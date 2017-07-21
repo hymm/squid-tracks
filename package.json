@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "request-promise-native": "^1.0.4"
   },
   "homepage": "./",
   "main": "src/main.js",
@@ -19,6 +20,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",
-    "dev" : "nf start -p 3000"
+    "dev": "nf start -p 3000"
   }
 }
