@@ -7,6 +7,7 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const url = require('url');
+const splatnet = require('./splatnet2');
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -14,8 +15,6 @@ const url = require('url');
 let mainWindow;
 
 electron.protocol.registerStandardSchemes(['npf71b963c1b7b6d119', 'https', 'http']);
-
-console.log('hi');
 
 function createWindow() {
     protocol.registerHttpProtocol('npf71b963c1b7b6d119',
@@ -31,10 +30,10 @@ function createWindow() {
             });
 
             console.log(params);
-
-            mainWindow.loadURL(redirectPath, {
+            // console.log(splatnet);
+            /* mainWindow.loadURL(redirectPath, {
                 extraHeaders: `Authorization: Bearer ${params.access_token}`,
-            });
+            }); */
             // callback({ method: request.method, referrer: request.referrer, url: redirectPath });
         },
         (e) => {

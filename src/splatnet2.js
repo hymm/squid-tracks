@@ -1,8 +1,8 @@
-import request from 'request-promise-native';
+const request = require('request-promise-native');
 
-const session_token = '';
+const session_token_code = 'eyJhbGciOiJIUzI1NiJ9.eyJzdGM6c2NwIjpbMCw4LDksMTcsMjNdLCJ0eXAiOiJzZXNzaW9uX3Rva2VuX2NvZGUiLCJzdGM6YyI6bnVsbCwiaWF0IjoxNTAwNzY0MTk2LCJleHAiOjE1MDA3NjQ3OTYsImlzcyI6Imh0dHBzOi8vYWNjb3VudHMubmludGVuZG8uY29tIiwic3RjOm0iOm51bGwsImp0aSI6IjU0MjgwMDc0NCIsInN1YiI6ImMyM2VkMDFmYmNhNTFkMjUiLCJhdWQiOiI3MWI5NjNjMWI3YjZkMTE5In0.yti9j4-6su6P8_l0Uhu8by4cySRTrgS-zEu8IQMu1pg';
 
-export function async getToken(session_token) {
+async function getToken(session_token) {
     const resp = await request({
         method: 'POST',
         uri: 'https://accounts.nintendo.com/connect/1.0.0/api/token',
@@ -12,8 +12,7 @@ export function async getToken(session_token) {
             'X-ProductVersion': '1.0.4',
             'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
         },
-        json: true,
-        body: {
+        json: {
             'client_id': '71b963c1b7b6d119',
             'grant_type': 'urn:ietf:params:oauth:grant-type:jwt-bearer-session-token',
             'session_token': session_token,
@@ -23,7 +22,7 @@ export function async getToken(session_token) {
     return resp.id_token;
 }
 
-export function async getApiLogin(id_token) {
+async function getApiLogin(id_token) {
     const loginId = await request({
         method: 'POST',
         uri: 'https://api-lp1.znc.srv.nintendo.net/v1/Account/Login',
@@ -43,14 +42,13 @@ export function async getApiLogin(id_token) {
             }
         },
         json: true,
-        headers
     });
 
     return loginId.accessToken;
 }
 
-export function async getWebServiceToken(token) {
-    const loginId = await request({
+async function getWebServiceToken(token) {
+    const resp = await request({
         method: 'POST',
         uri: 'https://api-lp1.znc.srv.nintendo.net/v1/Game/GetWebServiceToken',
         headers: {
@@ -59,6 +57,7 @@ export function async getWebServiceToken(token) {
             'X-ProductVersion': '1.0.4',
             'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
             'Authorization': `Bearer ${token}`,
+            'Access-Control-Allow-Origin': '*',
         },
         body: {
             "parameter": {
@@ -66,6 +65,37 @@ export function async getWebServiceToken(token) {
             }
         },
         json: true,
-        headers
     });
+
+    return resp.accessToken;
 }
+
+async function getSplatnetUrl(url, token) {
+  const resp = await request({
+      method: 'POST',
+      uri: url,
+      headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'X-Platform': 'Android',
+          'X-ProductVersion': '1.0.4',
+          'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+          'x-gamewebtoken': token,
+          'x-isappanalyticsoptedin': false,
+          'X-Requested-With': 'com.nintendo.znca',
+      },
+      qs: {
+        lang: 'en-US',
+      },
+      json: true,
+  });
+
+  return resp.accessToken;
+}
+
+async function getSplatnetSession(session) {
+  console.log(await getToken(session));
+}
+// getSplatnetSession();
+module.exports = {
+  getSplatnetSession,
+};
