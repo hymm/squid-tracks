@@ -1,6 +1,30 @@
 const request = require('request-promise-native');
 
-const session_token_code = 'eyJhbGciOiJIUzI1NiJ9.eyJzdGM6c2NwIjpbMCw4LDksMTcsMjNdLCJ0eXAiOiJzZXNzaW9uX3Rva2VuX2NvZGUiLCJzdGM6YyI6bnVsbCwiaWF0IjoxNTAwNzY0MTk2LCJleHAiOjE1MDA3NjQ3OTYsImlzcyI6Imh0dHBzOi8vYWNjb3VudHMubmludGVuZG8uY29tIiwic3RjOm0iOm51bGwsImp0aSI6IjU0MjgwMDc0NCIsInN1YiI6ImMyM2VkMDFmYmNhNTFkMjUiLCJhdWQiOiI3MWI5NjNjMWI3YjZkMTE5In0.yti9j4-6su6P8_l0Uhu8by4cySRTrgS-zEu8IQMu1pg';
+const session_code = '';
+
+async function getSessionToken(session_token_code, session_state) {
+    const resp = await request({
+        method: 'POST',
+        uri: 'https://accounts.nintendo.com/connect/1.0.0/api/session_token',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-Platform': 'Android',
+            'X-ProductVersion': '1.0.4',
+            // 'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
+            'User-Agent': 'OnlineLounge/1.0.4 NASDKAPI Android',
+            'Accept': 'application/json',
+            'Accept-Encoding': 'gzip',
+            'Accept-Language': 'en-US',
+        },
+        form: {
+            'client_id': '71b963c1b7b6d119',
+            'session_token_code': session_token_code,
+            'session_token_code_verifier': session_state,
+        },
+    });
+
+    return resp.id_token;
+}
 
 async function getToken(session_token) {
     const resp = await request({
@@ -59,12 +83,11 @@ async function getWebServiceToken(token) {
             'Authorization': `Bearer ${token}`,
             'Access-Control-Allow-Origin': '*',
         },
-        body: {
+        form: {
             "parameter": {
                 "id": 5741031244955648, // SplatNet 2 ID
             }
         },
-        json: true,
     });
 
     return resp.accessToken;
@@ -93,9 +116,11 @@ async function getSplatnetUrl(url, token) {
 }
 
 async function getSplatnetSession(session) {
-  console.log(await getToken(session));
+  console.log(await getToken(session_code));
 }
 // getSplatnetSession();
 module.exports = {
   getSplatnetSession,
+  getToken,
+  getSessionToken,
 };

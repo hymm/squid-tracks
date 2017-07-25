@@ -30,7 +30,7 @@ function createWindow() {
             });
 
             console.log(params);
-            // console.log(splatnet);
+            console.log(splatnet.getSplatnetSession(params.session_token_code, params.session_state));
             /* mainWindow.loadURL(redirectPath, {
                 extraHeaders: `Authorization: Bearer ${params.access_token}`,
             }); */

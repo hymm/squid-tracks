@@ -8,6 +8,7 @@
     "react-scripts": "0.8.5"
   },
   "dependencies": {
+    "jsonwebtoken": "^7.4.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "request-promise-native": "^1.0.4"
