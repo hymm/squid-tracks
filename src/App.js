@@ -4,12 +4,12 @@ import './App.css';
 
 function getLoginUrl() {
     const params = {
-        state: 'NcpWQPOBuATTTmBAbrUXUxSvsgqGNCKImXYwsLmnwgLIpXtcQR',
+        state: 'gEwdiqtwhaXLhBtWUKhPZPhaqZvcUhDxrlwKNXYDseGSidvgNk',
         redirect_uri: 'npf71b963c1b7b6d119://auth&client_id=71b963c1b7b6d119',
         scope: 'openid%20user%20user.birthday%20user.mii%20user.screenName',
         // response_type: 'token',
         response_type: 'session_token_code',
-        session_token_code_challenge: '8rPg6yWdmrWw_4zkE1yFaioBuK6LV1lb5w1B3BVSAXg',
+        session_token_code_challenge: 'iCzLJAsqbxVesq_sUAb3SwmyobMO9v9DgFtyS7HXn5g',
         session_token_code_challenge_method: 'S256',
         // theme: 'login_form',
     };

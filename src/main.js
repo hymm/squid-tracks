@@ -19,7 +19,7 @@ electron.protocol.registerStandardSchemes(['npf71b963c1b7b6d119', 'https', 'http
 function createWindow() {
     protocol.registerHttpProtocol('npf71b963c1b7b6d119',
         (request, callback) => {
-            const redirectPath = `https://app.splatoon2.nintendo.net/api/schedule`;
+            const redirectPath = `https://app.splatoon2.nintendo.net`;
             // console.log(request);
             // console.log(win.webContents.session);
             const url = request.url;
@@ -30,10 +30,20 @@ function createWindow() {
             });
 
             console.log(params);
-            console.log(splatnet.getSplatnetSession(params.session_token_code, params.session_state));
-            /* mainWindow.loadURL(redirectPath, {
-                extraHeaders: `Authorization: Bearer ${params.access_token}`,
-            }); */
+            splatnet.getSplatnetSession().then((token) => {
+                console.log(token);
+                mainWindow.loadURL(redirectPath, {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'X-Platform': 'Android',
+                    'X-ProductVersion': '1.0.4',
+                    'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+                    'x-gamewebtoken': token,
+                    'x-isappanalyticsoptedin': false,
+                    'X-Requested-With': 'com.nintendo.znca',
+                });
+            })
+            // console.log(splatnet.getSplatnetSession(params.session_token_code, params.session_state));
+
             // callback({ method: request.method, referrer: request.referrer, url: redirectPath });
         },
         (e) => {
