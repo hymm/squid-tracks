@@ -8,18 +8,17 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const url = require('url');
 const splatnet = require('./splatnet2');
-
+const { session } = require('electron');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
 electron.protocol.registerStandardSchemes(['npf71b963c1b7b6d119', 'https', 'http']);
-
-function createWindow() {
+function registerSplatnetHandler() {
     protocol.registerHttpProtocol('npf71b963c1b7b6d119',
         (request, callback) => {
-            const redirectPath = `https://app.splatoon2.nintendo.net`;
+            const redirectPath = `https://app.splatoon2.nintendo.net?lang=en-US`;
             // console.log(request);
             // console.log(win.webContents.session);
             const url = request.url;
@@ -32,6 +31,7 @@ function createWindow() {
             console.log(params);
             splatnet.getSplatnetSession().then((token) => {
                 console.log(token);
+                session.default
                 mainWindow.loadURL(redirectPath, {
                     'Content-Type': 'application/json; charset=utf-8',
                     'X-Platform': 'Android',
@@ -50,8 +50,28 @@ function createWindow() {
             if (e) { console.log(e); }
         },
     )
+}
+
+async function createWindow() {
+    const splatnetUrl = `https://app.splatoon2.nintendo.net?lang=en-US`;
+
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600});
+    mainWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+    });
+
+    const cookieValues = await splatnet.getSplatnetSession()
+
+    /* mainWindow.webContents.session.cookies.set({
+        url: splatnetUrl,
+        name: 'iksm_session',
+        value: cookieValues.accessToken,
+        expirationDate: cookieValues.expiresAt,
+    },
+        (err) => console.log(err)
+    ); */
+
 
     // and load the index.html of the app.
     const startUrl = process.env.ELECTRON_START_URL || url.format({
@@ -59,7 +79,10 @@ function createWindow() {
             protocol: 'file:',
             slashes: true
         });
-    mainWindow.loadURL(startUrl);
+    mainWindow.loadURL(splatnetUrl, {
+        userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+        extraHeaders: `Content-Type: application/json; charset=utf-8\nx-Platform: Android\nx-ProductVersion: 1.0.4\nx-gamewebtoken: ${cookieValues.accessToken}\nx-isappanalyticsoptedin: false\nX-Requested-With: com.nintendo.znca`,
+    });
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
 

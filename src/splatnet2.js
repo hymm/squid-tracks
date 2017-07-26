@@ -90,7 +90,10 @@ async function getWebServiceToken(token) {
         },
     });
 
-    return resp.result.accessToken;
+    return {
+        accessToken: resp.result.accessToken,
+        expiresAt: Math.round((new Date()).getTime()) + resp.result.expiresIn,
+    };
 }
 
 async function getSplatnetUrl(token) {
