@@ -19,29 +19,18 @@ function registerSplatnetHandler() {
     protocol.registerHttpProtocol('npf71b963c1b7b6d119',
         (request, callback) => {
             const redirectPath = `https://app.splatoon2.nintendo.net?lang=en-US`;
-            // console.log(request);
+            console.log(request);
             // console.log(win.webContents.session);
             const url = request.url;
             const params = {};
-            const splitUrl = url.split('#')[1].split('&').forEach((str) => {
+            const queryString = url.split('#')[1];
+            const splitUrl = queryString.split('&').forEach((str) => {
                 const splitStr = str.split('=');
                 params[splitStr[0]] = splitStr[1];
             });
 
             console.log(params);
-            splatnet.getSplatnetSession().then((token) => {
-                console.log(token);
-                session.default
-                mainWindow.loadURL(redirectPath, {
-                    'Content-Type': 'application/json; charset=utf-8',
-                    'X-Platform': 'Android',
-                    'X-ProductVersion': '1.0.4',
-                    'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-                    'x-gamewebtoken': token,
-                    'x-isappanalyticsoptedin': false,
-                    'X-Requested-With': 'com.nintendo.znca',
-                });
-            })
+            splatnet.getApiToken2(params.access_token).then((token) => console.log(token));
             // console.log(splatnet.getSplatnetSession(params.session_token_code, params.session_state));
 
             // callback({ method: request.method, referrer: request.referrer, url: redirectPath });
@@ -52,41 +41,36 @@ function registerSplatnetHandler() {
     )
 }
 
-async function createWindow() {
+async function loadSplatnetWithSessionToken(sessionToken) {
     const splatnetUrl = `https://app.splatoon2.nintendo.net?lang=en-US`;
 
-    // Create the browser window.
+    const cookieValues = await splatnet.getSplatnetSession(sessionToken);
+
+    mainWindow.loadURL(splatnetUrl, {
+        userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+        extraHeaders: `Content-Type: application/json; charset=utf-8\nx-Platform: Android\nx-ProductVersion: 1.0.4\nx-gamewebtoken: ${cookieValues.accessToken}\nx-isappanalyticsoptedin: false\nX-Requested-With: com.nintendo.znca`,
+    });
+}
+exports.loadSplatnetWithSessionToken = loadSplatnetWithSessionToken;
+
+function createWindow() {
+    registerSplatnetHandler();
+
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
     });
 
-    const cookieValues = await splatnet.getSplatnetSession()
-
-    /* mainWindow.webContents.session.cookies.set({
-        url: splatnetUrl,
-        name: 'iksm_session',
-        value: cookieValues.accessToken,
-        expirationDate: cookieValues.expiresAt,
-    },
-        (err) => console.log(err)
-    ); */
-
-
-    // and load the index.html of the app.
     const startUrl = process.env.ELECTRON_START_URL || url.format({
-            pathname: path.join(__dirname, '/../build/index.html'),
-            protocol: 'file:',
-            slashes: true
-        });
-    mainWindow.loadURL(splatnetUrl, {
-        userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-        extraHeaders: `Content-Type: application/json; charset=utf-8\nx-Platform: Android\nx-ProductVersion: 1.0.4\nx-gamewebtoken: ${cookieValues.accessToken}\nx-isappanalyticsoptedin: false\nX-Requested-With: com.nintendo.znca`,
+        pathname: path.join(__dirname, '/../build/index.html'),
+        protocol: 'file:',
+        slashes: true
     });
-    // Open the DevTools.
+
+    mainWindow.loadURL(startUrl);
+
     mainWindow.webContents.openDevTools();
 
-    // Emitted when the window is closed.
     mainWindow.on('closed', function () {
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time

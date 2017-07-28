@@ -1,7 +1,5 @@
 const request = require('request-promise-native');
 
-const session_code = '';
-
 async function getSessionToken(session_token_code, session_state) {
     const resp = await request({
         method: 'POST',
@@ -121,7 +119,7 @@ async function getCookie(token) {
     return request.cookie(`iksm_session=${token}`);
 }
 
-async function getSplatnetSession() {
+async function getSplatnetSession(session_code) {
   const idToken = await getApiToken(session_code);
   const apiAccessToken = await getApiLogin(idToken);
   const splatnetToken = await getWebServiceToken(apiAccessToken);
