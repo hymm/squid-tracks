@@ -10,11 +10,10 @@ function getLoginUrl() {
         state: 'gEwdiqtwhaXLhBtWUKhPZPhaqZvcUhDxrlwKNXYDseGSidvgNk',
         redirect_uri: 'npf71b963c1b7b6d119://auth&client_id=71b963c1b7b6d119',
         scope: 'openid%20user%20user.birthday%20user.mii%20user.screenName',
-        // response_type: 'token',
-        response_type: 'token',
+        response_type: 'session_token_code',
         session_token_code_challenge: 'iCzLJAsqbxVesq_sUAb3SwmyobMO9v9DgFtyS7HXn5g',
         session_token_code_challenge_method: 'S256',
-        // theme: 'login_form',
+        theme: 'login_form',
     };
 
     const arrayParams = [];
@@ -33,14 +32,16 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Splatnet Testing</h2>
         </div>
-        <p className="App-intro">
-          <a href={getLoginUrl()}>Login with Oauth</a>
+        <p>
+          <a href={getLoginUrl()}><button>Login with Oauth</button></a>
         </p>
-        <p className="App-intro">
+        <p>
             <button onClick={() => loadSplatnetWithSessionToken(auth.session_token)}>Login from Session Token</button>
+        </p>
+        <p>
+            <button>Custom Web Pages</button>
         </p>
       </div>
     );

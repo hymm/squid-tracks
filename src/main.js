@@ -30,7 +30,7 @@ function registerSplatnetHandler() {
             });
 
             console.log(params);
-            splatnet.getApiToken2(params.access_token).then((token) => console.log(token));
+            splatnet.getApiToken(params.session_token_code).then((token) => console.log(token));
             // console.log(splatnet.getSplatnetSession(params.session_token_code, params.session_state));
 
             // callback({ method: request.method, referrer: request.referrer, url: redirectPath });
@@ -48,7 +48,14 @@ async function loadSplatnetWithSessionToken(sessionToken) {
 
     mainWindow.loadURL(splatnetUrl, {
         userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-        extraHeaders: `Content-Type: application/json; charset=utf-8\nx-Platform: Android\nx-ProductVersion: 1.0.4\nx-gamewebtoken: ${cookieValues.accessToken}\nx-isappanalyticsoptedin: false\nX-Requested-With: com.nintendo.znca`,
+        extraHeaders:
+            `Content-Type: application/json; charset=utf-8\n
+            x-Platform: Android\n
+            x-ProductVersion: 1.0.4\n
+            x-gamewebtoken: ${cookieValues.accessToken}\n
+            x-isappanalyticsoptedin: false\n
+            X-Requested-With: com.nintendo.znca`
+        ,
     });
 }
 exports.loadSplatnetWithSessionToken = loadSplatnetWithSessionToken;
