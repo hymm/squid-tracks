@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import ApiViewer from './api-viewer';
 import logo from './logo.svg';
 import './App.css';
 import auth from './auth.json';
+// eslint-disable-next-line
 const remote = window.require('electron').remote;
 const loadSplatnetWithSessionToken = remote.require('./main.js').loadSplatnetWithSessionToken;
 
@@ -27,23 +30,32 @@ function getLoginUrl() {
     return `https://accounts.nintendo.com/connect/1.0.0/authorize?${stringParams}`;
 }
 
+const NavigationButtons = () => (
+  <div className="App">
+    <div className="App-header">
+      <h2>Splatnet Testing</h2>
+    </div>
+    <p>
+      <a href={getLoginUrl()}><button>Login with Oauth</button></a>
+    </p>
+    <p>
+        <button onClick={() => loadSplatnetWithSessionToken(auth.session_token)}>Login from Session Token</button>
+    </p>
+    <p>
+        <button>Custom Web Pages</button>
+    </p>
+  </div>
+)
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Splatnet Testing</h2>
+      <BrowserRouter>
+        <div>
+          <Route path="/" exact component={NavigationButtons} />
+          <Route path="/test" component={ApiViewer} />
         </div>
-        <p>
-          <a href={getLoginUrl()}><button>Login with Oauth</button></a>
-        </p>
-        <p>
-            <button onClick={() => loadSplatnetWithSessionToken(auth.session_token)}>Login from Session Token</button>
-        </p>
-        <p>
-            <button>Custom Web Pages</button>
-        </p>
-      </div>
+      </BrowserRouter>
     );
   }
 }
