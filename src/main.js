@@ -13,6 +13,11 @@ const { session } = require('electron');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+const startUrl = process.env.ELECTRON_START_URL || url.format({
+    pathname: path.join(__dirname, '/../build/index.html'),
+    protocol: 'file:',
+    slashes: true
+});
 
 electron.protocol.registerStandardSchemes(['npf71b963c1b7b6d119', 'https', 'http']);
 function registerSplatnetHandler() {
@@ -41,12 +46,10 @@ function registerSplatnetHandler() {
     )
 }
 
-async function loadSplatnetWithSessionToken(sessionToken) {
-    const splatnetUrl = `https://app.splatoon2.nintendo.net?lang=en-US`;
-
+async function loadWithSessionToken(url, sessionToken) {
     const cookieValues = await splatnet.getSplatnetSession(sessionToken);
 
-    mainWindow.loadURL(splatnetUrl, {
+    mainWindow.loadURL(url, {
         userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
         extraHeaders:
             `Content-Type: application/json; charset=utf-8\n
@@ -58,7 +61,23 @@ async function loadSplatnetWithSessionToken(sessionToken) {
         ,
     });
 }
+
+async function loadSplatnetWithSessionToken(sessionToken) {
+    const splatnetUrl = `https://app.splatoon2.nintendo.net?lang=en-US`;
+    await loadWithSessionToken(splatnetUrl, sessionToken);
+}
 exports.loadSplatnetWithSessionToken = loadSplatnetWithSessionToken;
+
+let token = '';
+async function loadCustomSplatnet(sessionToken) {
+    token = await loadWithSessionToken(startUrl + '#/test', sessionToken);
+}
+exports.loadCustomSplatnet = loadCustomSplatnet;
+
+async function getApi(url) {
+    return await splatnet.getSplatnetApi(url);
+}
+exports.getApi = getApi;
 
 function createWindow() {
     registerSplatnetHandler();
@@ -66,12 +85,6 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-    });
-
-    const startUrl = process.env.ELECTRON_START_URL || url.format({
-        pathname: path.join(__dirname, '/../build/index.html'),
-        protocol: 'file:',
-        slashes: true
     });
 
     mainWindow.loadURL(startUrl);

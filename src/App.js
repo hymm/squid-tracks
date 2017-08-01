@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route, } from 'react-router-dom';
 import ApiViewer from './api-viewer';
-import logo from './logo.svg';
 import './App.css';
 import auth from './auth.json';
 // eslint-disable-next-line
 const remote = window.require('electron').remote;
-const loadSplatnetWithSessionToken = remote.require('./main.js').loadSplatnetWithSessionToken;
+const { loadSplatnetWithSessionToken, loadCustomSplatnet } = remote.require('./main.js');
 
 function getLoginUrl() {
     const params = {
@@ -42,7 +41,7 @@ const NavigationButtons = () => (
         <button onClick={() => loadSplatnetWithSessionToken(auth.session_token)}>Login from Session Token</button>
     </p>
     <p>
-        <button>Custom Web Pages</button>
+        <button onClick={() => loadCustomSplatnet(auth.session_token)}>Custom Web Pages</button>
     </p>
   </div>
 )
@@ -50,12 +49,12 @@ const NavigationButtons = () => (
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div>
           <Route path="/" exact component={NavigationButtons} />
           <Route path="/test" component={ApiViewer} />
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }

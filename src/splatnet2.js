@@ -1,4 +1,7 @@
-const request = require('request-promise-native');
+const request2 = require('request-promise-native');
+// use this like to proxy through fiddler
+// request = request2.defaults({ proxy: 'http://localhost:8888', "rejectUnauthorized": false, jar: true });
+request = request2.defaults({ jar: true });
 
 async function getSessionToken(session_token_code, session_state) {
     const resp = await request({
@@ -98,21 +101,30 @@ async function getSplatnetApi(url) {
   const resp = await request({
       method: 'GET',
       uri: `https://app.splatoon2.nintendo.net/api/${url}`,
-      headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-          'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-      },
-      qs: {
-        lang: 'en-US',
-      },
       json: true,
   });
 
   return resp;
 }
 
+async function getSessionCookie(token) {
+    const resp = await request({
+        method: 'GET',
+        uri: `https://app.splatoon2.nintendo.net`,
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'X-Platform': 'Android',
+            'X-ProductVersion': '1.0.4',
+            'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+            'x-gamewebtoken': token,
+            'x-isappanalyticsoptedin': false,
+            'X-Requested-With': 'com.nintendo.znca',
+        },
+    })
+}
+
 async function getLeagueResults() {
-  const league = getSplatnetApi('api/league_match_ranking/17073112T/ALL');
+  const league = getSplatnetApi('league_match_ranking/17073112T/ALL');
   return league;
 }
 
@@ -120,11 +132,17 @@ async function getSplatnetSession(session_code) {
   const idToken = await getApiToken(session_code);
   const apiAccessToken = await getApiLogin(idToken);
   const splatnetToken = await getWebServiceToken(apiAccessToken);
+  await getSessionCookie(splatnetToken.accessToken);
   return splatnetToken;
 }
 // getSplatnetSession();
-export default {
+/* const Splatnet2 = {
   getSplatnetSession,
   getSessionToken,
   getLeagueResults,
-};
+}; */
+// module.exports = Splatnet2;
+exports.getSplatnetSession = getSplatnetSession;
+exports.getSessionToken = getSessionToken;
+exports.getLeagueResults = getLeagueResults;
+exports.getSplatnetApi = getSplatnetApi;

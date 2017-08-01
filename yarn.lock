@@ -929,6 +929,13 @@ babel-runtime@6.23.0, babel-runtime@^6.18.0, babel-runtime@^6.22.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.10.0"
 
+babel-runtime@^6.6.1:
+  version "6.25.0"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.25.0.tgz#33b98eaa5d482bb01a8d1aa6b437ad2b01aec41c"
+  dependencies:
+    core-js "^2.4.0"
+    regenerator-runtime "^0.10.0"
+
 babel-template@^6.16.0, babel-template@^6.24.1, babel-template@^6.25.0:
   version "6.25.0"
   resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.25.0.tgz#665241166b7c2aa4c619d71e192969552b10c071"
@@ -5196,7 +5203,7 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-base16-styling@^0.5.3:
+react-base16-styling@^0.5.1, react-base16-styling@^0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/react-base16-styling/-/react-base16-styling-0.5.3.tgz#3858f24e9c4dd8cbd3f702f3f74d581ca2917269"
   dependencies:
@@ -5247,6 +5254,14 @@ react-error-overlay@^1.0.9:
     react-dev-utils "^3.0.2"
     settle-promise "1.0.0"
     source-map "0.5.6"
+
+react-json-tree@^0.10.9:
+  version "0.10.9"
+  resolved "https://registry.yarnpkg.com/react-json-tree/-/react-json-tree-0.10.9.tgz#7263173a2cc8bf05eac63b0419c3ce75b232e284"
+  dependencies:
+    babel-runtime "^6.6.1"
+    prop-types "^15.5.8"
+    react-base16-styling "^0.5.1"
 
 react-json-view@^1.11.4:
   version "1.11.4"
