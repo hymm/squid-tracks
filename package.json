@@ -13,6 +13,8 @@
     "jws": "^3.1.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-json-view": "^1.11.4",
+    "react-router-dom": "^4.1.2",
     "request-promise-native": "^1.0.4"
   },
   "homepage": "./",

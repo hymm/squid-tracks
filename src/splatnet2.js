@@ -94,29 +94,26 @@ async function getWebServiceToken(token) {
     };
 }
 
-async function getSplatnetUrl(token) {
+async function getSplatnetApi(url) {
   const resp = await request({
       method: 'GET',
-      uri: 'https://app.splatoon2.nintendo.net',
+      uri: `https://app.splatoon2.nintendo.net/api/${url}`,
       headers: {
           'Content-Type': 'application/json; charset=utf-8',
-          'X-Platform': 'Android',
-          'X-ProductVersion': '1.0.4',
           'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-          'x-gamewebtoken': token,
-          'x-isappanalyticsoptedin': false,
-          'X-Requested-With': 'com.nintendo.znca',
       },
       qs: {
         lang: 'en-US',
       },
+      json: true,
   });
 
-  console.log(resp);
+  return resp;
 }
 
-async function getCookie(token) {
-    return request.cookie(`iksm_session=${token}`);
+async function getLeagueResults() {
+  const league = getSplatnetApi('api/league_match_ranking/17073112T/ALL');
+  return league;
 }
 
 async function getSplatnetSession(session_code) {
@@ -126,7 +123,8 @@ async function getSplatnetSession(session_code) {
   return splatnetToken;
 }
 // getSplatnetSession();
-module.exports = {
+export default {
   getSplatnetSession,
   getSessionToken,
+  getLeagueResults,
 };
