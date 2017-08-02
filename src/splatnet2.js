@@ -3,7 +3,7 @@ const request2 = require('request-promise-native');
 // request = request2.defaults({ proxy: 'http://localhost:8888', "rejectUnauthorized": false, jar: true });
 request = request2.defaults({ jar: true });
 
-async function getSessionToken(session_token_code, session_state) {
+async function getSessionTokenCode(session_token_code, session_state) {
     const resp = await request({
         method: 'POST',
         uri: 'https://accounts.nintendo.com/connect/1.0.0/api/session_token',
@@ -143,6 +143,6 @@ async function getSplatnetSession(session_code) {
 }; */
 // module.exports = Splatnet2;
 exports.getSplatnetSession = getSplatnetSession;
-exports.getSessionToken = getSessionToken;
+exports.getSessionTokenCode = getSessionTokenCode;
 exports.getLeagueResults = getLeagueResults;
 exports.getSplatnetApi = getSplatnetApi;

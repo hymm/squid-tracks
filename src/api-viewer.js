@@ -10,6 +10,21 @@ class ApiTester extends React.Component {
     url: '',
   };
 
+  urls = [
+    'league_match_ranking/17073112T/ALL',
+    'onlineshop/merchandises',
+    // POST 'onlineshop/order/4780952683920142604',
+    'results',
+    'results/180',
+    'nickname_and_icon',
+    'schedules',
+    'records/hero',
+    'timeline',
+    'festivals/active',
+    'data/stages',
+    'records',
+  ];
+
   handleButtonClick = async () => {
     const league = await getApi(this.state.url);
     this.setState({ reply: league });
@@ -30,7 +45,11 @@ class ApiTester extends React.Component {
         <button onClick={this.handleButtonClick}>Get API</button>
         <input type="text" value={this.state.url} onChange={this.handleUrlChange} />
         <select onClick={this.handleSelectChange}>
-          <option value='league_match_ranking/17073112T/ALL'>league_match_ranking/17073112T/ALL</option>
+        {
+          this.urls.map((url) => (
+            <option value={url}>{url}</option>
+          ))
+        }
         </select>
         <Json data={this.state.reply} invertTheme={false} />
       </div>
