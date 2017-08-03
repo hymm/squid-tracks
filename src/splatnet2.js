@@ -46,9 +46,7 @@ async function getSessionToken(session_token_code, codeVerifier) {
         json: true,
     });
 
-    console.log(resp.session_token);
-
-    // should check the state here and error if incorrect.
+    // should check the challege here and error if incorrect.
 
     return resp.session_token;
 }
@@ -170,12 +168,7 @@ async function getSessionCookie(token) {
             'x-isappanalyticsoptedin': false,
             'X-Requested-With': 'com.nintendo.znca',
         },
-    })
-}
-
-async function getLeagueResults() {
-  const league = getSplatnetApi('league_match_ranking/17073112T/ALL');
-  return league;
+    });
 }
 
 async function getSplatnetSession(sessionTokenCode, sessionVerifier) {
@@ -185,17 +178,10 @@ async function getSplatnetSession(sessionTokenCode, sessionVerifier) {
   const apiAccessToken = await getApiLogin(apiTokens.id, userInfo);
   const splatnetToken = await getWebServiceToken(apiAccessToken);
   await getSessionCookie(splatnetToken.accessToken);
+
   return splatnetToken;
 }
-// getSplatnetSession();
-/* const Splatnet2 = {
-  getSplatnetSession,
-  getSessionToken,
-  getLeagueResults,
-}; */
-// module.exports = Splatnet2;
+
 exports.generateAuthenticationParams = generateAuthenticationParams;
 exports.getSplatnetSession = getSplatnetSession;
-exports.getSessionToken = getSessionToken;
-exports.getLeagueResults = getLeagueResults;
 exports.getSplatnetApi = getSplatnetApi;

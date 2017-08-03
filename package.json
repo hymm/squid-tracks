@@ -27,5 +27,6 @@
     "eject": "react-scripts eject",
     "electron": "electron .",
     "dev": "nf start -p 3000"
-  }
+},
+  "license": "MIT"
 }
