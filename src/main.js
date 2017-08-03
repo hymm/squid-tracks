@@ -19,13 +19,14 @@ const startUrl = process.env.ELECTRON_START_URL || url.format({
     slashes: true
 });
 
+// global to current state, code challenge, and code verifier
+let authParams = {};
+
 electron.protocol.registerStandardSchemes(['npf71b963c1b7b6d119', 'https', 'http']);
 function registerSplatnetHandler() {
     protocol.registerHttpProtocol('npf71b963c1b7b6d119',
         (request, callback) => {
             const redirectPath = `https://app.splatoon2.nintendo.net?lang=en-US`;
-            console.log(request);
-            // console.log(win.webContents.session);
             const url = request.url;
             const params = {};
             const queryString = url.split('#')[1];
@@ -34,11 +35,10 @@ function registerSplatnetHandler() {
                 params[splitStr[0]] = splitStr[1];
             });
 
-            console.log(params);
-            splatnet.getApiToken(params.session_token_code).then((token) => console.log(token));
-            // console.log(splatnet.getSplatnetSession(params.session_token_code, params.session_state));
-
-            // callback({ method: request.method, referrer: request.referrer, url: redirectPath });
+            splatnet.getSplatnetSession(params.session_token_code, authParams.codeVerifier).then((accessToken) => {
+                authParams.accessToken = accessToken;
+                mainWindow.loadURL(startUrl);
+            });
         },
         (e) => {
             if (e) { console.log(e); }
@@ -46,34 +46,53 @@ function registerSplatnetHandler() {
     )
 }
 
-async function loadWithSessionToken(url, sessionToken) {
-    const cookieValues = await splatnet.getSplatnetSession(sessionToken);
+function getLoginUrl() {
+    authParams = splatnet.generateAuthenticationParams();
+    const params = {
+        state: authParams.state,
+        redirect_uri: 'npf71b963c1b7b6d119://auth&client_id=71b963c1b7b6d119',
+        scope: 'openid%20user%20user.birthday%20user.mii%20user.screenName',
+        response_type: 'session_token_code',
+        session_token_code_challenge: authParams.codeChallenge,
+        session_token_code_challenge_method: 'S256',
+        theme: 'login_form',
+    };
 
+    const arrayParams = [];
+    for (var key in params) {
+        if (!params.hasOwnProperty(key)) continue;
+        arrayParams.push(`${key}=${params[key]}`);
+    }
+
+    const stringParams = arrayParams.join('&');
+
+    return `https://accounts.nintendo.com/connect/1.0.0/authorize?${stringParams}`;
+}
+exports.getLoginUrl = getLoginUrl;
+
+function loadSplatnet() {
+    const url = `https://app.splatoon2.nintendo.net?lang=en-US`;
     mainWindow.loadURL(url, {
         userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
         extraHeaders:
             `Content-Type: application/json; charset=utf-8\n
             x-Platform: Android\n
             x-ProductVersion: 1.0.4\n
-            x-gamewebtoken: ${cookieValues.accessToken}\n
+            x-gamewebtoken: ${authParams.accessToken}\n
             x-isappanalyticsoptedin: false\n
             X-Requested-With: com.nintendo.znca`
         ,
     });
 }
+exports.loadSplatnet = loadSplatnet;
 
-async function loadSplatnetWithSessionToken(sessionToken) {
-    const splatnetUrl = `https://app.splatoon2.nintendo.net?lang=en-US`;
-    await loadWithSessionToken(splatnetUrl, sessionToken);
-}
-exports.loadSplatnetWithSessionToken = loadSplatnetWithSessionToken;
-
-let token = '';
+/* let token = '';
 async function loadCustomSplatnet(sessionToken) {
+
     token = await loadWithSessionToken(startUrl + '#/test', sessionToken);
 }
 exports.loadCustomSplatnet = loadCustomSplatnet;
-
+*/
 async function getApi(url) {
     return await splatnet.getSplatnetApi(url);
 }

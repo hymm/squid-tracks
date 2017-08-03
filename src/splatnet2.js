@@ -1,9 +1,34 @@
 const request2 = require('request-promise-native');
+const crypto = require('crypto');
+const base64url = require('base64url');
 // use this like to proxy through fiddler
 // request = request2.defaults({ proxy: 'http://localhost:8888', "rejectUnauthorized": false, jar: true });
 request = request2.defaults({ jar: true });
 
-async function getSessionTokenCode(session_token_code, session_state) {
+function generateRandom(length) {
+    return base64url(crypto.randomBytes(length));
+}
+
+function calculateChallenge(codeVerifier) {
+    const hash = crypto.createHash('sha256');
+    hash.update(codeVerifier);
+    const codeChallenge = base64url(hash.digest());
+    return codeChallenge;
+}
+
+function generateAuthenticationParams() {
+    const state = generateRandom(36);
+    const codeVerifier = generateRandom(32);
+    const codeChallenge = calculateChallenge(codeVerifier);
+
+    return {
+        state,
+        codeVerifier,
+        codeChallenge,
+    };
+}
+
+async function getSessionToken(session_token_code, codeVerifier) {
     const resp = await request({
         method: 'POST',
         uri: 'https://accounts.nintendo.com/connect/1.0.0/api/session_token',
@@ -12,17 +37,18 @@ async function getSessionTokenCode(session_token_code, session_state) {
             'X-Platform': 'Android',
             'X-ProductVersion': '1.0.4',
             'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-            // 'User-Agent': 'OnlineLounge/1.0.4 NASDKAPI Android',
-            // 'Accept': 'application/json',
-            // 'Accept-Encoding': 'gzip',
-            // 'Accept-Language': 'en-US',
         },
         form: {
             'client_id': '71b963c1b7b6d119',
             'session_token_code': session_token_code,
-            'session_token_code_verifier': 'cca7dbb27d384c59516d52957de4c26907f596dce11856485f44a23d2620f638',
+            'session_token_code_verifier': codeVerifier,
         },
+        json: true,
     });
+
+    console.log(resp.session_token);
+
+    // should check the state here and error if incorrect.
 
     return resp.session_token;
 }
@@ -44,10 +70,34 @@ async function getApiToken(session_token) {
         },
     });
 
-    return resp.id_token;
+    return {
+        id: resp.id_token,
+        access: resp.access_token,
+    }
 }
 
-async function getApiLogin(id_token) {
+async function getUserInfo(token) {
+    const response = await request({
+        method: 'GET',
+        uri: 'https://api.accounts.nintendo.com/2.0.0/users/me',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'X-Platform': 'Android',
+            'X-ProductVersion': '1.0.4',
+            'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+            'Authorization': `Bearer ${token}`,
+        },
+        json: true,
+    });
+
+    return {
+        language: response.language,
+        birthday: response.birthday,
+        country: response.country,
+    };
+}
+
+async function getApiLogin(id_token, userinfo) {
     const resp = await request({
         method: 'POST',
         uri: 'https://api-lp1.znc.srv.nintendo.net/v1/Account/Login',
@@ -60,9 +110,9 @@ async function getApiLogin(id_token) {
         },
         body: {
             "parameter": {
-                "language": "en-US",
-                'naCountry': 'US',
-                "naBirthday": "1980-08-22",
+                "language": userinfo.language,
+                'naCountry': userinfo.country,
+                "naBirthday": userinfo.birthday,
                 "naIdToken": id_token
             }
         },
@@ -128,9 +178,11 @@ async function getLeagueResults() {
   return league;
 }
 
-async function getSplatnetSession(session_code) {
-  const idToken = await getApiToken(session_code);
-  const apiAccessToken = await getApiLogin(idToken);
+async function getSplatnetSession(sessionTokenCode, sessionVerifier) {
+  const sessionToken = await getSessionToken(sessionTokenCode, sessionVerifier);
+  const apiTokens = await getApiToken(sessionToken);
+  const userInfo = await getUserInfo(apiTokens.access);
+  const apiAccessToken = await getApiLogin(apiTokens.id, userInfo);
   const splatnetToken = await getWebServiceToken(apiAccessToken);
   await getSessionCookie(splatnetToken.accessToken);
   return splatnetToken;
@@ -142,7 +194,8 @@ async function getSplatnetSession(session_code) {
   getLeagueResults,
 }; */
 // module.exports = Splatnet2;
+exports.generateAuthenticationParams = generateAuthenticationParams;
 exports.getSplatnetSession = getSplatnetSession;
-exports.getSessionTokenCode = getSessionTokenCode;
+exports.getSessionToken = getSessionToken;
 exports.getLeagueResults = getLeagueResults;
 exports.getSplatnetApi = getSplatnetApi;

@@ -1,33 +1,11 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, } from 'react-router-dom';
+import { HashRouter, Route, Link, } from 'react-router-dom';
 import ApiViewer from './api-viewer';
 import './App.css';
-import auth from './auth.json';
 // eslint-disable-next-line
 const remote = window.require('electron').remote;
-const { loadSplatnetWithSessionToken, loadCustomSplatnet } = remote.require('./main.js');
+const { getLoginUrl, loadSplatnet, } = remote.require('./main.js');
 
-function getLoginUrl() {
-    const params = {
-        state: 'gEwdiqtwhaXLhBtWUKhPZPhaqZvcUhDxrlwKNXYDseGSidvgNk',
-        redirect_uri: 'npf71b963c1b7b6d119://auth&client_id=71b963c1b7b6d119',
-        scope: 'openid%20user%20user.birthday%20user.mii%20user.screenName',
-        response_type: 'session_token_code',
-        session_token_code_challenge: 'iCzLJAsqbxVesq_sUAb3SwmyobMO9v9DgFtyS7HXn5g',
-        session_token_code_challenge_method: 'S256',
-        theme: 'login_form',
-    };
-
-    const arrayParams = [];
-    for (var key in params) {
-        if (!params.hasOwnProperty(key)) continue;
-        arrayParams.push(`${key}=${params[key]}`);
-    }
-
-    const stringParams = arrayParams.join('&');
-
-    return `https://accounts.nintendo.com/connect/1.0.0/authorize?${stringParams}`;
-}
 
 const NavigationButtons = () => (
   <div className="App">
@@ -38,10 +16,10 @@ const NavigationButtons = () => (
       <a href={getLoginUrl()}><button>Login with Oauth</button></a>
     </p>
     <p>
-        <button onClick={() => loadSplatnetWithSessionToken(auth.session_token)}>Login from Session Token</button>
+        <button onClick={() => loadSplatnet()}>Open Splatnet 2</button>
     </p>
     <p>
-        <button onClick={() => loadCustomSplatnet(auth.session_token)}>Custom Web Pages</button>
+        <Link to="/test"><button>Custom Web Pages</button></Link>
     </p>
   </div>
 )
