@@ -89,6 +89,7 @@ async function getUserInfo(token) {
     });
 
     return {
+        nickname: response.nickname,
         language: response.language,
         birthday: response.birthday,
         country: response.country,
@@ -171,17 +172,24 @@ async function getSessionCookie(token) {
     });
 }
 
+async function getSessionWithSessionToken(sessionToken) {
+    const apiTokens = await getApiToken(sessionToken);
+    const userInfo = await getUserInfo(apiTokens.access);
+    const apiAccessToken = await getApiLogin(apiTokens.id, userInfo);
+    const splatnetToken = await getWebServiceToken(apiAccessToken);
+
+    // loads session cookie into request, so calls to getSplatnetApi work
+    await getSessionCookie(splatnetToken.accessToken);
+
+    return splatnetToken;
+}
+
 async function getSplatnetSession(sessionTokenCode, sessionVerifier) {
   const sessionToken = await getSessionToken(sessionTokenCode, sessionVerifier);
-  const apiTokens = await getApiToken(sessionToken);
-  const userInfo = await getUserInfo(apiTokens.access);
-  const apiAccessToken = await getApiLogin(apiTokens.id, userInfo);
-  const splatnetToken = await getWebServiceToken(apiAccessToken);
-  await getSessionCookie(splatnetToken.accessToken);
-
-  return splatnetToken;
+  return await getSessionWithSessionToken(sessionToken);
 }
 
 exports.generateAuthenticationParams = generateAuthenticationParams;
+exports.getSessionWithSessionToken = getSessionWithSessionToken;
 exports.getSplatnetSession = getSplatnetSession;
 exports.getSplatnetApi = getSplatnetApi;

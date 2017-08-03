@@ -8,6 +8,7 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const url = require('url');
 const splatnet = require('./splatnet2');
+const Store = require('./store');
 const { session } = require('electron');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -117,6 +118,8 @@ function createWindow() {
         mainWindow = null
     })
 }
+
+const store = new Store({ configName: 'user-data' });
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
