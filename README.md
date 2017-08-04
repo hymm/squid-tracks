@@ -13,6 +13,7 @@ yarn run dev
 * look into how to use babel on backend process (low priority)
 * Schedule Page
 * Get other language users to test
+* Better opening screen.  (login.js).
 
 ## Development
 Note: Render Process is using babel, but the backend process is not so allowed syntax between the two is different right now.
