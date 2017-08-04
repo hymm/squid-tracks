@@ -7,7 +7,7 @@ const { getApi } = remote.require('./main.js');
 class ApiTester extends React.Component {
   state = {
     reply: {},
-    url: '',
+    url: ''
   };
 
   urls = [
@@ -22,34 +22,40 @@ class ApiTester extends React.Component {
     'timeline',
     'festivals/active',
     'data/stages',
-    'records',
+    'records'
   ];
 
   handleButtonClick = async () => {
     const league = await getApi(this.state.url);
     this.setState({ reply: league });
-  }
+  };
 
-  handleUrlChange = (e) => {
-      this.setState({ url: e.target.value });
-  }
+  handleUrlChange = e => {
+    this.setState({ url: e.target.value });
+  };
 
-  handleSelectChange = (e) => {
-      this.setState({ url: e.target.value });
-  }
+  handleSelectChange = e => {
+    this.setState({ url: e.target.value });
+  };
 
   render() {
     return (
       <div>
-        <Link to="/"><button onClick={this.handleButtonClick}>Back</button></Link>
+        <Link to="/">
+          <button onClick={this.handleButtonClick}>Back</button>
+        </Link>
         <button onClick={this.handleButtonClick}>Get API</button>
-        <input type="text" value={this.state.url} onChange={this.handleUrlChange} />
+        <input
+          type="text"
+          value={this.state.url}
+          onChange={this.handleUrlChange}
+        />
         <select onClick={this.handleSelectChange}>
-        {
-          this.urls.map((url) => (
-            <option value={url}>{url}</option>
-          ))
-        }
+          {this.urls.map(url =>
+            <option value={url}>
+              {url}
+            </option>
+          )}
         </select>
         <Json data={this.state.reply} invertTheme={false} />
       </div>
