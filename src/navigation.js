@@ -2,6 +2,8 @@ import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
+const remote = window.require('electron').remote;
+const { loadSplatnet } = remote.require('./main.js');
 
 const Navigation = () =>
   <Navbar fluid>
@@ -13,7 +15,9 @@ const Navigation = () =>
     </Navbar.Header>
     <Navbar.Collapse>
       <Nav>
-        <NavItem eventKey={1}>Official Site</NavItem>
+        <NavItem eventKey={1} onClick={() => loadSplatnet()}>
+          Official Site
+        </NavItem>
         <LinkContainer to="/testApi">
           <NavItem eventKey={2}>Api Checker</NavItem>
         </LinkContainer>
@@ -22,6 +26,9 @@ const Navigation = () =>
         </LinkContainer>
         <LinkContainer to="/results">
           <NavItem eventKey={3}>Results</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/settings">
+          <NavItem eventKey={3}>Settings</NavItem>
         </LinkContainer>
       </Nav>
     </Navbar.Collapse>

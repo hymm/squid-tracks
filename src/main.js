@@ -63,6 +63,11 @@ function registerSplatnetHandler() {
   );
 }
 
+function getSessionToken() {
+  return store.get('sessionToken');
+}
+exports.getSessionToken = getSessionToken;
+
 function getLoginUrl() {
   authParams = splatnet.generateAuthenticationParams();
   const params = {
@@ -115,8 +120,11 @@ async function getStoredSessionToken() {
   sessionToken = store.get('sessionToken');
 
   if (isTokenGood(sessionToken)) {
-    await splatnet.getSessionWithSessionToken(sessionToken);
-    loggedIn = true;
+    try {
+      await splatnet.getSessionWithSessionToken(sessionToken);
+    } catch (e) {
+      this.store.set('sessionToken', '');
+    }
   }
 }
 
