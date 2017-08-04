@@ -10,7 +10,8 @@ yarn run dev
 * Sorting on Tables
 * Open Splatnet 2 in webview
 * Invalidate Session Token on login error
-* look into how to use babel on backend process
+* look into how to use babel on backend process (low priority)
+* Schedule Page
 * Get other language users to test
 
 ## Development
