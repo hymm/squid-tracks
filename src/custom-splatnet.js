@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'proptypes';
 
 class ResultsContainer extends React.Component {
-    
+    render() {
+        return (
+            <div />
+        );
+    }
 }
 
 const ResultsViewer = ({ records }) => (
