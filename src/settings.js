@@ -1,7 +1,14 @@
 import React from 'react';
-import { Grid, Col, Row, Well } from 'react-bootstrap';
+import { Grid, Col, Row, Well, Button } from 'react-bootstrap';
+const remote = window.require('electron').remote;
+const { logout } = remote.require('./main.js');
 
-const SettingsScreen = ({ token }) =>
+function handleLogoutClick(callback) {
+  logout();
+  callback();
+}
+
+const SettingsScreen = ({ token, logoutCallback }) =>
   <Grid fluid>
     <Row>
       <Col md={12}>
@@ -10,6 +17,9 @@ const SettingsScreen = ({ token }) =>
         <Well bsSize="large" style={{ wordWrap: 'break-word' }}>
           {token}
         </Well>
+        <Button onClick={() => handleLogoutClick(logoutCallback)}>
+          Logout
+        </Button>
       </Col>
     </Row>
   </Grid>;

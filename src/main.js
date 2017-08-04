@@ -68,6 +68,11 @@ function getSessionToken() {
 }
 exports.getSessionToken = getSessionToken;
 
+function logout() {
+  store.set('sessionToken', '');
+}
+exports.logout = logout;
+
 function getLoginUrl() {
   authParams = splatnet.generateAuthenticationParams();
   const params = {
