@@ -17,7 +17,11 @@ const SettingsScreen = ({ token, logoutCallback }) =>
         <Well bsSize="large" style={{ wordWrap: 'break-word' }}>
           {token}
         </Well>
-        <Button onClick={() => handleLogoutClick(logoutCallback)}>
+        <Button
+          block
+          bsStyle="danger"
+          onClick={() => handleLogoutClick(logoutCallback)}
+        >
           Logout
         </Button>
       </Col>
