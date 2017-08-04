@@ -18,15 +18,7 @@ const Records = () =>
 class ResultsContainer extends React.Component {
   state = {
     records: {
-      records: {
-        player: {
-          nickname: '',
-          udemae_rainmaker: { name: '', number: 0, s_plus_number: null },
-          udemae_tower: { name: '', number: 0, s_plus_number: null },
-          udemae_zones: { name: '', number: 0, s_plus_number: null }
-        },
-        stage_stats: {}
-      }
+      records: {}
     }
   };
 
