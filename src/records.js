@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'proptypes';
 import { Grid, Row, Col, Panel, Table } from 'react-bootstrap';
+import StageCard from './components/stage-card';
 const remote = window.require('electron').remote;
 const { getApi } = remote.require('./main.js');
 
@@ -42,6 +43,7 @@ class ResultsContainer extends React.Component {
       <div>
         <PlayerCard records={this.state.records.records} />
         <StageCard records={this.state.records.records} />
+        <WeaponCard records={this.state.records.records} />
       </div>
     );
   }
@@ -69,45 +71,51 @@ const PlayerCard = ({ records }) =>
     <div>{`Losses: ${records.lose_count}`}</div>
   </Panel>;
 
-const StageCard = ({ records }) => {
-  const { stage_stats = {} } = records;
+const WeaponCard = ({ records }) => {
+  const { weapon_stats = {} } = records;
+  Object.keys(weapon_stats).forEach(weapon => {
+    weapon_stats[weapon].total_count =
+      weapon_stats[weapon].win_count + weapon_stats[weapon].lose_count;
+    weapon_stats[weapon].percentage_count =
+      weapon_stats[weapon].win_count / weapon_stats[weapon].total_count;
+  });
   return (
-    <Panel header={<h3>Player Card</h3>}>
+    <Panel header={<h3>Weapon Stats</h3>}>
       <Table striped bordered condensed hover>
-        <tr>
-          <th>Name</th>
-          <th>RM Win</th>
-          <th>RM Lose</th>
-          <th>SZ Win</th>
-          <th>SZ Lose</th>
-          <th>TC Win</th>
-          <th>TC Lose</th>
-        </tr>
-        {Object.keys(stage_stats).map(stage =>
+        <thead>
           <tr>
-            <td>
-              {stage_stats[stage].stage.name}
-            </td>
-            <td>
-              {stage_stats[stage].hoko_win}
-            </td>
-            <td>
-              {stage_stats[stage].hoko_lose}
-            </td>
-            <td>
-              {stage_stats[stage].area_win}
-            </td>
-            <td>
-              {stage_stats[stage].area_lose}
-            </td>
-            <td>
-              {stage_stats[stage].yagura_win}
-            </td>
-            <td>
-              {stage_stats[stage].yagura_lose}
-            </td>
+            <th>Weapon</th>
+            <th>Total</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Percentage</th>
+            <th>Paint</th>
           </tr>
-        )}
+        </thead>
+        <tbody>
+          {Object.keys(weapon_stats).map(weapon =>
+            <tr key={weapon}>
+              <td>
+                {weapon_stats[weapon].weapon.name}
+              </td>
+              <td>
+                {weapon_stats[weapon].total_count}
+              </td>
+              <td>
+                {weapon_stats[weapon].win_count}
+              </td>
+              <td>
+                {weapon_stats[weapon].lose_count}
+              </td>
+              <td>
+                {weapon_stats[weapon].percentage_count.toFixed(2)}
+              </td>
+              <td style={{ textAlign: 'right' }}>
+                {weapon_stats[weapon].total_paint_point}
+              </td>
+            </tr>
+          )}
+        </tbody>
       </Table>
     </Panel>
   );

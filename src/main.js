@@ -9,7 +9,6 @@ const path = require('path');
 const url = require('url');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
-const { session } = require('electron');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -40,11 +39,9 @@ function registerSplatnetHandler() {
   protocol.registerHttpProtocol(
     'npf71b963c1b7b6d119',
     (request, callback) => {
-      const redirectPath = `https://app.splatoon2.nintendo.net?lang=en-US`;
       const url = request.url;
       const params = {};
-      const queryString = url.split('#')[1];
-      const splitUrl = queryString.split('&').forEach(str => {
+      url.split('#')[1].split('&').forEach(str => {
         const splitStr = str.split('=');
         params[splitStr[0]] = splitStr[1];
       });
@@ -91,16 +88,16 @@ function getLoginUrl() {
 exports.getLoginUrl = getLoginUrl;
 
 async function loadSplatnet() {
-  const accessToken = await splatnet.getSessionWithSessionToken(sessionToken);
+  // const accessToken = await splatnet.getSessionWithSessionToken(sessionToken);
   const url = `https://app.splatoon2.nintendo.net?lang=en-US`;
   mainWindow.loadURL(url, {
-    userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-    extraHeaders: `Content-Type: application/json; charset=utf-8\n
+    userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
+    /* extraHeaders: `Content-Type: application/json; charset=utf-8\n
             x-Platform: Android\n
             x-ProductVersion: 1.0.4\n
             x-gamewebtoken: ${accessToken.accessToken}\n
             x-isappanalyticsoptedin: false\n
-            X-Requested-With: com.nintendo.znca`
+            X-Requested-With: com.nintendo.znca` */
   });
 }
 exports.loadSplatnet = loadSplatnet;
