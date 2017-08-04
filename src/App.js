@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 const remote = window.require('electron').remote;
 const { getSessionToken } = remote.require('./main.js');
 
-const Routes = ({ token }) =>
+const Routes = ({ token, logoutCallback }) =>
   <div>
     <Navigation />
     <Route path="/testApi" component={ApiViewer} />
@@ -22,7 +22,7 @@ const Routes = ({ token }) =>
     <Route
       path="/settings"
       component={() =>
-        <Settings token={token} logoutCallback={this.getSessionToken} />}
+        <Settings token={token} logoutCallback={logoutCallback} />}
     />
   </div>;
 
@@ -42,7 +42,12 @@ class App extends Component {
   render() {
     return (
       <HashRouter>
-        {this.state.sessionToken.length !== 0 ? <Routes /> : <Login />}
+        {this.state.sessionToken.length !== 0
+          ? <Routes
+              token={this.state.sessionToken}
+              logoutCallback={this.getSessionToken}
+            />
+          : <Login />}
       </HashRouter>
     );
   }
