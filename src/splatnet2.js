@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const base64url = require('base64url');
 // use this like to proxy through fiddler
 // request = request2.defaults({ proxy: 'http://localhost:8888', "rejectUnauthorized": false, jar: true });
-request = request2.defaults({ jar: true });
+const request = request2.defaults({ jar: true });
 
 function generateRandom(length) {
     return base64url(crypto.randomBytes(length));
@@ -177,18 +177,21 @@ async function getSessionWithSessionToken(sessionToken) {
     const userInfo = await getUserInfo(apiTokens.access);
     const apiAccessToken = await getApiLogin(apiTokens.id, userInfo);
     const splatnetToken = await getWebServiceToken(apiAccessToken);
-
-    // loads session cookie into request, so calls to getSplatnetApi work
     await getSessionCookie(splatnetToken.accessToken);
-
     return splatnetToken;
 }
 
 async function getSplatnetSession(sessionTokenCode, sessionVerifier) {
   const sessionToken = await getSessionToken(sessionTokenCode, sessionVerifier);
-  return await getSessionWithSessionToken(sessionToken);
+  const splatnetToken = await getSessionWithSessionToken(sessionToken);
+
+  return {
+    sessionToken: sessionToken,
+    accessToken: splatnetToken.accessToken,
+  };
 }
 
+exports.getSessionCookie = getSessionCookie;
 exports.generateAuthenticationParams = generateAuthenticationParams;
 exports.getSessionWithSessionToken = getSessionWithSessionToken;
 exports.getSplatnetSession = getSplatnetSession;

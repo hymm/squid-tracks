@@ -20,8 +20,11 @@ const startUrl = process.env.ELECTRON_START_URL || url.format({
     slashes: true
 });
 
+const store = new Store({ configName: 'user-data', defaults: { sessionToken: '', } });
+
 // global to current state, code challenge, and code verifier
 let authParams = {};
+let sessionToken = '';
 
 electron.protocol.registerStandardSchemes(['npf71b963c1b7b6d119', 'https', 'http']);
 function registerSplatnetHandler() {
@@ -36,8 +39,10 @@ function registerSplatnetHandler() {
                 params[splitStr[0]] = splitStr[1];
             });
 
-            splatnet.getSplatnetSession(params.session_token_code, authParams.codeVerifier).then((accessToken) => {
-                authParams.accessToken = accessToken;
+            splatnet.getSplatnetSession(params.session_token_code, authParams.codeVerifier).then(async (tokens) => {
+                sessionToken = tokens.sessionToken;
+                store.set('sessionToken', sessionToken);
+                await splatnet.getSessionCookie(tokens.accessToken);
                 mainWindow.loadURL(startUrl);
             });
         },
@@ -71,7 +76,8 @@ function getLoginUrl() {
 }
 exports.getLoginUrl = getLoginUrl;
 
-function loadSplatnet() {
+async function loadSplatnet() {
+    const accessToken = await splatnet.getSessionWithSessionToken(sessionToken);
     const url = `https://app.splatoon2.nintendo.net?lang=en-US`;
     mainWindow.loadURL(url, {
         userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
@@ -79,7 +85,7 @@ function loadSplatnet() {
             `Content-Type: application/json; charset=utf-8\n
             x-Platform: Android\n
             x-ProductVersion: 1.0.4\n
-            x-gamewebtoken: ${authParams.accessToken}\n
+            x-gamewebtoken: ${accessToken.accessToken}\n
             x-isappanalyticsoptedin: false\n
             X-Requested-With: com.nintendo.znca`
         ,
@@ -87,20 +93,27 @@ function loadSplatnet() {
 }
 exports.loadSplatnet = loadSplatnet;
 
-/* let token = '';
-async function loadCustomSplatnet(sessionToken) {
-
-    token = await loadWithSessionToken(startUrl + '#/test', sessionToken);
-}
-exports.loadCustomSplatnet = loadCustomSplatnet;
-*/
 async function getApi(url) {
     return await splatnet.getSplatnetApi(url);
 }
 exports.getApi = getApi;
 
+function isTokenGood(token) {
+  return !!token;
+}
+
+async function getStoredSessionToken() {
+  sessionToken = store.get('sessionToken');
+
+  if (isTokenGood(sessionToken)) {
+    await splatnet.getSessionWithSessionToken(sessionToken);
+    loggedIn = true;
+  }
+}
+
 function createWindow() {
     registerSplatnetHandler();
+    getStoredSessionToken();
 
     mainWindow = new BrowserWindow({
         width: 800,
@@ -118,8 +131,6 @@ function createWindow() {
         mainWindow = null
     })
 }
-
-const store = new Store({ configName: 'user-data' });
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
