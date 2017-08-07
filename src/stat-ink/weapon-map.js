@@ -13,7 +13,9 @@ module.exports = {
   70: 'prime', // splattershot pro
   80: '96gal',
   90: 'jetsweeper',
+  200: 'nova', // luna
   210: 'hotblaster', // blaster
+  211: 'hotblaster_custom',
   240: 'rapid', // rapid blaster
   230: 'clashblaster',
   300: 'l3reelgun',
@@ -26,6 +28,12 @@ module.exports = {
   1030: 'variableroller', // flinza roller
   1100: 'pablo', // inkbrush
   1110: 'hokusai', // octobursh
+  2010: 'splatcharger',
+  2011: 'splatcharger_collabo', // firefin
+  2021: 'splatscope_collabo', // firefin
+  2020: 'splatscope',
+  2030: 'liter4k',
+  2060: 'soytuber', // gootuber
   3000: 'bucketslosher',
   3010: 'hissen', // tri-slosher
   4000: 'splatspinner', // mini splatling
@@ -37,20 +45,10 @@ module.exports = {
   5050: 'heromaneuver_replica', // hero duelies
   5051: 'maneuver_collabo', // enperry duelies
 
-  // unknown
-  15: 'nova', // luna
-  35: 'herocharger_replica',
-  36: 'liter4k_scope',
-  37: 'liter4k',
-  38: 'soytuber', // gootuber
-  39: 'splatcharger_collabo', // firefin
-  140: 'splatcharger',
-  141: 'splatscope',
-  142: 'splatscope_collabo', // firefin
-
   // guesses
-  211: 'hotblaster_custom',
   215: 'heroblaster_replica',
   1115: 'herobrush_replica',
+  2015: 'herocharger_replica',
+  2040: 'liter4k_scope',
   3005: 'heroslosher_replica'
 };
