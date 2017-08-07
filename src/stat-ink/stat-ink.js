@@ -7,11 +7,12 @@ const appVersion = app.getVersion();
 const appName = app.getName();
 const WeaponMap = require('./weapon-map');
 
-const request = request2.defaults({
+/* const request = request2.defaults({
   proxy: 'http://localhost:8888',
   rejectUnauthorized: false,
   jar: true
-});
+}); */
+const request = request2;
 
 function setUuid(statInk, result) {
   statInk.uuid = result.start_time;

@@ -2,12 +2,12 @@ const request2 = require('request-promise-native');
 const crypto = require('crypto');
 const base64url = require('base64url');
 // use this like to proxy through fiddler
-const request = request2.defaults({
+/* const request = request2.defaults({
   proxy: 'http://localhost:8888',
   rejectUnauthorized: false,
   jar: true
-});
-// const request = request2.defaults({ jar: true });
+}); */
+const request = request2.defaults({ jar: true });
 
 function generateRandom(length) {
   return base64url(crypto.randomBytes(length));
