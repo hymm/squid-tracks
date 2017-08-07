@@ -3,8 +3,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import ResultsSummaryCard from './components/results-summary-card';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
-const remote = window.require('electron').remote;
-const { getApi } = remote.require('./main.js');
+const { ipcRenderer } = window.require('electron');
 
 const Results = () =>
   <Grid fluid>
@@ -29,10 +28,13 @@ class ResultsContainer extends React.Component {
   }
 
   async getRecords() {
-    const results = await getApi('results');
+    const results = ipcRenderer.sendSync('getApi', 'results');
     this.setState({ results: results });
     this.setState({
-      recent: await getApi(`results/${results.results[0].battle_number}`)
+      recent: ipcRenderer.sendSync(
+        'getApi',
+        `results/${results.results[0].battle_number}`
+      )
     });
     this.setState({ initialized: true });
   }

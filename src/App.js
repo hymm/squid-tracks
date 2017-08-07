@@ -10,8 +10,7 @@ import Login from './login';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 // eslint-disable-next-line
-const remote = window.require('electron').remote;
-const { getSessionToken } = remote.require('./main.js');
+const { ipcRenderer } = window.require('electron');
 
 const Routes = ({ token, logoutCallback }) =>
   <div>
@@ -36,7 +35,7 @@ class App extends Component {
   }
 
   getSessionToken = () => {
-    this.setState({ sessionToken: getSessionToken() });
+    this.setState({ sessionToken: ipcRenderer.sendSync('getSessionToken') });
   };
 
   render() {

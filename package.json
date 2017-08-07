@@ -1,10 +1,13 @@
 {
   "name": "splat-track",
-  "productName": "Splat Track",
+  "description": "alternative splatnet2 client with ability to upload to stat.ink",
+  "productName": "SplatTrack",
   "version": "0.1.0",
   "private": true,
+  "author": "@Wrong_Shoe",
   "devDependencies": {
     "electron": "^1.4.14",
+    "electron-builder": "^19.19.1",
     "foreman": "^2.0.0",
     "react-scripts": "^1.0.10"
   },
@@ -28,15 +31,23 @@
     "request-promise-native": "^1.0.4"
   },
   "homepage": "./",
-  "main": "src/main.js",
+  "main": "./public/electron.js",
   "scripts": {
     "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "prepack": "yarn build",
+    "pack": "build --em.main=build/electron.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",
     "dev": "nf start -p 3000"
+  },
+  "build": {
+    "appId": "com.shoesoft.splat-track",
+    "directories": {
+      "buildResources": "public"
+    }
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [

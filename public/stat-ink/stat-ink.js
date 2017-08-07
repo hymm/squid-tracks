@@ -50,9 +50,8 @@ function setGameResults(statInk, result) {
 
 function setPlayerResults(statInk, result) {
   statInk.weapon = WeaponMap[result.player_result.player.weapon.id];
-  statInk.kill_or_assist = result.player_result.kill_count;
-  statInk.kill =
-    result.player_result.kill_count - result.player_result.assist_count;
+  statInk.kill_or_assist = result.player_result.kill_count + result.player_result.assist_count;
+  statInk.kill = result.player_result.kill_count ;
   statInk.death = result.player_result.death_count;
   statInk.special = result.player_result.special_count;
   statInk.level = result.player_result.player.player_rank;
@@ -81,9 +80,9 @@ function getPlayer(playerResult, team) {
   if (playerResult.udemae) {
     player.rank = playerResult.player.udemae.name.toLowerCase();
   }
-  player.kill = playerResult.kill_count - playerResult.assist_count;
+  player.kill = playerResult.kill_count;
   player.death = playerResult.death_count;
-  player.kill_or_assist = playerResult.kill_count;
+  player.kill_or_assist = playerResult.kill_count + playerResult.assist_count;
   player.special = playerResult.special_count;
   player.point = playerResult.game_paint_point;
   return player;

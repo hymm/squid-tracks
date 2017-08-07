@@ -1,10 +1,4 @@
-const electron = require('electron');
-const protocol = electron.protocol;
-// Module to control application life.
-const app = electron.app;
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow;
-
+const { protocol, app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 const writeToStatInk = require('./stat-ink/stat-ink');
@@ -17,7 +11,7 @@ let mainWindow;
 const startUrl =
   process.env.ELECTRON_START_URL ||
   url.format({
-    pathname: path.join(__dirname, '/../build/index.html'),
+    pathname: path.join(__dirname, '../build/index.html'),
     protocol: 'file:',
     slashes: true
   });
@@ -31,7 +25,7 @@ const store = new Store({
 let authParams = {};
 let sessionToken = '';
 
-electron.protocol.registerStandardSchemes([
+protocol.registerStandardSchemes([
   'npf71b963c1b7b6d119',
   'https',
   'http'
@@ -64,65 +58,66 @@ function registerSplatnetHandler() {
   );
 }
 
-function getSessionToken() {
-  return store.get('sessionToken');
-}
-exports.getSessionToken = getSessionToken;
+ipcMain.on('getSessionToken', (event) => {
+    event.returnValue = store.get('sessionToken');
+});
 
-function logout() {
-  store.set('sessionToken', '');
-}
-exports.logout = logout;
+ipcMain.on('logout', (event) => {
+    store.set('sessionToken', '');
+    event.returnValue = true;
+});
 
-// this might not be very good, going to file every time we write
-exports.writeToStatInk = result => writeToStatInk(getStatInkApiToken(), result);
+ipcMain.on('writeToStatInk', (event, result) => {
+    try {
+        writeToStatInk(store.get('statInkToken'), result);
+        event.returnValue = true;
+    } catch (e) {
+        event.returnValue = false;
+    }
+});
 
-function getStatInkApiToken() {
-  return store.get('statInkToken');
-}
-exports.getStatInkApiToken = getStatInkApiToken;
+ipcMain.on('getStatInkApiToken', (event, result) => {
+    event.returnValue = store.get('statInkToken');
+});
 
-function setStatInkApiToken(value) {
-  store.set('statInkToken', value);
-}
-exports.setStatInkApiToken = setStatInkApiToken;
+ipcMain.on('setStatInkApiToken', (event, value) => {
+    store.set('statInkToken', value);
+    event.returnValue = true;
+});
 
-function getLoginUrl() {
-  authParams = splatnet.generateAuthenticationParams();
-  const params = {
-    state: authParams.state,
-    redirect_uri: 'npf71b963c1b7b6d119://auth&client_id=71b963c1b7b6d119',
-    scope: 'openid%20user%20user.birthday%20user.mii%20user.screenName',
-    response_type: 'session_token_code',
-    session_token_code_challenge: authParams.codeChallenge,
-    session_token_code_challenge_method: 'S256',
-    theme: 'login_form'
-  };
+ipcMain.on('getLoginUrl', (event) => {
+    authParams = splatnet.generateAuthenticationParams();
+    const params = {
+      state: authParams.state,
+      redirect_uri: 'npf71b963c1b7b6d119://auth&client_id=71b963c1b7b6d119',
+      scope: 'openid%20user%20user.birthday%20user.mii%20user.screenName',
+      response_type: 'session_token_code',
+      session_token_code_challenge: authParams.codeChallenge,
+      session_token_code_challenge_method: 'S256',
+      theme: 'login_form'
+    };
 
-  const arrayParams = [];
-  for (var key in params) {
-    if (!params.hasOwnProperty(key)) continue;
-    arrayParams.push(`${key}=${params[key]}`);
-  }
+    const arrayParams = [];
+    for (var key in params) {
+      if (!params.hasOwnProperty(key)) continue;
+      arrayParams.push(`${key}=${params[key]}`);
+    }
 
-  const stringParams = arrayParams.join('&');
+    const stringParams = arrayParams.join('&');
 
-  return `https://accounts.nintendo.com/connect/1.0.0/authorize?${stringParams}`;
-}
-exports.getLoginUrl = getLoginUrl;
+    event.returnValue = `https://accounts.nintendo.com/connect/1.0.0/authorize?${stringParams}`;
+});
 
-async function loadSplatnet() {
-  const url = `https://app.splatoon2.nintendo.net?lang=en-US`;
-  mainWindow.loadURL(url, {
-    userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
-  });
-}
-exports.loadSplatnet = loadSplatnet;
+ipcMain.on('loadSplatnet', (e) => {
+    const url = `https://app.splatoon2.nintendo.net?lang=en-US`;
+    mainWindow.loadURL(url, {
+      userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
+    });
+});
 
-async function getApi(url) {
-  return await splatnet.getSplatnetApi(url);
-}
-exports.getApi = getApi;
+ipcMain.on('getApi', async (e, url) => {
+    e.returnValue = await splatnet.getSplatnetApi(url);
+});
 
 function isTokenGood(token) {
   return !!token;
@@ -151,7 +146,7 @@ function createWindow() {
 
   mainWindow.loadURL(startUrl);
 
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows

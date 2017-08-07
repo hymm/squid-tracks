@@ -1,8 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col, Jumbotron, Button } from 'react-bootstrap';
-
-const remote = window.require('electron').remote;
-const { getLoginUrl } = remote.require('./main.js');
+const { ipcRenderer } = window.require('electron');
 
 const Login = ({ token }) =>
   <Grid fluid>
@@ -10,7 +8,7 @@ const Login = ({ token }) =>
       <Col md={12} style={{ textAlign: 'center' }}>
         <Jumbotron>
           <h1>Splatnet for your Desktop</h1>
-          <a href={getLoginUrl()}>
+          <a href={ipcRenderer.sendSync('getLoginUrl')}>
             <Button block>Login</Button>
           </a>
         </Jumbotron>

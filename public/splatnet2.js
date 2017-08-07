@@ -174,6 +174,8 @@ async function getSessionCookie(token) {
       'X-Requested-With': 'com.nintendo.znca'
     }
   });
+
+  return resp;
 }
 
 async function getSessionWithSessionToken(sessionToken) {

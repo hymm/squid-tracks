@@ -3,8 +3,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
-const remote = window.require('electron').remote;
-const { getApi } = remote.require('./main.js');
+const { ipcRenderer } = window.require('electron');
 
 const Records = () =>
   <Grid fluid>
@@ -26,8 +25,8 @@ class ResultsContainer extends React.Component {
     this.getRecords();
   }
 
-  async getRecords() {
-    const records = await getApi('records');
+  getRecords() {
+    const records = ipcRenderer.sendSync('getApi', 'records');
     this.setState({ records: records });
   }
 

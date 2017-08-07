@@ -9,15 +9,7 @@ import {
   ControlLabel,
   FormControl
 } from 'react-bootstrap';
-const remote = window.require('electron').remote;
-const { logout, getStatInkApiToken, setStatInkApiToken } = remote.require(
-  './main.js'
-);
-
-function handleLogoutClick(callback) {
-  logout();
-  callback();
-}
+const { ipcRenderer } = window.require('electron');
 
 class StatInkSettings extends React.Component {
   state = {
@@ -29,7 +21,7 @@ class StatInkSettings extends React.Component {
   }
 
   getStatInkApiToken = () => {
-    this.setState({ apiToken: getStatInkApiToken() });
+    this.setState({ apiToken: ipcRenderer.sendSync('getStatInkApiToken') });
   };
 
   handleChange = e => {
@@ -37,7 +29,7 @@ class StatInkSettings extends React.Component {
   };
 
   handleSubmit = e => {
-    setStatInkApiToken(this.state.apiToken);
+    ipcRenderer.sendSync('setStatInkApiToken', this.state.apiToken);
     e.preventDefault();
   };
 
@@ -56,6 +48,11 @@ class StatInkSettings extends React.Component {
       </form>
     );
   }
+}
+
+function handleLogoutClick(callback) {
+  ipcRenderer.sendSync('logout');
+  callback();
 }
 
 const SettingsScreen = ({ token, logoutCallback }) =>

@@ -1,8 +1,7 @@
 import React from 'react';
 import Json from 'react-json-tree';
 import { Link } from 'react-router-dom';
-const remote = window.require('electron').remote;
-const { getApi } = remote.require('./main.js');
+const { ipcRenderer } = window.require('electron');
 
 class ApiTester extends React.Component {
   state = {
@@ -26,7 +25,7 @@ class ApiTester extends React.Component {
   ];
 
   handleButtonClick = async () => {
-    const league = await getApi(this.state.url);
+    const league = ipcRenderer.sendSync('getApi', this.state.url);
     this.setState({ reply: league });
   };
 

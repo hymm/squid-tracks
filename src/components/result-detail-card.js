@@ -10,9 +10,7 @@ import {
   Button,
   MenuItem
 } from 'react-bootstrap';
-const remote = window.require('electron').remote;
-const { writeToStatInk } = remote.require('./main.js');
-// import writeToStatInk from '../stat-ink/stat-ink';
+const { ipcRenderer } = window.require('electron');
 
 const ResultSummary = ({ result }) =>
   <Table striped bordered>
@@ -300,7 +298,9 @@ const ResultControl = ({
           {latestBattleNumber}
         </MenuItem>
       </DropdownButton>
-      <Button onClick={() => writeToStatInk(result)}>Upload to stat.ink</Button>
+      <Button onClick={() => ipcRenderer.sendSync('writeToStatInk', result)}>
+        Upload to stat.ink
+      </Button>
     </ButtonGroup>
   );
 };
