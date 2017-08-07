@@ -1,5 +1,6 @@
 {
-  "name": "splatnet2-urihandler",
+  "name": "splat-track",
+  "productName": "Splat Track",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -15,6 +16,7 @@
     "jws": "^3.1.4",
     "lint-staged": "^4.0.2",
     "prettier": "^1.5.3",
+    "promise-memoize": "^1.2.0",
     "proptypes": "^1.1.0",
     "react": "^15.4.2",
     "react-bootstrap": "^0.31.2",

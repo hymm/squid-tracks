@@ -1,5 +1,5 @@
 // these number are incorrect need to check against game
-export default {
+module.exports = {
   0: 'bold', // sploosh
   10: 'wakaba', // splattershot jr
   20: 'sharp', // splasho
@@ -38,19 +38,19 @@ export default {
   5051: 'maneuver_collabo', // enperry duelies
 
   // unknown
-  6: 'heroblaster_replica',
-  9: 'hotblaster_custom',
   15: 'nova', // luna
   35: 'herocharger_replica',
   36: 'liter4k_scope',
   37: 'liter4k',
   38: 'soytuber', // gootuber
   39: 'splatcharger_collabo', // firefin
-  40: 'splatcharger',
-  41: 'splatscope',
-  42: 'splatscope_collabo', // firefin
+  140: 'splatcharger',
+  141: 'splatscope',
+  142: 'splatscope_collabo', // firefin
 
   // guesses
+  211: 'hotblaster_custom',
+  215: 'heroblaster_replica',
   1115: 'herobrush_replica',
   3005: 'heroslosher_replica'
 };

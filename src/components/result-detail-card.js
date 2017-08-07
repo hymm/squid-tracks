@@ -1,5 +1,18 @@
 import React from 'react';
-import { Grid, Row, Col, Panel, Table } from 'react-bootstrap';
+import {
+  Grid,
+  Row,
+  Col,
+  Panel,
+  Table,
+  ButtonGroup,
+  DropdownButton,
+  Button,
+  MenuItem
+} from 'react-bootstrap';
+const remote = window.require('electron').remote;
+const { writeToStatInk } = remote.require('./main.js');
+// import writeToStatInk from '../stat-ink/stat-ink';
 
 const ResultSummary = ({ result }) =>
   <Table striped bordered>
@@ -274,10 +287,37 @@ const TheirTeamTable = ({ result }) => {
   );
 };
 
+const ResultControl = ({
+  latestBattleNumber,
+  sendToStatInk,
+  currentBattle,
+  result
+}) => {
+  return (
+    <ButtonGroup>
+      <DropdownButton title={currentBattle} id={'battles'}>
+        <MenuItem>
+          {latestBattleNumber}
+        </MenuItem>
+      </DropdownButton>
+      <Button onClick={() => writeToStatInk(result)}>Upload to stat.ink</Button>
+    </ButtonGroup>
+  );
+};
+
 const ResultDetailCard = ({ result }) => {
   return (
     <Panel header={<h3>Result Details</h3>}>
       <Grid fluid>
+        <Row>
+          <Col sm={6} md={6}>
+            <ResultControl
+              latestBattleNumber={result.battle_number}
+              currentBattle={result.battle_number}
+              result={result}
+            />
+          </Col>
+        </Row>
         <Row>
           <Col sm={6} md={6}>
             <h4>Summary</h4>

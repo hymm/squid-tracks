@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   regular: { lobby: 'standard', mode: 'regular' },
   gachi: { lobby: 'standard', mode: 'gachi' },
   league_pair: { lobby: 'squad_2', mode: 'gachi' },

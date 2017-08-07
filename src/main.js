@@ -7,6 +7,7 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const url = require('url');
+const writeToStatInk = require('./stat-ink/stat-ink');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
 
@@ -23,7 +24,7 @@ const startUrl =
 
 const store = new Store({
   configName: 'user-data',
-  defaults: { sessionToken: '' }
+  defaults: { sessionToken: '', statInkToken: '' }
 });
 
 // global to current state, code challenge, and code verifier
@@ -73,6 +74,19 @@ function logout() {
 }
 exports.logout = logout;
 
+// this might not be very good, going to file every time we write
+exports.writeToStatInk = result => writeToStatInk(getStatInkApiToken(), result);
+
+function getStatInkApiToken() {
+  return store.get('statInkToken');
+}
+exports.getStatInkApiToken = getStatInkApiToken;
+
+function setStatInkApiToken(value) {
+  store.set('statInkToken', value);
+}
+exports.setStatInkApiToken = setStatInkApiToken;
+
 function getLoginUrl() {
   authParams = splatnet.generateAuthenticationParams();
   const params = {
@@ -98,16 +112,9 @@ function getLoginUrl() {
 exports.getLoginUrl = getLoginUrl;
 
 async function loadSplatnet() {
-  // const accessToken = await splatnet.getSessionWithSessionToken(sessionToken);
   const url = `https://app.splatoon2.nintendo.net?lang=en-US`;
   mainWindow.loadURL(url, {
     userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
-    /* extraHeaders: `Content-Type: application/json; charset=utf-8\n
-            x-Platform: Android\n
-            x-ProductVersion: 1.0.4\n
-            x-gamewebtoken: ${accessToken.accessToken}\n
-            x-isappanalyticsoptedin: false\n
-            X-Requested-With: com.nintendo.znca` */
   });
 }
 exports.loadSplatnet = loadSplatnet;

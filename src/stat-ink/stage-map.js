@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   0: 'battera', // the reef
   1: 'fujitsubo', // musselforge fitness
   2: 'gangaze', // starfish mainstage

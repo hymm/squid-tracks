@@ -1,9 +1,17 @@
-import request from 'request-promise-native';
-import LobbyModeMap from './stat-ink/lobby-mode-map';
-import RuleMap from './stat-ink/rule-map';
-import StageMap from './stat-ink/stage-map';
-import WeaponMap from './stat-ink/weapon-map';
-const appVersion = require('electron').remote.app.getVersion();
+const request2 = require('request-promise-native');
+const LobbyModeMap = require('./lobby-mode-map');
+const RuleMap = require('./rule-map');
+const StageMap = require('./stage-map');
+const app = require('electron').app;
+const appVersion = app.getVersion();
+const appName = app.getName();
+const WeaponMap = require('./weapon-map');
+
+const request = request2.defaults({
+  proxy: 'http://localhost:8888',
+  rejectUnauthorized: false,
+  jar: true
+});
 
 function setUuid(statInk, result) {
   statInk.uuid = result.start_time;
@@ -21,9 +29,9 @@ function setGameInfo(statInk, result) {
 }
 
 function setGameResults(statInk, result) {
-  statInk.result = result.my_team_result.key == 'victory' ? 'win' : 'lose';
+  statInk.result = result.my_team_result.key === 'victory' ? 'win' : 'lose';
   statInk.knock_out =
-    result.my_team_count == 100 || result.their_count == 100 ? 'yes' : 'no';
+    result.my_team_count === 100 || result.their_count === 100 ? 'yes' : 'no';
   // these next parameters depend on turf war vs gachi
   if (result.my_team_percentage) {
     statInk.my_team_percent = result.my_team_percentage;
@@ -57,7 +65,7 @@ function setPlayerResults(statInk, result) {
   }
 
   let paint_point = result.player_result.game_paint_point;
-  if (result.rule.key == 'turf_war' && result.my_team_result == 'victory') {
+  if (result.rule.key === 'turf_war' && result.my_team_result === 'victory') {
     paint_point += 1000;
   }
   statInk.my_point = paint_point;
@@ -65,8 +73,8 @@ function setPlayerResults(statInk, result) {
 
 function getPlayer(playerResult, team) {
   const player = {};
-  player.team = team == 'me' ? 'my' : team; // 'my', 'his'
-  player.is_me = team == 'me' ? 'yes' : 'no'; // 'yes', 'no'
+  player.team = team === 'me' ? 'my' : team; // 'my', 'his'
+  player.is_me = team === 'me' ? 'yes' : 'no'; // 'yes', 'no'
   player.weapon = WeaponMap[playerResult.player.weapon.id];
   player.level = playerResult.player.player_rank;
   if (playerResult.udemae) {
@@ -81,19 +89,19 @@ function getPlayer(playerResult, team) {
 }
 
 function setPlayers(statInk, result) {
-  stat.ink.players = [];
-  stat.ink.players.push(getPlayer(result.player_result, 'me'));
+  statInk.players = [];
+  statInk.players.push(getPlayer(result.player_result, 'me'));
   result.my_team_members.forEach(player => {
-    stat.ink.players.push(getPlayer(player, 'my'));
+    statInk.players.push(getPlayer(player, 'my'));
   });
   result.other_team_members.forEach(player => {
-    stat.ink.players.push(getPlayer(player, 'his'));
+    statInk.players.push(getPlayer(player, 'his'));
   });
 }
 
 function setClientInfo(statInk, result) {
-  statInk.automated = 'automated';
-  statInk.agent = 'SplatStats';
+  statInk.automated = 'yes';
+  statInk.agent = appName;
   statInk.agent_version = appVersion; // get from json file?
 }
 
@@ -114,10 +122,10 @@ async function writeToStatInk(apiKey, result) {
     method: 'POST',
     uri: 'https://stat.ink/api/v2/battle',
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${apiKey}`
     },
     json: convertResultToStatInk(result)
   });
 }
 
-export default writeToStatInk;
+module.exports = writeToStatInk;

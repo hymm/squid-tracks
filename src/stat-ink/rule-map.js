@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   turf_war: 'nawabari',
   splat_zones: 'area',
   tower_control: 'yagura',
