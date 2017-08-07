@@ -20,33 +20,41 @@ class ResultsContainer extends React.Component {
       summary: {},
       results: []
     },
-    recent: {}
+    currentResult: {}
   };
 
   componentDidMount() {
     this.getRecords();
   }
 
-  async getRecords() {
+  getRecords() {
     const results = ipcRenderer.sendSync('getApi', 'results');
     this.setState({ results: results });
-    this.setState({
-      recent: ipcRenderer.sendSync(
-        'getApi',
-        `results/${results.results[0].battle_number}`
-      )
-    });
+    this.changeResult(results.results[0].battle_number);
     this.setState({ initialized: true });
   }
+
+  changeResult = battleNumber => {
+    this.setState({
+      currentResult: ipcRenderer.sendSync('getApi', `results/${battleNumber}`)
+    });
+  };
 
   render() {
     return (
       <div>
         <ResultsSummaryCard summary={this.state.results.summary} />
         {this.state.initialized
-          ? <ResultDetailCard result={this.state.recent} />
+          ? <ResultDetailCard
+              result={this.state.currentResult}
+              changeResult={this.changeResult}
+              latestBattleNumber={this.state.results.results[0].battle_number}
+            />
           : null}
-        <ResultsCard results={this.state.results.results} />
+        <ResultsCard
+          results={this.state.results.results}
+          changeResult={this.changeResult}
+        />
       </div>
     );
   }

@@ -1,41 +1,43 @@
 # Splat Track
 A desktop program for viewing splatnet 2 statistics and uploading them to stat.ink.
 
-## Configure stat.ink
+## Uploading to stat.ink
 1. Go to stat.ink and copy your api key.
-2. Go to the configuration page and paste the key into "stat.ink API Key"
-3. Click save.
+2. Go to the "Settings" page and paste the key into "stat.ink API Key"
+3. Click "Save"
+4. On "Results" pick the battle in "Results Detail" you want to upload and
+5. Click "Upload to stat.ink"
+6. Repeat steps 4 and 5 as necessary
 
 ## Running the project for development
-Install yarn from https://yarnpkg.com
+To run in development mode:
 
-Get modules:
+Install yarn from https://yarnpkg.com
 ```
 yarn
-```
-
-To run in development mode:
-```
 yarn run dev
 ```
 
 ## TODO List:
-* Implement a Packager
-* Sorting on Tables
+* pick battle number from details page
+* poll for new battles and auto upload to stat.ink
+* autoupdate
 * Better feedback on clicking buttons
-* save records on local disk?
+* Sorting on Tables
 * Prettify Everything
 * Use weapon icons from splatnet
 * memoize or cache getting game details ('/results/512')
-* Invalidate Session Token on getSessionWithSessionToken error
-* Schedule Page
 * Get other language users to test
-* pick battle number from details page
 
-### low priority
+### Low Priority
 * official splatnet link is broken, probably not setting the cookie correctly into render view
 * Open Splatnet 2 in webview
-* look into how to use babel on backend process (low priority)
+* Schedule Page
+* About Page
+* Help Page
+* save records on local disk?
+* Invalidate Session Token on getSessionWithSessionToken error
+* look into how to use babel on backend process
 
 ## Development Notes
 Note: Render Process is using babel, but the backend process is not, so allowed syntax between the two is different right now.

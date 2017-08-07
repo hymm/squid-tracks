@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel, Table } from 'react-bootstrap';
 
-const ResultsCard = ({ results }) => {
+const ResultsCard = ({ results, changeResult }) => {
   /* Object.keys(results).forEach(weapon => {
     weapon_stats[weapon].total_count =
       weapon_stats[weapon].win_count + weapon_stats[weapon].lose_count;
@@ -13,7 +13,7 @@ const ResultsCard = ({ results }) => {
       <Table striped bordered condensed hover>
         <thead>
           <tr>
-            <th>Start Time</th>
+            <th>Battle</th>
             <th>Mode</th>
             <th>Rule</th>
             <th>Stage</th>
@@ -34,10 +34,9 @@ const ResultsCard = ({ results }) => {
             return (
               <tr key={result.start_time}>
                 <td>
-                  {result.start_time}
-                </td>
-                <td>
-                  {result.battle_number}
+                  <a onClick={() => changeResult(result.battle_number)}>
+                    {result.battle_number}
+                  </a>
                 </td>
                 <td>
                   {result.game_mode.key}

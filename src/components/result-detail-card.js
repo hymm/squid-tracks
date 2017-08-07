@@ -285,36 +285,47 @@ const TheirTeamTable = ({ result }) => {
   );
 };
 
-const ResultControl = ({
-  latestBattleNumber,
-  sendToStatInk,
-  currentBattle,
-  result
-}) => {
-  return (
-    <ButtonGroup>
-      <DropdownButton title={currentBattle} id={'battles'}>
-        <MenuItem>
-          {latestBattleNumber}
-        </MenuItem>
-      </DropdownButton>
-      <Button onClick={() => ipcRenderer.sendSync('writeToStatInk', result)}>
-        Upload to stat.ink
-      </Button>
-    </ButtonGroup>
-  );
-};
+class ResultControl extends React.Component {
+  handleChange = e => {
+    console.log(e);
+    this.props.changeResult(e.target.value);
+  };
 
-const ResultDetailCard = ({ result }) => {
+  render() {
+    const { latestBattleNumber, currentBattle, result } = this.props;
+
+    return (
+      <ButtonGroup>
+        <DropdownButton
+          title={currentBattle}
+          id={'battles'}
+          onSelect={this.handleChange}
+        >
+          {Array(50).fill().map((e, i) =>
+            <MenuItem>
+              {latestBattleNumber - i}
+            </MenuItem>
+          )}
+        </DropdownButton>
+        <Button onClick={() => ipcRenderer.sendSync('writeToStatInk', result)}>
+          Upload to stat.ink
+        </Button>
+      </ButtonGroup>
+    );
+  }
+}
+
+const ResultDetailCard = ({ result, latestBattleNumber, changeResult }) => {
   return (
     <Panel header={<h3>Result Details</h3>}>
       <Grid fluid>
         <Row>
           <Col sm={6} md={6}>
             <ResultControl
-              latestBattleNumber={result.battle_number}
+              latestBattleNumber={latestBattleNumber}
               currentBattle={result.battle_number}
               result={result}
+              changeResult={changeResult}
             />
           </Col>
         </Row>
