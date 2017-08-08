@@ -1,9 +1,18 @@
+
 const { protocol, app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
+const log = require('electron-log');
+const isDev = require('electron-is-dev');
 const writeToStatInk = require('./stat-ink/stat-ink');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
+
+if (!isDev) {
+  require('./autoupdate');
+} else {
+  log.info('app running in development');
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -21,6 +30,7 @@ const store = new Store({
   defaults: { sessionToken: '', statInkToken: '' }
 });
 
+// splatnet and stat.ink comm with renderer handling
 // global to current state, code challenge, and code verifier
 let authParams = {};
 let sessionToken = '';
@@ -134,6 +144,8 @@ async function getStoredSessionToken() {
     }
   }
 }
+
+// autoupdate
 
 function createWindow() {
   registerSplatnetHandler();

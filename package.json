@@ -14,6 +14,9 @@
   "dependencies": {
     "base64url": "^2.0.0",
     "bootstrap": "3",
+    "electron-is-dev": "^0.3.0",
+    "electron-log": "^2.2.7",
+    "electron-updater": "^2.8.5",
     "husky": "^0.14.3",
     "jsonwebtoken": "^7.4.1",
     "jws": "^3.1.4",
@@ -38,6 +41,7 @@
     "build": "react-scripts build",
     "prepack": "yarn build",
     "pack": "build --em.main=build/electron.js",
+    "release": "build --em.main=build/electron.js --publish=always",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",
