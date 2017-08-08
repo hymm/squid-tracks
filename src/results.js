@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
 import ResultsSummaryCard from './components/results-summary-card';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
@@ -14,31 +14,6 @@ const Results = () =>
     </Row>
   </Grid>;
 
-class ResultsPoller extends React.Component {
-  state = {
-    active: false
-  };
-
-  start = () => {
-    this.setState({ active: true });
-  };
-
-  stop = () => {
-    this.setState({ active: false });
-  };
-
-  poll = () => {
-    this.props.getRecords();
-    if (this.state.active) {
-      setTimeout(this.poll, 120000); // 2 minutes
-    }
-  };
-
-  render() {
-    return <Button>Poll for New Battles</Button>;
-  }
-}
-
 class ResultsContainer extends React.Component {
   state = {
     results: {
@@ -49,15 +24,15 @@ class ResultsContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.getRecords();
+    this.getResults();
   }
 
-  getRecords() {
+  getResults = () => {
     const results = ipcRenderer.sendSync('getApi', 'results');
     this.setState({ results: results });
     this.changeResult(results.results[0].battle_number);
     this.setState({ initialized: true });
-  }
+  };
 
   changeResult = battleNumber => {
     this.setState({
@@ -68,13 +43,16 @@ class ResultsContainer extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={() => this.getRecords()}>Refresh</Button>
+        <ButtonToolbar style={{ marginBottom: '10px' }}>
+          <Button onClick={() => this.getResults()}>Refresh</Button>
+        </ButtonToolbar>
         <ResultsSummaryCard summary={this.state.results.summary} />
         {this.state.initialized
           ? <ResultDetailCard
               result={this.state.currentResult}
               changeResult={this.changeResult}
               latestBattleNumber={this.state.results.results[0].battle_number}
+              getResults={this.getResults}
             />
           : null}
         <ResultsCard

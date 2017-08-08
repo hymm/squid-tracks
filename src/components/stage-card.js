@@ -1,5 +1,14 @@
 import React from 'react';
-import { Panel, ButtonGroup, Button, Table } from 'react-bootstrap';
+import {
+  Panel,
+  ButtonGroup,
+  ButtonToolbar,
+  Button,
+  Table,
+  Grid,
+  Col,
+  Row
+} from 'react-bootstrap';
 
 export default class StageCard extends React.Component {
   state = {
@@ -59,83 +68,102 @@ export default class StageCard extends React.Component {
 
     return (
       <Panel header={<h3>Stage Stats</h3>}>
-        <ButtonGroup>
-          <Button onClick={this.showCount} active={!this.state.percent}>
-            Count
-          </Button>
-          <Button onClick={this.showPercent} active={this.state.percent}>
-            Percent
-          </Button>
-        </ButtonGroup>
-        <Table striped bordered condensed hover>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>RM</th>
-              <th>SZ</th>
-              <th>TC</th>
-              <th>Totals</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.keys(stage_stats).map(stage =>
-              <tr key={stage}>
-                <td>
-                  {stage_stats[stage].stage.name}
-                </td>
-                <td>
-                  {this.state.percent
-                    ? `${stage_stats[stage].hoko_percent.toFixed(2)}`
-                    : `${stage_stats[stage].hoko_win} - ${stage_stats[stage]
-                        .hoko_lose}`}
-                </td>
-                <td>
-                  {this.state.percent
-                    ? `${stage_stats[stage].area_percent.toFixed(2)}`
-                    : `${stage_stats[stage].area_win} - ${stage_stats[stage]
-                        .area_lose}`}
-                </td>
-                <td>
-                  {this.state.percent
-                    ? `${stage_stats[stage].yagura_percent.toFixed(2)}`
-                    : `${stage_stats[stage].yagura_win} - ${stage_stats[stage]
-                        .yagura_lose}`}
-                </td>
-                <td>
-                  {this.state.percent
-                    ? `${stage_stats[stage].total_percent.toFixed(2)}`
-                    : `${stage_stats[stage].total_win} - ${stage_stats[stage]
-                        .total_lose}`}
-                </td>
-              </tr>
-            )}
-          </tbody>
-          <tfoot>
-            <tr>
-              <th>Totals</th>
-              <td>
-                {this.state.percent
-                  ? `${rm_percent.toFixed(2)}`
-                  : `${rm_win} - ${rm_lose}`}
-              </td>
-              <td>
-                {this.state.percent
-                  ? `${sz_percent.toFixed(2)}`
-                  : `${sz_win} - ${sz_lose}`}
-              </td>
-              <td>
-                {this.state.percent
-                  ? `${tc_percent.toFixed(2)}`
-                  : `${tc_win} - ${tc_lose}`}
-              </td>
-              <td>
-                {this.state.percent
-                  ? `${total_percent.toFixed(2)}`
-                  : `${total_win} - ${total_lose}`}
-              </td>
-            </tr>
-          </tfoot>
-        </Table>
+        <Grid fluid>
+          <Row>
+            <Col sm={12} md={12}>
+              <ButtonToolbar style={{ marginBottom: '10px' }}>
+                <ButtonGroup>
+                  <Button onClick={this.showCount} active={!this.state.percent}>
+                    Count
+                  </Button>
+                  <Button
+                    onClick={this.showPercent}
+                    active={this.state.percent}
+                  >
+                    Percent
+                  </Button>
+                </ButtonGroup>
+              </ButtonToolbar>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12} md={12}>
+              <Table striped bordered condensed hover>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>RM</th>
+                    <th>SZ</th>
+                    <th>TC</th>
+                    <th>Totals</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.keys(stage_stats).map(stage =>
+                    <tr key={stage}>
+                      <td>
+                        {stage_stats[stage].stage.name}
+                      </td>
+                      <td>
+                        {this.state.percent
+                          ? `${stage_stats[stage].hoko_percent.toFixed(2)}`
+                          : `${stage_stats[stage].hoko_win} - ${stage_stats[
+                              stage
+                            ].hoko_lose}`}
+                      </td>
+                      <td>
+                        {this.state.percent
+                          ? `${stage_stats[stage].area_percent.toFixed(2)}`
+                          : `${stage_stats[stage].area_win} - ${stage_stats[
+                              stage
+                            ].area_lose}`}
+                      </td>
+                      <td>
+                        {this.state.percent
+                          ? `${stage_stats[stage].yagura_percent.toFixed(2)}`
+                          : `${stage_stats[stage].yagura_win} - ${stage_stats[
+                              stage
+                            ].yagura_lose}`}
+                      </td>
+                      <td>
+                        {this.state.percent
+                          ? `${stage_stats[stage].total_percent.toFixed(2)}`
+                          : `${stage_stats[stage].total_win} - ${stage_stats[
+                              stage
+                            ].total_lose}`}
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Totals</th>
+                    <td>
+                      {this.state.percent
+                        ? `${rm_percent.toFixed(2)}`
+                        : `${rm_win} - ${rm_lose}`}
+                    </td>
+                    <td>
+                      {this.state.percent
+                        ? `${sz_percent.toFixed(2)}`
+                        : `${sz_win} - ${sz_lose}`}
+                    </td>
+                    <td>
+                      {this.state.percent
+                        ? `${tc_percent.toFixed(2)}`
+                        : `${tc_win} - ${tc_lose}`}
+                    </td>
+                    <td>
+                      {this.state.percent
+                        ? `${total_percent.toFixed(2)}`
+                        : `${total_win} - ${total_lose}`}
+                    </td>
+                  </tr>
+                </tfoot>
+              </Table>
+            </Col>
+          </Row>
+        </Grid>
       </Panel>
     );
   }

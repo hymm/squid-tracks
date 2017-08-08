@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
 import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
@@ -33,7 +33,9 @@ class ResultsContainer extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={() => this.getRecords()}>Refresh</Button>
+        <ButtonToolbar style={{ marginBottom: '10px' }}>
+          <Button onClick={() => this.getRecords()}>Refresh</Button>
+        </ButtonToolbar>
         <PlayerCard records={this.state.records.records} />
         <StageCard records={this.state.records.records} />
         <WeaponCard records={this.state.records.records} />

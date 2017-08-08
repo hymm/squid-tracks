@@ -8,7 +8,8 @@ import {
   ButtonGroup,
   DropdownButton,
   Button,
-  MenuItem
+  MenuItem,
+  ButtonToolbar
 } from 'react-bootstrap';
 const { ipcRenderer } = window.require('electron');
 
@@ -76,8 +77,9 @@ const ResultSummary2 = ({ result }) =>
       {result.my_team_percentage
         ? <tr>
             <th>Score</th>
-            <td
-            >{`${result.my_team_percentage} - ${result.other_team_percentage}`}</td>
+            <td>
+              {`${result.my_team_percentage} - ${result.other_team_percentage}`}
+            </td>
           </tr>
         : null}
       {result.my_team_count
@@ -285,16 +287,54 @@ const TheirTeamTable = ({ result }) => {
   );
 };
 
+class ResultsPoller extends React.Component {
+  state = {
+    active: false
+  };
+
+  start = () => {
+    this.setState({ active: true });
+  };
+
+  stop = () => {
+    this.setState({ active: false });
+  };
+
+  poll = () => {
+    this.props.getRecords();
+    if (this.state.active) {
+      setTimeout(this.poll, 120000); // 2 minutes
+    }
+  };
+
+  handleClick = () => {
+    if (this.state.active) {
+      this.stop();
+    } else {
+      this.start();
+    }
+  };
+
+  render() {
+    return (
+      <Button onClick={this.handleClick}>
+        {this.state.active ? 'Polling' : 'Poll for New Battles'}
+      </Button>
+    );
+  }
+}
+
 class ResultControl extends React.Component {
   render() {
     const {
       latestBattleNumber,
       currentBattle,
       result,
-      changeResult
+      changeResult,
+      getResults
     } = this.props;
     return (
-      <div>
+      <ButtonToolbar>
         <ButtonGroup>
           <Button
             onClick={() => changeResult(currentBattle + 1)}
@@ -323,22 +363,29 @@ class ResultControl extends React.Component {
             Upload to stat.ink
           </Button>
         </ButtonGroup>
-      </div>
+        <ResultsPoller getRecords={getResults} />
+      </ButtonToolbar>
     );
   }
 }
 
-const ResultDetailCard = ({ result, latestBattleNumber, changeResult }) => {
+const ResultDetailCard = ({
+  result,
+  latestBattleNumber,
+  changeResult,
+  getResults
+}) => {
   return (
     <Panel header={<h3>Result Details</h3>}>
       <Grid fluid>
         <Row>
-          <Col sm={6} md={6}>
+          <Col sm={12} md={12}>
             <ResultControl
               latestBattleNumber={latestBattleNumber}
               currentBattle={result.battle_number}
               result={result}
               changeResult={changeResult}
+              getResults={getResults}
             />
           </Col>
         </Row>

@@ -19,18 +19,19 @@ yarn run dev
 ```
 
 ## TODO List:
-* pick battle number from details page
 * poll for new battles and auto upload to stat.ink
-* autoupdate
+* memoize or cache getting game details ('/results/512')
+* autoupdate status page
 * Better feedback on clicking buttons
 * Sorting on Tables
+* handle splatnet errors
 * Prettify Everything
 * Use weapon icons from splatnet
-* memoize or cache getting game details ('/results/512')
 * Get other language users to test
+* Create an image game summary card to upload to stat.ink
 
 ### Low Priority
-* official splatnet link is broken, probably not setting the cookie correctly into render view
+* official splatnet link is broken, probably not setting the cookie correctly into renderer
 * Open Splatnet 2 in webview
 * Schedule Page
 * About Page
