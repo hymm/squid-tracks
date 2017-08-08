@@ -286,31 +286,44 @@ const TheirTeamTable = ({ result }) => {
 };
 
 class ResultControl extends React.Component {
-  handleChange = e => {
-    console.log(e);
-    this.props.changeResult(e.target.value);
-  };
-
   render() {
-    const { latestBattleNumber, currentBattle, result } = this.props;
-
+    const {
+      latestBattleNumber,
+      currentBattle,
+      result,
+      changeResult
+    } = this.props;
     return (
-      <ButtonGroup>
-        <DropdownButton
-          title={currentBattle}
-          id={'battles'}
-          onSelect={this.handleChange}
-        >
-          {Array(50).fill().map((e, i) =>
-            <MenuItem>
-              {latestBattleNumber - i}
-            </MenuItem>
-          )}
-        </DropdownButton>
-        <Button onClick={() => ipcRenderer.sendSync('writeToStatInk', result)}>
-          Upload to stat.ink
-        </Button>
-      </ButtonGroup>
+      <div>
+        <ButtonGroup>
+          <Button
+            onClick={() => changeResult(currentBattle + 1)}
+            disabled={currentBattle === latestBattleNumber}
+          >
+            {'<'}
+          </Button>
+          <DropdownButton title={currentBattle} id={'battles'}>
+            {Array(50).fill().map((e, i) =>
+              <MenuItem onClick={() => changeResult(latestBattleNumber - i)}>
+                {latestBattleNumber - i}
+              </MenuItem>
+            )}
+          </DropdownButton>
+          <Button
+            onClick={() => changeResult(currentBattle - 1)}
+            disabled={currentBattle === latestBattleNumber + 50}
+          >
+            {'>'}
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button
+            onClick={() => ipcRenderer.sendSync('writeToStatInk', result)}
+          >
+            Upload to stat.ink
+          </Button>
+        </ButtonGroup>
+      </div>
     );
   }
 }

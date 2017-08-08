@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Button } from 'react-bootstrap';
 import ResultsSummaryCard from './components/results-summary-card';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
@@ -13,6 +13,31 @@ const Results = () =>
       </Col>
     </Row>
   </Grid>;
+
+class ResultsPoller extends React.Component {
+  state = {
+    active: false
+  };
+
+  start = () => {
+    this.setState({ active: true });
+  };
+
+  stop = () => {
+    this.setState({ active: false });
+  };
+
+  poll = () => {
+    this.props.getRecords();
+    if (this.state.active) {
+      setTimeout(this.poll, 120000); // 2 minutes
+    }
+  };
+
+  render() {
+    return <Button>Poll for New Battles</Button>;
+  }
+}
 
 class ResultsContainer extends React.Component {
   state = {
@@ -43,6 +68,7 @@ class ResultsContainer extends React.Component {
   render() {
     return (
       <div>
+        <Button onClick={() => this.getRecords()}>Refresh</Button>
         <ResultsSummaryCard summary={this.state.results.summary} />
         {this.state.initialized
           ? <ResultDetailCard
