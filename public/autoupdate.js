@@ -6,26 +6,6 @@ autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
 
-let template = []
-if (process.platform === 'darwin') {
-  // OS X
-  const name = app.getName();
-  template.unshift({
-    label: name,
-    submenu: [
-      {
-        label: 'About ' + name,
-        role: 'about'
-      },
-      {
-        label: 'Quit',
-        accelerator: 'Command+Q',
-        click() { app.quit(); }
-      },
-    ]
-  })
-}
-
 let win;
 
 function sendStatusToWindow(text) {
@@ -33,7 +13,6 @@ function sendStatusToWindow(text) {
 }
 function createDefaultWindow() {
   win = new BrowserWindow();
-  win.webContents.openDevTools();
   win.on('closed', () => {
     win = null;
   });
@@ -48,6 +27,7 @@ autoUpdater.on('update-available', (info) => {
 })
 autoUpdater.on('update-not-available', (info) => {
   sendStatusToWindow('Update not available.');
+  win.close();
 })
 autoUpdater.on('error', (err) => {
   sendStatusToWindow('Error in auto-updater.');
@@ -63,9 +43,6 @@ autoUpdater.on('update-downloaded', (info) => {
 });
 app.on('ready', function() {
   // Create the Menu
-  const menu = Menu.buildFromTemplate(template);
-  Menu.setApplicationMenu(menu);
-
   createDefaultWindow();
 });
 app.on('window-all-closed', () => {
