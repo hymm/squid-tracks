@@ -1,4 +1,4 @@
-# Splat Track
+# Squid Tracks
 A desktop program for viewing splatnet 2 statistics and uploading them to stat.ink.
 
 ## Uploading to stat.ink
