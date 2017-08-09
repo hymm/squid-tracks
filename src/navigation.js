@@ -2,9 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import isDev from 'electron-is-dev';
-// const remote = window.require('electron').remote;
-// const { loadSplatnet } = remote.require('../public/electron.js');
+const isDev = window.require('electron-is-dev');
 
 const Navigation = () =>
   <Navbar fluid>
@@ -28,10 +26,10 @@ const Navigation = () =>
           <NavItem eventKey={3}>Records</NavItem>
         </LinkContainer>
         <LinkContainer to="/results">
-          <NavItem eventKey={3}>Results</NavItem>
+          <NavItem eventKey={4}>Results</NavItem>
         </LinkContainer>
         <LinkContainer to="/settings">
-          <NavItem eventKey={3}>Settings</NavItem>
+          <NavItem eventKey={5}>Settings</NavItem>
         </LinkContainer>
       </Nav>
     </Navbar.Collapse>

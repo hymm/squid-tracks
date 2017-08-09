@@ -7,7 +7,8 @@ import {
   ButtonGroup,
   Button,
   DropdownButton,
-  MenuItem
+  MenuItem,
+  Glyphicon
 } from 'react-bootstrap';
 import ResultsSummaryCard from './components/results-summary-card';
 import ResultsCard from './components/results-card';
@@ -96,7 +97,7 @@ class ResultControl extends React.Component {
             onClick={() => changeResult(parseInt(currentBattle, 10) + 1)}
             disabled={currentBattle === latestBattleNumber}
           >
-            {'<'}
+            <Glyphicon glyph="triangle-left" />
           </Button>
           <DropdownButton title={currentBattle} id={'battles'}>
             {Array(50).fill().map((e, i) =>
@@ -109,7 +110,7 @@ class ResultControl extends React.Component {
             onClick={() => changeResult(currentBattle - 1)}
             disabled={currentBattle === latestBattleNumber + 50}
           >
-            {'>'}
+            <Glyphicon glyph="triangle-right" />
           </Button>
         </ButtonGroup>
         <ButtonGroup>

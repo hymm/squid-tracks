@@ -40,19 +40,17 @@ The installer will be created in `/dist`.
 
 ## Version 1.0 ToDo List:
 * memoize or cache getting game details ('/results/512')
-* Prettier autoupdate status page
-* Better feedback on clicking buttons
-* Sorting on Tables
-* Prettify Everything
-* Get other language users to test
-* handle splatnet and stat.ink errors
-* fix freezing and crashing bugs
-* About/Help Page
 * only list battle numbers that are listed in results
+* Better feedback on clicking buttons
+* disable stat.ink buttons if sessiontoken is not defined.
+* Sorting on Tables
+* Prettier autoupdate status page
+* handle splatnet and stat.ink errors
 * figure out how to use docker to build for different os's
-* disable stat.ink buttons if sessiontoken is not defined
+* Get other language users to test
 
 ### Other ToDo's
+* Prettify Everything
 * Figure out how to get a smaller nintendo oauth login page
 * Use weapon icons from splatnet or custom graphics
 * Create an image game summary card to upload to stat.ink
@@ -72,6 +70,11 @@ Note: Render Process is using babel, but the backend process is not, so allowed 
 * create-react-app
 * React
 * Bootstrap
+
+## Alternative stat.ink Clients
+* [ikaLog](https://github.com/hasegaw/IkaLog) If you have a capture card, this program can provide a lot more information.  What weapons you're killed by, other onscreen events, ect.
+* [ikaRec](https://play.google.com/store/apps/details?id=ink.pocketgopher.ikarec&hl=en) Manually enter data using this android app.
+* [stat.ink](https://stat.ink/) The button on the top right allows you to enter data manually.
 
 ## Authors
 **[hymm](https://github.com/hymm)** *Maintainer* [@Wrong_Shoe](https://twitter.com/Wrong_Shoe) (Discord) WrongShoe#9733
