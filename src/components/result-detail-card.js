@@ -289,22 +289,26 @@ const TheirTeamTable = ({ result }) => {
 
 class ResultsPoller extends React.Component {
   state = {
-    active: false
+    active: false,
+    lastBattleUploaded: 0,
+    activeText: 'Not Polling'
   };
 
   start = () => {
-    this.setState({ active: true });
+    this.setState({ active: true, activeText: 'Polling' });
+    this.poll(true);
   };
 
   stop = () => {
     this.setState({ active: false });
   };
 
-  poll = () => {
-    this.props.getRecords();
-    if (this.state.active) {
-      setTimeout(this.poll, 120000); // 2 minutes
+  poll = start => {
+    if (!this.state.active && !start) {
+      return;
     }
+    this.props.getResults();
+    setTimeout(this.poll, 120000); // 2 minutes
   };
 
   handleClick = () => {
@@ -315,10 +319,28 @@ class ResultsPoller extends React.Component {
     }
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.result.battle_number &&
+      this.props.result.battle_number > prevProps.result.battle_number
+    ) {
+      this.setState({
+        activeText: `writing battle ${this.props.result.battle_number}`
+      });
+      ipcRenderer.sendSync('writeToStatInk', this.props.result);
+      this.setState({
+        activeText: `Wrote battle ${this.props.result.battle_number}`
+      });
+      setTimeout(() => {
+        this.setState({ activeText: `Polling` });
+      }, 10000);
+    }
+  }
+
   render() {
     return (
       <Button onClick={this.handleClick}>
-        {this.state.active ? 'Polling' : 'Poll for New Battles'}
+        {this.state.active ? this.state.activeText : 'Auto-upload to stat.ink'}
       </Button>
     );
   }
@@ -363,7 +385,7 @@ class ResultControl extends React.Component {
             Upload to stat.ink
           </Button>
         </ButtonGroup>
-        <ResultsPoller getRecords={getResults} />
+        <ResultsPoller getResults={getResults} result={result} />
       </ButtonToolbar>
     );
   }
