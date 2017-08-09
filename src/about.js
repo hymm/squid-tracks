@@ -89,6 +89,7 @@ const AboutPage = () =>
         </ol>
 
         <h2>For Help and Bug Filing</h2>
+        <p>Send cries for help, bug reports, and feature requests to</p>
         <p>
           <a
             onClick={() =>
