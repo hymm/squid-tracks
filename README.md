@@ -60,7 +60,7 @@ The installer will be created in `/dist`.
 * save records on local disk?
 * Invalidate Session Token on getSessionWithSessionToken error
 * look into how to use babel on backend process to make code syntax consistent
-* implement electron-getText, os-locale to support multiple languages
+* implement electron-getText, app.getLocale to support multiple languages
 
 ## Development Notes
 Note: Render Process is using babel, but the backend process is not, so allowed syntax between the two is different right now.

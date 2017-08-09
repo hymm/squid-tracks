@@ -1,7 +1,9 @@
 import React from 'react';
 import { Grid, Row, Col, Jumbotron } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-const { openExternal } = window.require('electron').shell;
+const { shell, app } = window.require('electron').remote;
+const { openExternal } = shell;
+const appVersion = app.getVersion();
 
 const AboutPage = () =>
   <Grid fluid>
@@ -10,6 +12,7 @@ const AboutPage = () =>
         <Jumbotron style={{ textAlign: 'center' }}>
           <h1>Squid Tracks</h1>
           <h2>A Splatnet 2 Client for your Desktop</h2>
+          <h5>{`Version ${appVersion}`}</h5>
         </Jumbotron>
         <h2>Stat.ink Integration</h2>
         <h4>Setup</h4>
@@ -59,6 +62,11 @@ const AboutPage = () =>
             <strong>Auto-upload to stat.ink</strong>
           </li>
         </ol>
+        <p>
+          <em>
+            Note: Autouploading is only active while Results tab is showing.
+          </em>
+        </p>
         <h4>Manual Uploading</h4>
         <p>
           Automatic uploading only uploads new games. If there are older games
