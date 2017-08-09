@@ -1,17 +1,5 @@
 import React from 'react';
-import {
-  Grid,
-  Row,
-  Col,
-  Panel,
-  Table,
-  ButtonGroup,
-  DropdownButton,
-  Button,
-  MenuItem,
-  ButtonToolbar
-} from 'react-bootstrap';
-const { ipcRenderer } = window.require('electron');
+import { Grid, Row, Col, Panel, Table } from 'react-bootstrap';
 
 const ResultSummary = ({ result }) =>
   <Table striped bordered>
@@ -287,137 +275,15 @@ const TheirTeamTable = ({ result }) => {
   );
 };
 
-class ResultsPoller extends React.Component {
-  state = {
-    active: false,
-    lastBattleUploaded: 0,
-    activeText: 'Not Polling'
-  };
-
-  start = () => {
-    this.setState({ active: true, activeText: 'Polling' });
-    this.poll(true);
-  };
-
-  stop = () => {
-    this.setState({ active: false });
-  };
-
-  poll = start => {
-    if (!this.state.active && !start) {
-      return;
-    }
-    this.props.getResults();
-    setTimeout(this.poll, 120000); // 2 minutes
-  };
-
-  handleClick = () => {
-    if (this.state.active) {
-      this.stop();
-    } else {
-      this.start();
-    }
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      this.props.result.battle_number &&
-      this.props.result.battle_number > prevProps.result.battle_number
-    ) {
-      this.setState({
-        activeText: `writing battle ${this.props.result.battle_number}`
-      });
-      ipcRenderer.sendSync('writeToStatInk', this.props.result);
-      this.setState({
-        activeText: `Wrote battle ${this.props.result.battle_number}`
-      });
-      setTimeout(() => {
-        this.setState({ activeText: `Polling` });
-      }, 10000);
-    }
-  }
-
-  render() {
-    return (
-      <Button onClick={this.handleClick}>
-        {this.state.active ? this.state.activeText : 'Auto-upload to stat.ink'}
-      </Button>
-    );
-  }
-}
-
-class ResultControl extends React.Component {
-  render() {
-    const {
-      latestBattleNumber,
-      currentBattle,
-      result,
-      changeResult,
-      getResults
-    } = this.props;
-    return (
-      <ButtonToolbar>
-        <ButtonGroup>
-          <Button
-            onClick={() => changeResult(currentBattle + 1)}
-            disabled={currentBattle === latestBattleNumber}
-          >
-            {'<'}
-          </Button>
-          <DropdownButton title={currentBattle} id={'battles'}>
-            {Array(50).fill().map((e, i) =>
-              <MenuItem onClick={() => changeResult(latestBattleNumber - i)}>
-                {latestBattleNumber - i}
-              </MenuItem>
-            )}
-          </DropdownButton>
-          <Button
-            onClick={() => changeResult(currentBattle - 1)}
-            disabled={currentBattle === latestBattleNumber + 50}
-          >
-            {'>'}
-          </Button>
-        </ButtonGroup>
-        <ButtonGroup>
-          <Button
-            onClick={() => ipcRenderer.sendSync('writeToStatInk', result)}
-          >
-            Upload to stat.ink
-          </Button>
-        </ButtonGroup>
-        <ResultsPoller getResults={getResults} result={result} />
-      </ButtonToolbar>
-    );
-  }
-}
-
-const ResultDetailCard = ({
-  result,
-  latestBattleNumber,
-  changeResult,
-  getResults
-}) => {
+const ResultDetailCard = ({ result }) => {
   return (
-    <Panel header={<h3>Result Details</h3>}>
+    <Panel header={<h3>{`Battle ${result.battle_number} Details`}</h3>}>
       <Grid fluid>
         <Row>
-          <Col sm={12} md={12}>
-            <ResultControl
-              latestBattleNumber={latestBattleNumber}
-              currentBattle={result.battle_number}
-              result={result}
-              changeResult={changeResult}
-              getResults={getResults}
-            />
-          </Col>
-        </Row>
-        <Row>
           <Col sm={6} md={6}>
-            <h4>Summary</h4>
             <ResultSummary result={result} />
           </Col>
           <Col sm={6} md={6}>
-            <h4>More Summary</h4>
             <ResultSummary2 result={result} />
           </Col>
         </Row>

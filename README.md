@@ -50,6 +50,7 @@ The installer will be created in `/dist`.
 * About/Help Page
 * only list battle numbers that are listed in results
 * figure out how to use docker to build for different os's
+* disable stat.ink buttons if sessiontoken is not defined
 
 ### Other ToDo's
 * Figure out how to get a smaller nintendo oauth login page
@@ -61,7 +62,7 @@ The installer will be created in `/dist`.
 * save records on local disk?
 * Invalidate Session Token on getSessionWithSessionToken error
 * look into how to use babel on backend process to make code syntax consistent
-* implement electron-getText to support multiple languages
+* implement electron-getText, os-locale to support multiple languages
 
 ## Development Notes
 Note: Render Process is using babel, but the backend process is not, so allowed syntax between the two is different right now.
@@ -78,4 +79,5 @@ Note: Render Process is using babel, but the backend process is not, so allowed 
 ## Acknowledgements
 * [Danny](https://github.com/Rapptz): For figuring out how to log into splatnet-2 and making [R.Danny](https://github.com/Rapptz/RoboDanny).
 * [frozenpandaman](https://github.com/frozenpandaman/): I referenced his [python uploader](https://github.com/frozenpandaman/splatnet2statink) for parsing splatnet-2 to stat.ink
+* [fetus hina](https://github.com/fetus-hina): for creating [stat.ink](https://stat.ink) and answering my questions about the API.
 * My girlfriend [@Selkaine](https://twitter.com/Selkaine) for making graphics.

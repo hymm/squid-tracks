@@ -5,6 +5,7 @@ import Records from './records';
 import Results from './results';
 import Settings from './settings';
 import Navigation from './navigation';
+import About from './about';
 import Login from './login';
 
 import './App.css';
@@ -15,6 +16,7 @@ const { ipcRenderer } = window.require('electron');
 const Routes = ({ token, logoutCallback }) =>
   <div>
     <Navigation />
+    <Route path="/" exact component={About} />
     <Route path="/testApi" component={ApiViewer} />
     <Route path="/records" component={Records} />
     <Route path="/results" component={Results} />

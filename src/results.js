@@ -1,5 +1,14 @@
 import React from 'react';
-import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
+import {
+  Grid,
+  Row,
+  Col,
+  ButtonToolbar,
+  ButtonGroup,
+  Button,
+  DropdownButton,
+  MenuItem
+} from 'react-bootstrap';
 import ResultsSummaryCard from './components/results-summary-card';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
@@ -13,6 +22,108 @@ const Results = () =>
       </Col>
     </Row>
   </Grid>;
+
+class ResultsPoller extends React.Component {
+  state = {
+    active: false,
+    lastBattleUploaded: 0,
+    activeText: 'Not Polling'
+  };
+
+  start = () => {
+    this.setState({ active: true, activeText: 'Polling' });
+    this.poll(true);
+  };
+
+  stop = () => {
+    this.setState({ active: false });
+  };
+
+  poll = start => {
+    if (!this.state.active && !start) {
+      return;
+    }
+    this.props.getResults();
+    setTimeout(this.poll, 120000); // 2 minutes
+  };
+
+  handleClick = () => {
+    if (this.state.active) {
+      this.stop();
+    } else {
+      this.start();
+    }
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.result.battle_number &&
+      this.props.result.battle_number > prevProps.result.battle_number
+    ) {
+      this.setState({
+        activeText: `writing battle ${this.props.result.battle_number}`
+      });
+      ipcRenderer.sendSync('writeToStatInk', this.props.result);
+      this.setState({
+        activeText: `Wrote battle ${this.props.result.battle_number}`
+      });
+      setTimeout(() => {
+        this.setState({ activeText: `Polling` });
+      }, 10000);
+    }
+  }
+
+  render() {
+    return (
+      <Button onClick={this.handleClick}>
+        {this.state.active ? this.state.activeText : 'Auto-upload to stat.ink'}
+      </Button>
+    );
+  }
+}
+
+class ResultControl extends React.Component {
+  render() {
+    const { latestBattleNumber, result, changeResult, getResults } = this.props;
+
+    const currentBattle = result.battle_number;
+
+    return (
+      <ButtonToolbar style={{ marginBottom: 10 }}>
+        <Button onClick={() => getResults()}>Refresh</Button>
+        <ButtonGroup>
+          <Button
+            onClick={() => changeResult(parseInt(currentBattle, 10) + 1)}
+            disabled={currentBattle === latestBattleNumber}
+          >
+            {'<'}
+          </Button>
+          <DropdownButton title={currentBattle} id={'battles'}>
+            {Array(50).fill().map((e, i) =>
+              <MenuItem onClick={() => changeResult(latestBattleNumber - i)}>
+                {latestBattleNumber - i}
+              </MenuItem>
+            )}
+          </DropdownButton>
+          <Button
+            onClick={() => changeResult(currentBattle - 1)}
+            disabled={currentBattle === latestBattleNumber + 50}
+          >
+            {'>'}
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button
+            onClick={() => ipcRenderer.sendSync('writeToStatInk', result)}
+          >
+            Upload to stat.ink
+          </Button>
+        </ButtonGroup>
+        <ResultsPoller getResults={getResults} result={result} />
+      </ButtonToolbar>
+    );
+  }
+}
 
 class ResultsContainer extends React.Component {
   state = {
@@ -42,24 +153,34 @@ class ResultsContainer extends React.Component {
 
   render() {
     return (
-      <div>
-        <ButtonToolbar style={{ marginBottom: '10px' }}>
-          <Button onClick={() => this.getResults()}>Refresh</Button>
-        </ButtonToolbar>
-        <ResultsSummaryCard summary={this.state.results.summary} />
-        {this.state.initialized
-          ? <ResultDetailCard
+      <Grid>
+        <Row>
+          <Col sm={12} md={12}>
+            <ResultControl
+              latestBattleNumber={
+                this.state.results.results[0]
+                  ? this.state.results.results[0].battle_number
+                  : 0
+              }
               result={this.state.currentResult}
               changeResult={this.changeResult}
-              latestBattleNumber={this.state.results.results[0].battle_number}
               getResults={this.getResults}
             />
-          : null}
-        <ResultsCard
-          results={this.state.results.results}
-          changeResult={this.changeResult}
-        />
-      </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={12} md={12}>
+            {this.state.initialized
+              ? <ResultDetailCard result={this.state.currentResult} />
+              : null}
+            <ResultsSummaryCard summary={this.state.results.summary} />
+            <ResultsCard
+              results={this.state.results.results}
+              changeResult={this.changeResult}
+            />
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
