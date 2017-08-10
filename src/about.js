@@ -19,6 +19,7 @@ const AboutPage = () =>
                 openExternal(
                   'https://github.com/hymm/squid-tracks/blob/master/CHANGELOG.md'
                 )}
+              style={{ cursor: 'pointer' }}
             >
               Change Log
             </a>
