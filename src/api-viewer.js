@@ -51,7 +51,7 @@ class ApiTester extends React.Component {
         />
         <select onClick={this.handleSelectChange}>
           {this.urls.map(url =>
-            <option value={url}>
+            <option key={url} value={url}>
               {url}
             </option>
           )}

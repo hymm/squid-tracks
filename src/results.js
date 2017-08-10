@@ -87,7 +87,7 @@ class ResultControl extends React.Component {
   render() {
     const { latestBattleNumber, result, changeResult, getResults } = this.props;
 
-    const currentBattle = result.battle_number;
+    const currentBattle = result.battle_number ? result.battle_number : 0;
 
     return (
       <ButtonToolbar style={{ marginBottom: 10 }}>
@@ -101,7 +101,10 @@ class ResultControl extends React.Component {
           </Button>
           <DropdownButton title={currentBattle} id={'battles'}>
             {Array(50).fill().map((e, i) =>
-              <MenuItem onClick={() => changeResult(latestBattleNumber - i)}>
+              <MenuItem
+                key={i}
+                onClick={() => changeResult(latestBattleNumber - i)}
+              >
                 {latestBattleNumber - i}
               </MenuItem>
             )}
