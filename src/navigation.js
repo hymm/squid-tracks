@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 const isDev = window.require('electron-is-dev');
 
 const Navigation = () =>
-  <Navbar fluid>
+  <Navbar fixedTop>
     <Navbar.Header>
       <Navbar.Brand>
         <Link to="/">Home</Link>
@@ -26,7 +26,7 @@ const Navigation = () =>
           <NavItem eventKey={3}>Records</NavItem>
         </LinkContainer>
         <LinkContainer to="/results">
-          <NavItem eventKey={4}>Results</NavItem>
+          <NavItem eventKey={4}>Battle History</NavItem>
         </LinkContainer>
         <LinkContainer to="/settings">
           <NavItem eventKey={5}>Settings</NavItem>

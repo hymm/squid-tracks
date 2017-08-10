@@ -6,7 +6,7 @@ import WeaponCard from './components/weapon-card';
 const { ipcRenderer } = window.require('electron');
 
 const Records = () =>
-  <Grid fluid>
+  <Grid fluid style={{ marginTop: 65 }}>
     <Row>
       <Col md={12}>
         <ResultsContainer />
