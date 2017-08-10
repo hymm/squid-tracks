@@ -38,32 +38,13 @@ yarn run build
 ```  
 The installer will be created in `/dist`.
 
-## Version 1.0 ToDo List:
-* memoize or cache getting game details ('/results/512')
-* only list battle numbers that are listed in results
-* Better feedback on clicking buttons
-* disable stat.ink buttons if sessiontoken is not defined.
-* Sorting on Tables
-* Prettier autoupdate status page
-* handle splatnet and stat.ink errors
-* figure out how to use docker to build for different os's
-* Get other language users to test
-
-### Other ToDo's
-* Prettify Everything
-* Figure out how to get a smaller nintendo oauth login page
-* Use weapon icons from splatnet or custom graphics
-* Create an image game summary card to upload to stat.ink
-* official splatnet link is broken, probably not setting the cookie correctly into renderer
-* Open Splatnet 2 in webview
-* Feature parity with splatnet 2
-* save records on local disk?
-* Invalidate Session Token on getSessionWithSessionToken error
-* look into how to use babel on backend process to make code syntax consistent
-* implement electron-getText, app.getLocale to support multiple languages
-
 ## Development Notes
 Note: Render Process is using babel, but the backend process is not, so allowed syntax between the two is different right now.
+
+## Roadmap
+[Version 1.0](https://github.com/hymm/squid-tracks/issues/3)
+
+[Version 2.0](https://github.com/hymm/squid-tracks/issues/4)
 
 ## Built With
 * Electron

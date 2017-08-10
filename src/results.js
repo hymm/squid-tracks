@@ -154,34 +154,26 @@ class ResultsContainer extends React.Component {
 
   render() {
     return (
-      <Grid>
-        <Row>
-          <Col sm={12} md={12}>
-            <ResultControl
-              latestBattleNumber={
-                this.state.results.results[0]
-                  ? this.state.results.results[0].battle_number
-                  : 0
-              }
-              result={this.state.currentResult}
-              changeResult={this.changeResult}
-              getResults={this.getResults}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={12} md={12}>
-            {this.state.initialized
-              ? <ResultDetailCard result={this.state.currentResult} />
-              : null}
-            <ResultsSummaryCard summary={this.state.results.summary} />
-            <ResultsCard
-              results={this.state.results.results}
-              changeResult={this.changeResult}
-            />
-          </Col>
-        </Row>
-      </Grid>
+      <div>
+        <ResultControl
+          latestBattleNumber={
+            this.state.results.results[0]
+              ? this.state.results.results[0].battle_number
+              : 0
+          }
+          result={this.state.currentResult}
+          changeResult={this.changeResult}
+          getResults={this.getResults}
+        />
+        {this.state.initialized
+          ? <ResultDetailCard result={this.state.currentResult} />
+          : null}
+        <ResultsSummaryCard summary={this.state.results.summary} />
+        <ResultsCard
+          results={this.state.results.results}
+          changeResult={this.changeResult}
+        />
+      </div>
     );
   }
 }
