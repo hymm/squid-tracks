@@ -152,8 +152,8 @@ function createWindow() {
   getStoredSessionToken();
 
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600
+    width: 1024,
+    height: 768
   });
 
   mainWindow.loadURL(startUrl);
