@@ -14,15 +14,6 @@ Download installer .exe from https://github.com/hymm/squid-tracks/releases.
 You will get a warning when running the installer.  Bypass the warning by clicking
 "more info" and then "Run Anyways."
 
-## Usage
-#### Uploading to stat.ink
-1. Go to stat.ink and copy your api key.
-2. Go to the "Settings" tab and paste the key into "stat.ink API Key"
-3. Click "Save"
-4. On "Results" pick the battle in "Battle Detail" you want to upload.
-5. Click "Upload to stat.ink"
-6. Repeat steps 4 and 5 as necessary
-
 ## Development
 To run in development mode install [yarn](https://yarnpkg.com).
 ```

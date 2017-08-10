@@ -32,7 +32,7 @@ class ResultsPoller extends React.Component {
   };
 
   start = () => {
-    this.setState({ active: true, activeText: 'Polling' });
+    this.setState({ active: true, activeText: 'Waiting for Battle Data' });
     this.poll(true);
   };
 
@@ -69,14 +69,14 @@ class ResultsPoller extends React.Component {
         activeText: `Wrote battle ${this.props.result.battle_number}`
       });
       setTimeout(() => {
-        this.setState({ activeText: `Polling` });
+        this.setState({ activeText: `Waiting for Battle Data` });
       }, 10000);
     }
   }
 
   render() {
     return (
-      <Button onClick={this.handleClick}>
+      <Button onClick={this.handleClick} active={this.state.active}>
         {this.state.active ? this.state.activeText : 'Auto-upload to stat.ink'}
       </Button>
     );

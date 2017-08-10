@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 const isDev = window.require('electron-is-dev');
 
 const Navigation = () =>
-  <Navbar fixedTop>
+  <Navbar fluid fixedTop collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
         <Link to="/">Home</Link>
