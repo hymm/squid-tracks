@@ -120,6 +120,11 @@ const PlayerRow = ({ player }) => {
         {player.player.nickname}
       </td>
       <td>
+        {`${player.player.udemae.name}${player.player.udemae.s_plus_number
+          ? player.player.udemae.s_plus_number
+          : player.player.udemae.name === 'S+' ? 0 : ''}`}
+      </td>
+      <td>
         {player.player.weapon.name}
       </td>
       <td>
@@ -148,6 +153,7 @@ const TeamHeader = () =>
   <thead>
     <tr>
       <th>Player</th>
+      <th>Rank</th>
       <th>Weapon</th>
       <th>Inked</th>
       <th>K+A</th>
@@ -180,6 +186,7 @@ const MyTeamTable = ({ result }) => {
       <tfoot>
         <tr>
           <th>Totals</th>
+          <th />
           <th />
           <td>
             {result.my_team_members.reduce(
@@ -235,6 +242,7 @@ const TheirTeamTable = ({ result }) => {
       <tfoot>
         <tr>
           <th>Totals</th>
+          <th />
           <th />
           <td>
             {result.other_team_members.reduce(
