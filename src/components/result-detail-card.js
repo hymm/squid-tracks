@@ -5,12 +5,6 @@ const ResultSummary = ({ result }) =>
   <Table striped bordered>
     <tbody>
       <tr>
-        <th>Number</th>
-        <td>
-          {result.battle_number}
-        </td>
-      </tr>
-      <tr>
         <th>Result</th>
         <td>
           {result.my_team_result.name}
@@ -43,14 +37,14 @@ const ResultSummary2 = ({ result }) =>
       <tr>
         <th>Start Time</th>
         <td>
-          {result.start_time}
+          {new Date(result.start_time * 1000).toString()}
         </td>
       </tr>
       {result.elapsed_time
         ? <tr>
-            <th>Elapsed Time</th>
+            <th>Duration</th>
             <td>
-              {result.elapsed_time}
+              {`${result.elapsed_time} sec`}
             </td>
           </tr>
         : null}
@@ -153,7 +147,7 @@ const PlayerRow = ({ player }) => {
 const TeamHeader = () =>
   <thead>
     <tr>
-      <th>Nickname</th>
+      <th>Player</th>
       <th>Weapon</th>
       <th>Inked</th>
       <th>K+A</th>
@@ -277,7 +271,7 @@ const TheirTeamTable = ({ result }) => {
 
 const ResultDetailCard = ({ result }) => {
   return (
-    <Panel header={<h3>{`Battle ${result.battle_number} Details`}</h3>}>
+    <Panel header={<h3>{`Battle #${result.battle_number} Details`}</h3>}>
       <Grid fluid>
         <Row>
           <Col sm={6} md={6}>
@@ -293,7 +287,7 @@ const ResultDetailCard = ({ result }) => {
             <MyTeamTable result={result} />
           </Col>
           <Col sm={6} md={6}>
-            <h4>Their Team</h4>
+            <h4>Enemy Team</h4>
             <TheirTeamTable result={result} />
           </Col>
         </Row>

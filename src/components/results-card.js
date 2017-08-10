@@ -9,7 +9,7 @@ const ResultsCard = ({ results, changeResult }) => {
       weapon_stats[weapon].win_count / weapon_stats[weapon].total_count;
   }); */
   return (
-    <Panel header={<h3>Results</h3>}>
+    <Panel header={<h3>Last 50 Battles</h3>}>
       <Table striped bordered condensed hover>
         <thead>
           <tr>
@@ -34,7 +34,12 @@ const ResultsCard = ({ results, changeResult }) => {
             return (
               <tr key={result.start_time}>
                 <td>
-                  <a onClick={() => changeResult(result.battle_number)}>
+                  <a
+                    onClick={() => {
+                      document.body.scrollTop = 0;
+                      changeResult(result.battle_number);
+                    }}
+                  >
                     {result.battle_number}
                   </a>
                 </td>

@@ -3,7 +3,7 @@ import { Panel, Table } from 'react-bootstrap';
 
 const ResultsSummaryCard = ({ summary }) => {
   return (
-    <Panel header={<h3>Results Summary</h3>}>
+    <Panel header={<h3>Last 50 Battles Summary</h3>}>
       <Table striped bordered condensed hover>
         <tbody>
           <tr>

@@ -16,7 +16,7 @@ import ResultDetailCard from './components/result-detail-card';
 const { ipcRenderer } = window.require('electron');
 
 const Results = () =>
-  <Grid fluid>
+  <Grid fluid style={{ marginTop: 65 }}>
     <Row>
       <Col md={12}>
         <ResultsContainer />
@@ -94,8 +94,8 @@ class ResultControl extends React.Component {
         <Button onClick={() => getResults()}>Refresh</Button>
         <ButtonGroup>
           <Button
-            onClick={() => changeResult(parseInt(currentBattle, 10) + 1)}
-            disabled={currentBattle === latestBattleNumber}
+            onClick={() => changeResult(currentBattle - 1)}
+            disabled={currentBattle === latestBattleNumber + 50}
           >
             <Glyphicon glyph="triangle-left" />
           </Button>
@@ -107,8 +107,8 @@ class ResultControl extends React.Component {
             )}
           </DropdownButton>
           <Button
-            onClick={() => changeResult(currentBattle - 1)}
-            disabled={currentBattle === latestBattleNumber + 50}
+            onClick={() => changeResult(parseInt(currentBattle, 10) + 1)}
+            disabled={currentBattle === latestBattleNumber}
           >
             <Glyphicon glyph="triangle-right" />
           </Button>
