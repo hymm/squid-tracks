@@ -22,6 +22,9 @@ const Navigation = () =>
               <NavItem eventKey={2}>Api Checker</NavItem>
             </LinkContainer>
           : null}
+        <LinkContainer to="/schedule">
+          <NavItem eventKey={3}>Schedule</NavItem>
+        </LinkContainer>
         <LinkContainer to="/records">
           <NavItem eventKey={3}>Records</NavItem>
         </LinkContainer>
