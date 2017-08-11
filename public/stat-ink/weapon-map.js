@@ -41,9 +41,9 @@ module.exports = {
   4015: 'herospinner_replica',
   5000: 'sputtery', // dapple dualies
   5010: 'maneuver', // duelies
+  5011: 'maneuver_collabo', // enperry duelies
+  5015: 'heromaneuver_replica', // hero duelies
   5030: 'dualsweeper', // dual squelcher
-  5050: 'heromaneuver_replica', // hero duelies
-  5051: 'maneuver_collabo', // enperry duelies
 
   // guesses
   215: 'heroblaster_replica',
