@@ -119,11 +119,14 @@ const PlayerRow = ({ player }) => {
       <td>
         {player.player.nickname}
       </td>
-      <td>
-        {`${player.player.udemae.name}${player.player.udemae.s_plus_number
-          ? player.player.udemae.s_plus_number
-          : player.player.udemae.name === 'S+' ? 0 : ''}`}
-      </td>
+
+      {player.player.udemae
+        ? <td>
+            {`${player.player.udemae.name}${player.player.udemae.s_plus_number
+              ? player.player.udemae.s_plus_number
+              : player.player.udemae.name === 'S+' ? 0 : ''}`}
+          </td>
+        : null}
       <td>
         {player.player.weapon.name}
       </td>
@@ -149,11 +152,11 @@ const PlayerRow = ({ player }) => {
   );
 };
 
-const TeamHeader = () =>
+const TeamHeader = ({ player = {} }) =>
   <thead>
     <tr>
       <th>Player</th>
-      <th>Rank</th>
+      {player.udemae ? <th>Rank</th> : null}
       <th>Weapon</th>
       <th>Inked</th>
       <th>K+A</th>
@@ -176,7 +179,7 @@ const MyTeamTable = ({ result }) => {
 
   return (
     <Table striped bordered condensed hover>
-      <TeamHeader />
+      <TeamHeader player={result.player_result} />
       <tbody>
         <PlayerRow player={result.player_result} />
         {result.my_team_members.map(player =>
@@ -187,7 +190,7 @@ const MyTeamTable = ({ result }) => {
         <tr>
           <th>Totals</th>
           <th />
-          <th />
+          {result.player_result.player.udemae ? <th /> : null}
           <td>
             {result.my_team_members.reduce(
               (sum, player) => sum + player.game_paint_point,
