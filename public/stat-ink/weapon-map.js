@@ -44,6 +44,8 @@ module.exports = {
   5011: 'maneuver_collabo', // enperry duelies
   5015: 'heromaneuver_replica', // hero duelies
   5030: 'dualsweeper', // dual squelcher
+  6000: 'parashelter',
+  6005: 'heroshelter_replica',
 
   // guesses
   215: 'heroblaster_replica',
