@@ -152,11 +152,11 @@ const PlayerRow = ({ player }) => {
   );
 };
 
-const TeamHeader = ({ player = {} }) =>
+const TeamHeader = ({ player = { player: {} } }) =>
   <thead>
     <tr>
       <th>Player</th>
-      {player.udemae ? <th>Rank</th> : null}
+      {player.player.udemae ? <th>Rank</th> : null}
       <th>Weapon</th>
       <th>Inked</th>
       <th>K+A</th>
@@ -236,7 +236,7 @@ const TheirTeamTable = ({ result }) => {
 
   return (
     <Table striped bordered condensed hover>
-      <TeamHeader />
+      <TeamHeader player={result.other_team_members[0]} />
       <tbody>
         {result.other_team_members.map(player =>
           <PlayerRow key={player.player.nickname} player={player} />
