@@ -100,7 +100,13 @@ class ResultControl extends React.Component {
   }
 
   render() {
-    const { latestBattleNumber, result, changeResult, getResults } = this.props;
+    const {
+      latestBattleNumber,
+      result,
+      changeResult,
+      getResults,
+      results
+    } = this.props;
 
     const currentBattle = result.battle_number ? result.battle_number : 0;
 
@@ -124,12 +130,12 @@ class ResultControl extends React.Component {
             <Glyphicon glyph="triangle-left" />
           </Button>
           <DropdownButton title={currentBattle} id={'battles'}>
-            {Array(50).fill().map((e, i) =>
+            {results.map(result =>
               <MenuItem
-                key={i}
-                onClick={() => changeResult(latestBattleNumber - i)}
+                key={result.battle_number}
+                onClick={() => changeResult(result.battle_number)}
               >
-                {latestBattleNumber - i}
+                {result.battle_number}
               </MenuItem>
             )}
           </DropdownButton>
@@ -198,6 +204,7 @@ class ResultsContainer extends React.Component {
               : 0
           }
           result={this.state.currentResult}
+          results={this.state.results.results}
           changeResult={this.changeResult}
           getResults={this.getResults}
         />
