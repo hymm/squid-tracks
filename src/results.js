@@ -76,7 +76,11 @@ class ResultsPoller extends React.Component {
 
   render() {
     return (
-      <Button onClick={this.handleClick} active={this.state.active}>
+      <Button
+        onClick={this.handleClick}
+        active={this.state.active}
+        disabled={this.props.disabled}
+      >
         {this.state.active ? this.state.activeText : 'Auto-upload to stat.ink'}
       </Button>
     );
@@ -84,6 +88,17 @@ class ResultsPoller extends React.Component {
 }
 
 class ResultControl extends React.Component {
+  state = {
+    tokenExists: false,
+    refreshing: false,
+    wroteToStatInk: false
+  };
+
+  componentDidMount() {
+    const token = ipcRenderer.sendSync('getStatInkApiToken');
+    this.setState({ tokenExists: token.length > 0 });
+  }
+
   render() {
     const { latestBattleNumber, result, changeResult, getResults } = this.props;
 
@@ -91,7 +106,16 @@ class ResultControl extends React.Component {
 
     return (
       <ButtonToolbar style={{ marginBottom: 10 }}>
-        <Button onClick={() => getResults()}>Refresh</Button>
+        <Button
+          onClick={() => {
+            getResults();
+            this.setState({ refreshing: true });
+            setTimeout(() => this.setState({ refreshing: false }), 2000);
+          }}
+          disabled={this.state.refreshing}
+        >
+          {this.state.refreshing ? 'Refreshed' : 'Refresh'}
+        </Button>
         <ButtonGroup>
           <Button
             onClick={() => changeResult(currentBattle - 1)}
@@ -118,12 +142,21 @@ class ResultControl extends React.Component {
         </ButtonGroup>
         <ButtonGroup>
           <Button
-            onClick={() => ipcRenderer.sendSync('writeToStatInk', result)}
+            onClick={() => {
+              ipcRenderer.sendSync('writeToStatInk', result);
+              this.setState({ wroteToStatInk: true });
+              setTimeout(() => this.setState({ wroteToStatInk: false }), 2000);
+            }}
+            disabled={!this.state.tokenExists || this.state.wroteToStatInk}
           >
-            Upload to stat.ink
+            {this.state.wroteToStatInk ? 'Uploaded' : 'Upload to stat.ink'}
           </Button>
         </ButtonGroup>
-        <ResultsPoller getResults={getResults} result={result} />
+        <ResultsPoller
+          getResults={getResults}
+          result={result}
+          disabled={!this.state.tokenExists}
+        />
       </ButtonToolbar>
     );
   }

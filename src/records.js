@@ -18,7 +18,8 @@ class ResultsContainer extends React.Component {
   state = {
     records: {
       records: {}
-    }
+    },
+    refreshing: false
   };
 
   componentDidMount() {
@@ -34,7 +35,16 @@ class ResultsContainer extends React.Component {
     return (
       <div>
         <ButtonToolbar style={{ marginBottom: '10px' }}>
-          <Button onClick={() => this.getRecords()}>Refresh</Button>
+          <Button
+            onClick={() => {
+              this.getRecords();
+              this.setState({ refreshing: true });
+              setTimeout(() => this.setState({ refreshing: false }), 2000);
+            }}
+            disabled={this.state.refreshing}
+          >
+            {this.state.refreshing ? 'Refreshed' : 'Refresh'}
+          </Button>
         </ButtonToolbar>
         <PlayerCard records={this.state.records.records} />
         <StageCard records={this.state.records.records} />
