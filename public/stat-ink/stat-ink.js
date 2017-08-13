@@ -65,7 +65,7 @@ function setPlayerResults(statInk, result) {
   }
 
   let paint_point = result.player_result.game_paint_point;
-  if (result.rule.key === 'turf_war' && result.my_team_result === 'victory') {
+  if (result.my_team_result === 'victory') {
     paint_point += 1000;
   }
   statInk.my_point = paint_point;
@@ -84,7 +84,7 @@ function getPlayer(playerResult, team) {
   player.death = playerResult.death_count;
   player.kill_or_assist = playerResult.kill_count + playerResult.assist_count;
   player.special = playerResult.special_count;
-  player.point = playerResult.game_paint_point;
+  player.point = playerResult.game_paint_point; // might need to add victory bonus to this.
   return player;
 }
 
