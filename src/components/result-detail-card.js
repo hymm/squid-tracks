@@ -246,7 +246,7 @@ const TheirTeamTable = ({ result }) => {
         <tr>
           <th>Totals</th>
           <th />
-          <th />
+          {result.player_result.player.udemae ? <th /> : null}
           <td>
             {result.other_team_members.reduce(
               (sum, player) => sum + player.game_paint_point,

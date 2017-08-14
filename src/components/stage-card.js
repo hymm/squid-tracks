@@ -9,11 +9,13 @@ import {
   Col,
   Row
 } from 'react-bootstrap';
+import { sort } from './sort-array';
+import TableHeader from './table-header';
 
 export default class StageCard extends React.Component {
   state = {
-    percent: false,
-    sortColumn: '',
+    percent: true,
+    sortColumn: 'total_percent',
     sortDirection: 'up'
   };
 
@@ -83,33 +85,22 @@ export default class StageCard extends React.Component {
     };
   }
 
-  sort(stage_stats) {
-    // convert stage_stats to an array
-    const stageStats = [];
-    Object.keys(stage_stats).forEach(stage =>
-      stageStats.push(stage_stats[stage])
-    );
-
-    if (this.state.sortColumn.length < 1) {
-      return stageStats;
-    }
-    stageStats.sort((a, b) => {
-      if (a[this.state.sortColumn] > b[this.state.sortColumn]) {
-        return this.state.sortDirection === 'up' ? -1 : 1;
-      }
-      if (a[this.state.sortColumn] < b[this.state.sortColumn]) {
-        return this.state.sortDirection === 'up' ? 1 : -1;
-      }
-      return 0;
-    });
-    return stageStats;
-  }
+  static columnHeaders = [
+    { text: 'SZ', sortColumn: 'area_percent', sortDirection: 'up' },
+    { text: 'TC', sortColumn: 'yagura_percent', sortDirection: 'up' },
+    { text: 'RM', sortColumn: 'hoko_percent', sortDirection: 'up' },
+    { text: 'Total', sortColumn: 'total_percent', sortDirection: 'up' }
+  ];
 
   render() {
     const { stage_stats = {} } = this.props.records;
 
     const calcStats = this.getCalculatedStats(stage_stats);
-    const sortedStats = this.sort(stage_stats);
+    const stageStats = [];
+    Object.keys(stage_stats).forEach(stage =>
+      stageStats.push(stage_stats[stage])
+    );
+    sort(stageStats, this.state.sortColumn, this.state.sortDirection);
 
     return (
       <Panel header={<h3>Stage Stats</h3>}>
@@ -118,14 +109,14 @@ export default class StageCard extends React.Component {
             <Col sm={12} md={12}>
               <ButtonToolbar style={{ marginBottom: '10px' }}>
                 <ButtonGroup>
-                  <Button onClick={this.showCount} active={!this.state.percent}>
-                    Count
-                  </Button>
                   <Button
                     onClick={this.showPercent}
                     active={this.state.percent}
                   >
                     Percent
+                  </Button>
+                  <Button onClick={this.showCount} active={!this.state.percent}>
+                    Count
                   </Button>
                 </ButtonGroup>
               </ButtonToolbar>
@@ -138,42 +129,24 @@ export default class StageCard extends React.Component {
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th
-                      onClick={() =>
-                        this.setState({ sortColumn: 'hoko_percent' })}
-                    >
-                      RM
-                    </th>
-                    <th
-                      onClick={() =>
-                        this.setState({ sortColumn: 'area_percent' })}
-                    >
-                      SZ
-                    </th>
-                    <th
-                      onClick={() =>
-                        this.setState({ sortColumn: 'yagura_percent' })}
-                    >
-                      TC
-                    </th>
-                    <th
-                      onClick={() =>
-                        this.setState({ sortColumn: 'total_percent' })}
-                    >
-                      Totals
-                    </th>
+                    {StageCard.columnHeaders.map(header =>
+                      <TableHeader
+                        setState={this.setState.bind(this)}
+                        sort={{
+                          sortColumn: header.sortColumn,
+                          sortDirection: header.sortDirection
+                        }}
+                        text={header.text}
+                        sortColumn={this.state.sortColumn}
+                      />
+                    )}
                   </tr>
                 </thead>
                 <tbody>
-                  {sortedStats.map(stage =>
+                  {stageStats.map(stage =>
                     <tr key={stage.stage.name}>
                       <td>
                         {stage.stage.name}
-                      </td>
-                      <td>
-                        {this.state.percent
-                          ? `${stage.hoko_percent.toFixed(2)}`
-                          : `${stage.hoko_win} - ${stage.hoko_lose}`}
                       </td>
                       <td>
                         {this.state.percent
@@ -184,6 +157,11 @@ export default class StageCard extends React.Component {
                         {this.state.percent
                           ? `${stage.yagura_percent.toFixed(2)}`
                           : `${stage.yagura_win} - ${stage.yagura_lose}`}
+                      </td>
+                      <td>
+                        {this.state.percent
+                          ? `${stage.hoko_percent.toFixed(2)}`
+                          : `${stage.hoko_win} - ${stage.hoko_lose}`}
                       </td>
                       <td>
                         {this.state.percent

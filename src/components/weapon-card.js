@@ -1,40 +1,22 @@
 import React from 'react';
 import { Panel, Table } from 'react-bootstrap';
+import { sort } from './sort-array';
+import TableHeader from './table-header';
 
 export default class WeaponCard extends React.Component {
   state = {
-    sortColumn: '',
+    sortColumn: 'percentage_count',
     sortDirection: 'up'
   };
 
-  getValue(obj, valuePath) {
-    const splitPath = valuePath.split('.');
-    if (splitPath.length <= 1) {
-      return obj[valuePath];
-    }
-    let value = undefined;
-    for (const path of splitPath) {
-      value = value ? value[path] : obj[path];
-    }
-    return value;
-  }
-
-  sort(array, sortColumn) {
-    if (sortColumn.length < 1) {
-      return array;
-    }
-
-    array.sort((a, b) => {
-      if (this.getValue(a, sortColumn) > this.getValue(b, sortColumn)) {
-        return this.state.sortDirection === 'up' ? -1 : 1;
-      }
-      if (this.getValue(a, sortColumn) < this.getValue(b, sortColumn)) {
-        return this.state.sortDirection === 'up' ? 1 : -1;
-      }
-      return 0;
-    });
-    return array;
-  }
+  static columnHeaders = [
+    { text: 'Weapon', sortColumn: 'weapon.name', sortDirection: 'down' },
+    { text: 'Total', sortColumn: 'total_count', sortDirection: 'up' },
+    { text: 'Wins', sortColumn: 'win_count', sortDirection: 'up' },
+    { text: 'Losses', sortColumn: 'lose_count', sortDirection: 'up' },
+    { text: 'Percentage', sortColumn: 'percentage_count', sortDirection: 'up' },
+    { text: 'Paint', sortColumn: 'total_paint_point', sortDirection: 'up' }
+  ];
 
   render() {
     const { records } = this.props;
@@ -48,67 +30,25 @@ export default class WeaponCard extends React.Component {
       weaponArray.push(weapon_stats[weapon]);
     });
 
-    this.sort(weaponArray, this.state.sortColumn);
+    sort(weaponArray, this.state.sortColumn, this.state.sortDirection);
 
     return (
       <Panel header={<h3>Weapon Stats</h3>}>
+        * Click on column headers to sort
         <Table striped bordered condensed hover>
           <thead>
             <tr>
-              <th
-                onClick={() =>
-                  this.setState({
-                    sortColumn: 'weapon.name',
-                    sortDirection: 'down'
-                  })}
-              >
-                Weapon
-              </th>
-              <th
-                onClick={() =>
-                  this.setState({
-                    sortColumn: 'total_count',
-                    sortDirection: 'up'
-                  })}
-              >
-                Total
-              </th>
-              <th
-                onClick={() =>
-                  this.setState({
-                    sortColumn: 'win_count',
-                    sortDirection: 'up'
-                  })}
-              >
-                Wins
-              </th>
-              <th
-                onClick={() =>
-                  this.setState({
-                    sortColumn: 'lose_count',
-                    sortDirection: 'up'
-                  })}
-              >
-                Losses
-              </th>
-              <th
-                onClick={() =>
-                  this.setState({
-                    sortColumn: 'percentage_count',
-                    sortDirection: 'up'
-                  })}
-              >
-                Percentage
-              </th>
-              <th
-                onClick={() =>
-                  this.setState({
-                    sortColumn: 'total_paint_point',
-                    sortDirection: 'up'
-                  })}
-              >
-                Paint
-              </th>
+              {WeaponCard.columnHeaders.map(header =>
+                <TableHeader
+                  setState={this.setState.bind(this)}
+                  sort={{
+                    sortColumn: header.sortColumn,
+                    sortDirection: header.sortDirection
+                  }}
+                  text={header.text}
+                  sortColumn={this.state.sortColumn}
+                />
+              )}
             </tr>
           </thead>
           <tbody>
