@@ -12,7 +12,9 @@ import {
 
 export default class StageCard extends React.Component {
   state = {
-    percent: false
+    percent: false,
+    sortColumn: '',
+    sortDirection: 'up'
   };
 
   showCount = () => {
@@ -23,8 +25,7 @@ export default class StageCard extends React.Component {
     this.setState({ percent: true });
   };
 
-  render() {
-    const { stage_stats = {} } = this.props.records;
+  getCalculatedStats(stage_stats) {
     let rm_win = 0,
       rm_lose = 0,
       tc_win = 0,
@@ -66,6 +67,50 @@ export default class StageCard extends React.Component {
     const total_lose = rm_lose + tc_lose + sz_lose;
     const total_percent = total_win / (total_win + total_lose);
 
+    return {
+      rm_win,
+      rm_lose,
+      tc_win,
+      tc_lose,
+      sz_win,
+      sz_lose,
+      rm_percent,
+      tc_percent,
+      sz_percent,
+      total_win,
+      total_lose,
+      total_percent
+    };
+  }
+
+  sort(stage_stats) {
+    // convert stage_stats to an array
+    const stageStats = [];
+    Object.keys(stage_stats).forEach(stage =>
+      stageStats.push(stage_stats[stage])
+    );
+
+    if (this.state.sortColumn.length < 1) {
+      return stageStats;
+    }
+    stageStats.sort((a, b) => {
+      if (a[this.state.sortColumn] > b[this.state.sortColumn]) {
+        return this.state.sortDirection === 'up' ? -1 : 1;
+      }
+      if (a[this.state.sortColumn] < b[this.state.sortColumn]) {
+        return this.state.sortDirection === 'up' ? 1 : -1;
+      }
+      return 0;
+    });
+    return stageStats;
+  }
+
+  render() {
+    const { stage_stats = {} } = this.props.records;
+
+    const calcStats = this.getCalculatedStats(stage_stats);
+    const sortedStats = this.sort(stage_stats);
+
     return (
       <Panel header={<h3>Stage Stats</h3>}>
         <Grid fluid>
@@ -84,6 +129,7 @@ export default class StageCard extends React.Component {
                   </Button>
                 </ButtonGroup>
               </ButtonToolbar>
+              * Click on column headers to sort by win percent
             </Col>
           </Row>
           <Row>
@@ -92,45 +138,57 @@ export default class StageCard extends React.Component {
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>RM</th>
-                    <th>SZ</th>
-                    <th>TC</th>
-                    <th>Totals</th>
+                    <th
+                      onClick={() =>
+                        this.setState({ sortColumn: 'hoko_percent' })}
+                    >
+                      RM
+                    </th>
+                    <th
+                      onClick={() =>
+                        this.setState({ sortColumn: 'area_percent' })}
+                    >
+                      SZ
+                    </th>
+                    <th
+                      onClick={() =>
+                        this.setState({ sortColumn: 'yagura_percent' })}
+                    >
+                      TC
+                    </th>
+                    <th
+                      onClick={() =>
+                        this.setState({ sortColumn: 'total_percent' })}
+                    >
+                      Totals
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.keys(stage_stats).map(stage =>
-                    <tr key={stage}>
+                  {sortedStats.map(stage =>
+                    <tr key={stage.stage.name}>
                       <td>
-                        {stage_stats[stage].stage.name}
+                        {stage.stage.name}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${stage_stats[stage].hoko_percent.toFixed(2)}`
-                          : `${stage_stats[stage].hoko_win} - ${stage_stats[
-                              stage
-                            ].hoko_lose}`}
+                          ? `${stage.hoko_percent.toFixed(2)}`
+                          : `${stage.hoko_win} - ${stage.hoko_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${stage_stats[stage].area_percent.toFixed(2)}`
-                          : `${stage_stats[stage].area_win} - ${stage_stats[
-                              stage
-                            ].area_lose}`}
+                          ? `${stage.area_percent.toFixed(2)}`
+                          : `${stage.area_win} - ${stage.area_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${stage_stats[stage].yagura_percent.toFixed(2)}`
-                          : `${stage_stats[stage].yagura_win} - ${stage_stats[
-                              stage
-                            ].yagura_lose}`}
+                          ? `${stage.yagura_percent.toFixed(2)}`
+                          : `${stage.yagura_win} - ${stage.yagura_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${stage_stats[stage].total_percent.toFixed(2)}`
-                          : `${stage_stats[stage].total_win} - ${stage_stats[
-                              stage
-                            ].total_lose}`}
+                          ? `${stage.total_percent.toFixed(2)}`
+                          : `${stage.total_win} - ${stage.total_lose}`}
                       </td>
                     </tr>
                   )}
@@ -140,23 +198,23 @@ export default class StageCard extends React.Component {
                     <th>Totals</th>
                     <td>
                       {this.state.percent
-                        ? `${rm_percent.toFixed(2)}`
-                        : `${rm_win} - ${rm_lose}`}
+                        ? `${calcStats.rm_percent.toFixed(2)}`
+                        : `${calcStats.rm_win} - ${calcStats.rm_lose}`}
                     </td>
                     <td>
                       {this.state.percent
-                        ? `${sz_percent.toFixed(2)}`
-                        : `${sz_win} - ${sz_lose}`}
+                        ? `${calcStats.sz_percent.toFixed(2)}`
+                        : `${calcStats.sz_win} - ${calcStats.sz_lose}`}
                     </td>
                     <td>
                       {this.state.percent
-                        ? `${tc_percent.toFixed(2)}`
-                        : `${tc_win} - ${tc_lose}`}
+                        ? `${calcStats.tc_percent.toFixed(2)}`
+                        : `${calcStats.tc_win} - ${calcStats.tc_lose}`}
                     </td>
                     <td>
                       {this.state.percent
-                        ? `${total_percent.toFixed(2)}`
-                        : `${total_win} - ${total_lose}`}
+                        ? `${calcStats.total_percent.toFixed(2)}`
+                        : `${calcStats.total_win} - ${calcStats.total_lose}`}
                     </td>
                   </tr>
                 </tfoot>
