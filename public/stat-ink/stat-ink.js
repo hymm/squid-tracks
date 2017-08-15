@@ -65,7 +65,7 @@ function setPlayerResults(statInk, result) {
   }
 
   let paint_point = result.player_result.game_paint_point;
-  if (result.my_team_result === 'victory') {
+  if (result.my_team_result.key === 'victory') {
     paint_point += 1000;
   }
   statInk.my_point = paint_point;
