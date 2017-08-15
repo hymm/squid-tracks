@@ -153,7 +153,7 @@ async function getWebServiceToken(token) {
 async function getSplatnetApi(url) {
   const resp = await request({
     method: 'GET',
-    uri: `https://app.splatoon2.nintendo.net/api/${url}`,
+    uri: `https://app.splatoon2.nintendo.net/api/${url}?locale=ja_JP`,
     json: true
   });
 

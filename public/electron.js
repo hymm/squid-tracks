@@ -79,10 +79,9 @@ ipcMain.on('logout', (event) => {
 
 ipcMain.on('writeToStatInk', (event, result) => {
     try {
-        writeToStatInk(store.get('statInkToken'), result);
-        event.returnValue = true;
+        event.returnValue = writeToStatInk(store.get('statInkToken'), result);
     } catch (e) {
-        event.returnValue = false;
+        event.returnValue = { username: '', battle: -1 };
     }
 });
 

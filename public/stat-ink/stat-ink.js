@@ -122,13 +122,18 @@ function convertResultToStatInk(result) {
 module.exports.convertResultToStatInk = convertResultToStatInk;
 
 async function writeToStatInk(apiKey, result) {
-  await request({
+  const response = await request({
     method: 'POST',
     uri: 'https://stat.ink/api/v2/battle',
     headers: {
       Authorization: `Bearer ${apiKey}`
     },
-    json: convertResultToStatInk(result)
+    json: convertResultToStatInk(result),
+    resolveWithFullResponse: true
   });
+  return {
+      username: response.headers['x-user-screen-name'],
+      battle: response.headers['x-battle-id']
+  };
 }
 module.exports.writeToStatInk = writeToStatInk;
