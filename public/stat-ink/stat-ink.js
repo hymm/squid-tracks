@@ -71,7 +71,7 @@ function setPlayerResults(statInk, result) {
   statInk.my_point = paint_point;
 }
 
-function getPlayer(playerResult, team) {
+function getPlayer(playerResult, team, result) {
   const player = {};
   player.team = team === 'me' ? 'my' : team; // 'my', 'his'
   player.is_me = team === 'me' ? 'yes' : 'no'; // 'yes', 'no'
@@ -84,18 +84,21 @@ function getPlayer(playerResult, team) {
   player.death = playerResult.death_count;
   player.kill_or_assist = playerResult.kill_count + playerResult.assist_count;
   player.special = playerResult.special_count;
-  player.point = playerResult.game_paint_point; // might need to add victory bonus to this.
+  player.point = playerResult.game_paint_point;
+  if (result === 'victory') {
+    player.point += 1000;
+  }
   return player;
 }
 
 function setPlayers(statInk, result) {
   statInk.players = [];
-  statInk.players.push(getPlayer(result.player_result, 'me'));
+  statInk.players.push(getPlayer(result.player_result, 'me', result.my_team_result.key));
   result.my_team_members.forEach(player => {
-    statInk.players.push(getPlayer(player, 'my'));
+    statInk.players.push(getPlayer(player, 'my', result.my_team_result.key));
   });
   result.other_team_members.forEach(player => {
-    statInk.players.push(getPlayer(player, 'his'));
+    statInk.players.push(getPlayer(player, 'his', result.other_team_result.key));
   });
 }
 
@@ -116,6 +119,7 @@ function convertResultToStatInk(result) {
 
   return statInk;
 }
+module.exports.convertResultToStatInk = convertResultToStatInk;
 
 async function writeToStatInk(apiKey, result) {
   await request({
@@ -127,5 +131,4 @@ async function writeToStatInk(apiKey, result) {
     json: convertResultToStatInk(result)
   });
 }
-
-module.exports = writeToStatInk;
+module.exports.writeToStatInk = writeToStatInk;

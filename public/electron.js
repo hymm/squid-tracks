@@ -4,7 +4,7 @@ const path = require('path');
 const url = require('url');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
-const writeToStatInk = require('./stat-ink/stat-ink');
+const { writeToStatInk } = require('./stat-ink/stat-ink');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
 
