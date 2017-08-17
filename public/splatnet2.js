@@ -150,11 +150,20 @@ async function getWebServiceToken(token) {
   };
 }
 
+let userLanguage = 'en-US';
 async function getSplatnetApi(url) {
   const resp = await request({
     method: 'GET',
     uri: `https://app.splatoon2.nintendo.net/api/${url}`,
-    json: true
+    headers: {
+      'Accept': '*/*',
+      'Accept-Encoding': 'gzip, deflate',
+      'Accept-Language': userLanguage,
+      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+      'Connection': 'keep-alive'
+    },
+    json: true,
+    gzip: true,
   });
 
   return resp;
@@ -171,7 +180,8 @@ async function getSessionCookie(token) {
       'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
       'x-gamewebtoken': token,
       'x-isappanalyticsoptedin': false,
-      'X-Requested-With': 'com.nintendo.znca'
+      'X-Requested-With': 'com.nintendo.znca',
+      'Connection': 'keep-alive'
     }
   });
 
@@ -181,6 +191,7 @@ async function getSessionCookie(token) {
 async function getSessionWithSessionToken(sessionToken) {
   const apiTokens = await getApiToken(sessionToken);
   const userInfo = await getUserInfo(apiTokens.access);
+  userLanguage = userInfo.language;
   const apiAccessToken = await getApiLogin(apiTokens.id, userInfo);
   const splatnetToken = await getWebServiceToken(apiAccessToken);
   await getSessionCookie(splatnetToken.accessToken);
