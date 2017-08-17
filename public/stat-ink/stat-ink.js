@@ -61,9 +61,18 @@ function setPlayerResults(statInk, result) {
     if (result.player_result.player.udemae.name) {
       statInk.rank = result.player_result.player.udemae.name.toLowerCase();
     }
+    if (result.player_result.player.udemae.s_plus_number != null) {
+        statInk.rank_exp = result.player_result.player.udemae.s_plus_number;
+    }
   }
   if (result.udemae) {
-    statInk.rank_after = result.udemae.name.toLowerCase();
+    if (result.udemae.name) {
+        statInk.rank_after = result.udemae.name.toLowerCase();
+    }
+
+    if (result.udemae.s_plus_number != null) {
+        statInk.rank_exp_after = result.player_result.player.udemae.s_plus_number;
+    }
   }
 
   let paint_point = result.player_result.game_paint_point;
@@ -77,11 +86,15 @@ function getPlayer(playerResult, team, result) {
   const player = {};
   player.team = team === 'me' ? 'my' : team; // 'my', 'his'
   player.is_me = team === 'me' ? 'yes' : 'no'; // 'yes', 'no'
+  player.name = playerResult.player.nickname;
   player.weapon = WeaponMap[playerResult.player.weapon.id];
   player.level = playerResult.player.player_rank;
   if (playerResult.player.udemae) {
     if (playerResult.player.udemae.name) {
       player.rank = playerResult.player.udemae.name.toLowerCase();
+    }
+    if (result.player_result.player.udemae.s_plus_number != null) {
+      player.rank_exp = playerResult.player.udemae.s_plus_number;
     }
   }
   player.kill = playerResult.kill_count;
