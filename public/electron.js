@@ -125,7 +125,13 @@ ipcMain.on('loadSplatnet', (e) => {
 });
 
 ipcMain.on('getApi', async (e, url) => {
-    e.returnValue = await splatnet.getSplatnetApi(url);
+    try {
+      e.returnValue = await splatnet.getSplatnetApi(url);
+  } catch (e) {
+      log.error(e);
+      e.returnValue = {};
+  }
+
 });
 
 function isTokenGood(token) {
