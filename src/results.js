@@ -105,7 +105,8 @@ class ResultControl extends React.Component {
       result,
       changeResult,
       getResults,
-      results
+      results,
+      setStatInkInfo
     } = this.props;
 
     const currentBattle = result.battle_number ? result.battle_number : 0;
@@ -149,7 +150,8 @@ class ResultControl extends React.Component {
         <ButtonGroup>
           <Button
             onClick={() => {
-              ipcRenderer.sendSync('writeToStatInk', result);
+              const info = ipcRenderer.sendSync('writeToStatInk', result);
+              setStatInkInfo(currentBattle, info);
               this.setState({ wroteToStatInk: true });
               setTimeout(() => this.setState({ wroteToStatInk: false }), 2000);
             }}
@@ -174,7 +176,8 @@ class ResultsContainer extends React.Component {
       summary: {},
       results: []
     },
-    currentResult: {}
+    currentResult: {},
+    statInk: {}
   };
 
   componentDidMount() {
@@ -194,6 +197,12 @@ class ResultsContainer extends React.Component {
     });
   };
 
+  setStatInkInfo = (battleNumber, info) => {
+    const statInk = this.state.statInk;
+    statInk[battleNumber] = info;
+    this.setState({ statInk: statInk });
+  };
+
   render() {
     return (
       <div>
@@ -207,9 +216,13 @@ class ResultsContainer extends React.Component {
           results={this.state.results.results}
           changeResult={this.changeResult}
           getResults={this.getResults}
+          setStatInkInfo={this.setStatInkInfo}
         />
         {this.state.initialized
-          ? <ResultDetailCard result={this.state.currentResult} />
+          ? <ResultDetailCard
+              result={this.state.currentResult}
+              statInk={this.state.statInk}
+            />
           : null}
         <ResultsSummaryCard summary={this.state.results.summary} />
         <ResultsCard

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col, Panel, Table } from 'react-bootstrap';
+const { openExternal } = window.require('electron').remote.shell;
 
 const ResultSummary = ({ result }) =>
   <Table striped bordered>
@@ -280,9 +281,29 @@ const TheirTeamTable = ({ result }) => {
   );
 };
 
-const ResultDetailCard = ({ result }) => {
+const ResultDetailCard = ({ result, statInk }) => {
+  const linkInfo = statInk[result.battle_number];
   return (
-    <Panel header={<h3>{`Battle #${result.battle_number} Details`}</h3>}>
+    <Panel
+      header={
+        <span>
+          <h3
+            style={{ display: 'inline' }}
+          >{`Battle #${result.battle_number} Details`}</h3>
+          {linkInfo
+            ? <a
+                onClick={() =>
+                  openExternal(
+                    `https://stat.ink/@${linkInfo.username}/spl2/${linkInfo.battle}`
+                  )}
+                style={{ cursor: 'pointer' }}
+              >
+                view on stat.ink
+              </a>
+            : null}
+        </span>
+      }
+    >
       <Grid fluid>
         <Row>
           <Col sm={6} md={6}>

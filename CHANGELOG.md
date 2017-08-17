@@ -2,7 +2,7 @@
 
 ## Version 0.1.6
 
-* tried to fix bug with battles with null ranks not uploading to stat.ink
+* fixes bug with battles with null ranks not uploading to stat.ink
 * added api checker for debugging
 
 ## Version 0.1.5
