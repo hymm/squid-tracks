@@ -136,8 +136,10 @@ async function writeToStatInk(apiKey, result) {
     resolveWithFullResponse: true
   });
   return {
-      username: response.headers['x-user-screen-name'],
-      battle: response.headers['x-battle-id']
+      username: response.headers['X-User-Screen-Name'],
+      battle: response.headers['X-Battle-Id'],
+      location: response.headers['Location'],
+      apiLocation: response.headers['X-Api-Location'],
   };
 }
 module.exports.writeToStatInk = writeToStatInk;
