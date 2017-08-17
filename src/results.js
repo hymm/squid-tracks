@@ -58,6 +58,7 @@ class ResultsPoller extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (
+      this.state.active &&
       this.props.result.battle_number &&
       this.props.result.battle_number > prevProps.result.battle_number
     ) {
