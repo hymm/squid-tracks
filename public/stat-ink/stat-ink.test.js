@@ -41,4 +41,40 @@ describe('convertResultToStatInk', () => {
 
         expect(res.players[1].point).toEqual(result.my_team_members[0].game_paint_point);
     });
+
+    it('should not insert rank if user udemae name is null', () => {
+      const result = getDefaultResult();
+      result.player_result.player.udemae.name = null;
+
+      const res = convertResultToStatInk(result)
+
+      expect(res.players[0].rank).toBeUndefined();
+    });
+
+    it('should insert rank if user udemae name is not null', () => {
+      const result = getDefaultResult();
+      result.player_result.player.udemae.name = 'B-';
+
+      const res = convertResultToStatInk(result)
+
+      expect(res.players[0].rank).toEqual('b-');
+    });
+
+    it('should not insert rank if teammate udemae name is null', () => {
+      const result = getDefaultResult();
+      result.my_team_members[0].player.udemae.name = null;
+
+      const res = convertResultToStatInk(result)
+
+      expect(res.players[1].rank).toBeUndefined();
+    });
+
+    it('should insert rank if teammate udemae name is not null', () => {
+      const result = getDefaultResult();
+      result.my_team_members[0].player.udemae.name = 'B-';
+
+      const res = convertResultToStatInk(result)
+
+      expect(res.players[1].rank).toEqual('b-');
+    });
 });

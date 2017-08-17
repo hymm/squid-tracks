@@ -17,6 +17,9 @@ function getExampleResult() {
   "my_team_members":[
     {
       "player":{
+        "udemae": {
+          "name": "B+",
+        },
         "fes_grade":{
           "name":"Ketchup Champion",
           "rank":3
@@ -1240,6 +1243,9 @@ function getExampleResult() {
           null,
           null
         ]
+      },
+      "udemae": {
+        "name": "B-"
       }
     },
     "death_count":3,

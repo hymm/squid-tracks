@@ -58,7 +58,9 @@ function setPlayerResults(statInk, result) {
   statInk.level_after = result.player_rank;
 
   if (result.player_result.player.udemae) {
-    statInk.rank = result.player_result.player.udemae.name.toLowerCase();
+    if (result.player_result.player.udemae.name) {
+      statInk.rank = result.player_result.player.udemae.name.toLowerCase();
+    }
   }
   if (result.udemae) {
     statInk.rank_after = result.udemae.name.toLowerCase();
@@ -78,7 +80,9 @@ function getPlayer(playerResult, team, result) {
   player.weapon = WeaponMap[playerResult.player.weapon.id];
   player.level = playerResult.player.player_rank;
   if (playerResult.player.udemae) {
-    player.rank = playerResult.player.udemae.name.toLowerCase();
+    if (playerResult.player.udemae.name) {
+      player.rank = playerResult.player.udemae.name.toLowerCase();
+    }
   }
   player.kill = playerResult.kill_count;
   player.death = playerResult.death_count;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Json from 'react-json-tree';
 import { Link } from 'react-router-dom';
-const { ipcRenderer } = window.require('electron');
+const { ipcRenderer, clipboard } = window.require('electron');
 
 class ApiTester extends React.Component {
   state = {
@@ -44,6 +44,11 @@ class ApiTester extends React.Component {
           <button onClick={this.handleButtonClick}>Back</button>
         </Link>
         <button onClick={this.handleButtonClick}>Get API</button>
+        <button
+          onClick={() => clipboard.writeText(JSON.stringify(this.state.reply))}
+        >
+          Copy to Clipboard
+        </button>
         <input
           type="text"
           value={this.state.url}

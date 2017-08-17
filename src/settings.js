@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Grid,
   Col,
@@ -82,6 +83,14 @@ const SettingsScreen = ({ token, logoutCallback }) =>
     <Row>
       <Col md={12}>
         <StatInkSettings />
+      </Col>
+    </Row>
+    <Row>
+      <Col md={12}>
+        <h3>Debugging</h3>
+        <Link to="/testApi">
+          <Button>API Checker</Button>
+        </Link>
       </Col>
     </Row>
     <Row>
