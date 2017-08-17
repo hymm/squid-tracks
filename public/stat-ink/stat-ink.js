@@ -32,7 +32,7 @@ function setGameInfo(statInk, result) {
 function setGameResults(statInk, result) {
   statInk.result = result.my_team_result.key === 'victory' ? 'win' : 'lose';
   statInk.knock_out =
-    result.my_team_count === 100 || result.their_count === 100 ? 'yes' : 'no';
+    result.my_team_count === 100 || result.other_team_count === 100 ? 'yes' : 'no';
   // these next parameters depend on turf war vs gachi
   if (result.my_team_percentage) {
     statInk.my_team_percent = result.my_team_percentage;
@@ -40,7 +40,7 @@ function setGameResults(statInk, result) {
   if (result.other_team_percentage) {
     statInk.his_team_percent = result.other_team_percentage;
   }
-  if (result.my_team_count) {
+  if (result.my_team_count != null) {
     statInk.my_team_count = result.my_team_count;
   }
   if (result.other_team_count) {

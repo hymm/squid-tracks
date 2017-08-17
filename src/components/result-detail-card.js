@@ -65,7 +65,7 @@ const ResultSummary2 = ({ result }) =>
             </td>
           </tr>
         : null}
-      {result.my_team_count
+      {result.my_team_count != null
         ? <tr>
             <th>Score</th>
             <td>{`${result.my_team_count} - ${result.other_team_count}`}</td>
