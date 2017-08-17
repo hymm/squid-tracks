@@ -12,16 +12,22 @@ class ApiTester extends React.Component {
   urls = [
     'league_match_ranking/17073112T/ALL',
     'onlineshop/merchandises',
-    // POST 'onlineshop/order/4780952683920142604',
     'results',
     'results/180',
     'nickname_and_icon',
     'schedules',
     'records/hero',
     'timeline',
-    'festivals/active',
     'data/stages',
-    'records'
+    'records',
+    'festivals/active',
+    'festivals/pasts',
+    'festivals/2050/votes'
+    // POST 'onlineshop/order/4780952683920142604',
+    // POST 'share/profile'
+    // POST 'share/results/630'
+    // POST 'share/challenges/tenflod_squid_research_lab'
+    // POST 'share/challenges/great_pyramid_at_giza'
   ];
 
   handleButtonClick = async () => {
