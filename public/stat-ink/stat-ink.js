@@ -93,7 +93,7 @@ function getPlayer(playerResult, team, result) {
     if (playerResult.player.udemae.name) {
       player.rank = playerResult.player.udemae.name.toLowerCase();
     }
-    if (result.player_result.player.udemae.s_plus_number != null) {
+    if (playerResult.player.udemae.s_plus_number != null) {
       player.rank_exp = playerResult.player.udemae.s_plus_number;
     }
   }
@@ -148,11 +148,12 @@ async function writeToStatInk(apiKey, result) {
     json: convertResultToStatInk(result),
     resolveWithFullResponse: true
   });
+  console.log(response.headers);
   return {
-      username: response.headers['X-User-Screen-Name'],
-      battle: response.headers['X-Battle-Id'],
-      location: response.headers['Location'],
-      apiLocation: response.headers['X-Api-Location'],
+      username: response.headers['x-user-screen-name'],
+      battle: response.headers['x-battle-id'],
+      location: response.headers['location'],
+      apiLocation: response.headers['x-api-location'],
   };
 }
 module.exports.writeToStatInk = writeToStatInk;
