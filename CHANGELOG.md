@@ -2,7 +2,7 @@
 
 ## Version 0.2.0
 
-* decreased poll timer from 120 seconds to 69 seconds
+* decreased poll timer from 120 seconds to 60 seconds
 * records stat.ink battle address onto disk
 * shows a link to battles uploaded to stat.ink
 * api is now retrieved in users language
