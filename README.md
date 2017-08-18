@@ -49,7 +49,8 @@ Note: Render Process is using babel, but the backend process is not, so allowed 
 * [stat.ink](https://stat.ink/) The button on the top right allows you to enter data manually.
 
 ## Authors
-**[hymm](https://github.com/hymm)** *Maintainer* [@Wrong_Shoe](https://twitter.com/Wrong_Shoe) (Discord) WrongShoe#9733
+* **[hymm](https://github.com/hymm)** *Maintainer* [@Wrong_Shoe](https://twitter.com/Wrong_Shoe) (Discord) WrongShoe#9733
+* **[mcescalante](https://github.com/mcescalante)** *Mac Releases* [@mcescalante](https://twitter.com/mcescalante) (Discord) sofly#3729
 
 ## Acknowledgements
 * [Danny](https://github.com/Rapptz): For figuring out how to log into splatnet-2 and making [R.Danny](https://github.com/Rapptz/RoboDanny).
