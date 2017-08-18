@@ -52,5 +52,6 @@ module.exports = {
   1115: 'herobrush_replica',
   2015: 'herocharger_replica',
   2040: 'liter4k_scope',
-  3005: 'heroslosher_replica'
+  3005: 'heroslosher_replica',
+  99999: 'squiclean_a' // squiffer
 };
