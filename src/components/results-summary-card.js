@@ -24,8 +24,8 @@ const ResultsSummaryCard = ({ summary }) => {
           </tr>
           <tr>
             <td>Kill Average</td>
-            <td>{`${summary.kill_count_average -
-              summary.assist_count_average}`}</td>
+            <td>{`${(summary.kill_count_average -
+              summary.assist_count_average).toFixed(2)}`}</td>
           </tr>
           <tr>
             <td>Assist Average</td>
