@@ -40,6 +40,7 @@ export default class WeaponCard extends React.Component {
             <tr>
               {WeaponCard.columnHeaders.map(header =>
                 <TableHeader
+                  key={header.text}
                   setState={this.setState.bind(this)}
                   sort={{
                     sortColumn: header.sortColumn,

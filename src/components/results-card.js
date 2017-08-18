@@ -57,6 +57,7 @@ export default class ResultsCard extends React.Component {
             <tr>
               {ResultsCard.columnHeaders.map(header =>
                 <TableHeader
+                  key={header.text}
                   setState={this.setState.bind(this)}
                   sort={{
                     sortColumn: header.sortColumn,

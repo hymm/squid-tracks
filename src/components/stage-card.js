@@ -131,6 +131,7 @@ export default class StageCard extends React.Component {
                     <th>Name</th>
                     {StageCard.columnHeaders.map(header =>
                       <TableHeader
+                        key={header.text}
                         setState={this.setState.bind(this)}
                         sort={{
                           sortColumn: header.sortColumn,
