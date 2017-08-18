@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Version 0.2.0
+
+* decreased poll timer from 120 seconds to 69 seconds
+* records stat.ink battle address onto disk
+* shows a link to battles uploaded to stat.ink
+* api is now retrieved in users language
+* added support for name and s plus number to be uploaded to stat.ink (stat.ink page does not yet display names)
+* fixed bug with KO loss scores not being displayed on stat.ink and SquidTracks
+* fixes bug with games being uploaded on refresh even when auto-upload was not enabled
+
 ## Version 0.1.6
 
 * fixes bug with battles with null ranks not uploading to stat.ink
