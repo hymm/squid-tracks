@@ -26,24 +26,26 @@ const GachiRow = ({ rotation }) => {
             </Col>
           </Row>
           <Row>
-            <Col md={6} style={{ minWidth: 150 }}>
+            <Col md={6} style={{ minWidth: 111, maxWidth: 360 }}>
               <div className="rotation-map">
                 <Image
                   src={
                     'https://app.splatoon2.nintendo.net' +
                     rotation.stage_a.image
                   }
+                  responsive
                 />
                 {rotation.stage_a.name}
               </div>
             </Col>
-            <Col md={6} style={{ minWidth: 150 }}>
+            <Col md={6} style={{ minWidth: 111, maxWidth: 360 }}>
               <div className="rotation-map">
                 <Image
                   src={
                     'https://app.splatoon2.nintendo.net' +
                     rotation.stage_b.image
                   }
+                  responsive
                 />
                 {rotation.stage_b.name}
               </div>
