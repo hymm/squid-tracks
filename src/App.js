@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
+import createMemoryHistory from 'history/createMemoryHistory';
 import ApiViewer from './api-viewer';
+import { screenview } from './analytics';
 import Schedule from './schedule';
 import Records from './records';
 import Results from './results';
@@ -13,6 +15,11 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 // eslint-disable-next-line
 const { ipcRenderer } = window.require('electron');
+
+const history = createMemoryHistory();
+history.listen((location) => {
+    screenview(`${location.pathname}${location.search}${location.hash}`);
+});
 
 const Routes = ({ token, logoutCallback }) =>
   <div>
@@ -36,6 +43,7 @@ class App extends Component {
 
   componentDidMount() {
     this.getSessionToken();
+    screenview('Start');
   }
 
   getSessionToken = () => {
@@ -44,14 +52,14 @@ class App extends Component {
 
   render() {
     return (
-      <HashRouter>
+      <Router history={history}>
         {this.state.sessionToken.length !== 0
           ? <Routes
               token={this.state.sessionToken}
               logoutCallback={this.getSessionToken}
             />
           : <Login />}
-      </HashRouter>
+      </Router>
     );
   }
 }

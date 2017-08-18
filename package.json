@@ -17,6 +17,7 @@
     "electron-is-dev": "^0.3.0",
     "electron-log": "^2.2.7",
     "electron-updater": "^2.8.5",
+    "history": "^4.6.3",
     "husky": "^0.14.3",
     "jsonwebtoken": "^7.4.1",
     "jws": "^3.1.4",
@@ -31,7 +32,9 @@
     "react-json-view": "^1.11.4",
     "react-router-bootstrap": "^0.24.2",
     "react-router-dom": "^4.1.2",
-    "request-promise-native": "^1.0.4"
+    "request-promise-native": "^1.0.4",
+    "universal-analytics": "^0.4.15",
+    "uuid": "^3.1.0"
   },
   "homepage": "./",
   "main": "./public/electron.js",
