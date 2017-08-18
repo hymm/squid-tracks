@@ -45,7 +45,7 @@ class ResultsPoller extends React.Component {
       return;
     }
     this.props.getResults();
-    setTimeout(this.poll, 120000); // 2 minutes
+    setTimeout(this.poll, 60000); // 2 minutes
   };
 
   handleClick = () => {
@@ -65,7 +65,10 @@ class ResultsPoller extends React.Component {
       this.setState({
         activeText: `writing battle ${this.props.result.battle_number}`
       });
-      ipcRenderer.sendSync('writeToStatInk', this.props.result);
+      const info = ipcRenderer.sendSync('writeToStatInk', this.props.result);
+      if (info.username) {
+        this.props.setStatInkInfo(this.props.result.battle_number, info);
+      }
       this.setState({
         activeText: `Wrote battle ${this.props.result.battle_number}`
       });
@@ -152,7 +155,9 @@ class ResultControl extends React.Component {
           <Button
             onClick={() => {
               const info = ipcRenderer.sendSync('writeToStatInk', result);
-              setStatInkInfo(currentBattle, info);
+              if (info.username) {
+                setStatInkInfo(currentBattle, info);
+              }
               this.setState({ wroteToStatInk: true });
               setTimeout(() => this.setState({ wroteToStatInk: false }), 2000);
             }}
@@ -165,6 +170,7 @@ class ResultControl extends React.Component {
           getResults={getResults}
           result={result}
           disabled={!this.state.tokenExists}
+          setStatInkInfo={setStatInkInfo}
         />
       </ButtonToolbar>
     );
@@ -183,6 +189,8 @@ class ResultsContainer extends React.Component {
 
   componentDidMount() {
     this.getResults();
+    const statInkInfo = ipcRenderer.sendSync('getFromStore', 'statInkInfo');
+    this.setState({ statInk: statInkInfo });
   }
 
   getResults = () => {
@@ -202,6 +210,7 @@ class ResultsContainer extends React.Component {
     const statInk = this.state.statInk;
     statInk[battleNumber] = info;
     this.setState({ statInk: statInk });
+    ipcRenderer.sendSync('setToStore', 'statInkInfo', statInk);
   };
 
   render() {

@@ -148,7 +148,7 @@ async function writeToStatInk(apiKey, result) {
     json: convertResultToStatInk(result),
     resolveWithFullResponse: true
   });
-  console.log(response.headers);
+
   return {
       username: response.headers['x-user-screen-name'],
       battle: response.headers['x-battle-id'],

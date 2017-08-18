@@ -27,7 +27,7 @@ const startUrl =
 
 const store = new Store({
   configName: 'user-data',
-  defaults: { sessionToken: '', statInkToken: '' }
+  defaults: { sessionToken: '', statInkToken: '', statInkInfo: {} }
 });
 
 // splatnet and stat.ink comm with renderer handling
@@ -62,11 +62,21 @@ function registerSplatnetHandler() {
     },
     e => {
       if (e) {
-        console.log(e);
+        log.error(e);
       }
     }
   );
 }
+
+ipcMain.on('getFromStore', (event, settingName) => {
+  event.returnValue = store.get(settingName);
+  log.debug(event.returnValue);
+});
+
+ipcMain.on('setToStore', (event, settingName, value) => {
+  store.set(settingName, value);
+  event.returnValue = true;
+})
 
 ipcMain.on('getSessionToken', (event) => {
     event.returnValue = store.get('sessionToken');
@@ -77,10 +87,11 @@ ipcMain.on('logout', (event) => {
     event.returnValue = true;
 });
 
-ipcMain.on('writeToStatInk', (event, result) => {
+ipcMain.on('writeToStatInk', async (event, result) => {
     try {
-        event.returnValue = writeToStatInk(store.get('statInkToken'), result);
+        event.returnValue = await writeToStatInk(store.get('statInkToken'), result);
     } catch (e) {
+        log.error(e);
         event.returnValue = { username: '', battle: -1 };
     }
 });

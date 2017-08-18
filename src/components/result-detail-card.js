@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col, Panel, Table } from 'react-bootstrap';
+import { Grid, Row, Col, Panel, Table, Glyphicon } from 'react-bootstrap';
 const { openExternal } = window.require('electron').remote.shell;
 
 const ResultSummary = ({ result }) =>
@@ -286,10 +286,8 @@ const ResultDetailCard = ({ result, statInk }) => {
   return (
     <Panel
       header={
-        <span>
-          <h3
-            style={{ display: 'inline' }}
-          >{`Battle #${result.battle_number} Details`}</h3>
+        <h3>
+          {`Battle #${result.battle_number} Details`}
           {linkInfo
             ? <a
                 onClick={() =>
@@ -298,10 +296,10 @@ const ResultDetailCard = ({ result, statInk }) => {
                   )}
                 style={{ cursor: 'pointer' }}
               >
-                view on stat.ink
+                <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
               </a>
             : null}
-        </span>
+        </h3>
       }
     >
       <Grid fluid>
