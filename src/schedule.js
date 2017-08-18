@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col, Table } from 'react-bootstrap';
+import { Grid, Row, Col, Table, Image } from 'react-bootstrap';
 import './schedule.css';
 const { ipcRenderer } = window.require('electron');
 
@@ -17,23 +17,39 @@ const GachiRow = ({ rotation }) => {
         {hour}
       </td>
       <td>
-        {rotation.rule.name}
-      </td>
-      <td>
-        <div className="rotation-map">
-          <img
-            src={'https://app.splatoon2.nintendo.net' + rotation.stage_a.image}
-            alt="Map illustration"
-          />
-          {`${rotation.stage_a.name}`}
-        </div>
-        <div className={'rotation-map'}>
-          <img
-            src={'https://app.splatoon2.nintendo.net' + rotation.stage_b.image}
-            alt="Map illustration"
-          />
-          {`${rotation.stage_b.name}`}
-        </div>
+        <Grid fluid>
+          <Row>
+            <Col md={12}>
+              <strong>
+                {rotation.rule.name}
+              </strong>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6} style={{ minWidth: 150 }}>
+              <div className="rotation-map">
+                <Image
+                  src={
+                    'https://app.splatoon2.nintendo.net' +
+                    rotation.stage_a.image
+                  }
+                />
+                {rotation.stage_a.name}
+              </div>
+            </Col>
+            <Col md={6} style={{ minWidth: 150 }}>
+              <div className="rotation-map">
+                <Image
+                  src={
+                    'https://app.splatoon2.nintendo.net' +
+                    rotation.stage_b.image
+                  }
+                />
+                {rotation.stage_b.name}
+              </div>
+            </Col>
+          </Row>
+        </Grid>
       </td>
     </tr>
   );

@@ -1,18 +1,23 @@
+body {
+  //text-align: center
+}
+
 .rotation-map {
   text-align: center;
-  max-width: 170px;
+  width: 150px;
   border-radius: 20px;
   background-color: #ccc;
   font-size: 12px;
   padding-bottom: 3px;
+  margin: 1px auto;
 }
 
 .rotation-map img {
-  max-width: 170px;
+  width: 150px;
   border-radius: 20px 20px 0px 0px;
   margin-bottom: 3px;
 }
 
-.rotation-map + .rotation-map {
+/*.rotation-map + .rotation-map {
   margin-top: 5px;
-}
+}*/
