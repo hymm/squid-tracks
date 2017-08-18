@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col, Table } from 'react-bootstrap';
+import './schedule.css';
 const { ipcRenderer } = window.require('electron');
 
 const GachiRow = ({ rotation }) => {
@@ -19,9 +20,20 @@ const GachiRow = ({ rotation }) => {
         {rotation.rule.name}
       </td>
       <td>
-        {`${rotation.stage_a.name}`}
-        <br />
-        {`${rotation.stage_b.name}`}
+        <div className="rotation-map">
+          <img
+            src={'https://app.splatoon2.nintendo.net' + rotation.stage_a.image}
+            alt="Map illustration"
+          />
+          {`${rotation.stage_a.name}`}
+        </div>
+        <div className={'rotation-map'}>
+          <img
+            src={'https://app.splatoon2.nintendo.net' + rotation.stage_b.image}
+            alt="Map illustration"
+          />
+          {`${rotation.stage_b.name}`}
+        </div>
       </td>
     </tr>
   );
