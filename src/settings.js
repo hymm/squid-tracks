@@ -11,6 +11,7 @@ import {
   FormControl,
   HelpBlock
 } from 'react-bootstrap';
+import { event } from './analytics';
 const { remote, ipcRenderer } = window.require('electron');
 const { openExternal } = remote.shell;
 
@@ -33,6 +34,7 @@ class StatInkSettings extends React.Component {
   };
 
   handleSubmit = e => {
+    event('stat.ink', 'saved-token');
     ipcRenderer.sendSync('setStatInkApiToken', this.state.apiToken);
     this.setState({ statInkSaveButtonText: 'Token Saved' });
     setTimeout(() => {
@@ -74,6 +76,7 @@ class StatInkSettings extends React.Component {
 }
 
 function handleLogoutClick(callback) {
+  event('user', 'logout');
   ipcRenderer.sendSync('logout');
   callback();
 }

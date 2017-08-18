@@ -21,3 +21,9 @@ export const screenview = (screenName) => {
         visitor.screenview(screenName, appName, appVersion).send();
     }
 };
+
+export const event = (...args) => {
+    if (analyticsEnabled) {
+        visitor.event(...args).send();
+    }
+};
