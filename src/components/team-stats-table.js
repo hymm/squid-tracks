@@ -75,10 +75,10 @@ const TeamStatTable = ({ result, team }) => {
             {team.reduce((sum, player) => sum + player.game_paint_point, 0)}
           </td>
           <td>
-            {`${total_k + total_a} (${total_d})`}
+            {`${total_k + total_a} (${total_a})`}
           </td>
           <td>
-            {`${total_k} / ${total_a}`}
+            {`${total_k} / ${total_d}`}
           </td>
           <td>
             {`${total_s}`}
