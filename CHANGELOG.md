@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 0.2.1
+
+* added squiffer
+* map images on schedule page.  Thanks to DanSyor.
+* added in google analytics.  See home page for more details.
+
 ## Version 0.2.0
 
 * decreased poll timer from 120 seconds to 60 seconds
