@@ -1,0 +1,13 @@
+.rotation-map {
+  text-align: center;
+  border-radius: 20px;
+  background-color: #ccc;
+  font-size: 12px;
+  padding-bottom: 3px;
+  margin: 1px;
+}
+
+.rotation-map img {
+  border-radius: 20px 20px 0px 0px;
+  margin-bottom: 3px;
+}
