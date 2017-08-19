@@ -118,6 +118,9 @@ const SettingsScreen = ({ token, logoutCallback }) =>
     <Row>
       <Col md={12}>
         <h3>Google Analytics</h3>
+        This program uses google analytics to track version uptake, activity,
+        bugs, and crashing. If you find this creepy you can disable this feature
+        below.
         <GoogleAnalyticsCheckbox />
       </Col>
     </Row>
