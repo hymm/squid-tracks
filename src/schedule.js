@@ -26,7 +26,7 @@ const GachiRow = ({ rotation }) => {
             </Col>
           </Row>
           <Row>
-            <Col md={6} style={{ minWidth: 111, maxWidth: 360 }}>
+            <Col md={6} style={{ minWidth: 111, maxWidth: 360, padding: 0 }}>
               <div className="rotation-map">
                 <Image
                   src={
@@ -38,7 +38,7 @@ const GachiRow = ({ rotation }) => {
                 {rotation.stage_a.name}
               </div>
             </Col>
-            <Col md={6} style={{ minWidth: 111, maxWidth: 360 }}>
+            <Col md={6} style={{ minWidth: 111, maxWidth: 360, padding: 0 }}>
               <div className="rotation-map">
                 <Image
                   src={
