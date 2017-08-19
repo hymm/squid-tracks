@@ -92,6 +92,9 @@ class GoogleAnalyticsCheckbox extends React.Component {
   }
 
   handleClick = () => {
+    if (this.state.enabled) {
+      event('ga', 'disabled');
+    }
     ipcRenderer.sendSync('setToStore', 'gaEnabled', !this.state.enabled);
     this.setState({ enabled: !this.state.enabled });
   };
