@@ -10,7 +10,7 @@ const AboutPage = () =>
     <Row>
       <Col md={12}>
         <Jumbotron style={{ textAlign: 'center' }}>
-          <h1>Squid Tracks</h1>
+          <h1>SquidTracks</h1>
           <h2>A Splatnet 2 Client for your Desktop</h2>
           <h5>
             {`Beta Version ${appVersion} `}
@@ -27,17 +27,17 @@ const AboutPage = () =>
         </Jumbotron>
         <h2>Introduction</h2>
         <p>
-          Squid Tracks is a desktop program for tracking your Splatnet 2
+          SquidTracks is a desktop program for tracking your Splatnet 2
           statistics. It reads the data from the Nintendo Splatnet API and
           presents it in an alternative format that is hopefully more easy to
           digest. There is also some data that the Nintendo App does not show.
-          Squid Tracks offers that data up too.
+          SquidTracks offers that data up too.
         </p>
         <p>
-          Another feature of Squid Tracks is that it can back up your data to
-          stat.ink. Splatnet only records your most recent 50 games. Splat
-          Tracks offers integration with stat.ink where you can backup all of
-          your games and also offers them for public viewing on the web.
+          Another feature of SquidTracks is that it can back up your data to
+          stat.ink. Splatnet only records your most recent 50 games. SquidTracks
+          offers integration with stat.ink where you can backup all of your
+          games and also offers them for public viewing on the web.
         </p>
         <p>
           The records tab shows your win-loss records by stage and by weapon.
