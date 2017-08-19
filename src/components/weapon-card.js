@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, Table } from 'react-bootstrap';
+import { Panel, Table, Image } from 'react-bootstrap';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
 
@@ -10,6 +10,7 @@ export default class WeaponCard extends React.Component {
   };
 
   static columnHeaders = [
+    { text: '', noSort: true },
     { text: 'Weapon', sortColumn: 'weapon.name', sortDirection: 'down' },
     { text: 'Total', sortColumn: 'total_count', sortDirection: 'up' },
     { text: 'Wins', sortColumn: 'win_count', sortDirection: 'up' },
@@ -38,23 +39,41 @@ export default class WeaponCard extends React.Component {
         <Table striped bordered condensed hover>
           <thead>
             <tr>
-              {WeaponCard.columnHeaders.map(header =>
-                <TableHeader
-                  key={header.text}
-                  setState={this.setState.bind(this)}
-                  sort={{
-                    sortColumn: header.sortColumn,
-                    sortDirection: header.sortDirection
-                  }}
-                  text={header.text}
-                  sortColumn={this.state.sortColumn}
-                />
-              )}
+              {WeaponCard.columnHeaders.map(header => {
+                header.noSort
+                  ? <th>
+                      {header.text}
+                    </th>
+                  : <TableHeader
+                      key={header.text}
+                      setState={this.setState.bind(this)}
+                      sort={{
+                        sortColumn: header.sortColumn,
+                        sortDirection: header.sortDirection
+                      }}
+                      text={header.text}
+                      sortColumn={this.state.sortColumn}
+                    />;
+              })}
             </tr>
           </thead>
           <tbody>
             {weaponArray.map(weapon =>
               <tr key={weapon.weapon.name}>
+                <td
+                  style={{
+                    width: 50,
+                    textAlign: 'center',
+                    background: 'darkgrey'
+                  }}
+                >
+                  <Image
+                    src={`https://app.splatoon2.nintendo.net${weapon.weapon
+                      .thumbnail}`}
+                    style={{ maxHeight: 30 }}
+                    alt={weapon.weapon.name}
+                  />
+                </td>
                 <td>
                   {weapon.weapon.name}
                 </td>
