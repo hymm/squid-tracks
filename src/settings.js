@@ -9,7 +9,8 @@ import {
   FormGroup,
   ControlLabel,
   FormControl,
-  HelpBlock
+  HelpBlock,
+  Checkbox
 } from 'react-bootstrap';
 import { event } from './analytics';
 const { remote, ipcRenderer } = window.require('electron');
@@ -81,11 +82,40 @@ function handleLogoutClick(callback) {
   callback();
 }
 
+class GoogleAnalyticsCheckbox extends React.Component {
+  state = { enabled: false };
+
+  componentDidMount() {
+    this.setState({
+      enabled: ipcRenderer.sendSync('getFromStore', 'gaEnabled')
+    });
+  }
+
+  handleClick = () => {
+    ipcRenderer.sendSync('setToStore', 'gaEnabled', !this.state.enabled);
+    this.setState({ enabled: !this.state.enabled });
+  };
+
+  render() {
+    return (
+      <Checkbox checked={this.state.enabled} onClick={this.handleClick}>
+        Enabled
+      </Checkbox>
+    );
+  }
+}
+
 const SettingsScreen = ({ token, logoutCallback }) =>
   <Grid fluid style={{ marginTop: 65 }}>
     <Row>
       <Col md={12}>
         <StatInkSettings />
+      </Col>
+    </Row>
+    <Row>
+      <Col md={12}>
+        <h3>Google Analytics</h3>
+        <GoogleAnalyticsCheckbox />
       </Col>
     </Row>
     <Row>

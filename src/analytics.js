@@ -9,21 +9,20 @@ const ua_ID = 'UA-104941988-1';
 // get this from saved data or create if it doesn't exist and save it.
 let userUuid = ipcRenderer.sendSync('getFromStore', 'uuid');
 if (userUuid.length < 10) {
-    userUuid = uuid();
-    ipcRenderer.sendSync('setToStore', 'uuid', userUuid);
+  userUuid = uuid();
+  ipcRenderer.sendSync('setToStore', 'uuid', userUuid);
 }
 const visitor = ua(ua_ID, userUuid);
 
 // support disabling analytics
-const analyticsEnabled = true;
-export const screenview = (screenName) => {
-    if (analyticsEnabled) {
-        visitor.screenview(screenName, appName, appVersion).send();
-    }
+export const screenview = screenName => {
+  if (ipcRenderer.sendSync('getFromStore', 'gaEnabled')) {
+    visitor.screenview(screenName, appName, appVersion).send();
+  }
 };
 
 export const event = (...args) => {
-    if (analyticsEnabled) {
-        visitor.event(...args).send();
-    }
+  if (ipcRenderer.sendSync('getFromStore', 'gaEnabled')) {
+    visitor.event(...args).send();
+  }
 };
