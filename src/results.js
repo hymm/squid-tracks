@@ -13,6 +13,7 @@ import {
 import ResultsSummaryCard from './components/results-summary-card';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
+import { event } from './analytics';
 const { ipcRenderer } = window.require('electron');
 
 const Results = () =>
@@ -69,6 +70,7 @@ class ResultsPoller extends React.Component {
       if (info.username) {
         this.props.setStatInkInfo(this.props.result.battle_number, info);
       }
+      event('stat.ink', 'wrote-battle', 'auto');
       this.setState({
         activeText: `Wrote battle ${this.props.result.battle_number}`
       });
@@ -120,6 +122,7 @@ class ResultControl extends React.Component {
         <Button
           onClick={() => {
             getResults();
+            event('results', 'refresh');
             this.setState({ refreshing: true });
             setTimeout(() => this.setState({ refreshing: false }), 2000);
           }}
@@ -158,6 +161,7 @@ class ResultControl extends React.Component {
               if (info.username) {
                 setStatInkInfo(currentBattle, info);
               }
+              event('stat.ink', 'wrote-battle', 'manual');
               this.setState({ wroteToStatInk: true });
               setTimeout(() => this.setState({ wroteToStatInk: false }), 2000);
             }}

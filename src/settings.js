@@ -9,8 +9,10 @@ import {
   FormGroup,
   ControlLabel,
   FormControl,
-  HelpBlock
+  HelpBlock,
+  Checkbox
 } from 'react-bootstrap';
+import { event } from './analytics';
 const { remote, ipcRenderer } = window.require('electron');
 const { openExternal } = remote.shell;
 
@@ -33,6 +35,7 @@ class StatInkSettings extends React.Component {
   };
 
   handleSubmit = e => {
+    event('stat.ink', 'saved-token');
     ipcRenderer.sendSync('setStatInkApiToken', this.state.apiToken);
     this.setState({ statInkSaveButtonText: 'Token Saved' });
     setTimeout(() => {
@@ -74,8 +77,35 @@ class StatInkSettings extends React.Component {
 }
 
 function handleLogoutClick(callback) {
+  event('user', 'logout');
   ipcRenderer.sendSync('logout');
   callback();
+}
+
+class GoogleAnalyticsCheckbox extends React.Component {
+  state = { enabled: false };
+
+  componentDidMount() {
+    this.setState({
+      enabled: ipcRenderer.sendSync('getFromStore', 'gaEnabled')
+    });
+  }
+
+  handleClick = () => {
+    if (this.state.enabled) {
+      event('ga', 'disabled');
+    }
+    ipcRenderer.sendSync('setToStore', 'gaEnabled', !this.state.enabled);
+    this.setState({ enabled: !this.state.enabled });
+  };
+
+  render() {
+    return (
+      <Checkbox checked={this.state.enabled} onClick={this.handleClick}>
+        Enabled
+      </Checkbox>
+    );
+  }
 }
 
 const SettingsScreen = ({ token, logoutCallback }) =>
@@ -83,6 +113,15 @@ const SettingsScreen = ({ token, logoutCallback }) =>
     <Row>
       <Col md={12}>
         <StatInkSettings />
+      </Col>
+    </Row>
+    <Row>
+      <Col md={12}>
+        <h3>Google Analytics</h3>
+        This program uses google analytics to track version uptake, activity,
+        bugs, and crashing. If you find this creepy you can disable this feature
+        below.
+        <GoogleAnalyticsCheckbox />
       </Col>
     </Row>
     <Row>

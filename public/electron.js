@@ -27,7 +27,7 @@ const startUrl =
 
 const store = new Store({
   configName: 'user-data',
-  defaults: { sessionToken: '', statInkToken: '', statInkInfo: {} }
+  defaults: { sessionToken: '', statInkToken: '', statInkInfo: {}, uuid: '', gaEnabled: true }
 });
 
 // splatnet and stat.ink comm with renderer handling

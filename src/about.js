@@ -104,7 +104,6 @@ const AboutPage = () =>
             When done playing, click on the button again to stop auto uploads.
           </li>
         </ol>
-
         <h4>Manual Uploading</h4>
         <p>
           Automatic uploading only uploads new games. If there are older games
@@ -125,7 +124,14 @@ const AboutPage = () =>
             Click <strong>Upload to stat.ink</strong>
           </li>
         </ol>
-
+        <h2>Tracking and Privacy</h2>
+        This program uses google analytics to track version uptake, activity,
+        bugs, and crashing. Your information is anonymized before sending and
+        will not be shared with any third party. If you find this creepy you can
+        disable tracking in{' '}
+        <Link to="/settings">
+          <strong>Settings</strong>
+        </Link>.
         <h2>For Help and Bug Filing</h2>
         <p>Send cries for help, bug reports, and feature requests to</p>
         <p>
@@ -146,7 +152,6 @@ const AboutPage = () =>
             @SquidTracks
           </a>
         </p>
-
         <h2>Releases</h2>
         <p>
           Once the program is installed, the program should autoupdate on
