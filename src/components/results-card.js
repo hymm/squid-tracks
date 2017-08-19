@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, Table } from 'react-bootstrap';
+import { Panel, Table, Image } from 'react-bootstrap';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
 
@@ -15,7 +15,7 @@ export default class ResultsCard extends React.Component {
     { text: 'Rule', sortColumn: 'rule.key', sortDirection: 'down' },
     { text: 'Stage', sortColumn: 'stage.name', sortDirection: 'down' },
     {
-      text: 'Weapon',
+      text: '',
       sortColumn: 'player_result.player.weapon.name',
       sortDirection: 'down'
     },
@@ -92,8 +92,13 @@ export default class ResultsCard extends React.Component {
                   <td>
                     {result.stage.name}
                   </td>
-                  <td>
-                    {result.player_result.player.weapon.name}
+                  <td style={{ textAlign: 'center', background: 'darkgrey' }}>
+                    <Image
+                      src={`https://app.splatoon2.nintendo.net${result
+                        .player_result.player.weapon.thumbnail}`}
+                      style={{ maxHeight: 30 }}
+                      alt={result.player_result.player.weapon.name}
+                    />
                   </td>
                   <td>
                     {result.my_team_result.key}
