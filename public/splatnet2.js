@@ -5,12 +5,12 @@ const cheerio = require('cheerio');
 const log = require('electron-log');
 const fs = require('fs');
 // use this like to proxy through fiddler
-const request = request2.defaults({
+/* const request = request2.defaults({
   proxy: 'http://localhost:8888',
   rejectUnauthorized: false,
   jar: true
-});
-// const request = request2.defaults({ jar: true });
+}); */
+const request = request2.defaults({ jar: true });
 let userLanguage = 'en-US';
 let uniqueId = '';
 
