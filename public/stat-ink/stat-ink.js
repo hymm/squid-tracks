@@ -136,7 +136,7 @@ async function convertResultToStatInk(result) {
   setPlayers(statInk, result);
   setClientInfo(statInk, result);
 
-  // statInk.image_judge = await getSplatnetImage(result.battle_number);
+  statInk.image_judge = await getSplatnetImage(result.battle_number);
 
   return statInk;
 }

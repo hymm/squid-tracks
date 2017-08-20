@@ -254,8 +254,8 @@ async function getSplatnetImage(battle) {
     encoding: null,
   });
 
-  const imgEncoded = imgBuf.toString('binary');
-  return imgEncoded;
+  // const imgEncoded = imgBuf.toString('binary');
+  return imgBuf;
 }
 
 exports.getUniqueId = getUniqueId;
