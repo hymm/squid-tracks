@@ -1,18 +1,20 @@
 const request2 = require('request-promise-native');
+const msgpack = require('msgpack-lite');
 const LobbyModeMap = require('./lobby-mode-map');
 const RuleMap = require('./rule-map');
 const StageMap = require('./stage-map');
+const { getSplatnetImage } = require('../splatnet2');
 const app = require('electron').app;
 const appVersion = app.getVersion();
 const appName = app.getName();
 const WeaponMap = require('./weapon-map');
 
-/* const request = request2.defaults({
+const request = request2.defaults({
   proxy: 'http://localhost:8888',
   rejectUnauthorized: false,
   jar: true
-}); */
-const request = request2;
+});
+// const request = request2;
 
 function setUuid(statInk, result) {
   statInk.uuid = result.start_time;
@@ -125,7 +127,7 @@ function setClientInfo(statInk, result) {
   statInk.agent_version = appVersion; // get from json file?
 }
 
-function convertResultToStatInk(result) {
+async function convertResultToStatInk(result) {
   const statInk = {};
   setUuid(statInk, result);
   setGameInfo(statInk, result);
@@ -133,6 +135,8 @@ function convertResultToStatInk(result) {
   setPlayerResults(statInk, result);
   setPlayers(statInk, result);
   setClientInfo(statInk, result);
+
+  statInk.image_judge = await getSplatnetImage(result.battle_number);
 
   return statInk;
 }
@@ -143,9 +147,10 @@ async function writeToStatInk(apiKey, result) {
     method: 'POST',
     uri: 'https://stat.ink/api/v2/battle',
     headers: {
+      'Content-Type': 'application/x-msgpack',
       Authorization: `Bearer ${apiKey}`
     },
-    json: convertResultToStatInk(result),
+    body: msgpack.encode(await convertResultToStatInk(result)),
     resolveWithFullResponse: true
   });
 

@@ -70,7 +70,6 @@ function registerSplatnetHandler() {
 
 ipcMain.on('getFromStore', (event, settingName) => {
   event.returnValue = store.get(settingName);
-  log.debug(event.returnValue);
 });
 
 ipcMain.on('setToStore', (event, settingName, value) => {
@@ -142,7 +141,15 @@ ipcMain.on('getApi', async (e, url) => {
       log.error(e);
       e.returnValue = {};
   }
+});
 
+ipcMain.on('postApi', async (e, url) => {
+    try {
+      e.returnValue = await splatnet.postSplatnetApi(url);
+  } catch (e) {
+      log.error(e);
+      e.returnValue = {};
+  }
 });
 
 function isTokenGood(token) {

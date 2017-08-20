@@ -1,6 +1,5 @@
 const { convertResultToStatInk } = require('./stat-ink');
 const getDefaultResult = require('./example-result');
-jest.mock('electron');
 
 describe('convertResultToStatInk', () => {
     it('should add 1000p on a victory', () => {

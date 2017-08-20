@@ -43,13 +43,19 @@ class ApiTester extends React.Component {
     this.setState({ url: e.target.value });
   };
 
+  handlePostClick = () => {
+    const res = ipcRenderer.sendSync('postApi', this.state.url);
+    this.setState({ reply: res });
+  };
+
   render() {
     return (
       <div style={{ marginTop: 65 }}>
         <Link to="/">
-          <button onClick={this.handleButtonClick}>Back</button>
+          <button>Back</button>
         </Link>
         <button onClick={this.handleButtonClick}>Get API</button>
+        <button onClick={this.handlePostClick}>Post API</button>
         <button
           onClick={() => clipboard.writeText(JSON.stringify(this.state.reply))}
         >

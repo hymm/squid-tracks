@@ -1,13 +1,18 @@
 const request2 = require('request-promise-native');
 const crypto = require('crypto');
 const base64url = require('base64url');
+const cheerio = require('cheerio');
+const log = require('electron-log');
+const fs = require('fs');
 // use this like to proxy through fiddler
-/* const request = request2.defaults({
+const request = request2.defaults({
   proxy: 'http://localhost:8888',
   rejectUnauthorized: false,
   jar: true
-}); */
-const request = request2.defaults({ jar: true });
+});
+// const request = request2.defaults({ jar: true });
+let userLanguage = 'en-US';
+let uniqueId = '';
 
 function generateRandom(length) {
   return base64url(crypto.randomBytes(length));
@@ -150,7 +155,6 @@ async function getWebServiceToken(token) {
   };
 }
 
-let userLanguage = 'en-US';
 async function getSplatnetApi(url) {
   const resp = await request({
     method: 'GET',
@@ -161,6 +165,35 @@ async function getSplatnetApi(url) {
       'Accept-Language': userLanguage,
       'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
       'Connection': 'keep-alive'
+    },
+    json: true,
+    gzip: true,
+  });
+
+  return resp;
+}
+
+function getUniqueId(body) {
+  const $ = cheerio.load(body);
+  const id = $('html').data('unique-id');
+  if (id == null) {
+    throw Error('Could not read splatnet2 unique id');
+  }
+  return id;
+}
+
+async function postSplatnetApi(url) {
+  const resp = await request({
+    method: 'POST',
+    uri: `https://app.splatoon2.nintendo.net/api/${url}`,
+    headers: {
+      'Accept': '*/*',
+      'Accept-Encoding': 'gzip, deflate',
+      'Accept-Language': userLanguage,
+      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+      'Connection': 'keep-alive',
+      'X-Unique-Id': uniqueId,
+      'X-Requested-With': 'XMLHttpRequest'
     },
     json: true,
     gzip: true,
@@ -185,7 +218,9 @@ async function getSessionCookie(token) {
     }
   });
 
-  return resp;
+  const id = getUniqueId(resp)
+
+  return id;
 }
 
 async function getSessionWithSessionToken(sessionToken) {
@@ -194,7 +229,7 @@ async function getSessionWithSessionToken(sessionToken) {
   userLanguage = userInfo.language;
   const apiAccessToken = await getApiLogin(apiTokens.id, userInfo);
   const splatnetToken = await getWebServiceToken(apiAccessToken);
-  await getSessionCookie(splatnetToken.accessToken);
+  uniqueId = await getSessionCookie(splatnetToken.accessToken);
   return splatnetToken;
 }
 
@@ -208,8 +243,26 @@ async function getSplatnetSession(sessionTokenCode, sessionVerifier) {
   };
 }
 
+async function getSplatnetImage(battle) {
+  const { url } = await postSplatnetApi(`share/results/${battle}`);
+  const imgBuf = await request({
+    method: 'GET',
+    uri: url,
+    headers: {
+      'Content-Type': 'image/png',
+    },
+    encoding: null,
+  });
+
+  const imgEncoded = imgBuf.toString('binary');
+  return imgEncoded;
+}
+
+exports.getUniqueId = getUniqueId;
 exports.getSessionCookie = getSessionCookie;
 exports.generateAuthenticationParams = generateAuthenticationParams;
 exports.getSessionWithSessionToken = getSessionWithSessionToken;
 exports.getSplatnetSession = getSplatnetSession;
 exports.getSplatnetApi = getSplatnetApi;
+exports.postSplatnetApi = postSplatnetApi;
+exports.getSplatnetImage = getSplatnetImage;
