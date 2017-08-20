@@ -93,11 +93,84 @@ class ResultsPoller extends React.Component {
   }
 }
 
+class StatInkManualButton extends React.Component {
+  defaultButtonText = 'Upload to stat.ink';
+
+  state = {
+    buttonText: this.defaultButtonText,
+    writingToStatInk: false
+  };
+
+  componentDidMount() {
+    ipcRenderer.on('wroteBattleManual', this.handleWroteBattleManual);
+    ipcRenderer.on('writeBattlekManualError', this.handleError);
+  }
+
+  componentWillUnmount() {
+    ipcRenderer.removeListener(
+      'wroteBattleManual',
+      this.handleWroteBattleManual
+    );
+    ipcRenderer.removeListener('writeBattlekManualError', this.handleError);
+  }
+
+  handleWroteBattleManual = (e, info) => {
+    const { currentBattle, setStatInkInfo } = this.props;
+    event('stat.ink', 'wrote-battle', 'manual');
+    this.setState({ buttonText: `Wrote Battle #${currentBattle}` });
+
+    if (info.username) {
+      setStatInkInfo(currentBattle, info);
+    }
+    setTimeout(
+      () =>
+        this.setState({
+          buttonText: this.defaultButtonText,
+          writingToStatInk: false
+        }),
+      2000
+    );
+  };
+
+  handleError = (e, error) => {
+    setTimeout(
+      () =>
+        this.setState({
+          buttonText: this.defaultButtonText,
+          writingToStatInk: false
+        }),
+      2000
+    );
+  };
+
+  handleClick = () => {
+    const { currentBattle, result } = this.props;
+    this.setState({
+      buttonText: `Writing Battle #${currentBattle}`,
+      writingToStatInk: true
+    });
+    ipcRenderer.send('writeToStatInk', result, 'manual');
+  };
+
+  render() {
+    const { tokenExists } = this.props;
+    const { writingToStatInk, buttonText } = this.state;
+
+    return (
+      <Button
+        onClick={this.handleClick}
+        disabled={!tokenExists || writingToStatInk}
+      >
+        {buttonText}
+      </Button>
+    );
+  }
+}
+
 class ResultControl extends React.Component {
   state = {
     tokenExists: false,
-    refreshing: false,
-    wroteToStatInk: false
+    refreshing: false
   };
 
   componentDidMount() {
@@ -155,20 +228,12 @@ class ResultControl extends React.Component {
           </Button>
         </ButtonGroup>
         <ButtonGroup>
-          <Button
-            onClick={() => {
-              const info = ipcRenderer.sendSync('writeToStatInk', result);
-              if (info.username) {
-                setStatInkInfo(currentBattle, info);
-              }
-              event('stat.ink', 'wrote-battle', 'manual');
-              this.setState({ wroteToStatInk: true });
-              setTimeout(() => this.setState({ wroteToStatInk: false }), 2000);
-            }}
-            disabled={!this.state.tokenExists || this.state.wroteToStatInk}
-          >
-            {this.state.wroteToStatInk ? 'Uploaded' : 'Upload to stat.ink'}
-          </Button>
+          <StatInkManualButton
+            result={result}
+            currentBattle={currentBattle}
+            tokenExists={this.state.tokenExists}
+            setStatInkInfo={setStatInkInfo}
+          />
         </ButtonGroup>
         <ResultsPoller
           getResults={getResults}
