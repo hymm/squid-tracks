@@ -96,7 +96,12 @@ ipcMain.on('writeToStatInk', async (event, result, type) => {
         }
     } catch (e) {
         log.error(e);
-        ipcMain.send('writeBattlekManualError', { username: '', battle: -1 });
+        if (type === 'manual') {
+          ipcMain.send('writeBattlekManualError', { username: '', battle: -1 });
+        } else {
+          ipcMain.send('writeBattleAutoError', { username: '', battle: -1 });            
+        }
+
     }
 });
 
