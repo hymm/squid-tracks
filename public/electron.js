@@ -70,7 +70,6 @@ function registerSplatnetHandler() {
 
 ipcMain.on('getFromStore', (event, settingName) => {
   event.returnValue = store.get(settingName);
-  log.debug(event.returnValue);
 });
 
 ipcMain.on('setToStore', (event, settingName, value) => {
@@ -87,12 +86,22 @@ ipcMain.on('logout', (event) => {
     event.returnValue = true;
 });
 
-ipcMain.on('writeToStatInk', async (event, result) => {
+ipcMain.on('writeToStatInk', async (event, result, type) => {
     try {
-        event.returnValue = await writeToStatInk(store.get('statInkToken'), result);
+        const info = await writeToStatInk(store.get('statInkToken'), result);
+        if (type === 'manual') {
+          event.sender.send('wroteBattleManual', info);
+        } else {
+          event.sender.send('wroteBattleAuto', info);
+        }
     } catch (e) {
         log.error(e);
-        event.returnValue = { username: '', battle: -1 };
+        if (type === 'manual') {
+          ipcMain.send('writeBattlekManualError', { username: '', battle: -1 });
+        } else {
+          ipcMain.send('writeBattleAutoError', { username: '', battle: -1 });            
+        }
+
     }
 });
 
@@ -142,7 +151,15 @@ ipcMain.on('getApi', async (e, url) => {
       log.error(e);
       e.returnValue = {};
   }
+});
 
+ipcMain.on('postApi', async (e, url) => {
+    try {
+      e.returnValue = await splatnet.postSplatnetApi(url);
+  } catch (e) {
+      log.error(e);
+      e.returnValue = {};
+  }
 });
 
 function isTokenGood(token) {

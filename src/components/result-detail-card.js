@@ -6,13 +6,13 @@ import {
   Panel,
   Table,
   Glyphicon,
-  Image,
   ButtonToolbar,
   ButtonGroup,
   Button
 } from 'react-bootstrap';
 import TeamStatsTable from './team-stats-table';
 import TeamGearTable from './team-gear-table';
+import TeamInfoTable from './team-info-table';
 const { openExternal } = window.require('electron').remote.shell;
 
 const ResultSummary = ({ result }) =>
@@ -129,15 +129,19 @@ const ResultSummary2 = ({ result }) =>
 
 class ResultDetailCard extends React.Component {
   state = {
-    showStats: true
+    show: 1
   };
 
   showStats = () => {
-    this.setState({ showStats: true });
+    this.setState({ show: 1 });
   };
 
   showGear = () => {
-    this.setState({ showStats: false });
+    this.setState({ show: 2 });
+  };
+
+  showInfo = () => {
+    this.setState({ show: 3 });
   };
 
   render() {
@@ -149,6 +153,11 @@ class ResultDetailCard extends React.Component {
 
     const myTeam = result.my_team_members.slice(0);
     myTeam.unshift(result.player_result);
+    myTeam.sort((a, b) => b.sort_score - a.sort_score);
+    const otherTeam = result.other_team_members
+      .slice(0)
+      .sort((a, b) => b.sort_score - a.sort_score);
+
     return (
       <Panel
         header={
@@ -183,15 +192,21 @@ class ResultDetailCard extends React.Component {
                 <ButtonGroup>
                   <Button
                     onClick={this.showStats}
-                    active={this.state.showStats}
+                    active={this.state.show === 1}
                   >
                     Stats
                   </Button>
                   <Button
                     onClick={this.showGear}
-                    active={!this.state.showStats}
+                    active={this.state.show === 2}
                   >
                     Gear
+                  </Button>
+                  <Button
+                    onClick={this.showInfo}
+                    active={this.state.show === 3}
+                  >
+                    More Info
                   </Button>
                 </ButtonGroup>
               </ButtonToolbar>
@@ -200,15 +215,21 @@ class ResultDetailCard extends React.Component {
           <Row>
             <Col sm={6} md={6}>
               <h4>My Team</h4>
-              {this.state.showStats
-                ? <TeamStatsTable team={myTeam} />
-                : <TeamGearTable team={myTeam} />}
+              {this.state.show === 1 ? <TeamStatsTable team={myTeam} /> : null}
+              {this.state.show === 2 ? <TeamGearTable team={myTeam} /> : null}
+              {this.state.show === 3 ? <TeamInfoTable team={myTeam} /> : null}
             </Col>
             <Col sm={6} md={6}>
               <h4>Enemy Team</h4>
-              {this.state.showStats
-                ? <TeamStatsTable team={result.other_team_members} />
-                : <TeamGearTable team={result.other_team_members} />}
+              {this.state.show === 1
+                ? <TeamStatsTable team={otherTeam} />
+                : null}
+              {this.state.show === 2
+                ? <TeamGearTable team={otherTeam} />
+                : null}
+              {this.state.show === 3
+                ? <TeamInfoTable team={otherTeam} />
+                : null}
             </Col>
           </Row>
         </Grid>

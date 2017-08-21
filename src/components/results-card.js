@@ -10,7 +10,12 @@ export default class ResultsCard extends React.Component {
   };
 
   static columnHeaders = [
-    { text: 'Battle', sortColumn: 'battle_number', sortDirection: 'up' },
+    {
+      text: 'Battle',
+      sortColumn: 'battle_number',
+      sortDirection: 'up',
+      sortFunction: parseFloat
+    },
     { text: 'Mode', sortColumn: 'game_mode.key', sortDirection: 'down' },
     { text: 'Rule', sortColumn: 'rule.key', sortDirection: 'down' },
     { text: 'Stage', sortColumn: 'stage.name', sortDirection: 'down' },
@@ -48,7 +53,14 @@ export default class ResultsCard extends React.Component {
           result.player_result.kill_count + result.player_result.assist_count)
     );
 
-    sort(results, this.state.sortColumn, this.state.sortDirection);
+    const sortedResults = results.slice();
+
+    sort(
+      sortedResults,
+      this.state.sortColumn,
+      this.state.sortDirection,
+      this.state.sortFunction
+    );
     return (
       <Panel header={<h3>Last 50 Battles</h3>}>
         * Click on column headers to sort
@@ -61,7 +73,8 @@ export default class ResultsCard extends React.Component {
                   setState={this.setState.bind(this)}
                   sort={{
                     sortColumn: header.sortColumn,
-                    sortDirection: header.sortDirection
+                    sortDirection: header.sortDirection,
+                    sortFunction: header.sortFunction
                   }}
                   text={header.text}
                   sortColumn={this.state.sortColumn}
@@ -70,7 +83,7 @@ export default class ResultsCard extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {results.map(result => {
+            {sortedResults.map(result => {
               return (
                 <tr key={result.start_time}>
                   <td>
