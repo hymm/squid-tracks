@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Version 0.2.2
+* added weapon images
+* added sort order to details table
+* added image from splatnet to stat.ink upload
+* view gear in details
+* changed to k+a(a) and k-d to make table more readable and compact
+* fixed bug with bar not displaying on stat ink
+
+
 ## Version 0.2.1
 
 * added squiffer
