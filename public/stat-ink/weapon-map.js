@@ -11,6 +11,7 @@ module.exports = {
   50: '52gal',
   60: 'nzap85',
   70: 'prime', // splattershot pro
+  71: 'prime_collabo', // forge pro
   80: '96gal',
   90: 'jetsweeper',
   200: 'nova', // luna
