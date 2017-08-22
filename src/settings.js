@@ -12,6 +12,7 @@ import {
   HelpBlock,
   Checkbox
 } from 'react-bootstrap';
+import jws from 'jws';
 import { event } from './analytics';
 const { remote, ipcRenderer } = window.require('electron');
 const { openExternal } = remote.shell;
@@ -106,46 +107,58 @@ class GoogleAnalyticsCheckbox extends React.Component {
   }
 }
 
-const SettingsScreen = ({ token, logoutCallback }) =>
-  <Grid fluid style={{ marginTop: 65 }}>
-    <Row>
-      <Col md={12}>
-        <StatInkSettings />
-      </Col>
-    </Row>
-    <Row>
-      <Col md={12}>
-        <h3>Google Analytics</h3>
-        This program uses google analytics to track version uptake, activity,
-        bugs, and crashing. If you find this creepy you can disable this feature
-        below.
-        <GoogleAnalyticsCheckbox />
-      </Col>
-    </Row>
-    <Row>
-      <Col md={12}>
-        <h3>Debugging</h3>
-        <Link to="/testApi">
-          <Button>API Checker</Button>
-        </Link>
-      </Col>
-    </Row>
-    <Row>
-      <Col md={12}>
-        <h3>Other Settings</h3>
-        <h4>Session Token</h4>
-        <Well bsSize="large" style={{ wordWrap: 'break-word' }}>
-          {token}
-        </Well>
-        <Button
-          block
-          bsStyle="danger"
-          onClick={() => handleLogoutClick(logoutCallback)}
-        >
-          Logout
-        </Button>
-      </Col>
-    </Row>
-  </Grid>;
+const SettingsScreen = ({ token, logoutCallback }) => {
+    const expUnix = JSON.parse(jws.decode(token).payload).exp;
+    const tokenExpiration = token ? (new Date( expUnix * 1000)).toString() : 'unknown';
+    return (
+        <Grid fluid style={{ marginTop: 65 }}>
+          <Row>
+            <Col md={12}>
+              <StatInkSettings />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <h3>Google Analytics</h3>
+              This program uses google analytics to track version uptake, activity,
+              bugs, and crashing. If you find this creepy you can disable this feature
+              below.
+              <GoogleAnalyticsCheckbox />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <h3>Debugging</h3>
+              <Link to="/testApi">
+                <Button>API Checker</Button>
+              </Link>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <h3>Nintendo User Info</h3>
+              <h4>Session Token</h4>
+              Expiration: {tokenExpiration}
+              <Well bsSize="large" style={{ wordWrap: 'break-word' }}>
+                {token}
+              </Well>
+              <h4>iksm Token</h4>
+              Expiration: {'blach'}
+              <Well bsSize="large" style={{ wordWrap: 'break-word' }}>
+                {'whatever'}
+              </Well>
+              <Button
+                block
+                bsStyle="danger"
+                onClick={() => handleLogoutClick(logoutCallback)}
+              >
+                Logout
+              </Button>
+            </Col>
+          </Row>
+        </Grid>
+    );
+}
+
 
 export default SettingsScreen;
