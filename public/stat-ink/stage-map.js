@@ -7,5 +7,6 @@ module.exports = {
   5: 'kombu', // humpback pump track
   7: 'hokke', // port mackerel
   8: 'tachiuo', // moray towers
-  9999: 'mystery' // shifty station
+  9999: 'mystery', // shifty station
+  99999: 'manta', // Manta Maria
 };
