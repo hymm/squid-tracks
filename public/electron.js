@@ -62,7 +62,7 @@ function registerSplatnetHandler() {
     },
     e => {
       if (e) {
-        log.error(e);
+        log.error(`Error Logging into Nintendo: ${e}`);
       }
     }
   );
@@ -95,13 +95,12 @@ ipcMain.on('writeToStatInk', async (event, result, type) => {
           event.sender.send('wroteBattleAuto', info);
         }
     } catch (e) {
-        log.error(e);
+        log.error(`Failed to write #${result.battle_number} to stat.ink: ${e}`);
         if (type === 'manual') {
-          ipcMain.send('writeBattlekManualError', { username: '', battle: -1 });
+          event.sender.send('writeBattleManualError', { username: '', battle: -1 });
         } else {
-          ipcMain.send('writeBattleAutoError', { username: '', battle: -1 });            
+          event.sender.send('writeBattleAutoError', { username: '', battle: -1 });
         }
-
     }
 });
 
@@ -148,7 +147,7 @@ ipcMain.on('getApi', async (e, url) => {
     try {
       e.returnValue = await splatnet.getSplatnetApi(url);
   } catch (e) {
-      log.error(e);
+      log.error(`Error getting ${url}: ${e}`);
       e.returnValue = {};
   }
 });
@@ -157,7 +156,7 @@ ipcMain.on('postApi', async (e, url) => {
     try {
       e.returnValue = await splatnet.postSplatnetApi(url);
   } catch (e) {
-      log.error(e);
+      log.error(`Error posting ${url}: ${e}`);
       e.returnValue = {};
   }
 });
@@ -173,6 +172,7 @@ async function getStoredSessionToken() {
     try {
       await splatnet.getSessionWithSessionToken(sessionToken);
     } catch (e) {
+      log.info('SessionToken has probably expired, please login again');
       this.store.set('sessionToken', '');
     }
   }

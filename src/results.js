@@ -146,7 +146,7 @@ class StatInkManualButton extends React.Component {
 
   componentDidMount() {
     ipcRenderer.on('wroteBattleManual', this.handleWroteBattleManual);
-    ipcRenderer.on('writeBattlekManualError', this.handleError);
+    ipcRenderer.on('writeBattleManualError', this.handleError);
   }
 
   componentWillUnmount() {
