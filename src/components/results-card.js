@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, Table, Image } from 'react-bootstrap';
+import { Panel, Table, Image, Glyphicon } from 'react-bootstrap';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
 
@@ -46,7 +46,7 @@ export default class ResultsCard extends React.Component {
   ];
 
   render() {
-    const { results, changeResult } = this.props;
+    const { results, changeResult, statInk } = this.props;
     results.forEach(
       result =>
         (result.k_a =
@@ -84,6 +84,7 @@ export default class ResultsCard extends React.Component {
           </thead>
           <tbody>
             {sortedResults.map(result => {
+              const linkInfo = statInk[result.battle_number];
               return (
                 <tr key={result.start_time}>
                   <td>
@@ -92,15 +93,22 @@ export default class ResultsCard extends React.Component {
                         document.body.scrollTop = 0;
                         changeResult(result.battle_number);
                       }}
+                      style={{ cursor: 'pointer' }}
                     >
                       {result.battle_number}
                     </a>
+                    {linkInfo
+                      ? <Glyphicon
+                          glyph={'ok-sign'}
+                          style={{ paddingLeft: 6 }}
+                        />
+                      : null}
                   </td>
                   <td>
                     {result.game_mode.key}
                   </td>
                   <td>
-                    {result.rule.key}
+                    {result.rule.name}
                   </td>
                   <td>
                     {result.stage.name}

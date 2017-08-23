@@ -326,29 +326,26 @@ class ResultsContainer extends React.Component {
   };
 
   render() {
+    const { results, currentResult, statInk } = this.state;
     return (
       <div>
         <ResultControl
           latestBattleNumber={
-            this.state.results.results[0]
-              ? this.state.results.results[0].battle_number
-              : 0
+            results.results[0] ? results.results[0].battle_number : 0
           }
-          result={this.state.currentResult}
-          results={this.state.results.results}
+          result={currentResult}
+          results={results.results}
           changeResult={this.changeResult}
           getResults={this.getResults}
           setStatInkInfo={this.setStatInkInfo}
         />
         {this.state.initialized
-          ? <ResultDetailCard
-              result={this.state.currentResult}
-              statInk={this.state.statInk}
-            />
+          ? <ResultDetailCard result={currentResult} statInk={statInk} />
           : null}
-        <ResultsSummaryCard summary={this.state.results.summary} />
+        <ResultsSummaryCard summary={results.summary} />
         <ResultsCard
-          results={this.state.results.results}
+          results={results.results}
+          statInk={statInk}
           changeResult={this.changeResult}
         />
       </div>
