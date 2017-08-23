@@ -4,7 +4,6 @@ import {
   Grid,
   Col,
   Row,
-  Well,
   Button,
   FormGroup,
   ControlLabel,
@@ -14,7 +13,7 @@ import {
 } from 'react-bootstrap';
 import jws from 'jws';
 import { event } from './analytics';
-const { remote, ipcRenderer } = window.require('electron');
+const { remote, ipcRenderer, clipboard } = window.require('electron');
 const { openExternal } = remote.shell;
 
 class StatInkSettings extends React.Component {
@@ -107,6 +106,37 @@ class GoogleAnalyticsCheckbox extends React.Component {
   }
 }
 
+class IksmToken extends React.Component {
+  state = {
+      cookie: { key: '', value: '', expires: '' }
+  };
+
+  componentDidMount() {
+      ipcRenderer.send('getIksmToken');
+      ipcRenderer.on('iksmToken', this.handleToken)
+  }
+
+  handleToken = (e, cookie) => {
+    this.setState({ cookie: cookie });
+  };
+
+  render() {
+      const { cookie } = this.state;
+      return (
+          <div>
+          <h4>iksm Token</h4>
+          Expiration: {cookie.expires}
+          <br />
+          <Button
+            onClick={() => clipboard.writeText(cookie.value)}
+          >
+            Copy to Clipboard
+          </Button>
+          </div>
+      );
+  }
+}
+
 const SettingsScreen = ({ token, logoutCallback }) => {
     const expUnix = JSON.parse(jws.decode(token).payload).exp;
     const tokenExpiration = token ? (new Date( expUnix * 1000)).toString() : 'unknown';
@@ -137,16 +167,18 @@ const SettingsScreen = ({ token, logoutCallback }) => {
           <Row>
             <Col md={12}>
               <h3>Nintendo User Info</h3>
+              <strong>DO NOT SHARE Session Token or iksm Token.</strong> These are
+              available here for debugging purposes.  Sharing these could
+              lead to someone stealing your personal information.
               <h4>Session Token</h4>
               Expiration: {tokenExpiration}
-              <Well bsSize="large" style={{ wordWrap: 'break-word' }}>
-                {token}
-              </Well>
-              <h4>iksm Token</h4>
-              Expiration: {'blach'}
-              <Well bsSize="large" style={{ wordWrap: 'break-word' }}>
-                {'whatever'}
-              </Well>
+              <br />
+              <Button
+                onClick={() => clipboard.writeText(token)}
+              >
+                Copy to Clipboard
+              </Button>
+              <IksmToken />
               <Button
                 block
                 bsStyle="danger"

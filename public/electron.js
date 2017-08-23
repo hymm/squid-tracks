@@ -161,6 +161,16 @@ ipcMain.on('postApi', async (e, url) => {
   }
 });
 
+ipcMain.on('getIksmToken', async (e) => {
+  try {
+    const cookie = splatnet.getIksmToken();
+    e.sender.send('iksmToken', cookie);
+  } catch (err) {
+    log.error(`Failed to get iksm cookie: ${err}`);
+    e.sender.send('getIksmTokenError', { username: '', battle: -1 });
+  }
+});
+
 function isTokenGood(token) {
   return !!token;
 }

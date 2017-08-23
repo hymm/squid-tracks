@@ -2,16 +2,17 @@ const request2 = require('request-promise-native');
 const crypto = require('crypto');
 const base64url = require('base64url');
 const cheerio = require('cheerio');
-const log = require('electron-log');
-const fs = require('fs');
-const { Cookie } = require('request-cookies');
+
+const splatnetUrl = `https://app.splatoon2.nintendo.net`;
+const jar = request2.jar();
 // use this like to proxy through fiddler
 /* const request = request2.defaults({
   proxy: 'http://localhost:8888',
   rejectUnauthorized: false,
-  jar: true
+  jar: jar
 }); */
-const request = request2.defaults({ jar: true });
+
+const request = request2.defaults({ jar: jar });
 let userLanguage = 'en-US';
 let uniqueId = '';
 
@@ -159,7 +160,7 @@ async function getWebServiceToken(token) {
 async function getSplatnetApi(url) {
   const resp = await request({
     method: 'GET',
-    uri: `https://app.splatoon2.nintendo.net/api/${url}`,
+    uri: `${splatnetUrl}/api/${url}`,
     headers: {
       'Accept': '*/*',
       'Accept-Encoding': 'gzip, deflate',
@@ -186,7 +187,7 @@ function getUniqueId(body) {
 async function postSplatnetApi(url) {
   const resp = await request({
     method: 'POST',
-    uri: `https://app.splatoon2.nintendo.net/api/${url}`,
+    uri: `${splatnetUrl}/api/${url}`,
     headers: {
       'Accept': '*/*',
       'Accept-Encoding': 'gzip, deflate',
@@ -206,7 +207,7 @@ async function postSplatnetApi(url) {
 async function getSessionCookie(token) {
   const resp = await request({
     method: 'GET',
-    uri: `https://app.splatoon2.nintendo.net`,
+    uri: splatnetUrl,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
@@ -259,6 +260,16 @@ async function getSplatnetImage(battle) {
   return imgBuf;
 }
 
+function getIksmToken() {
+    const cookies = jar.getCookies(splatnetUrl);
+    const iksmSessionCookie = cookies.find((cookie) => cookie.key === 'iksm_session');
+    if (iksmSessionCookie == null) {
+        throw new Error('Could not get iksm_session cookie');
+    }
+
+    return iksmSessionCookie;
+}
+
 exports.getUniqueId = getUniqueId;
 exports.getSessionCookie = getSessionCookie;
 exports.generateAuthenticationParams = generateAuthenticationParams;
@@ -267,3 +278,4 @@ exports.getSplatnetSession = getSplatnetSession;
 exports.getSplatnetApi = getSplatnetApi;
 exports.postSplatnetApi = postSplatnetApi;
 exports.getSplatnetImage = getSplatnetImage;
+exports.getIksmToken = getIksmToken;
