@@ -4,6 +4,7 @@ const base64url = require('base64url');
 const cheerio = require('cheerio');
 const log = require('electron-log');
 const fs = require('fs');
+const { Cookie } = require('request-cookies');
 // use this like to proxy through fiddler
 /* const request = request2.defaults({
   proxy: 'http://localhost:8888',
