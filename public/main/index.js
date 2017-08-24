@@ -1,7 +1,6 @@
 
-const { protocol, app, BrowserWindow, ipcMain } = require('electron');
+import { protocol, app, BrowserWindow, ipcMain } from 'electron';
 const path = require('path');
-const url = require('url');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
 const Memo = require('promise-memoize');
@@ -22,13 +21,6 @@ if (!isDev) {
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
-const startUrl =
-  process.env.ELECTRON_START_URL ||
-  url.format({
-    pathname: path.join(__dirname, '../build/index.html'),
-    protocol: 'file:',
-    slashes: true
-  });
 
 const store = new Store({
   configName: 'user-data',
@@ -62,7 +54,11 @@ function registerSplatnetHandler() {
           sessionToken = tokens.sessionToken;
           store.set('sessionToken', sessionToken);
           await splatnet.getSessionCookie(tokens.accessToken);
-          mainWindow.loadURL(startUrl);
+          mainWindow.loadURL(
+           isDev
+             ? 'http://localhost:3000'
+             : `file://${path.join(__dirname, '/build/index.html')}`
+          );
         });
     },
     e => {
@@ -153,13 +149,10 @@ ipcMain.on('getApi', async (e, url) => {
       const battleRegex = /^results\/\d{1,}$/;
       let value;
       if (url.match(battleRegex)) {
-        log.info('battle#')
         value = await getSplatnetApiMemoInf(url);
       } else if (url === 'results') {
-        log.info('reults')
         value = await getSplatnetApiMemo10(url);
       } else {
-        log.info('everythingelse');
         value = await getSplatnetApiMemo120(url);
       }
       e.returnValue = value;
@@ -216,9 +209,21 @@ function createWindow() {
     height: 768
   });
 
-  mainWindow.loadURL(startUrl);
+  // comment this in on first run to get dev tools
+  /* const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
+  installExtension(REACT_DEVELOPER_TOOLS)
+    .then((name) => console.log(`Added Extension:  ${name}`))
+    .catch((err) => console.log('An error occurred: ', err)); */
+
+  mainWindow.loadURL(
+   isDev
+     ? 'http://localhost:3000'
+     : `file://${path.join(__dirname, '/build/index.html')}`
+  );
 
   // mainWindow.webContents.openDevTools();
+
+
 
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows

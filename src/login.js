@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col, Jumbotron, Button } from 'react-bootstrap';
-const { ipcRenderer } = window.require('electron');
+const { ipcRenderer } = require('electron');
 
 const Login = ({ token }) =>
   <Grid fluid>

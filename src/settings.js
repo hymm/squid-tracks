@@ -13,7 +13,7 @@ import {
 } from 'react-bootstrap';
 import jws from 'jws';
 import { event } from './analytics';
-const { remote, ipcRenderer, clipboard } = window.require('electron');
+const { remote, ipcRenderer, clipboard } = require('electron');
 const { openExternal } = remote.shell;
 
 class StatInkSettings extends React.Component {

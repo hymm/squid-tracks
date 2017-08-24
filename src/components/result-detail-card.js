@@ -13,7 +13,7 @@ import {
 import TeamStatsTable from './team-stats-table';
 import TeamGearTable from './team-gear-table';
 import TeamInfoTable from './team-info-table';
-const { openExternal } = window.require('electron').remote.shell;
+const { openExternal } = require('electron').remote.shell;
 
 const ResultSummary = ({ result }) =>
   <Table striped bordered>

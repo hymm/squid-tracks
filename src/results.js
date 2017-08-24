@@ -14,7 +14,7 @@ import ResultsSummaryCard from './components/results-summary-card';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
 import { event } from './analytics';
-const { ipcRenderer } = window.require('electron');
+const { ipcRenderer } = require('electron');
 
 const Results = () =>
   <Grid fluid style={{ marginTop: 65 }}>

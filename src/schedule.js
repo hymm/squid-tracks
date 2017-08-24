@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col, Table, Image } from 'react-bootstrap';
 import './schedule.css';
-const { ipcRenderer } = window.require('electron');
+const { ipcRenderer } = require('electron');
 
 const GachiRow = ({ rotation }) => {
   const now = Date.now() / 1000;
