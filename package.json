@@ -47,7 +47,7 @@
     "wait-on": "^2.0.2"
   },
   "homepage": "./",
-  "main": "public/main/start.js",
+  "main": "public/electron.js",
   "scripts": {
     "precommit": "lint-staged",
     "react-start": "react-app-rewired start",

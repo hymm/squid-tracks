@@ -1,5 +1,5 @@
 
-import { protocol, app, BrowserWindow, ipcMain } from 'electron';
+const { protocol, app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
@@ -17,6 +17,10 @@ if (!isDev) {
 } else {
   log.info('app running in development');
 }
+
+const startUrl = isDev
+  ? 'http://localhost:3000'
+  : `file://${path.join(__dirname, '../../build/index.html')}`;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -54,11 +58,7 @@ function registerSplatnetHandler() {
           sessionToken = tokens.sessionToken;
           store.set('sessionToken', sessionToken);
           await splatnet.getSessionCookie(tokens.accessToken);
-          mainWindow.loadURL(
-           isDev
-             ? 'http://localhost:3000'
-             : `file://${path.join(__dirname, '/build/index.html')}`
-          );
+          mainWindow.loadURL(startUrl);
         });
     },
     e => {
@@ -198,8 +198,6 @@ async function getStoredSessionToken() {
   }
 }
 
-// autoupdate
-
 function createWindow() {
   registerSplatnetHandler();
   getStoredSessionToken();
@@ -215,15 +213,9 @@ function createWindow() {
     .then((name) => console.log(`Added Extension:  ${name}`))
     .catch((err) => console.log('An error occurred: ', err)); */
 
-  mainWindow.loadURL(
-   isDev
-     ? 'http://localhost:3000'
-     : `file://${path.join(__dirname, '/build/index.html')}`
-  );
+  mainWindow.loadURL(startUrl);
 
   // mainWindow.webContents.openDevTools();
-
-
 
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
@@ -233,12 +225,8 @@ function createWindow() {
   });
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
-// Quit when all windows are closed.
 app.on('window-all-closed', function() {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
@@ -254,6 +242,3 @@ app.on('activate', function() {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
