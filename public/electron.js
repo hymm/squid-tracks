@@ -4,9 +4,14 @@ const path = require('path');
 const url = require('url');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
+const Memo = require('promise-memoize');
 const { writeToStatInk } = require('./stat-ink/stat-ink');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
+
+const getSplatnetApiMemo120 = Memo(splatnet.getSplatnetApi, { maxAge: 120000 });
+const getSplatnetApiMemo10 = Memo(splatnet.getSplatnetApi, { maxAge: 10000 });
+const getSplatnetApiMemoInf = Memo(splatnet.getSplatnetApi);
 
 if (!isDev) {
   require('./autoupdate');
@@ -145,7 +150,19 @@ ipcMain.on('loadSplatnet', (e) => {
 
 ipcMain.on('getApi', async (e, url) => {
     try {
-      e.returnValue = await splatnet.getSplatnetApi(url);
+      const battleRegex = /^results\/\d{1,}$/;
+      let value;
+      if (url.match(battleRegex)) {
+        log.info('battle#')
+        value = await getSplatnetApiMemoInf(url);
+      } else if (url === 'results') {
+        log.info('reults')
+        value = await getSplatnetApiMemo10(url);
+      } else {
+        log.info('everythingelse');
+        value = await getSplatnetApiMemo120(url);
+      }
+      e.returnValue = value;
   } catch (e) {
       log.error(`Error getting ${url}: ${e}`);
       e.returnValue = {};
