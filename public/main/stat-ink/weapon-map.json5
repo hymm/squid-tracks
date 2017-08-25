@@ -37,6 +37,7 @@
   '2060': 'soytuber', // gootuber
   '3000': 'bucketslosher',
   '3010': 'hissen', // tri-slosher
+  '99999': 'screwslosher',
   '4000': 'splatspinner', // mini splatling
   '4010': 'barrelspinner', // heavy splatling
   '4015': 'herospinner_replica',
