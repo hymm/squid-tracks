@@ -223,8 +223,8 @@ class ResultControl extends React.Component {
 
   render() {
     const {
-      latestBattleNumber,
       result,
+      resultIndex,
       changeResult,
       getResults,
       results,
@@ -248,24 +248,24 @@ class ResultControl extends React.Component {
         </Button>
         <ButtonGroup>
           <Button
-            onClick={() => changeResult(currentBattle - 1)}
-            disabled={currentBattle === latestBattleNumber + 50}
+            onClick={() => changeResult(resultIndex + 1)}
+            disabled={resultIndex === results.length - 1}
           >
             <Glyphicon glyph="triangle-left" />
           </Button>
           <DropdownButton title={currentBattle} id={'battles'}>
-            {results.map(result =>
+            {results.map((result, idx) =>
               <MenuItem
                 key={result.battle_number}
-                onClick={() => changeResult(result.battle_number)}
+                onClick={() => changeResult(idx)}
               >
                 {result.battle_number}
               </MenuItem>
             )}
           </DropdownButton>
           <Button
-            onClick={() => changeResult(parseInt(currentBattle, 10) + 1)}
-            disabled={currentBattle === latestBattleNumber}
+            onClick={() => changeResult(resultIndex - 1)}
+            disabled={resultIndex === 0}
           >
             <Glyphicon glyph="triangle-right" />
           </Button>
@@ -296,6 +296,7 @@ class ResultsContainer extends React.Component {
       results: []
     },
     currentResult: {},
+    currentResultIndex: 0,
     statInk: {}
   };
 
@@ -308,13 +309,23 @@ class ResultsContainer extends React.Component {
   getResults = () => {
     const results = ipcRenderer.sendSync('getApi', 'results');
     this.setState({ results: results });
-    this.changeResult(results.results[0].battle_number);
+    this.changeResult(0, results.results);
     this.setState({ initialized: true });
   };
 
-  changeResult = battleNumber => {
+  changeResult = (arrayIndex, results) => {
+    const resultsPicked = results ? results : this.state.results.results
+    const battleNumber = resultsPicked[arrayIndex].battle_number;
     this.setState({
-      currentResult: ipcRenderer.sendSync('getApi', `results/${battleNumber}`)
+      currentResult: ipcRenderer.sendSync('getApi', `results/${battleNumber}`),
+      currentResultIndex: arrayIndex
+    });
+  };
+
+  changeResultByBattleNumber = battleNumber => {
+    this.setState({
+      currentResult: ipcRenderer.sendSync('getApi', `results/${battleNumber}`),
+      currentResultIndex: this.state.results.results.findIndex((a) => a.battle_number === battleNumber)
     });
   };
 
@@ -326,14 +337,12 @@ class ResultsContainer extends React.Component {
   };
 
   render() {
-    const { results, currentResult, statInk } = this.state;
+    const { results, currentResult, statInk, currentResultIndex } = this.state;
     return (
       <div>
         <ResultControl
-          latestBattleNumber={
-            results.results[0] ? results.results[0].battle_number : 0
-          }
           result={currentResult}
+          resultIndex={currentResultIndex}
           results={results.results}
           changeResult={this.changeResult}
           getResults={this.getResults}
@@ -346,7 +355,7 @@ class ResultsContainer extends React.Component {
         <ResultsCard
           results={results.results}
           statInk={statInk}
-          changeResult={this.changeResult}
+          changeResult={this.changeResultByBattleNumber}
         />
       </div>
     );
