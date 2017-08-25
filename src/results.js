@@ -13,6 +13,7 @@ import {
 import ResultsSummaryCard from './components/results-summary-card';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
+import { event } from './analytics';
 const { ipcRenderer } = window.require('electron');
 
 const Results = () =>
@@ -25,19 +26,33 @@ const Results = () =>
   </Grid>;
 
 class ResultsPoller extends React.Component {
+  inactiveButtonText = 'Auto-upload to stat.ink';
+  activeDefaultText = 'Waiting for Battle Data';
+
   state = {
     active: false,
     lastBattleUploaded: 0,
-    activeText: 'Not Polling'
+    buttonText: this.inactiveButtonText,
+    writingToStatInk: false
   };
 
+  componentDidMount() {
+    ipcRenderer.on('wroteBattleAuto', this.handleWroteBattleAuto);
+    ipcRenderer.on('writeBattleAutoError', this.handleError);
+  }
+
+  componentWillUnmount() {
+    ipcRenderer.removeListener('wroteBattleAuto', this.handleWroteBattleAuto);
+    ipcRenderer.removeListener('writeBattleAutoError', this.handleError);
+  }
+
   start = () => {
-    this.setState({ active: true, activeText: 'Waiting for Battle Data' });
+    this.setState({ active: true, buttonText: this.activeDefaultText });
     this.poll(true);
   };
 
   stop = () => {
-    this.setState({ active: false });
+    this.setState({ active: false, buttonText: this.inactiveButtonText });
   };
 
   poll = start => {
@@ -62,21 +77,51 @@ class ResultsPoller extends React.Component {
       this.props.result.battle_number &&
       this.props.result.battle_number > prevProps.result.battle_number
     ) {
-      this.setState({
-        activeText: `writing battle ${this.props.result.battle_number}`
-      });
-      const info = ipcRenderer.sendSync('writeToStatInk', this.props.result);
-      if (info.username) {
-        this.props.setStatInkInfo(this.props.result.battle_number, info);
-      }
-      this.setState({
-        activeText: `Wrote battle ${this.props.result.battle_number}`
-      });
-      setTimeout(() => {
-        this.setState({ activeText: `Waiting for Battle Data` });
-      }, 10000);
+      this.upload();
     }
   }
+
+  upload = () => {
+    const { result } = this.props;
+    this.setState({
+      buttonText: `Writing Battle #${result.battle_number}`,
+      writingToStatInk: true
+    });
+    ipcRenderer.send('writeToStatInk', result, 'auto');
+  };
+
+  handleWroteBattleAuto = (e, info) => {
+    const { result, setStatInkInfo } = this.props;
+    event('stat.ink', 'wrote-battle', 'auto');
+    this.setState({ buttonText: `Wrote Battle #${result.battle_number}` });
+
+    if (info.username) {
+      setStatInkInfo(result.battle_number, info);
+    }
+    setTimeout(
+      () =>
+        this.setState({
+          buttonText: this.activeDefaultText,
+          writingToStatInk: false
+        }),
+      10000
+    );
+  };
+
+  handleError = (e, error) => {
+    const { result } = this.props;
+    this.setState({
+      buttonText: `Error writing battle #${result.battle_number}`
+    });
+    setTimeout(
+      () =>
+        this.setState({
+          buttonText: this.activeDefaultText,
+          writingToStatInk: false
+        }),
+      10000
+    );
+  };
 
   render() {
     return (
@@ -85,7 +130,81 @@ class ResultsPoller extends React.Component {
         active={this.state.active}
         disabled={this.props.disabled}
       >
-        {this.state.active ? this.state.activeText : 'Auto-upload to stat.ink'}
+        {this.state.buttonText}
+      </Button>
+    );
+  }
+}
+
+class StatInkManualButton extends React.Component {
+  defaultButtonText = 'Upload to stat.ink';
+
+  state = {
+    buttonText: this.defaultButtonText,
+    writingToStatInk: false
+  };
+
+  componentDidMount() {
+    ipcRenderer.on('wroteBattleManual', this.handleWroteBattleManual);
+    ipcRenderer.on('writeBattlekManualError', this.handleError);
+  }
+
+  componentWillUnmount() {
+    ipcRenderer.removeListener(
+      'wroteBattleManual',
+      this.handleWroteBattleManual
+    );
+    ipcRenderer.removeListener('writeBattlekManualError', this.handleError);
+  }
+
+  handleWroteBattleManual = (e, info) => {
+    const { currentBattle, setStatInkInfo } = this.props;
+    event('stat.ink', 'wrote-battle', 'manual');
+    this.setState({ buttonText: `Wrote Battle #${currentBattle}` });
+
+    if (info.username) {
+      setStatInkInfo(currentBattle, info);
+    }
+    setTimeout(
+      () =>
+        this.setState({
+          buttonText: this.defaultButtonText,
+          writingToStatInk: false
+        }),
+      5000
+    );
+  };
+
+  handleError = (e, error) => {
+    setTimeout(
+      () =>
+        this.setState({
+          buttonText: this.defaultButtonText,
+          writingToStatInk: false
+        }),
+      5000
+    );
+  };
+
+  handleClick = () => {
+    const { currentBattle, result } = this.props;
+    this.setState({
+      buttonText: `Writing Battle #${currentBattle}`,
+      writingToStatInk: true
+    });
+    ipcRenderer.send('writeToStatInk', result, 'manual');
+  };
+
+  render() {
+    const { tokenExists } = this.props;
+    const { writingToStatInk, buttonText } = this.state;
+
+    return (
+      <Button
+        onClick={this.handleClick}
+        disabled={!tokenExists || writingToStatInk}
+      >
+        {buttonText}
       </Button>
     );
   }
@@ -94,8 +213,7 @@ class ResultsPoller extends React.Component {
 class ResultControl extends React.Component {
   state = {
     tokenExists: false,
-    refreshing: false,
-    wroteToStatInk: false
+    refreshing: false
   };
 
   componentDidMount() {
@@ -120,6 +238,7 @@ class ResultControl extends React.Component {
         <Button
           onClick={() => {
             getResults();
+            event('results', 'refresh');
             this.setState({ refreshing: true });
             setTimeout(() => this.setState({ refreshing: false }), 2000);
           }}
@@ -152,19 +271,12 @@ class ResultControl extends React.Component {
           </Button>
         </ButtonGroup>
         <ButtonGroup>
-          <Button
-            onClick={() => {
-              const info = ipcRenderer.sendSync('writeToStatInk', result);
-              if (info.username) {
-                setStatInkInfo(currentBattle, info);
-              }
-              this.setState({ wroteToStatInk: true });
-              setTimeout(() => this.setState({ wroteToStatInk: false }), 2000);
-            }}
-            disabled={!this.state.tokenExists || this.state.wroteToStatInk}
-          >
-            {this.state.wroteToStatInk ? 'Uploaded' : 'Upload to stat.ink'}
-          </Button>
+          <StatInkManualButton
+            result={result}
+            currentBattle={currentBattle}
+            tokenExists={this.state.tokenExists}
+            setStatInkInfo={setStatInkInfo}
+          />
         </ButtonGroup>
         <ResultsPoller
           getResults={getResults}

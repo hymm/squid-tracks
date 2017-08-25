@@ -7,7 +7,7 @@ const Login = ({ token }) =>
     <Row>
       <Col md={12} style={{ textAlign: 'center' }}>
         <Jumbotron>
-          <h1>Squid Tracks</h1>
+          <h1>SquidTracks</h1>
           <h2>Splatnet for your Desktop</h2>
           <a href={ipcRenderer.sendSync('getLoginUrl')}>
             <Button block>Login</Button>

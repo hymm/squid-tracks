@@ -3,6 +3,7 @@ import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
 import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
+import { event } from './analytics';
 const { ipcRenderer } = window.require('electron');
 
 const Records = () =>
@@ -37,6 +38,7 @@ class ResultsContainer extends React.Component {
         <ButtonToolbar style={{ marginBottom: '10px' }}>
           <Button
             onClick={() => {
+              event('records', 'refresh');
               this.getRecords();
               this.setState({ refreshing: true });
               setTimeout(() => this.setState({ refreshing: false }), 2000);

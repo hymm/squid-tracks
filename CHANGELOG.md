@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## Version 0.2.2
+* added weapon images
+* added sort order to details table
+* added image from splatnet to stat.ink upload
+* view gear in details
+* changed to k+a(a) and k-d to make table more readable and compact
+* fixed bug with bar not displaying on stat ink
+
+
+## Version 0.2.1
+
+* added squiffer
+* map images on schedule page.  Thanks to DanSyor.
+* added in google analytics.  See home page for more details.
+
 ## Version 0.2.0
 
 * decreased poll timer from 120 seconds to 60 seconds

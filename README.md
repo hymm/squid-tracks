@@ -1,4 +1,4 @@
-# Squid Tracks
+# SquidTracks
 A desktop program for viewing splatnet 2 statistics and uploading them to stat.ink.
 Splatnet 2 only records the most recent 50 games and this tool is for uploading the
 game data to stat.ink for longer term access.  There is also some data that splatnet 2

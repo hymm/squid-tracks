@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, Table } from 'react-bootstrap';
+import { Panel, Table, Image } from 'react-bootstrap';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
 
@@ -10,12 +10,17 @@ export default class ResultsCard extends React.Component {
   };
 
   static columnHeaders = [
-    { text: 'Battle', sortColumn: 'battle_number', sortDirection: 'up' },
+    {
+      text: 'Battle',
+      sortColumn: 'battle_number',
+      sortDirection: 'up',
+      sortFunction: parseFloat
+    },
     { text: 'Mode', sortColumn: 'game_mode.key', sortDirection: 'down' },
     { text: 'Rule', sortColumn: 'rule.key', sortDirection: 'down' },
     { text: 'Stage', sortColumn: 'stage.name', sortDirection: 'down' },
     {
-      text: 'Weapon',
+      text: '',
       sortColumn: 'player_result.player.weapon.name',
       sortDirection: 'down'
     },
@@ -48,7 +53,14 @@ export default class ResultsCard extends React.Component {
           result.player_result.kill_count + result.player_result.assist_count)
     );
 
-    sort(results, this.state.sortColumn, this.state.sortDirection);
+    const sortedResults = results.slice();
+
+    sort(
+      sortedResults,
+      this.state.sortColumn,
+      this.state.sortDirection,
+      this.state.sortFunction
+    );
     return (
       <Panel header={<h3>Last 50 Battles</h3>}>
         * Click on column headers to sort
@@ -61,7 +73,8 @@ export default class ResultsCard extends React.Component {
                   setState={this.setState.bind(this)}
                   sort={{
                     sortColumn: header.sortColumn,
-                    sortDirection: header.sortDirection
+                    sortDirection: header.sortDirection,
+                    sortFunction: header.sortFunction
                   }}
                   text={header.text}
                   sortColumn={this.state.sortColumn}
@@ -70,7 +83,7 @@ export default class ResultsCard extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {results.map(result => {
+            {sortedResults.map(result => {
               return (
                 <tr key={result.start_time}>
                   <td>
@@ -92,8 +105,13 @@ export default class ResultsCard extends React.Component {
                   <td>
                     {result.stage.name}
                   </td>
-                  <td>
-                    {result.player_result.player.weapon.name}
+                  <td style={{ textAlign: 'center', background: 'darkgrey' }}>
+                    <Image
+                      src={`https://app.splatoon2.nintendo.net${result
+                        .player_result.player.weapon.thumbnail}`}
+                      style={{ maxHeight: 30 }}
+                      alt={result.player_result.player.weapon.name}
+                    />
                   </td>
                   <td>
                     {result.my_team_result.key}

@@ -28,6 +28,7 @@ module.exports = {
   1030: 'variableroller', // flinza roller
   1100: 'pablo', // inkbrush
   1110: 'hokusai', // octobursh
+  2000: 'squiclean_a', // squiffer
   2010: 'splatcharger',
   2011: 'splatcharger_collabo', // firefin
   2021: 'splatscope_collabo', // firefin
@@ -53,5 +54,4 @@ module.exports = {
   2015: 'herocharger_replica',
   2040: 'liter4k_scope',
   3005: 'heroslosher_replica',
-  99999: 'squiclean_a' // squiffer
 };

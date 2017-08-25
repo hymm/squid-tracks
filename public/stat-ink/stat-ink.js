@@ -1,7 +1,9 @@
 const request2 = require('request-promise-native');
+const msgpack = require('msgpack-lite');
 const LobbyModeMap = require('./lobby-mode-map');
 const RuleMap = require('./rule-map');
 const StageMap = require('./stage-map');
+const { getSplatnetImage } = require('../splatnet2');
 const app = require('electron').app;
 const appVersion = app.getVersion();
 const appName = app.getName();
@@ -32,7 +34,7 @@ function setGameInfo(statInk, result) {
 function setGameResults(statInk, result) {
   statInk.result = result.my_team_result.key === 'victory' ? 'win' : 'lose';
   statInk.knock_out =
-    result.my_team_count === 100 || result.other_team_count === 100 ? 'yes' : 'no';
+    (result.my_team_count === 100 || result.other_team_count === 100) ? 'yes' : 'no';
   // these next parameters depend on turf war vs gachi
   if (result.my_team_percentage) {
     statInk.my_team_percent = result.my_team_percentage;
@@ -43,7 +45,7 @@ function setGameResults(statInk, result) {
   if (result.my_team_count != null) {
     statInk.my_team_count = result.my_team_count;
   }
-  if (result.other_team_count) {
+  if (result.other_team_count != null) {
     statInk.his_team_count = result.other_team_count;
   }
 }
@@ -125,7 +127,7 @@ function setClientInfo(statInk, result) {
   statInk.agent_version = appVersion; // get from json file?
 }
 
-function convertResultToStatInk(result) {
+async function convertResultToStatInk(result) {
   const statInk = {};
   setUuid(statInk, result);
   setGameInfo(statInk, result);
@@ -133,6 +135,8 @@ function convertResultToStatInk(result) {
   setPlayerResults(statInk, result);
   setPlayers(statInk, result);
   setClientInfo(statInk, result);
+
+  statInk.image_judge = await getSplatnetImage(result.battle_number);
 
   return statInk;
 }
@@ -143,9 +147,10 @@ async function writeToStatInk(apiKey, result) {
     method: 'POST',
     uri: 'https://stat.ink/api/v2/battle',
     headers: {
+      'Content-Type': 'application/x-msgpack',
       Authorization: `Bearer ${apiKey}`
     },
-    json: convertResultToStatInk(result),
+    body: msgpack.encode(await convertResultToStatInk(result)),
     resolveWithFullResponse: true
   });
 

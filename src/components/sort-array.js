@@ -10,16 +10,25 @@ export function getValue(obj, valuePath) {
   return value;
 }
 
-export function sort(array, sortColumn, sortDirection) {
+export function sort(array, sortColumn, sortDirection, convertFunc) {
   if (sortColumn.length < 1) {
     return array;
   }
 
   array.sort((a, b) => {
-    if (getValue(a, sortColumn) > getValue(b, sortColumn)) {
+    const valA =
+      convertFunc != null
+        ? convertFunc(getValue(a, sortColumn))
+        : getValue(a, sortColumn);
+    const valB =
+      convertFunc != null
+        ? convertFunc(getValue(b, sortColumn))
+        : getValue(b, sortColumn);
+
+    if (valA > valB) {
       return sortDirection === 'up' ? -1 : 1;
     }
-    if (getValue(a, sortColumn) < getValue(b, sortColumn)) {
+    if (valA < valB) {
       return sortDirection === 'up' ? 1 : -1;
     }
     return 0;

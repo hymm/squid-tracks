@@ -1,6 +1,5 @@
 const { convertResultToStatInk } = require('./stat-ink');
 const getDefaultResult = require('./example-result');
-jest.mock('electron');
 
 describe('convertResultToStatInk', () => {
     it('should add 1000p on a victory', () => {
@@ -76,5 +75,55 @@ describe('convertResultToStatInk', () => {
       const res = convertResultToStatInk(result)
 
       expect(res.players[1].rank).toEqual('b-');
+    });
+
+    it('should insert my team count if 0', () => {
+      const result = getDefaultResult();
+      result.other_team_count = 100;
+      result.my_team_count = 0;
+
+      const res = convertResultToStatInk(result);
+
+      expect(res.my_team_count).toEqual(0);
+    });
+
+    it('should insert other team count if 0', () => {
+      const result = getDefaultResult();
+      result.other_team_count = 0;
+      result.my_team_count = 100;
+
+      const res = convertResultToStatInk(result);
+
+      expect(res.his_team_count).toEqual(0);
+    });
+
+    it('should insert knockout=yes if other team count is 100', () => {
+      const result = getDefaultResult();
+      result.other_team_count = 100;
+      result.my_team_count = 0;
+
+      const res = convertResultToStatInk(result);
+
+      expect(res.knock_out).toEqual('yes');
+    });
+
+    it('should insert knockout=yes if my team count is 100', () => {
+      const result = getDefaultResult();
+      result.other_team_count = 0;
+      result.my_team_count = 100;
+
+      const res = convertResultToStatInk(result);
+
+      expect(res.knock_out).toEqual('yes');
+    });
+
+    it('should insert knockout=no if my team count is 100', () => {
+      const result = getDefaultResult();
+      result.other_team_count = 80;
+      result.my_team_count = 55;
+
+      const res = convertResultToStatInk(result);
+
+      expect(res.knock_out).toEqual('no');
     });
 });
