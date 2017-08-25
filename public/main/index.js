@@ -36,6 +36,13 @@ const store = new Store({
   }
 });
 
+const statInkStore = new Store({
+  configName: 'stat-ink',
+  defaults: {
+    info: {},
+  }
+});
+
 // splatnet and stat.ink comm with renderer handling
 // global to current state, code challenge, and code verifier
 let authParams = {};
@@ -76,6 +83,15 @@ ipcMain.on('getFromStore', (event, settingName) => {
 
 ipcMain.on('setToStore', (event, settingName, value) => {
   store.set(settingName, value);
+  event.returnValue = true;
+});
+
+ipcMain.on('getFromStatInkStore', (event, settingName) => {
+  event.returnValue = statInkStore.get(settingName);
+});
+
+ipcMain.on('setToStatInkStore', (event, settingName, value) => {
+  statInkStore.set(settingName, value);
   event.returnValue = true;
 });
 

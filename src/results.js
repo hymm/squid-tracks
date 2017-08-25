@@ -302,7 +302,7 @@ class ResultsContainer extends React.Component {
 
   componentDidMount() {
     this.getResults();
-    const statInkInfo = ipcRenderer.sendSync('getFromStore', 'statInkInfo');
+    const statInkInfo = ipcRenderer.sendSync('getFromStatInkStore', 'info');
     this.setState({ statInk: statInkInfo });
   }
 
@@ -333,7 +333,7 @@ class ResultsContainer extends React.Component {
     const statInk = this.state.statInk;
     statInk[battleNumber] = info;
     this.setState({ statInk: statInk });
-    ipcRenderer.sendSync('setToStore', 'statInkInfo', statInk);
+    ipcRenderer.sendSync('setToStatInkStore', 'info', statInk);
   };
 
   render() {
