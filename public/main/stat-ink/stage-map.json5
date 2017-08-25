@@ -5,8 +5,8 @@
   '3': 'chozame', // sturgeon shipyard
   '4': 'ama', // inkblot
   '5': 'kombu', // humpback pump track
+  '6': 'manta', // Manta Maria
   '7': 'hokke', // port mackerel
   '8': 'tachiuo', // moray towers
   '9999': 'mystery', // shifty station
-  '99999': 'manta', // Manta Maria
 }
