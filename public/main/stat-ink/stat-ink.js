@@ -151,8 +151,13 @@ async function writeToStatInk(apiKey, result) {
       Authorization: `Bearer ${apiKey}`
     },
     body: msgpack.encode(await convertResultToStatInk(result)),
-    resolveWithFullResponse: true
+    resolveWithFullResponse: true,
+    simple: false,
   });
+
+  if (response.statusCode !== 201 && response.statusCode !== 302) {
+    throw new Error(`${response.statusCode} - ${response.body}`);
+  }
 
   return {
       username: response.headers['x-user-screen-name'],
