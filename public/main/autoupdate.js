@@ -1,4 +1,4 @@
-const { BrowserWindow, app, Menu } = require('electron');
+const { BrowserWindow, app } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 
