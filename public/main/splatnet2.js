@@ -162,14 +162,14 @@ async function getSplatnetApi(url) {
     method: 'GET',
     uri: `${splatnetUrl}/api/${url}`,
     headers: {
-      'Accept': '*/*',
+      Accept: '*/*',
       'Accept-Encoding': 'gzip, deflate',
       'Accept-Language': userLanguage,
       'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-      'Connection': 'keep-alive'
+      Connection: 'keep-alive'
     },
     json: true,
-    gzip: true,
+    gzip: true
   });
 
   return resp;
@@ -189,16 +189,16 @@ async function postSplatnetApi(url) {
     method: 'POST',
     uri: `${splatnetUrl}/api/${url}`,
     headers: {
-      'Accept': '*/*',
+      Accept: '*/*',
       'Accept-Encoding': 'gzip, deflate',
       'Accept-Language': userLanguage,
       'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-      'Connection': 'keep-alive',
+      Connection: 'keep-alive',
       'X-Unique-Id': uniqueId,
       'X-Requested-With': 'XMLHttpRequest'
     },
     json: true,
-    gzip: true,
+    gzip: true
   });
 
   return resp;
@@ -216,11 +216,11 @@ async function getSessionCookie(token) {
       'x-gamewebtoken': token,
       'x-isappanalyticsoptedin': false,
       'X-Requested-With': 'com.nintendo.znca',
-      'Connection': 'keep-alive'
+      Connection: 'keep-alive'
     }
   });
 
-  const id = getUniqueId(resp)
+  const id = getUniqueId(resp);
 
   return id;
 }
@@ -251,9 +251,9 @@ async function getSplatnetImage(battle) {
     method: 'GET',
     uri: url,
     headers: {
-      'Content-Type': 'image/png',
+      'Content-Type': 'image/png'
     },
-    encoding: null,
+    encoding: null
   });
 
   // const imgEncoded = imgBuf.toString('binary');
@@ -261,13 +261,15 @@ async function getSplatnetImage(battle) {
 }
 
 function getIksmToken() {
-    const cookies = jar.getCookies(splatnetUrl);
-    const iksmSessionCookie = cookies.find((cookie) => cookie.key === 'iksm_session');
-    if (iksmSessionCookie == null) {
-        throw new Error('Could not get iksm_session cookie');
-    }
+  const cookies = jar.getCookies(splatnetUrl);
+  const iksmSessionCookie = cookies.find(
+    cookie => cookie.key === 'iksm_session'
+  );
+  if (iksmSessionCookie == null) {
+    throw new Error('Could not get iksm_session cookie');
+  }
 
-    return iksmSessionCookie;
+  return iksmSessionCookie;
 }
 
 exports.getUniqueId = getUniqueId;

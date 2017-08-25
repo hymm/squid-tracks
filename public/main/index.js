@@ -1,4 +1,3 @@
-
 const { protocol, app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const log = require('electron-log');
@@ -28,7 +27,13 @@ let mainWindow;
 
 const store = new Store({
   configName: 'user-data',
-  defaults: { sessionToken: '', statInkToken: '', statInkInfo: {}, uuid: '', gaEnabled: true }
+  defaults: {
+    sessionToken: '',
+    statInkToken: '',
+    statInkInfo: {},
+    uuid: '',
+    gaEnabled: true
+  }
 });
 
 // splatnet and stat.ink comm with renderer handling
@@ -36,11 +41,7 @@ const store = new Store({
 let authParams = {};
 let sessionToken = '';
 
-protocol.registerStandardSchemes([
-  'npf71b963c1b7b6d119',
-  'https',
-  'http'
-]);
+protocol.registerStandardSchemes(['npf71b963c1b7b6d119', 'https', 'http']);
 function registerSplatnetHandler() {
   protocol.registerHttpProtocol(
     'npf71b963c1b7b6d119',
@@ -76,102 +77,102 @@ ipcMain.on('getFromStore', (event, settingName) => {
 ipcMain.on('setToStore', (event, settingName, value) => {
   store.set(settingName, value);
   event.returnValue = true;
-})
-
-ipcMain.on('getSessionToken', (event) => {
-    event.returnValue = store.get('sessionToken');
 });
 
-ipcMain.on('logout', (event) => {
-    store.set('sessionToken', '');
-    event.returnValue = true;
+ipcMain.on('getSessionToken', event => {
+  event.returnValue = store.get('sessionToken');
+});
+
+ipcMain.on('logout', event => {
+  store.set('sessionToken', '');
+  event.returnValue = true;
 });
 
 ipcMain.on('writeToStatInk', async (event, result, type) => {
-    try {
-        const info = await writeToStatInk(store.get('statInkToken'), result);
-        if (type === 'manual') {
-          event.sender.send('wroteBattleManual', info);
-        } else {
-          event.sender.send('wroteBattleAuto', info);
-        }
-    } catch (e) {
-        log.error(`Failed to write #${result.battle_number} to stat.ink: ${e}`);
-        if (type === 'manual') {
-          event.sender.send('writeBattleManualError', { username: '', battle: -1 });
-        } else {
-          event.sender.send('writeBattleAutoError', { username: '', battle: -1 });
-        }
+  try {
+    const info = await writeToStatInk(store.get('statInkToken'), result);
+    if (type === 'manual') {
+      event.sender.send('wroteBattleManual', info);
+    } else {
+      event.sender.send('wroteBattleAuto', info);
     }
+  } catch (e) {
+    log.error(`Failed to write #${result.battle_number} to stat.ink: ${e}`);
+    if (type === 'manual') {
+      event.sender.send('writeBattleManualError', { username: '', battle: -1 });
+    } else {
+      event.sender.send('writeBattleAutoError', { username: '', battle: -1 });
+    }
+  }
 });
 
 ipcMain.on('getStatInkApiToken', (event, result) => {
-    event.returnValue = store.get('statInkToken');
+  event.returnValue = store.get('statInkToken');
 });
 
 ipcMain.on('setStatInkApiToken', (event, value) => {
-    store.set('statInkToken', value);
-    event.returnValue = true;
+  store.set('statInkToken', value);
+  event.returnValue = true;
 });
 
-ipcMain.on('getLoginUrl', (event) => {
-    authParams = splatnet.generateAuthenticationParams();
-    const params = {
-      state: authParams.state,
-      redirect_uri: 'npf71b963c1b7b6d119://auth&client_id=71b963c1b7b6d119',
-      scope: 'openid%20user%20user.birthday%20user.mii%20user.screenName',
-      response_type: 'session_token_code',
-      session_token_code_challenge: authParams.codeChallenge,
-      session_token_code_challenge_method: 'S256',
-      theme: 'login_form'
-    };
+ipcMain.on('getLoginUrl', event => {
+  authParams = splatnet.generateAuthenticationParams();
+  const params = {
+    state: authParams.state,
+    redirect_uri: 'npf71b963c1b7b6d119://auth&client_id=71b963c1b7b6d119',
+    scope: 'openid%20user%20user.birthday%20user.mii%20user.screenName',
+    response_type: 'session_token_code',
+    session_token_code_challenge: authParams.codeChallenge,
+    session_token_code_challenge_method: 'S256',
+    theme: 'login_form'
+  };
 
-    const arrayParams = [];
-    for (var key in params) {
-      if (!params.hasOwnProperty(key)) continue;
-      arrayParams.push(`${key}=${params[key]}`);
-    }
+  const arrayParams = [];
+  for (var key in params) {
+    if (!params.hasOwnProperty(key)) continue;
+    arrayParams.push(`${key}=${params[key]}`);
+  }
 
-    const stringParams = arrayParams.join('&');
+  const stringParams = arrayParams.join('&');
 
-    event.returnValue = `https://accounts.nintendo.com/connect/1.0.0/authorize?${stringParams}`;
+  event.returnValue = `https://accounts.nintendo.com/connect/1.0.0/authorize?${stringParams}`;
 });
 
-ipcMain.on('loadSplatnet', (e) => {
-    const url = `https://app.splatoon2.nintendo.net?lang=en-US`;
-    mainWindow.loadURL(url, {
-      userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
-    });
+ipcMain.on('loadSplatnet', e => {
+  const url = `https://app.splatoon2.nintendo.net?lang=en-US`;
+  mainWindow.loadURL(url, {
+    userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
+  });
 });
 
 ipcMain.on('getApi', async (e, url) => {
-    try {
-      const battleRegex = /^results\/\d{1,}$/;
-      let value;
-      if (url.match(battleRegex)) {
-        value = await getSplatnetApiMemoInf(url);
-      } else if (url === 'results') {
-        value = await getSplatnetApiMemo10(url);
-      } else {
-        value = await getSplatnetApiMemo120(url);
-      }
-      e.returnValue = value;
+  try {
+    const battleRegex = /^results\/\d{1,}$/;
+    let value;
+    if (url.match(battleRegex)) {
+      value = await getSplatnetApiMemoInf(url);
+    } else if (url === 'results') {
+      value = await getSplatnetApiMemo10(url);
+    } else {
+      value = await getSplatnetApiMemo120(url);
+    }
+    e.returnValue = value;
   } catch (e) {
-      log.error(`Error getting ${url}: ${e}`);
-      e.returnValue = {};
+    log.error(`Error getting ${url}: ${e}`);
+    e.returnValue = {};
   }
 });
 
 ipcMain.on('postApi', async (e, url) => {
-    try {
-      e.returnValue = await splatnet.postSplatnetApi(url);
+  try {
+    e.returnValue = await splatnet.postSplatnetApi(url);
   } catch (e) {
-      log.error(`Error posting ${url}: ${e}`);
-      e.returnValue = {};
+    log.error(`Error posting ${url}: ${e}`);
+    e.returnValue = {};
   }
 });
 
-ipcMain.on('getIksmToken', async (e) => {
+ipcMain.on('getIksmToken', async e => {
   try {
     const cookie = splatnet.getIksmToken();
     e.sender.send('iksmToken', cookie);

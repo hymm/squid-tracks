@@ -9,4 +9,4 @@ const electron = {
 electron.app.getVersion = () => '1.1';
 electron.app.getName = () => 'appName';
 
-module.exports = electron
+module.exports = electron;

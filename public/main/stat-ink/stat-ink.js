@@ -34,7 +34,9 @@ function setGameInfo(statInk, result) {
 function setGameResults(statInk, result) {
   statInk.result = result.my_team_result.key === 'victory' ? 'win' : 'lose';
   statInk.knock_out =
-    (result.my_team_count === 100 || result.other_team_count === 100) ? 'yes' : 'no';
+    result.my_team_count === 100 || result.other_team_count === 100
+      ? 'yes'
+      : 'no';
   // these next parameters depend on turf war vs gachi
   if (result.my_team_percentage) {
     statInk.my_team_percent = result.my_team_percentage;
@@ -52,8 +54,9 @@ function setGameResults(statInk, result) {
 
 function setPlayerResults(statInk, result) {
   statInk.weapon = WeaponMap[result.player_result.player.weapon.id];
-  statInk.kill_or_assist = result.player_result.kill_count + result.player_result.assist_count;
-  statInk.kill = result.player_result.kill_count ;
+  statInk.kill_or_assist =
+    result.player_result.kill_count + result.player_result.assist_count;
+  statInk.kill = result.player_result.kill_count;
   statInk.death = result.player_result.death_count;
   statInk.special = result.player_result.special_count;
   statInk.level = result.player_result.player.player_rank;
@@ -64,16 +67,16 @@ function setPlayerResults(statInk, result) {
       statInk.rank = result.player_result.player.udemae.name.toLowerCase();
     }
     if (result.player_result.player.udemae.s_plus_number != null) {
-        statInk.rank_exp = result.player_result.player.udemae.s_plus_number;
+      statInk.rank_exp = result.player_result.player.udemae.s_plus_number;
     }
   }
   if (result.udemae) {
     if (result.udemae.name) {
-        statInk.rank_after = result.udemae.name.toLowerCase();
+      statInk.rank_after = result.udemae.name.toLowerCase();
     }
 
     if (result.udemae.s_plus_number != null) {
-        statInk.rank_exp_after = result.player_result.player.udemae.s_plus_number;
+      statInk.rank_exp_after = result.player_result.player.udemae.s_plus_number;
     }
   }
 
@@ -112,12 +115,16 @@ function getPlayer(playerResult, team, result) {
 
 function setPlayers(statInk, result) {
   statInk.players = [];
-  statInk.players.push(getPlayer(result.player_result, 'me', result.my_team_result.key));
+  statInk.players.push(
+    getPlayer(result.player_result, 'me', result.my_team_result.key)
+  );
   result.my_team_members.forEach(player => {
     statInk.players.push(getPlayer(player, 'my', result.my_team_result.key));
   });
   result.other_team_members.forEach(player => {
-    statInk.players.push(getPlayer(player, 'his', result.other_team_result.key));
+    statInk.players.push(
+      getPlayer(player, 'his', result.other_team_result.key)
+    );
   });
 }
 
@@ -152,7 +159,7 @@ async function writeToStatInk(apiKey, result) {
     },
     body: msgpack.encode(await convertResultToStatInk(result)),
     resolveWithFullResponse: true,
-    simple: false,
+    simple: false
   });
 
   if (response.statusCode !== 201 && response.statusCode !== 302) {
@@ -160,10 +167,10 @@ async function writeToStatInk(apiKey, result) {
   }
 
   return {
-      username: response.headers['x-user-screen-name'],
-      battle: response.headers['x-battle-id'],
-      location: response.headers['location'],
-      apiLocation: response.headers['x-api-location'],
+    username: response.headers['x-user-screen-name'],
+    battle: response.headers['x-battle-id'],
+    location: response.headers['location'],
+    apiLocation: response.headers['x-api-location']
   };
 }
 module.exports.writeToStatInk = writeToStatInk;

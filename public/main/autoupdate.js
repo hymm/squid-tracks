@@ -21,24 +21,30 @@ function createDefaultWindow() {
 }
 autoUpdater.on('checking-for-update', () => {
   sendStatusToWindow('Checking for update...');
-})
-autoUpdater.on('update-available', (info) => {
+});
+autoUpdater.on('update-available', info => {
   sendStatusToWindow('Update available.');
-})
-autoUpdater.on('update-not-available', (info) => {
+});
+autoUpdater.on('update-not-available', info => {
   sendStatusToWindow('Update not available.');
   win.close();
-})
-autoUpdater.on('error', (err) => {
+});
+autoUpdater.on('error', err => {
   sendStatusToWindow('Error in auto-updater.');
-})
-autoUpdater.on('download-progress', (progressObj) => {
-  let log_message = "Download speed: " + progressObj.bytesPerSecond;
+});
+autoUpdater.on('download-progress', progressObj => {
+  let log_message = 'Download speed: ' + progressObj.bytesPerSecond;
   log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
-  log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
+  log_message =
+    log_message +
+    ' (' +
+    progressObj.transferred +
+    '/' +
+    progressObj.total +
+    ')';
   sendStatusToWindow(log_message);
-})
-autoUpdater.on('update-downloaded', (info) => {
+});
+autoUpdater.on('update-downloaded', info => {
   sendStatusToWindow('Update downloaded; will install in 5 seconds');
 });
 app.on('ready', function() {
@@ -49,12 +55,12 @@ app.on('window-all-closed', () => {
   app.quit();
 });
 
-autoUpdater.on('update-downloaded', (info) => {
+autoUpdater.on('update-downloaded', info => {
   setTimeout(function() {
     autoUpdater.quitAndInstall();
-  }, 5000)
-})
+  }, 5000);
+});
 
-app.on('ready', function()  {
+app.on('ready', function() {
   autoUpdater.checkForUpdates();
 });
