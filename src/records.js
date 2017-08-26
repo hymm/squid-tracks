@@ -4,7 +4,7 @@ import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
 import { event } from './analytics';
-const { ipcRenderer } = window.require('electron');
+const { ipcRenderer } = require('electron');
 
 const Records = () =>
   <Grid fluid style={{ marginTop: 65 }}>

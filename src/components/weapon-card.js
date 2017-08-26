@@ -41,7 +41,7 @@ export default class WeaponCard extends React.Component {
             <tr>
               {WeaponCard.columnHeaders.map(header => {
                 return header.noSort
-                  ? <th>
+                  ? <th key={header.text}>
                       {header.text}
                     </th>
                   : <TableHeader

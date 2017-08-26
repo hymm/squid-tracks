@@ -14,7 +14,7 @@ import ResultsSummaryCard from './components/results-summary-card';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
 import { event } from './analytics';
-const { ipcRenderer } = window.require('electron');
+const { ipcRenderer } = require('electron');
 
 const Results = () =>
   <Grid fluid style={{ marginTop: 65 }}>
@@ -146,7 +146,7 @@ class StatInkManualButton extends React.Component {
 
   componentDidMount() {
     ipcRenderer.on('wroteBattleManual', this.handleWroteBattleManual);
-    ipcRenderer.on('writeBattlekManualError', this.handleError);
+    ipcRenderer.on('writeBattleManualError', this.handleError);
   }
 
   componentWillUnmount() {
@@ -158,7 +158,7 @@ class StatInkManualButton extends React.Component {
   }
 
   handleWroteBattleManual = (e, info) => {
-    const { currentBattle, setStatInkInfo } = this.props;
+    const { currentBattle, setStatInkInfo, uploaded } = this.props;
     event('stat.ink', 'wrote-battle', 'manual');
     this.setState({ buttonText: `Wrote Battle #${currentBattle}` });
 
@@ -196,15 +196,15 @@ class StatInkManualButton extends React.Component {
   };
 
   render() {
-    const { tokenExists } = this.props;
+    const { disabled, uploaded } = this.props;
     const { writingToStatInk, buttonText } = this.state;
 
     return (
       <Button
         onClick={this.handleClick}
-        disabled={!tokenExists || writingToStatInk}
+        disabled={disabled || writingToStatInk || uploaded}
       >
-        {buttonText}
+        {uploaded ? 'Already Uploaded' : buttonText}
       </Button>
     );
   }
@@ -223,15 +223,18 @@ class ResultControl extends React.Component {
 
   render() {
     const {
-      latestBattleNumber,
       result,
+      resultIndex,
       changeResult,
       getResults,
       results,
-      setStatInkInfo
+      setStatInkInfo,
+      statInk
     } = this.props;
+    const { tokenExists } = this.state;
 
     const currentBattle = result.battle_number ? result.battle_number : 0;
+    const uploaded = statInk ? statInk[currentBattle] != null : false;
 
     return (
       <ButtonToolbar style={{ marginBottom: 10 }}>
@@ -248,24 +251,24 @@ class ResultControl extends React.Component {
         </Button>
         <ButtonGroup>
           <Button
-            onClick={() => changeResult(currentBattle - 1)}
-            disabled={currentBattle === latestBattleNumber + 50}
+            onClick={() => changeResult(resultIndex + 1)}
+            disabled={resultIndex === results.length - 1}
           >
             <Glyphicon glyph="triangle-left" />
           </Button>
           <DropdownButton title={currentBattle} id={'battles'}>
-            {results.map(result =>
+            {results.map((result, idx) =>
               <MenuItem
                 key={result.battle_number}
-                onClick={() => changeResult(result.battle_number)}
+                onClick={() => changeResult(idx)}
               >
                 {result.battle_number}
               </MenuItem>
             )}
           </DropdownButton>
           <Button
-            onClick={() => changeResult(parseInt(currentBattle, 10) + 1)}
-            disabled={currentBattle === latestBattleNumber}
+            onClick={() => changeResult(resultIndex - 1)}
+            disabled={resultIndex === 0}
           >
             <Glyphicon glyph="triangle-right" />
           </Button>
@@ -274,14 +277,15 @@ class ResultControl extends React.Component {
           <StatInkManualButton
             result={result}
             currentBattle={currentBattle}
-            tokenExists={this.state.tokenExists}
+            disabled={!tokenExists}
+            uploaded={uploaded}
             setStatInkInfo={setStatInkInfo}
           />
         </ButtonGroup>
         <ResultsPoller
           getResults={getResults}
           result={result}
-          disabled={!this.state.tokenExists}
+          disabled={!tokenExists}
           setStatInkInfo={setStatInkInfo}
         />
       </ButtonToolbar>
@@ -296,25 +300,38 @@ class ResultsContainer extends React.Component {
       results: []
     },
     currentResult: {},
+    currentResultIndex: 0,
     statInk: {}
   };
 
   componentDidMount() {
     this.getResults();
-    const statInkInfo = ipcRenderer.sendSync('getFromStore', 'statInkInfo');
+    const statInkInfo = ipcRenderer.sendSync('getFromStatInkStore', 'info');
     this.setState({ statInk: statInkInfo });
   }
 
   getResults = () => {
     const results = ipcRenderer.sendSync('getApi', 'results');
     this.setState({ results: results });
-    this.changeResult(results.results[0].battle_number);
+    this.changeResult(0, results.results);
     this.setState({ initialized: true });
   };
 
-  changeResult = battleNumber => {
+  changeResult = (arrayIndex, results) => {
+    const resultsPicked = results ? results : this.state.results.results;
+    const battleNumber = resultsPicked[arrayIndex].battle_number;
     this.setState({
-      currentResult: ipcRenderer.sendSync('getApi', `results/${battleNumber}`)
+      currentResult: ipcRenderer.sendSync('getApi', `results/${battleNumber}`),
+      currentResultIndex: arrayIndex
+    });
+  };
+
+  changeResultByBattleNumber = battleNumber => {
+    this.setState({
+      currentResult: ipcRenderer.sendSync('getApi', `results/${battleNumber}`),
+      currentResultIndex: this.state.results.results.findIndex(
+        a => a.battle_number === battleNumber
+      )
     });
   };
 
@@ -322,34 +339,30 @@ class ResultsContainer extends React.Component {
     const statInk = this.state.statInk;
     statInk[battleNumber] = info;
     this.setState({ statInk: statInk });
-    ipcRenderer.sendSync('setToStore', 'statInkInfo', statInk);
+    ipcRenderer.sendSync('setToStatInkStore', 'info', statInk);
   };
 
   render() {
+    const { results, currentResult, statInk, currentResultIndex } = this.state;
     return (
       <div>
         <ResultControl
-          latestBattleNumber={
-            this.state.results.results[0]
-              ? this.state.results.results[0].battle_number
-              : 0
-          }
-          result={this.state.currentResult}
-          results={this.state.results.results}
+          result={currentResult}
+          resultIndex={currentResultIndex}
+          results={results.results}
           changeResult={this.changeResult}
           getResults={this.getResults}
           setStatInkInfo={this.setStatInkInfo}
+          statInk={statInk}
         />
         {this.state.initialized
-          ? <ResultDetailCard
-              result={this.state.currentResult}
-              statInk={this.state.statInk}
-            />
+          ? <ResultDetailCard result={currentResult} statInk={statInk} />
           : null}
-        <ResultsSummaryCard summary={this.state.results.summary} />
+        <ResultsSummaryCard summary={results.summary} />
         <ResultsCard
-          results={this.state.results.results}
-          changeResult={this.changeResult}
+          results={results.results}
+          statInk={statInk}
+          changeResult={this.changeResultByBattleNumber}
         />
       </div>
     );

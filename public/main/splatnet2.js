@@ -2,15 +2,17 @@ const request2 = require('request-promise-native');
 const crypto = require('crypto');
 const base64url = require('base64url');
 const cheerio = require('cheerio');
-const log = require('electron-log');
-const fs = require('fs');
+
+const splatnetUrl = `https://app.splatoon2.nintendo.net`;
+const jar = request2.jar();
 // use this like to proxy through fiddler
 /* const request = request2.defaults({
   proxy: 'http://localhost:8888',
   rejectUnauthorized: false,
-  jar: true
+  jar: jar
 }); */
-const request = request2.defaults({ jar: true });
+
+const request = request2.defaults({ jar: jar });
 let userLanguage = 'en-US';
 let uniqueId = '';
 
@@ -158,16 +160,16 @@ async function getWebServiceToken(token) {
 async function getSplatnetApi(url) {
   const resp = await request({
     method: 'GET',
-    uri: `https://app.splatoon2.nintendo.net/api/${url}`,
+    uri: `${splatnetUrl}/api/${url}`,
     headers: {
-      'Accept': '*/*',
+      Accept: '*/*',
       'Accept-Encoding': 'gzip, deflate',
       'Accept-Language': userLanguage,
       'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-      'Connection': 'keep-alive'
+      Connection: 'keep-alive'
     },
     json: true,
-    gzip: true,
+    gzip: true
   });
 
   return resp;
@@ -185,18 +187,18 @@ function getUniqueId(body) {
 async function postSplatnetApi(url) {
   const resp = await request({
     method: 'POST',
-    uri: `https://app.splatoon2.nintendo.net/api/${url}`,
+    uri: `${splatnetUrl}/api/${url}`,
     headers: {
-      'Accept': '*/*',
+      Accept: '*/*',
       'Accept-Encoding': 'gzip, deflate',
       'Accept-Language': userLanguage,
       'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-      'Connection': 'keep-alive',
+      Connection: 'keep-alive',
       'X-Unique-Id': uniqueId,
       'X-Requested-With': 'XMLHttpRequest'
     },
     json: true,
-    gzip: true,
+    gzip: true
   });
 
   return resp;
@@ -205,7 +207,7 @@ async function postSplatnetApi(url) {
 async function getSessionCookie(token) {
   const resp = await request({
     method: 'GET',
-    uri: `https://app.splatoon2.nintendo.net`,
+    uri: splatnetUrl,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
@@ -214,11 +216,11 @@ async function getSessionCookie(token) {
       'x-gamewebtoken': token,
       'x-isappanalyticsoptedin': false,
       'X-Requested-With': 'com.nintendo.znca',
-      'Connection': 'keep-alive'
+      Connection: 'keep-alive'
     }
   });
 
-  const id = getUniqueId(resp)
+  const id = getUniqueId(resp);
 
   return id;
 }
@@ -249,13 +251,25 @@ async function getSplatnetImage(battle) {
     method: 'GET',
     uri: url,
     headers: {
-      'Content-Type': 'image/png',
+      'Content-Type': 'image/png'
     },
-    encoding: null,
+    encoding: null
   });
 
   // const imgEncoded = imgBuf.toString('binary');
   return imgBuf;
+}
+
+function getIksmToken() {
+  const cookies = jar.getCookies(splatnetUrl);
+  const iksmSessionCookie = cookies.find(
+    cookie => cookie.key === 'iksm_session'
+  );
+  if (iksmSessionCookie == null) {
+    throw new Error('Could not get iksm_session cookie');
+  }
+
+  return iksmSessionCookie;
 }
 
 exports.getUniqueId = getUniqueId;
@@ -266,3 +280,4 @@ exports.getSplatnetSession = getSplatnetSession;
 exports.getSplatnetApi = getSplatnetApi;
 exports.postSplatnetApi = postSplatnetApi;
 exports.getSplatnetImage = getSplatnetImage;
+exports.getIksmToken = getIksmToken;

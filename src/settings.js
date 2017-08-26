@@ -4,7 +4,6 @@ import {
   Grid,
   Col,
   Row,
-  Well,
   Button,
   FormGroup,
   ControlLabel,
@@ -12,8 +11,9 @@ import {
   HelpBlock,
   Checkbox
 } from 'react-bootstrap';
+import jws from 'jws';
 import { event } from './analytics';
-const { remote, ipcRenderer } = window.require('electron');
+const { remote, ipcRenderer, clipboard } = require('electron');
 const { openExternal } = remote.shell;
 
 class StatInkSettings extends React.Component {
@@ -106,46 +106,91 @@ class GoogleAnalyticsCheckbox extends React.Component {
   }
 }
 
-const SettingsScreen = ({ token, logoutCallback }) =>
-  <Grid fluid style={{ marginTop: 65 }}>
-    <Row>
-      <Col md={12}>
-        <StatInkSettings />
-      </Col>
-    </Row>
-    <Row>
-      <Col md={12}>
-        <h3>Google Analytics</h3>
-        This program uses google analytics to track version uptake, activity,
-        bugs, and crashing. If you find this creepy you can disable this feature
-        below.
-        <GoogleAnalyticsCheckbox />
-      </Col>
-    </Row>
-    <Row>
-      <Col md={12}>
-        <h3>Debugging</h3>
-        <Link to="/testApi">
-          <Button>API Checker</Button>
-        </Link>
-      </Col>
-    </Row>
-    <Row>
-      <Col md={12}>
-        <h3>Other Settings</h3>
-        <h4>Session Token</h4>
-        <Well bsSize="large" style={{ wordWrap: 'break-word' }}>
-          {token}
-        </Well>
-        <Button
-          block
-          bsStyle="danger"
-          onClick={() => handleLogoutClick(logoutCallback)}
-        >
-          Logout
-        </Button>
-      </Col>
-    </Row>
-  </Grid>;
+class IksmToken extends React.Component {
+  state = {
+      cookie: { key: '', value: '', expires: '' }
+  };
+
+  componentDidMount() {
+      ipcRenderer.send('getIksmToken');
+      ipcRenderer.on('iksmToken', this.handleToken)
+  }
+
+  handleToken = (e, cookie) => {
+    this.setState({ cookie: cookie });
+  };
+
+  render() {
+      const { cookie } = this.state;
+      return (
+          <div>
+          <h4>iksm Token</h4>
+          Expiration: {cookie.expires}
+          <br />
+          <Button
+            onClick={() => clipboard.writeText(cookie.value)}
+          >
+            Copy to Clipboard
+          </Button>
+          </div>
+      );
+  }
+}
+
+const SettingsScreen = ({ token, logoutCallback }) => {
+    const expUnix = JSON.parse(jws.decode(token).payload).exp;
+    const tokenExpiration = token ? (new Date( expUnix * 1000)).toString() : 'unknown';
+    return (
+        <Grid fluid style={{ marginTop: 65 }}>
+          <Row>
+            <Col md={12}>
+              <StatInkSettings />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <h3>Google Analytics</h3>
+              This program uses google analytics to track version uptake, activity,
+              bugs, and crashing. If you find this creepy you can disable this feature
+              below.
+              <GoogleAnalyticsCheckbox />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <h3>Debugging</h3>
+              <Link to="/testApi">
+                <Button>API Checker</Button>
+              </Link>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <h3>Nintendo User Info</h3>
+              <strong>DO NOT SHARE Session Token or iksm Token.</strong> These are
+              available here for debugging purposes.  Sharing these could
+              lead to someone stealing your personal information.
+              <h4>Session Token</h4>
+              Expiration: {tokenExpiration}
+              <br />
+              <Button
+                onClick={() => clipboard.writeText(token)}
+              >
+                Copy to Clipboard
+              </Button>
+              <IksmToken />
+              <Button
+                block
+                bsStyle="danger"
+                onClick={() => handleLogoutClick(logoutCallback)}
+              >
+                Logout
+              </Button>
+            </Col>
+          </Row>
+        </Grid>
+    );
+}
+
 
 export default SettingsScreen;

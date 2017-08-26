@@ -14,7 +14,7 @@ import Login from './login';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 // eslint-disable-next-line
-const { ipcRenderer } = window.require('electron');
+const { ipcRenderer } = require('electron');
 
 const history = createMemoryHistory();
 history.listen((location) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-const isDev = window.require('electron-is-dev');
+const isDev = require('electron-is-dev');
 
 const Navigation = () =>
   <Navbar fluid fixedTop collapseOnSelect>

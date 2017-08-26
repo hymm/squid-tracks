@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col, Jumbotron } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-const { shell, app } = window.require('electron').remote;
+const { shell, app } = require('electron').remote;
 const { openExternal } = shell;
 const appVersion = app.getVersion();
 

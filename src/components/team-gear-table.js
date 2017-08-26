@@ -31,8 +31,17 @@ const AbilityCell = ({ skills }) => {
   const subHeight = 20;
   const background = '#777';
 
+  const shiny = skills.subs.reduce((a, b) => {
+    return a && b && (b.id === skills.subs[0].id);
+  }, true);
+
+  let bgcolor = 'darkgrey';
+  if (shiny) {
+      bgcolor = (skills.subs[0].id === skills.main.id) ? 'lightgreen' : 'skyblue';
+  }
+
   return (
-    <td style={{ textAlign: 'left', background: 'darkgrey' }}>
+    <td style={{ textAlign: 'left', background: bgcolor }}>
       <Image
         circle
         src={`https://app.splatoon2.nintendo.net${skills.main.image}`}
