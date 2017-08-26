@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## Version 0.2.3
+
+* add sloshing machine
+* add forge pro
+* add manta maria
+* add highlighting for pure and shiny gear
+* change stat.ink image from image_judge to image_result
+* show session token expiration date on settings page
+* added iksm tokem for debugging purposes
+* show unuploaded battles on last 50 battles table
+* change arrows to increment through array instead of battle number
+* accept stat.ink 302 errors
+* memoize or cache getting game details
+* option to show stats as a rate on last 50 battles
+* move stat.ink upload info into separate file
+
 ## Version 0.2.2
 * added weapon images
 * added sort order to details table
