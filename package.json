@@ -57,6 +57,7 @@
     "pack": "build --em.main=build/electron.js",
     "release": "build --em.main=build/electron.js --publish=always",
     "test": "react-app-rewired test --env=jsdom",
+    "test:main": "jest -c=jest.main.config.json --watch",
     "eject": "react-app-rewired eject",
     "electron": "electron .",
     "electron-dev": "node public/main/dev.js .",
