@@ -23,9 +23,7 @@ const PlayerRow = ({ player }) => {
 
       {player.player.udemae
         ? <td>
-            {`${player.player.udemae.name}${player.player.udemae.s_plus_number
-              ? player.player.udemae.s_plus_number
-              : player.player.udemae.name === 'S+' ? 0 : ''}`}
+            {`${player.player.udemae.name}`}
           </td>
         : null}
       <td style={{ textAlign: 'center', background: 'darkgrey' }}>
