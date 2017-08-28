@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route } from 'react-router-dom';
-import createMemoryHistory from 'history/createMemoryHistory';
 import ApiViewer from './api-viewer';
+import createHashHistory from 'history/createHashHistory';
 import { screenview } from './analytics';
 import Schedule from './schedule';
 import Records from './records';
@@ -16,7 +16,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 // eslint-disable-next-line
 const { ipcRenderer } = require('electron');
 
-const history = createMemoryHistory();
+const history = createHashHistory();
 history.listen((location) => {
     screenview(`${location.pathname}${location.search}${location.hash}`);
 });
