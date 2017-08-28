@@ -5,6 +5,7 @@ const TeamHeader = ({ player = { player: {} } }) =>
   <thead>
     <tr>
       <th>Player</th>
+      <th colSpan="1">Level</th>
       <th colSpan="1">Sort</th>
       <th colSpan="1">Star</th>
       <th colSpan="1">Weapon ID</th>
@@ -17,6 +18,9 @@ const PlayerRow = ({ player }) => {
     <tr>
       <td>
         {player.player.nickname}
+      </td>
+      <td>
+        {player.player.player_rank}
       </td>
       <td>
         {player.sort_score}
