@@ -8,6 +8,7 @@ const app = require('electron').app;
 const appVersion = app.getVersion();
 const appName = app.getName();
 const WeaponMap = require('./weapon-map');
+const FestRankMap = require('./fest-rank-map');
 
 /* const request = request2.defaults({
   proxy: 'http://localhost:8888',
@@ -139,6 +140,11 @@ function setClientInfo(statInk, result) {
   statInk.agent_version = appVersion; // get from json file?
 }
 
+function setSplatFest(statInk, result) {
+    statInk.fest_title = FestRankMap[result.player_result.player.fes_grade.rank];
+    statInk.fest_title_after = FestRankMap[result.fes_grade.rank];
+}
+
 async function convertResultToStatInk(result, disableGetImage) {
   const statInk = {};
   setUuid(statInk, result);
@@ -148,6 +154,10 @@ async function convertResultToStatInk(result, disableGetImage) {
   setPlayerResults(statInk, result);
   setPlayers(statInk, result);
   setClientInfo(statInk, result);
+
+  if (result.game_mode.key === 'fest') {
+      setSplatFest(statInk, result);
+  }
 
   if (!disableGetImage) {
     statInk.image_result = await getSplatnetImage(result.battle_number);
