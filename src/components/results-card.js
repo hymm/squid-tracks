@@ -22,12 +22,13 @@ export default class ResultsCard extends React.Component {
     { text: 'Mode', sortColumn: 'game_mode.key', sortDirection: 'down' },
     { text: 'Rule', sortColumn: 'rule.key', sortDirection: 'down' },
     { text: 'Stage', sortColumn: 'stage.name', sortDirection: 'down' },
+    { text: 'W/L', sortColumn: 'my_team_result.key', sortDirection: 'up' },
+    { text: 'Power', sortColumn: 'estimate_gachi_power', sortDirection: 'up' },
     {
       text: '',
       sortColumn: 'player_result.player.weapon.name',
       sortDirection: 'down'
     },
-    { text: 'W/L', sortColumn: 'my_team_result.key', sortDirection: 'up' },
     {
       text: 'Paint',
       sortColumn: 'player_result.game_paint_point',
@@ -156,6 +157,12 @@ export default class ResultsCard extends React.Component {
                   <td>
                     {result.stage.name}
                   </td>
+                  <td>
+                    {result.my_team_result.key}
+                  </td>
+                  <td>
+                    {result.estimate_gachi_power ? result.estimate_gachi_power : '---'}
+                  </td>
                   <td style={{ textAlign: 'center', background: 'darkgrey' }}>
                     <Image
                       src={`https://app.splatoon2.nintendo.net${result
@@ -163,9 +170,6 @@ export default class ResultsCard extends React.Component {
                       style={{ maxHeight: 30 }}
                       alt={result.player_result.player.weapon.name}
                     />
-                  </td>
-                  <td>
-                    {result.my_team_result.key}
                   </td>
                   <td>
                     {result.player_result.game_paint_point.toFixed(0)}
