@@ -158,7 +158,7 @@ class StatInkManualButton extends React.Component {
   }
 
   handleWroteBattleManual = (e, info) => {
-    const { currentBattle, setStatInkInfo, uploaded } = this.props;
+    const { currentBattle, setStatInkInfo } = this.props;
     event('stat.ink', 'wrote-battle', 'manual');
     this.setState({ buttonText: `Wrote Battle #${currentBattle}` });
 
@@ -204,7 +204,7 @@ class StatInkManualButton extends React.Component {
         onClick={this.handleClick}
         disabled={disabled || writingToStatInk || uploaded}
       >
-        {uploaded ? 'Already Uploaded' : buttonText}
+        {uploaded ? 'Uploaded' : buttonText}
       </Button>
     );
   }
