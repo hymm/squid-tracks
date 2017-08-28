@@ -108,12 +108,12 @@ class GoogleAnalyticsCheckbox extends React.Component {
 
 class IksmToken extends React.Component {
   state = {
-      cookie: { key: '', value: '', expires: '' }
+    cookie: { key: '', value: '', expires: '' }
   };
 
   componentDidMount() {
-      ipcRenderer.send('getIksmToken');
-      ipcRenderer.on('iksmToken', this.handleToken)
+    ipcRenderer.send('getIksmToken');
+    ipcRenderer.on('iksmToken', this.handleToken);
   }
 
   handleToken = (e, cookie) => {
@@ -121,76 +121,125 @@ class IksmToken extends React.Component {
   };
 
   render() {
-      const { cookie } = this.state;
-      return (
-          <div>
-          <h4>iksm Token</h4>
-          Expiration: {cookie.expires}
-          <br />
-          <Button
-            onClick={() => clipboard.writeText(cookie.value)}
+    const { cookie } = this.state;
+    return (
+      <div>
+        <h4>iksm Token</h4>
+        Expiration: {cookie.expires}
+        <br />
+        <Button onClick={() => clipboard.writeText(cookie.value)}>
+          Copy to Clipboard
+        </Button>
+      </div>
+    );
+  }
+}
+
+class LanguageSettings extends React.Component {
+  state = {
+    language: ''
+  };
+
+  languages = [
+    { name: 'Default', code: '' },
+    { name: 'Deutsch', code: 'de' },
+    { name: 'English', code: 'en' },
+    { name: 'Español', code: 'es' },
+    { name: 'Francais', code: 'fr' },
+    { name: 'Italiano', code: 'it' },
+    { name: '日本語', code: 'jp' }
+  ];
+
+  componentDidMount() {
+    this.setState({ language: ipcRenderer.sendSync('getFromStore', 'locale') });
+  }
+
+  handleChange = e => {
+    ipcRenderer.sendSync('setUserLangauge', e.target.value);
+    this.setState({ language: e.target.value });
+  };
+
+  render() {
+    return (
+      <Row>
+        <Col md={12}>
+          <h3>Splatnet API Language</h3>
+          Languages are limited by Nintendo regions, so several of the languages
+          listed will not work. If you think your language should be supported,
+          please contact the developer.
+          <FormControl
+            value={this.state.language}
+            id="languageSelect"
+            componentClass="select"
+            onChange={this.handleChange}
           >
-            Copy to Clipboard
-          </Button>
-          </div>
-      );
+            {this.languages.map(language =>
+              <option key={language.code} value={language.code}>
+                {language.name}
+              </option>
+            )}
+          </FormControl>
+        </Col>
+      </Row>
+    );
   }
 }
 
 const SettingsScreen = ({ token, logoutCallback }) => {
-    const expUnix = JSON.parse(jws.decode(token).payload).exp;
-    const tokenExpiration = token ? (new Date( expUnix * 1000)).toString() : 'unknown';
-    return (
-        <Grid fluid style={{ marginTop: 65 }}>
-          <Row>
-            <Col md={12}>
-              <StatInkSettings />
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              <h3>Google Analytics</h3>
-              This program uses google analytics to track version uptake, activity,
-              bugs, and crashing. If you find this creepy you can disable this feature
-              below.
-              <GoogleAnalyticsCheckbox />
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              <h3>Debugging</h3>
-              <Link to="/testApi">
-                <Button>API Checker</Button>
-              </Link>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              <h3>Nintendo User Info</h3>
-              <strong>DO NOT SHARE Session Token or iksm Token.</strong> These are
-              available here for debugging purposes.  Sharing these could
-              lead to someone stealing your personal information.
-              <h4>Session Token</h4>
-              Expiration: {tokenExpiration}
-              <br />
-              <Button
-                onClick={() => clipboard.writeText(token)}
-              >
-                Copy to Clipboard
-              </Button>
-              <IksmToken />
-              <Button
-                block
-                bsStyle="danger"
-                onClick={() => handleLogoutClick(logoutCallback)}
-              >
-                Logout
-              </Button>
-            </Col>
-          </Row>
-        </Grid>
-    );
-}
-
+  const expUnix = JSON.parse(jws.decode(token).payload).exp;
+  const tokenExpiration = token
+    ? new Date(expUnix * 1000).toString()
+    : 'unknown';
+  return (
+    <Grid fluid style={{ marginTop: 65, marginBotton: 30 }}>
+      <LanguageSettings />
+      <Row>
+        <Col md={12}>
+          <StatInkSettings />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <h3>Google Analytics</h3>
+          This program uses google analytics to track version uptake, activity,
+          bugs, and crashing. If you find this creepy you can disable this
+          feature below.
+          <GoogleAnalyticsCheckbox />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <h3>Debugging</h3>
+          <Link to="/testApi">
+            <Button>API Checker</Button>
+          </Link>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <h3>Nintendo User Info</h3>
+          <strong>DO NOT SHARE Session Token or iksm Token.</strong> These are
+          available here for debugging purposes. Sharing these could lead to
+          someone stealing your personal information.
+          <h4>Session Token</h4>
+          Expiration: {tokenExpiration}
+          <br />
+          <Button onClick={() => clipboard.writeText(token)}>
+            Copy to Clipboard
+          </Button>
+          <IksmToken />
+          <Button
+            block
+            bsStyle="danger"
+            style={{ marginTop: 10 }}
+            onClick={() => handleLogoutClick(logoutCallback)}
+          >
+            Logout
+          </Button>
+        </Col>
+      </Row>
+    </Grid>
+  );
+};
 
 export default SettingsScreen;

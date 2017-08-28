@@ -272,6 +272,10 @@ function getIksmToken() {
   return iksmSessionCookie;
 }
 
+function setUserLanguage(language) {
+  userLanguage = language;
+}
+
 exports.getUniqueId = getUniqueId;
 exports.getSessionCookie = getSessionCookie;
 exports.generateAuthenticationParams = generateAuthenticationParams;
@@ -281,3 +285,4 @@ exports.getSplatnetApi = getSplatnetApi;
 exports.postSplatnetApi = postSplatnetApi;
 exports.getSplatnetImage = getSplatnetImage;
 exports.getIksmToken = getIksmToken;
+exports.setUserLanguage = setUserLanguage;
