@@ -2,5 +2,7 @@
   "nav.records": "Records",
   "nav.results": "Battle History",
   "nav.schedule": "時間割",
-  "nav.settings": "Settings"
+  "nav.settings": "Settings",
+  "results.autoupload.activeDefaultText": "Waiting for Battle Data",
+  "results.autoupload.inactiveButtonText": "Auto-upload to stat.ink(ja)"
 }

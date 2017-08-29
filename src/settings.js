@@ -150,10 +150,6 @@ class LanguageSettings extends React.Component {
     { name: '日本語', code: 'ja' }
   ];
 
-  componentDidMount() {
-    this.setState({ language: ipcRenderer.sendSync('getFromStore', 'locale') });
-  }
-
   handleChange = e => {
       this.props.setLocale(e.target.value);
   };
@@ -191,7 +187,7 @@ const SettingsScreen = ({ token, logoutCallback, setLocale }) => {
     : 'unknown';
   return (
     <Grid fluid style={{ marginTop: 65, marginBotton: 30 }}>
-      <LanguageSettings setLocale={setLocale} />
+      <LanguageSettings setLocale={setLocale}/>
       <Row>
         <Col md={12}>
           <StatInkSettings />
