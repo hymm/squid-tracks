@@ -100,6 +100,7 @@ export default class ResultsCard extends React.Component {
                   title={`Normalize to ${normalizeTime} minutes`}
                   onClick={() => this.setState({ normalize: true})}
                   active={normalize}
+                  id='minutes'
               >
                   <MenuItem onClick={() => this.setState({ normalizeTime: 1})}>1</MenuItem>
                   <MenuItem onClick={() => this.setState({ normalizeTime: 3})}>3</MenuItem>
