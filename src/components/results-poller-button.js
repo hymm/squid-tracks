@@ -8,11 +8,11 @@ import { event } from '../analytics';
 class ResultsPoller extends React.Component {
   messages = defineMessages({
         inactive: {
-            id: 'results.autoupload.inactiveButtonText',
+            id: 'results.autoupload.inactiveButton',
             defaultMessage: 'Auto-upload to stat.ink',
         },
         activeDefault: {
-            id: 'results.autoupload.activeDefaultText',
+            id: 'results.autoupload.activeDefault',
             defaultMessage: 'Waiting for Battle Data'
         },
         writingBattle: {

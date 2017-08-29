@@ -1,8 +1,15 @@
 {
   "nav.records": "Records",
   "nav.results": "Battle History",
-  "nav.schedule": "時間割",
+  "nav.schedule": "Schedule",
   "nav.settings": "Settings",
-  "results.autoupload.activeDefaultText": "Waiting for Battle Data",
-  "results.autoupload.inactiveButtonText": "Auto-upload to stat.ink(ja)"
+  "results.autoupload.activeDefault": "Waiting for Battle Data",
+  "results.autoupload.error": "Error Writing Battle #{battle_number}",
+  "results.autoupload.inactiveButton": "Auto-upload to stat.ink",
+  "results.autoupload.writingBattle": "Writing Battle #{battle_number}",
+  "results.autoupload.wroteBattle": "Wrote Battle #{battle_number}",
+  "results.uploadManual.default": "Upload to stat.ink",
+  "results.uploadManual.uploaded": "Uploaded",
+  "results.uploadManual.writingBattle": "Writing Battle #{battle_number}",
+  "results.uploadManual.wroteBattle": "Wrote Battle #{battle_number}"
 }
