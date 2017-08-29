@@ -32,6 +32,42 @@ The installer will be created in `/dist`.
 ## Development Notes
 Note: Render Process is using babel, but the backend process is not, so allowed syntax between the two is different right now.
 
+## Translations
+translations are located in `scr/locales/<locale code>.json`
+
+### Adding a translation language
+In `src/messages.js`,
+1. add translation package from `react-intl`
+    ```js
+    import szLocaleData from 'react-intl/locale-data/zz';
+    ```
+2. add package to addLocaleData
+    ```js
+    addLocaleData([...jaLocaleData, ...zzLocaleData]);
+    ```
+3. import messages and add to export
+    ```js
+    import sz from './locales/zz';
+    export default {
+        ja,
+        zz,
+    };
+    ```
+In `translationRunner.js`
+```js
+manageTranslations({
+    ...
+    languages: ['ja', 'zz'],
+});
+```
+
+### Updating the translation keys
+If there are new strings in the program or new langauges added, run these commands.
+```
+yarn run dev
+yarn run manage:translations
+```
+
 ## Roadmap
 [Version 1.0](https://github.com/hymm/squid-tracks/issues/3)
 
