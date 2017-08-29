@@ -6,9 +6,11 @@
   "private": true,
   "author": "@Wrong_Shoe",
   "devDependencies": {
+    "babel-plugin-react-intl": "^2.3.1",
     "electron": "^1.4.14",
     "electron-builder": "^19.24.1",
     "foreman": "^2.0.0",
+    "react-intl-translations-manager": "^5.0.0",
     "react-scripts": "^1.0.11"
   },
   "dependencies": {
@@ -39,6 +41,7 @@
     "react-app-rewired": "^1.2.2",
     "react-bootstrap": "^0.31.2",
     "react-dom": "^15.4.2",
+    "react-intl": "^2.3.0",
     "react-json-tree": "^0.10.9",
     "react-json-view": "^1.12.0",
     "react-router-bootstrap": "^0.24.2",
@@ -62,7 +65,8 @@
     "eject": "react-app-rewired eject",
     "electron": "electron .",
     "electron-dev": "node public/main/dev.js .",
-    "dev": "concurrently \"yarn react-start\" \"wait-on http://localhost:3000/ && yarn electron-dev\""
+    "dev": "concurrently \"yarn react-start\" \"wait-on http://localhost:3000/ && yarn electron-dev\"",
+    "manage:translations": "node ./translationRunner.js"
   },
   "build": {
     "appId": "com.shoesoft.splat-track",

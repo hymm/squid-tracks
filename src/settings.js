@@ -147,7 +147,7 @@ class LanguageSettings extends React.Component {
     { name: 'Español', code: 'es' },
     { name: 'Francais', code: 'fr' },
     { name: 'Italiano', code: 'it' },
-    { name: '日本語', code: 'jp' }
+    { name: '日本語', code: 'ja' }
   ];
 
   componentDidMount() {
@@ -155,8 +155,7 @@ class LanguageSettings extends React.Component {
   }
 
   handleChange = e => {
-    ipcRenderer.sendSync('setUserLangauge', e.target.value);
-    this.setState({ language: e.target.value });
+      this.props.setLocale(e.target.value);
   };
 
   render() {
@@ -185,14 +184,14 @@ class LanguageSettings extends React.Component {
   }
 }
 
-const SettingsScreen = ({ token, logoutCallback }) => {
+const SettingsScreen = ({ token, logoutCallback, setLocale }) => {
   const expUnix = JSON.parse(jws.decode(token).payload).exp;
   const tokenExpiration = token
     ? new Date(expUnix * 1000).toString()
     : 'unknown';
   return (
     <Grid fluid style={{ marginTop: 65, marginBotton: 30 }}>
-      <LanguageSettings />
+      <LanguageSettings setLocale={setLocale} />
       <Row>
         <Col md={12}>
           <StatInkSettings />
