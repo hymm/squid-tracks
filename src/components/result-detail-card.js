@@ -3,17 +3,21 @@ import {
   Grid,
   Row,
   Col,
-  Panel,
   Table,
   Glyphicon,
   ButtonToolbar,
   ButtonGroup,
-  Button
+  Button,
+  Nav,
+  NavDropdown,
+  MenuItem,
 } from 'react-bootstrap';
 import TeamStatsTable from './team-stats-table';
 import TeamGearTable from './team-gear-table';
 import TeamInfoTable from './team-info-table';
+import PanelWithMenu from './panel-with-menu';
 const { openExternal } = require('electron').remote.shell;
+
 
 const ResultSummary = ({ result }) =>
   <Table striped bordered>
@@ -159,9 +163,9 @@ class ResultDetailCard extends React.Component {
       .sort((a, b) => b.sort_score - a.sort_score);
 
     return (
-      <Panel
+      <PanelWithMenu
         header={
-          <h3>
+          <h3 className="panel-title">
             {`Battle #${result.battle_number} Details`}
             {linkInfo
               ? <a
@@ -175,6 +179,13 @@ class ResultDetailCard extends React.Component {
                 </a>
               : null}
           </h3>
+        }
+        menu={
+            <Nav className={'navbar-right pull-right'}>
+                <NavDropdown title={<Glyphicon glyph={'option-vertical'} />} noCaret pullRight>
+                    <MenuItem>Something</MenuItem>
+                </NavDropdown>
+            </Nav>
         }
       >
         <Grid fluid>
@@ -233,7 +244,7 @@ class ResultDetailCard extends React.Component {
             </Col>
           </Row>
         </Grid>
-      </Panel>
+      </PanelWithMenu>
     );
   }
 }
