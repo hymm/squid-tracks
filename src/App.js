@@ -51,6 +51,7 @@ class App extends Component {
                   token={sessionToken}
                   logoutCallback={this.getSessionToken}
                   setLocale={this.setLocale}
+                  locale={locale}
                 />
               : <Login />}
           </Router>

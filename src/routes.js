@@ -9,7 +9,7 @@ import Settings from './settings';
 import Navigation from './navigation';
 import About from './about';
 
-const Routes = ({ token, logoutCallback, setLocale }) =>
+const Routes = ({ token, logoutCallback, setLocale, locale }) =>
   <div>
     <Navigation />
     <Route path="/" exact component={About} />
@@ -20,7 +20,7 @@ const Routes = ({ token, logoutCallback, setLocale }) =>
     <Route
       path="/settings"
       component={() =>
-        <Settings token={token} logoutCallback={logoutCallback} setLocale={setLocale} />}
+        <Settings token={token} logoutCallback={logoutCallback} setLocale={setLocale} locale={locale} />}
     />
   </div>;
 

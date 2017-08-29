@@ -136,10 +136,6 @@ class IksmToken extends React.Component {
 }
 
 class LanguageSettings extends React.Component {
-  state = {
-    language: ''
-  };
-
   languages = [
     { name: 'Default', code: '' },
     { name: 'Deutsch', code: 'de' },
@@ -155,6 +151,7 @@ class LanguageSettings extends React.Component {
   };
 
   render() {
+    const { locale } = this.props;
     return (
       <Row>
         <Col md={12}>
@@ -163,7 +160,7 @@ class LanguageSettings extends React.Component {
           listed will not work. If you think your language should be supported,
           please contact the developer.
           <FormControl
-            value={this.state.language}
+            value={locale}
             id="languageSelect"
             componentClass="select"
             onChange={this.handleChange}
@@ -180,14 +177,14 @@ class LanguageSettings extends React.Component {
   }
 }
 
-const SettingsScreen = ({ token, logoutCallback, setLocale }) => {
+const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
   const expUnix = JSON.parse(jws.decode(token).payload).exp;
   const tokenExpiration = token
     ? new Date(expUnix * 1000).toString()
     : 'unknown';
   return (
     <Grid fluid style={{ marginTop: 65, marginBotton: 30 }}>
-      <LanguageSettings setLocale={setLocale}/>
+      <LanguageSettings setLocale={setLocale} locale={locale} />
       <Row>
         <Col md={12}>
           <StatInkSettings />
