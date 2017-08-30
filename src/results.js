@@ -1,21 +1,9 @@
 import React from 'react';
-import {
-  Grid,
-  Row,
-  Col,
-  ButtonToolbar,
-  ButtonGroup,
-  Button,
-  DropdownButton,
-  MenuItem,
-  Glyphicon
-} from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import ResultsSummaryCard from './components/results-summary-card';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
-import ResultsPoller from './components/results-poller-button';
-import StatInkManualButton from './components/results-upload-manual-button';
-import { event } from './analytics';
+import ResultsControl from './components/results-controls';
 const { ipcRenderer } = require('electron');
 
 const Results = () =>
@@ -26,89 +14,6 @@ const Results = () =>
       </Col>
     </Row>
   </Grid>;
-
-class ResultControl extends React.Component {
-  state = {
-    tokenExists: false,
-    refreshing: false
-  };
-
-  componentDidMount() {
-    const token = ipcRenderer.sendSync('getStatInkApiToken');
-    this.setState({ tokenExists: token.length > 0 });
-  }
-
-  render() {
-    const {
-      result,
-      resultIndex,
-      changeResult,
-      getResults,
-      results,
-      setStatInkInfo,
-      statInk
-    } = this.props;
-    const { tokenExists } = this.state;
-
-    const currentBattle = result.battle_number ? result.battle_number : 0;
-    const uploaded = statInk ? statInk[currentBattle] != null : false;
-
-    return (
-      <ButtonToolbar style={{ marginBottom: 10 }}>
-        <Button
-          onClick={() => {
-            getResults();
-            event('results', 'refresh');
-            this.setState({ refreshing: true });
-            setTimeout(() => this.setState({ refreshing: false }), 2000);
-          }}
-          disabled={this.state.refreshing}
-        >
-          {this.state.refreshing ? 'Refreshed' : 'Refresh'}
-        </Button>
-        <ButtonGroup>
-          <Button
-            onClick={() => changeResult(resultIndex + 1)}
-            disabled={resultIndex === results.length - 1}
-          >
-            <Glyphicon glyph="triangle-left" />
-          </Button>
-          <DropdownButton title={currentBattle} id={'battles'}>
-            {results.map((result, idx) =>
-              <MenuItem
-                key={result.battle_number}
-                onClick={() => changeResult(idx)}
-              >
-                {result.battle_number}
-              </MenuItem>
-            )}
-          </DropdownButton>
-          <Button
-            onClick={() => changeResult(resultIndex - 1)}
-            disabled={resultIndex === 0}
-          >
-            <Glyphicon glyph="triangle-right" />
-          </Button>
-        </ButtonGroup>
-        <ButtonGroup>
-          <StatInkManualButton
-            result={result}
-            currentBattle={currentBattle}
-            disabled={!tokenExists}
-            uploaded={uploaded}
-            setStatInkInfo={setStatInkInfo}
-          />
-        </ButtonGroup>
-        <ResultsPoller
-          getResults={getResults}
-          result={result}
-          disabled={!tokenExists}
-          setStatInkInfo={setStatInkInfo}
-        />
-      </ButtonToolbar>
-    );
-  }
-}
 
 class ResultsContainer extends React.Component {
   state = {
@@ -163,7 +68,7 @@ class ResultsContainer extends React.Component {
     const { results, currentResult, statInk, currentResultIndex } = this.state;
     return (
       <div>
-        <ResultControl
+        <ResultsControl
           result={currentResult}
           resultIndex={currentResultIndex}
           results={results.results}
