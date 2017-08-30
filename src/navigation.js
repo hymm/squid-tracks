@@ -31,8 +31,11 @@ const Navigation = () =>
         <LinkContainer to="/results">
           <NavItem eventKey={4}>Battle History</NavItem>
         </LinkContainer>
+        <LinkContainer to="/meta">
+          <NavItem eventKey={5}>League Meta</NavItem>
+        </LinkContainer>
         <LinkContainer to="/settings">
-          <NavItem eventKey={5}>Settings</NavItem>
+          <NavItem eventKey={6}>Settings</NavItem>
         </LinkContainer>
       </Nav>
     </Navbar.Collapse>

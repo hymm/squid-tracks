@@ -1,7 +1,49 @@
 import React from 'react';
 import Json from 'react-json-tree';
 import { Link } from 'react-router-dom';
+import { ButtonGroup, Button } from 'react-bootstrap';
 const { ipcRenderer, clipboard } = require('electron');
+
+class ApiAsyncButton extends React.Component {
+  // defaultButtonText = 'Get API';
+
+  // state = {
+  //   data: {}
+  // };
+
+  componentDidMount() {
+    ipcRenderer.on('apiData', this.handleApiData);
+    // ipcRenderer.on('writeBattleManualError', this.handleError);
+  }
+
+  componentWillUnmount() {
+    ipcRenderer.removeListener('apiData', this.handleApiData);
+    // ipcRenderer.removeListener('writeBattlekManualError', this.handleError);
+  }
+
+  handleApiData = (e, data) => {
+    const { setApiData } = this.props;
+    // event('stat.ink', 'wrote-battle', 'manual');
+    // this.setState({ buttonText: `Wrote Battle #${currentBattle}` });
+    setApiData(data);
+  };
+
+  handleClick = () => {
+    const { url } = this.props;
+    // this.setState({
+    // buttonText: `Writing Battle #${currentBattle}`,
+    // writingToStatInk: true
+    // });
+    ipcRenderer.send('getApiAsync', url);
+  };
+
+  render() {
+    // const { disabled, uploaded } = this.props;
+    // const { writingToStatInk, buttonText } = this.state;
+
+    return <Button onClick={this.handleClick}>Get API</Button>;
+  }
+}
 
 class ApiTester extends React.Component {
   state = {
@@ -30,11 +72,6 @@ class ApiTester extends React.Component {
     // POST 'share/challenges/great_pyramid_at_giza'
   ];
 
-  handleButtonClick = async () => {
-    const league = ipcRenderer.sendSync('getApi', this.state.url);
-    this.setState({ reply: league });
-  };
-
   handleUrlChange = e => {
     this.setState({ url: e.target.value });
   };
@@ -48,6 +85,10 @@ class ApiTester extends React.Component {
     this.setState({ reply: res });
   };
 
+  setApiData = data => {
+    this.setState({ reply: data });
+  };
+
   render() {
     return (
       <div style={{ marginTop: 65 }}>
@@ -55,6 +96,9 @@ class ApiTester extends React.Component {
           <button>Back</button>
         </Link>
         <button onClick={this.handleButtonClick}>Get API</button>
+        <ButtonGroup>
+          <ApiAsyncButton url={this.state.url} setApiData={this.setApiData} />
+        </ButtonGroup>
         <button onClick={this.handlePostClick}>Post API</button>
         <button
           onClick={() => clipboard.writeText(JSON.stringify(this.state.reply))}

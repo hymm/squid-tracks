@@ -175,11 +175,33 @@ ipcMain.on('loadSplatnet', e => {
   });
 });
 
+ipcMain.on('getApiAsync', async (e, url) => {
+  try {
+    const battleRegex = /^results\/\d{1,}$/;
+    const leagueRegex = /^league_match_ranking\/.*$/;
+    let value;
+    if (url.match(battleRegex) || url.match(leagueRegex)) {
+      value = await getSplatnetApiMemoInf(url);
+    } else if (url === 'results') {
+      value = await getSplatnetApiMemo10(url);
+    } else {
+      value = await getSplatnetApiMemo120(url);
+    }
+    e.sender.send('apiData', value);
+    //e.returnValue = value;
+  } catch (e) {
+    log.error(`Error getting ${url}: ${e}`);
+    e.sender.send('apiData', {});
+    //e.returnValue = {};
+  }
+});
+
 ipcMain.on('getApi', async (e, url) => {
   try {
     const battleRegex = /^results\/\d{1,}$/;
+    const leagueRegex = /^league_match_ranking\/.*$/;
     let value;
-    if (url.match(battleRegex)) {
+    if (url.match(battleRegex) || url.match(leagueRegex)) {
       value = await getSplatnetApiMemoInf(url);
     } else if (url === 'results') {
       value = await getSplatnetApiMemo10(url);

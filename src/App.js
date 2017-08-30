@@ -5,6 +5,7 @@ import createHashHistory from 'history/createHashHistory';
 import { screenview } from './analytics';
 import Schedule from './schedule';
 import Records from './records';
+import Meta from './meta';
 import Results from './results';
 import Settings from './settings';
 import Navigation from './navigation';
@@ -17,8 +18,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 const { ipcRenderer } = require('electron');
 
 const history = createHashHistory();
-history.listen((location) => {
-    screenview(`${location.pathname}${location.search}${location.hash}`);
+history.listen(location => {
+  screenview(`${location.pathname}${location.search}${location.hash}`);
 });
 
 const Routes = ({ token, logoutCallback }) =>
@@ -29,6 +30,7 @@ const Routes = ({ token, logoutCallback }) =>
     <Route path="/schedule" component={Schedule} />
     <Route path="/records" component={Records} />
     <Route path="/results" component={Results} />
+    <Route path="/meta" component={Meta} />
     <Route
       path="/settings"
       component={() =>
