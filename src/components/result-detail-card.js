@@ -17,7 +17,9 @@ import { FormattedMessage } from 'react-intl';
 import TeamStatsTable from './team-stats-table';
 import TeamGearTable from './team-gear-table';
 import TeamInfoTable from './team-info-table';
+import TeamRadarTotals from './team-radar-totals';
 import PanelWithMenu from './panel-with-menu';
+import TeamRadar from './team-radar';
 import { ResultSummary1, ResultSummary2 } from './result-detail-summary';
 import { getGeneralFields, getPlayerFields } from './export-detail-helpers';
 import { clipboard, remote } from 'electron';
@@ -160,6 +162,27 @@ class ResultDetailCard extends React.Component {
     this.setState({ show: 3 });
   };
 
+  showRadarTeam = () => {
+    this.setState({ show: 4 });
+  };
+
+  showRadarTotals = () => {
+    this.setState({ show: 5 });
+  };
+
+  calculateMaximums = (myTeam, otherTeam) => {
+    const teams = myTeam.concat(otherTeam);
+    const k = teams.reduce((max, member) => member.kill_count > max ? member.kill_count : max, 0);
+    const a = teams.reduce((max, member) => member.assist_count > max ? member.assist_count : max, 0);
+    const d = teams.reduce((max, member) => member.death_count > max ? member.death_count : max, 0);
+    const s = teams.reduce((max, member) => member.special_count > max ? member.special_count : max, 0);
+    const p = teams.reduce((max, member) => member.game_paint_point > max ? member.game_paint_point : max, 0);
+
+    const kad = [k, a, d].reduce((max, value) => value > max ? value : max, 0);
+
+    return { k: kad, a: kad, d: kad, s, p };
+  }
+
   render() {
     const { result, statInk } = this.props;
     const linkInfo = statInk[result.battle_number];
@@ -173,6 +196,8 @@ class ResultDetailCard extends React.Component {
     const otherTeam = result.other_team_members
       .slice(0)
       .sort((a, b) => b.sort_score - a.sort_score);
+
+    const maximums = this.calculateMaximums(myTeam, otherTeam);
 
     return (
       <PanelWithMenu
@@ -238,39 +263,68 @@ class ResultDetailCard extends React.Component {
                       defaultMessage="More Info"
                     />
                   </Button>
+                  <Button
+                    onClick={this.showRadarTeam}
+                    active={this.state.show === 4}
+                  >
+                    <Glyphicon glyph='unchecked' />
+                    <Glyphicon glyph='unchecked' />
+                  </Button>
+                  <Button
+                    onClick={this.showRadarTotals}
+                    active={this.state.show === 5}
+                  >
+                    <Glyphicon glyph='unchecked' />
+                  </Button>
                 </ButtonGroup>
               </ButtonToolbar>
             </Col>
           </Row>
           <Row>
-            <Col sm={6} md={6}>
-              <h4>
-                <FormattedMessage
-                  id="resultDetails.teamsButton.myTeamTitle"
-                  defaultMessage="My Team"
-                />
-              </h4>
-              {this.state.show === 1 ? <TeamStatsTable team={myTeam} /> : null}
-              {this.state.show === 2 ? <TeamGearTable team={myTeam} /> : null}
-              {this.state.show === 3 ? <TeamInfoTable team={myTeam} /> : null}
-            </Col>
-            <Col sm={6} md={6}>
-              <h4>
-                <FormattedMessage
-                  id="resultDetails.teamsButton.otherTeamTitle"
-                  defaultMessage="Enemy Team"
-                />
-              </h4>
-              {this.state.show === 1
-                ? <TeamStatsTable team={otherTeam} />
-                : null}
-              {this.state.show === 2
-                ? <TeamGearTable team={otherTeam} />
-                : null}
-              {this.state.show === 3
-                ? <TeamInfoTable team={otherTeam} />
-                : null}
-            </Col>
+            {this.state.show < 5 ?
+                [
+                    <Col sm={6} md={6}>
+
+                  <h4>
+                    <FormattedMessage
+                      id="resultDetails.teamsButton.myTeamTitle"
+                      defaultMessage="My Team"
+                    />
+                  </h4>
+                  {this.state.show === 1 ? <TeamStatsTable team={myTeam} /> : null}
+                  {this.state.show === 2 ? <TeamGearTable team={myTeam} /> : null}
+                  {this.state.show === 3 ? <TeamInfoTable team={myTeam} /> : null}
+                  {this.state.show === 4 ? <TeamRadar team={myTeam} maximums={maximums} /> : null}
+              </Col>,
+                <Col sm={6} md={6}>
+                  <h4>
+                    <FormattedMessage
+                      id="resultDetails.teamsButton.otherTeamTitle"
+                      defaultMessage="Enemy Team"
+                    />
+                  </h4>
+                  {this.state.show === 1
+                    ? <TeamStatsTable team={otherTeam} />
+                    : null}
+                  {this.state.show === 2
+                    ? <TeamGearTable team={otherTeam} />
+                    : null}
+                  {this.state.show === 3
+                    ? <TeamInfoTable team={otherTeam} />
+                    : null}
+                  {this.state.show === 4 ? <TeamRadar team={otherTeam} maximums={maximums} /> : null}
+                </Col>
+            ]
+            :
+                <Col md={12}>
+                    <TeamRadarTotals
+                        myTeam={myTeam}
+                        myCount={result.my_team_count != null ? result.my_team_count : result.my_team_percentage}
+                        otherTeam={otherTeam}
+                        otherCount={result.other_team_count != null ? result.other_team_count : result.other_team_percentage}
+                    />
+                </Col>
+            }
           </Row>
         </Grid>
       </PanelWithMenu>
