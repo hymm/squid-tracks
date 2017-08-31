@@ -92,7 +92,7 @@ class GoogleAnalyticsCheckbox extends React.Component {
   }
 
   handleClick = () => {
-    event('ga', this.state.enabled ? 'enabled' : 'disabled');
+    event('ga', !this.state.enabled ? 'enabled' : 'disabled');
     ipcRenderer.sendSync('setToStore', 'gaEnabled', !this.state.enabled);
     this.setState({ enabled: !this.state.enabled });
   };
@@ -136,10 +136,6 @@ class IksmToken extends React.Component {
 }
 
 class LanguageSettings extends React.Component {
-  state = {
-    language: ''
-  };
-
   languages = [
     { name: 'Default', code: '' },
     { name: 'Deutsch', code: 'de' },
@@ -147,19 +143,15 @@ class LanguageSettings extends React.Component {
     { name: 'Español', code: 'es' },
     { name: 'Francais', code: 'fr' },
     { name: 'Italiano', code: 'it' },
-    { name: '日本語', code: 'jp' }
+    { name: '日本語', code: 'ja' }
   ];
 
-  componentDidMount() {
-    this.setState({ language: ipcRenderer.sendSync('getFromStore', 'locale') });
-  }
-
   handleChange = e => {
-    ipcRenderer.sendSync('setUserLangauge', e.target.value);
-    this.setState({ language: e.target.value });
+      this.props.setLocale(e.target.value);
   };
 
   render() {
+    const { locale } = this.props;
     return (
       <Row>
         <Col md={12}>
@@ -168,7 +160,7 @@ class LanguageSettings extends React.Component {
           listed will not work. If you think your language should be supported,
           please contact the developer.
           <FormControl
-            value={this.state.language}
+            value={locale}
             id="languageSelect"
             componentClass="select"
             onChange={this.handleChange}
@@ -185,14 +177,14 @@ class LanguageSettings extends React.Component {
   }
 }
 
-const SettingsScreen = ({ token, logoutCallback }) => {
+const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
   const expUnix = JSON.parse(jws.decode(token).payload).exp;
   const tokenExpiration = token
     ? new Date(expUnix * 1000).toString()
     : 'unknown';
   return (
     <Grid fluid style={{ marginTop: 65, marginBotton: 30 }}>
-      <LanguageSettings />
+      <LanguageSettings setLocale={setLocale} locale={locale} />
       <Row>
         <Col md={12}>
           <StatInkSettings />
