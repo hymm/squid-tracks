@@ -12,6 +12,7 @@ import {
   MenuItem
 } from 'react-bootstrap';
 import { pick, mapKeys } from 'lodash';
+import Polygon from 'react-polygon';
 import flatten from 'flat';
 import { FormattedMessage } from 'react-intl';
 import TeamStatsTable from './team-stats-table';
@@ -266,15 +267,34 @@ class ResultDetailCard extends React.Component {
                   <Button
                     onClick={this.showRadarTeam}
                     active={this.state.show === 4}
+                    style={{ padding: '8px 12px 4px 12px' }}
                   >
-                    <Glyphicon glyph='unchecked' />
-                    <Glyphicon glyph='unchecked' />
+                      <svg width="16" height="14">
+                          <polygon
+                              class="r--poly-polygon"
+                              points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
+                              style={{ strokeWidth: 1.5, stroke: '#666', fill: 'none' }}
+                          />
+                      </svg>
+                      <svg width="14" height="14">
+                          <polygon
+                              class="r--poly-polygon"
+                              points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
+                              style={{ strokeWidth: 1.5, stroke: '#666', fill: 'none' }}
+                          />
+                      </svg>
                   </Button>
                   <Button
                     onClick={this.showRadarTotals}
                     active={this.state.show === 5}
+                    style={{ padding: '8px 12px 4px 12px' }}
                   >
-                    <Glyphicon glyph='unchecked' />
+                      <svg width="14" height="14">
+                          <polygon class="r--poly-polygon"
+                              points="7,0,13.062177826491,3.5,13.062177826491,10.5,7,14,0.93782217350893,10.5,0.93782217350893,3.5"
+                              style={{ strokeWidth: 1.5, stroke: '#666', fill: 'none' }}
+                          />
+                    </svg>
                   </Button>
                 </ButtonGroup>
               </ButtonToolbar>
