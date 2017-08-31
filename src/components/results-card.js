@@ -1,5 +1,15 @@
 import React from 'react';
-import { Panel, Table, Image, Glyphicon, ButtonToolbar, ButtonGroup, Button, SplitButton, MenuItem } from 'react-bootstrap';
+import {
+  Panel,
+  Table,
+  Image,
+  Glyphicon,
+  ButtonToolbar,
+  ButtonGroup,
+  Button,
+  SplitButton,
+  MenuItem
+} from 'react-bootstrap';
 import { cloneDeep } from 'lodash';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
@@ -9,7 +19,7 @@ export default class ResultsCard extends React.Component {
     sortColumn: 'battle_number',
     sortDirection: 'up',
     normalize: false,
-    normalizeTime: 5,
+    normalizeTime: 5
   };
 
   static columnHeaders = [
@@ -50,21 +60,26 @@ export default class ResultsCard extends React.Component {
   ];
 
   normalize(results) {
-      if (!this.state.normalize) {
-          return;
-      }
+    if (!this.state.normalize) {
+      return;
+    }
 
+    const { normalizeTime } = this.state;
+
+    results.forEach(result => {
       // assume is turf war if elapsed_time is not defined
-      const time = results.elapsed_time ? results.elapsed_time : 180;
-      const { normalizeTime } = this.state;
-
-      results.forEach((result) => {
-         result.player_result.game_paint_point = result.player_result.game_paint_point * 60 * normalizeTime / time;
-         result.player_result.kill_count = result.player_result.kill_count * 60 * normalizeTime / time;
-         result.player_result.assist_count = result.player_result.assist_count * 60 * normalizeTime / time;
-         result.player_result.death_count = result.player_result.death_count * 60 * normalizeTime / time;
-         result.player_result.special_count = result.player_result.special_count * 60 * normalizeTime / time;
-     });
+      const time = result.elapsed_time ? result.elapsed_time : 180;
+      result.player_result.game_paint_point =
+        result.player_result.game_paint_point * 60 * normalizeTime / time;
+      result.player_result.kill_count =
+        result.player_result.kill_count * 60 * normalizeTime / time;
+      result.player_result.assist_count =
+        result.player_result.assist_count * 60 * normalizeTime / time;
+      result.player_result.death_count =
+        result.player_result.death_count * 60 * normalizeTime / time;
+      result.player_result.special_count =
+        result.player_result.special_count * 60 * normalizeTime / time;
+    });
   }
 
   render() {
@@ -88,26 +103,32 @@ export default class ResultsCard extends React.Component {
 
     return (
       <Panel header={<h3>Last 50 Battles</h3>}>
-          <ButtonToolbar style={{ marginBottom: '10px' }}>
-            <ButtonGroup>
-              <Button
-                onClick={() => this.setState({ normalize: false})}
-                active={!normalize}
-              >
-                Raw
-              </Button>
-              <SplitButton
-                  title={`Normalize to ${normalizeTime} minutes`}
-                  onClick={() => this.setState({ normalize: true})}
-                  active={normalize}
-                  id='minutes'
-              >
-                  <MenuItem onClick={() => this.setState({ normalizeTime: 1})}>1</MenuItem>
-                  <MenuItem onClick={() => this.setState({ normalizeTime: 3})}>3</MenuItem>
-                  <MenuItem onClick={() => this.setState({ normalizeTime: 5})}>5</MenuItem>
-                </SplitButton>
-            </ButtonGroup>
-          </ButtonToolbar>
+        <ButtonToolbar style={{ marginBottom: '10px' }}>
+          <ButtonGroup>
+            <Button
+              onClick={() => this.setState({ normalize: false })}
+              active={!normalize}
+            >
+              Raw
+            </Button>
+            <SplitButton
+              title={`Normalize to ${normalizeTime} minutes`}
+              onClick={() => this.setState({ normalize: true })}
+              active={normalize}
+              id="minutes"
+            >
+              <MenuItem onClick={() => this.setState({ normalizeTime: 1 })}>
+                1
+              </MenuItem>
+              <MenuItem onClick={() => this.setState({ normalizeTime: 3 })}>
+                3
+              </MenuItem>
+              <MenuItem onClick={() => this.setState({ normalizeTime: 5 })}>
+                5
+              </MenuItem>
+            </SplitButton>
+          </ButtonGroup>
+        </ButtonToolbar>
         * Click on column headers to sort
         <Table striped bordered condensed hover>
           <thead>
@@ -162,7 +183,9 @@ export default class ResultsCard extends React.Component {
                     {result.my_team_result.key}
                   </td>
                   <td>
-                    {result.estimate_gachi_power ? result.estimate_gachi_power : '---'}
+                    {result.estimate_gachi_power
+                      ? result.estimate_gachi_power
+                      : '---'}
                   </td>
                   <td style={{ textAlign: 'center', background: 'darkgrey' }}>
                     <Image
@@ -176,19 +199,25 @@ export default class ResultsCard extends React.Component {
                     {result.player_result.game_paint_point.toFixed(0)}
                   </td>
                   <td>
-                    {result.k_a.toFixed(normalize ?  1 : 0)}
+                    {result.k_a.toFixed(normalize ? 1 : 0)}
                   </td>
                   <td>
-                    {result.player_result.kill_count.toFixed(normalize ?  1 : 0)}
+                    {result.player_result.kill_count.toFixed(normalize ? 1 : 0)}
                   </td>
                   <td>
-                    {result.player_result.assist_count.toFixed(normalize ?  1 : 0)}
+                    {result.player_result.assist_count.toFixed(
+                      normalize ? 1 : 0
+                    )}
                   </td>
                   <td>
-                    {result.player_result.death_count.toFixed(normalize ?  1 : 0)}
+                    {result.player_result.death_count.toFixed(
+                      normalize ? 1 : 0
+                    )}
                   </td>
                   <td>
-                    {result.player_result.special_count.toFixed(normalize ?  1 : 0)}
+                    {result.player_result.special_count.toFixed(
+                      normalize ? 1 : 0
+                    )}
                   </td>
                 </tr>
               );
