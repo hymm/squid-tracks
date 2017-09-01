@@ -70,6 +70,7 @@ class ResultsCard extends React.Component {
   state = {
     sortColumn: 'battle_number',
     sortDirection: 'up',
+    sortFunction: parseFloat,
     normalize: false,
     normalizeTime: 5
   };
@@ -167,7 +168,7 @@ class ResultsCard extends React.Component {
   }
 
   render() {
-    const { results, changeResult, statInk, intl } = this.props;
+    const { results, changeResult, statInk } = this.props;
     const { normalize, normalizeTime } = this.state;
 
     const columnHeaders = this.columnHeaders;

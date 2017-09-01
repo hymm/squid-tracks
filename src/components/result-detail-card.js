@@ -12,7 +12,6 @@ import {
   MenuItem
 } from 'react-bootstrap';
 import { pick, mapKeys } from 'lodash';
-import Polygon from 'react-polygon';
 import flatten from 'flat';
 import { FormattedMessage } from 'react-intl';
 import TeamStatsTable from './team-stats-table';
