@@ -68,6 +68,7 @@ function registerSplatnetHandler() {
         const splitStr = str.split('=');
         params[splitStr[0]] = splitStr[1];
       });
+
       splatnet
         .getSplatnetSession(params.session_token_code, authParams.codeVerifier)
         .then(async tokens => {
