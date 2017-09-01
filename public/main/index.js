@@ -6,6 +6,8 @@ const Memo = require('promise-memoize');
 const { writeToStatInk } = require('./stat-ink/stat-ink');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
+const unhandled = require('electron-unhandled');
+unhandled({ logger: log.error });
 
 const getSplatnetApiMemo120 = Memo(splatnet.getSplatnetApi, { maxAge: 120000 });
 const getSplatnetApiMemo10 = Memo(splatnet.getSplatnetApi, { maxAge: 10000 });
@@ -66,7 +68,6 @@ function registerSplatnetHandler() {
         const splitStr = str.split('=');
         params[splitStr[0]] = splitStr[1];
       });
-
       splatnet
         .getSplatnetSession(params.session_token_code, authParams.codeVerifier)
         .then(async tokens => {

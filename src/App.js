@@ -4,15 +4,16 @@ import createHashHistory from 'history/createHashHistory';
 import { IntlProvider } from 'react-intl';
 import Routes from './routes';
 import messages from './messages';
-
 import { screenview } from './analytics';
-
 import Login from './login';
+import log from 'electron-log';
+import unhandled from 'electron-unhandled'
+import { ipcRenderer } from 'electron';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-// eslint-disable-next-line
-const { ipcRenderer } = require('electron');
+unhandled({ logger: log.error });
+
 
 const history = createHashHistory();
 history.listen((location) => {
