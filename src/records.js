@@ -4,18 +4,21 @@ import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
 import { event } from './analytics';
-const { ipcRenderer } = require('electron');
-
-const Records = () =>
-  <Grid fluid style={{ marginTop: 65 }}>
-    <Row>
-      <Col md={12}>
-        <ResultsContainer />
-      </Col>
-    </Row>
-  </Grid>;
+import { ipcRenderer } from 'electron';
+import { defineMessages, injectIntl } from 'react-intl';
 
 class ResultsContainer extends React.Component {
+  messages = defineMessages({
+    refresh: {
+      id: 'records.refreshButton.refresh',
+      defaultMessage: 'Refresh'
+    },
+    refreshed: {
+      id: 'records.refreshButton.refreshed',
+      defaultMessage: 'Refreshed'
+    }
+  });
+
   state = {
     records: {
       records: {}
@@ -33,6 +36,7 @@ class ResultsContainer extends React.Component {
   }
 
   render() {
+    const { intl } = this.props;
     return (
       <div>
         <ButtonToolbar style={{ marginBottom: '10px' }}>
@@ -45,7 +49,9 @@ class ResultsContainer extends React.Component {
             }}
             disabled={this.state.refreshing}
           >
-            {this.state.refreshing ? 'Refreshed' : 'Refresh'}
+            {this.state.refreshing
+              ? intl.formatMessage(this.messages.refreshed)
+              : intl.formatMessage(this.messages.refresh)}
           </Button>
         </ButtonToolbar>
         <PlayerCard records={this.state.records.records} />
@@ -55,5 +61,16 @@ class ResultsContainer extends React.Component {
     );
   }
 }
+
+const ResultsContainerIntl = injectIntl(ResultsContainer);
+
+const Records = () =>
+  <Grid fluid style={{ marginTop: 65 }}>
+    <Row>
+      <Col md={12}>
+        <ResultsContainerIntl />
+      </Col>
+    </Row>
+  </Grid>;
 
 export default Records;

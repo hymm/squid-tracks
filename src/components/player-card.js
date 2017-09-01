@@ -1,5 +1,6 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
 const PlayerCard = ({ records }) => {
   const { player = {} } = records;
@@ -21,12 +22,41 @@ const PlayerCard = ({ records }) => {
 
   return (
     <Panel header={<h3>Player Card</h3>}>
-      <div>{`Nickname: ${player.nickname}`}</div>
-      <div>{`SZ: ${udemae_zones.name}${sz_s_plus_number}`}</div>
-      <div>{`TC: ${udemae_tower.name}${tc_s_plus_number}`}</div>
-      <div>{`RM: ${udemae_rainmaker.name}${rm_s_plus_number}`}</div>
-      <div>{`Wins: ${records.win_count}`}</div>
-      <div>{`Losses: ${records.lose_count}`}</div>
+      <FormattedMessage
+        id="PlayerCard.nickname"
+        defaultMessage="Nickname: {nickname}"
+        values={{ nickname: player.nickname }}
+      />
+      <br />
+      <FormattedMessage
+        id="PlayerCard.splatzonesShortname"
+        defaultMessage="SZ: {name}{number}"
+        values={{ name: udemae_zones.name, number: sz_s_plus_number }}
+      />
+      <br />
+      <FormattedMessage
+        id="PlayerCard.towercontrolShortname"
+        defaultMessage="SZ: {name}{number}"
+        values={{ name: udemae_tower.name, number: tc_s_plus_number }}
+      />
+      <br />
+      <FormattedMessage
+        id="PlayerCard.rainmakerShortname"
+        defaultMessage="SZ: {name}{number}"
+        values={{ name: udemae_rainmaker.name, number: rm_s_plus_number }}
+      />
+      <br />
+      <FormattedMessage
+        id="PlayerCard.winCount"
+        defaultMessage="Wins: {count}"
+        values={{ count: records.win_count }}
+      />
+      <br />
+      <FormattedMessage
+        id="PlayerCard.loseCount"
+        defaultMessage="Losses: {count}"
+        values={{ count: records.lose_count }}
+      />
     </Panel>
   );
 };
