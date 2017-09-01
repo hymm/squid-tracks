@@ -6,10 +6,18 @@ const Memo = require('promise-memoize');
 const { writeToStatInk } = require('./stat-ink/stat-ink');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
+const unhandled = require('electron-unhandled');
+unhandled({ logger: log.error });
 
 const getSplatnetApiMemo120 = Memo(splatnet.getSplatnetApi, { maxAge: 120000 });
 const getSplatnetApiMemo10 = Memo(splatnet.getSplatnetApi, { maxAge: 10000 });
 const getSplatnetApiMemoInf = Memo(splatnet.getSplatnetApi);
+
+function clearSplatnetCache() {
+  getSplatnetApiMemo120.clear();
+  getSplatnetApiMemo10.clear();
+  getSplatnetApiMemoInf.clear();
+}
 
 if (!isDev) {
   require('./autoupdate');
@@ -32,14 +40,15 @@ const store = new Store({
     statInkToken: '',
     statInkInfo: {},
     uuid: '',
-    gaEnabled: true
+    gaEnabled: true,
+    locale: ''
   }
 });
 
 const statInkStore = new Store({
   configName: 'stat-ink',
   defaults: {
-    info: {},
+    info: {}
   }
 });
 
@@ -76,6 +85,13 @@ function registerSplatnetHandler() {
     }
   );
 }
+
+ipcMain.on('setUserLangauge', (event, value) => {
+  store.set('locale', value);
+  splatnet.setUserLanguage(value);
+  clearSplatnetCache();
+  event.returnValue = true;
+});
 
 ipcMain.on('getFromStore', (event, settingName) => {
   event.returnValue = store.get(settingName);
@@ -208,7 +224,12 @@ async function getStoredSessionToken() {
   if (isTokenGood(sessionToken)) {
     try {
       await splatnet.getSessionWithSessionToken(sessionToken);
+      const language = store.get('locale');
+      if (language.length > 0) {
+        splatnet.setUserLanguage(language);
+      }
     } catch (e) {
+      log.info(e);
       log.info('SessionToken has probably expired, please login again');
       this.store.set('sessionToken', '');
     }
@@ -225,10 +246,12 @@ function createWindow() {
   });
 
   // comment this in on first run to get dev tools
-  /* const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
-  installExtension(REACT_DEVELOPER_TOOLS)
-    .then((name) => console.log(`Added Extension:  ${name}`))
-    .catch((err) => console.log('An error occurred: ', err)); */
+  if (isDev) {
+      const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
+      installExtension(REACT_DEVELOPER_TOOLS)
+        .then((name) => console.log(`Added Extension:  ${name}`))
+        .catch((err) => console.log('An error occurred: ', err));
+  }
 
   mainWindow.loadURL(startUrl);
 

@@ -8,6 +8,7 @@ const app = require('electron').app;
 const appVersion = app.getVersion();
 const appName = app.getName();
 const WeaponMap = require('./weapon-map');
+const FestRankMap = require('./fest-rank-map');
 
 /* const request = request2.defaults({
   proxy: 'http://localhost:8888',
@@ -81,13 +82,16 @@ function setPlayerResults(statInk, result) {
   }
 
   let paint_point = result.player_result.game_paint_point;
-  if (result.my_team_result.key === 'victory') {
+  if (
+    result.my_team_result.key === 'victory' &&
+    result.rule.key === 'turf_war'
+  ) {
     paint_point += 1000;
   }
   statInk.my_point = paint_point;
 }
 
-function getPlayer(playerResult, team, result) {
+function getPlayer(playerResult, team, addBonus) {
   const player = {};
   player.team = team === 'me' ? 'my' : team; // 'my', 'his'
   player.is_me = team === 'me' ? 'yes' : 'no'; // 'yes', 'no'
@@ -107,7 +111,7 @@ function getPlayer(playerResult, team, result) {
   player.kill_or_assist = playerResult.kill_count + playerResult.assist_count;
   player.special = playerResult.special_count;
   player.point = playerResult.game_paint_point;
-  if (result === 'victory') {
+  if (addBonus) {
     player.point += 1000;
   }
   return player;
@@ -115,16 +119,18 @@ function getPlayer(playerResult, team, result) {
 
 function setPlayers(statInk, result) {
   statInk.players = [];
-  statInk.players.push(
-    getPlayer(result.player_result, 'me', result.my_team_result.key)
-  );
+  const addBonusMyTeam =
+    result.my_team_result.key === 'victory' && result.rule.key === 'turf_war';
+  statInk.players.push(getPlayer(result.player_result, 'me', addBonusMyTeam));
   result.my_team_members.forEach(player => {
-    statInk.players.push(getPlayer(player, 'my', result.my_team_result.key));
+    statInk.players.push(getPlayer(player, 'my', addBonusMyTeam));
   });
+
+  const addBonusTheirTeam =
+    result.other_team_result.key === 'victory' &&
+    result.rule.key === 'turf_war';
   result.other_team_members.forEach(player => {
-    statInk.players.push(
-      getPlayer(player, 'his', result.other_team_result.key)
-    );
+    statInk.players.push(getPlayer(player, 'his', addBonusTheirTeam));
   });
 }
 
@@ -134,16 +140,28 @@ function setClientInfo(statInk, result) {
   statInk.agent_version = appVersion; // get from json file?
 }
 
-async function convertResultToStatInk(result) {
+function setSplatFest(statInk, result) {
+    statInk.fest_title = FestRankMap[result.player_result.player.fes_grade.rank];
+    statInk.fest_title_after = FestRankMap[result.fes_grade.rank];
+}
+
+async function convertResultToStatInk(result, disableGetImage) {
   const statInk = {};
   setUuid(statInk, result);
   setGameInfo(statInk, result);
   setGameResults(statInk, result);
+
   setPlayerResults(statInk, result);
   setPlayers(statInk, result);
   setClientInfo(statInk, result);
 
-  statInk.image_result = await getSplatnetImage(result.battle_number);
+  if (result.game_mode.key === 'fest') {
+      setSplatFest(statInk, result);
+  }
+
+  if (!disableGetImage) {
+    statInk.image_result = await getSplatnetImage(result.battle_number);
+  }
 
   return statInk;
 }

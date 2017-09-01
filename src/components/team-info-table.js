@@ -1,14 +1,46 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
 const TeamHeader = ({ player = { player: {} } }) =>
   <thead>
     <tr>
-      <th>Player</th>
-      <th colSpan="1">Sort</th>
-      <th colSpan="1">Star</th>
-      <th colSpan="1">Weapon ID</th>
-      <th colSpan="1">Player ID</th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamInfo.header.player"
+          defaultMessage="Player"
+        />
+      </th>
+      <th colSpan="1">
+        <FormattedMessage
+          id="resultDetails.teamInfo.header.level"
+          defaultMessage="Level"
+        />
+      </th>
+      <th colSpan="1">
+        <FormattedMessage
+          id="resultDetails.teamInfo.header.sort"
+          defaultMessage="Sort"
+        />
+      </th>
+      <th colSpan="1">
+        <FormattedMessage
+          id="resultDetails.teamInfo.header.star"
+          defaultMessage="Star"
+        />
+      </th>
+      <th colSpan="1">
+        <FormattedMessage
+          id="resultDetails.teamInfo.header.weaponId"
+          defaultMessage="Weapon ID"
+        />
+      </th>
+      <th colSpan="1">
+        <FormattedMessage
+          id="resultDetails.teamInfo.header.playerId"
+          defaultMessage="Player ID"
+        />
+      </th>
     </tr>
   </thead>;
 
@@ -17,6 +49,9 @@ const PlayerRow = ({ player }) => {
     <tr>
       <td>
         {player.player.nickname}
+      </td>
+      <td>
+        {player.player.player_rank}
       </td>
       <td>
         {player.sort_score}

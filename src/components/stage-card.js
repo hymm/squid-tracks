@@ -9,10 +9,11 @@ import {
   Col,
   Row
 } from 'react-bootstrap';
+import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
 
-export default class StageCard extends React.Component {
+class StageCard extends React.Component {
   state = {
     percent: true,
     sortColumn: 'total_percent',
@@ -85,11 +86,46 @@ export default class StageCard extends React.Component {
     };
   }
 
-  static columnHeaders = [
-    { text: 'SZ', sortColumn: 'area_percent', sortDirection: 'up' },
-    { text: 'TC', sortColumn: 'yagura_percent', sortDirection: 'up' },
-    { text: 'RM', sortColumn: 'hoko_percent', sortDirection: 'up' },
-    { text: 'Total', sortColumn: 'total_percent', sortDirection: 'up' }
+  messages = defineMessages({
+    sz: {
+      id: 'stageCard.header.splatzones',
+      defaultMessage: 'SZ'
+    },
+    tc: {
+      id: 'stageCard.header.towercontrol',
+      defaultMessage: 'TC'
+    },
+    rm: {
+      id: 'stageCard.header.rainmaker',
+      defaultMessage: 'RM'
+    },
+    total: {
+      id: 'stageCard.header.total',
+      defaultMessage: 'Total'
+    }
+  });
+
+  columnHeaders = [
+    {
+      text: this.props.intl.formatMessage(this.messages.sz),
+      sortColumn: 'area_percent',
+      sortDirection: 'up'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.tc),
+      sortColumn: 'yagura_percent',
+      sortDirection: 'up'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.rm),
+      sortColumn: 'hoko_percent',
+      sortDirection: 'up'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.total),
+      sortColumn: 'total_percent',
+      sortDirection: 'up'
+    }
   ];
 
   render() {
@@ -103,7 +139,16 @@ export default class StageCard extends React.Component {
     sort(stageStats, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel header={<h3>Stage Stats</h3>}>
+      <Panel
+        header={
+          <h3>
+            <FormattedMessage
+              id="StageCard.title"
+              defaultMessage="Stage Stats"
+            />
+          </h3>
+        }
+      >
         <Grid fluid>
           <Row>
             <Col sm={12} md={12}>
@@ -113,14 +158,23 @@ export default class StageCard extends React.Component {
                     onClick={this.showPercent}
                     active={this.state.percent}
                   >
-                    Percent
+                    <FormattedMessage
+                      id="StageCard.button.percent"
+                      defaultMessage="Percent"
+                    />
                   </Button>
                   <Button onClick={this.showCount} active={!this.state.percent}>
-                    Count
+                    <FormattedMessage
+                      id="StageCard.button.count"
+                      defaultMessage="Count"
+                    />
                   </Button>
                 </ButtonGroup>
               </ButtonToolbar>
-              * Click on column headers to sort by win percent
+              <FormattedMessage
+                id="StageCard.sortHelp"
+                defaultMessage="* Click on column headers to sort by win percent"
+              />
             </Col>
           </Row>
           <Row>
@@ -128,8 +182,13 @@ export default class StageCard extends React.Component {
               <Table striped bordered condensed hover>
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    {StageCard.columnHeaders.map(header =>
+                    <th>
+                      <FormattedMessage
+                        id="StageCard.header.name"
+                        defaultMessage="Name"
+                      />
+                    </th>
+                    {this.columnHeaders.map(header =>
                       <TableHeader
                         key={header.text}
                         setState={this.setState.bind(this)}
@@ -174,7 +233,12 @@ export default class StageCard extends React.Component {
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Totals</th>
+                    <th>
+                      <FormattedMessage
+                        id="StageCard.header.total"
+                        defaultMessage="Total"
+                      />
+                    </th>
                     <td>
                       {this.state.percent
                         ? `${calcStats.rm_percent.toFixed(2)}`
@@ -205,3 +269,5 @@ export default class StageCard extends React.Component {
     );
   }
 }
+
+export default injectIntl(StageCard);

@@ -1,14 +1,35 @@
 import React from 'react';
 import { Table, Image } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
 const TeamHeader = ({ player = { player: {} } }) =>
   <thead>
     <tr>
-      <th>Player</th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamGear.header.player"
+          defaultMessage="Player"
+        />
+      </th>
       <th />
-      <th colSpan="2">Head</th>
-      <th colSpan="2">Clothes</th>
-      <th colSpan="2">Shoes</th>
+      <th colSpan="2">
+        <FormattedMessage
+          id="resultDetails.teamGear.header.head"
+          defaultMessage="Head"
+        />
+      </th>
+      <th colSpan="2">
+        <FormattedMessage
+          id="resultDetails.teamGear.header.clothes"
+          defaultMessage="Clothes"
+        />
+      </th>
+      <th colSpan="2">
+        <FormattedMessage
+          id="resultDetails.teamGear.header.shoes"
+          defaultMessage="Shoes"
+        />
+      </th>
     </tr>
   </thead>;
 
@@ -32,12 +53,12 @@ const AbilityCell = ({ skills }) => {
   const background = '#777';
 
   const shiny = skills.subs.reduce((a, b) => {
-    return a && b && (b.id === skills.subs[0].id);
+    return a && b && b.id === skills.subs[0].id;
   }, true);
 
   let bgcolor = 'darkgrey';
   if (shiny) {
-      bgcolor = (skills.subs[0].id === skills.main.id) ? 'lightgreen' : 'skyblue';
+    bgcolor = skills.subs[0].id === skills.main.id ? 'lightgreen' : 'skyblue';
   }
 
   return (
