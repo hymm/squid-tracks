@@ -6,8 +6,14 @@ const Memo = require('promise-memoize');
 const { writeToStatInk } = require('./stat-ink/stat-ink');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
-const unhandled = require('electron-unhandled');
-unhandled({ logger: log.error });
+
+process.on('uncaughtException', err => {
+    log.error(`Unhandled Error in Main: ${err}`);
+});
+
+process.on('unhandledRejection', err => {
+    log.error(`Unhandled Promise Rejection in Main: ${err}`);
+});
 
 const getSplatnetApiMemo120 = Memo(splatnet.getSplatnetApi, { maxAge: 120000 });
 const getSplatnetApiMemo10 = Memo(splatnet.getSplatnetApi, { maxAge: 10000 });

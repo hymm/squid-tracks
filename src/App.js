@@ -7,13 +7,18 @@ import messages from './messages';
 import { screenview } from './analytics';
 import Login from './login';
 import log from 'electron-log';
-import unhandled from 'electron-unhandled'
 import { ipcRenderer } from 'electron';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-unhandled({ logger: log.error });
 
+window.addEventListener('error', event => {
+    log.error(`UnhandledError in renderer: ${event.error}`);
+});
+
+window.addEventListener('unhandledrejection', event => {
+    log.error(`Unhandled Promise Rejection in renderer: ${event.reason}`);
+});
 
 const history = createHashHistory();
 history.listen((location) => {
