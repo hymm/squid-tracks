@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## Version 0.2.4
+### New Features
+* added radar charts to battle details
+* user can now pick splatnet language in settings.  Support languages vary by region
+* player level added in more info section of battle details
+* copy a discord pastable json of battle stats to clipboard
+* added estimate gachi power to last 50 battles table
+* added translation support to results, records, and schedule (looking for translators)
+
+### Bug Fixes 
+* removed turf bonus points for ranked games
+* calculation for per minutes stats was wrong, now fixed
+* removed s+ numbers from details, splatnet was not sending the real numbers
+* removed bonus from turf inked for ranked games uploaded to stat.ink
+* added logging of uncaught errors to help with debugging
+
 ## Version 0.2.3
 
 * add sloshing machine

@@ -1,16 +1,49 @@
 import React from 'react';
 import { Table, Image } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
 const TeamHeader = ({ player = { player: {} } }) =>
   <thead>
     <tr>
-      <th>Player</th>
-      {player.player.udemae ? <th>Rank</th> : null}
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamStats.header.player"
+          defaultMessage="Player"
+        />
+      </th>
+      {player.player.udemae
+        ? <th>
+            <FormattedMessage
+              id="resultDetails.teamStats.header.rank"
+              defaultMessage="Rank"
+            />
+          </th>
+        : null}
       <th />
-      <th>Inked</th>
-      <th>K+A (A)</th>
-      <th>K / D</th>
-      <th>S</th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamStats.header.inked"
+          defaultMessage="Inked"
+        />
+      </th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamStats.header.killsAndAssists"
+          defaultMessage="K+A (A)"
+        />
+      </th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamStats.header.killsAndDeaths"
+          defaultMessage="K / D"
+        />
+      </th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamStats.header.specials"
+          defaultMessage="S"
+        />
+      </th>
     </tr>
   </thead>;
 
@@ -66,7 +99,12 @@ const TeamStatTable = ({ result, team }) => {
       </tbody>
       <tfoot>
         <tr>
-          <th>Totals</th>
+          <th>
+            <FormattedMessage
+              id="resultDetails.teamStats.header.totals"
+              defaultMessage="Totals"
+            />
+          </th>
           <th />
           {team[0].player.udemae ? <th /> : null}
           <td>

@@ -1,67 +1,67 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router-dom';
-import ApiViewer from './api-viewer';
+import { Router } from 'react-router-dom';
 import createHashHistory from 'history/createHashHistory';
+import { IntlProvider } from 'react-intl';
+import Routes from './routes';
+import messages from './messages';
 import { screenview } from './analytics';
-import Schedule from './schedule';
-import Records from './records';
-import Meta from './meta';
-import Results from './results';
-import Settings from './settings';
-import Navigation from './navigation';
-import About from './about';
 import Login from './login';
+import log from 'electron-log';
+import { ipcRenderer } from 'electron';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-// eslint-disable-next-line
-const { ipcRenderer } = require('electron');
+
+window.addEventListener('error', event => {
+  log.error(`UnhandledError in renderer: ${event.error}`);
+});
+
+window.addEventListener('unhandledrejection', event => {
+  log.error(`Unhandled Promise Rejection in renderer: ${event.reason}`);
+});
 
 const history = createHashHistory();
 history.listen(location => {
   screenview(`${location.pathname}${location.search}${location.hash}`);
 });
 
-const Routes = ({ token, logoutCallback }) =>
-  <div>
-    <Navigation />
-    <Route path="/" exact component={About} />
-    <Route path="/testApi" component={ApiViewer} />
-    <Route path="/schedule" component={Schedule} />
-    <Route path="/records" component={Records} />
-    <Route path="/results" component={Results} />
-    <Route path="/meta" component={Meta} />
-    <Route
-      path="/settings"
-      component={() =>
-        <Settings token={token} logoutCallback={logoutCallback} />}
-    />
-  </div>;
-
 class App extends Component {
   state = {
-    sessionToken: ''
+    sessionToken: '',
+    locale: 'en'
   };
 
   componentDidMount() {
     this.getSessionToken();
     screenview('Start');
+    this.setState({ locale: ipcRenderer.sendSync('getFromStore', 'locale') });
   }
 
   getSessionToken = () => {
     this.setState({ sessionToken: ipcRenderer.sendSync('getSessionToken') });
   };
 
+  setLocale = locale => {
+    this.setState({ locale });
+    ipcRenderer.sendSync('setUserLangauge', locale);
+  };
+
   render() {
+    const { sessionToken, locale } = this.state;
+    const message = messages[locale] || messages.en;
     return (
-      <Router history={history}>
-        {this.state.sessionToken.length !== 0
-          ? <Routes
-              token={this.state.sessionToken}
-              logoutCallback={this.getSessionToken}
-            />
-          : <Login />}
-      </Router>
+      <IntlProvider locale={locale} messages={message}>
+        <Router history={history}>
+          {sessionToken.length !== 0
+            ? <Routes
+                token={sessionToken}
+                logoutCallback={this.getSessionToken}
+                setLocale={this.setLocale}
+                locale={locale}
+              />
+            : <Login />}
+        </Router>
+      </IntlProvider>
     );
   }
 }
