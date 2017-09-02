@@ -94,7 +94,7 @@ const TeamStatTable = ({ result, team }) => {
       <TeamHeader player={team[0]} />
       <tbody>
         {team.map(player =>
-          <PlayerRow key={player.player.nickname} player={player} />
+          <PlayerRow key={player.player.principal_id} player={player} />
         )}
       </tbody>
       <tfoot>
