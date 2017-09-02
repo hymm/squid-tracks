@@ -284,7 +284,9 @@ class ResultsCard extends React.Component {
                   <td>
                     {result.estimate_gachi_power
                       ? result.estimate_gachi_power
-                      : '---'}
+                      : result.other_estimate_fes_power
+                        ? result.other_estimate_fes_power
+                        : '---'}
                   </td>
                   <td style={{ textAlign: 'center', background: 'darkgrey' }}>
                     <Image

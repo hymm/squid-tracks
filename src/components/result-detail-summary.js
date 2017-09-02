@@ -117,6 +117,19 @@ export const ResultSummary2 = ({ result }) =>
             <td>{`${result.my_team_count} - ${result.other_team_count}`}</td>
           </tr>
         : null}
+      {result.win_meter != null
+        ? <tr>
+            <th>
+              <FormattedMessage
+                id="results.summary.winMeter"
+                defaultMessage="Win Meter"
+              />
+            </th>
+            <td>
+              {result.win_meter}
+            </td>
+          </tr>
+        : null}
       {result.estimate_gachi_power
         ? <tr>
             <th>
@@ -140,6 +153,19 @@ export const ResultSummary2 = ({ result }) =>
             </th>
             <td>
               {result.fes_power}
+            </td>
+          </tr>
+        : null}
+      {result.max_fes_poser != null
+        ? <tr>
+            <th>
+              <FormattedMessage
+                id="results.summary.maxFestivalPower"
+                defaultMessage="Max Festival Power"
+              />
+            </th>
+            <td>
+              {result.max_fes_poser}
             </td>
           </tr>
         : null}
@@ -182,19 +208,6 @@ export const ResultSummary2 = ({ result }) =>
             </td>
           </tr>
         : null}
-      {result.win_meter != null
-        ? <tr>
-            <th>
-              <FormattedMessage
-                id="results.summary.winMeter"
-                defaultMessage="Win Meter"
-              />
-            </th>
-            <td>
-              {result.win_meter}
-            </td>
-          </tr>
-        : null}
       {result.my_estimate_fes_power != null
         ? <tr>
             <th>
@@ -218,19 +231,6 @@ export const ResultSummary2 = ({ result }) =>
             </th>
             <td>
               {result.other_estimate_fes_power}
-            </td>
-          </tr>
-        : null}
-      {result.max_fes_poser != null
-        ? <tr>
-            <th>
-              <FormattedMessage
-                id="results.summary.maxFestivalPower"
-                defaultMessage="Max Festival Power"
-              />
-            </th>
-            <td>
-              {result.max_fes_poser}
             </td>
           </tr>
         : null}
