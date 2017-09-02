@@ -1,6 +1,7 @@
 {
   "nav.records": "Records",
   "nav.results": "Battle History",
+  "nav.league": "League Meta",
   "nav.schedule": "Schedule",
   "nav.settings": "Settings",
   "resultDetails.export.copyRawJson": "Copy Raw Json",

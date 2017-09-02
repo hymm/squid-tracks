@@ -25,17 +25,34 @@ const Navigation = () =>
           : null}
         <LinkContainer to="/schedule">
           <NavItem eventKey={3}>
-              <FormattedMessage id={'nav.schedule'} defaultMessage={'Schedule'} />
+            <FormattedMessage id={'nav.schedule'} defaultMessage={'Schedule'} />
           </NavItem>
         </LinkContainer>
         <LinkContainer to="/records">
-          <NavItem eventKey={3}><FormattedMessage id={'nav.records'} defaultMessage={'Records'} /></NavItem>
+          <NavItem eventKey={3}>
+            <FormattedMessage id={'nav.records'} defaultMessage={'Records'} />
+          </NavItem>
         </LinkContainer>
         <LinkContainer to="/results">
-          <NavItem eventKey={4}><FormattedMessage id={'nav.results'} defaultMessage={'Battle History'} /></NavItem>
+          <NavItem eventKey={4}>
+            <FormattedMessage
+              id={'nav.results'}
+              defaultMessage={'Battle History'}
+            />
+          </NavItem>
+        </LinkContainer>
+        <LinkContainer to="/meta">
+          <NavItem eventKey={5}>
+            <FormattedMessage
+              id={'nav.league'}
+              defaultMessage={'League Meta'}
+            />
+          </NavItem>
         </LinkContainer>
         <LinkContainer to="/settings">
-          <NavItem eventKey={5}><FormattedMessage id={'nav.settings'} defaultMessage={'Settings'} /></NavItem>
+          <NavItem eventKey={6}>
+            <FormattedMessage id={'nav.settings'} defaultMessage={'Settings'} />
+          </NavItem>
         </LinkContainer>
       </Nav>
     </Navbar.Collapse>

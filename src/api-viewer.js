@@ -30,17 +30,17 @@ class ApiTester extends React.Component {
     // POST 'share/challenges/great_pyramid_at_giza'
   ];
 
-  handleButtonClick = async () => {
-    const league = ipcRenderer.sendSync('getApi', this.state.url);
-    this.setState({ reply: league });
-  };
-
   handleUrlChange = e => {
     this.setState({ url: e.target.value });
   };
 
   handleSelectChange = e => {
     this.setState({ url: e.target.value });
+  };
+
+  handleButtonClick = async () => {
+    const league = ipcRenderer.sendSync('getApi', this.state.url);
+    this.setState({ reply: league });
   };
 
   handlePostClick = () => {

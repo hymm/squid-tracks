@@ -172,16 +172,36 @@ class ResultDetailCard extends React.Component {
 
   calculateMaximums = (myTeam, otherTeam) => {
     const teams = myTeam.concat(otherTeam);
-    const k = teams.reduce((max, member) => member.kill_count > max ? member.kill_count : max, 0);
-    const a = teams.reduce((max, member) => member.assist_count > max ? member.assist_count : max, 0);
-    const d = teams.reduce((max, member) => member.death_count > max ? member.death_count : max, 0);
-    const s = teams.reduce((max, member) => member.special_count > max ? member.special_count : max, 0);
-    const p = teams.reduce((max, member) => member.game_paint_point > max ? member.game_paint_point : max, 0);
+    const k = teams.reduce(
+      (max, member) => (member.kill_count > max ? member.kill_count : max),
+      0
+    );
+    const a = teams.reduce(
+      (max, member) => (member.assist_count > max ? member.assist_count : max),
+      0
+    );
+    const d = teams.reduce(
+      (max, member) => (member.death_count > max ? member.death_count : max),
+      0
+    );
+    const s = teams.reduce(
+      (max, member) =>
+        member.special_count > max ? member.special_count : max,
+      0
+    );
+    const p = teams.reduce(
+      (max, member) =>
+        member.game_paint_point > max ? member.game_paint_point : max,
+      0
+    );
 
-    const kad = [k, a, d].reduce((max, value) => value > max ? value : max, 0);
+    const kad = [k, a, d].reduce(
+      (max, value) => (value > max ? value : max),
+      0
+    );
 
     return { k: kad, a: kad, d: kad, s, p };
-  }
+  };
 
   render() {
     const { result, statInk } = this.props;
@@ -268,31 +288,44 @@ class ResultDetailCard extends React.Component {
                     active={this.state.show === 4}
                     style={{ padding: '8px 12px 4px 12px' }}
                   >
-                      <svg width="16" height="14">
-                          <polygon
-                              class="r--poly-polygon"
-                              points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
-                              style={{ strokeWidth: 1.5, stroke: '#666', fill: 'none' }}
-                          />
-                      </svg>
-                      <svg width="14" height="14">
-                          <polygon
-                              class="r--poly-polygon"
-                              points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
-                              style={{ strokeWidth: 1.5, stroke: '#666', fill: 'none' }}
-                          />
-                      </svg>
+                    <svg width="16" height="14">
+                      <polygon
+                        class="r--poly-polygon"
+                        points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
+                        style={{
+                          strokeWidth: 1.5,
+                          stroke: '#666',
+                          fill: 'none'
+                        }}
+                      />
+                    </svg>
+                    <svg width="14" height="14">
+                      <polygon
+                        class="r--poly-polygon"
+                        points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
+                        style={{
+                          strokeWidth: 1.5,
+                          stroke: '#666',
+                          fill: 'none'
+                        }}
+                      />
+                    </svg>
                   </Button>
                   <Button
                     onClick={this.showRadarTotals}
                     active={this.state.show === 5}
                     style={{ padding: '8px 12px 4px 12px' }}
                   >
-                      <svg width="14" height="14">
-                          <polygon class="r--poly-polygon"
-                              points="7,0,13.062177826491,3.5,13.062177826491,10.5,7,14,0.93782217350893,10.5,0.93782217350893,3.5"
-                              style={{ strokeWidth: 1.5, stroke: '#666', fill: 'none' }}
-                          />
+                    <svg width="14" height="14">
+                      <polygon
+                        class="r--poly-polygon"
+                        points="7,0,13.062177826491,3.5,13.062177826491,10.5,7,14,0.93782217350893,10.5,0.93782217350893,3.5"
+                        style={{
+                          strokeWidth: 1.5,
+                          stroke: '#666',
+                          fill: 'none'
+                        }}
+                      />
                     </svg>
                   </Button>
                 </ButtonGroup>
@@ -300,50 +333,65 @@ class ResultDetailCard extends React.Component {
             </Col>
           </Row>
           <Row>
-            {this.state.show < 5 ?
-                [
-                    <Col sm={6} md={6}>
-
-                  <h4>
-                    <FormattedMessage
-                      id="resultDetails.teamsButton.myTeamTitle"
-                      defaultMessage="My Team"
-                    />
-                  </h4>
-                  {this.state.show === 1 ? <TeamStatsTable team={myTeam} /> : null}
-                  {this.state.show === 2 ? <TeamGearTable team={myTeam} /> : null}
-                  {this.state.show === 3 ? <TeamInfoTable team={myTeam} /> : null}
-                  {this.state.show === 4 ? <TeamRadar team={myTeam} maximums={maximums} /> : null}
-              </Col>,
-                <Col sm={6} md={6}>
-                  <h4>
-                    <FormattedMessage
-                      id="resultDetails.teamsButton.otherTeamTitle"
-                      defaultMessage="Enemy Team"
-                    />
-                  </h4>
-                  {this.state.show === 1
-                    ? <TeamStatsTable team={otherTeam} />
-                    : null}
-                  {this.state.show === 2
-                    ? <TeamGearTable team={otherTeam} />
-                    : null}
-                  {this.state.show === 3
-                    ? <TeamInfoTable team={otherTeam} />
-                    : null}
-                  {this.state.show === 4 ? <TeamRadar team={otherTeam} maximums={maximums} /> : null}
-                </Col>
-            ]
-            :
-                <Col md={12}>
-                    <TeamRadarTotals
-                        myTeam={myTeam}
-                        myCount={result.my_team_count != null ? result.my_team_count : result.my_team_percentage}
-                        otherTeam={otherTeam}
-                        otherCount={result.other_team_count != null ? result.other_team_count : result.other_team_percentage}
-                    />
-                </Col>
-            }
+            {this.state.show < 5
+              ? [
+                  <Col sm={6} md={6}>
+                    <h4>
+                      <FormattedMessage
+                        id="resultDetails.teamsButton.myTeamTitle"
+                        defaultMessage="My Team"
+                      />
+                    </h4>
+                    {this.state.show === 1
+                      ? <TeamStatsTable team={myTeam} />
+                      : null}
+                    {this.state.show === 2
+                      ? <TeamGearTable team={myTeam} />
+                      : null}
+                    {this.state.show === 3
+                      ? <TeamInfoTable team={myTeam} />
+                      : null}
+                    {this.state.show === 4
+                      ? <TeamRadar team={myTeam} maximums={maximums} />
+                      : null}
+                  </Col>,
+                  <Col sm={6} md={6}>
+                    <h4>
+                      <FormattedMessage
+                        id="resultDetails.teamsButton.otherTeamTitle"
+                        defaultMessage="Enemy Team"
+                      />
+                    </h4>
+                    {this.state.show === 1
+                      ? <TeamStatsTable team={otherTeam} />
+                      : null}
+                    {this.state.show === 2
+                      ? <TeamGearTable team={otherTeam} />
+                      : null}
+                    {this.state.show === 3
+                      ? <TeamInfoTable team={otherTeam} />
+                      : null}
+                    {this.state.show === 4
+                      ? <TeamRadar team={otherTeam} maximums={maximums} />
+                      : null}
+                  </Col>
+                ]
+              : <Col md={12}>
+                  <TeamRadarTotals
+                    myTeam={myTeam}
+                    myCount={
+                      result.my_team_count != null
+                        ? result.my_team_count
+                        : result.my_team_percentage
+                    }
+                    otherTeam={otherTeam}
+                    otherCount={
+                      result.other_team_count != null
+                        ? result.other_team_count
+                        : result.other_team_percentage
+                    }
+                  />
+                </Col>}
           </Row>
         </Grid>
       </PanelWithMenu>
