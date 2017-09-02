@@ -196,11 +196,9 @@ ipcMain.on('getApiAsync', async (e, url) => {
       value = await getSplatnetApiMemo120(url);
     }
     e.sender.send('apiData', value);
-    //e.returnValue = value;
   } catch (e) {
     log.error(`Error getting ${url}: ${e}`);
     e.sender.send('apiData', {});
-    //e.returnValue = {};
   }
 });
 

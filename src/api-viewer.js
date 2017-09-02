@@ -38,13 +38,14 @@ class ApiTester extends React.Component {
     this.setState({ url: e.target.value });
   };
 
+  handleButtonClick = async () => {
+    const league = ipcRenderer.sendSync('getApi', this.state.url);
+    this.setState({ reply: league });
+  };
+
   handlePostClick = () => {
     const res = ipcRenderer.sendSync('postApi', this.state.url);
     this.setState({ reply: res });
-  };
-
-  setApiData = data => {
-    this.setState({ reply: data });
   };
 
   render() {
