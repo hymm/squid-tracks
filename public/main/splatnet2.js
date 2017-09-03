@@ -2,17 +2,23 @@ const request2 = require('request-promise-native');
 const crypto = require('crypto');
 const base64url = require('base64url');
 const cheerio = require('cheerio');
+const log = require('electron-log');
 
 const splatnetUrl = `https://app.splatoon2.nintendo.net`;
 const jar = request2.jar();
-// use this like to proxy through fiddler
-/* const request = request2.defaults({
-  proxy: 'http://localhost:8888',
-  rejectUnauthorized: false,
-  jar: jar
-}); */
+let request;
+if (process.env.PROXY) {
+  const proxy = 'http://localhost:8888';
+  request = request2.defaults({
+    proxy: proxy,
+    rejectUnauthorized: false,
+    jar: jar
+  });
+  log.info(`Splatnet proxy on ${proxy}`);
+} else {
+  request = request2.defaults({ jar: jar });
+}
 
-const request = request2.defaults({ jar: jar });
 let userLanguage = 'en-US';
 let uniqueId = '';
 
