@@ -36,12 +36,12 @@ class MetaContainer extends React.Component {
   };
 
   getMetaRequest() {
-    let endUtc = moment();
+    let endUtc = moment().startOf('day');
     let startUtc = moment();
     // goes back to the third monday back
-    startUtc.days(-14);
+    startUtc.startOf('isoWeek').subtract(2, 'week');
 
-    while (endUtc.diff(startUtc, 'days') > 0) {
+    while (endUtc.diff(startUtc, 'days') >= 0) {
       for (let i = 0; i < 24; i += 2) {
         let league_string =
           endUtc.format('YYMMDD') +
@@ -49,11 +49,13 @@ class MetaContainer extends React.Component {
           (this.state.full_teams ? 'T' : 'P') +
           '/' +
           this.state.region;
+        //log.info(`getting ${league_string} (offset ${this.getWeekIndex(endUtc)})`);
         ipcRenderer.send(
           'getApiAsync',
           'league_match_ranking/' + league_string
         );
       }
+
       endUtc.subtract(1, 'day');
     }
   }
@@ -85,11 +87,11 @@ class MetaContainer extends React.Component {
   getWeekIndex(date) {
     let input_moment = moment(date);
     let now = moment();
-    if (input_moment.isAfter(now.day(0))) {
+    if (input_moment.isSameOrAfter(now.startOf('isoWeek'))) {
       return 0;
-    } else if (input_moment.isAfter(now.day(-7))) {
+    } else if (input_moment.isSameOrAfter(now.subtract(1, 'week'))) {
       return 1;
-    } else if (input_moment.isAfter(now.day(-7))) {
+    } else {
       return 2;
     }
   }
