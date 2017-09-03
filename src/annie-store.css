@@ -1,0 +1,7 @@
+.merch.thumbnail > img {
+  max-height: 100px;
+}
+
+.merch div img {
+  max-height: 30px;
+}

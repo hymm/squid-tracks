@@ -201,9 +201,9 @@ ipcMain.on('getApi', async (e, url) => {
   }
 });
 
-ipcMain.on('postApi', async (e, url) => {
+ipcMain.on('postApi', async (e, url, body) => {
   try {
-    e.returnValue = await splatnet.postSplatnetApi(url);
+    e.returnValue = await splatnet.postSplatnetApi(url, body);
   } catch (e) {
     log.error(`Error posting ${url}: ${e}`);
     e.returnValue = {};
