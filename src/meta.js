@@ -4,8 +4,6 @@ import LeagueRankings from './components/league-rankings';
 import { event } from './analytics';
 import moment from 'moment';
 
-const log = require('electron-log');
-
 const { ipcRenderer } = require('electron');
 
 const Meta = () =>
@@ -30,7 +28,7 @@ class MetaContainer extends React.Component {
   }
 
   handleApiData = (e, data) => {
-    if (typeof data == 'object') {
+    if (typeof data === 'object') {
       this.state.league_dict[
         data.league_id + data.league_ranking_region.code
       ] = data;
@@ -55,7 +53,6 @@ class MetaContainer extends React.Component {
           'getApiAsync',
           'league_match_ranking/' + league_string
         );
-        //log.info(`getting ${league_string} (offset ${this.getWeekIndex(endUtc)})`);
       }
       endUtc.subtract(1, 'day');
     }
@@ -64,7 +61,7 @@ class MetaContainer extends React.Component {
   getMetaLoad = (e, data) => {
     this.handleApiData(data);
     ipcRenderer.removeListener('apiData', this.handleApiData);
-    if (typeof data == 'object') {
+    if (typeof data === 'object') {
       this.state.league_dict[data.league_id] = data;
     }
   };
@@ -104,7 +101,7 @@ class MetaContainer extends React.Component {
     weapons_stats.push({});
 
     if (
-      typeof league_dict == 'undefined' ||
+      typeof league_dict === 'undefined' ||
       Object.keys(league_dict).length === 0
     ) {
       return {
@@ -115,7 +112,6 @@ class MetaContainer extends React.Component {
     Object.keys(league_dict).forEach(league => {
       let week_index = this.getWeekIndex(league_dict[league].start_time * 1000);
       Object.keys(league_dict[league].rankings).forEach(team => {
-        let uses_this_team = {};
         Object.keys(
           league_dict[league].rankings[team].tag_members
         ).forEach(player => {

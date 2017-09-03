@@ -256,7 +256,7 @@ export default class LeagueRankings extends React.Component {
                         {weapon[
                           this.state.data_to_display
                         ].last_last_week.toFixed(0)}
-                        {this.state.data_to_display == 'avg_points'
+                        {this.state.data_to_display === 'avg_points'
                           ? ``
                           : ` (${weapon[
                               this.state.data_to_display
@@ -266,7 +266,7 @@ export default class LeagueRankings extends React.Component {
                         {weapon[this.state.data_to_display].last_week.toFixed(
                           0
                         )}
-                        {this.state.data_to_display == 'avg_points'
+                        {this.state.data_to_display === 'avg_points'
                           ? ` (${weapon[
                               this.state.data_to_display
                             ].diff_last_to_last_last.toFixed(1)})`
@@ -280,7 +280,7 @@ export default class LeagueRankings extends React.Component {
                         {weapon[this.state.data_to_display].this_week.toFixed(
                           0
                         )}
-                        {this.state.data_to_display == 'avg_points'
+                        {this.state.data_to_display === 'avg_points'
                           ? ` (${weapon[
                               this.state.data_to_display
                             ].diff_this_to_last.toFixed(1)})`
