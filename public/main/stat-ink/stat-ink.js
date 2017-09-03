@@ -141,8 +141,8 @@ function setClientInfo(statInk, result) {
 }
 
 function setSplatFest(statInk, result) {
-    statInk.fest_title = FestRankMap[result.player_result.player.fes_grade.rank];
-    statInk.fest_title_after = FestRankMap[result.fes_grade.rank];
+  statInk.fest_title = FestRankMap[result.player_result.player.fes_grade.rank];
+  statInk.fest_title_after = FestRankMap[result.fes_grade.rank];
 }
 
 async function convertResultToStatInk(result, disableGetImage) {
@@ -156,7 +156,7 @@ async function convertResultToStatInk(result, disableGetImage) {
   setClientInfo(statInk, result);
 
   if (result.game_mode.key === 'fest') {
-      setSplatFest(statInk, result);
+    setSplatFest(statInk, result);
   }
 
   if (!disableGetImage) {

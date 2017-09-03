@@ -11,7 +11,7 @@ import {
   HelpBlock,
   Checkbox,
   Panel,
-  Glyphicon,
+  Glyphicon
 } from 'react-bootstrap';
 import jws from 'jws';
 import { event } from './analytics';
@@ -48,9 +48,8 @@ class StatInkSettings extends React.Component {
 
   render() {
     return (
-
-          <Panel header={<h3>Stat.ink Settings</h3>}>
-          <form onSubmit={this.handleSubmit}>
+      <Panel header={<h3>Stat.ink Settings</h3>}>
+        <form onSubmit={this.handleSubmit}>
           <FormGroup>
             <ControlLabel>API Token</ControlLabel>
             <HelpBlock>
@@ -74,8 +73,8 @@ class StatInkSettings extends React.Component {
           >
             {this.state.statInkSaveButtonText}
           </Button>
-          </form>
-          </Panel>
+        </form>
+      </Panel>
     );
   }
 }
@@ -129,8 +128,12 @@ class IksmToken extends React.Component {
     return (
       <div>
         <h4>
-            iksm Token{' '}
-            <Glyphicon glyph='copy' style={{ fontSize: 20, cursor: 'pointer' }}  onClick={() => clipboard.writeText(cookie.value)} />
+          iksm Token{' '}
+          <Glyphicon
+            glyph="copy"
+            style={{ fontSize: 20, cursor: 'pointer' }}
+            onClick={() => clipboard.writeText(cookie.value)}
+          />
         </h4>
         Expiration: {cookie.expires}
       </div>
@@ -150,7 +153,7 @@ class LanguageSettings extends React.Component {
   ];
 
   handleChange = e => {
-      this.props.setLocale(e.target.value);
+    this.props.setLocale(e.target.value);
   };
 
   render() {
@@ -159,21 +162,21 @@ class LanguageSettings extends React.Component {
       <Row>
         <Col md={12}>
           <Panel header={<h3>Splatnet API Language</h3>}>
-              Languages are limited by Nintendo regions, so several of the languages
-              listed will not work. If you think your language should be supported,
-              please contact the developer.
-              <FormControl
-                value={locale}
-                id="languageSelect"
-                componentClass="select"
-                onChange={this.handleChange}
-              >
-                {this.languages.map(language =>
-                  <option key={language.code} value={language.code}>
-                    {language.name}
-                  </option>
-                )}
-              </FormControl>
+            Languages are limited by Nintendo regions, so several of the
+            languages listed will not work. If you think your language should be
+            supported, please contact the developer.
+            <FormControl
+              value={locale}
+              id="languageSelect"
+              componentClass="select"
+              onChange={this.handleChange}
+            >
+              {this.languages.map(language =>
+                <option key={language.code} value={language.code}>
+                  {language.name}
+                </option>
+              )}
+            </FormControl>
           </Panel>
         </Col>
       </Row>
@@ -197,35 +200,35 @@ const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
       <Row>
         <Col md={12}>
           <Panel header={<h3>Google Analytics</h3>}>
-              This program uses google analytics to track version uptake, activity,
-              bugs, and crashing. If you find this creepy you can disable this
-              feature below.
-              <GoogleAnalyticsCheckbox />
+            This program uses google analytics to track version uptake,
+            activity, bugs, and crashing. If you find this creepy you can
+            disable this feature below.
+            <GoogleAnalyticsCheckbox />
           </Panel>
         </Col>
       </Row>
       <Row>
         <Col md={12}>
           <Panel header={<h3>Debugging</h3>}>
-          <Link to="/testApi">
-            <Button>API Checker</Button>
-          </Link>
+            <Link to="/testApi">
+              <Button>API Checker</Button>
+            </Link>
           </Panel>
         </Col>
       </Row>
       <Row>
         <Col md={12}>
-            <Panel header={<h3>Nintendo User Info</h3>}>
+          <Panel header={<h3>Nintendo User Info</h3>}>
             <strong>DO NOT SHARE Session Token or iksm Token.</strong> These are
             available here for debugging purposes. Sharing these could lead to
             someone stealing your personal information.
             <h4>
-                Session Token{' '}
-                <Glyphicon
-                    glyph='copy'
-                    onClick={() => clipboard.writeText(token)}
-                    style={{ fontSize: 20, cursor: 'pointer'   }}
-                />
+              Session Token{' '}
+              <Glyphicon
+                glyph="copy"
+                onClick={() => clipboard.writeText(token)}
+                style={{ fontSize: 20, cursor: 'pointer' }}
+              />
             </h4>
             Expiration: {tokenExpiration}
             <IksmToken />
@@ -237,7 +240,7 @@ const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
             >
               Logout
             </Button>
-            </Panel>
+          </Panel>
         </Col>
       </Row>
     </Grid>
