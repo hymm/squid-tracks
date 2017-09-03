@@ -10,43 +10,43 @@ import {
   Button
 } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
-import { describeMessages, injectIntl } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 
 import './annie-store.css';
 
-const messages = describeMessages({
-    endTime: {
-        id: 'Store.endTime',
-        defaultMessage: 'End Time: ',
-    },
-    main: {
-        id: 'Store.mainAbility',
-        defaultMessage: 'Main: ',
-    },
-    brand: {
-        id: 'Store.brand',
-        defaultMessage: 'Brand: ',
-    },
-    brandFavors: {
-        id: 'Store.brandFavors',
-        defaultMessage: 'Favors: ',
-    },
-    ordered: {
-        id: 'Store.GearOrderedTitle',
-        defaultMessage: 'Ordered',
-    },
-    orderButtonText: {
-        id: 'Store.orderButton.text',
-        defaultMessage: 'Order',
-    },
-    cancelButtonText: {
-        id: 'Store.cancelButton.text',
-        defaultMessage: 'Cancel',
-    },
-    uncancelButtonText: {
-        id: 'Store.cancelButton.uncancel',
-        defaultMessage: 'Uncancel',
-    }
+const messages = defineMessages({
+  endTime: {
+    id: 'Store.endTime',
+    defaultMessage: 'End Time: '
+  },
+  main: {
+    id: 'Store.mainAbility',
+    defaultMessage: 'Main: '
+  },
+  brand: {
+    id: 'Store.brand',
+    defaultMessage: 'Brand: '
+  },
+  brandFavors: {
+    id: 'Store.brandFavors',
+    defaultMessage: 'Favors: '
+  },
+  ordered: {
+    id: 'Store.GearOrderedTitle',
+    defaultMessage: 'Ordered'
+  },
+  orderButtonText: {
+    id: 'Store.orderButton.text',
+    defaultMessage: 'Order'
+  },
+  cancelButtonText: {
+    id: 'Store.cancelButton.text',
+    defaultMessage: 'Cancel'
+  },
+  uncancelButtonText: {
+    id: 'Store.cancelButton.uncancel',
+    defaultMessage: 'Uncancel'
+  }
 });
 
 const Merch = ({ merch, order, disabled, intl }) => {
@@ -152,11 +152,9 @@ const OrderedInfo = ({ order, cancel, cancelled, intl }) => {
                       cancel();
                     }}
                   >
-                    {
-                        cancelled
-                        ? intl.formatMessage(messages.uncancelButtonText)
-                        : intl.formatMessage(messages.cancelButtonText)
-                    }
+                    {cancelled
+                      ? intl.formatMessage(messages.uncancelButtonText)
+                      : intl.formatMessage(messages.cancelButtonText)}
                   </Button>
                 </Col>
               </Row>
@@ -224,12 +222,12 @@ class AnnieStore extends React.Component {
   }
 }
 
-const SubscribedAnnieStore = () => {
+const SubscribedAnnieStore = ({ intl }) => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => injectIntl(<AnnieStore splatnet={splatnet} />)}
+      {splatnet => <AnnieStore splatnet={splatnet} intl={intl} />}
     </Subscriber>
   );
 };
 
-export default SubscribedAnnieStore;
+export default injectIntl(SubscribedAnnieStore);

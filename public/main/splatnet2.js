@@ -191,7 +191,7 @@ function getUniqueId(body) {
 }
 
 async function postSplatnetApi(url, body) {
-  const resp = await request({
+  const requestOptions = {
     method: 'POST',
     uri: `${splatnetUrl}/api/${url}`,
     headers: {
@@ -205,7 +205,14 @@ async function postSplatnetApi(url, body) {
     },
     formData: body,
     gzip: true
-  });
+  };
+  if (body) {
+    requestOptions.formData = body;
+  } else {
+    requestOptions.json = true;
+  }
+
+  const resp = await request(requestOptions);
 
   return resp;
 }
