@@ -13,22 +13,22 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 window.addEventListener('error', event => {
-    log.error(`UnhandledError in renderer: ${event.error}`);
+  log.error(`UnhandledError in renderer: ${event.error}`);
 });
 
 window.addEventListener('unhandledrejection', event => {
-    log.error(`Unhandled Promise Rejection in renderer: ${event.reason}`);
+  log.error(`Unhandled Promise Rejection in renderer: ${event.reason}`);
 });
 
 const history = createHashHistory();
-history.listen((location) => {
-    screenview(`${location.pathname}${location.search}${location.hash}`);
+history.listen(location => {
+  screenview(`${location.pathname}${location.search}${location.hash}`);
 });
 
 class App extends Component {
   state = {
     sessionToken: '',
-    locale: 'en',
+    locale: 'en'
   };
 
   componentDidMount() {
@@ -41,9 +41,9 @@ class App extends Component {
     this.setState({ sessionToken: ipcRenderer.sendSync('getSessionToken') });
   };
 
-  setLocale = (locale) => {
-      this.setState({ locale });
-      ipcRenderer.sendSync('setUserLangauge', locale);
+  setLocale = locale => {
+    this.setState({ locale });
+    ipcRenderer.sendSync('setUserLangauge', locale);
   };
 
   render() {
@@ -51,16 +51,16 @@ class App extends Component {
     const message = messages[locale] || messages.en;
     return (
       <IntlProvider locale={locale} messages={message}>
-          <Router history={history}>
-            {sessionToken.length !== 0
-              ? <Routes
-                  token={sessionToken}
-                  logoutCallback={this.getSessionToken}
-                  setLocale={this.setLocale}
-                  locale={locale}
-                />
-              : <Login />}
-          </Router>
+        <Router history={history}>
+          {sessionToken.length !== 0
+            ? <Routes
+                token={sessionToken}
+                logoutCallback={this.getSessionToken}
+                setLocale={this.setLocale}
+                locale={locale}
+              />
+            : <Login />}
+        </Router>
       </IntlProvider>
     );
   }

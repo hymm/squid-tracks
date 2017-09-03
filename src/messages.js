@@ -5,5 +5,5 @@ import ja from './locales/ja';
 addLocaleData([...jaLocaleData]);
 
 export default {
-    ja,
+  ja
 };

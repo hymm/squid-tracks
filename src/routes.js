@@ -20,7 +20,12 @@ const Routes = ({ token, logoutCallback, setLocale, locale }) =>
     <Route
       path="/settings"
       component={() =>
-        <Settings token={token} logoutCallback={logoutCallback} setLocale={setLocale} locale={locale} />}
+        <Settings
+          token={token}
+          logoutCallback={logoutCallback}
+          setLocale={setLocale}
+          locale={locale}
+        />}
     />
   </div>;
 

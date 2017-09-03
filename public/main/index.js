@@ -8,11 +8,11 @@ const splatnet = require('./splatnet2');
 const Store = require('./store');
 
 process.on('uncaughtException', err => {
-    log.error(`Unhandled Error in Main: ${err}`);
+  log.error(`Unhandled Error in Main: ${err}`);
 });
 
 process.on('unhandledRejection', err => {
-    log.error(`Unhandled Promise Rejection in Main: ${err}`);
+  log.error(`Unhandled Promise Rejection in Main: ${err}`);
 });
 
 const getSplatnetApiMemo120 = Memo(splatnet.getSplatnetApi, { maxAge: 120000 });
@@ -253,10 +253,13 @@ function createWindow() {
 
   // comment this in on first run to get dev tools
   if (isDev) {
-      const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
-      installExtension(REACT_DEVELOPER_TOOLS)
-        .then((name) => console.log(`Added Extension:  ${name}`))
-        .catch((err) => console.log('An error occurred: ', err));
+    const {
+      default: installExtension,
+      REACT_DEVELOPER_TOOLS
+    } = require('electron-devtools-installer');
+    installExtension(REACT_DEVELOPER_TOOLS)
+      .then(name => console.log(`Added Extension:  ${name}`))
+      .catch(err => console.log('An error occurred: ', err));
   }
 
   mainWindow.loadURL(startUrl);
