@@ -1,7 +1,12 @@
-.merch.thumbnail > img {
-  max-height: 100px;
+.merch h3 {
+  font-size: 22px;
 }
 
-.merch div img {
+.merch img {
+  max-height: 150px;
+  max-width: 100%;
+}
+
+.merch .details img {
   max-height: 30px;
 }
