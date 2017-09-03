@@ -13,7 +13,7 @@ import { ipcRenderer } from 'electron';
 
 import './annie-store.css';
 
-const Merch = ({ merch, order }) => {
+const Merch = ({ merch, order, disabled }) => {
   return (
     <Col sm={6} md={6} lg={3}>
       <Thumbnail
@@ -59,6 +59,7 @@ const Merch = ({ merch, order }) => {
                 onClick={() => {
                   order(merch.id);
                 }}
+                disabled={disabled}
               >
                 Order
               </Button>
@@ -70,26 +71,110 @@ const Merch = ({ merch, order }) => {
   );
 };
 
+const OrderedInfo = ({ order, cancel, cancelled }) => {
+  return (
+    <Row>
+      <Col sm={12} md={12} lg={12}>
+        <Panel header={'Ordered'}>
+          <Thumbnail
+            src={`https://app.splatoon2.nintendo.net${order.gear.image}`}
+            className="merch"
+          >
+            <h3 style={{ textAlign: 'center', marginTop: 0 }}>
+              {order.gear.name}
+            </h3>
+            <Grid fluid>
+              <Row>
+                <Col md={4} style={{ textAlign: 'center' }}>
+                  {`Main: `}
+                  <Image
+                    src={`https://app.splatoon2.nintendo.net${order.skill
+                      .image}`}
+                  />
+                </Col>
+                <Col md={4} style={{ textAlign: 'center' }}>
+                  {`Brand: `}
+                  <Image
+                    src={`https://app.splatoon2.nintendo.net${order.gear.brand
+                      .image}`}
+                  />
+                </Col>
+                <Col md={4} style={{ textAlign: 'center' }}>
+                  {`Favors: `}
+                  <Image
+                    src={`https://app.splatoon2.nintendo.net${order.gear.brand
+                      .frequent_skill.image}`}
+                  />
+                </Col>
+              </Row>
+              <Row style={{ marginTop: 10 }}>
+                <Col md={12}>
+                  <Button
+                    block
+                    bsStyle="warning"
+                    onClick={() => {
+                      cancel();
+                    }}
+                  >
+                    {cancelled ? 'Uncancel' : 'Cancel'}
+                  </Button>
+                </Col>
+              </Row>
+            </Grid>
+          </Thumbnail>
+        </Panel>
+      </Col>
+    </Row>
+  );
+};
+
 class AnnieStore extends React.Component {
+  state = {
+    cancelled: false,
+    ordering: false
+  };
+
   componentDidMount() {
     this.props.splatnet.comm.updateMerchandise();
   }
 
   order = merchId => {
-    ipcRenderer.send('postApi', `order/merchandise/${merchId}`, {
-      overrride: 1
+    this.setState({ ordering: true });
+    ipcRenderer.send('postApi', `onlineshop/order/${merchId}`, {
+      override: '1'
     });
+    setTimeout(() => {
+      this.setState({ cancelled: false, ordering: true });
+      this.props.splatnet.comm.updateMerchandise();
+    }, 1000);
+  };
+
+  cancel = () => {
+    this.setState({ cancelled: !this.state.cancelled });
   };
 
   render() {
     const { splatnet } = this.props;
-    const { merchandises } = splatnet.current.annie;
+    const { cancelled, ordering } = this.state;
+    const { merchandises, ordered_info } = splatnet.current.annie;
 
     return (
       <Grid fluid style={{ marginTop: 65 }}>
+        {ordered_info != null && !cancelled
+          ? <OrderedInfo
+              order={ordered_info}
+              cancel={this.cancel}
+              cancelled={cancelled}
+            />
+          : null}
         <Row>
           {merchandises.map(merch =>
-            <Merch key={merch.id} merch={merch} order={this.order} />
+            <Merch
+              key={merch.id}
+              merch={merch}
+              order={this.order}
+              disabled={(ordered_info != null && !cancelled) || ordering}
+            />
           )}
         </Row>
       </Grid>

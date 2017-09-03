@@ -191,6 +191,8 @@ ipcMain.on('getApi', async (e, url) => {
       value = await getSplatnetApiMemoInf(url);
     } else if (url === 'results') {
       value = await getSplatnetApiMemo10(url);
+    } else if (url === 'onlineshop/merchandises') {
+      value = await splatnet.getSplatnetApi(url);
     } else {
       value = await getSplatnetApiMemo120(url);
     }
