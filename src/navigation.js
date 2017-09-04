@@ -41,6 +41,11 @@ const Navigation = () =>
             />
           </NavItem>
         </LinkContainer>
+        <LinkContainer to="/store">
+          <NavItem eventKey={5}>
+            <FormattedMessage id={'nav.store'} defaultMessage={'Store'} />
+          </NavItem>
+        </LinkContainer>
         <LinkContainer to="/settings">
           <NavItem eventKey={5}>
             <FormattedMessage id={'nav.settings'} defaultMessage={'Settings'} />

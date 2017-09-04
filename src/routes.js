@@ -7,6 +7,7 @@ import Records from './records';
 import Results from './results';
 import Settings from './settings';
 import Navigation from './navigation';
+import AnnieStore from './annie-store';
 import About from './about';
 
 const Routes = ({ token, logoutCallback, setLocale, locale }) =>
@@ -17,6 +18,7 @@ const Routes = ({ token, logoutCallback, setLocale, locale }) =>
     <Route path="/schedule" component={Schedule} />
     <Route path="/records" component={Records} />
     <Route path="/results" component={Results} />
+    <Route path="/store" component={AnnieStore} />
     <Route
       path="/settings"
       component={() =>

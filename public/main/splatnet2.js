@@ -190,8 +190,8 @@ function getUniqueId(body) {
   return id;
 }
 
-async function postSplatnetApi(url) {
-  const resp = await request({
+async function postSplatnetApi(url, body) {
+  const requestOptions = {
     method: 'POST',
     uri: `${splatnetUrl}/api/${url}`,
     headers: {
@@ -203,9 +203,16 @@ async function postSplatnetApi(url) {
       'X-Unique-Id': uniqueId,
       'X-Requested-With': 'XMLHttpRequest'
     },
-    json: true,
+    formData: body,
     gzip: true
-  });
+  };
+  if (body) {
+    requestOptions.formData = body;
+  } else {
+    requestOptions.json = true;
+  }
+
+  const resp = await request(requestOptions);
 
   return resp;
 }

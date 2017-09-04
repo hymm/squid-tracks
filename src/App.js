@@ -8,6 +8,7 @@ import { screenview } from './analytics';
 import Login from './login';
 import log from 'electron-log';
 import { ipcRenderer } from 'electron';
+import SplatnetProvider from './splatnet-provider';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -51,16 +52,18 @@ class App extends Component {
     const message = messages[locale] || messages.en;
     return (
       <IntlProvider locale={locale} messages={message}>
-        <Router history={history}>
-          {sessionToken.length !== 0
-            ? <Routes
-                token={sessionToken}
-                logoutCallback={this.getSessionToken}
-                setLocale={this.setLocale}
-                locale={locale}
-              />
-            : <Login />}
-        </Router>
+        <SplatnetProvider>
+          <Router history={history}>
+            {sessionToken.length !== 0
+              ? <Routes
+                  token={sessionToken}
+                  logoutCallback={this.getSessionToken}
+                  setLocale={this.setLocale}
+                  locale={locale}
+                />
+              : <Login />}
+          </Router>
+        </SplatnetProvider>
       </IntlProvider>
     );
   }
