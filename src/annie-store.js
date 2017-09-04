@@ -20,7 +20,7 @@ import './annie-store.css';
 const messages = defineMessages({
   endTime: {
     id: 'Store.endTime',
-    defaultMessage: 'Offer ends in '
+    defaultMessage: 'Offer ends in {hours} Hours'
   },
   main: {
     id: 'Store.mainAbility',
@@ -114,9 +114,9 @@ const MerchRight = ({ merch, intl }) => {
             {merch.gear.name}
             <br />
             <small>
-              {`${intl.formatMessage(
-                messages.endTime
-              )} ${timeLeftInHours.toFixed(2)} Hours`}
+              {intl.formatMessage(messages.endTime, {
+                hours: timeLeftInHours.toFixed(2)
+              })}
             </small>
           </h3>
         </Col>
@@ -150,7 +150,11 @@ const Merch = ({ merch, order, disabled, intl }) => {
           <Col md={12}>
             <Button
               block
-              bsStyle="primary"
+              bsStyle={
+                merch.skill.id === merch.gear.brand.frequent_skill.id
+                  ? 'success'
+                  : 'primary'
+              }
               onClick={() => {
                 order(merch.id);
               }}
