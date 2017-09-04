@@ -63,15 +63,16 @@ const RadarTotalsChart = ({ myTeam, otherTeam, myCount, otherCount }) => {
     row.otherTeam = otherTeamNormalized[row.key];
     row.fullMark = 1;
     row.maximum = maximums[row.key];
+    row.statMax = `${row.stat} (${row.maximum})`;
     return row;
   });
 
   return (
     <RadarChart
-      cx={160}
+      cx={180}
       cy={130}
       outerRadius={100}
-      width={320}
+      width={360}
       height={280}
       data={data}
       startAngle={90}
@@ -93,7 +94,7 @@ const RadarTotalsChart = ({ myTeam, otherTeam, myCount, otherCount }) => {
       />
       <PolarGrid />
       <Legend />
-      <PolarAngleAxis dataKey="stat" />
+      <PolarAngleAxis dataKey="statMax" />
     </RadarChart>
   );
 };
