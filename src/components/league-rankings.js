@@ -152,55 +152,18 @@ export default class LeagueRankings extends React.Component {
     sort(weapons_out, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel header={<h3>League Weapon Stats</h3>}>
+      <Panel
+        header={
+          <h3>
+            {this.props.region} Region{' '}
+            {this.props.full_teams ? `Squads` : `Pairs`} League Weapon Stats
+          </h3>
+        }
+      >
         <Grid fluid>
           <Row>
             <Col sm={12} md={12}>
               <ButtonToolbar style={{ marginBottom: '10px' }}>
-                <ButtonGroup>
-                  <Button
-                    onClick={this.props.showTeams}
-                    active={this.props.full_teams}
-                  >
-                    Teams
-                  </Button>
-                  <Button
-                    onClick={this.props.showPairs}
-                    active={!this.props.full_teams}
-                  >
-                    Pairs
-                  </Button>
-                </ButtonGroup>
-                <ButtonGroup>
-                  <Button
-                    onClick={this.props.setRegion}
-                    value="ALL"
-                    active={this.props.region === 'ALL'}
-                  >
-                    All Regions
-                  </Button>
-                  <Button
-                    onClick={this.props.setRegion}
-                    value="JP"
-                    active={this.props.region === 'JP'}
-                  >
-                    Japan
-                  </Button>
-                  <Button
-                    onClick={this.props.setRegion}
-                    value="US"
-                    active={this.props.region === 'US'}
-                  >
-                    NA/AU/NZ
-                  </Button>
-                  <Button
-                    onClick={this.props.setRegion}
-                    value="EU"
-                    active={this.props.region === 'EU'}
-                  >
-                    Europe
-                  </Button>
-                </ButtonGroup>
                 <ButtonGroup>
                   <Button
                     onClick={this.setDataToDisplay}

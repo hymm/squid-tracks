@@ -1,5 +1,12 @@
 import React from 'react';
-import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
+import {
+  Grid,
+  Row,
+  Col,
+  ButtonToolbar,
+  ButtonGroup,
+  Button
+} from 'react-bootstrap';
 import LeagueRankings from './components/league-rankings';
 import { event } from './analytics';
 import moment from 'moment';
@@ -166,6 +173,7 @@ class MetaContainer extends React.Component {
       <div>
         <ButtonToolbar style={{ marginBottom: '10px' }}>
           <Button
+            bsStyle="primary"
             onClick={() => {
               event('league_dict', 'refresh');
               this.getMetaRequest();
@@ -176,11 +184,46 @@ class MetaContainer extends React.Component {
           >
             {this.state.refreshing ? 'Loaded' : 'Load Data'}
           </Button>
+          <ButtonGroup>
+            <Button onClick={this.showTeams} active={this.state.full_teams}>
+              Teams
+            </Button>
+            <Button onClick={this.showPairs} active={!this.state.full_teams}>
+              Pairs
+            </Button>
+          </ButtonGroup>
+          <ButtonGroup>
+            <Button
+              onClick={this.setRegion}
+              value="ALL"
+              active={this.state.region === 'ALL'}
+            >
+              All Regions
+            </Button>
+            <Button
+              onClick={this.setRegion}
+              value="JP"
+              active={this.state.region === 'JP'}
+            >
+              Japan
+            </Button>
+            <Button
+              onClick={this.setRegion}
+              value="US"
+              active={this.state.region === 'US'}
+            >
+              NA/AU/NZ
+            </Button>
+            <Button
+              onClick={this.setRegion}
+              value="EU"
+              active={this.state.region === 'EU'}
+            >
+              Europe
+            </Button>
+          </ButtonGroup>
         </ButtonToolbar>
         <LeagueRankings
-          showPairs={this.showPairs}
-          showTeams={this.showTeams}
-          setRegion={this.setRegion}
           handleChange={this.handleChange}
           calcStats={this.getCalculatedWeaponStats(this.state.league_dict)}
           full_teams={this.state.full_teams}
