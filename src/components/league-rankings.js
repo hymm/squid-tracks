@@ -7,7 +7,9 @@ import {
   Table,
   Grid,
   Col,
-  Row
+  Row,
+  Label,
+  Glyphicon
 } from 'react-bootstrap';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
@@ -123,12 +125,13 @@ export default class LeagueRankings extends React.Component {
         weapons_out[j]['uses'].last_last_week /
         calcStats.totals['uses'][2] *
         100;
-      weapons_out[j]['uses'].diff_this_to_last =
-        weapons_out[j]['uses'].this_week_percent -
-        weapons_out[j]['uses'].last_week_percent;
-      weapons_out[j]['uses'].diff_last_to_last_last =
-        weapons_out[j]['uses'].last_week_percent -
-        weapons_out[j]['uses'].last_last_week_percent;
+      weapons_out[j]['uses'].diff_this_to_last = (weapons_out[j]['uses']
+        .this_week_percent - weapons_out[j]['uses'].last_week_percent).toFixed(
+        1
+      );
+      weapons_out[j]['uses'].diff_last_to_last_last = (weapons_out[j]['uses']
+        .last_week_percent -
+        weapons_out[j]['uses'].last_last_week_percent).toFixed(1);
 
       weapons_out[j]['total_points'].this_week_percent =
         weapons_out[j]['total_points'].this_week /
@@ -142,19 +145,21 @@ export default class LeagueRankings extends React.Component {
         weapons_out[j]['total_points'].last_last_week /
         calcStats.totals['total_points'][2] *
         100;
-      weapons_out[j]['total_points'].diff_this_to_last =
-        weapons_out[j]['total_points'].this_week_percent -
-        weapons_out[j]['total_points'].last_week_percent;
-      weapons_out[j]['total_points'].diff_last_to_last_last =
-        weapons_out[j]['total_points'].last_week_percent -
-        weapons_out[j]['total_points'].last_last_week_percent;
+      weapons_out[j]['total_points'].diff_this_to_last = (weapons_out[j][
+        'total_points'
+      ].this_week_percent -
+        weapons_out[j]['total_points'].last_week_percent).toFixed(1);
+      weapons_out[j]['total_points'].diff_last_to_last_last = (weapons_out[j][
+        'total_points'
+      ].last_week_percent -
+        weapons_out[j]['total_points'].last_last_week_percent).toFixed(1);
 
-      weapons_out[j]['avg_points'].diff_this_to_last =
-        weapons_out[j]['avg_points'].this_week -
-        weapons_out[j]['avg_points'].last_week;
-      weapons_out[j]['avg_points'].diff_last_to_last_last =
-        weapons_out[j]['avg_points'].last_week -
-        weapons_out[j]['avg_points'].last_last_week;
+      weapons_out[j]['avg_points'].diff_this_to_last = (weapons_out[j][
+        'avg_points'
+      ].this_week - weapons_out[j]['avg_points'].last_week).toFixed(1);
+      weapons_out[j]['avg_points'].diff_last_to_last_last = (weapons_out[j][
+        'avg_points'
+      ].last_week - weapons_out[j]['avg_points'].last_last_week).toFixed(1);
     }
 
     sort(weapons_out, this.state.sortColumn, this.state.sortDirection);
@@ -241,28 +246,71 @@ export default class LeagueRankings extends React.Component {
                           0
                         )}
                         {this.state.data_to_display === 'avg_points'
-                          ? ` (${weapon[
-                              this.state.data_to_display
-                            ].diff_last_to_last_last.toFixed(1)})`
+                          ? ` `
                           : ` (${weapon[
                               this.state.data_to_display
-                            ].last_week_percent.toFixed(1)}% ${weapon[
-                              this.state.data_to_display
-                            ].diff_last_to_last_last.toFixed(1)})`}
+                            ].last_week_percent.toFixed(1)}%) `}
+                        <Label
+                          bsStyle={
+                            weapon[this.state.data_to_display]
+                              .diff_last_to_last_last > 0
+                              ? 'success'
+                              : weapon[this.state.data_to_display]
+                                  .diff_last_to_last_last < 0
+                                ? 'danger'
+                                : 'default'
+                          }
+                        >
+                          <Glyphicon
+                            glyph={
+                              weapon[this.state.data_to_display]
+                                .diff_last_to_last_last > 0
+                                ? 'arrow-up'
+                                : weapon[this.state.data_to_display]
+                                    .diff_last_to_last_last < 0
+                                  ? 'arrow-down'
+                                  : 'arrow-right'
+                            }
+                          />
+                          {
+                            weapon[this.state.data_to_display]
+                              .diff_last_to_last_last
+                          }
+                        </Label>
                       </td>
                       <td>
                         {weapon[this.state.data_to_display].this_week.toFixed(
                           0
                         )}
                         {this.state.data_to_display === 'avg_points'
-                          ? ` (${weapon[
-                              this.state.data_to_display
-                            ].diff_this_to_last.toFixed(1)})`
+                          ? ` `
                           : ` (${weapon[
                               this.state.data_to_display
-                            ].this_week_percent.toFixed(1)}% ${weapon[
-                              this.state.data_to_display
-                            ].diff_this_to_last.toFixed(1)})`}
+                            ].this_week_percent.toFixed(1)}%) `}
+                        <Label
+                          bsStyle={
+                            weapon[this.state.data_to_display]
+                              .diff_this_to_last > 0
+                              ? 'success'
+                              : weapon[this.state.data_to_display]
+                                  .diff_this_to_last < 0
+                                ? 'danger'
+                                : 'default'
+                          }
+                        >
+                          <Glyphicon
+                            glyph={
+                              weapon[this.state.data_to_display]
+                                .diff_this_to_last > 0
+                                ? 'arrow-up'
+                                : weapon[this.state.data_to_display]
+                                    .diff_this_to_last < 0
+                                  ? 'arrow-down'
+                                  : 'arrow-right'
+                            }
+                          />
+                          {weapon[this.state.data_to_display].diff_this_to_last}
+                        </Label>
                       </td>
                     </tr>
                   )}
