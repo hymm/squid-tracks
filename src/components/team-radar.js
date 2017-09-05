@@ -31,13 +31,13 @@ function normalize(team, maximums) {
 }
 
 const RadarTeam = ({ team, maximums }) => {
-  const mappedTeam = team.map(member => {
+  const mappedTeam = team.map(player => {
     return {
-      k: member.kill_count,
-      a: member.assist_count,
-      d: member.death_count,
-      s: member.special_count,
-      p: member.game_paint_point
+      k: player.kill_count,
+      a: player.assist_count,
+      d: player.death_count,
+      s: player.special_count,
+      p: player.game_paint_point
     };
   });
   const normalized = normalize(mappedTeam, maximums);
@@ -61,7 +61,13 @@ const RadarTeam = ({ team, maximums }) => {
     >
       {team.map((player, index) =>
         <Radar
-          name={player.player.nickname}
+          name={
+            player.game_paint_point === 0
+              ? <strike>
+                  {player.player.nickname}
+                </strike>
+              : player.player.nickname
+          }
           dataKey={player.player.principal_id}
           stroke={colors[0][index]}
           fill={colors[0][index]}
