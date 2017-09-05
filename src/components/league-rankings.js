@@ -14,7 +14,7 @@ import TableHeader from './table-header';
 
 export default class LeagueRankings extends React.Component {
   state = {
-    sortColumn: 'uses',
+    sortColumn: 'total_points.last_week',
     sortDirection: 'up',
     data_to_display: 'total_points'
   };
@@ -30,8 +30,16 @@ export default class LeagueRankings extends React.Component {
       sortColumn: 'last_last_week',
       sortDirection: 'up'
     },
-    { text: 'Last Week', sortColumn: 'last_week', sortDirection: 'up' },
-    { text: 'This Week', sortColumn: 'this_week', sortDirection: 'up' }
+    {
+      text: 'Last Week',
+      sortColumn: 'last_week',
+      sortDirection: 'up'
+    },
+    {
+      text: 'This Week',
+      sortColumn: 'this_week',
+      sortDirection: 'up'
+    }
   ];
 
   render() {
@@ -200,7 +208,10 @@ export default class LeagueRankings extends React.Component {
                         key={header.text}
                         setState={this.setState.bind(this)}
                         sort={{
-                          sortColumn: header.sortColumn,
+                          sortColumn:
+                            this.state.data_to_display +
+                            '.' +
+                            header.sortColumn,
                           sortDirection: header.sortDirection
                         }}
                         text={header.text}
