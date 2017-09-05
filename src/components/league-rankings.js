@@ -214,9 +214,11 @@ export default class LeagueRankings extends React.Component {
                         setState={this.setState.bind(this)}
                         sort={{
                           sortColumn:
-                            this.state.data_to_display +
-                            '.' +
-                            header.sortColumn,
+                            header.sortColumn === 'name'
+                              ? header.sortColumn
+                              : this.state.data_to_display +
+                                '.' +
+                                header.sortColumn,
                           sortDirection: header.sortDirection
                         }}
                         text={header.text}
