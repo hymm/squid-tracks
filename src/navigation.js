@@ -41,8 +41,13 @@ const Navigation = () =>
             />
           </NavItem>
         </LinkContainer>
-        <LinkContainer to="/meta">
+        <LinkContainer to="/store">
           <NavItem eventKey={5}>
+            <FormattedMessage id={'nav.store'} defaultMessage={'Store'} />
+          </NavItem>
+        </LinkContainer>
+        <LinkContainer to="/meta">
+          <NavItem eventKey={6}>
             <FormattedMessage
               id={'nav.league'}
               defaultMessage={'League Stats'}
@@ -50,7 +55,7 @@ const Navigation = () =>
           </NavItem>
         </LinkContainer>
         <LinkContainer to="/settings">
-          <NavItem eventKey={6}>
+          <NavItem eventKey={7}>
             <FormattedMessage id={'nav.settings'} defaultMessage={'Settings'} />
           </NavItem>
         </LinkContainer>

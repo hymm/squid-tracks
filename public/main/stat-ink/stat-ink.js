@@ -10,12 +10,16 @@ const appName = app.getName();
 const WeaponMap = require('./weapon-map');
 const FestRankMap = require('./fest-rank-map');
 
-/* const request = request2.defaults({
-  proxy: 'http://localhost:8888',
-  rejectUnauthorized: false,
-  jar: true
-}); */
-const request = request2;
+let request;
+if (process.env.PROXY) {
+  request = request2.defaults({
+    proxy: 'http://localhost:8888',
+    rejectUnauthorized: false,
+    jar: true
+  });
+} else {
+  request = request2;
+}
 
 function setUuid(statInk, result) {
   statInk.uuid = result.start_time;
