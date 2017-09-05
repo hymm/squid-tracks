@@ -9,6 +9,7 @@ import {
 } from 'react-bootstrap';
 import LeagueRankings from './components/league-rankings';
 import { event } from './analytics';
+import update from 'immutability-helper';
 import moment from 'moment';
 
 const { ipcRenderer } = require('electron');
@@ -33,14 +34,6 @@ class MetaContainer extends React.Component {
   componentDidMount() {
     ipcRenderer.on('apiData', this.getMetaLoad);
   }
-
-  handleApiData = (e, data) => {
-    if (typeof data === 'object') {
-      this.state.league_dict[
-        data.league_id + data.league_ranking_region.code
-      ] = data;
-    }
-  };
 
   getMetaRequest() {
     let endUtc = moment().startOf('day');
@@ -68,10 +61,12 @@ class MetaContainer extends React.Component {
   }
 
   getMetaLoad = (e, data) => {
-    this.handleApiData(data);
-    ipcRenderer.removeListener('apiData', this.handleApiData);
     if (typeof data === 'object') {
-      this.state.league_dict[data.league_id] = data;
+      let newEntry = {};
+      newEntry[data.league_id] = data;
+      this.setState({
+        league_dict: update(this.state.league_dict, { $merge: newEntry })
+      });
     }
   };
 
