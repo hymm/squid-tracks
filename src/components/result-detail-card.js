@@ -203,6 +203,64 @@ class ResultDetailCard extends React.Component {
     return { k: kad, a: kad, d: kad, s, p };
   };
 
+  checkGear(skills) {
+    const shiny = skills.subs.reduce((a, b) => {
+      return a && b && b.id === skills.subs[0].id;
+    }, true);
+    if (shiny) {
+      if (skills.subs[0].id === skills.main.id) {
+        return 'pure';
+      }
+      return 'perfect';
+    }
+    return 'none';
+  }
+
+  checkPlayerGear(player) {
+    const gearResults = [];
+    gearResults.push(this.checkGear(player.head_skills));
+    gearResults.push(this.checkGear(player.clothes_skills));
+    gearResults.push(this.checkGear(player.shoes_skills));
+    return this.reduceGear(gearResults);
+  }
+
+  reduceGear(gearResults) {
+    const result = gearResults.reduce((a, b) => {
+      if (a === 'pure' || b === 'pure') {
+        return 'pure';
+      }
+
+      if (a === 'perfect' || b === 'perfect') {
+        return 'perfect';
+      }
+
+      return 'none';
+    }, 'none');
+    return result;
+  }
+
+  getGearStyle() {
+    const { result } = this.props;
+    let style = undefined;
+    const gearResults = [];
+    gearResults.push(this.checkPlayerGear(result.player_result.player));
+    result.my_team_members.map(player => {
+      gearResults.push(this.checkPlayerGear(player.player));
+    });
+    result.other_team_members.map(player => {
+      gearResults.push(this.checkPlayerGear(player.player));
+    });
+
+    const res = this.reduceGear(gearResults);
+    if (res === 'pure') {
+      return 'success';
+    }
+    if (res === 'perfect') {
+      return 'info';
+    }
+    return 'default';
+  }
+
   render() {
     const { result, statInk } = this.props;
     const linkInfo = statInk[result.battle_number];
@@ -268,6 +326,7 @@ class ResultDetailCard extends React.Component {
                   <Button
                     onClick={this.showGear}
                     active={this.state.show === 2}
+                    bsStyle={this.getGearStyle()}
                   >
                     <FormattedMessage
                       id="resultDetails.teamsButton.gear"
