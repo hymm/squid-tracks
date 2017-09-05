@@ -156,7 +156,7 @@ export default class LeagueRankings extends React.Component {
         header={
           <h3>
             {this.props.region} Region{' '}
-            {this.props.full_teams ? `Squads` : `Pairs`} League Weapon Stats
+            {this.props.full_teams ? `Teams` : `Pairs`} League Weapon Stats
           </h3>
         }
       >
