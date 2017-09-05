@@ -282,11 +282,13 @@ class ResultsCard extends React.Component {
                     {result.my_team_result.key}
                   </td>
                   <td>
-                    {result.estimate_gachi_power
-                      ? result.estimate_gachi_power
-                      : result.other_estimate_fes_power
-                        ? result.other_estimate_fes_power
-                        : '---'}
+                    {result.other_estimate_league_power
+                      ? results.other_estimate_league_power
+                      : result.estimate_gachi_power
+                        ? result.estimate_gachi_power
+                        : result.other_estimate_fes_power
+                          ? result.other_estimate_fes_power
+                          : '---'}
                   </td>
                   <td style={{ textAlign: 'center', background: 'darkgrey' }}>
                     <Image
