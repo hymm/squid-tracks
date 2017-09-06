@@ -34,6 +34,10 @@ function setGameInfo(statInk, result) {
   // assume if elapsed_time doesn't exist make it 3 minutes for turf war
   const elapsed_time = result.elapsed_time ? result.elapsed_time : 180;
   statInk.end_at = result.start_time + elapsed_time;
+  statInk.splatnet_number = result.battle_number;
+  if (result.tag_id) {
+    statInk.my_team_id = result.tag_id;
+  }
 }
 
 function setGameResults(statInk, result) {
@@ -118,6 +122,7 @@ function getPlayer(playerResult, team, addBonus) {
   if (addBonus) {
     player.point += 1000;
   }
+  player.splatnet_id = playerResult.player.principal_id;
   return player;
 }
 
@@ -166,6 +171,8 @@ async function convertResultToStatInk(result, disableGetImage) {
   if (!disableGetImage) {
     statInk.image_result = await getSplatnetImage(result.battle_number);
   }
+
+  statInk.splatnet_json = result;
 
   return statInk;
 }

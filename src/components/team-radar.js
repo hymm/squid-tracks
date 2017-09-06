@@ -31,28 +31,29 @@ function normalize(team, maximums) {
 }
 
 const RadarTeam = ({ team, maximums }) => {
-  const mappedTeam = team.map(member => {
+  const mappedTeam = team.map(player => {
     return {
-      k: member.kill_count,
-      a: member.assist_count,
-      d: member.death_count,
-      s: member.special_count,
-      p: member.game_paint_point
+      k: player.kill_count,
+      a: player.assist_count,
+      d: player.death_count,
+      s: player.special_count,
+      p: player.game_paint_point
     };
   });
   const normalized = normalize(mappedTeam, maximums);
   const data = dataTypes.map(row => {
     team.forEach((player, index) => {
       row[player.player.principal_id] = normalized[index][row.key];
+      row.statMax = `${row.stat} (${maximums[row.key]})`;
     });
     return row;
   });
   return (
     <RadarChart
-      cx={160}
+      cx={180}
       cy={130}
       outerRadius={100}
-      width={320}
+      width={360}
       height={280}
       data={data}
       startAngle={90}
@@ -60,7 +61,13 @@ const RadarTeam = ({ team, maximums }) => {
     >
       {team.map((player, index) =>
         <Radar
-          name={player.player.nickname}
+          name={
+            player.game_paint_point === 0
+              ? <strike>
+                  {player.player.nickname}
+                </strike>
+              : player.player.nickname
+          }
           dataKey={player.player.principal_id}
           stroke={colors[0][index]}
           fill={colors[0][index]}
@@ -69,7 +76,7 @@ const RadarTeam = ({ team, maximums }) => {
       )}
       <PolarGrid />
       <Legend />
-      <PolarAngleAxis dataKey="stat" />
+      <PolarAngleAxis dataKey="statMax" />
     </RadarChart>
   );
 };

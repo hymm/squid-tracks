@@ -182,6 +182,19 @@ export const ResultSummary2 = ({ result }) =>
             </td>
           </tr>
         : null}
+      {result.other_estimate_league_point
+        ? <tr>
+            <th>
+              <FormattedMessage
+                id="results.summary.otherEstimateLeaguePower"
+                defaultMessage="Enemy Estimate League Power"
+              />
+            </th>
+            <td>
+              {result.other_estimate_league_point}
+            </td>
+          </tr>
+        : null}
       {result.league_point
         ? <tr>
             <th>

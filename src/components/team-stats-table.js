@@ -49,9 +49,15 @@ const TeamHeader = ({ player = { player: {} } }) =>
 
 const PlayerRow = ({ player }) => {
   return (
-    <tr>
+    <tr
+      style={{ color: player.game_paint_point === 0 ? 'lightgrey' : undefined }}
+    >
       <td>
-        {player.player.nickname}
+        {player.game_paint_point === 0
+          ? <strike>
+              {player.player.nickname}
+            </strike>
+          : player.player.nickname}
       </td>
 
       {player.player.udemae
