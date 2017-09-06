@@ -241,13 +241,12 @@ class ResultDetailCard extends React.Component {
 
   getGearStyle() {
     const { result } = this.props;
-    let style = undefined;
     const gearResults = [];
     gearResults.push(this.checkPlayerGear(result.player_result.player));
-    result.my_team_members.map(player => {
+    result.my_team_members.forEach(player => {
       gearResults.push(this.checkPlayerGear(player.player));
     });
-    result.other_team_members.map(player => {
+    result.other_team_members.forEach(player => {
       gearResults.push(this.checkPlayerGear(player.player));
     });
 

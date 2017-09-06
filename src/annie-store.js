@@ -5,7 +5,6 @@ import {
   Row,
   Col,
   Panel,
-  Thumbnail,
   Image,
   ButtonToolbar,
   Button,
