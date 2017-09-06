@@ -168,8 +168,7 @@ export default class LeagueRankings extends React.Component {
       <Panel
         header={
           <h3>
-            {this.props.region} Region{' '}
-            {this.props.full_teams ? `Teams` : `Pairs`} League Weapon Stats
+            {this.props.title}
           </h3>
         }
       >

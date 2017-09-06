@@ -28,7 +28,8 @@ class MetaContainer extends React.Component {
     league_dict: {},
     refreshing: false,
     full_teams: true,
-    region: 'ALL'
+    region: 'ALL',
+    title: 'Load Data Above'
   };
 
   componentDidMount() {
@@ -170,9 +171,22 @@ class MetaContainer extends React.Component {
           <Button
             bsStyle="primary"
             onClick={() => {
-              event('league_dict', 'refresh');
+              event(
+                'league_dict',
+                'refresh',
+                (this.state.full_teams ? 'team-' : 'pair-') +
+                  this.state.region.toLowerCase()
+              );
               this.getMetaRequest();
-              this.setState({ refreshing: true, league_dict: {} });
+              this.setState({
+                refreshing: true,
+                league_dict: {},
+                title:
+                  this.state.region +
+                  ' Region ' +
+                  (this.state.full_teams ? 'Teams' : 'Pairs') +
+                  ' League Weapon Stats'
+              });
               setTimeout(() => this.setState({ refreshing: false }), 4000);
             }}
             disabled={this.state.refreshing}
@@ -221,8 +235,7 @@ class MetaContainer extends React.Component {
         <LeagueRankings
           handleChange={this.handleChange}
           calcStats={this.getCalculatedWeaponStats(this.state.league_dict)}
-          full_teams={this.state.full_teams}
-          region={this.state.region}
+          title={this.state.title}
         />
       </div>
     );
