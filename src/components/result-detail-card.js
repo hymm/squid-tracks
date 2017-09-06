@@ -242,7 +242,8 @@ class ResultDetailCard extends React.Component {
   getGearStyle() {
     const { result } = this.props;
     const gearResults = [];
-    gearResults.push(this.checkPlayerGear(result.player_result.player));
+    // don't check own gear
+    // gearResults.push(this.checkPlayerGear(result.player_result.player));
     result.my_team_members.forEach(player => {
       gearResults.push(this.checkPlayerGear(player.player));
     });
