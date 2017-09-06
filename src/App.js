@@ -4,7 +4,7 @@ import createHashHistory from 'history/createHashHistory';
 import { IntlProvider } from 'react-intl';
 import Routes from './routes';
 import messages from './messages';
-import { screenview } from './analytics';
+import { screenview, uaException } from './analytics';
 import Login from './login';
 import log from 'electron-log';
 import { ipcRenderer } from 'electron';
@@ -14,11 +14,15 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 window.addEventListener('error', event => {
-  log.error(`UnhandledError in renderer: ${event.error}`);
+  const message = `UnhandledError in renderer: ${event.error}`;
+  log.error(message);
+  uaException(message);
 });
 
 window.addEventListener('unhandledrejection', event => {
-  log.error(`Unhandled Promise Rejection in renderer: ${event.reason}`);
+  const message = `Unhandled Promise Rejection in renderer: ${event.reason}`;
+  log.error(message);
+  uaException(message);
 });
 
 const history = createHashHistory();

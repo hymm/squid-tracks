@@ -4,15 +4,20 @@ const log = require('electron-log');
 const isDev = require('electron-is-dev');
 const Memo = require('promise-memoize');
 const { writeToStatInk } = require('./stat-ink/stat-ink');
+const { uaException } = require('./analytics');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
 
 process.on('uncaughtException', err => {
-  log.error(`Unhandled Error in Main: ${err}`);
+  const message = `Unhandled Error in Main: ${err}`;
+  log.error(message);
+  uaException(message);
 });
 
 process.on('unhandledRejection', err => {
-  log.error(`Unhandled Promise Rejection in Main: ${err}`);
+  const message = `Unhandled Promise Rejection in Main: ${err}`;
+  log.error(message);
+  uaException(message);
 });
 
 const getSplatnetApiMemo120 = Memo(splatnet.getSplatnetApi, { maxAge: 120000 });
