@@ -189,7 +189,16 @@ ipcMain.on('getApiAsync', async (e, url) => {
     const leagueRegex = /^league_match_ranking\/.*$/;
     let value;
     if (url.match(battleRegex) || url.match(leagueRegex)) {
-      value = await getSplatnetApiMemoInf(url);
+      value = await getSplatnetApiMemoInf(url).catch(function(error) {
+        if (
+          error.statusCode === 404 &&
+          error.options.uri.includes('league_match_ranking')
+        ) {
+          /*do nothing*/
+        } else {
+          throw error;
+        }
+      });
     } else if (url === 'results') {
       value = await getSplatnetApiMemo10(url);
     } else {

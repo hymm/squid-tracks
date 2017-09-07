@@ -29,7 +29,7 @@ class MetaContainer extends React.Component {
     refreshing: false,
     full_teams: true,
     region: 'ALL',
-    title: 'Load Data Above'
+    title: 'Select Data Above'
   };
 
   componentDidMount() {
@@ -50,7 +50,6 @@ class MetaContainer extends React.Component {
           (this.state.full_teams ? 'T' : 'P') +
           '/' +
           this.state.region;
-        //log.info(`getting ${league_string} (offset ${this.getWeekIndex(endUtc)})`);
         ipcRenderer.send(
           'getApiAsync',
           'league_match_ranking/' + league_string
@@ -62,7 +61,7 @@ class MetaContainer extends React.Component {
   }
 
   getMetaLoad = (e, data) => {
-    if (typeof data === 'object') {
+    if (typeof data === 'object' && data != null) {
       let newEntry = {};
       newEntry[data.league_id] = data;
       this.setState({
