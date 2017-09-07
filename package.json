@@ -34,6 +34,7 @@
     "jws": "^3.1.4",
     "lint-staged": "^4.0.4",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "msgpack-lite": "^0.1.26",
     "piping": "^1.0.0-rc.4",
     "prettier": "^1.5.3",
