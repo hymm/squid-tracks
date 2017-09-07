@@ -7,6 +7,7 @@ const { writeToStatInk } = require('./stat-ink/stat-ink');
 const { uaException } = require('./analytics');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
+require('./battles-store');
 
 process.on('uncaughtException', err => {
   const message = `Unhandled Error in Main: ${err}`;
