@@ -10,8 +10,9 @@
 * Gear button now changes color if there's good gear
 * Added anonymizer for people who like to screenshot
 * Added support for custom jr
-* Players who diconnected (inked 0p) are now greyed out in battle details
+* Players who disconnected (inked 0p) are now greyed out in battle details
 * Radar charts now show max values
+* Max game score in radar chart is now always 100
 * Support to show splat fest power
 * Added Enemy Team Power for league battle details
 * Added ability to turn on fiddler proxy with environment variable
