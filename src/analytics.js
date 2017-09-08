@@ -27,8 +27,8 @@ export const event = (...args) => {
   }
 };
 
-export const uaException = (...args) => {
+export const uaException = (exd, ...args) => {
   if (ipcRenderer.sendSync('getFromStore', 'gaEnabled')) {
-      visitor.exception(...args).send();
+      visitor.exception({ exd, av: appVersion }, ...args).send();
   }
 }

@@ -232,13 +232,14 @@ class AnnieStore extends React.Component {
   }
 
   update = () => {
-    event('store', 'refresh');
+    event('annie-store', 'refresh');
     this.setState({ refreshing: true });
     this.props.splatnet.comm.updateMerchandise();
     setTimeout(() => this.setState({ refreshing: false }), 2000);
   };
 
   order = merchId => {
+    event('annie-store', 'order');
     this.setState({ ordering: true });
     ipcRenderer.send('postApi', `onlineshop/order/${merchId}`, {
       override: '1'
@@ -250,6 +251,7 @@ class AnnieStore extends React.Component {
   };
 
   cancel = () => {
+    event('annie-store', 'cancel');
     this.setState({ cancelled: !this.state.cancelled });
   };
 

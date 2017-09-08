@@ -94,7 +94,9 @@ function registerSplatnetHandler() {
     },
     e => {
       if (e) {
-        log.error(`Error Logging into Nintendo: ${e}`);
+        const message = `Error Logging into Nintendo: ${e}`;
+        uaException(message);
+        log.error(message);
       }
     }
   );
@@ -143,7 +145,9 @@ ipcMain.on('writeToStatInk', async (event, result, type) => {
       event.sender.send('wroteBattleAuto', info);
     }
   } catch (e) {
-    log.error(`Failed to write #${result.battle_number} to stat.ink: ${e}`);
+    const message = `Failed to write #${result.battle_number} to stat.ink: ${e}`
+    uaException(message);
+    log.error(message);
     if (type === 'manual') {
       event.sender.send('writeBattleManualError', { username: '', battle: -1 });
     } else {
@@ -214,7 +218,9 @@ ipcMain.on('getApiAsync', async (e, url) => {
     }
     e.sender.send('apiData', value);
   } catch (e) {
-    log.error(`Error getting ${url}: ${e}`);
+    const message = `Error getting ${url}: ${e}`
+    uaException(message);
+    log.error(message);
     e.sender.send('apiData', {});
   }
 });
@@ -235,7 +241,9 @@ ipcMain.on('getApi', async (e, url) => {
     }
     e.returnValue = value;
   } catch (e) {
-    log.error(`Error getting ${url}: ${e}`);
+    const message = `Error getting ${url}: ${e}`;
+    uaException(message);
+    log.error(message);
     e.returnValue = {};
   }
 });
@@ -244,7 +252,9 @@ ipcMain.on('postApi', async (e, url, body) => {
   try {
     e.returnValue = await splatnet.postSplatnetApi(url, body);
   } catch (e) {
-    log.error(`Error posting ${url}: ${e}`);
+    const message = `Error posting ${url}: ${e}`;
+    uaException(message);
+    log.error(message);
     e.returnValue = {};
   }
 });
@@ -254,7 +264,9 @@ ipcMain.on('getIksmToken', async e => {
     const cookie = splatnet.getIksmToken();
     e.sender.send('iksmToken', cookie);
   } catch (err) {
-    log.error(`Failed to get iksm cookie: ${err}`);
+    const message = `Failed to get iksm cookie: ${err}`;
+    uaException(message);
+    log.error(message);
     e.sender.send('getIksmTokenError', { username: '', battle: -1 });
   }
 });

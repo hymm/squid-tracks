@@ -22,6 +22,7 @@ import PanelWithMenu from './panel-with-menu';
 import TeamRadar from './team-radar';
 import { ResultSummary1, ResultSummary2 } from './result-detail-summary';
 import { getGeneralFields, getPlayerFields } from './export-detail-helpers';
+import { event } from '../analytics';
 import { clipboard, remote } from 'electron';
 const { openExternal } = remote.shell;
 
@@ -99,12 +100,14 @@ class ResultDetailMenu extends React.Component {
   }
 
   copySimplifiedToJson = () => {
+    event('export-data', 'battle-simplified-json');
     const { result } = this.props;
     const simplified = this.simplify(result);
     clipboard.writeText(JSON.stringify(simplified));
   };
 
   copyToJson = () => {
+    event('export-data', 'battle-json');
     const { result } = this.props;
     clipboard.writeText(JSON.stringify(result));
   };
@@ -151,22 +154,27 @@ class ResultDetailCard extends React.Component {
   };
 
   showStats = () => {
+    event('result-details', 'show-stats');
     this.setState({ show: 1 });
   };
 
   showGear = () => {
+    event('result-details', 'show-gear');
     this.setState({ show: 2 });
   };
 
   showInfo = () => {
+    event('result-details', 'show-info');
     this.setState({ show: 3 });
   };
 
   showRadarTeam = () => {
+    event('result-details', 'show-radar-team');
     this.setState({ show: 4 });
   };
 
   showRadarTotals = () => {
+    event('result-details', 'show-radar-game-totals');
     this.setState({ show: 5 });
   };
 

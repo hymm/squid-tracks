@@ -37,9 +37,9 @@ const event = (...args) => {
 };
 module.exports.event = event;
 
-const uaException = (...args) => {
+const uaException = (exd, ...args) => {
   if (store.get('gaEnabled')) {
-      visitor.exception(...args).send();
+      visitor.exception({ exd, av: appVersion }, ...args).send();
   }
 }
 module.exports.uaException = uaException;

@@ -15,6 +15,7 @@ import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
 import ExportButton from './export-details-csv';
+import { event } from '../analytics';
 
 class ResultsCard extends React.Component {
   messages = defineMessages({
@@ -194,7 +195,10 @@ class ResultsCard extends React.Component {
         <ButtonToolbar style={{ marginBottom: '10px' }}>
           <ButtonGroup>
             <Button
-              onClick={() => this.setState({ normalize: false })}
+              onClick={() => {
+                  event('last-50-battles', 'show-stats-raw');
+                  this.setState({ normalize: false })
+              }}
               active={!normalize}
             >
               <FormattedMessage
@@ -210,17 +214,29 @@ class ResultsCard extends React.Component {
                   values={{ normalizeTime }}
                 />
               }
-              onClick={() => this.setState({ normalize: true })}
+              onClick={() => {
+                  event('last-50-battles', 'show-stats-normailzed', this.state.normalizeTime);
+                  this.setState({ normalize: true })
+              }}
               active={normalize}
               id="minutes"
             >
-              <MenuItem onClick={() => this.setState({ normalizeTime: 1 })}>
+              <MenuItem onClick={() => {
+                  event('last-50-battles', 'show-stats-normailzed', 1);
+                  this.setState({ normalizeTime: 1 })
+              }}>
                 1
               </MenuItem>
-              <MenuItem onClick={() => this.setState({ normalizeTime: 3 })}>
+              <MenuItem onClick={() => {
+                  event('last-50-battles', 'show-stats-normailzed', 3);
+                  this.setState({ normalizeTime: 3 })
+              }}>
                 3
               </MenuItem>
-              <MenuItem onClick={() => this.setState({ normalizeTime: 5 })}>
+              <MenuItem onClick={() => {
+                  event('last-50-battles', 'show-stats-normailzed', 5);
+                  this.setState({ normalizeTime: 5 })
+              }}>
                 5
               </MenuItem>
             </SplitButton>

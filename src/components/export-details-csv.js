@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import flatten from 'flat';
 import json2csv from 'json2csv';
 import { remote, ipcRenderer } from 'electron';
+import { event } from '../analytics';
 const { dialog } = remote;
 
 class ExportBattlesToCsvButton extends React.Component {
@@ -17,6 +18,7 @@ class ExportBattlesToCsvButton extends React.Component {
   }
 
   exportBattlesToCsv = () => {
+    event('export-data', '50-battles-csv');
     // loop through current and get battles
     const { splatnet } = this.props;
     const battles = splatnet.current.results.results.map(battle => {
@@ -36,7 +38,6 @@ class ExportBattlesToCsvButton extends React.Component {
   };
 
   render() {
-    const { splatnet } = this.props;
     return (
       <Button onClick={this.exportBattlesToCsv}>
         <FormattedMessage
