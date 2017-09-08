@@ -35,7 +35,7 @@ class ResultDetailMenu extends React.Component {
     for (let i = 0; i < 4; i++) {
       fields = fields.concat(getPlayerFields(`other_team_members[${i}]`));
     }
-    console.log(fields);
+
     return fields;
   }
 
