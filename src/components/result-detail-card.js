@@ -11,9 +11,12 @@ import {
   NavDropdown,
   MenuItem
 } from 'react-bootstrap';
-import { pick, mapKeys } from 'lodash';
+import { pick, mapKeys, cloneDeep } from 'lodash';
 import flatten from 'flat';
 import { FormattedMessage } from 'react-intl';
+import sillyname from 'sillyname';
+import { clipboard, remote } from 'electron';
+
 import TeamStatsTable from './team-stats-table';
 import TeamGearTable from './team-gear-table';
 import TeamInfoTable from './team-info-table';
@@ -23,7 +26,7 @@ import TeamRadar from './team-radar';
 import { ResultSummary1, ResultSummary2 } from './result-detail-summary';
 import { getGeneralFields, getPlayerFields } from './export-detail-helpers';
 import { event } from '../analytics';
-import { clipboard, remote } from 'electron';
+
 const { openExternal } = remote.shell;
 
 class ResultDetailMenu extends React.Component {
@@ -150,7 +153,8 @@ class ResultDetailMenu extends React.Component {
 
 class ResultDetailCard extends React.Component {
   state = {
-    show: 1
+    show: 1,
+    anonymize: false,
   };
 
   showStats = () => {
@@ -269,17 +273,31 @@ class ResultDetailCard extends React.Component {
     return 'default';
   }
 
+  anonymize(result) {
+    const newResult = cloneDeep(result);
+    for (const player of newResult.my_team_members) {
+        player.player.nickname = sillyname();
+    }
+    for (const player of newResult.other_team_members) {
+        player.player.nickname = sillyname();
+    }
+    return newResult;
+  }
+
   render() {
     const { result, statInk } = this.props;
+    const { anonymize } = this.state;
     const linkInfo = statInk[result.battle_number];
     if (!result) {
       return null;
     }
 
-    const myTeam = result.my_team_members.slice(0);
-    myTeam.unshift(result.player_result);
+    const resultChanged = anonymize ? this.anonymize(result) : result;
+
+    const myTeam = resultChanged.my_team_members.slice(0);
+    myTeam.unshift(resultChanged.player_result);
     myTeam.sort((a, b) => b.sort_score - a.sort_score);
-    const otherTeam = result.other_team_members
+    const otherTeam = resultChanged.other_team_members
       .slice(0)
       .sort((a, b) => b.sort_score - a.sort_score);
 
@@ -292,7 +310,7 @@ class ResultDetailCard extends React.Component {
             <FormattedMessage
               id="resultDetails.title"
               defaultMessage="Battle #{battle_number} Details"
-              values={{ battle_number: result.battle_number }}
+              values={{ battle_number: resultChanged.battle_number }}
             />
             {linkInfo
               ? <a
@@ -307,15 +325,15 @@ class ResultDetailCard extends React.Component {
               : null}
           </h3>
         }
-        menu={<ResultDetailMenu result={result} />}
+        menu={<ResultDetailMenu result={resultChanged} />}
       >
         <Grid fluid>
           <Row>
             <Col sm={6} md={6}>
-              <ResultSummary1 result={result} />
+              <ResultSummary1 result={resultChanged} />
             </Col>
             <Col sm={6} md={6}>
-              <ResultSummary2 result={result} />
+              <ResultSummary2 result={resultChanged} />
             </Col>
           </Row>
           <Row>
@@ -381,6 +399,15 @@ class ResultDetailCard extends React.Component {
                     <Glyphicon glyph='option-horizontal' />
                   </Button>
                 </ButtonGroup>
+                <Button
+                  onClick={() => {
+                      event('result-details', 'anonymize', !this.state.anonymize);
+                      this.setState({ anonymize: !this.state.anonymize });
+                  }}
+                  active={this.state.anonymize}
+                >
+                  Anonymize
+                </Button>
               </ButtonToolbar>
             </Col>
           </Row>
