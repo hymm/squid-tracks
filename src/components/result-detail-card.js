@@ -406,7 +406,10 @@ class ResultDetailCard extends React.Component {
                   }}
                   active={this.state.anonymize}
                 >
-                  Anonymize
+                  <FormattedMessage
+                    id={'resultDetails.anonymizeButton.text'}
+                    defaultMessage={'Anonymize'}
+                  />
                 </Button>
               </ButtonToolbar>
             </Col>
