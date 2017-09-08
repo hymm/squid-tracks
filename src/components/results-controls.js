@@ -12,6 +12,7 @@ import { ipcRenderer } from 'electron';
 import StatInkManualButton from './results-upload-manual-button';
 import ResultsPoller from './results-poller-button';
 import { event } from '../analytics';
+import ResultsUploadAll from './results-upload-all-battles';
 
 class ResultControl extends React.Component {
   messages = defineMessages({
@@ -105,6 +106,7 @@ class ResultControl extends React.Component {
           disabled={!tokenExists}
           setStatInkInfo={setStatInkInfo}
         />
+        <ResultsUploadAll statInk={statInk} setStatInkInfo={setStatInkInfo} />
       </ButtonToolbar>
     );
   }
