@@ -55,6 +55,7 @@ const RadarTotalsChart = ({ myTeam, otherTeam, myCount, otherCount }) => {
   myTeamTotals.c = myCount;
   otherTeamTotals.c = otherCount;
   const maximums = getMaximums(myTeamTotals, otherTeamTotals);
+  maximums.c = 100;
   const myTeamNormalized = normalize(myTeamTotals, maximums);
   const otherTeamNormalized = normalize(otherTeamTotals, maximums);
 
