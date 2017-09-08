@@ -40,19 +40,17 @@ class SplatnetProvider extends React.Component {
           return cachedBattle;
         }
 
+        const storedBattle = ipcRenderer.sendSync('getBattleFromStore', number);
+        if (storedBattle != null) {
+            return storedBattle;
+        }
+
         const freshBattle = ipcRenderer.sendSync('getApi', `results/${number}`);
         this.setBattleToCache(freshBattle);
         return freshBattle;
       }
     }
   };
-
-  componentDidMount() {
-    const battles = ipcRenderer.sendSync('getBattlesFromStore');
-    this.setState({
-      cache: update(this.state.cache, { $merge: { battles: battles } })
-    });
-  }
 
   setBattleToCache(freshBattle) {
     const number = freshBattle.battle_number;
