@@ -14,6 +14,7 @@ import { cloneDeep } from 'lodash';
 import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
+import ExportButton from './export-details-csv';
 
 class ResultsCard extends React.Component {
   messages = defineMessages({
@@ -224,6 +225,7 @@ class ResultsCard extends React.Component {
               </MenuItem>
             </SplitButton>
           </ButtonGroup>
+          <ExportButton />
         </ButtonToolbar>
         <FormattedMessage
           id="results.table.sortHelp"

@@ -3,10 +3,13 @@ const path = require('path');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
 const Memo = require('promise-memoize');
+const fs = require('fs');
+
 const { writeToStatInk } = require('./stat-ink/stat-ink');
 const { uaException } = require('./analytics');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
+require('./battles-store');
 
 process.on('uncaughtException', err => {
   const message = `Unhandled Error in Main: ${err}`;
@@ -254,6 +257,10 @@ ipcMain.on('getIksmToken', async e => {
     log.error(`Failed to get iksm cookie: ${err}`);
     e.sender.send('getIksmTokenError', { username: '', battle: -1 });
   }
+});
+
+ipcMain.on('saveBattlesToCsv', (event, file, csv) => {
+  fs.writeFileSync(file, csv);
 });
 
 function isTokenGood(token) {
