@@ -318,55 +318,17 @@ class ResultDetailCard extends React.Component {
                     onClick={this.showStats}
                     active={this.state.show === 1}
                   >
-                    <FormattedMessage
-                      id="resultDetails.teamsButton.stats"
-                      defaultMessage="Stats"
-                    />
+                    <Glyphicon glyph='th' />
                   </Button>
                   <Button
                     onClick={this.showGear}
                     active={this.state.show === 2}
                     bsStyle={this.getGearStyle()}
-                  >
-                    <FormattedMessage
-                      id="resultDetails.teamsButton.gear"
-                      defaultMessage="Gear"
-                    />
-                  </Button>
-                  <Button
-                    onClick={this.showInfo}
-                    active={this.state.show === 3}
-                  >
-                    <FormattedMessage
-                      id="resultDetails.teamsButton.moreInfo"
-                      defaultMessage="More Info"
-                    />
-                  </Button>
-                  <Button
-                    onClick={this.showRadarTeam}
-                    active={this.state.show === 4}
                     style={{ padding: '8px 12px 4px 12px' }}
                   >
-                    <svg width="16" height="14">
-                      <polygon
-                        points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
-                        style={{
-                          strokeWidth: 1.5,
-                          stroke: '#666',
-                          fill: 'none'
-                        }}
-                      />
-                    </svg>
-                    <svg width="14" height="14">
-                      <polygon
-                        points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
-                        style={{
-                          strokeWidth: 1.5,
-                          stroke: '#666',
-                          fill: 'none'
-                        }}
-                      />
-                    </svg>
+                      <svg width="16" height="14" viewBox="0 0 448 416">
+                          <path fill="#000" d="M448 48L288 0c-13.988 27.227-30.771 40.223-63.769 40.223C191.723 39.676 173.722 27 160 0L0 48l32 88 64-8-16 288h288l-16-288 64 8 32-88z"/>
+                      </svg>
                   </Button>
                   <Button
                     onClick={this.showRadarTotals}
@@ -377,12 +339,38 @@ class ResultDetailCard extends React.Component {
                       <polygon
                         points="7,0,13.062177826491,3.5,13.062177826491,10.5,7,14,0.93782217350893,10.5,0.93782217350893,3.5"
                         style={{
-                          strokeWidth: 1.5,
-                          stroke: '#666',
-                          fill: 'none'
+                          fill: '#000'
                         }}
                       />
                     </svg>
+                  </Button>
+                  <Button
+                    onClick={this.showRadarTeam}
+                    active={this.state.show === 4}
+                    style={{ padding: '8px 12px 4px 12px' }}
+                  >
+                    <svg width="16" height="14">
+                      <polygon
+                        points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
+                        style={{
+                          fill: '#000'
+                        }}
+                      />
+                    </svg>
+                    <svg width="14" height="14">
+                      <polygon
+                        points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
+                        style={{
+                          fill: '#000'
+                        }}
+                      />
+                    </svg>
+                  </Button>
+                  <Button
+                    onClick={this.showInfo}
+                    active={this.state.show === 3}
+                  >
+                    <Glyphicon glyph='option-horizontal' />
                   </Button>
                 </ButtonGroup>
               </ButtonToolbar>
