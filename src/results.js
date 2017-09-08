@@ -41,7 +41,7 @@ class Results extends React.Component {
     const { splatnet } = this.props;
     this.setState({
       currentResult: splatnet.comm.getBattle(battleNumber),
-      currentResultIndex: splatnet.current.results.findIndex(
+      currentResultIndex: splatnet.current.results.results.findIndex(
         a => a.battle_number === battleNumber
       )
     });
