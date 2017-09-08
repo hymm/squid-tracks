@@ -132,7 +132,10 @@ class IksmToken extends React.Component {
           <Glyphicon
             glyph="copy"
             style={{ fontSize: 20, cursor: 'pointer' }}
-            onClick={() => clipboard.writeText(cookie.value)}
+            onClick={() => {
+                clipboard.writeText(cookie.value)
+                event('settings', 'copy-iksm-token');
+            }}
           />
         </h4>
         Expiration: {cookie.expires}
@@ -154,6 +157,7 @@ class LanguageSettings extends React.Component {
 
   handleChange = e => {
     this.props.setLocale(e.target.value);
+    event('settings', 'set-locale', e.target.value);
   };
 
   render() {
@@ -226,7 +230,10 @@ const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
               Session Token{' '}
               <Glyphicon
                 glyph="copy"
-                onClick={() => clipboard.writeText(token)}
+                onClick={() => {
+                    clipboard.writeText(token)
+                    event('settings', 'copy-session-token');
+                }}
                 style={{ fontSize: 20, cursor: 'pointer' }}
               />
             </h4>
