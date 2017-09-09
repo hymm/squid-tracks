@@ -4,23 +4,11 @@ import ResultsSummaryCard from './components/results-summary-card';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
 import ResultsControl from './components/results-controls';
-const { ipcRenderer } = require('electron');
+import { ipcRenderer } from 'electron';
+import { Subscriber } from 'react-broadcast';
 
-const Results = () =>
-  <Grid fluid style={{ marginTop: 65 }}>
-    <Row>
-      <Col md={12}>
-        <ResultsContainer />
-      </Col>
-    </Row>
-  </Grid>;
-
-class ResultsContainer extends React.Component {
+class Results extends React.Component {
   state = {
-    results: {
-      summary: {},
-      results: []
-    },
     currentResult: {},
     currentResultIndex: 0,
     statInk: {}
@@ -33,25 +21,27 @@ class ResultsContainer extends React.Component {
   }
 
   getResults = () => {
-    const results = ipcRenderer.sendSync('getApi', 'results');
-    this.setState({ results: results });
+    const { splatnet } = this.props;
+    const results = splatnet.comm.updateResults();
     this.changeResult(0, results.results);
     this.setState({ initialized: true });
   };
 
   changeResult = (arrayIndex, results) => {
-    const resultsPicked = results ? results : this.state.results.results;
+    const { splatnet } = this.props;
+    const resultsPicked = results ? results : splatnet.current.results.results;
     const battleNumber = resultsPicked[arrayIndex].battle_number;
     this.setState({
-      currentResult: ipcRenderer.sendSync('getApi', `results/${battleNumber}`),
+      currentResult: splatnet.comm.getBattle(battleNumber),
       currentResultIndex: arrayIndex
     });
   };
 
   changeResultByBattleNumber = battleNumber => {
+    const { splatnet } = this.props;
     this.setState({
-      currentResult: ipcRenderer.sendSync('getApi', `results/${battleNumber}`),
-      currentResultIndex: this.state.results.results.findIndex(
+      currentResult: splatnet.comm.getBattle(battleNumber),
+      currentResultIndex: splatnet.current.results.results.findIndex(
         a => a.battle_number === battleNumber
       )
     });
@@ -65,30 +55,43 @@ class ResultsContainer extends React.Component {
   };
 
   render() {
-    const { results, currentResult, statInk, currentResultIndex } = this.state;
+    const { currentResult, statInk, currentResultIndex } = this.state;
+    const results = this.props.splatnet.current.results;
     return (
-      <div>
-        <ResultsControl
-          result={currentResult}
-          resultIndex={currentResultIndex}
-          results={results.results}
-          changeResult={this.changeResult}
-          getResults={this.getResults}
-          setStatInkInfo={this.setStatInkInfo}
-          statInk={statInk}
-        />
-        {this.state.initialized
-          ? <ResultDetailCard result={currentResult} statInk={statInk} />
-          : null}
-        <ResultsSummaryCard summary={results.summary} />
-        <ResultsCard
-          results={results.results}
-          statInk={statInk}
-          changeResult={this.changeResultByBattleNumber}
-        />
-      </div>
+      <Grid fluid style={{ marginTop: 65 }}>
+        <Row>
+          <Col md={12}>
+            <ResultsControl
+              result={currentResult}
+              resultIndex={currentResultIndex}
+              results={results.results}
+              changeResult={this.changeResult}
+              getResults={this.getResults}
+              setStatInkInfo={this.setStatInkInfo}
+              statInk={statInk}
+            />
+            {this.state.initialized
+              ? <ResultDetailCard result={currentResult} statInk={statInk} />
+              : null}
+            <ResultsSummaryCard summary={results.summary} />
+            <ResultsCard
+              results={results.results}
+              statInk={statInk}
+              changeResult={this.changeResultByBattleNumber}
+            />
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
 
-export default Results;
+const SubscribedResults = () => {
+  return (
+    <Subscriber channel="splatnet">
+      {splatnet => <Results splatnet={splatnet} />}
+    </Subscriber>
+  );
+};
+
+export default SubscribedResults;

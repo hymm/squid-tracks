@@ -7,10 +7,10 @@ export const ResultSummary1 = ({ result }) =>
     <tbody>
       <tr>
         <th>
-            <FormattedMessage
-                id="results.summary.gameResult"
-                defaultMessage="Result"
-            />
+          <FormattedMessage
+            id="results.summary.gameResult"
+            defaultMessage="Result"
+          />
         </th>
         <td>
           {result.my_team_result.name}
@@ -18,10 +18,10 @@ export const ResultSummary1 = ({ result }) =>
       </tr>
       <tr>
         <th>
-            <FormattedMessage
-                id="results.summary.gameMode"
-                defaultMessage="Game Mode"
-            />
+          <FormattedMessage
+            id="results.summary.gameMode"
+            defaultMessage="Game Mode"
+          />
         </th>
         <td>
           {result.game_mode.name}
@@ -29,10 +29,7 @@ export const ResultSummary1 = ({ result }) =>
       </tr>
       <tr>
         <th>
-            <FormattedMessage
-                id="results.summary.rule"
-                defaultMessage="Rule"
-            />
+          <FormattedMessage id="results.summary.rule" defaultMessage="Rule" />
         </th>
         <td>
           {result.rule.name}
@@ -40,10 +37,7 @@ export const ResultSummary1 = ({ result }) =>
       </tr>
       <tr>
         <th>
-            <FormattedMessage
-                id="results.summary.stage"
-                defaultMessage="Stage"
-            />
+          <FormattedMessage id="results.summary.stage" defaultMessage="Stage" />
         </th>
         <td>
           {result.stage.name}
@@ -69,28 +63,28 @@ export const ResultSummary2 = ({ result }) =>
       {result.elapsed_time
         ? <tr>
             <th>
-                <FormattedMessage
-                  id="results.summary.duration"
-                  defaultMessage="Duration"
-                />
+              <FormattedMessage
+                id="results.summary.duration"
+                defaultMessage="Duration"
+              />
             </th>
             <td>
-                <FormattedMessage
-                  id="results.summary.elapsedTime"
-                  defaultMessage="{elapsed_time} sec"
-                  values={{ elapsed_time: result.elapsed_time }}
-                />
+              <FormattedMessage
+                id="results.summary.elapsedTime"
+                defaultMessage="{elapsed_time} sec"
+                values={{ elapsed_time: result.elapsed_time }}
+              />
             </td>
           </tr>
         : null}
       {result.tag_id
         ? <tr>
             <th>
-                <FormattedMessage
-                  id="results.summary.teamId"
-                  defaultMessage="Team Id"
-                  description="Team id is a unique id assigned by nintendo to a set of team members"
-                />
+              <FormattedMessage
+                id="results.summary.teamId"
+                defaultMessage="Team Id"
+                description="Team id is a unique id assigned by nintendo to a set of team members"
+              />
             </th>
             <td>
               {result.tag_id}
@@ -100,11 +94,11 @@ export const ResultSummary2 = ({ result }) =>
       {result.my_team_percentage
         ? <tr>
             <th>
-                <FormattedMessage
-                  id="results.summary.score"
-                  defaultMessage="Score"
-                  description="Score of the game i.e. 100 - 0"
-                />
+              <FormattedMessage
+                id="results.summary.score"
+                defaultMessage="Score"
+                description="Score of the game i.e. 100 - 0"
+              />
             </th>
             <td>
               {`${result.my_team_percentage} - ${result.other_team_percentage}`}
@@ -123,13 +117,26 @@ export const ResultSummary2 = ({ result }) =>
             <td>{`${result.my_team_count} - ${result.other_team_count}`}</td>
           </tr>
         : null}
+      {result.win_meter != null
+        ? <tr>
+            <th>
+              <FormattedMessage
+                id="results.summary.winMeter"
+                defaultMessage="Win Meter"
+              />
+            </th>
+            <td>
+              {result.win_meter}
+            </td>
+          </tr>
+        : null}
       {result.estimate_gachi_power
         ? <tr>
             <th>
-                <FormattedMessage
-                  id="results.summary.estimateGachiPower"
-                  defaultMessage="Estimate Gachi Power"
-                />
+              <FormattedMessage
+                id="results.summary.estimateGachiPower"
+                defaultMessage="Estimate Gachi Power"
+              />
             </th>
             <td>
               {result.estimate_gachi_power}
@@ -139,36 +146,62 @@ export const ResultSummary2 = ({ result }) =>
       {result.fes_power
         ? <tr>
             <th>
-                <FormattedMessage
-                  id="results.summary.fesPower"
-                  defaultMessage="Fes Power"
-                />
+              <FormattedMessage
+                id="results.summary.fesPower"
+                defaultMessage="Fes Power"
+              />
             </th>
             <td>
               {result.fes_power}
             </td>
           </tr>
         : null}
+      {result.max_fes_poser != null
+        ? <tr>
+            <th>
+              <FormattedMessage
+                id="results.summary.maxFestivalPower"
+                defaultMessage="Max Festival Power"
+              />
+            </th>
+            <td>
+              {result.max_fes_poser}
+            </td>
+          </tr>
+        : null}
       {result.my_estimate_league_point
         ? <tr>
             <th>
-                <FormattedMessage
-                  id="results.summary.myEstimateLeaguePower"
-                  defaultMessage="My Estimate League Power"
-                />
+              <FormattedMessage
+                id="results.summary.myEstimateLeaguePower"
+                defaultMessage="My Estimate League Power"
+              />
             </th>
             <td>
               {result.my_estimate_league_point}
             </td>
           </tr>
         : null}
+      {result.other_estimate_league_point
+        ? <tr>
+            <th>
+              <FormattedMessage
+                id="results.summary.otherEstimateLeaguePower"
+                defaultMessage="Enemy Estimate League Power"
+              />
+            </th>
+            <td>
+              {result.other_estimate_league_point}
+            </td>
+          </tr>
+        : null}
       {result.league_point
         ? <tr>
             <th>
-                <FormattedMessage
-                  id="results.summary.leaguePoint"
-                  defaultMessage="League Points"
-                />
+              <FormattedMessage
+                id="results.summary.leaguePoint"
+                defaultMessage="League Points"
+              />
             </th>
             <td>
               {result.league_point}
@@ -178,26 +211,39 @@ export const ResultSummary2 = ({ result }) =>
       {result.max_league_point && result.max_league_point > 0
         ? <tr>
             <th>
-                <FormattedMessage
-                  id="results.summary.maxLeaguePoint"
-                  defaultMessage="Max League Points"
-                />
+              <FormattedMessage
+                id="results.summary.maxLeaguePoint"
+                defaultMessage="Max League Points"
+              />
             </th>
             <td>
               {result.max_league_point}
             </td>
           </tr>
         : null}
-      {result.win_meter != null
+      {result.my_estimate_fes_power != null
         ? <tr>
             <th>
-                <FormattedMessage
-                  id="results.summary.winMeter"
-                  defaultMessage="Win Meter"
-                />
+              <FormattedMessage
+                id="results.summary.myEstimateFestivalPower"
+                defaultMessage="My Estimate Festival Power"
+              />
             </th>
             <td>
-                {result.win_meter}
+              {result.my_estimate_fes_power}
+            </td>
+          </tr>
+        : null}
+      {result.other_estimate_fes_power != null
+        ? <tr>
+            <th>
+              <FormattedMessage
+                id="results.summary.otherEstimateFestivalPower"
+                defaultMessage="Other Estimate Festival Power"
+              />
+            </th>
+            <td>
+              {result.other_estimate_fes_power}
             </td>
           </tr>
         : null}

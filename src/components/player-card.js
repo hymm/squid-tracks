@@ -36,13 +36,13 @@ const PlayerCard = ({ records }) => {
       <br />
       <FormattedMessage
         id="PlayerCard.towercontrolShortname"
-        defaultMessage="SZ: {name}{number}"
+        defaultMessage="TC: {name}{number}"
         values={{ name: udemae_tower.name, number: tc_s_plus_number }}
       />
       <br />
       <FormattedMessage
         id="PlayerCard.rainmakerShortname"
-        defaultMessage="SZ: {name}{number}"
+        defaultMessage="RM: {name}{number}"
         values={{ name: udemae_rainmaker.name, number: rm_s_plus_number }}
       />
       <br />

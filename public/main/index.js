@@ -1,18 +1,26 @@
-const { protocol, app, BrowserWindow, ipcMain } = require('electron');
+const { protocol, app, BrowserWindow, ipcMain, Menu } = require('electron');
 const path = require('path');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
 const Memo = require('promise-memoize');
+const fs = require('fs');
+
 const { writeToStatInk } = require('./stat-ink/stat-ink');
+const { uaException } = require('./analytics');
 const splatnet = require('./splatnet2');
 const Store = require('./store');
+require('./battles-store');
 
 process.on('uncaughtException', err => {
-    log.error(`Unhandled Error in Main: ${err}`);
+  const message = `Unhandled Error in Main: ${err}`;
+  log.error(message);
+  uaException(message);
 });
 
 process.on('unhandledRejection', err => {
-    log.error(`Unhandled Promise Rejection in Main: ${err}`);
+  const message = `Unhandled Promise Rejection in Main: ${err}`;
+  log.error(message);
+  uaException(message);
 });
 
 const getSplatnetApiMemo120 = Memo(splatnet.getSplatnetApi, { maxAge: 120000 });
@@ -86,7 +94,9 @@ function registerSplatnetHandler() {
     },
     e => {
       if (e) {
-        log.error(`Error Logging into Nintendo: ${e}`);
+        const message = `Error Logging into Nintendo: ${e}`;
+        uaException(message);
+        log.error(message);
       }
     }
   );
@@ -135,7 +145,9 @@ ipcMain.on('writeToStatInk', async (event, result, type) => {
       event.sender.send('wroteBattleAuto', info);
     }
   } catch (e) {
-    log.error(`Failed to write #${result.battle_number} to stat.ink: ${e}`);
+    const message = `Failed to write #${result.battle_number} to stat.ink: ${e}`;
+    uaException(message);
+    log.error(message);
     if (type === 'manual') {
       event.sender.send('writeBattleManualError', { username: '', battle: -1 });
     } else {
@@ -183,29 +195,66 @@ ipcMain.on('loadSplatnet', e => {
   });
 });
 
-ipcMain.on('getApi', async (e, url) => {
+ipcMain.on('getApiAsync', async (e, url) => {
   try {
     const battleRegex = /^results\/\d{1,}$/;
+    const leagueRegex = /^league_match_ranking\/.*$/;
     let value;
-    if (url.match(battleRegex)) {
-      value = await getSplatnetApiMemoInf(url);
+    if (url.match(battleRegex) || url.match(leagueRegex)) {
+      value = await getSplatnetApiMemoInf(url).catch(function(error) {
+        if (
+          error.statusCode === 404 &&
+          error.options.uri.includes('league_match_ranking')
+        ) {
+          /*do nothing*/
+        } else {
+          throw error;
+        }
+      });
     } else if (url === 'results') {
       value = await getSplatnetApiMemo10(url);
     } else {
       value = await getSplatnetApiMemo120(url);
     }
+    e.sender.send('apiData', value);
+  } catch (e) {
+    const message = `Error getting ${url}: ${e}`;
+    uaException(message);
+    log.error(message);
+    e.sender.send('apiData', {});
+  }
+});
+
+ipcMain.on('getApi', async (e, url) => {
+  try {
+    const battleRegex = /^results\/\d{1,}$/;
+    const leagueRegex = /^league_match_ranking\/.*$/;
+    let value;
+    if (url.match(battleRegex) || url.match(leagueRegex)) {
+      value = await getSplatnetApiMemoInf(url);
+    } else if (url === 'results') {
+      value = await getSplatnetApiMemo10(url);
+    } else if (url === 'onlineshop/merchandises') {
+      value = await splatnet.getSplatnetApi(url);
+    } else {
+      value = await getSplatnetApiMemo120(url);
+    }
     e.returnValue = value;
   } catch (e) {
-    log.error(`Error getting ${url}: ${e}`);
+    const message = `Error getting ${url}: ${e}`;
+    uaException(message);
+    log.error(message);
     e.returnValue = {};
   }
 });
 
-ipcMain.on('postApi', async (e, url) => {
+ipcMain.on('postApi', async (e, url, body) => {
   try {
-    e.returnValue = await splatnet.postSplatnetApi(url);
+    e.returnValue = await splatnet.postSplatnetApi(url, body);
   } catch (e) {
-    log.error(`Error posting ${url}: ${e}`);
+    const message = `Error posting ${url}: ${e}`;
+    uaException(message);
+    log.error(message);
     e.returnValue = {};
   }
 });
@@ -215,9 +264,15 @@ ipcMain.on('getIksmToken', async e => {
     const cookie = splatnet.getIksmToken();
     e.sender.send('iksmToken', cookie);
   } catch (err) {
-    log.error(`Failed to get iksm cookie: ${err}`);
+    const message = `Failed to get iksm cookie: ${err}`;
+    uaException(message);
+    log.error(message);
     e.sender.send('getIksmTokenError', { username: '', battle: -1 });
   }
+});
+
+ipcMain.on('saveBattlesToCsv', (event, file, csv) => {
+  fs.writeFileSync(file, csv);
 });
 
 function isTokenGood(token) {
@@ -242,9 +297,81 @@ async function getStoredSessionToken() {
   }
 }
 
+function createMenusMacOS() {
+  // Creates an application Edit menu (top bar) which enables copy & paste on MacOS
+  var template = [
+    {
+      label: app.getName(),
+      submenu: [
+        {
+          label: 'About SquidTracks',
+          selector: 'orderFrontStandardAboutPanel:'
+        },
+        { type: 'separator' },
+        { label: 'Hide SquidTracks', role: 'hide' },
+        { label: 'Hide Other Applications', role: 'hideothers' },
+        { label: 'Unhide', role: 'unide' },
+        { type: 'separator' },
+        {
+          label: 'Quit',
+          accelerator: 'Command+Q',
+          click: function() {
+            app.quit();
+          }
+        }
+      ]
+    },
+    {
+      label: 'Edit',
+      submenu: [
+        { label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
+        { label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:' },
+        { type: 'separator' },
+        { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
+        { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
+        { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
+        {
+          label: 'Select All',
+          accelerator: 'CmdOrCtrl+A',
+          selector: 'selectAll:'
+        }
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        { label: 'Reset Zoom', role: 'resetzoom' },
+        { label: 'Zoom In', role: 'zoomin' },
+        { label: 'Zoom Out', role: 'zoomout' },
+        { type: 'separator' },
+        { label: 'Toggle Full Screen', role: 'togglefullscreen' }
+      ]
+    },
+    {
+      label: 'Window',
+      role: 'window',
+      submenu: [
+        { label: 'Minimize', role: 'close' },
+        { label: 'Close', role: 'close' }
+      ]
+    },
+    {
+      label: 'Help',
+      role: 'help',
+      submenu: [{ label: '' }]
+    }
+  ];
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+}
+
 function createWindow() {
   registerSplatnetHandler();
   getStoredSessionToken();
+  // Check if we are on OSX
+  if (process.platform === 'darwin') {
+    // If so, create the top bar menus which enable copy & paste
+    createMenusMacOS();
+  }
 
   mainWindow = new BrowserWindow({
     width: 1024,
@@ -253,10 +380,13 @@ function createWindow() {
 
   // comment this in on first run to get dev tools
   if (isDev) {
-      const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
-      installExtension(REACT_DEVELOPER_TOOLS)
-        .then((name) => console.log(`Added Extension:  ${name}`))
-        .catch((err) => console.log('An error occurred: ', err));
+    const {
+      default: installExtension,
+      REACT_DEVELOPER_TOOLS
+    } = require('electron-devtools-installer');
+    installExtension(REACT_DEVELOPER_TOOLS)
+      .then(name => console.log(`Added Extension:  ${name}`))
+      .catch(err => console.log('An error occurred: ', err));
   }
 
   mainWindow.loadURL(startUrl);

@@ -1,6 +1,7 @@
 module.exports = {
   '0': 'bold', // sploosh
   '10': 'wakaba', // splattershot jr
+  '11': 'momiji', // custom splattershot jr
   '20': 'sharp', // splasho
   '30': 'promodeler_mg',
   '31': 'promodeler_rg',

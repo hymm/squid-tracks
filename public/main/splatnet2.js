@@ -2,17 +2,23 @@ const request2 = require('request-promise-native');
 const crypto = require('crypto');
 const base64url = require('base64url');
 const cheerio = require('cheerio');
+const log = require('electron-log');
 
 const splatnetUrl = `https://app.splatoon2.nintendo.net`;
 const jar = request2.jar();
-// use this like to proxy through fiddler
-/* const request = request2.defaults({
-  proxy: 'http://localhost:8888',
-  rejectUnauthorized: false,
-  jar: jar
-}); */
+let request;
+if (process.env.PROXY) {
+  const proxy = 'http://localhost:8888';
+  request = request2.defaults({
+    proxy: proxy,
+    rejectUnauthorized: false,
+    jar: jar
+  });
+  log.info(`Splatnet proxy on ${proxy}`);
+} else {
+  request = request2.defaults({ jar: jar });
+}
 
-const request = request2.defaults({ jar: jar });
 let userLanguage = 'en-US';
 let uniqueId = '';
 
@@ -184,8 +190,8 @@ function getUniqueId(body) {
   return id;
 }
 
-async function postSplatnetApi(url) {
-  const resp = await request({
+async function postSplatnetApi(url, body) {
+  const requestOptions = {
     method: 'POST',
     uri: `${splatnetUrl}/api/${url}`,
     headers: {
@@ -197,9 +203,16 @@ async function postSplatnetApi(url) {
       'X-Unique-Id': uniqueId,
       'X-Requested-With': 'XMLHttpRequest'
     },
-    json: true,
+    formData: body,
     gzip: true
-  });
+  };
+  if (body) {
+    requestOptions.formData = body;
+  } else {
+    requestOptions.json = true;
+  }
+
+  const resp = await request(requestOptions);
 
   return resp;
 }

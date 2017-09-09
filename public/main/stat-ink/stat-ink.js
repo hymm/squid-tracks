@@ -10,12 +10,16 @@ const appName = app.getName();
 const WeaponMap = require('./weapon-map');
 const FestRankMap = require('./fest-rank-map');
 
-/* const request = request2.defaults({
-  proxy: 'http://localhost:8888',
-  rejectUnauthorized: false,
-  jar: true
-}); */
-const request = request2;
+let request;
+if (process.env.PROXY) {
+  request = request2.defaults({
+    proxy: 'http://localhost:8888',
+    rejectUnauthorized: false,
+    jar: true
+  });
+} else {
+  request = request2;
+}
 
 function setUuid(statInk, result) {
   statInk.uuid = result.start_time;
@@ -30,6 +34,10 @@ function setGameInfo(statInk, result) {
   // assume if elapsed_time doesn't exist make it 3 minutes for turf war
   const elapsed_time = result.elapsed_time ? result.elapsed_time : 180;
   statInk.end_at = result.start_time + elapsed_time;
+  statInk.splatnet_number = result.battle_number;
+  if (result.tag_id) {
+    statInk.my_team_id = result.tag_id;
+  }
 }
 
 function setGameResults(statInk, result) {
@@ -114,6 +122,7 @@ function getPlayer(playerResult, team, addBonus) {
   if (addBonus) {
     player.point += 1000;
   }
+  player.splatnet_id = playerResult.player.principal_id;
   return player;
 }
 
@@ -141,8 +150,8 @@ function setClientInfo(statInk, result) {
 }
 
 function setSplatFest(statInk, result) {
-    statInk.fest_title = FestRankMap[result.player_result.player.fes_grade.rank];
-    statInk.fest_title_after = FestRankMap[result.fes_grade.rank];
+  statInk.fest_title = FestRankMap[result.player_result.player.fes_grade.rank];
+  statInk.fest_title_after = FestRankMap[result.fes_grade.rank];
 }
 
 async function convertResultToStatInk(result, disableGetImage) {
@@ -156,12 +165,14 @@ async function convertResultToStatInk(result, disableGetImage) {
   setClientInfo(statInk, result);
 
   if (result.game_mode.key === 'fest') {
-      setSplatFest(statInk, result);
+    setSplatFest(statInk, result);
   }
 
   if (!disableGetImage) {
     statInk.image_result = await getSplatnetImage(result.battle_number);
   }
+
+  statInk.splatnet_json = result;
 
   return statInk;
 }
