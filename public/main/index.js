@@ -1,4 +1,4 @@
-const { protocol, app, BrowserWindow, ipcMain } = require('electron');
+const { protocol, app, BrowserWindow, ipcMain, Menu } = require('electron');
 const path = require('path');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
@@ -145,7 +145,7 @@ ipcMain.on('writeToStatInk', async (event, result, type) => {
       event.sender.send('wroteBattleAuto', info);
     }
   } catch (e) {
-    const message = `Failed to write #${result.battle_number} to stat.ink: ${e}`
+    const message = `Failed to write #${result.battle_number} to stat.ink: ${e}`;
     uaException(message);
     log.error(message);
     if (type === 'manual') {
@@ -218,7 +218,7 @@ ipcMain.on('getApiAsync', async (e, url) => {
     }
     e.sender.send('apiData', value);
   } catch (e) {
-    const message = `Error getting ${url}: ${e}`
+    const message = `Error getting ${url}: ${e}`;
     uaException(message);
     log.error(message);
     e.sender.send('apiData', {});
@@ -297,9 +297,81 @@ async function getStoredSessionToken() {
   }
 }
 
+function createMenusMacOS() {
+  // Creates an application Edit menu (top bar) which enables copy & paste on MacOS
+  var template = [
+    {
+      label: app.getName(),
+      submenu: [
+        {
+          label: 'About SquidTracks',
+          selector: 'orderFrontStandardAboutPanel:'
+        },
+        { type: 'separator' },
+        { label: 'Hide SquidTrack', role: 'hide' },
+        { label: 'Hide Other Applications', role: 'hideothers' },
+        { label: 'Unhide', role: 'unide' },
+        { type: 'separator' },
+        {
+          label: 'Quit',
+          accelerator: 'Command+Q',
+          click: function() {
+            app.quit();
+          }
+        }
+      ]
+    },
+    {
+      label: 'Edit',
+      submenu: [
+        { label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
+        { label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:' },
+        { type: 'separator' },
+        { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
+        { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
+        { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
+        {
+          label: 'Select All',
+          accelerator: 'CmdOrCtrl+A',
+          selector: 'selectAll:'
+        }
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        { label: 'Reset Zoom', role: 'resetzoom' },
+        { label: 'Zoom In', role: 'zoomin' },
+        { label: 'Zoom Out', role: 'zoomout' },
+        { type: 'separator' },
+        { label: 'Toggle Full Screen', role: 'togglefullscreen' }
+      ]
+    },
+    {
+      label: 'Window',
+      role: 'window',
+      submenu: [
+        { label: 'Minimize', role: 'close' },
+        { label: 'Close', role: 'close' }
+      ]
+    },
+    {
+      label: 'Help',
+      role: 'help',
+      submenu: [{ label: '' }]
+    }
+  ];
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+}
+
 function createWindow() {
   registerSplatnetHandler();
   getStoredSessionToken();
+  // Check if we are on OSX
+  if (process.platform === 'darwin') {
+    // If so, create the top bar menus which enable copy & paste
+    createMenusMacOS();
+  }
 
   mainWindow = new BrowserWindow({
     width: 1024,
