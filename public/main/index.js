@@ -139,19 +139,34 @@ ipcMain.on('logout', event => {
 ipcMain.on('writeToStatInk', async (event, result, type) => {
   try {
     const info = await writeToStatInk(store.get('statInkToken'), result);
-    if (type === 'manual') {
-      event.sender.send('wroteBattleManual', info);
-    } else {
-      event.sender.send('wroteBattleAuto', info);
+    switch (type) {
+      case 'manual':
+        event.sender.send('wroteBattleManual', info, result.battle_number);
+        break;
+      case 'auto':
+        event.sender.send('wroteBattleAuto', info, result.battle_number);
+        break;
+      default:
+        event.sender.send('wroteBattleAll', info, result.battle_number);
+        break;
     }
   } catch (e) {
     const message = `Failed to write #${result.battle_number} to stat.ink: ${e}`;
     uaException(message);
     log.error(message);
-    if (type === 'manual') {
-      event.sender.send('writeBattleManualError', { username: '', battle: -1 });
-    } else {
-      event.sender.send('writeBattleAutoError', { username: '', battle: -1 });
+    switch (type) {
+      case 'manual':
+        event.sender.send('writeBattleManualError', {
+          username: '',
+          battle: -1
+        });
+        break;
+      case 'auto':
+        event.sender.send('writeBattleAutoError', { username: '', battle: -1 });
+        break;
+      default:
+        event.sender.send('writeBattleAllError', { username: '', battle: -1 });
+        break;
     }
   }
 });
