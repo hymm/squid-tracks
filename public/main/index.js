@@ -308,7 +308,7 @@ function createMenusMacOS() {
           selector: 'orderFrontStandardAboutPanel:'
         },
         { type: 'separator' },
-        { label: 'Hide SquidTrack', role: 'hide' },
+        { label: 'Hide SquidTracks', role: 'hide' },
         { label: 'Hide Other Applications', role: 'hideothers' },
         { label: 'Unhide', role: 'unide' },
         { type: 'separator' },
