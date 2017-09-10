@@ -16,6 +16,8 @@ import { event } from './analytics';
 import update from 'immutability-helper';
 import moment from 'moment';
 
+import './meta.css';
+
 const { ipcRenderer } = require('electron');
 
 const Meta = () =>
@@ -44,8 +46,15 @@ class MetaContainer extends React.Component {
   }
 
   getMetaRequest() {
-    let endUtc = moment().startOf('day');
-    let startUtc = moment();
+    let endUtc = moment().utc().startOf('day');
+    let startUtc = moment().utc();
+    if (
+      startUtc.hour() < 2 ||
+      (startUtc.hour() === 2 && startUtc.minute() < 31)
+    ) {
+      startUtc.subtract(3, 'hours');
+      endUtc.subtract(3, 'hours');
+    }
     // gathers three weeks of data, where 'this week' may only be today
     if (startUtc.day() < this.state.next_desired_start_of_week) {
       startUtc.day(this.state.next_desired_start_of_week).subtract(1, 'week');
@@ -106,7 +115,10 @@ class MetaContainer extends React.Component {
 
   getWeekIndex(date, start_of_week) {
     let input_moment = moment(date);
-    let now = moment();
+    let now = moment().utc();
+    if (now.hour() < 2 || (now.hour() === 2 && now.minute() < 31)) {
+      now.subtract(3, 'hours');
+    }
     if (now.day() < start_of_week) {
       now.day(start_of_week).subtract(1, 'week');
     } else {
@@ -192,7 +204,7 @@ class MetaContainer extends React.Component {
   render() {
     return (
       <div>
-        <Form inline>
+        <Form inline className="league_top">
           <ButtonToolbar>
             <Button
               bsStyle="primary"
@@ -259,7 +271,7 @@ class MetaContainer extends React.Component {
               </Button>
             </ButtonGroup>
             <FormGroup controlId="startOfWeekSelect">
-              <ControlLabel> Start of Week:</ControlLabel>
+              <ControlLabel className="text">Start of Week (UTC):</ControlLabel>
               <FormControl
                 onChange={this.setDesiredStartDayOfWeek}
                 componentClass="select"
