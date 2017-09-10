@@ -25,7 +25,7 @@ export default class LeagueRankings extends React.Component {
     this.setState({ data_to_display: e.target.value });
   };
 
-  static columnHeaders = [
+  columnHeaders = [
     { text: 'Name', sortColumn: 'name', sortDirection: 'down' },
     {
       text: 'Two Weeks Ago',
@@ -44,7 +44,29 @@ export default class LeagueRankings extends React.Component {
     }
   ];
 
+  updateColumnHeaders() {
+    this.columnHeaders[1].text =
+      'Two Weeks Ago (' +
+      this.props.last_last_week_date_range_start +
+      '-' +
+      this.props.last_last_week_date_range_end +
+      ')';
+    this.columnHeaders[2].text =
+      'Last Week (' +
+      this.props.last_week_date_range_start +
+      '-' +
+      this.props.last_week_date_range_end +
+      ')';
+    this.columnHeaders[3].text =
+      'This Week (' +
+      this.props.this_week_date_range_start +
+      '-' +
+      this.props.this_week_date_range_end +
+      ')';
+  }
+
   render() {
+    this.updateColumnHeaders();
     const calcStats = this.props.calcStats;
     const snapshot_table = {};
     // should be three iterations, starting with this week
@@ -207,7 +229,7 @@ export default class LeagueRankings extends React.Component {
               <Table striped bordered condensed hover>
                 <thead>
                   <tr>
-                    {LeagueRankings.columnHeaders.map(header =>
+                    {this.columnHeaders.map(header =>
                       <TableHeader
                         key={header.text}
                         setState={this.setState.bind(this)}

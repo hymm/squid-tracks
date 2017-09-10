@@ -41,6 +41,13 @@ class MetaContainer extends React.Component {
 
   desired_start_of_week = 1;
 
+  this_week_date_range_start = '';
+  this_week_date_range_end = '';
+  last_week_date_range_start = '';
+  last_week_date_range_end = '';
+  last_last_week_date_range_start = '';
+  last_last_week_date_range_end = '';
+
   componentDidMount() {
     ipcRenderer.on('apiData', this.getMetaLoad);
   }
@@ -63,6 +70,8 @@ class MetaContainer extends React.Component {
       startUtc.day(this.state.next_desired_start_of_week);
     }
     startUtc.startOf('day').subtract(2, 'week');
+
+    this.this_week_date_range_end = endUtc.format('DMMM');
 
     while (endUtc.diff(startUtc, 'days') >= 0) {
       for (let i = 0; i < 24; i += 2) {
@@ -126,10 +135,19 @@ class MetaContainer extends React.Component {
       now.day(start_of_week);
     }
     if (input_moment.isSameOrAfter(now.startOf('day'))) {
+      this.this_week_date_range_start = input_moment.format('DMMM');
+      this.last_week_date_range_end = input_moment
+        .subtract(1, 'day')
+        .format('DMMM');
       return 0;
     } else if (input_moment.isSameOrAfter(now.subtract(1, 'week'))) {
+      this.last_week_date_range_start = input_moment.format('DMMM');
+      this.last_last_week_date_range_end = input_moment
+        .subtract(1, 'day')
+        .format('DMMM');
       return 1;
     } else {
+      this.last_last_week_date_range_start = input_moment.format('DMMM');
       return 2;
     }
   }
@@ -294,6 +312,12 @@ class MetaContainer extends React.Component {
           handleChange={this.handleChange}
           calcStats={this.getCalculatedWeaponStats(this.state.league_dict)}
           title={this.state.title}
+          this_week_date_range_start={this.this_week_date_range_start}
+          this_week_date_range_end={this.this_week_date_range_end}
+          last_week_date_range_start={this.last_week_date_range_start}
+          last_week_date_range_end={this.last_week_date_range_end}
+          last_last_week_date_range_start={this.last_last_week_date_range_start}
+          last_last_week_date_range_end={this.last_last_week_date_range_end}
         />
       </div>
     );
