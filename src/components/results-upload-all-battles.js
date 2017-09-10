@@ -2,11 +2,36 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Subscriber } from 'react-broadcast';
 import { ipcRenderer } from 'electron';
+import { injectIntl, defineMessages } from 'react-intl';
 import { event } from '../analytics';
 
 class UploadAllBattlesButton extends React.Component {
+  messages = {
+    default: {
+      id: 'results.uploadAll.default',
+      defaultMessage: 'Upload All Battles to stat.ink'
+    },
+    checking: {
+      id: 'results.uploadAll.checking',
+      defaultMessage: 'Checking Battle #{battle_number}'
+    },
+    wroteBattle: {
+      id: 'results.uploadAll.wroteBattle',
+      defaultMessage: 'Wrote Battle #{battle_number}'
+    },
+    writingBattle: {
+      id: 'results.uploadAll.writingBattle',
+      defaultMessage: 'Writing Battle #{battle_number}'
+    },
+    done: {
+      id: 'results.uploadAll.done',
+      defaultMessage: 'Done'
+    }
+  };
+
   state = {
     uploading: false,
+    buttonText: this.props.intl.formatMessage(this.messages.default),
     currentIdx: 0
   };
 
@@ -31,14 +56,24 @@ class UploadAllBattlesButton extends React.Component {
   };
 
   uploadBattle = battleIdx => {
-    const { splatnet, statInk } = this.props;
-    this.setState({ currentIdx: battleIdx });
+    const { splatnet, statInk, intl } = this.props;
     const battle = this.props.splatnet.current.results.results[battleIdx];
+    this.setState({
+      currentIdx: battleIdx,
+      buttonText: intl.formatMessage(this.messages.checking, {
+        battle_number: battle.battle_number
+      })
+    });
 
     const uploaded = statInk ? statInk[battle.battle_number] != null : false;
     if (!uploaded) {
       const battleDetails = splatnet.comm.getBattle(battle.battle_number);
       ipcRenderer.send('writeToStatInk', battleDetails, 'all');
+      this.setState({
+        buttonText: intl.formatMessage(this.messages.writingBattle, {
+          battle_number: battle.battle_number
+        })
+      });
     } else {
       setTimeout(this.uploadNext, 100);
     }
@@ -55,8 +90,12 @@ class UploadAllBattlesButton extends React.Component {
   };
 
   handleWroteBattle = (e, info, number) => {
-    const { setStatInkInfo, splatnet } = this.props;
-
+    const { setStatInkInfo, splatnet, intl } = this.props;
+    this.setState({
+      buttonText: intl.formatMessage(this.messages.wroteBattle, {
+        battle_number: number
+      })
+    });
     event('stat.ink', 'wrote-battle', 'auto');
     if (info.username) {
       setStatInkInfo(number, info);
@@ -66,7 +105,14 @@ class UploadAllBattlesButton extends React.Component {
   };
 
   finalizeUpload = () => {
-    this.setState({ uploading: false });
+    const { intl } = this.props;
+    this.setState({
+      uploading: false,
+      buttonText: intl.formatMessage(this.messages.done)
+    });
+    setTimeout(() => {
+      this.setState({ buttonText: intl.formatMessage(this.messages.default) });
+    }, 5000);
   };
 
   handleError = (e, error) => {
@@ -74,9 +120,10 @@ class UploadAllBattlesButton extends React.Component {
   };
 
   render() {
+    const { buttonText } = this.state;
     return (
       <Button onClick={this.uploadAllBattles}>
-        Upload All Battles to stat.ink
+        {buttonText}
       </Button>
     );
   }
@@ -90,4 +137,4 @@ const UploadAllBattlesButtonInjected = ({ ...args }) => {
   );
 };
 
-export default UploadAllBattlesButtonInjected;
+export default injectIntl(UploadAllBattlesButtonInjected);
