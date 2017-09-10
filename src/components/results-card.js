@@ -196,8 +196,8 @@ class ResultsCard extends React.Component {
           <ButtonGroup>
             <Button
               onClick={() => {
-                  event('last-50-battles', 'show-stats-raw');
-                  this.setState({ normalize: false })
+                event('last-50-battles', 'show-stats-raw');
+                this.setState({ normalize: false });
               }}
               active={!normalize}
             >
@@ -215,28 +215,38 @@ class ResultsCard extends React.Component {
                 />
               }
               onClick={() => {
-                  event('last-50-battles', 'show-stats-normailzed', this.state.normalizeTime);
-                  this.setState({ normalize: true })
+                event(
+                  'last-50-battles',
+                  'show-stats-normailzed',
+                  this.state.normalizeTime
+                );
+                this.setState({ normalize: true });
               }}
               active={normalize}
               id="minutes"
             >
-              <MenuItem onClick={() => {
+              <MenuItem
+                onClick={() => {
                   event('last-50-battles', 'show-stats-normailzed', 1);
-                  this.setState({ normalizeTime: 1 })
-              }}>
+                  this.setState({ normalizeTime: 1 });
+                }}
+              >
                 1
               </MenuItem>
-              <MenuItem onClick={() => {
+              <MenuItem
+                onClick={() => {
                   event('last-50-battles', 'show-stats-normailzed', 3);
-                  this.setState({ normalizeTime: 3 })
-              }}>
+                  this.setState({ normalizeTime: 3 });
+                }}
+              >
                 3
               </MenuItem>
-              <MenuItem onClick={() => {
+              <MenuItem
+                onClick={() => {
                   event('last-50-battles', 'show-stats-normailzed', 5);
-                  this.setState({ normalizeTime: 5 })
-              }}>
+                  this.setState({ normalizeTime: 5 });
+                }}
+              >
                 5
               </MenuItem>
             </SplitButton>
@@ -300,8 +310,8 @@ class ResultsCard extends React.Component {
                     {result.my_team_result.key}
                   </td>
                   <td>
-                    {result.other_estimate_league_power
-                      ? results.other_estimate_league_power
+                    {result.other_estimate_league_point
+                      ? result.other_estimate_league_point
                       : result.estimate_gachi_power
                         ? result.estimate_gachi_power
                         : result.other_estimate_fes_power
