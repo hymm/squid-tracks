@@ -5,12 +5,18 @@ import {
   Col,
   ButtonToolbar,
   ButtonGroup,
-  Button
+  Button,
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Form
 } from 'react-bootstrap';
 import LeagueRankings from './components/league-rankings';
 import { event } from './analytics';
 import update from 'immutability-helper';
 import moment from 'moment';
+
+import './meta.css';
 
 const { ipcRenderer } = require('electron');
 
@@ -29,18 +35,43 @@ class MetaContainer extends React.Component {
     refreshing: false,
     full_teams: true,
     region: 'ALL',
-    title: 'Select Data Above'
+    title: 'Select Data Above',
+    next_desired_start_of_week: 1
   };
+
+  desired_start_of_week = 1;
+
+  this_week_date_range_start = '';
+  this_week_date_range_end = '';
+  last_week_date_range_start = '';
+  last_week_date_range_end = '';
+  last_last_week_date_range_start = '';
+  last_last_week_date_range_end = '';
 
   componentDidMount() {
     ipcRenderer.on('apiData', this.getMetaLoad);
   }
 
   getMetaRequest() {
-    let endUtc = moment().startOf('day');
-    let startUtc = moment();
-    // goes back to the third monday back
-    startUtc.startOf('isoWeek').subtract(2, 'week');
+    let endUtc = moment().utc().startOf('day');
+    let startUtc = moment().utc();
+    if (
+      startUtc.hour() < 2 ||
+      (startUtc.hour() === 2 && startUtc.minute() < 31)
+    ) {
+      startUtc.subtract(3, 'hours');
+      endUtc.subtract(3, 'hours');
+    }
+    // gathers three weeks of data, where 'this week' may only be today
+    if (startUtc.day() < this.state.next_desired_start_of_week) {
+      startUtc.day(this.state.next_desired_start_of_week).subtract(1, 'week');
+    } else {
+      // if today is the desired day, 'this week' is one day intentionally
+      startUtc.day(this.state.next_desired_start_of_week);
+    }
+    startUtc.startOf('day').subtract(2, 'week');
+
+    this.this_week_date_range_end = endUtc.format('DMMM');
 
     while (endUtc.diff(startUtc, 'days') >= 0) {
       for (let i = 0; i < 24; i += 2) {
@@ -68,6 +99,7 @@ class MetaContainer extends React.Component {
         league_dict: update(this.state.league_dict, { $merge: newEntry })
       });
     }
+    this.desired_start_of_week = this.state.next_desired_start_of_week;
   };
 
   showPairs = () => {
@@ -86,14 +118,36 @@ class MetaContainer extends React.Component {
     this.setState({ league_time: e.target.value });
   };
 
-  getWeekIndex(date) {
+  setDesiredStartDayOfWeek = e => {
+    this.setState({ next_desired_start_of_week: e.target.value });
+  };
+
+  getWeekIndex(date, start_of_week) {
     let input_moment = moment(date);
-    let now = moment();
-    if (input_moment.isSameOrAfter(now.startOf('isoWeek'))) {
+    let now = moment().utc();
+    if (now.hour() < 2 || (now.hour() === 2 && now.minute() < 31)) {
+      now.subtract(3, 'hours');
+    }
+    if (now.day() < start_of_week) {
+      now.day(start_of_week).subtract(1, 'week');
+    } else {
+      // if today is the desired day, 'this week' is one day intentionally
+      now.day(start_of_week);
+    }
+    if (input_moment.isSameOrAfter(now.startOf('day'))) {
+      this.this_week_date_range_start = input_moment.format('DMMM');
+      this.last_week_date_range_end = input_moment
+        .subtract(1, 'day')
+        .format('DMMM');
       return 0;
     } else if (input_moment.isSameOrAfter(now.subtract(1, 'week'))) {
+      this.last_week_date_range_start = input_moment.format('DMMM');
+      this.last_last_week_date_range_end = input_moment
+        .subtract(1, 'day')
+        .format('DMMM');
       return 1;
     } else {
+      this.last_last_week_date_range_start = input_moment.format('DMMM');
       return 2;
     }
   }
@@ -112,9 +166,11 @@ class MetaContainer extends React.Component {
         weapons_stats
       };
     }
-
     Object.keys(league_dict).forEach(league => {
-      let week_index = this.getWeekIndex(league_dict[league].start_time * 1000);
+      let week_index = this.getWeekIndex(
+        league_dict[league].start_time * 1000,
+        this.desired_start_of_week
+      );
       Object.keys(league_dict[league].rankings).forEach(team => {
         Object.keys(
           league_dict[league].rankings[team].tag_members
@@ -166,75 +222,102 @@ class MetaContainer extends React.Component {
   render() {
     return (
       <div>
-        <ButtonToolbar style={{ marginBottom: '10px' }}>
-          <Button
-            bsStyle="primary"
-            onClick={() => {
-              event(
-                'league_dict',
-                'refresh',
-                (this.state.full_teams ? 'team-' : 'pair-') +
-                  this.state.region.toLowerCase()
-              );
-              this.getMetaRequest();
-              this.setState({
-                refreshing: true,
-                league_dict: {},
-                title:
-                  this.state.region +
-                  ' Region ' +
-                  (this.state.full_teams ? 'Teams' : 'Pairs') +
-                  ' League Weapon Stats'
-              });
-              setTimeout(() => this.setState({ refreshing: false }), 4000);
-            }}
-            disabled={this.state.refreshing}
-          >
-            {this.state.refreshing ? 'Loaded' : 'Load Data'}
-          </Button>
-          <ButtonGroup>
-            <Button onClick={this.showTeams} active={this.state.full_teams}>
-              Teams
-            </Button>
-            <Button onClick={this.showPairs} active={!this.state.full_teams}>
-              Pairs
-            </Button>
-          </ButtonGroup>
-          <ButtonGroup>
+        <Form inline className="league_top">
+          <ButtonToolbar>
             <Button
-              onClick={this.setRegion}
-              value="ALL"
-              active={this.state.region === 'ALL'}
+              bsStyle="primary"
+              onClick={() => {
+                event(
+                  'league_dict',
+                  'refresh',
+                  (this.state.full_teams ? 'team-' : 'pair-') +
+                    this.state.region.toLowerCase()
+                );
+                this.setState({
+                  refreshing: true,
+                  league_dict: {},
+                  title:
+                    this.state.region +
+                    ' Region ' +
+                    (this.state.full_teams ? 'Teams' : 'Pairs') +
+                    ' League Weapon Stats'
+                });
+                this.getMetaRequest();
+                setTimeout(() => this.setState({ refreshing: false }), 4000);
+              }}
+              disabled={this.state.refreshing}
             >
-              All Regions
+              {this.state.refreshing ? 'Loaded' : 'Load Data'}
             </Button>
-            <Button
-              onClick={this.setRegion}
-              value="JP"
-              active={this.state.region === 'JP'}
-            >
-              Japan
-            </Button>
-            <Button
-              onClick={this.setRegion}
-              value="US"
-              active={this.state.region === 'US'}
-            >
-              NA/AU/NZ
-            </Button>
-            <Button
-              onClick={this.setRegion}
-              value="EU"
-              active={this.state.region === 'EU'}
-            >
-              Europe
-            </Button>
-          </ButtonGroup>
-        </ButtonToolbar>
+            <ButtonGroup>
+              <Button onClick={this.showTeams} active={this.state.full_teams}>
+                Teams
+              </Button>
+              <Button onClick={this.showPairs} active={!this.state.full_teams}>
+                Pairs
+              </Button>
+            </ButtonGroup>
+
+            <ButtonGroup>
+              <Button
+                onClick={this.setRegion}
+                value="ALL"
+                active={this.state.region === 'ALL'}
+              >
+                All Regions
+              </Button>
+              <Button
+                onClick={this.setRegion}
+                value="JP"
+                active={this.state.region === 'JP'}
+              >
+                Japan
+              </Button>
+              <Button
+                onClick={this.setRegion}
+                value="US"
+                active={this.state.region === 'US'}
+              >
+                NA/AU/NZ
+              </Button>
+              <Button
+                onClick={this.setRegion}
+                value="EU"
+                active={this.state.region === 'EU'}
+              >
+                Europe
+              </Button>
+            </ButtonGroup>
+            <FormGroup controlId="startOfWeekSelect">
+              <ControlLabel className="text">Start of Week (UTC):</ControlLabel>
+              <FormControl
+                onChange={this.setDesiredStartDayOfWeek}
+                componentClass="select"
+                placeholder="Monday"
+                value={this.state.next_desired_start_of_week}
+              >
+                <option value="0">Sunday</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+              </FormControl>
+            </FormGroup>
+          </ButtonToolbar>
+        </Form>
+        <br />
         <LeagueRankings
           handleChange={this.handleChange}
           calcStats={this.getCalculatedWeaponStats(this.state.league_dict)}
           title={this.state.title}
+          this_week_date_range_start={this.this_week_date_range_start}
+          this_week_date_range_end={this.this_week_date_range_end}
+          last_week_date_range_start={this.last_week_date_range_start}
+          last_week_date_range_end={this.last_week_date_range_end}
+          last_last_week_date_range_start={this.last_last_week_date_range_start}
+          last_last_week_date_range_end={this.last_last_week_date_range_end}
         />
       </div>
     );
