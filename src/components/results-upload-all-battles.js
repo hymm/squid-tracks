@@ -6,7 +6,7 @@ import { injectIntl, defineMessages } from 'react-intl';
 import { event } from '../analytics';
 
 class UploadAllBattlesButton extends React.Component {
-  messages = {
+  messages = defineMessages({
     default: {
       id: 'results.uploadAll.default',
       defaultMessage: 'Upload All Battles to stat.ink'
@@ -27,7 +27,7 @@ class UploadAllBattlesButton extends React.Component {
       id: 'results.uploadAll.done',
       defaultMessage: 'Done'
     }
-  };
+  });
 
   state = {
     uploading: false,
@@ -90,7 +90,7 @@ class UploadAllBattlesButton extends React.Component {
   };
 
   handleWroteBattle = (e, info, number) => {
-    const { setStatInkInfo, splatnet, intl } = this.props;
+    const { setStatInkInfo, intl } = this.props;
     this.setState({
       buttonText: intl.formatMessage(this.messages.wroteBattle, {
         battle_number: number
@@ -121,11 +121,7 @@ class UploadAllBattlesButton extends React.Component {
 
   render() {
     const { buttonText } = this.state;
-    return (
-      <Button onClick={this.uploadAllBattles}>
-        {buttonText}
-      </Button>
-    );
+    return <Button onClick={this.uploadAllBattles}>{buttonText}</Button>;
   }
 }
 
