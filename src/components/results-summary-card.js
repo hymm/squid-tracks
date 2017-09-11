@@ -1,6 +1,7 @@
 import React from 'react';
 import { Panel, Table } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import Timeline from './results-timeline';
 
 const ResultsSummaryCard = ({ summary }) => {
   return (
@@ -82,6 +83,7 @@ const ResultsSummaryCard = ({ summary }) => {
           </tr>
         </tbody>
       </Table>
+      <Timeline />
     </Panel>
   );
 };
