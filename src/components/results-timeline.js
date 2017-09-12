@@ -4,7 +4,7 @@ import {
   ResponsiveContainer,
   ComposedChart,
   Line,
-  Bar,
+  ReferenceArea,
   YAxis,
   CartesianGrid
 } from 'recharts';
@@ -23,15 +23,40 @@ class ResultsTimeline extends React.Component {
       }
 
       return {
-        power
+        power,
+        lobby: result.game_mode.key
       };
     });
+    data.reverse();
+    const modes = data.map(({ lobby }, i) => {
+      let color = 'grey';
+      switch (lobby) {
+        case 'regular':
+          color = 'lightgreen';
+          break;
+        case 'gachi':
+          color = 'orange';
+          break;
+        case 'league_pair':
+          color = 'hotpink';
+          break;
+        case 'league_team':
+          color = 'hotpink';
+          break;
+        case 'private':
+          color = 'purple';
+          break;
+        default:
+          color = 'lightgrey';
+      }
+      return <ReferenceArea x1={i} x2={i + 1} fill={color} fillOpacity={0.3} />;
+    });
     return (
-      <ResponsiveContainer>
+      <ResponsiveContainer minHeight={200}>
         <ComposedChart
-          width={'100%'}
-          height={'100%'}
-          data={data.reverse()}
+          width={600}
+          height={400}
+          data={data}
           margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         >
           <YAxis
@@ -41,7 +66,8 @@ class ResultsTimeline extends React.Component {
             domain={['dataMin', 'dataMax']}
           />
           <CartesianGrid stroke="#f5f5f5" />
-          <Line type="monotone" dataKey="power" stroke="#888" />
+          <Line type="step" dataKey="power" stroke="#333" />
+          {modes}
         </ComposedChart>
       </ResponsiveContainer>
     );
