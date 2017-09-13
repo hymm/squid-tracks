@@ -7,6 +7,7 @@ import {
   ButtonGroup,
   Button,
   FormGroup,
+  Checkbox,
   ControlLabel,
   FormControl,
   Form
@@ -36,7 +37,8 @@ class MetaContainer extends React.Component {
     full_teams: true,
     region: 'ALL',
     title: 'Select Data Above',
-    next_desired_start_of_week: 1
+    next_desired_start_of_week: 1,
+    combine_replicas_toggle: false
   };
 
   desired_start_of_week = 1;
@@ -118,6 +120,12 @@ class MetaContainer extends React.Component {
     this.setState({ league_time: e.target.value });
   };
 
+  handleReplicaToggleClick = () => {
+    this.setState({
+      combine_replicas_toggle: !this.state.combine_replicas_toggle
+    });
+  };
+
   setDesiredStartDayOfWeek = e => {
     this.setState({ next_desired_start_of_week: e.target.value });
   };
@@ -175,14 +183,37 @@ class MetaContainer extends React.Component {
         Object.keys(
           league_dict[league].rankings[team].tag_members
         ).forEach(player => {
-          const weap_name =
+          let weap_name =
             league_dict[league].rankings[team].tag_members[player].weapon.name;
-          if (weap_name in weapons_stats[week_index]) {
-            weapons_stats[week_index][weap_name].uses += 1;
-            weapons_stats[week_index][weap_name].total_points +=
+          let weap_id =
+            league_dict[league].rankings[team].tag_members[player].weapon.id;
+          let is_replica = false;
+          if (this.state.combine_replicas_toggle) {
+            const replica_equivalents = {
+              '45': '40',
+              '1015': '1010',
+              '4015': '4010',
+              '5015': '5010',
+              '6005': '6000',
+              '215': '210',
+              '1115': '1110',
+              '2015': '2010',
+              '3005': '3000'
+            };
+            if (weap_id in replica_equivalents) {
+              weap_id = replica_equivalents[weap_id];
+              is_replica = true;
+            }
+          }
+          if (weap_id in weapons_stats[week_index]) {
+            if (!is_replica) {
+              weapons_stats[week_index][weap_id].name = weap_name;
+            }
+            weapons_stats[week_index][weap_id].uses += 1;
+            weapons_stats[week_index][weap_id].total_points +=
               league_dict[league].rankings[team].point;
           } else {
-            weapons_stats[week_index][weap_name] = {
+            weapons_stats[week_index][weap_id] = {
               name: weap_name,
               uses: 1,
               total_points: league_dict[league].rankings[team].point,
@@ -305,6 +336,13 @@ class MetaContainer extends React.Component {
                 <option value="6">Saturday</option>
               </FormControl>
             </FormGroup>
+            <Checkbox
+              className="text"
+              checked={this.state.combine_replicas_toggle}
+              onClick={this.handleReplicaToggleClick}
+            >
+              Combine Hero Versions
+            </Checkbox>
           </ButtonToolbar>
         </Form>
         <br />
