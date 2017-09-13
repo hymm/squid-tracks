@@ -4,9 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import Timeline from './results-timeline';
 import './results-summary-card.css';
 
-const ResultsSummaryCard = ({ summary }) => {
-  return (
-    <Panel header={<h3>Last 50 Battles Summary</h3>}>
+class ResultsSummaryCard extends React.Component {
+  state = {
+    activeValue: 'power'
+  };
+
+  render() {
+    const { summary, averages } = this.props;
+    return (
       <div className="grid-wrapper">
         <div className="winLoss">
           <h4>
@@ -26,41 +31,87 @@ const ResultsSummaryCard = ({ summary }) => {
           </h4>
           <span>{`${summary.victory_rate}`}</span>
         </div>
-        <div className="killsAndAssists">
+        <div
+          className="power active"
+          onClick={() => {
+            this.setState({ activeValue: 'power' });
+          }}
+        >
+          <h4>
+            <FormattedMessage
+              id="resultsSummary.power"
+              defaultMessage="Power"
+            />
+          </h4>
+          <span>{`${averages.power}`}</span>
+        </div>
+        <div
+          className="inked"
+          onClick={() => {
+            this.setState({ activeValue: 'player_result.game_paint_point' });
+          }}
+        >
+          <h4>
+            <FormattedMessage
+              id="resultsSummary.inked"
+              defaultMessage="Inked"
+            />
+          </h4>
+          <span>{`${averages.p}`}</span>
+        </div>
+        <div
+          className="killsAndAssists"
+          onClick={() => {
+            if (this.state.activeValue === 'player_result.assist_count') {
+              this.setState({ activeValue: 'killsAndAssists' });
+            } else {
+              this.setState({ activeValue: 'player_result.assist_count' });
+            }
+          }}
+        >
           <h4>
             <FormattedMessage
               id="resultsSummary.killsAndAssists"
               defaultMessage="K+A (A)"
             />
           </h4>
-          <span>
-            {`${summary.kill_count_average} (${summary.assist_count_average})`}
-          </span>
+          <span>{`${averages.ka} (${averages.a})`}</span>
         </div>
-        <div className="killsAndDeaths">
+        <div
+          className="killsAndDeaths"
+          onClick={() => {
+            if (this.state.activeValue === 'player_result.kill_count') {
+              this.setState({ activeValue: 'player_result.death_count' });
+            } else {
+              this.setState({ activeValue: 'player_result.kill_count' });
+            }
+          }}
+        >
           <h4>
             <FormattedMessage
               id="resultsSummary.killsAndDeaths"
               defaultMessage="K - D"
             />
           </h4>
-          <span>
-            {`${(summary.kill_count_average -
-              summary.assist_count_average).toFixed(
-              2
-            )} - ${summary.death_count_average}`}
-          </span>
+          <span>{`${averages.k} - ${averages.d}`}</span>
         </div>
-        <div className="specials">
+        <div
+          className="specials"
+          onClick={() => {
+            this.setState({ activeValue: 'player_result.special_count' });
+          }}
+        >
           <h4>
             <FormattedMessage id="resultsSummary.specials" defaultMessage="S" />
           </h4>
-          <span>{`${summary.special_count_average}`}</span>
+          <span>{`${averages.s}`}</span>
+        </div>
+        <div className="timeline">
+          <Timeline activeValue={this.state.activeValue} />
         </div>
       </div>
-      <Timeline />
-    </Panel>
-  );
-};
+    );
+  }
+}
 
 export default ResultsSummaryCard;

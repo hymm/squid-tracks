@@ -73,11 +73,11 @@ class Results extends React.Component {
             {this.state.initialized ? (
               <ResultDetailCard result={currentResult} statInk={statInk} />
             ) : null}
-            <ResultsSummaryCard summary={results.summary} />
             <ResultsCard
               results={results.results}
               statInk={statInk}
               changeResult={this.changeResultByBattleNumber}
+              summary={results.summary}
             />
           </Col>
         </Row>

@@ -11,6 +11,7 @@ import {
   ReferenceLine,
   Dot
 } from 'recharts';
+import { getValue } from './sort-array';
 
 class ResultDot extends React.Component {
   render() {
@@ -70,7 +71,19 @@ class ResultsTimeline extends React.Component {
       const scoreTotal = my_count_raw + other_count_raw;
       const my_count = my_count_raw * 100 / scoreTotal;
       const other_count = other_count_raw * 100 / scoreTotal;
+
+      let active = null;
+      if (this.props.activeValue === 'power') {
+        active = power;
+      } else if (this.props.activeValue === 'killsAndAssists') {
+        active =
+          result.player_result.death_count + result.player_result.assist_count;
+      } else {
+        active = getValue(result, this.props.activeValue);
+      }
+
       return {
+        active,
         bar: 100,
         power,
         lobby: result.game_mode.key,
@@ -79,9 +92,10 @@ class ResultsTimeline extends React.Component {
         otherScore: other_count
       };
     });
+    const dataBuffer = 1;
     data.reverse();
     const powerAvg = data
-      .map(d => d.power)
+      .map(d => d.active)
       .filter(a => a != null)
       .reduce((avg, v, i, a) => avg + v / a.length, 0);
     return (
@@ -102,10 +116,10 @@ class ResultsTimeline extends React.Component {
             hide
           />
           <YAxis
-            dataKey="power"
+            dataKey="active"
             scale="auto"
             type="number"
-            domain={['dataMin', 'dataMax']}
+            domain={[`dataMin - ${dataBuffer}`, `dataMax + ${dataBuffer}`]}
           />
           <CartesianGrid stroke="#f5f5f5" />
           <Bar dataKey="bar" yAxisId="mode" isAnimationActive={false}>
@@ -117,9 +131,9 @@ class ResultsTimeline extends React.Component {
           <ReferenceLine y={powerAvg} stroke="white" strokeDasharray="3 3" />
           <Line
             type="step"
-            dataKey="power"
+            dataKey="active"
             stroke="#333"
-            isAnimationActive={false}
+            isAnimationActive={true}
             dot={<ResultDot />}
           />
         </ComposedChart>
@@ -128,10 +142,10 @@ class ResultsTimeline extends React.Component {
   }
 }
 
-const TimelineSubscribed = () => {
+const TimelineSubscribed = ({ ...props }) => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => <ResultsTimeline splatnet={splatnet} />}
+      {splatnet => <ResultsTimeline splatnet={splatnet} {...props} />}
     </Subscriber>
   );
 };
