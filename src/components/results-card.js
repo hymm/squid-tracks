@@ -309,7 +309,7 @@ class ResultsCard extends React.Component {
           </ButtonGroup>
           <ExportButton />
         </ButtonToolbar>
-        <ResultsSummary summary={summary} averages={averages} />
+        <ResultsSummary summary={summary} averages={averages} results={normalized} />
         <FormattedMessage
           id="results.table.sortHelp"
           defaultMessage="* Click on column headers to sort"

@@ -19,6 +19,7 @@
     "base64url": "^2.0.0",
     "bootstrap": "3",
     "cheerio": "^1.0.0-rc.2",
+    "classnames": "^2.2.5",
     "concurrently": "^3.5.0",
     "electron-devtools-installer": "^2.2.0",
     "electron-is-dev": "^0.3.0",

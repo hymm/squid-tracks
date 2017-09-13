@@ -1,113 +1,130 @@
 import React from 'react';
-import { Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import classnames from 'classnames';
 import Timeline from './results-timeline';
 import './results-summary-card.css';
+
+const ResultsSummaryValueDisplay = ({ className, onClick, label, value }) => {
+    return (
+        <div
+            className={className}
+            onClick={onClick}
+            style={{ cursor: onClick ? 'pointer' : 'default' }}
+        >
+          <h4>
+            {label}
+          </h4>
+          <span>{value}</span>
+        </div>
+    )
+};
+
+const SelectableValue = ({ className, activeValue, setActiveValue, ...props }) => {
+    return (
+        <ResultsSummaryValueDisplay
+            className={classnames(className, { active: activeValue === className })}
+            onClick={() => {
+                setActiveValue(className);
+            }}
+            {...props}
+        />
+    )
+}
 
 class ResultsSummaryCard extends React.Component {
   state = {
     activeValue: 'power'
   };
 
+  setActiveValue = (activeValue) => {
+      this.setState({ activeValue });
+  }
+
   render() {
-    const { summary, averages } = this.props;
+    const { summary, averages, results } = this.props;
+    const { activeValue } = this.state;
+
     return (
       <div className="grid-wrapper">
-        <div className="winLoss">
-          <h4>
-            <FormattedMessage
-              id="resultsSummary.winsLosses"
-              defaultMessage="W - L"
-            />
-          </h4>
-          <span>{`${summary.victory_count} - ${summary.defeat_count}`}</span>
-        </div>
-        <div className="winPercent">
-          <h4>
+        <ResultsSummaryValueDisplay
+          className={'winLoss'}
+          label={
+              <FormattedMessage
+                id="resultsSummary.winLoss"
+                defaultMessage="W - L"
+              />
+          }
+          value={`${summary.victory_count} - ${summary.defeat_count}`}
+        />
+        <ResultsSummaryValueDisplay
+          className={'winPercent'}
+          label={
             <FormattedMessage
               id="resultsSummary.winPercent"
               defaultMessage="W%"
             />
-          </h4>
-          <span>{`${summary.victory_rate}`}</span>
-        </div>
-        <div
-          className="power active"
-          onClick={() => {
-            this.setState({ activeValue: 'power' });
-          }}
-        >
-          <h4>
-            <FormattedMessage
-              id="resultsSummary.power"
-              defaultMessage="Power"
-            />
-          </h4>
-          <span>{`${averages.power}`}</span>
-        </div>
-        <div
-          className="inked"
-          onClick={() => {
-            this.setState({ activeValue: 'player_result.game_paint_point' });
-          }}
-        >
-          <h4>
-            <FormattedMessage
-              id="resultsSummary.inked"
-              defaultMessage="Inked"
-            />
-          </h4>
-          <span>{`${averages.p}`}</span>
-        </div>
-        <div
-          className="killsAndAssists"
-          onClick={() => {
-            if (this.state.activeValue === 'player_result.assist_count') {
-              this.setState({ activeValue: 'killsAndAssists' });
-            } else {
-              this.setState({ activeValue: 'player_result.assist_count' });
+          }
+          value={`${summary.victory_rate}`}
+        />
+        <SelectableValue
+            className={'power'}
+            setActiveValue={this.setActiveValue}
+            activeValue={activeValue}
+            label={
+                <FormattedMessage
+                  id="resultsSummary.power"
+                  defaultMessage="Power"
+                />
             }
-          }}
-        >
-          <h4>
-            <FormattedMessage
-              id="resultsSummary.killsAndAssists"
-              defaultMessage="K+A (A)"
-            />
-          </h4>
-          <span>{`${averages.ka} (${averages.a})`}</span>
-        </div>
-        <div
-          className="killsAndDeaths"
-          onClick={() => {
-            if (this.state.activeValue === 'player_result.kill_count') {
-              this.setState({ activeValue: 'player_result.death_count' });
-            } else {
-              this.setState({ activeValue: 'player_result.kill_count' });
+            value={`${averages.power}`}
+        />
+        <SelectableValue
+            className={'inked'}
+            setActiveValue={this.setActiveValue}
+            activeValue={activeValue}
+            label={
+                <FormattedMessage
+                  id="resultsSummary.inked"
+                  defaultMessage="Inked"
+                />
             }
-          }}
-        >
-          <h4>
-            <FormattedMessage
-              id="resultsSummary.killsAndDeaths"
-              defaultMessage="K - D"
-            />
-          </h4>
-          <span>{`${averages.k} - ${averages.d}`}</span>
-        </div>
-        <div
-          className="specials"
-          onClick={() => {
-            this.setState({ activeValue: 'player_result.special_count' });
-          }}
-        >
-          <h4>
-            <FormattedMessage id="resultsSummary.specials" defaultMessage="S" />
-          </h4>
-          <span>{`${averages.s}`}</span>
-        </div>
+            value={`${averages.p}`}
+        />
+        <SelectableValue
+            className={'killsAndAssists'}
+            setActiveValue={this.setActiveValue}
+            activeValue={activeValue}
+            label={
+                <FormattedMessage
+                  id="resultsSummary.killsAndAssists"
+                  defaultMessage="K+A (A)"
+                />
+            }
+            value={`${averages.ka} (${averages.a})`}
+        />
+        <SelectableValue
+            className={'killsAndDeaths'}
+            setActiveValue={this.setActiveValue}
+            activeValue={activeValue}
+            label={
+                <FormattedMessage
+                  id="resultsSummary.killsAndDeaths"
+                  defaultMessage="K - D"
+                />
+            }
+            value={`${averages.k} - ${averages.d}`}
+        />
+        <SelectableValue
+            className={'specials'}
+            setActiveValue={this.setActiveValue}
+            activeValue={activeValue}
+            label={
+                <FormattedMessage id="resultsSummary.specials" defaultMessage="S" />
+            }
+            value={`${averages.s}`}
+        />
         <div className="timeline">
-          <Timeline activeValue={this.state.activeValue} />
+          <Timeline activeValue={activeValue} averages={averages} results={results} />
         </div>
       </div>
     );

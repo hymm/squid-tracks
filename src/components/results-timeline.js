@@ -9,7 +9,8 @@ import {
   YAxis,
   CartesianGrid,
   ReferenceLine,
-  Dot
+  Dot,
+  Area,
 } from 'recharts';
 import { getValue } from './sort-array';
 
@@ -17,7 +18,7 @@ class ResultDot extends React.Component {
   render() {
     const { payload } = this.props;
     if (payload.result === 'victory') {
-      return <Dot {...this.props} />;
+      return <Dot {...this.props} fill={'#fff'} fillOpacity={1}/>;
     }
     return null;
   }
@@ -48,9 +49,24 @@ class ResultsTimeline extends React.Component {
     return color;
   }
 
-  render() {
-    const results = this.props.splatnet.current.results.results;
-    const data = results.map(result => {
+  selectCount(team_count, team_percentage) {
+      return team_count != null ? team_count : team_percentage;
+  }
+
+  getCounts(result) {
+      const my_count_raw = this.selectCount(result.my_team_count, result.my_team_percentage);
+      const other_count_raw = this.selectCount(result.other_team_count, result.other_team_percentage);
+      const total = my_count_raw + other_count_raw;
+      const mine = my_count_raw * 100 / total;
+      const other = other_count_raw * 100 / total;
+
+      return {
+          mine,
+          other,
+      };
+  }
+
+  getPower(result) {
       let power = null;
       if (result.other_estimate_league_point) {
         power = result.other_estimate_league_point;
@@ -60,42 +76,172 @@ class ResultsTimeline extends React.Component {
         power = result.estimate_gachi_power;
       }
 
-      const my_count_raw =
-        result.my_team_count != null
-          ? result.my_team_count
-          : result.my_team_percentage;
-      const other_count_raw =
-        result.other_team_count != null
-          ? result.other_team_count
-          : result.other_team_percentage;
-      const scoreTotal = my_count_raw + other_count_raw;
-      const my_count = my_count_raw * 100 / scoreTotal;
-      const other_count = other_count_raw * 100 / scoreTotal;
+      return power;
+  }
 
-      let active = null;
-      if (this.props.activeValue === 'power') {
-        active = power;
-      } else if (this.props.activeValue === 'killsAndAssists') {
-        active =
-          result.player_result.death_count + result.player_result.assist_count;
-      } else {
-        active = getValue(result, this.props.activeValue);
-      }
+  getValues(result) {
+      const power = this.getPower(result);
+      const counts = this.getCounts(result);
+
+      const a = getValue(result, 'player_result.assist_count');
+      const k = getValue(result, 'player_result.kill_count');
 
       return {
-        active,
-        bar: 100,
+        a,
+        k,
+        ka: k + a,
+        d: getValue(result, 'player_result.death_count'),
+        s: getValue(result, 'player_result.special_count'),
+        lobbyBar: 100,
+        inked: getValue(result, 'player_result.game_paint_point'),
         power,
         lobby: result.game_mode.key,
         result: result.my_team_result.key,
-        myScore: my_count,
-        otherScore: other_count
+        myScore: counts.mine,
+        otherScore: counts.other,
       };
-    });
-    const dataBuffer = 1;
+  }
+
+  renderPowerTrend(average) {
+      return [
+        <YAxis
+          key="powerYAxis"
+          dataKey="power"
+          scale="auto"
+          type="number"
+          domain={[`dataMin - 50`, `dataMax + 50`]}
+          allowDecimals={false}
+        />,
+        <Line
+          key="powerTrend"
+          type="step"
+          dataKey="power"
+          stroke="#333"
+          isAnimationActive={true}
+          dot={<ResultDot />}
+      />,
+        <ReferenceLine key="powerAverage" y={average} stroke="white" strokeOpacity={.5} />,
+    ];
+  }
+
+  renderInkedTrend(average) {
+      return [
+        <YAxis
+          key="inkedYAxis"
+          dataKey="inked"
+          scale="auto"
+          type="number"
+          domain={[0, `dataMax + 50`]}
+          tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
+        />,
+        <Line
+          key="inkedTrend"
+          type="step"
+          dataKey="inked"
+          stroke="#333"
+          isAnimationActive={true}
+          dot={<ResultDot />}
+        />,
+        <ReferenceLine key="inkedAverage" y={average} stroke="white" strokeOpacity={.5} />,
+    ];
+  }
+
+  renderKillsAndAssistsTrend(averageK, averageA) {
+      return [
+        <YAxis
+          key="kaYAxis"
+          dataKey="ka"
+          scale="auto"
+          type="number"
+          domain={[`dataMin`, `dataMax + 1`]}
+          tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
+        />,
+        <ReferenceLine key="kaAverage" y={(parseFloat(averageK) + parseFloat(averageA)).toFixed(2)} stroke="white" />,
+        <Area
+          key="kaTrend"
+          dataKey="ka"
+          type="step"
+          stroke="#333"
+          fill="lightgrey"
+          fillOpacity={1}
+          isAnimationActive={true}
+          dot={<ResultDot />}
+        />,
+        <ReferenceLine key="aAverage" y={averageA} stroke="grey" />,
+        <Area
+          key="aTrend"
+          dataKey="a"
+          type="step"
+          stroke="#000"
+          fill="grey"
+          fillOpacity={1}
+          isAnimationActive={true}
+          dot={null}
+        />,
+    ];
+  }
+
+  renderKillsAndDeathsTrend(averageK, averageD) {
+      return [
+        <YAxis
+          key="kdYAxis"
+          dataKey="k"
+          scale="auto"
+          type="number"
+          domain={[`dataMin`, `dataMax + 1`]}
+          tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
+        />,
+        <ReferenceLine key="kAverage" y={averageK} stroke="white" />,
+        <Line
+          key="kTrend"
+          dataKey="k"
+          type="step"
+          stroke="#fff"
+          isAnimationActive={true}
+          dot={<ResultDot />}
+        />,
+        <ReferenceLine key="dAverage" y={averageD} stroke="grey" />,
+        <Line
+          key="dTrend"
+          dataKey="d"
+          type="step"
+          stroke="#000"
+          isAnimationActive={true}
+          dot={null}
+        />,
+    ];
+  }
+
+  renderSpecialsTrend(average) {
+      return [
+      <YAxis
+        key="sYAxis"
+        dataKey="s"
+        scale="auto"
+        type="number"
+        domain={[0, `dataMax + 1`]}
+        tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
+      />,
+      <Line
+        key="sTrend"
+        type="step"
+        dataKey="s"
+        stroke="#333"
+        isAnimationActive={true}
+        dot={<ResultDot />}
+    />,
+    <ReferenceLine key="sAverage" y={average} stroke="white" strokeOpacity={.5} />,
+];
+  }
+
+  render() {
+    const { activeValue, averages, results } = this.props;
+    // const results = this.props.splatnet.current.results.results;
+    const data = results.map(result => this.getValues(result));
+
     data.reverse();
     const powerAvg = data
-      .map(d => d.active)
+      .map(d => d.power)
       .filter(a => a != null)
       .reduce((avg, v, i, a) => avg + v / a.length, 0);
     return (
@@ -110,32 +256,23 @@ class ResultsTimeline extends React.Component {
         >
           <YAxis
             yAxisId="mode"
-            dataKey="bar"
+            dataKey="lobbyBar"
             type="number"
             domain={[0, 100]}
             hide
           />
-          <YAxis
-            dataKey="active"
-            scale="auto"
-            type="number"
-            domain={[`dataMin - ${dataBuffer}`, `dataMax + ${dataBuffer}`]}
-          />
           <CartesianGrid stroke="#f5f5f5" />
-          <Bar dataKey="bar" yAxisId="mode" isAnimationActive={false}>
+          <Bar dataKey="lobbyBar" yAxisId="mode" isAnimationActive={false}>
             {data.map((entry, index) => {
               const color = this.getModeColor(entry.lobby);
               return <Cell key={index} fill={color} fillOpacity={0.8} />;
             })}
           </Bar>
-          <ReferenceLine y={powerAvg} stroke="white" strokeDasharray="3 3" />
-          <Line
-            type="step"
-            dataKey="active"
-            stroke="#333"
-            isAnimationActive={true}
-            dot={<ResultDot />}
-          />
+          {activeValue === 'power' ? this.renderPowerTrend(powerAvg) : null}
+          {activeValue === 'inked' ? this.renderInkedTrend(averages.p) : null}
+          {activeValue === 'killsAndAssists' ? this.renderKillsAndAssistsTrend(averages.k, averages.a) : null}
+          {activeValue === 'killsAndDeaths' ? this.renderKillsAndDeathsTrend(averages.k, averages.d) : null}
+          {activeValue === 'specials' ? this.renderSpecialsTrend(averages.s) : null}
         </ComposedChart>
       </ResponsiveContainer>
     );

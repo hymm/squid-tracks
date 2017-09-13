@@ -4,7 +4,7 @@
   grid-gap: 20px;
 }
 
-.active {
+.grid-wrapper .active {
   border: 1px solid black;
 }
 
