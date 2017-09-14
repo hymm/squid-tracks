@@ -4,6 +4,8 @@ const base64url = require('base64url');
 const cheerio = require('cheerio');
 const log = require('electron-log');
 
+const userAgentVersion = `1.1.0`;
+
 const splatnetUrl = `https://app.splatoon2.nintendo.net`;
 const jar = request2.jar();
 let request;
@@ -52,8 +54,8 @@ async function getSessionToken(session_token_code, codeVerifier) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`
     },
     form: {
       client_id: '71b963c1b7b6d119',
@@ -75,8 +77,8 @@ async function getApiToken(session_token) {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`
     },
     json: {
       client_id: '71b963c1b7b6d119',
@@ -98,8 +100,8 @@ async function getUserInfo(token) {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
       Authorization: `Bearer ${token}`
     },
     json: true
@@ -120,9 +122,9 @@ async function getApiLogin(id_token, userinfo) {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-      Authorization: 'Bearer'
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
+      Authorization: 'Bearer  ${id_token}'
     },
     body: {
       parameter: {
@@ -132,7 +134,8 @@ async function getApiLogin(id_token, userinfo) {
         naIdToken: id_token
       }
     },
-    json: true
+    json: true,
+    gzip: true
   });
 
   return resp.result.webApiServerCredential.accessToken;
@@ -145,8 +148,8 @@ async function getWebServiceToken(token) {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
       Authorization: `Bearer ${token}`
       // 'Access-Control-Allow-Origin': '*',
     },
@@ -171,7 +174,7 @@ async function getSplatnetApi(url) {
       Accept: '*/*',
       'Accept-Encoding': 'gzip, deflate',
       'Accept-Language': userLanguage,
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
       Connection: 'keep-alive'
     },
     json: true,
@@ -198,7 +201,7 @@ async function postSplatnetApi(url, body) {
       Accept: '*/*',
       'Accept-Encoding': 'gzip, deflate',
       'Accept-Language': userLanguage,
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
       Connection: 'keep-alive',
       'X-Unique-Id': uniqueId,
       'X-Requested-With': 'XMLHttpRequest'
@@ -224,8 +227,8 @@ async function getSessionCookie(token) {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
       'x-gamewebtoken': token,
       'x-isappanalyticsoptedin': false,
       'X-Requested-With': 'com.nintendo.znca',
