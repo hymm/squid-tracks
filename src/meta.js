@@ -52,6 +52,12 @@ class MetaContainer extends React.Component {
 
   componentDidMount() {
     ipcRenderer.on('apiData', this.getMetaLoad);
+    this.setState({
+      combine_replicas_toggle: ipcRenderer.sendSync(
+        'getFromStore',
+        'combineReplicaLeagueStats'
+      )
+    });
   }
 
   getMetaRequest() {
@@ -121,6 +127,15 @@ class MetaContainer extends React.Component {
   };
 
   handleReplicaToggleClick = () => {
+    event(
+      'combineReplicaLeagueStats',
+      !this.state.combine_replicas_toggle ? 'enabled' : 'disabled'
+    );
+    ipcRenderer.sendSync(
+      'setToStore',
+      'combineReplicaLeagueStats',
+      !this.state.combine_replicas_toggle
+    );
     this.setState({
       combine_replicas_toggle: !this.state.combine_replicas_toggle
     });
