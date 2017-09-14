@@ -55,7 +55,8 @@ const store = new Store({
     statInkInfo: {},
     uuid: '',
     gaEnabled: true,
-    locale: ''
+    locale: '',
+    combineReplicaLeagueStats: false
   }
 });
 
