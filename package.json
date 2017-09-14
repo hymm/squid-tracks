@@ -40,6 +40,7 @@
     "moment": "^2.18.1",
     "msgpack-lite": "^0.1.26",
     "node-forge": "^0.7.1",
+    "mz": "^2.7.0",
     "piping": "^1.0.0-rc.4",
     "prettier": "^1.6.1",
     "promise-memoize": "^1.2.0",
