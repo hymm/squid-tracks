@@ -133,8 +133,8 @@ class IksmToken extends React.Component {
             glyph="copy"
             style={{ fontSize: 20, cursor: 'pointer' }}
             onClick={() => {
-                clipboard.writeText(cookie.value)
-                event('settings', 'copy-iksm-token');
+              clipboard.writeText(cookie.value);
+              event('settings', 'copy-iksm-token');
             }}
           />
         </h4>
@@ -175,11 +175,11 @@ class LanguageSettings extends React.Component {
               componentClass="select"
               onChange={this.handleChange}
             >
-              {this.languages.map(language =>
+              {this.languages.map(language => (
                 <option key={language.code} value={language.code}>
                   {language.name}
                 </option>
-              )}
+              ))}
             </FormControl>
           </Panel>
         </Col>
@@ -189,7 +189,7 @@ class LanguageSettings extends React.Component {
 }
 
 const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
-  const expUnix = JSON.parse(jws.decode(token).payload).exp;
+  const expUnix = token ? JSON.parse(jws.decode(token).payload).exp : 0;
   const tokenExpiration = token
     ? new Date(expUnix * 1000).toString()
     : 'unknown';
@@ -231,8 +231,8 @@ const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
               <Glyphicon
                 glyph="copy"
                 onClick={() => {
-                    clipboard.writeText(token)
-                    event('settings', 'copy-session-token');
+                  clipboard.writeText(token);
+                  event('settings', 'copy-session-token');
                 }}
                 style={{ fontSize: 20, cursor: 'pointer' }}
               />

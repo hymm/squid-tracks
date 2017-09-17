@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Router } from 'react-router-dom';
+import { Router, Redirect } from 'react-router-dom';
 import createHashHistory from 'history/createHashHistory';
 import { IntlProvider } from 'react-intl';
 import Routes from './routes';
 import messages from './messages';
 import { screenview, uaException } from './analytics';
-import Login from './login';
 import log from 'electron-log';
 import { ipcRenderer } from 'electron';
 import SplatnetProvider from './splatnet-provider';
@@ -33,7 +32,8 @@ history.listen(location => {
 class App extends Component {
   state = {
     sessionToken: '',
-    locale: 'en'
+    locale: 'en',
+    loggedIn: false
   };
 
   componentDidMount() {
@@ -43,7 +43,10 @@ class App extends Component {
   }
 
   getSessionToken = () => {
-    this.setState({ sessionToken: ipcRenderer.sendSync('getSessionToken') });
+    this.setState({
+      sessionToken: ipcRenderer.sendSync('getSessionToken'),
+      loggedIn: false
+    });
   };
 
   setLocale = locale => {
@@ -51,21 +54,25 @@ class App extends Component {
     ipcRenderer.sendSync('setUserLangauge', locale);
   };
 
+  setLogin = loginStatus => {
+    this.setState({ loggedIn: loginStatus });
+  };
+
   render() {
-    const { sessionToken, locale } = this.state;
+    const { sessionToken, locale, loggedIn } = this.state;
     const message = messages[locale] || messages.en;
     return (
       <IntlProvider locale={locale} messages={message}>
         <SplatnetProvider>
           <Router history={history}>
-            {sessionToken.length !== 0
-              ? <Routes
-                  token={sessionToken}
-                  logoutCallback={this.getSessionToken}
-                  setLocale={this.setLocale}
-                  locale={locale}
-                />
-              : <Login />}
+            <Routes
+              loggedIn={loggedIn}
+              setLogin={this.setLogin}
+              token={sessionToken}
+              logoutCallback={this.getSessionToken}
+              setLocale={this.setLocale}
+              locale={locale}
+            />
           </Router>
         </SplatnetProvider>
       </IntlProvider>
