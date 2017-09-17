@@ -5,8 +5,9 @@ const cheerio = require('cheerio');
 const log = require('electron-log');
 
 const userAgentVersion = `1.1.0`;
-
+const userAgentString = `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`;
 const splatnetUrl = `https://app.splatoon2.nintendo.net`;
+
 const jar = request2.jar();
 let request;
 if (process.env.PROXY) {
@@ -55,7 +56,7 @@ async function getSessionToken(session_token_code, codeVerifier) {
       'Content-Type': 'application/x-www-form-urlencoded',
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
-      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`
+      'User-Agent': userAgentString
     },
     form: {
       client_id: '71b963c1b7b6d119',
@@ -78,7 +79,7 @@ async function getApiToken(session_token) {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
-      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`
+      'User-Agent': userAgentString
     },
     json: {
       client_id: '71b963c1b7b6d119',
@@ -101,7 +102,7 @@ async function getUserInfo(token) {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
-      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
+      'User-Agent': userAgentString,
       Authorization: `Bearer ${token}`
     },
     json: true
@@ -123,7 +124,7 @@ async function getApiLogin(id_token, userinfo) {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
-      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
+      'User-Agent': userAgentString,
       Authorization: 'Bearer  ${id_token}'
     },
     body: {
@@ -149,7 +150,7 @@ async function getWebServiceToken(token) {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
-      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
+      'User-Agent': userAgentString,
       Authorization: `Bearer ${token}`
       // 'Access-Control-Allow-Origin': '*',
     },
@@ -174,7 +175,7 @@ async function getSplatnetApi(url) {
       Accept: '*/*',
       'Accept-Encoding': 'gzip, deflate',
       'Accept-Language': userLanguage,
-      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
+      'User-Agent': userAgentString,
       Connection: 'keep-alive'
     },
     json: true,
@@ -201,7 +202,7 @@ async function postSplatnetApi(url, body) {
       Accept: '*/*',
       'Accept-Encoding': 'gzip, deflate',
       'Accept-Language': userLanguage,
-      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
+      'User-Agent': userAgentString,
       Connection: 'keep-alive',
       'X-Unique-Id': uniqueId,
       'X-Requested-With': 'XMLHttpRequest'
@@ -228,7 +229,7 @@ async function getSessionCookie(token) {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
-      'User-Agent': `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`,
+      'User-Agent': userAgentString,
       'x-gamewebtoken': token,
       'x-isappanalyticsoptedin': false,
       'X-Requested-With': 'com.nintendo.znca',
@@ -276,6 +277,11 @@ async function getSplatnetImage(battle) {
   return imgBuf;
 }
 
+function setIksmToken(cookieValue) {
+  const cookie = request2.cookie(`iksm_session=${cookieValue}`);
+  const cookies = jar.setCookie(cookie, splatnetUrl);
+}
+
 function getIksmToken() {
   const cookies = jar.getCookies(splatnetUrl);
   const iksmSessionCookie = cookies.find(
@@ -302,3 +308,4 @@ exports.postSplatnetApi = postSplatnetApi;
 exports.getSplatnetImage = getSplatnetImage;
 exports.getIksmToken = getIksmToken;
 exports.setUserLanguage = setUserLanguage;
+exports.setIksmToken = setIksmToken;
