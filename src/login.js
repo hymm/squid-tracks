@@ -15,17 +15,36 @@ import { ipcRenderer } from 'electron';
 
 class LoginCookie extends React.Component {
   state = {
-    token: ''
+    token: '',
+    mitm: false
   };
 
   componentDidMount() {
+    ipcRenderer.on('interceptedIksm', this.handleIntercept);
     this.setState({
       token: ipcRenderer.sendSync('getFromStore', 'iksmCookie')
     });
   }
 
+  componentWillUnmount() {
+    ipcRenderer.removeListener('interceptedIksm', this.handleIntercept);
+  }
+
+  handleIntercept = (e, value) => {
+    this.setState({ token: value });
+  };
+
   handleChange = e => {
     this.setState({ token: e.target.value });
+  };
+
+  handleMitmClick = () => {
+    if (this.state.mitm) {
+      ipcRenderer.sendSync('stopMitm');
+    } else {
+      ipcRenderer.sendSync('startMitm');
+    }
+    this.setState({ mitm: !this.state.mitm });
   };
 
   handleSubmit = e => {
@@ -35,6 +54,7 @@ class LoginCookie extends React.Component {
   };
 
   render() {
+    const { mitm } = this.state;
     return (
       <Grid fluid>
         <Row>
@@ -56,6 +76,10 @@ class LoginCookie extends React.Component {
                 Login
               </Button>
             </form>
+
+            <Button onClick={this.handleMitmClick}>
+              {mitm ? 'Stop Proxy' : 'Start Proxy'}
+            </Button>
           </Col>
           <Col md={3} />
         </Row>
@@ -98,7 +122,7 @@ const LoginRoutes = ({ setLogin }) => {
         path="/login/cookie"
         component={() => <LoginCookie setLogin={setLogin} />}
       />
-      <Redirect from="/" exact to="/login" />
+      <Redirect exact from="/" to="/login" />
     </Switch>
   );
 };

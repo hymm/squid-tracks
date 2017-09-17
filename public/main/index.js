@@ -12,6 +12,7 @@ const { uaException } = require('./analytics');
 
 const Store = require('./store');
 require('./battles-store');
+const mitm = require('./mitm-read-cookie');
 
 process.on('uncaughtException', err => {
   const message = `Unhandled Error in Main: ${err}`;
@@ -228,6 +229,8 @@ function createWindow() {
     width: 1024,
     height: 768
   });
+
+  mitm.setMainWindow(mainWindow);
 
   // comment this in on first run to get dev tools
   if (isDev) {
