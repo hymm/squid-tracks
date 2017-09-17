@@ -18,7 +18,7 @@ class LoginCookie extends React.Component {
   state = {
     token: '',
     mitm: false,
-    ips: []
+    address: { ip: '', port: 0 }
   };
 
   componentDidMount() {
@@ -30,6 +30,9 @@ class LoginCookie extends React.Component {
 
   componentWillUnmount() {
     ipcRenderer.removeListener('interceptedIksm', this.handleIntercept);
+    if (this.state.mitm) {
+      ipcRenderer.sendSync('stopMitm');
+    }
   }
 
   handleIntercept = (e, value) => {
@@ -42,14 +45,14 @@ class LoginCookie extends React.Component {
   };
 
   handleMitmClick = () => {
-    let ips = [];
+    let address = { ip: '', port: 0 };
     if (this.state.mitm) {
       ipcRenderer.sendSync('stopMitm');
     } else {
       ipcRenderer.sendSync('startMitm');
-      ips = ipcRenderer.sendSync('getIps');
+      address = ipcRenderer.sendSync('getIps');
     }
-    this.setState({ mitm: !this.state.mitm, ips });
+    this.setState({ mitm: !this.state.mitm, address });
   };
 
   handleSubmit = e => {
@@ -63,7 +66,7 @@ class LoginCookie extends React.Component {
   }
 
   render() {
-    const { mitm, ips, token } = this.state;
+    const { mitm, address, token } = this.state;
     return (
       <Grid fluid>
         <Row>
@@ -82,8 +85,15 @@ class LoginCookie extends React.Component {
                 />
               </FormGroup>
               <ButtonToolbar>
-                <Button onClick={this.handleMitmClick}>
-                  {mitm ? 'Stop Proxy' : 'Start Proxy'}
+                <Button
+                  onClick={this.handleMitmClick}
+                  bsStyle={mitm ? 'warning' : 'default'}
+                >
+                  {mitm ? (
+                    `Proxy running on ${address.ip}, Port ${address.port}`
+                  ) : (
+                    'Start Proxy'
+                  )}
                 </Button>
                 <Button
                   type="submit"
@@ -94,9 +104,6 @@ class LoginCookie extends React.Component {
                 </Button>
               </ButtonToolbar>
             </form>
-            <ul>
-              <li>{ips[0]}</li>
-            </ul>
           </Col>
           <Col md={3} />
         </Row>

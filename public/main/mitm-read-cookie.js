@@ -7,6 +7,7 @@ const ifs = require('os').networkInterfaces();
 const fs = require('fs');
 const { ipcMain } = electron;
 
+const port = 8001;
 const userDataPath = (electron.app || electron.remote.app).getPath('userData');
 
 let mainWindow;
@@ -24,11 +25,15 @@ function getIps() {
 }
 
 ipcMain.on('getIps', e => {
-  e.returnValue = getIps();
+  const ips = getIps();
+
+  e.returnValue = {
+    ip: ips[0],
+    port
+  };
 });
 
 proxy.onCertificateRequired = (hostname, callback) => {
-  console.log(userDataPath);
   return callback(null, {
     keyFile: `${userDataPath}/certs/${hostname}.key`,
     certFile: `${userDataPath}/certs/${hostname}.crt`
@@ -72,7 +77,6 @@ proxy.onRequest((ctx, callback) => {
 });
 
 ipcMain.on('startMitm', e => {
-  const port = 8001;
   proxy.listen({ port, sslCaDir: userDataPath });
   log.debug(`running mitm proxy on port ${port}`);
   e.returnValue = true;
