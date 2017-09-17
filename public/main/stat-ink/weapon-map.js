@@ -41,6 +41,7 @@ module.exports = {
   '3020': 'screwslosher', // sloshing machine
   '4000': 'splatspinner', // mini splatling
   '4010': 'barrelspinner', // heavy splatling
+  '4011': 'barrelspinner_deco', // heavy splatling deco
   '4015': 'herospinner_replica',
   '5000': 'sputtery', // dapple dualies
   '5010': 'maneuver', // duelies
