@@ -7,7 +7,8 @@ import {
   Button,
   FormControl,
   FormGroup,
-  ControlLabel
+  ControlLabel,
+  ButtonToolbar
 } from 'react-bootstrap';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -16,11 +17,12 @@ import { ipcRenderer } from 'electron';
 class LoginCookie extends React.Component {
   state = {
     token: '',
-    mitm: false
+    mitm: false,
+    ips: []
   };
 
   componentDidMount() {
-    ipcRenderer.on('interceptedIksm', this.handleIntercept);
+    ipcRenderer.once('interceptedIksm', this.handleIntercept);
     this.setState({
       token: ipcRenderer.sendSync('getFromStore', 'iksmCookie')
     });
@@ -32,6 +34,7 @@ class LoginCookie extends React.Component {
 
   handleIntercept = (e, value) => {
     this.setState({ token: value });
+    this.login(value);
   };
 
   handleChange = e => {
@@ -39,22 +42,28 @@ class LoginCookie extends React.Component {
   };
 
   handleMitmClick = () => {
+    let ips = [];
     if (this.state.mitm) {
       ipcRenderer.sendSync('stopMitm');
     } else {
       ipcRenderer.sendSync('startMitm');
+      ips = ipcRenderer.sendSync('getIps');
     }
-    this.setState({ mitm: !this.state.mitm });
+    this.setState({ mitm: !this.state.mitm, ips });
   };
 
   handleSubmit = e => {
-    ipcRenderer.sendSync('setIksmToken', this.state.token);
-    ipcRenderer.sendSync('setToStore', 'iksmCookie', this.state.token);
-    this.props.setLogin(true);
+    this.login(this.state.token);
   };
 
+  login(iksmValue) {
+    ipcRenderer.sendSync('setIksmToken', iksmValue);
+    ipcRenderer.sendSync('setToStore', 'iksmCookie', iksmValue);
+    this.props.setLogin(true);
+  }
+
   render() {
-    const { mitm } = this.state;
+    const { mitm, ips, token } = this.state;
     return (
       <Grid fluid>
         <Row>
@@ -72,14 +81,22 @@ class LoginCookie extends React.Component {
                   onChange={this.handleChange}
                 />
               </FormGroup>
-              <Button type="submit" bsStyle="primary">
-                Login
-              </Button>
+              <ButtonToolbar>
+                <Button onClick={this.handleMitmClick}>
+                  {mitm ? 'Stop Proxy' : 'Start Proxy'}
+                </Button>
+                <Button
+                  type="submit"
+                  bsStyle="primary"
+                  disabled={token.length <= 0}
+                >
+                  Login
+                </Button>
+              </ButtonToolbar>
             </form>
-
-            <Button onClick={this.handleMitmClick}>
-              {mitm ? 'Stop Proxy' : 'Start Proxy'}
-            </Button>
+            <ul>
+              <li>{ips[0]}</li>
+            </ul>
           </Col>
           <Col md={3} />
         </Row>
