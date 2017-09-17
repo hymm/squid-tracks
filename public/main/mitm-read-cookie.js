@@ -47,28 +47,25 @@ proxy.onRequest((ctx, callback) => {
       }
     }
   } else if (ctx.clientToProxyRequest.headers.host === 'squidtracks.ink') {
-    console.log(ctx.clientToProxyRequest);
-    if (
-      ctx.clientToProxyRequest.headers.referer ===
-      'http://squidtracks.ink/squidtracks.cer'
-    ) {
-      console.log('cert!');
-      ctx.proxyToClientResponse.writeHead(200, {
-        'Content-Type': 'application/x-x509-user-cert'
-      });
-      fs.readFile(`${userDataPath}/certs/ca.pem`, (err, data) => {
-        console.log(data);
-        ctx.proxyToClientResponse.write(data);
+    if (ctx.clientToProxyRequest.headers.host === 'squidtracks.ink') {
+      if (ctx.clientToProxyRequest.url === '/squidtracks.cer') {
+        ctx.proxyToClientResponse.writeHead(200, {
+          'Content-Type': 'application/x-x509-user-cert'
+        });
+        fs.readFile(`${userDataPath}/certs/ca.pem`, (err, data) => {
+          ctx.proxyToClientResponse.write(data);
+          ctx.proxyToClientResponse.end();
+        });
+      } else {
+        ctx.proxyToClientResponse.writeHead(200, {
+          'Content-Type': 'text/html'
+        });
+        ctx.proxyToClientResponse.write(
+          '<a href="/squidtracks.cer">Download Certificate</a>'
+        );
         ctx.proxyToClientResponse.end();
-      });
-    } else {
-      ctx.proxyToClientResponse.writeHead(200, { 'Content-Type': 'text/html' });
-      ctx.proxyToClientResponse.write(
-        '<a href="/squidtracks.cer">Download Certificate</a>'
-      );
-      ctx.proxyToClientResponse.end();
+      }
     }
-    console.log('squidtracks');
   }
 
   return callback();
