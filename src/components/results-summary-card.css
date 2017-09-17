@@ -1,0 +1,61 @@
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(14, [col-start] 1fr);
+  grid-gap: 20px;
+}
+
+.grid-wrapper .active {
+  border: 1px solid black;
+}
+
+.grid-wrapper h4 {
+  text-decoration: underline;
+}
+
+.winLoss {
+  grid-column: col-start 1 / span 2;
+  grid-row: 1;
+  text-align: center;
+}
+
+.winPercent {
+  grid-column: col-start 3 / span 2;
+  grid-row: 1;
+  text-align: center;
+}
+
+.power {
+  grid-column: col-start 5 / span 2;
+  grid-row: 1;
+  text-align: center;
+}
+
+.inked {
+  grid-column: col-start 7 / span 2;
+  grid-row: 1;
+  text-align: center;
+}
+
+.killsAndAssists {
+  grid-column: col-start 9 / span 2;
+  grid-row: 1;
+  text-align: center;
+}
+
+.killsAndDeaths {
+  grid-column: col-start 11 / span 2;
+  grid-row: 1;
+  text-align: center;
+}
+
+.specials {
+  grid-column: col-start 13 / span 2;
+  grid-row: 1;
+  text-align: center;
+}
+
+.timeline {
+  grid-column: col-start 1 / span 14;
+  grid-row: 2;
+  text-align: center;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import ResultsSummaryCard from './components/results-summary-card';
+import ResultsSummaryCard from './components/results-summary-card-2';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
 import ResultsControl from './components/results-controls';
@@ -70,14 +70,14 @@ class Results extends React.Component {
               setStatInkInfo={this.setStatInkInfo}
               statInk={statInk}
             />
-            {this.state.initialized
-              ? <ResultDetailCard result={currentResult} statInk={statInk} />
-              : null}
-            <ResultsSummaryCard summary={results.summary} />
+            {this.state.initialized ? (
+              <ResultDetailCard result={currentResult} statInk={statInk} />
+            ) : null}
             <ResultsCard
               results={results.results}
               statInk={statInk}
               changeResult={this.changeResultByBattleNumber}
+              summary={results.summary}
             />
           </Col>
         </Row>
