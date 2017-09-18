@@ -27,7 +27,7 @@ ipcMain.on('getIps', e => {
   const ips = getIps();
 
   e.returnValue = {
-    ip: ips[0],
+    ips: ips,
     port
   };
 });

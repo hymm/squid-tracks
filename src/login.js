@@ -8,18 +8,71 @@ import {
   FormControl,
   FormGroup,
   ControlLabel,
-  ButtonToolbar
+  ButtonToolbar,
+  SplitButton,
+  MenuItem,
 } from 'react-bootstrap';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { ipcRenderer, remote } from 'electron';
 const { openExternal } = remote.shell;
 
+class ProxyButton extends React.Component {
+    state = {
+        mitm: false,
+        address: { ips: [], port: 0 }
+    }
+
+    handleMitmClick = () => {
+      let address = { ip: '', port: 0 };
+      if (this.state.mitm) {
+        ipcRenderer.sendSync('stopMitm');
+      } else {
+        ipcRenderer.sendSync('startMitm');
+        address = ipcRenderer.sendSync('getIps');
+      }
+      this.setState({ mitm: !this.state.mitm, address });
+    };
+
+    render() {
+        const { mitm, address } = this.state;
+        if (address.ips.length > 1) {
+            return (
+                <SplitButton
+                  title={mitm ? (
+                    `Proxy running on ${address.ips[0]}, Port ${address.port}`
+                  ) : (
+                    'Start Proxy'
+                  )}
+                  onClick={this.handleMitmClick}
+                  bsStyle={mitm ? 'warning' : 'default'}
+                >
+                    <MenuItem header>Additional IP Addresses</MenuItem>
+                    {
+                        address.ips.map(address => <MenuItem key={address}>{address}</MenuItem>)
+                    }
+                </SplitButton>
+            )
+        }
+        return (
+            <Button
+              onClick={this.handleMitmClick}
+              bsStyle={mitm ? 'warning' : 'default'}
+            >
+              {mitm ? (
+                `Proxy running on ${address.ips[0]}, Port ${address.port}`
+              ) : (
+                'Start Proxy'
+              )}
+            </Button>
+        );
+    }
+
+}
+
 class LoginCookie extends React.Component {
   state = {
     token: '',
-    mitm: false,
-    address: { ip: '', port: 0 }
   };
 
   componentDidMount() {
@@ -45,17 +98,6 @@ class LoginCookie extends React.Component {
     this.setState({ token: e.target.value });
   };
 
-  handleMitmClick = () => {
-    let address = { ip: '', port: 0 };
-    if (this.state.mitm) {
-      ipcRenderer.sendSync('stopMitm');
-    } else {
-      ipcRenderer.sendSync('startMitm');
-      address = ipcRenderer.sendSync('getIps');
-    }
-    this.setState({ mitm: !this.state.mitm, address });
-  };
-
   handleSubmit = e => {
     this.login(this.state.token);
   };
@@ -67,7 +109,7 @@ class LoginCookie extends React.Component {
   }
 
   render() {
-    const { mitm, address, token } = this.state;
+    const { token } = this.state;
     return (
       <Grid fluid>
         <Row>
@@ -91,16 +133,7 @@ class LoginCookie extends React.Component {
                         />
                       </FormGroup>
                       <ButtonToolbar>
-                        <Button
-                          onClick={this.handleMitmClick}
-                          bsStyle={mitm ? 'warning' : 'default'}
-                        >
-                          {mitm ? (
-                            `Proxy running on ${address.ip}, Port ${address.port}`
-                          ) : (
-                            'Start Proxy'
-                          )}
-                        </Button>
+                        <ProxyButton />
                         <Button
                           type="submit"
                           bsStyle="primary"
