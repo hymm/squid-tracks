@@ -67,6 +67,13 @@ class SplatnetProvider extends React.Component {
     }
   };
 
+  handleApiData = (e, url, data) => {
+    if (url.includes('results/')) {
+      this.handleBattleResult(data);
+      return;
+    }
+  };
+
   setBattleToCache(freshBattle) {
     const number = freshBattle.battle_number;
     const battles = update(this.state.cache.battles, {

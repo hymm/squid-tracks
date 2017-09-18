@@ -162,11 +162,11 @@ ipcMain.on('getApiAsync', async (e, url) => {
     } else {
       value = await getSplatnetApiMemo120(url);
     }
-    e.sender.send('apiData', value);
+    e.sender.send('apiData', url, value);
   } catch (e) {
     const message = `Error getting ${url}: ${e}`;
     uaException(message);
     log.error(message);
-    e.sender.send('apiData', {});
+    e.sender.send('apiDataError', message);
   }
 });

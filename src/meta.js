@@ -42,6 +42,8 @@ class MetaContainer extends React.Component {
     combine_replicas_toggle: false
   };
 
+  url = 'league_match_ranking/';
+
   desired_start_of_week = 1;
 
   this_week_date_range_start = '';
@@ -106,7 +108,11 @@ class MetaContainer extends React.Component {
     }
   }
 
-  getMetaLoad = (e, data) => {
+  getMetaLoad = (e, url, data) => {
+    if (!url.includes(this.url)) {
+      return;
+    }
+
     if (typeof data === 'object' && data != null) {
       let newEntry = {};
       newEntry[data.league_id] = data;
