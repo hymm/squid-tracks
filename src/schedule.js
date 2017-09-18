@@ -3,7 +3,6 @@ import { Grid, Row, Col, Table, Image } from 'react-bootstrap';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import { Subscriber } from 'react-broadcast';
 import './schedule.css';
-const { ipcRenderer } = require('electron');
 
 const messages = defineMessages({
   current: {

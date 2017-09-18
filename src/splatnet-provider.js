@@ -10,7 +10,6 @@ class SplatnetProvider extends React.Component {
         summary: {},
         results: []
       },
-      records: {},
       annie: { merchandises: [] },
       schedule: { gachi: [], league: [], regular: [] },
       records: {
