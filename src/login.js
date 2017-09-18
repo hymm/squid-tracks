@@ -12,7 +12,8 @@ import {
 } from 'react-bootstrap';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, remote } from 'electron';
+const { openExternal } = remote.shell;
 
 class LoginCookie extends React.Component {
   state = {
@@ -70,42 +71,74 @@ class LoginCookie extends React.Component {
     return (
       <Grid fluid>
         <Row>
-          <Col md={3} />
           <Col md={6}>
-            <LinkContainer exact to="/login">
-              <Button>Back</Button>
-            </LinkContainer>
-            <form onSubmit={this.handleSubmit}>
-              <FormGroup>
-                <ControlLabel>iksm session Token</ControlLabel>
-                <FormControl
-                  type="text"
-                  value={this.state.token}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-              <ButtonToolbar>
-                <Button
-                  onClick={this.handleMitmClick}
-                  bsStyle={mitm ? 'warning' : 'default'}
-                >
-                  {mitm ? (
-                    `Proxy running on ${address.ip}, Port ${address.port}`
-                  ) : (
-                    'Start Proxy'
-                  )}
-                </Button>
-                <Button
-                  type="submit"
-                  bsStyle="primary"
-                  disabled={token.length <= 0}
-                >
-                  Login
-                </Button>
-              </ButtonToolbar>
-            </form>
+            <Row>
+                <Col md={12}>
+                    <LinkContainer exact to="/login">
+                      <Button>Back</Button>
+                    </LinkContainer>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={12}>
+                    <form onSubmit={this.handleSubmit}>
+                      <FormGroup>
+                        <ControlLabel>iksm session Token</ControlLabel>
+                        <FormControl
+                          type="text"
+                          value={this.state.token}
+                          onChange={this.handleChange}
+                        />
+                      </FormGroup>
+                      <ButtonToolbar>
+                        <Button
+                          onClick={this.handleMitmClick}
+                          bsStyle={mitm ? 'warning' : 'default'}
+                        >
+                          {mitm ? (
+                            `Proxy running on ${address.ip}, Port ${address.port}`
+                          ) : (
+                            'Start Proxy'
+                          )}
+                        </Button>
+                        <Button
+                          type="submit"
+                          bsStyle="primary"
+                          disabled={token.length <= 0}
+                        >
+                          Login
+                        </Button>
+                      </ButtonToolbar>
+                    </form>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={12}>
+                    <ul>
+                        <li>
+                            <a
+                              onClick={() =>
+                              openExternal(
+                                'https://github.com/hymm/squid-tracks/wiki/en_getCookie'
+                              )}
+                            style={{ cursor: 'pointer' }}
+                            >English Instructions</a>
+                        </li>
+                        <li>
+                            <a
+                              onClick={() =>
+                              openExternal(
+                                'https://github.com/hymm/squid-tracks/wiki/jp_getCookie'
+                              )}
+                            style={{ cursor: 'pointer' }}
+                            >Japanese Instructions</a>
+                        </li>
+                    </ul>
+                </Col>
+            </Row>
+
+
           </Col>
-          <Col md={3} />
         </Row>
       </Grid>
     );

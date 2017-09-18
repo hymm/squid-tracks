@@ -1,7 +1,6 @@
 const Proxy = require('http-mitm-proxy');
 const electron = require('electron');
 const log = require('electron-log');
-const path = require('path');
 const proxy = new Proxy();
 const ifs = require('os').networkInterfaces();
 const fs = require('fs');

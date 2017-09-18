@@ -1,11 +1,11 @@
-const { protocol, app, BrowserWindow, ipcMain, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu } = require('electron');
 const path = require('path');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
-const Memo = require('promise-memoize');
 const fs = require('fs');
 const eSplatnet = require('./electron-splatnet');
 const { userDataStore } = require('./stores');
+const splatnet = require('./splatnet2');
 
 const { writeToStatInk } = require('./stat-ink/stat-ink');
 const { uaException } = require('./analytics');
@@ -49,8 +49,8 @@ const statInkStore = new Store({
 
 ipcMain.on('setUserLangauge', (event, value) => {
   userDataStore.set('locale', value);
-  eSplatnet.setUserLanguage(value);
-  clearSplatnetCache();
+  splatnet.setUserLanguage(value);
+  eSplatnet.clearSplatnetCache();
   event.returnValue = true;
 });
 
@@ -119,7 +119,7 @@ ipcMain.on('getStatInkApiToken', (event, result) => {
 });
 
 ipcMain.on('setStatInkApiToken', (event, value) => {
-  store.set('statInkToken', value);
+  userDataStore.set('statInkToken', value);
   event.returnValue = true;
 });
 
@@ -132,7 +132,7 @@ function isTokenGood(token) {
 }
 
 async function getStoredSessionToken() {
-  sessionToken = userDataStore.get('sessionToken');
+  let sessionToken = userDataStore.get('sessionToken');
 
   if (isTokenGood(sessionToken)) {
     try {
@@ -231,6 +231,7 @@ function createWindow() {
   });
 
   mitm.setMainWindow(mainWindow);
+  eSplatnet.setMainWindow(mainWindow, startUrl);
 
   // comment this in on first run to get dev tools
   if (isDev) {
