@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col, Table, Image } from 'react-bootstrap';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import { Subscriber } from 'react-broadcast';
 import './schedule.css';
 const { ipcRenderer } = require('electron');
 
@@ -22,16 +23,12 @@ const GachiRow = ({ rotation, intl }) => {
 
   return (
     <tr>
-      <td>
-        {hour}
-      </td>
+      <td>{hour}</td>
       <td>
         <Grid fluid>
           <Row>
             <Col md={12}>
-              <strong>
-                {rotation.rule.name}
-              </strong>
+              <strong>{rotation.rule.name}</strong>
             </Col>
           </Row>
           <Row>
@@ -68,20 +65,13 @@ const GachiRow = ({ rotation, intl }) => {
 
 const GachiRowIntl = injectIntl(GachiRow);
 
-export default class ScheduleContainer extends React.Component {
-  state = {
-    schedules: { gachi: [], league: [], regular: [] }
-  };
+class Schedule extends React.Component {
   componentDidMount() {
-    this.getSchedule();
+    this.props.splatnet.comm.updateSchedule();
   }
-
-  getSchedule() {
-    const schedules = ipcRenderer.sendSync('getApi', 'schedules');
-    this.setState({ schedules: schedules });
-  }
-
   render() {
+    const { splatnet } = this.props;
+    const { regular = [], gachi = [], league = [] } = splatnet.current.schedule;
     return (
       <Grid fluid style={{ paddingTop: 65 }}>
         <Row>
@@ -91,9 +81,9 @@ export default class ScheduleContainer extends React.Component {
             </h2>
             <Table>
               <tbody>
-                {this.state.schedules.regular.map(rotation =>
+                {regular.map(rotation => (
                   <GachiRowIntl key={rotation.start_time} rotation={rotation} />
-                )}
+                ))}
               </tbody>
             </Table>
           </Col>
@@ -103,9 +93,9 @@ export default class ScheduleContainer extends React.Component {
             </h2>
             <Table>
               <tbody>
-                {this.state.schedules.gachi.map(rotation =>
+                {gachi.map(rotation => (
                   <GachiRowIntl key={rotation.start_time} rotation={rotation} />
-                )}
+                ))}
               </tbody>
             </Table>
           </Col>
@@ -115,9 +105,9 @@ export default class ScheduleContainer extends React.Component {
             </h2>
             <Table>
               <tbody>
-                {this.state.schedules.league.map(rotation =>
+                {league.map(rotation => (
                   <GachiRowIntl key={rotation.start_time} rotation={rotation} />
-                )}
+                ))}
               </tbody>
             </Table>
           </Col>
@@ -126,3 +116,13 @@ export default class ScheduleContainer extends React.Component {
     );
   }
 }
+
+const SubscribedSchedule = () => {
+  return (
+    <Subscriber channel="splatnet">
+      {splatnet => <Schedule splatnet={splatnet} />}
+    </Subscriber>
+  );
+};
+
+export default SubscribedSchedule;

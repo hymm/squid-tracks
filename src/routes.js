@@ -25,7 +25,7 @@ const Routes = ({
       {loggedIn ? (
         <div>
           <Navigation />
-          <Route path="/" exact component={About} />
+          <Route path="/home" exact component={About} />
           <Route path="/testApi" component={ApiViewer} />
           <Route path="/schedule" component={Schedule} />
           <Route path="/records" component={Records} />
@@ -47,7 +47,11 @@ const Routes = ({
       ) : (
         <Login setLogin={setLogin} />
       )}
-      <Redirect exact from="/" to={loggedIn ? '/' : '/login'} />
+      {loggedIn ? (
+        <Redirect exact from="/" to="/home" />
+      ) : (
+        <Redirect exact from="/" to="/login" />
+      )}
     </div>
   );
 };

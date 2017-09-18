@@ -11,7 +11,11 @@ class SplatnetProvider extends React.Component {
         results: []
       },
       records: {},
-      annie: { merchandises: [] }
+      annie: { merchandises: [] },
+      schedule: { gachi: [], league: [], regular: [] },
+      records: {
+        records: {}
+      }
     },
     cache: {
       battles: {},
@@ -21,6 +25,18 @@ class SplatnetProvider extends React.Component {
       }
     },
     comm: {
+      updateSchedule: () => {
+        const schedule = ipcRenderer.sendSync('getApi', 'schedules');
+        this.setState({
+          current: update(this.state.current, { $merge: { schedule } })
+        });
+      },
+      updateRecords: () => {
+        const records = ipcRenderer.sendSync('getApi', 'records');
+        this.setState({
+          current: update(this.state.current, { $merge: { records } })
+        });
+      },
       updateMerchandise: () => {
         const annie = ipcRenderer.sendSync('getApi', 'onlineshop/merchandises');
         this.setState({
@@ -42,7 +58,7 @@ class SplatnetProvider extends React.Component {
 
         const storedBattle = ipcRenderer.sendSync('getBattleFromStore', number);
         if (storedBattle != null) {
-            return storedBattle;
+          return storedBattle;
         }
 
         const freshBattle = ipcRenderer.sendSync('getApi', `results/${number}`);
