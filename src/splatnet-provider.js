@@ -58,7 +58,8 @@ class SplatnetProvider extends React.Component {
           this.setBattleToStore(freshBattle);
           return freshBattle;
         } else {
-          ipcRenderer.send('getApi', `results/${number}`);
+          ipcRenderer.send('getApiAsync', `results/${number}`);
+          return;
         }
       }
     }
@@ -106,7 +107,10 @@ class SplatnetProvider extends React.Component {
     }
   };
 
-  handleBattleResult = battle => {};
+  handleBattleResult = battle => {
+    this.setBattleToCache(battle);
+    this.setBattleToStore(battle);
+  };
 
   handleApiError = (e, err) => {
     log.error(err);

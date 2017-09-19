@@ -5,7 +5,7 @@ import ResultDetailCard from './components/result-detail-card';
 import ResultsControl from './components/results-controls';
 import { ipcRenderer } from 'electron';
 import { Subscriber } from 'react-broadcast';
-import lodash from 'lodash'
+import lodash from 'lodash';
 
 class Results extends React.Component {
   state = {
@@ -19,28 +19,44 @@ class Results extends React.Component {
     this.setState({ statInk: statInkInfo });
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { splatnet } = this.props;
+    const { splatnet: splatnetNext } = nextProps;
+    const firstBattle = lodash.has(
+      splatnet,
+      'current.results.results[0].battle_number'
+    )
+      ? splatnet.current.results.results[0].battle_number
+      : 0;
+    const nextFirstBattle = lodash.has(
+      splatnetNext,
+      'current.results.results[0].battle_number'
+    )
+      ? splatnetNext.current.results.results[0].battle_number
+      : 0;
+
+    if (firstBattle !== nextFirstBattle) {
+      this.setState({ initialized: true });
+      if (nextFirstBattle != null) {
+        splatnet.comm.getBattle(nextFirstBattle);
+      }
+    }
+  }
+
   getResults = () => {
     const { splatnet } = this.props;
     splatnet.comm.updateResults();
   };
 
-  componentWillReceiveProps(nextProps) {
-      const { splatnet } = this.props;
-      const { splatnet: splatnetNext } = nextProps;
-      const firstBattle = lodash.has(splatnet, 'current.results.results[0].battle_number')
-        ? splatnet.current.results.results[0].battle_number
-        : 0;
-      const nextFirstBattle = lodash.has(splatnetNext, 'current.results.results[0].battle_number')
-        ? splatnetNext.current.results.results[0].battle_number
-        : 0;
-
-      if ( firstBattle !== nextFirstBattle) {
-          this.setState({ initialized: true });
-          if (nextFirstBattle != null) {
-            splatnet.comm.getBattle(nextFirstBattle);
-          }
-      }
-  }
+  changeResult = arrayIndex => {
+    const { splatnet } = this.props;
+    const results = splatnet.current.results.results;
+    const battleNumber = results[arrayIndex].battle_number;
+    splatnet.comm.getBattle(battleNumber);
+    this.setState({
+      currentResultIndex: arrayIndex
+    });
+  };
 
   getCurrentBattle() {
     const { currentResultIndex } = this.state;
@@ -49,6 +65,16 @@ class Results extends React.Component {
     const battle = this.props.splatnet.cache.battles[battleNumber];
     return battle ? battle : {};
   }
+
+  changeResultByBattleNumber = battleNumber => {
+    const { splatnet } = this.props;
+    splatnet.comm.getBattle(battleNumber),
+      this.setState({
+        currentResultIndex: splatnet.current.results.results.findIndex(
+          a => a.battle_number === battleNumber
+        )
+      });
+  };
 
   setStatInkInfo = (battleNumber, info) => {
     const statInk = this.state.statInk;
@@ -62,7 +88,7 @@ class Results extends React.Component {
     const results = this.props.splatnet.current.results;
     let currentBattle = {};
     if (initialized) {
-        currentBattle = this.getCurrentBattle();
+      currentBattle = this.getCurrentBattle();
     }
 
     return (
