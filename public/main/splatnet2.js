@@ -125,7 +125,7 @@ async function getApiLogin(id_token, userinfo) {
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
       'User-Agent': userAgentString,
-      Authorization: 'Bearer  ${id_token}'
+      Authorization: 'Bearer'
     },
     body: {
       parameter: {
@@ -279,7 +279,7 @@ async function getSplatnetImage(battle) {
 
 function setIksmToken(cookieValue) {
   const cookie = request2.cookie(`iksm_session=${cookieValue}`);
-  const cookies = jar.setCookie(cookie, splatnetUrl);
+  jar.setCookie(cookie, splatnetUrl);
 }
 
 function getIksmToken() {

@@ -67,7 +67,10 @@ class UploadAllBattlesButton extends React.Component {
 
     const uploaded = statInk ? statInk[battle.battle_number] != null : false;
     if (!uploaded) {
-      const battleDetails = splatnet.comm.getBattle(battle.battle_number);
+      const battleDetails = splatnet.comm.getBattle(
+        battle.battle_number,
+        'sync'
+      );
       ipcRenderer.send('writeToStatInk', battleDetails, 'all');
       this.setState({
         buttonText: intl.formatMessage(this.messages.writingBattle, {

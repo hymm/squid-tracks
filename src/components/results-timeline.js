@@ -10,7 +10,7 @@ import {
   CartesianGrid,
   ReferenceLine,
   Dot,
-  Area,
+  Area
 } from 'recharts';
 import { getValue } from './sort-array';
 
@@ -18,7 +18,7 @@ class ResultDot extends React.Component {
   render() {
     const { payload } = this.props;
     if (payload.result === 'victory') {
-      return <Dot {...this.props} fill={'#fff'} fillOpacity={1}/>;
+      return <Dot {...this.props} fill={'#fff'} fillOpacity={1} />;
     }
     return null;
   }
@@ -50,177 +50,197 @@ class ResultsTimeline extends React.Component {
   }
 
   selectCount(team_count, team_percentage) {
-      return team_count != null ? team_count : team_percentage;
+    return team_count != null ? team_count : team_percentage;
   }
 
   getCounts(result) {
-      const my_count_raw = this.selectCount(result.my_team_count, result.my_team_percentage);
-      const other_count_raw = this.selectCount(result.other_team_count, result.other_team_percentage);
-      const total = my_count_raw + other_count_raw;
-      const mine = my_count_raw * 100 / total;
-      const other = other_count_raw * 100 / total;
+    const my_count_raw = this.selectCount(
+      result.my_team_count,
+      result.my_team_percentage
+    );
+    const other_count_raw = this.selectCount(
+      result.other_team_count,
+      result.other_team_percentage
+    );
+    const total = my_count_raw + other_count_raw;
+    const mine = my_count_raw * 100 / total;
+    const other = other_count_raw * 100 / total;
 
-      return {
-          mine,
-          other,
-      };
+    return {
+      mine,
+      other
+    };
   }
 
   getPower(result) {
-      let power = null;
-      if (result.other_estimate_league_point) {
-        power = result.other_estimate_league_point;
-      } else if (result.other_estimate_fes_power) {
-        power = result.other_estimate_fes_power;
-      } else if (result.estimate_gachi_power) {
-        power = result.estimate_gachi_power;
-      }
+    let power = null;
+    if (result.other_estimate_league_point) {
+      power = result.other_estimate_league_point;
+    } else if (result.other_estimate_fes_power) {
+      power = result.other_estimate_fes_power;
+    } else if (result.estimate_gachi_power) {
+      power = result.estimate_gachi_power;
+    }
 
-      return power;
+    return power;
   }
 
   getValues(result) {
-      const power = this.getPower(result);
-      const counts = this.getCounts(result);
+    const power = this.getPower(result);
+    const counts = this.getCounts(result);
 
-      const a = getValue(result, 'player_result.assist_count');
-      const k = getValue(result, 'player_result.kill_count');
+    const a = getValue(result, 'player_result.assist_count');
+    const k = getValue(result, 'player_result.kill_count');
 
-      return {
-        a,
-        k,
-        ka: k + a,
-        d: getValue(result, 'player_result.death_count'),
-        s: getValue(result, 'player_result.special_count'),
-        lobbyBar: 100,
-        inked: getValue(result, 'player_result.game_paint_point'),
-        power,
-        lobby: result.game_mode.key,
-        result: result.my_team_result.key,
-        myScore: counts.mine,
-        otherScore: counts.other,
-      };
+    return {
+      a,
+      k,
+      ka: k + a,
+      d: getValue(result, 'player_result.death_count'),
+      s: getValue(result, 'player_result.special_count'),
+      lobbyBar: 100,
+      inked: getValue(result, 'player_result.game_paint_point'),
+      power,
+      lobby: result.game_mode.key,
+      result: result.my_team_result.key,
+      myScore: counts.mine,
+      otherScore: counts.other
+    };
   }
 
   renderPowerTrend(average) {
-      return [
-        <YAxis
-          key="powerYAxis"
-          dataKey="power"
-          scale="auto"
-          type="number"
-          domain={[`dataMin - 50`, `dataMax + 50`]}
-          allowDecimals={false}
-        />,
-        <Line
-          key="powerTrend"
-          type="step"
-          dataKey="power"
-          stroke="#333"
-          isAnimationActive={true}
-          dot={<ResultDot />}
+    return [
+      <YAxis
+        key="powerYAxis"
+        dataKey="power"
+        scale="auto"
+        type="number"
+        domain={[`dataMin - 50`, `dataMax + 50`]}
+        allowDecimals={false}
       />,
-        <ReferenceLine key="powerAverage" y={average} stroke="white" strokeOpacity={.5} />,
+      <Line
+        key="powerTrend"
+        type="step"
+        dataKey="power"
+        stroke="#333"
+        isAnimationActive={true}
+        dot={<ResultDot />}
+      />,
+      <ReferenceLine
+        key="powerAverage"
+        y={average}
+        stroke="white"
+        strokeOpacity={0.5}
+      />
     ];
   }
 
   renderInkedTrend(average) {
-      return [
-        <YAxis
-          key="inkedYAxis"
-          dataKey="inked"
-          scale="auto"
-          type="number"
-          domain={[0, `dataMax + 50`]}
-          tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
-        />,
-        <Line
-          key="inkedTrend"
-          type="step"
-          dataKey="inked"
-          stroke="#333"
-          isAnimationActive={true}
-          dot={<ResultDot />}
-        />,
-        <ReferenceLine key="inkedAverage" y={average} stroke="white" strokeOpacity={.5} />,
+    return [
+      <YAxis
+        key="inkedYAxis"
+        dataKey="inked"
+        scale="auto"
+        type="number"
+        domain={[0, `dataMax + 50`]}
+        tickFormatter={valueRaw => valueRaw.toFixed(0)}
+      />,
+      <Line
+        key="inkedTrend"
+        type="step"
+        dataKey="inked"
+        stroke="#333"
+        isAnimationActive={true}
+        dot={<ResultDot />}
+      />,
+      <ReferenceLine
+        key="inkedAverage"
+        y={average}
+        stroke="white"
+        strokeOpacity={0.5}
+      />
     ];
   }
 
   renderKillsAndAssistsTrend(averageK, averageA) {
-      return [
-        <YAxis
-          key="kaYAxis"
-          dataKey="ka"
-          scale="auto"
-          type="number"
-          domain={[`dataMin`, `dataMax + 1`]}
-          tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
-        />,
-        <ReferenceLine key="kaAverage" y={(parseFloat(averageK) + parseFloat(averageA)).toFixed(2)} stroke="white" />,
-        <Area
-          key="kaTrend"
-          dataKey="ka"
-          type="step"
-          stroke="#333"
-          fill="lightgrey"
-          fillOpacity={1}
-          isAnimationActive={true}
-          dot={<ResultDot />}
-        />,
-        <ReferenceLine key="aAverage" y={averageA} stroke="grey" />,
-        <Area
-          key="aTrend"
-          dataKey="a"
-          type="step"
-          stroke="#000"
-          fill="grey"
-          fillOpacity={1}
-          isAnimationActive={true}
-          dot={null}
-        />,
+    return [
+      <YAxis
+        key="kaYAxis"
+        dataKey="ka"
+        scale="auto"
+        type="number"
+        domain={[0, `dataMax + 1`]}
+        tickFormatter={valueRaw => valueRaw.toFixed(0)}
+      />,
+      <ReferenceLine
+        key="kaAverage"
+        y={(parseFloat(averageK) + parseFloat(averageA)).toFixed(2)}
+        stroke="white"
+      />,
+      <Area
+        key="kaTrend"
+        dataKey="ka"
+        type="step"
+        stroke="#333"
+        fill="lightgrey"
+        fillOpacity={1}
+        isAnimationActive={true}
+        dot={<ResultDot />}
+      />,
+      <ReferenceLine key="aAverage" y={averageA} stroke="grey" />,
+      <Area
+        key="aTrend"
+        dataKey="a"
+        type="step"
+        stroke="#000"
+        fill="grey"
+        fillOpacity={1}
+        isAnimationActive={true}
+        dot={null}
+      />
     ];
   }
 
   renderKillsAndDeathsTrend(averageK, averageD) {
-      return [
-        <YAxis
-          key="kdYAxis"
-          dataKey="k"
-          scale="auto"
-          type="number"
-          domain={[`dataMin`, `dataMax + 1`]}
-          tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
-        />,
-        <ReferenceLine key="kAverage" y={averageK} stroke="white" />,
-        <Line
-          key="kTrend"
-          dataKey="k"
-          type="step"
-          stroke="#fff"
-          isAnimationActive={true}
-          dot={<ResultDot />}
-        />,
-        <ReferenceLine key="dAverage" y={averageD} stroke="grey" />,
-        <Line
-          key="dTrend"
-          dataKey="d"
-          type="step"
-          stroke="#000"
-          isAnimationActive={true}
-          dot={null}
-        />,
+    return [
+      <YAxis
+        key="kdYAxis"
+        dataKey="k"
+        scale="auto"
+        type="number"
+        domain={[0, `dataMax + 1`]}
+        tickFormatter={valueRaw => valueRaw.toFixed(0)}
+      />,
+      <ReferenceLine key="kAverage" y={averageK} stroke="white" />,
+      <Line
+        key="kTrend"
+        dataKey="k"
+        type="step"
+        stroke="#fff"
+        isAnimationActive={true}
+        dot={<ResultDot />}
+      />,
+      <ReferenceLine key="dAverage" y={averageD} stroke="grey" />,
+      <Line
+        key="dTrend"
+        dataKey="d"
+        type="step"
+        stroke="#000"
+        isAnimationActive={true}
+        dot={null}
+      />
     ];
   }
 
   renderSpecialsTrend(average) {
-      return [
+    return [
       <YAxis
         key="sYAxis"
         dataKey="s"
         scale="auto"
         type="number"
         domain={[0, `dataMax + 1`]}
-        tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
+        tickFormatter={valueRaw => valueRaw.toFixed(0)}
       />,
       <Line
         key="sTrend"
@@ -229,9 +249,14 @@ class ResultsTimeline extends React.Component {
         stroke="#333"
         isAnimationActive={true}
         dot={<ResultDot />}
-    />,
-    <ReferenceLine key="sAverage" y={average} stroke="white" strokeOpacity={.5} />,
-];
+      />,
+      <ReferenceLine
+        key="sAverage"
+        y={average}
+        stroke="white"
+        strokeOpacity={0.5}
+      />
+    ];
   }
 
   render() {
@@ -270,9 +295,15 @@ class ResultsTimeline extends React.Component {
           </Bar>
           {activeValue === 'power' ? this.renderPowerTrend(powerAvg) : null}
           {activeValue === 'inked' ? this.renderInkedTrend(averages.p) : null}
-          {activeValue === 'killsAndAssists' ? this.renderKillsAndAssistsTrend(averages.k, averages.a) : null}
-          {activeValue === 'killsAndDeaths' ? this.renderKillsAndDeathsTrend(averages.k, averages.d) : null}
-          {activeValue === 'specials' ? this.renderSpecialsTrend(averages.s) : null}
+          {activeValue === 'killsAndAssists' ? (
+            this.renderKillsAndAssistsTrend(averages.k, averages.a)
+          ) : null}
+          {activeValue === 'killsAndDeaths' ? (
+            this.renderKillsAndDeathsTrend(averages.k, averages.d)
+          ) : null}
+          {activeValue === 'specials' ? (
+            this.renderSpecialsTrend(averages.s)
+          ) : null}
         </ComposedChart>
       </ResponsiveContainer>
     );

@@ -21,14 +21,15 @@ import './meta.css';
 
 const { ipcRenderer } = require('electron');
 
-const Meta = () =>
+const Meta = () => (
   <Grid fluid style={{ marginTop: 65 }}>
     <Row>
       <Col md={12}>
         <MetaContainer />
       </Col>
     </Row>
-  </Grid>;
+  </Grid>
+);
 
 class MetaContainer extends React.Component {
   state = {
@@ -40,6 +41,8 @@ class MetaContainer extends React.Component {
     next_desired_start_of_week: 1,
     combine_replicas_toggle: false
   };
+
+  url = 'league_match_ranking/';
 
   desired_start_of_week = 1;
 
@@ -60,8 +63,14 @@ class MetaContainer extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    ipcRenderer.removeListener('apiData', this.getMetaLoad);
+  }
+
   getMetaRequest() {
-    let endUtc = moment().utc().startOf('day');
+    let endUtc = moment()
+      .utc()
+      .startOf('day');
     let startUtc = moment().utc();
     if (
       startUtc.hour() < 2 ||
@@ -99,7 +108,11 @@ class MetaContainer extends React.Component {
     }
   }
 
-  getMetaLoad = (e, data) => {
+  getMetaLoad = (e, url, data) => {
+    if (!url.includes(this.url)) {
+      return;
+    }
+
     if (typeof data === 'object' && data != null) {
       let newEntry = {};
       newEntry[data.league_id] = data;

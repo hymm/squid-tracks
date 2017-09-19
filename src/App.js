@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Redirect } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import createHashHistory from 'history/createHashHistory';
 import { IntlProvider } from 'react-intl';
 import Routes from './routes';

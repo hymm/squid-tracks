@@ -2,7 +2,9 @@
 const splatnet = require('./splatnet2');
 const Memo = require('promise-memoize');
 const { ipcMain, protocol } = require('electron');
+const log = require('electron-log');
 const { userDataStore } = require('./stores');
+const { uaException } = require('./analytics');
 
 const getSplatnetApiMemo120 = Memo(splatnet.getSplatnetApi, { maxAge: 120000 });
 const getSplatnetApiMemo10 = Memo(splatnet.getSplatnetApi, { maxAge: 10000 });
@@ -19,6 +21,13 @@ module.exports.clearSplatnetCache = clearSplatnetCache;
 // global to current state, code challenge, and code verifier
 let authParams = {};
 let sessionToken = '';
+
+let mainWindow, startUrl;
+function setMainWindow(win, url) {
+  mainWindow = win;
+  startUrl = url;
+}
+module.exports.setMainWindow = setMainWindow;
 
 ipcMain.on('getLoginUrl', event => {
   authParams = splatnet.generateAuthenticationParams();
@@ -162,11 +171,11 @@ ipcMain.on('getApiAsync', async (e, url) => {
     } else {
       value = await getSplatnetApiMemo120(url);
     }
-    e.sender.send('apiData', value);
-  } catch (e) {
-    const message = `Error getting ${url}: ${e}`;
+    e.sender.send('apiData', url, value);
+  } catch (err) {
+    const message = `Error getting ${url}: ${err}`;
     uaException(message);
     log.error(message);
-    e.sender.send('apiData', {});
+    e.sender.send('apiDataError', message);
   }
 });
