@@ -9,6 +9,11 @@ import { event } from '../analytics';
 const { dialog } = remote;
 
 class ExportBattlesToCsvButton extends React.Component {
+
+  componentDidRecieveProps() {
+
+  }
+  
   convertBattlesToCsv(battles) {
     const battlesFlattened = battles.map(battle => {
       return flatten(battle);
@@ -21,6 +26,7 @@ class ExportBattlesToCsvButton extends React.Component {
     event('export-data', '50-battles-csv');
     // loop through current and get battles
     const { splatnet } = this.props;
+    const { battles: cachedBattles } = splatnet.cache.battles;
     const battles = splatnet.current.results.results.map(battle => {
       return splatnet.comm.getBattle(battle.battle_number);
     });
@@ -31,7 +37,6 @@ class ExportBattlesToCsvButton extends React.Component {
         filters: [{ name: 'csv', extensions: ['csv'] }]
       },
       file => {
-        console.log(file);
         ipcRenderer.send('saveBattlesToCsv', file, battlesCsv);
       }
     );

@@ -51,7 +51,7 @@ ipcMain.on('getLoginUrl', event => {
 
   event.returnValue = `https://accounts.nintendo.com/connect/1.0.0/authorize?${stringParams}`;
 });
- 
+
 protocol.registerStandardSchemes(['npf71b963c1b7b6d119', 'https', 'http']);
 function registerSplatnetHandler() {
   protocol.registerHttpProtocol(
@@ -172,8 +172,8 @@ ipcMain.on('getApiAsync', async (e, url) => {
       value = await getSplatnetApiMemo120(url);
     }
     e.sender.send('apiData', url, value);
-  } catch (e) {
-    const message = `Error getting ${url}: ${e}`;
+  } catch (err) {
+    const message = `Error getting ${url}: ${err}`;
     uaException(message);
     log.error(message);
     e.sender.send('apiDataError', message);

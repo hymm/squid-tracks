@@ -16,6 +16,7 @@ import flatten from 'flat';
 import { FormattedMessage } from 'react-intl';
 import sillyname from 'sillyname';
 import { clipboard, remote } from 'electron';
+import lodash from 'lodash';
 
 import TeamStatsTable from './team-stats-table';
 import TeamGearTable from './team-gear-table';
@@ -287,11 +288,12 @@ class ResultDetailCard extends React.Component {
   render() {
     const { result, statInk } = this.props;
     const { anonymize } = this.state;
-    const linkInfo = statInk[result.battle_number];
-    if (!result) {
+
+    if (lodash.isEmpty(result)) {
       return null;
     }
 
+    const linkInfo = statInk[result.battle_number];
     const resultChanged = anonymize ? this.anonymize(result) : result;
 
     const myTeam = resultChanged.my_team_members.slice(0);

@@ -2,6 +2,7 @@ import React from 'react';
 import update from 'immutability-helper';
 import { Broadcast } from 'react-broadcast';
 import { ipcRenderer } from 'electron';
+import log from 'electron-log';
 
 class SplatnetProvider extends React.Component {
   state = {
@@ -25,53 +26,81 @@ class SplatnetProvider extends React.Component {
     },
     comm: {
       updateSchedule: () => {
-        const schedule = ipcRenderer.sendSync('getApi', 'schedules');
-        this.setState({
-          current: update(this.state.current, { $merge: { schedule } })
-        });
+        ipcRenderer.send('getApiAsync', 'schedules');
       },
       updateRecords: () => {
-        const records = ipcRenderer.sendSync('getApi', 'records');
-        this.setState({
-          current: update(this.state.current, { $merge: { records } })
-        });
+        ipcRenderer.send('getApiAsync', 'records');
       },
       updateMerchandise: () => {
-        const annie = ipcRenderer.sendSync('getApi', 'onlineshop/merchandises');
-        this.setState({
-          current: update(this.state.current, { $merge: { annie } })
-        });
+        ipcRenderer.send('getApiAsync', 'onlineshop/merchandises');
       },
       updateResults: () => {
-        const results = ipcRenderer.sendSync('getApi', 'results');
-        this.setState({
-          current: update(this.state.current, { $merge: { results } })
-        });
-        return results;
+        ipcRenderer.send('getApiAsync', 'results');
       },
       getBattle: number => {
         const cachedBattle = this.state.cache.battles[number];
         if (cachedBattle != null) {
-          return cachedBattle;
+          return;
         }
 
         const storedBattle = ipcRenderer.sendSync('getBattleFromStore', number);
         if (storedBattle != null) {
-          return storedBattle;
+          this.setBattleToCache(storedBattle);
+          return;
         }
 
         const freshBattle = ipcRenderer.sendSync('getApi', `results/${number}`);
         this.setBattleToCache(freshBattle);
-        return freshBattle;
+        this.setBattleToStore(freshBattle);
+        return;
       }
     }
   };
+
+  componentDidMount() {
+      ipcRenderer.on('apiData', this.handleApiData);
+      ipcRenderer.on('apiDataError', this.handleApiError);
+  }
+
+  componentWillUnmount() {
+      ipcRenderer.removeListener('apiData', this.handleApiData);
+      ipcRenderer.removeListener('apiDataError', this.handleApiError);
+  }
 
   handleApiData = (e, url, data) => {
     if (url.includes('results/')) {
       this.handleBattleResult(data);
       return;
     }
+
+    switch(url) {
+    case 'schedules':
+        this.setState({
+          current: update(this.state.current, { $merge: { schedule: data } })
+        });
+        return;
+    case 'records':
+        this.setState({
+          current: update(this.state.current, { $merge: { records: data } })
+        });
+        return;
+    case 'results':
+        this.setState({
+          current: update(this.state.current, { $merge: { results: data } })
+        });
+        return;
+    case 'onlineshop/merchandises':
+        this.setState({
+          current: update(this.state.current, { $merge: { annie: data } })
+        });
+        return;
+    default:
+        return;
+    }
+  };
+
+  handleApiError = (e, err) => {
+      log.error(err);
   };
 
   setBattleToCache(freshBattle) {
@@ -82,7 +111,10 @@ class SplatnetProvider extends React.Component {
     this.setState({
       cache: update(this.state.cache, { $merge: { battles: battles } })
     });
-    ipcRenderer.sendSync('setBattleToStore', freshBattle);
+  }
+
+  setBattleToStore(battle) {
+    ipcRenderer.sendSync('setBattleToStore', battle);
   }
 
   render() {
