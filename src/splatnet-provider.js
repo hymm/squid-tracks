@@ -37,34 +37,41 @@ class SplatnetProvider extends React.Component {
       updateResults: () => {
         ipcRenderer.send('getApiAsync', 'results');
       },
-      getBattle: number => {
+      getBattle: (number, sync = false) => {
         const cachedBattle = this.state.cache.battles[number];
         if (cachedBattle != null) {
-          return;
+          return cachedBattle;
         }
 
         const storedBattle = ipcRenderer.sendSync('getBattleFromStore', number);
         if (storedBattle != null) {
           this.setBattleToCache(storedBattle);
-          return;
+          return storedBattle;
         }
 
-        const freshBattle = ipcRenderer.sendSync('getApi', `results/${number}`);
-        this.setBattleToCache(freshBattle);
-        this.setBattleToStore(freshBattle);
-        return;
+        if (sync) {
+          const freshBattle = ipcRenderer.sendSync(
+            'getApi',
+            `results/${number}`
+          );
+          this.setBattleToCache(freshBattle);
+          this.setBattleToStore(freshBattle);
+          return freshBattle;
+        } else {
+          ipcRenderer.send('getApi', `results/${number}`);
+        }
       }
     }
   };
 
   componentDidMount() {
-      ipcRenderer.on('apiData', this.handleApiData);
-      ipcRenderer.on('apiDataError', this.handleApiError);
+    ipcRenderer.on('apiData', this.handleApiData);
+    ipcRenderer.on('apiDataError', this.handleApiError);
   }
 
   componentWillUnmount() {
-      ipcRenderer.removeListener('apiData', this.handleApiData);
-      ipcRenderer.removeListener('apiDataError', this.handleApiError);
+    ipcRenderer.removeListener('apiData', this.handleApiData);
+    ipcRenderer.removeListener('apiDataError', this.handleApiError);
   }
 
   handleApiData = (e, url, data) => {
@@ -73,34 +80,36 @@ class SplatnetProvider extends React.Component {
       return;
     }
 
-    switch(url) {
-    case 'schedules':
+    switch (url) {
+      case 'schedules':
         this.setState({
           current: update(this.state.current, { $merge: { schedule: data } })
         });
         return;
-    case 'records':
+      case 'records':
         this.setState({
           current: update(this.state.current, { $merge: { records: data } })
         });
         return;
-    case 'results':
+      case 'results':
         this.setState({
           current: update(this.state.current, { $merge: { results: data } })
         });
         return;
-    case 'onlineshop/merchandises':
+      case 'onlineshop/merchandises':
         this.setState({
           current: update(this.state.current, { $merge: { annie: data } })
         });
         return;
-    default:
+      default:
         return;
     }
   };
 
+  handleBattleResult = battle => {};
+
   handleApiError = (e, err) => {
-      log.error(err);
+    log.error(err);
   };
 
   setBattleToCache(freshBattle) {
