@@ -28,6 +28,7 @@ class Results extends React.Component {
     )
       ? splatnet.current.results.results[0].battle_number
       : 0;
+
     const nextFirstBattle = lodash.has(
       splatnetNext,
       'current.results.results[0].battle_number'
@@ -68,12 +69,12 @@ class Results extends React.Component {
 
   changeResultByBattleNumber = battleNumber => {
     const { splatnet } = this.props;
-    splatnet.comm.getBattle(battleNumber),
-      this.setState({
-        currentResultIndex: splatnet.current.results.results.findIndex(
-          a => a.battle_number === battleNumber
-        )
-      });
+    splatnet.comm.getBattle(battleNumber);
+    this.setState({
+      currentResultIndex: splatnet.current.results.results.findIndex(
+        a => a.battle_number === battleNumber
+      )
+    });
   };
 
   setStatInkInfo = (battleNumber, info) => {

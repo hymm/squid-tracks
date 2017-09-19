@@ -10,7 +10,7 @@ import {
   ControlLabel,
   ButtonToolbar,
   SplitButton,
-  MenuItem,
+  MenuItem
 } from 'react-bootstrap';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -18,61 +18,62 @@ import { ipcRenderer, remote } from 'electron';
 const { openExternal } = remote.shell;
 
 class ProxyButton extends React.Component {
-    state = {
-        mitm: false,
-        address: { ips: [], port: 0 }
+  state = {
+    mitm: false,
+    address: { ips: [], port: 0 }
+  };
+
+  handleMitmClick = () => {
+    let address = { ip: '', port: 0 };
+    if (this.state.mitm) {
+      ipcRenderer.sendSync('stopMitm');
+    } else {
+      ipcRenderer.sendSync('startMitm');
+      address = ipcRenderer.sendSync('getIps');
     }
+    this.setState({ mitm: !this.state.mitm, address });
+  };
 
-    handleMitmClick = () => {
-      let address = { ip: '', port: 0 };
-      if (this.state.mitm) {
-        ipcRenderer.sendSync('stopMitm');
-      } else {
-        ipcRenderer.sendSync('startMitm');
-        address = ipcRenderer.sendSync('getIps');
-      }
-      this.setState({ mitm: !this.state.mitm, address });
-    };
-
-    render() {
-        const { mitm, address } = this.state;
-        if (address.ips.length > 1) {
-            return (
-                <SplitButton
-                  title={mitm ? (
-                    `Proxy running on ${address.ips[0]}, Port ${address.port}`
-                  ) : (
-                    'Start Proxy'
-                  )}
-                  onClick={this.handleMitmClick}
-                  bsStyle={mitm ? 'warning' : 'default'}
-                >
-                    <MenuItem header>Additional IP Addresses</MenuItem>
-                    {
-                        address.ips.map(address => <MenuItem key={address}>{address}</MenuItem>)
-                    }
-                </SplitButton>
+  render() {
+    const { mitm, address } = this.state;
+    if (address.ips.length > 1) {
+      return (
+        <SplitButton
+          title={
+            mitm ? (
+              `Proxy running on ${address.ips[0]}, Port ${address.port}`
+            ) : (
+              'Start Proxy'
             )
-        }
-        return (
-            <Button
-              onClick={this.handleMitmClick}
-              bsStyle={mitm ? 'warning' : 'default'}
-            >
-              {mitm ? (
-                `Proxy running on ${address.ips[0]}, Port ${address.port}`
-              ) : (
-                'Start Proxy'
-              )}
-            </Button>
-        );
+          }
+          onClick={this.handleMitmClick}
+          bsStyle={mitm ? 'warning' : 'default'}
+        >
+          <MenuItem header>Additional IP Addresses</MenuItem>
+          {address.ips.map(address => (
+            <MenuItem key={address}>{address}</MenuItem>
+          ))}
+        </SplitButton>
+      );
     }
-
+    return (
+      <Button
+        onClick={this.handleMitmClick}
+        bsStyle={mitm ? 'warning' : 'default'}
+      >
+        {mitm ? (
+          `Proxy running on ${address.ips[0]}, Port ${address.port}`
+        ) : (
+          'Start Proxy'
+        )}
+      </Button>
+    );
+  }
 }
 
 class LoginCookie extends React.Component {
   state = {
-    token: '',
+    token: ''
   };
 
   componentDidMount() {
@@ -115,62 +116,64 @@ class LoginCookie extends React.Component {
         <Row>
           <Col md={6}>
             <Row>
-                <Col md={12}>
-                    <LinkContainer exact to="/login">
-                      <Button>Back</Button>
-                    </LinkContainer>
-                </Col>
+              <Col md={12}>
+                <LinkContainer exact to="/login">
+                  <Button>Back</Button>
+                </LinkContainer>
+              </Col>
             </Row>
             <Row>
-                <Col md={12}>
-                    <form onSubmit={this.handleSubmit}>
-                      <FormGroup>
-                        <ControlLabel>iksm session Token</ControlLabel>
-                        <FormControl
-                          type="text"
-                          value={this.state.token}
-                          onChange={this.handleChange}
-                        />
-                      </FormGroup>
-                      <ButtonToolbar>
-                        <ProxyButton />
-                        <Button
-                          type="submit"
-                          bsStyle="primary"
-                          disabled={token.length <= 0}
-                        >
-                          Login
-                        </Button>
-                      </ButtonToolbar>
-                    </form>
-                </Col>
+              <Col md={12}>
+                <form onSubmit={this.handleSubmit}>
+                  <FormGroup>
+                    <ControlLabel>iksm session Token</ControlLabel>
+                    <FormControl
+                      type="text"
+                      value={this.state.token}
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <ButtonToolbar>
+                    <ProxyButton />
+                    <Button
+                      type="submit"
+                      bsStyle="primary"
+                      disabled={token.length <= 0}
+                    >
+                      Login
+                    </Button>
+                  </ButtonToolbar>
+                </form>
+              </Col>
             </Row>
             <Row>
-                <Col md={12}>
-                    <ul>
-                        <li>
-                            <a
-                              onClick={() =>
-                              openExternal(
-                                'https://github.com/hymm/squid-tracks/wiki/en_getCookie'
-                              )}
-                            style={{ cursor: 'pointer' }}
-                            >English Instructions</a>
-                        </li>
-                        <li>
-                            <a
-                              onClick={() =>
-                              openExternal(
-                                'https://github.com/hymm/squid-tracks/wiki/jp_getCookie'
-                              )}
-                            style={{ cursor: 'pointer' }}
-                            >Japanese Instructions</a>
-                        </li>
-                    </ul>
-                </Col>
+              <Col md={12}>
+                <ul>
+                  <li>
+                    <a
+                      onClick={() =>
+                        openExternal(
+                          'https://github.com/hymm/squid-tracks/wiki/en_getCookie'
+                        )}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      English Instructions
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      onClick={() =>
+                        openExternal(
+                          'https://github.com/hymm/squid-tracks/wiki/jp_getCookie'
+                        )}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      Japanese Instructions
+                    </a>
+                  </li>
+                </ul>
+              </Col>
             </Row>
-
-
           </Col>
         </Row>
       </Grid>
@@ -192,7 +195,9 @@ const LoginSplash = () => {
               @SquidTracks
             </h3>
             <a href={ipcRenderer.sendSync('getLoginUrl')}>
-              <Button block>Login</Button>
+              <Button block disabled>
+                Login
+              </Button>
             </a>
             <LinkContainer to="/login/cookie">
               <Button block>Login with Cookie</Button>
