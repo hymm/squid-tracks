@@ -34,6 +34,12 @@ class ProxyButton extends React.Component {
     this.setState({ mitm: !this.state.mitm, address });
   };
 
+  componentWillUnmount() {
+    if (this.state.mitm) {
+      ipcRenderer.sendSync('stopMitm');
+    }
+  }
+
   render() {
     const { mitm, address } = this.state;
     if (address.ips.length > 1) {
@@ -85,9 +91,6 @@ class LoginCookie extends React.Component {
 
   componentWillUnmount() {
     ipcRenderer.removeListener('interceptedIksm', this.handleIntercept);
-    if (this.state.mitm) {
-      ipcRenderer.sendSync('stopMitm');
-    }
   }
 
   handleIntercept = (e, value) => {
