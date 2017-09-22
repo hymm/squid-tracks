@@ -50,7 +50,7 @@ class ResultsSummaryCard extends React.Component {
           className={'winLoss'}
           label={
               <FormattedMessage
-                id="resultsSummary.winLoss"
+                id="results.summary.winLoss"
                 defaultMessage="W - L"
               />
           }
@@ -60,7 +60,7 @@ class ResultsSummaryCard extends React.Component {
           className={'winPercent'}
           label={
             <FormattedMessage
-              id="resultsSummary.winPercent"
+              id="results.summary.winPercent"
               defaultMessage="W%"
             />
           }
@@ -72,7 +72,7 @@ class ResultsSummaryCard extends React.Component {
             activeValue={activeValue}
             label={
                 <FormattedMessage
-                  id="resultsSummary.power"
+                  id="results.summary.power"
                   defaultMessage="Power"
                 />
             }
@@ -84,7 +84,7 @@ class ResultsSummaryCard extends React.Component {
             activeValue={activeValue}
             label={
                 <FormattedMessage
-                  id="resultsSummary.inked"
+                  id="results.summary.inked"
                   defaultMessage="Inked"
                 />
             }
@@ -96,7 +96,7 @@ class ResultsSummaryCard extends React.Component {
             activeValue={activeValue}
             label={
                 <FormattedMessage
-                  id="resultsSummary.killsAndAssists"
+                  id="results.summary.killsAndAssists"
                   defaultMessage="K+A (A)"
                 />
             }
@@ -108,7 +108,7 @@ class ResultsSummaryCard extends React.Component {
             activeValue={activeValue}
             label={
                 <FormattedMessage
-                  id="resultsSummary.killsAndDeaths"
+                  id="results.summary.killsAndDeaths"
                   defaultMessage="K - D"
                 />
             }
@@ -119,7 +119,7 @@ class ResultsSummaryCard extends React.Component {
             setActiveValue={this.setActiveValue}
             activeValue={activeValue}
             label={
-                <FormattedMessage id="resultsSummary.specials" defaultMessage="S" />
+                <FormattedMessage id="results.summary.specials" defaultMessage="S" />
             }
             value={`${averages.s}`}
         />
