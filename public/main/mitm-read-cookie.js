@@ -1,10 +1,12 @@
 const Proxy = require('http-mitm-proxy');
 const electron = require('electron');
 const log = require('electron-log');
+const forge = require('node-forge');
 const proxy = new Proxy();
 const ifs = require('os').networkInterfaces();
 const fs = require('fs');
 const { ipcMain } = electron;
+forge.options.usePureJavaScript = true;
 
 const port = 8001;
 const userDataPath = (electron.app || electron.remote.app).getPath('userData');
@@ -21,6 +23,20 @@ function getIps() {
     .filter(x => x[1])
     .map(x => x[1].address);
   return result;
+}
+
+function convertPemToDex(pemBuffer) {
+    const { pki, asn1 } = forge;
+    const pemString = pemBuffer.toString('ascii');
+    console.log('line 0')
+    const cert = pki.certificateFromPem(pemString);
+    console.log('line 1')
+    var asn1Cert = pki.certificateToAsn1(cert);
+    const derBuffer = asn1.toDer(asn1Cert);
+    console.log('line 2')
+    const derNode = new Buffer(derBuffer.getBytes(), 'binary');
+    console.log('line 3')
+    return derNode;
 }
 
 ipcMain.on('getIps', e => {
@@ -57,7 +73,7 @@ proxy.onRequest((ctx, callback) => {
           'Content-Type': 'application/x-x509-user-cert'
         });
         fs.readFile(`${userDataPath}/certs/ca.pem`, (err, data) => {
-          ctx.proxyToClientResponse.write(data);
+          ctx.proxyToClientResponse.write(convertPemToDex(data));
           ctx.proxyToClientResponse.end();
         });
       } else {
@@ -74,6 +90,7 @@ proxy.onRequest((ctx, callback) => {
 
   return callback();
 });
+
 
 ipcMain.on('startMitm', e => {
   proxy.listen({ port, sslCaDir: userDataPath });
