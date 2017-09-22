@@ -16,6 +16,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { ipcRenderer, remote } from 'electron';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import LanguageSelect from './components/language-select';
 const { openExternal } = remote.shell;
 
 class ProxyButton extends React.Component {
@@ -26,11 +27,11 @@ class ProxyButton extends React.Component {
 
   messages = defineMessages({
       proxyStart: {
-          id: 'loginCookie.proxyStart',
+          id: 'login.cookie.proxyStart',
           defaultMessage: 'Start Proxy',
       },
       proxyRunning: {
-          id: 'loginCookie.proxyRunning',
+          id: 'login.cookie.proxyRunning',
           defaultMessage: 'Proxy running on {ip}, Port {port}'
       }
   });
@@ -66,7 +67,7 @@ class ProxyButton extends React.Component {
           bsStyle={mitm ? 'warning' : 'default'}
         >
           <MenuItem header><FormattedMessage
-              id='loginCookie.additionalIps'
+              id='login.cookie.additionalIps'
               defaultMessage='Additional IP Addresses'
           /></MenuItem>
           {address.ips.map(address => (
@@ -91,7 +92,7 @@ const ProxyButtonWithIntl = injectIntl(ProxyButton);
 class LoginCookie extends React.Component {
   messages = defineMessages({
     instructionsUrl: {
-        id: 'loginCookie.instructionsUrl',
+        id: 'login.cookie.instructionsUrl',
         defaultMessage: 'https://github.com/hymm/squid-tracks/wiki/en_getCookie',
     }
   })
@@ -147,7 +148,7 @@ class LoginCookie extends React.Component {
               <Col md={12}>
                 <br />
                 <FormattedMessage
-                    id='loginCookie.warning'
+                    id='login.cookie.warning'
                     defaultMessage={`WARNING: This process is less secure than the previous log in method.
                         If you don't understand the risks, please wait until the
                         previous login system is reimplemented. This login system is for those desperate to
@@ -160,7 +161,7 @@ class LoginCookie extends React.Component {
                   style={{ cursor: 'pointer' }}
                 >
                   <FormattedMessage
-                      id='loginCookie.instructions'
+                      id='login.cookie.instructions'
                       defaultMessage='View Instructions'
                   />
                 </a></h3>
@@ -199,7 +200,7 @@ class LoginCookie extends React.Component {
 
 const LoginCookieWithIntl = injectIntl(LoginCookie);
 
-const LoginSplash = () => {
+const LoginSplash = ({ setLocale, locale }) => {
   return (
     <Grid fluid>
       <Row>
@@ -224,6 +225,9 @@ const LoginSplash = () => {
                 }}
             />
             </h3>
+            <ControlLabel>Language</ControlLabel>
+            <LanguageSelect setLocale={setLocale} locale={locale} />
+            <br />
             <a href={ipcRenderer.sendSync('getLoginUrl')}>
               <Button block disabled style={{ display: 'none' }}>
                   <FormattedMessage
@@ -233,7 +237,7 @@ const LoginSplash = () => {
               </Button>
             </a>
             <LinkContainer to="/login/cookie">
-              <Button block>
+              <Button block bsStyle="primary">
                   <FormattedMessage
                       id='login.loginWithCookie'
                       defaultMessage='Login with Session Cookie'
@@ -247,21 +251,25 @@ const LoginSplash = () => {
   );
 };
 
-const LoginRoutes = ({ setLogin }) => {
+const LoginRoutes = (props) => {
   return (
     <Switch>
-      <Route path="/login" exact component={LoginSplash} />
+      <Route
+          path="/login"
+          exact
+          component={() => <LoginSplash {...props} />}
+      />
       <Route
         path="/login/cookie"
-        component={() => <LoginCookieWithIntl setLogin={setLogin} />}
+        component={() => <LoginCookieWithIntl {...props} />}
       />
       <Redirect exact from="/" to="/login" />
     </Switch>
   );
 };
 
-const Login = ({ setLogin }) => {
-  return <LoginRoutes setLogin={setLogin} />;
+const Login = (props) => {
+  return <LoginRoutes {...props} />;
 };
 
 export default Login;
