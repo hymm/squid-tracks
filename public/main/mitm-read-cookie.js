@@ -28,14 +28,10 @@ function getIps() {
 function convertPemToDex(pemBuffer) {
     const { pki, asn1 } = forge;
     const pemString = pemBuffer.toString('ascii');
-    console.log('line 0')
     const cert = pki.certificateFromPem(pemString);
-    console.log('line 1')
     var asn1Cert = pki.certificateToAsn1(cert);
     const derBuffer = asn1.toDer(asn1Cert);
-    console.log('line 2')
     const derNode = new Buffer(derBuffer.getBytes(), 'binary');
-    console.log('line 3')
     return derNode;
 }
 
