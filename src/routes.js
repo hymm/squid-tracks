@@ -45,7 +45,11 @@ const Routes = ({
           />
         </div>
       ) : (
-        <Login setLogin={setLogin} />
+        <Login
+            setLogin={setLogin}
+            setLocale={setLocale}
+            locale={locale}
+        />
       )}
       {loggedIn ? (
         <Redirect exact from="/" to="/home" />

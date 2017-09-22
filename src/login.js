@@ -15,6 +15,8 @@ import {
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { ipcRenderer, remote } from 'electron';
+import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import LanguageSelect from './components/language-select';
 const { openExternal } = remote.shell;
 
 class ProxyButton extends React.Component {
@@ -22,6 +24,17 @@ class ProxyButton extends React.Component {
     mitm: false,
     address: { ips: [], port: 0 }
   };
+
+  messages = defineMessages({
+      proxyStart: {
+          id: 'login.cookie.proxyStart',
+          defaultMessage: 'Start Proxy',
+      },
+      proxyRunning: {
+          id: 'login.cookie.proxyRunning',
+          defaultMessage: 'Proxy running on {ip}, Port {port}'
+      }
+  });
 
   handleMitmClick = () => {
     let address = { ip: '', port: 0 };
@@ -41,21 +54,22 @@ class ProxyButton extends React.Component {
   }
 
   render() {
-    const { mitm, address } = this.state;
+    const { mitm, address, } = this.state;
+    const { intl } = this.props;
+    const buttonText = mitm
+        ? intl.formatMessage(this.messages.proxyRunning, {ip: address.ips[0], port: address.port})
+        : intl.formatMessage(this.messages.proxyStart);
     if (address.ips.length > 1) {
       return (
         <SplitButton
-          title={
-            mitm ? (
-              `Proxy running on ${address.ips[0]}, Port ${address.port}`
-            ) : (
-              'Start Proxy'
-            )
-          }
+          title={buttonText}
           onClick={this.handleMitmClick}
           bsStyle={mitm ? 'warning' : 'default'}
         >
-          <MenuItem header>Additional IP Addresses</MenuItem>
+          <MenuItem header><FormattedMessage
+              id='login.cookie.additionalIps'
+              defaultMessage='Additional IP Addresses'
+          /></MenuItem>
           {address.ips.map(address => (
             <MenuItem key={address}>{address}</MenuItem>
           ))}
@@ -67,17 +81,21 @@ class ProxyButton extends React.Component {
         onClick={this.handleMitmClick}
         bsStyle={mitm ? 'warning' : 'default'}
       >
-        {mitm ? (
-          `Proxy running on ${address.ips[0]}, Port ${address.port}`
-        ) : (
-          'Start Proxy'
-        )}
+        {buttonText}
       </Button>
     );
   }
 }
 
+const ProxyButtonWithIntl = injectIntl(ProxyButton);
+
 class LoginCookie extends React.Component {
+  messages = defineMessages({
+    instructionsUrl: {
+        id: 'login.cookie.instructionsUrl',
+        defaultMessage: 'https://github.com/hymm/squid-tracks/wiki/en_getCookie',
+    }
+  })
   state = {
     token: ''
   };
@@ -114,6 +132,7 @@ class LoginCookie extends React.Component {
 
   render() {
     const { token } = this.state;
+    const { intl } = this.props;
     return (
       <Grid fluid>
         <Row>
@@ -121,8 +140,31 @@ class LoginCookie extends React.Component {
             <Row>
               <Col md={12}>
                 <LinkContainer exact to="/login">
-                  <Button>Back</Button>
+                  <Button>{'<--'}</Button>
                 </LinkContainer>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}>
+                <br />
+                <FormattedMessage
+                    id='login.cookie.warning'
+                    defaultMessage={`WARNING: This process is less secure than the previous log in method.
+                        If you don't understand the risks, please wait until the
+                        previous login system is reimplemented. This login system is for those desperate to
+                        use SquidTracks.`}
+                />
+                <h3><a
+                  onClick={() =>
+                    openExternal(intl.formatMessage(this.messages.instructionsUrl))
+                  }
+                  style={{ cursor: 'pointer' }}
+                >
+                  <FormattedMessage
+                      id='login.cookie.instructions'
+                      defaultMessage='View Instructions'
+                  />
+                </a></h3>
               </Col>
             </Row>
             <Row>
@@ -137,7 +179,7 @@ class LoginCookie extends React.Component {
                     />
                   </FormGroup>
                   <ButtonToolbar>
-                    <ProxyButton />
+                    <ProxyButtonWithIntl />
                     <Button
                       type="submit"
                       bsStyle="primary"
@@ -149,34 +191,6 @@ class LoginCookie extends React.Component {
                 </form>
               </Col>
             </Row>
-            <Row>
-              <Col md={12}>
-                <ul>
-                  <li>
-                    <a
-                      onClick={() =>
-                        openExternal(
-                          'https://github.com/hymm/squid-tracks/wiki/en_getCookie'
-                        )}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      English Instructions
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      onClick={() =>
-                        openExternal(
-                          'https://github.com/hymm/squid-tracks/wiki/jp_getCookie'
-                        )}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      Japanese Instructions
-                    </a>
-                  </li>
-                </ul>
-              </Col>
-            </Row>
           </Col>
         </Row>
       </Grid>
@@ -184,26 +198,51 @@ class LoginCookie extends React.Component {
   }
 }
 
-const LoginSplash = () => {
+const LoginCookieWithIntl = injectIntl(LoginCookie);
+
+const LoginSplash = ({ setLocale, locale }) => {
   return (
     <Grid fluid>
       <Row>
         <Col md={12} style={{ textAlign: 'center' }}>
           <Jumbotron style={{ background: 'pink' }}>
             <h1>SquidTracks</h1>
-            <h2>Splatnet for your Desktop</h2>
-            <h3>
-              Normal login is currently broken. You can try to login with a
-              cookie if you know how to get it. Follow progress on Twitter
-              @SquidTracks
+            <h2><FormattedMessage
+                id='login.tagLine'
+                defaultMessage='An Unofficial Splatnet Client for your Desktop'
+            /></h2>
+            <h3><FormattedMessage
+                id='login.loginInformation'
+                defaultMessage={`Normal login is currently broken. You can try to login with a
+                    cookie if you know how to get it. Follow progress on Twitter {twitterLink}`}
+                values={{twitterLink:
+                    <a
+                      onClick={() => openExternal('https://twitter.com/SquidTracks')}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      @SquidTracks
+                    </a>
+                }}
+            />
             </h3>
+            <ControlLabel>Language</ControlLabel>
+            <LanguageSelect setLocale={setLocale} locale={locale} />
+            <br />
             <a href={ipcRenderer.sendSync('getLoginUrl')}>
-              <Button block disabled>
-                Login
+              <Button block disabled style={{ display: 'none' }}>
+                  <FormattedMessage
+                      id='login.login'
+                      defaultMessage='Login'
+                  />
               </Button>
             </a>
             <LinkContainer to="/login/cookie">
-              <Button block>Login with Cookie</Button>
+              <Button block bsStyle="primary">
+                  <FormattedMessage
+                      id='login.loginWithCookie'
+                      defaultMessage='Login with Session Cookie'
+                  />
+              </Button>
             </LinkContainer>
           </Jumbotron>
         </Col>
@@ -212,21 +251,25 @@ const LoginSplash = () => {
   );
 };
 
-const LoginRoutes = ({ setLogin }) => {
+const LoginRoutes = (props) => {
   return (
     <Switch>
-      <Route path="/login" exact component={LoginSplash} />
+      <Route
+          path="/login"
+          exact
+          component={() => <LoginSplash {...props} />}
+      />
       <Route
         path="/login/cookie"
-        component={() => <LoginCookie setLogin={setLogin} />}
+        component={() => <LoginCookieWithIntl {...props} />}
       />
       <Redirect exact from="/" to="/login" />
     </Switch>
   );
 };
 
-const Login = ({ setLogin }) => {
-  return <LoginRoutes setLogin={setLogin} />;
+const Login = (props) => {
+  return <LoginRoutes {...props} />;
 };
 
 export default Login;

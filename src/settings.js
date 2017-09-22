@@ -15,6 +15,7 @@ import {
 } from 'react-bootstrap';
 import jws from 'jws';
 import { event } from './analytics';
+import LanguageSelect from './components/language-select';
 const { remote, ipcRenderer, clipboard } = require('electron');
 const { openExternal } = remote.shell;
 
@@ -144,49 +145,20 @@ class IksmToken extends React.Component {
   }
 }
 
-class LanguageSettings extends React.Component {
-  languages = [
-    { name: 'Default', code: '' },
-    { name: 'Deutsch', code: 'de' },
-    { name: 'English', code: 'en' },
-    { name: 'Español', code: 'es' },
-    { name: 'Francais', code: 'fr' },
-    { name: 'Italiano', code: 'it' },
-    { name: '日本語', code: 'ja' }
-  ];
-
-  handleChange = e => {
-    this.props.setLocale(e.target.value);
-    event('settings', 'set-locale', e.target.value);
-  };
-
-  render() {
-    const { locale } = this.props;
+const LanguageSettings = ({ setLocale, locale }) => {
     return (
-      <Row>
-        <Col md={12}>
-          <Panel header={<h3>Splatnet API Language</h3>}>
-            Languages are limited by Nintendo regions, so several of the
-            languages listed will not work. If you think your language should be
-            supported, please contact the developer.
-            <FormControl
-              value={locale}
-              id="languageSelect"
-              componentClass="select"
-              onChange={this.handleChange}
-            >
-              {this.languages.map(language => (
-                <option key={language.code} value={language.code}>
-                  {language.name}
-                </option>
-              ))}
-            </FormControl>
-          </Panel>
-        </Col>
-      </Row>
+        <Row>
+          <Col md={12}>
+            <Panel header={<h3>Splatnet API Language</h3>}>
+              Languages are limited by Nintendo regions, so several of the
+              languages listed will not work. If you think your language should be
+              supported, please contact the developer.
+              <LanguageSelect setLocale={setLocale} locale={locale} />
+            </Panel>
+          </Col>
+        </Row>
     );
-  }
-}
+};
 
 const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
   const expUnix = token ? JSON.parse(jws.decode(token).payload).exp : 0;

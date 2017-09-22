@@ -84,7 +84,6 @@ class UploadAllBattlesButton extends React.Component {
 
   uploadNext = () => {
     const { uploading, currentIdx } = this.state;
-    console.log(this.state);
     if (uploading && currentIdx - 1 >= 0) {
       this.uploadBattle(currentIdx - 1);
     } else {

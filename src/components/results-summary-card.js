@@ -11,7 +11,7 @@ const ResultsSummaryCard = ({ summary }) => {
           <tr>
             <td>
               <FormattedMessage
-                id="resultsSummary.wins"
+                id="results.summary.wins"
                 defaultMessage="Wins"
               />
             </td>
@@ -20,7 +20,7 @@ const ResultsSummaryCard = ({ summary }) => {
           <tr>
             <td>
               <FormattedMessage
-                id="resultsSummary.losses"
+                id="results.summary.losses"
                 defaultMessage="Losses"
               />
             </td>
@@ -29,7 +29,7 @@ const ResultsSummaryCard = ({ summary }) => {
           <tr>
             <td>
               <FormattedMessage
-                id="resultsSummary.winPercent"
+                id="results.summary.winPercent"
                 defaultMessage="Win Percent"
               />
             </td>
@@ -38,7 +38,7 @@ const ResultsSummaryCard = ({ summary }) => {
           <tr>
             <td>
               <FormattedMessage
-                id="resultsSummary.kaAverage"
+                id="results.summary.kaAverage"
                 defaultMessage="Kills + Assist Average"
               />
             </td>
@@ -47,7 +47,7 @@ const ResultsSummaryCard = ({ summary }) => {
           <tr>
             <td>
               <FormattedMessage
-                id="resultsSummary.killsAverage"
+                id="results.summary.killsAverage"
                 defaultMessage="Kill Average"
               />
             </td>
@@ -57,7 +57,7 @@ const ResultsSummaryCard = ({ summary }) => {
           <tr>
             <td>
               <FormattedMessage
-                id="resultsSummary.assistsAverage"
+                id="results.summary.assistsAverage"
                 defaultMessage="Assist Average"
               />
             </td>
@@ -66,7 +66,7 @@ const ResultsSummaryCard = ({ summary }) => {
           <tr>
             <td>
               <FormattedMessage
-                id="resultsSummary.deathsAverage"
+                id="results.summary.deathsAverage"
                 defaultMessage="Deaths Average"
               />
             </td>
@@ -75,7 +75,7 @@ const ResultsSummaryCard = ({ summary }) => {
           <tr>
             <td>
               <FormattedMessage
-                id="resultsSummary.specialsAverage"
+                id="results.summary.specialsAverage"
                 defaultMessage="Special Count Average"
               />
             </td>
