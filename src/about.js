@@ -11,7 +11,7 @@ const AboutPage = () =>
       <Col md={12}>
         <Jumbotron style={{ textAlign: 'center' }}>
           <h1>SquidTracks</h1>
-          <h2>A Splatnet 2 Client for your Desktop</h2>
+          <h2>An Unofficial Splatnet 2 Client for your Desktop</h2>
           <h5>
             {`Beta Version ${appVersion} `}
             <a

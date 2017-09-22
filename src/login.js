@@ -127,30 +127,13 @@ class LoginCookie extends React.Component {
             </Row>
             <Row>
               <Col md={12}>
-                <form onSubmit={this.handleSubmit}>
-                  <FormGroup>
-                    <ControlLabel>iksm session Token</ControlLabel>
-                    <FormControl
-                      type="text"
-                      value={this.state.token}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                  <ButtonToolbar>
-                    <ProxyButton />
-                    <Button
-                      type="submit"
-                      bsStyle="primary"
-                      disabled={token.length <= 0}
-                    >
-                      Login
-                    </Button>
-                  </ButtonToolbar>
-                </form>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={12}>
+                <br />
+                WARNING: This process is less secure than the previous log in method.
+                If you don't understand the risks, please wait until the
+                previous login system is reimplemented. This login system is for the
+                desperate.
+                <br />
+                <br />
                 <ul>
                   <li>
                     <a
@@ -177,6 +160,30 @@ class LoginCookie extends React.Component {
                 </ul>
               </Col>
             </Row>
+            <Row>
+              <Col md={12}>
+                <form onSubmit={this.handleSubmit}>
+                  <FormGroup>
+                    <ControlLabel>iksm session Token</ControlLabel>
+                    <FormControl
+                      type="text"
+                      value={this.state.token}
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <ButtonToolbar>
+                    <ProxyButton />
+                    <Button
+                      type="submit"
+                      bsStyle="primary"
+                      disabled={token.length <= 0}
+                    >
+                      Login
+                    </Button>
+                  </ButtonToolbar>
+                </form>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Grid>
@@ -191,11 +198,16 @@ const LoginSplash = () => {
         <Col md={12} style={{ textAlign: 'center' }}>
           <Jumbotron style={{ background: 'pink' }}>
             <h1>SquidTracks</h1>
-            <h2>Splatnet for your Desktop</h2>
+            <h2>An Unofficial Splatnet Client for your Desktop</h2>
             <h3>
               Normal login is currently broken. You can try to login with a
-              cookie if you know how to get it. Follow progress on Twitter
-              @SquidTracks
+              cookie if you know how to get it. Follow progress on Twitter{' '}
+              <a
+                onClick={() => openExternal('https://twitter.com/SquidTracks')}
+                style={{ cursor: 'pointer' }}
+              >
+                @SquidTracks
+              </a>
             </h3>
             <a href={ipcRenderer.sendSync('getLoginUrl')}>
               <Button block disabled>
