@@ -17,6 +17,7 @@ module.exports = {
   '200': 'nova', // luna
   '210': 'hotblaster', // blaster
   '211': 'hotblaster_custom',
+  '215': 'heroblaster_replica',
   '240': 'rapid', // rapid blaster
   '230': 'clashblaster',
   '300': 'l3reelgun',
@@ -29,14 +30,18 @@ module.exports = {
   '1030': 'variableroller', // flinza roller
   '1100': 'pablo', // inkbrush
   '1110': 'hokusai', // octobursh
+  '1115': 'herobrush_replica',
   '2000': 'squiclean_a', // squiffer
   '2010': 'splatcharger',
   '2011': 'splatcharger_collabo', // firefin
+  '2015': 'herocharger_replica',
   '2021': 'splatscope_collabo', // firefin
   '2020': 'splatscope',
   '2030': 'liter4k',
+  '2040': 'liter4k_scope',
   '2060': 'soytuber', // gootuber
   '3000': 'bucketslosher',
+  '3005': 'heroslosher_replica',
   '3010': 'hissen', // tri-slosher
   '3020': 'screwslosher', // sloshing machine
   '4000': 'splatspinner', // mini splatling
@@ -51,10 +56,6 @@ module.exports = {
   '6000': 'parashelter',
   '6005': 'heroshelter_replica',
 
-  // guesses
-  '215': 'heroblaster_replica',
-  '1115': 'herobrush_replica',
-  '2015': 'herocharger_replica',
-  '2040': 'liter4k_scope',
-  '3005': 'heroslosher_replica'
+  // unknown
+  '99999': 'rapid_elite',
 };
