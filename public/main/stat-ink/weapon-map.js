@@ -18,8 +18,9 @@ module.exports = {
   '210': 'hotblaster', // blaster
   '211': 'hotblaster_custom',
   '215': 'heroblaster_replica',
-  '240': 'rapid', // rapid blaster
   '230': 'clashblaster',
+  '240': 'rapid', // rapid blaster
+  '250': 'rapid_elite',
   '300': 'l3reelgun',
   '310': 'h3reelgun',
   '1000': 'carbon',
@@ -54,8 +55,7 @@ module.exports = {
   '5015': 'heromaneuver_replica', // hero duelies
   '5030': 'dualsweeper', // dual squelcher
   '6000': 'parashelter',
-  '6005': 'heroshelter_replica',
+  '6005': 'heroshelter_replica'
 
   // unknown
-  '99999': 'rapid_elite',
 };
