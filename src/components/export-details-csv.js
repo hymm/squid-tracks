@@ -22,7 +22,7 @@ class ExportBattlesToCsvButton extends React.Component {
     // loop through current and get battles
     const { splatnet } = this.props;
     const battles = splatnet.current.results.results.map(battle => {
-      return splatnet.comm.getBattle(battle.battle_number);
+      return splatnet.comm.getBattle(battle.battle_number, 'sync');
     });
 
     const battlesCsv = this.convertBattlesToCsv(battles);
@@ -31,7 +31,6 @@ class ExportBattlesToCsvButton extends React.Component {
         filters: [{ name: 'csv', extensions: ['csv'] }]
       },
       file => {
-        console.log(file);
         ipcRenderer.send('saveBattlesToCsv', file, battlesCsv);
       }
     );

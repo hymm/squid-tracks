@@ -8,5 +8,6 @@ module.exports = {
   '6': 'manta', // Manta Maria
   '7': 'hokke', // port mackerel
   '8': 'tachiuo', // moray towers
+  '10': 'mozuku', // kelp dome
   '9999': 'mystery' // shifty station
 };

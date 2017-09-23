@@ -83,7 +83,8 @@ class ResultsPoller extends React.Component {
     if (
       this.state.active &&
       this.props.result.battle_number &&
-      this.props.result.battle_number > prevProps.result.battle_number
+      (this.props.result.battle_number > prevProps.result.battle_number ||
+        prevProps.result.battle_number == null)
     ) {
       this.upload();
     }
