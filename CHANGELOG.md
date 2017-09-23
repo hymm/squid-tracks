@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## Version 0.3.1
+This release is does not fix the login system.  There is an alternative login system
+that uses session cookie hijacking.  A lot of the code has changed so this is release
+is still a little buggy.
+
+### New Features
+* login with cookie hijacking
+* The most requested feature.  An upload all battles button.
+* Early version of a last 50 battles trend
+* Start day and combine hero weapons checkbox for League Data tab
+
 ## Version 0.3.0
 ### New Features
 * Functional Annie Store!
