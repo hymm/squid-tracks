@@ -42,7 +42,11 @@ async function setGameInfo(statInk, result) {
   statInk.lobby = LobbyModeMap[result.game_mode.key].lobby;
   statInk.mode = LobbyModeMap[result.game_mode.key].mode;
   statInk.rule = RuleMap[result.rule.key];
-  statInk.stage = await stageMap.getKey(result.stage.id);
+  try {
+    statInk.stage = await stageMap.getKey(result.stage.id);
+  } catch (e) {
+    log.error(e);
+  }
   statInk.start_at = result.start_time;
   // assume if elapsed_time doesn't exist make it 3 minutes for turf war
   const elapsed_time = result.elapsed_time ? result.elapsed_time : 180;
@@ -75,9 +79,14 @@ function setGameResults(statInk, result) {
 }
 
 async function setPlayerResults(statInk, result) {
-  statInk.weapon = await weaponMap.getKey(
-    result.player_result.player.weapon.id
-  );
+  try {
+    statInk.weapon = await weaponMap.getKey(
+      result.player_result.player.weapon.id
+    );
+  } catch (e) {
+    log.error(e);
+  }
+
   statInk.kill_or_assist =
     result.player_result.kill_count + result.player_result.assist_count;
   statInk.kill = result.player_result.kill_count;
@@ -119,7 +128,11 @@ async function getPlayer(playerResult, team, addBonus) {
   player.team = team === 'me' ? 'my' : team; // 'my', 'his'
   player.is_me = team === 'me' ? 'yes' : 'no'; // 'yes', 'no'
   player.name = playerResult.player.nickname;
-  player.weapon = await weaponMap.getKey(playerResult.player.weapon.id);
+  try {
+    player.weapon = await weaponMap.getKey(playerResult.player.weapon.id);
+  } catch (e) {
+    log.error(e);
+  }
   player.level = playerResult.player.player_rank;
   if (playerResult.player.udemae) {
     if (playerResult.player.udemae.name) {

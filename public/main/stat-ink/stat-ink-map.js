@@ -1,4 +1,5 @@
 const fs = require('mz/fs');
+const path = require('path');
 const { app } = require('electron');
 const request2 = require('request-promise-native');
 const log = require('electron-log');
@@ -18,13 +19,14 @@ class StatInkMap {
   constructor(filename, statInkUri, defaultMap) {
     this.map = defaultMap;
     this.uri = statInkUri;
+    this.filename = filename;
     this.loadFromFile(filename);
   }
 
   async loadFromFile(filename) {
     try {
       const userDataPath = app.getPath('userData');
-      this.path = userDataPath + filename;
+      this.path = path.join(userDataPath, filename);
       const jsonRaw = await fs.readFile(this.path);
       this.map = JSON.parse(jsonRaw);
     } catch (e) {
@@ -47,15 +49,18 @@ class StatInkMap {
         uri: this.uri,
         json: true
       });
+      await this.save();
     } catch (e) {
       log.error(`Could not read ${this.path} from stat.ink`);
     }
   }
 
   getKeyFromMap(id) {
-    const row = this.map.find(row => row.splatnet === id);
+    const row = this.map.find(
+      row => parseInt(row.splatnet, 10) === parseInt(id, 10)
+    );
     if (row == null) {
-      throw Error('Could not get key from map');
+      throw Error(`Could not get id ${id} from map`);
     }
 
     return row.key;
