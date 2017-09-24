@@ -2,12 +2,13 @@ const request2 = require('request-promise-native');
 const msgpack = require('msgpack-lite');
 const LobbyModeMap = require('./lobby-mode-map');
 const RuleMap = require('./rule-map');
-const StageMap = require('./stage-map');
+const StatInkMap = require('./stat-ink-map');
+const defaultStageMap = require('./default-maps/stage.json');
+const defaultWeaponMap = require('./default-maps/weapon.json');
 const { getSplatnetImage } = require('../splatnet2');
 const app = require('electron').app;
 const appVersion = app.getVersion();
 const appName = app.getName();
-const WeaponMap = require('./weapon-map');
 const FestRankMap = require('./fest-rank-map');
 
 let request;
@@ -25,11 +26,27 @@ function setUuid(statInk, result) {
   statInk.uuid = result.start_time;
 }
 
-function setGameInfo(statInk, result) {
+const stageMap = new StatInkMap(
+  'stage.json',
+  'https://stat.ink/api/v2/stage',
+  defaultStageMap
+);
+
+const weaponMap = new StatInkMap(
+  'weapon.json',
+  'https://stat.ink/api/v2/weapon',
+  defaultWeaponMap
+);
+
+async function setGameInfo(statInk, result) {
   statInk.lobby = LobbyModeMap[result.game_mode.key].lobby;
   statInk.mode = LobbyModeMap[result.game_mode.key].mode;
   statInk.rule = RuleMap[result.rule.key];
-  statInk.stage = StageMap[result.stage.id];
+  try {
+    statInk.stage = await stageMap.getKey(result.stage.id);
+  } catch (e) {
+    log.error(e);
+  }
   statInk.start_at = result.start_time;
   // assume if elapsed_time doesn't exist make it 3 minutes for turf war
   const elapsed_time = result.elapsed_time ? result.elapsed_time : 180;
@@ -61,8 +78,15 @@ function setGameResults(statInk, result) {
   }
 }
 
-function setPlayerResults(statInk, result) {
-  statInk.weapon = WeaponMap[result.player_result.player.weapon.id];
+async function setPlayerResults(statInk, result) {
+  try {
+    statInk.weapon = await weaponMap.getKey(
+      result.player_result.player.weapon.id
+    );
+  } catch (e) {
+    log.error(e);
+  }
+
   statInk.kill_or_assist =
     result.player_result.kill_count + result.player_result.assist_count;
   statInk.kill = result.player_result.kill_count;
@@ -99,12 +123,16 @@ function setPlayerResults(statInk, result) {
   statInk.my_point = paint_point;
 }
 
-function getPlayer(playerResult, team, addBonus) {
+async function getPlayer(playerResult, team, addBonus) {
   const player = {};
   player.team = team === 'me' ? 'my' : team; // 'my', 'his'
   player.is_me = team === 'me' ? 'yes' : 'no'; // 'yes', 'no'
   player.name = playerResult.player.nickname;
-  player.weapon = WeaponMap[playerResult.player.weapon.id];
+  try {
+    player.weapon = await weaponMap.getKey(playerResult.player.weapon.id);
+  } catch (e) {
+    log.error(e);
+  }
   player.level = playerResult.player.player_rank;
   if (playerResult.player.udemae) {
     if (playerResult.player.udemae.name) {
@@ -126,20 +154,22 @@ function getPlayer(playerResult, team, addBonus) {
   return player;
 }
 
-function setPlayers(statInk, result) {
+async function setPlayers(statInk, result) {
   statInk.players = [];
   const addBonusMyTeam =
     result.my_team_result.key === 'victory' && result.rule.key === 'turf_war';
-  statInk.players.push(getPlayer(result.player_result, 'me', addBonusMyTeam));
-  result.my_team_members.forEach(player => {
-    statInk.players.push(getPlayer(player, 'my', addBonusMyTeam));
+  statInk.players.push(
+    await getPlayer(result.player_result, 'me', addBonusMyTeam)
+  );
+  result.my_team_members.forEach(async player => {
+    statInk.players.push(await getPlayer(player, 'my', addBonusMyTeam));
   });
 
   const addBonusTheirTeam =
     result.other_team_result.key === 'victory' &&
     result.rule.key === 'turf_war';
-  result.other_team_members.forEach(player => {
-    statInk.players.push(getPlayer(player, 'his', addBonusTheirTeam));
+  result.other_team_members.forEach(async player => {
+    statInk.players.push(await getPlayer(player, 'his', addBonusTheirTeam));
   });
 }
 
@@ -157,11 +187,11 @@ function setSplatFest(statInk, result) {
 async function convertResultToStatInk(result, disableGetImage) {
   const statInk = {};
   setUuid(statInk, result);
-  setGameInfo(statInk, result);
+  await setGameInfo(statInk, result);
   setGameResults(statInk, result);
 
-  setPlayerResults(statInk, result);
-  setPlayers(statInk, result);
+  await setPlayerResults(statInk, result);
+  await setPlayers(statInk, result);
   setClientInfo(statInk, result);
 
   if (result.game_mode.key === 'fest') {
