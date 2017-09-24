@@ -6,7 +6,6 @@ import { Subscriber } from 'react-broadcast';
 import { FormattedMessage } from 'react-intl';
 import { ipcRenderer } from 'electron';
 import { event } from './analytics';
-const isDev = require('electron-is-dev');
 
 const Navigation = ({ logoutCallback }) => {
   return (
