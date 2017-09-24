@@ -24,7 +24,7 @@ const Routes = ({
     <div>
       {loggedIn ? (
         <div>
-          <Navigation />
+          <Navigation logoutCallback={logoutCallback} />
           <Route path="/home" exact component={About} />
           <Route path="/testApi" component={ApiViewer} />
           <Route path="/schedule" component={Schedule} />
@@ -35,21 +35,12 @@ const Routes = ({
           <Route
             path="/settings"
             component={() => (
-              <Settings
-                token={token}
-                logoutCallback={logoutCallback}
-                setLocale={setLocale}
-                locale={locale}
-              />
+              <Settings token={token} setLocale={setLocale} locale={locale} />
             )}
           />
         </div>
       ) : (
-        <Login
-            setLogin={setLogin}
-            setLocale={setLocale}
-            locale={locale}
-        />
+        <Login setLogin={setLogin} setLocale={setLocale} locale={locale} />
       )}
       {loggedIn ? (
         <Redirect exact from="/" to="/home" />

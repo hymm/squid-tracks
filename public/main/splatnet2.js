@@ -294,6 +294,15 @@ function getIksmToken() {
   return iksmSessionCookie;
 }
 
+async function checkIksmValid() {
+  try {
+    await getSplatnetApi('results');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 function setUserLanguage(language) {
   userLanguage = language;
 }

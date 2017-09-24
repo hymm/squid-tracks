@@ -14,7 +14,7 @@ class SplatnetProvider extends React.Component {
       annie: { merchandises: [] },
       schedule: { gachi: [], league: [], regular: [] },
       records: {
-        records: {}
+        records: { player: { nickname: '' } }
       }
     },
     cache: {
@@ -68,6 +68,7 @@ class SplatnetProvider extends React.Component {
   componentDidMount() {
     ipcRenderer.on('apiData', this.handleApiData);
     ipcRenderer.on('apiDataError', this.handleApiError);
+    this.state.comm.updateRecords();
   }
 
   componentWillUnmount() {
