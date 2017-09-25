@@ -68,7 +68,6 @@ class SplatnetProvider extends React.Component {
   componentDidMount() {
     ipcRenderer.on('apiData', this.handleApiData);
     ipcRenderer.on('apiDataError', this.handleApiError);
-    this.state.comm.updateRecords();
   }
 
   componentWillUnmount() {

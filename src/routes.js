@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-
+import { Subscriber } from 'react-broadcast';
 import ApiViewer from './api-viewer';
 import Schedule from './schedule';
 import Records from './records';
@@ -11,6 +11,25 @@ import Navigation from './navigation';
 import AnnieStore from './annie-store';
 import Login from './login';
 import About from './about';
+
+// trigger an updateRecords on login for user nickname
+class Startup extends React.Component {
+  componentDidMount() {
+    this.props.splatnet.comm.updateRecords();
+  }
+
+  render() {
+    return <div />;
+  }
+}
+
+const StartupWithSplatnet = () => {
+  return (
+    <Subscriber channel="splatnet">
+      {splatnet => <Startup splatnet={splatnet} />}
+    </Subscriber>
+  );
+};
 
 const Routes = ({
   token,
@@ -24,6 +43,7 @@ const Routes = ({
     <div>
       {loggedIn ? (
         <div>
+          <StartupWithSplatnet />
           <Navigation logoutCallback={logoutCallback} />
           <Route path="/home" exact component={About} />
           <Route path="/testApi" component={ApiViewer} />
