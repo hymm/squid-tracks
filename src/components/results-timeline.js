@@ -25,26 +25,27 @@ class ResultDot extends React.Component {
 }
 
 class ResultsTimeline extends React.Component {
-  getModeColor(lobby) {
+  getModeColor(lobby, result) {
     let color = 'grey';
+    const won = result === 'victory';
     switch (lobby) {
       case 'regular':
-        color = 'rgb(152, 207, 4)';
+        color = won ? 'rgb(152, 207, 4)' : 'rgb(112, 152, 3)';
         break;
       case 'gachi':
-        color = 'rgb(249, 114, 7)';
+        color = won ? 'rgb(249, 114, 7)' : 'rgb(220, 102, 5)';
         break;
       case 'league_pair':
-        color = 'rgb(228, 24, 113)';
+        color = won ? 'rgb(228, 24, 113)' : 'rgb(205, 24, 101)';
         break;
       case 'league_team':
-        color = 'rgb(228, 24, 113)';
+        color = won ? 'rgb(228, 24, 113)' : 'rgb(205, 24, 101)';
         break;
       case 'private':
-        color = 'rgb(157, 0, 200)';
+        color = won ? 'rgb(157, 0, 200)' : 'rgb(133, 36, 162)';
         break;
       default:
-        color = 'lightgrey';
+        color = won ? 'lightgrey' : 'lightgrey';
     }
     return color;
   }
@@ -289,7 +290,7 @@ class ResultsTimeline extends React.Component {
           <CartesianGrid stroke="#f5f5f5" />
           <Bar dataKey="lobbyBar" yAxisId="mode" isAnimationActive={false}>
             {data.map((entry, index) => {
-              const color = this.getModeColor(entry.lobby);
+              const color = this.getModeColor(entry.lobby, entry.result);
               return <Cell key={index} fill={color} fillOpacity={0.8} />;
             })}
           </Bar>
