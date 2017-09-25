@@ -185,13 +185,9 @@ async function getSplatnetApi(url) {
   return resp;
 }
 
-function getUniqueId(body) {
-  const $ = cheerio.load(body);
-  const id = $('html').data('unique-id');
-  if (id == null) {
-    throw Error('Could not read splatnet2 unique id');
-  }
-  return id;
+async function getUniqueId() {
+  const records = await getSplatnetApi('records');
+  uniqueId = records.records.unique_id;
 }
 
 async function postSplatnetApi(url, body) {
@@ -237,7 +233,7 @@ async function getSessionCookie(token) {
     }
   });
 
-  const id = getUniqueId(resp);
+  await getUniqueId();
 
   return id;
 }
@@ -280,6 +276,7 @@ async function getSplatnetImage(battle) {
 function setIksmToken(cookieValue) {
   const cookie = request2.cookie(`iksm_session=${cookieValue}`);
   jar.setCookie(cookie, splatnetUrl);
+  getUniqueId();
 }
 
 function getIksmToken() {
@@ -292,6 +289,15 @@ function getIksmToken() {
   }
 
   return iksmSessionCookie;
+}
+
+async function checkIksmValid() {
+  try {
+    await getSplatnetApi('records');
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 function setUserLanguage(language) {
