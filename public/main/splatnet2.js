@@ -186,14 +186,6 @@ async function getSplatnetApi(url) {
 }
 
 async function getUniqueId() {
-  /*
-  const $ = cheerio.load(body);
-  const id = $('html').data('unique-id');
-  if (id == null) {
-    throw Error('Could not read splatnet2 unique id');
-  }
-  return id;
-  */
   const records = await getSplatnetApi('records');
   uniqueId = records.records.unique_id;
 }
