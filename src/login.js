@@ -12,7 +12,7 @@ import {
   SplitButton,
   MenuItem
 } from 'react-bootstrap';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { ipcRenderer, remote } from 'electron';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
@@ -128,6 +128,7 @@ class LoginCookie extends React.Component {
     ipcRenderer.sendSync('setIksmToken', iksmValue);
     ipcRenderer.sendSync('setToStore', 'iksmCookie', iksmValue);
     this.props.setLogin(true);
+    this.props.history.push('/');
   }
 
   render() {
@@ -198,7 +199,7 @@ class LoginCookie extends React.Component {
   }
 }
 
-const LoginCookieWithIntl = injectIntl(LoginCookie);
+const LoginCookieWithIntl = injectIntl(withRouter(LoginCookie));
 
 const LoginSplash = ({ setLocale, locale }) => {
   return (

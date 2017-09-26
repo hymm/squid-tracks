@@ -9,14 +9,16 @@ import lodash from 'lodash';
 
 class Results extends React.Component {
   state = {
-    currentResultIndex: 0,
-    statInk: {}
+    currentResultIndex: -1,
+    statInk: {},
+    initialized: false,
   };
 
   componentDidMount() {
     this.getResults();
     const statInkInfo = ipcRenderer.sendSync('getFromStatInkStore', 'info');
-    this.setState({ statInk: statInkInfo });
+    this.setState({ statInk: statInkInfo, initialized: false, currentResultIndex: 0 });
+    console.log('results did mount');
   }
 
   componentWillReceiveProps(nextProps) {

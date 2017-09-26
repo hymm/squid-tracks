@@ -47,6 +47,7 @@ class App extends Component {
       sessionToken: ipcRenderer.sendSync('getSessionToken'),
       loggedIn: false
     });
+    history.push('/');
   };
 
   setLocale = locale => {
