@@ -21,31 +21,6 @@ class Results extends React.Component {
     console.log('results did mount');
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { splatnet } = this.props;
-    const { splatnet: splatnetNext } = nextProps;
-    const firstBattle = lodash.has(
-      splatnet,
-      'current.results.results[0].battle_number'
-    )
-      ? splatnet.current.results.results[0].battle_number
-      : 0;
-
-    const nextFirstBattle = lodash.has(
-      splatnetNext,
-      'current.results.results[0].battle_number'
-    )
-      ? splatnetNext.current.results.results[0].battle_number
-      : 0;
-
-    if (firstBattle !== nextFirstBattle) {
-      this.setState({ initialized: true });
-      if (nextFirstBattle != null) {
-        splatnet.comm.getBattle(nextFirstBattle);
-      }
-    }
-  }
-
   getResults = () => {
     const { splatnet } = this.props;
     splatnet.comm.updateResults();
@@ -62,11 +37,23 @@ class Results extends React.Component {
   };
 
   getCurrentBattle() {
+    const { splatnet } = this.props;
     const { currentResultIndex } = this.state;
+
     const { results } = this.props.splatnet.current.results;
+
+    if (results[currentResultIndex] == null || results[currentResultIndex].battle_number == null) {
+        return {};
+    }
     const battleNumber = results[currentResultIndex].battle_number;
+
+    if (this.props.splatnet.cache.battles[battleNumber] == null) {
+        splatnet.comm.getBattle(battleNumber);
+        return {};
+    }
+
     const battle = this.props.splatnet.cache.battles[battleNumber];
-    return battle ? battle : {};
+    return battle;
   }
 
   changeResultByBattleNumber = battleNumber => {
@@ -87,12 +74,9 @@ class Results extends React.Component {
   };
 
   render() {
-    const { statInk, currentResultIndex, initialized } = this.state;
+    const { statInk, currentResultIndex } = this.state;
     const results = this.props.splatnet.current.results;
-    let currentBattle = {};
-    if (initialized) {
-      currentBattle = this.getCurrentBattle();
-    }
+    const currentBattle = this.getCurrentBattle();
 
     return (
       <Grid fluid style={{ marginTop: 65 }}>
