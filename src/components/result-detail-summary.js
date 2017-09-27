@@ -8,15 +8,6 @@ export const ResultSummary1 = ({ result }) => (
       <tr>
         <th>
           <FormattedMessage
-            id="results.summary.gameResult"
-            defaultMessage="Result"
-          />
-        </th>
-        <td>{result.my_team_result.name}</td>
-      </tr>
-      <tr>
-        <th>
-          <FormattedMessage
             id="results.summary.gameMode"
             defaultMessage="Game Mode"
           />

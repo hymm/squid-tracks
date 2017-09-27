@@ -24,6 +24,13 @@ const BattleSummary = ({ result }) => {
       </Row>
       <Row>
         <Col md={12}>
+          <h5 style={{ marginTop: 0 }}>
+            {`${result.my_team_result.name} in ${result.elapsed_time} sec`}
+          </h5>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
           <ProgressBar>
             <ProgressBar
               striped
