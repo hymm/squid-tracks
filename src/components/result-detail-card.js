@@ -25,7 +25,7 @@ import TeamInfoTable from './team-info-table';
 import TeamRadarTotals from './team-radar-totals';
 import PanelWithMenu from './panel-with-menu';
 import TeamRadar from './team-radar';
-import { ResultSummary1, ResultSummary2 } from './result-detail-summary';
+import { ResultSummary2 } from './result-detail-summary';
 import { getGeneralFields, getPlayerFields } from './export-detail-helpers';
 import { event } from '../analytics';
 
@@ -333,9 +333,6 @@ class ResultDetailCard extends React.Component {
         <Grid fluid>
           <BattleSummary result={resultChanged} />
           <Row>
-            <Col sm={6} md={6}>
-              <ResultSummary1 result={resultChanged} />
-            </Col>
             <Col sm={6} md={6}>
               <ResultSummary2 result={resultChanged} />
             </Col>

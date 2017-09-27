@@ -1,5 +1,13 @@
 import React from 'react';
-import { Row, Col, ProgressBar } from 'react-bootstrap';
+import { Row, Col, ProgressBar, Label } from 'react-bootstrap';
+
+const labelStyle = {
+  fontSize: 16,
+  fontWeight: 'normal',
+  marginRight: 5,
+  float: 'left',
+  marginBottom: 5
+};
 
 const BattleSummary = ({ result }) => {
   const myScore =
@@ -24,9 +32,27 @@ const BattleSummary = ({ result }) => {
       </Row>
       <Row>
         <Col md={12}>
-          <h5 style={{ marginTop: 0 }}>
+          <Label
+            bsStyle={
+              result.my_team_result.key === 'victory' ? 'info' : 'warning'
+            }
+            style={labelStyle}
+          >
             {`${result.my_team_result.name} in ${result.elapsed_time} sec`}
-          </h5>
+          </Label>
+          <Label style={{ background: 'purple', ...labelStyle }}>
+            {`${result.game_mode.name}`}
+          </Label>
+          {result.max_league_point != null ? (
+            <Label style={{ background: 'purple', ...labelStyle }}>
+              {`Max Points ${result.max_league_point}`}
+            </Label>
+          ) : null}
+          {result.league_point != null ? (
+            <Label style={{ background: 'purple', ...labelStyle }}>
+              {`Current Points ${result.league_point}`}
+            </Label>
+          ) : null}
         </Col>
       </Row>
       <Row>

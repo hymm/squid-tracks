@@ -26,14 +26,14 @@ class ProxyButton extends React.Component {
   };
 
   messages = defineMessages({
-      proxyStart: {
-          id: 'login.cookie.proxyStart',
-          defaultMessage: 'Start Proxy',
-      },
-      proxyRunning: {
-          id: 'login.cookie.proxyRunning',
-          defaultMessage: 'Proxy running on {ip}, Port {port}'
-      }
+    proxyStart: {
+      id: 'login.cookie.proxyStart',
+      defaultMessage: 'Start Proxy'
+    },
+    proxyRunning: {
+      id: 'login.cookie.proxyRunning',
+      defaultMessage: 'Proxy running on {ip}, Port {port}'
+    }
   });
 
   handleMitmClick = () => {
@@ -54,11 +54,14 @@ class ProxyButton extends React.Component {
   }
 
   render() {
-    const { mitm, address, } = this.state;
+    const { mitm, address } = this.state;
     const { intl } = this.props;
     const buttonText = mitm
-        ? intl.formatMessage(this.messages.proxyRunning, {ip: address.ips[0], port: address.port})
-        : intl.formatMessage(this.messages.proxyStart);
+      ? intl.formatMessage(this.messages.proxyRunning, {
+          ip: address.ips[0],
+          port: address.port
+        })
+      : intl.formatMessage(this.messages.proxyStart);
     if (address.ips.length > 1) {
       return (
         <SplitButton
@@ -66,10 +69,12 @@ class ProxyButton extends React.Component {
           onClick={this.handleMitmClick}
           bsStyle={mitm ? 'warning' : 'default'}
         >
-          <MenuItem header><FormattedMessage
-              id='login.cookie.additionalIps'
-              defaultMessage='Additional IP Addresses'
-          /></MenuItem>
+          <MenuItem header>
+            <FormattedMessage
+              id="login.cookie.additionalIps"
+              defaultMessage="Additional IP Addresses"
+            />
+          </MenuItem>
           {address.ips.map(address => (
             <MenuItem key={address}>{address}</MenuItem>
           ))}
@@ -92,10 +97,10 @@ const ProxyButtonWithIntl = injectIntl(ProxyButton);
 class LoginCookie extends React.Component {
   messages = defineMessages({
     instructionsUrl: {
-        id: 'login.cookie.instructionsUrl',
-        defaultMessage: 'https://github.com/hymm/squid-tracks/wiki/en_getCookie',
+      id: 'login.cookie.instructionsUrl',
+      defaultMessage: 'https://github.com/hymm/squid-tracks/wiki/en_getCookie'
     }
-  })
+  });
   state = {
     token: ''
   };
@@ -149,23 +154,26 @@ class LoginCookie extends React.Component {
               <Col md={12}>
                 <br />
                 <FormattedMessage
-                    id='login.cookie.warning'
-                    defaultMessage={`WARNING: This process is less secure than the previous log in method.
+                  id="login.cookie.warning"
+                  defaultMessage={`WARNING: This process is less secure than the previous log in method.
                         If you don't understand the risks, please wait until the
                         previous login system is reimplemented. This login system is for those desperate to
                         use SquidTracks.`}
                 />
-                <h3><a
-                  onClick={() =>
-                    openExternal(intl.formatMessage(this.messages.instructionsUrl))
-                  }
-                  style={{ cursor: 'pointer' }}
-                >
-                  <FormattedMessage
-                      id='login.cookie.instructions'
-                      defaultMessage='View Instructions'
-                  />
-                </a></h3>
+                <h3>
+                  <a
+                    onClick={() =>
+                      openExternal(
+                        intl.formatMessage(this.messages.instructionsUrl)
+                      )}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <FormattedMessage
+                      id="login.cookie.instructions"
+                      defaultMessage="View Instructions"
+                    />
+                  </a>
+                </h3>
               </Col>
             </Row>
             <Row>
@@ -208,41 +216,44 @@ const LoginSplash = ({ setLocale, locale }) => {
         <Col md={12} style={{ textAlign: 'center' }}>
           <Jumbotron style={{ background: 'pink' }}>
             <h1>SquidTracks</h1>
-            <h2><FormattedMessage
-                id='login.tagLine'
-                defaultMessage='An Unofficial Splatnet Client for your Desktop'
-            /></h2>
-            <h3><FormattedMessage
-                id='login.loginInformation'
+            <h2>
+              <FormattedMessage
+                id="login.tagLine"
+                defaultMessage="An Unofficial Splatnet Client for your Desktop"
+              />
+            </h2>
+            <h3>
+              <FormattedMessage
+                id="login.loginInformation"
                 defaultMessage={`Normal login is currently broken. You can try to login with a
                     cookie if you know how to get it. Follow progress on Twitter {twitterLink}`}
-                values={{twitterLink:
+                values={{
+                  twitterLink: (
                     <a
-                      onClick={() => openExternal('https://twitter.com/SquidTracks')}
+                      onClick={() =>
+                        openExternal('https://twitter.com/SquidTracks')}
                       style={{ cursor: 'pointer' }}
                     >
                       @SquidTracks
                     </a>
+                  )
                 }}
-            />
+              />
             </h3>
             <ControlLabel>Language</ControlLabel>
             <LanguageSelect setLocale={setLocale} locale={locale} />
             <br />
             <a href={ipcRenderer.sendSync('getLoginUrl')}>
               <Button block disabled style={{ display: 'none' }}>
-                  <FormattedMessage
-                      id='login.login'
-                      defaultMessage='Login'
-                  />
+                <FormattedMessage id="login.login" defaultMessage="Login" />
               </Button>
             </a>
             <LinkContainer to="/login/cookie">
               <Button block bsStyle="primary">
-                  <FormattedMessage
-                      id='login.loginWithCookie'
-                      defaultMessage='Login with Session Cookie'
-                  />
+                <FormattedMessage
+                  id="login.loginWithCookie"
+                  defaultMessage="Login with Session Cookie"
+                />
               </Button>
             </LinkContainer>
           </Jumbotron>
@@ -252,24 +263,20 @@ const LoginSplash = ({ setLocale, locale }) => {
   );
 };
 
-const LoginRoutes = (props) => {
+const LoginRoutes = props => {
   return (
     <Switch>
-      <Route
-          path="/login"
-          exact
-          component={() => <LoginSplash {...props} />}
-      />
+      <Route path="/login" exact component={() => <LoginSplash {...props} />} />
       <Route
         path="/login/cookie"
         component={() => <LoginCookieWithIntl {...props} />}
       />
-      <Redirect exact from="/" to="/login" />
+      <Redirect to="/login" />
     </Switch>
   );
 };
 
-const Login = (props) => {
+const Login = props => {
   return <LoginRoutes {...props} />;
 };
 
