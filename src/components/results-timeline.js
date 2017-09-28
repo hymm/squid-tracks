@@ -1,4 +1,5 @@
 import React from 'react';
+import LobbyColors from './lobby-colors';
 import { Subscriber } from 'react-broadcast';
 import {
   ResponsiveContainer,
@@ -27,26 +28,8 @@ class ResultDot extends React.Component {
 class ResultsTimeline extends React.Component {
   getModeColor(lobby, result) {
     let color = 'grey';
-    const won = result === 'victory';
-    switch (lobby) {
-      case 'regular':
-        color = won ? 'rgb(152, 207, 4)' : 'rgb(112, 152, 3)';
-        break;
-      case 'gachi':
-        color = won ? 'rgb(249, 114, 7)' : 'rgb(220, 102, 5)';
-        break;
-      case 'league_pair':
-        color = won ? 'rgb(228, 24, 113)' : 'rgb(205, 24, 101)';
-        break;
-      case 'league_team':
-        color = won ? 'rgb(228, 24, 113)' : 'rgb(205, 24, 101)';
-        break;
-      case 'private':
-        color = won ? 'rgb(157, 0, 200)' : 'rgb(133, 36, 162)';
-        break;
-      default:
-        color = won ? 'lightgrey' : 'lightgrey';
-    }
+    const winKey = result === 'victory' ? 'normal' : 'dark';
+    color = LobbyColors[lobby][winKey];
     return color;
   }
 

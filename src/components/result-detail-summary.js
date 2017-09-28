@@ -25,17 +25,6 @@ export const ResultSummary2 = ({ result }) => (
           <td>{result.win_meter}</td>
         </tr>
       ) : null}
-      {result.estimate_gachi_power ? (
-        <tr>
-          <th>
-            <FormattedMessage
-              id="results.summary.estimateGachiPower"
-              defaultMessage="Estimate Gachi Power"
-            />
-          </th>
-          <td>{result.estimate_gachi_power}</td>
-        </tr>
-      ) : null}
       {result.fes_power ? (
         <tr>
           <th>

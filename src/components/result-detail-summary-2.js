@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, ProgressBar, Label } from 'react-bootstrap';
+import LobbyColors from './lobby-colors';
 
 const labelStyle = {
   fontSize: 16,
@@ -21,6 +22,8 @@ const BattleSummary = ({ result }) => {
   const totalScore = myScore + otherScore;
   const myNow = myScore * 100 / totalScore;
   const otherNow = otherScore * 100 / totalScore;
+  const lobby = result.game_mode.key;
+  const colorMap = LobbyColors[lobby];
   return (
     <div>
       <Row>
@@ -40,10 +43,10 @@ const BattleSummary = ({ result }) => {
           >
             {`${result.my_team_result.name} in ${result.elapsed_time} sec`}
           </Label>
-          <Label style={{ background: 'purple', ...labelStyle }}>
+          <Label style={{ background: colorMap.dark, ...labelStyle }}>
             {`${result.game_mode.name}`}
           </Label>
-          {result.max_league_point != null ? (
+          {result.max_league_point != null && result.max_league_point > 0 ? (
             <Label style={{ background: 'purple', ...labelStyle }}>
               {`Max Points ${result.max_league_point}`}
             </Label>
@@ -51,6 +54,11 @@ const BattleSummary = ({ result }) => {
           {result.league_point != null ? (
             <Label style={{ background: 'purple', ...labelStyle }}>
               {`Current Points ${result.league_point}`}
+            </Label>
+          ) : null}
+          {result.estimate_gachi_power != null ? (
+            <Label bsStyle="primary" style={{ ...labelStyle }}>
+              {`Estimate Points ${result.estimate_gachi_power}`}
             </Label>
           ) : null}
         </Col>
@@ -64,6 +72,7 @@ const BattleSummary = ({ result }) => {
               bsStyle="info"
               label={myScore}
               key={1}
+              style={{ fontSize: 16 }}
             />
             <ProgressBar
               striped
@@ -71,6 +80,7 @@ const BattleSummary = ({ result }) => {
               bsStyle="warning"
               label={otherScore}
               key={2}
+              style={{ fontSize: 16 }}
             />
           </ProgressBar>
         </Col>
