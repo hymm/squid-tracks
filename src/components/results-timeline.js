@@ -1,4 +1,5 @@
 import React from 'react';
+import LobbyColors from './lobby-colors';
 import { Subscriber } from 'react-broadcast';
 import {
   ResponsiveContainer,
@@ -25,27 +26,10 @@ class ResultDot extends React.Component {
 }
 
 class ResultsTimeline extends React.Component {
-  getModeColor(lobby) {
+  getModeColor(lobby, result) {
     let color = 'grey';
-    switch (lobby) {
-      case 'regular':
-        color = 'rgb(152, 207, 4)';
-        break;
-      case 'gachi':
-        color = 'rgb(249, 114, 7)';
-        break;
-      case 'league_pair':
-        color = 'rgb(228, 24, 113)';
-        break;
-      case 'league_team':
-        color = 'rgb(228, 24, 113)';
-        break;
-      case 'private':
-        color = 'rgb(157, 0, 200)';
-        break;
-      default:
-        color = 'lightgrey';
-    }
+    const winKey = result === 'victory' ? 'normal' : 'dark';
+    color = LobbyColors[lobby][winKey];
     return color;
   }
 
@@ -289,7 +273,7 @@ class ResultsTimeline extends React.Component {
           <CartesianGrid stroke="#f5f5f5" />
           <Bar dataKey="lobbyBar" yAxisId="mode" isAnimationActive={false}>
             {data.map((entry, index) => {
-              const color = this.getModeColor(entry.lobby);
+              const color = this.getModeColor(entry.lobby, entry.result);
               return <Cell key={index} fill={color} fillOpacity={0.8} />;
             })}
           </Bar>

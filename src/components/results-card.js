@@ -15,7 +15,7 @@ import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
 import ExportButton from './export-details-csv';
-import ResultsSummary from './results-summary-card-2';
+import ResultsSummary from './results-summary-card';
 import { event } from '../analytics';
 import { getValue } from './sort-array';
 
@@ -309,7 +309,11 @@ class ResultsCard extends React.Component {
           </ButtonGroup>
           <ExportButton />
         </ButtonToolbar>
-        <ResultsSummary summary={summary} averages={averages} results={normalized} />
+        <ResultsSummary
+          summary={summary}
+          averages={averages}
+          results={normalized}
+        />
         <FormattedMessage
           id="results.table.sortHelp"
           defaultMessage="* Click on column headers to sort"

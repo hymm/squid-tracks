@@ -114,6 +114,10 @@ class IksmToken extends React.Component {
     ipcRenderer.on('iksmToken', this.handleToken);
   }
 
+  componentWillUnmount() {
+    ipcRenderer.removeListener('iksmToken', this.handleToken);
+  }
+
   handleToken = (e, cookie) => {
     this.setState({ cookie: cookie });
   };
