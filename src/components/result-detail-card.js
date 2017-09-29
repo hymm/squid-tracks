@@ -9,7 +9,8 @@ import {
   Button,
   Nav,
   NavDropdown,
-  MenuItem
+  MenuItem,
+  Label
 } from 'react-bootstrap';
 import { pick, mapKeys, cloneDeep } from 'lodash';
 import flatten from 'flat';
@@ -28,6 +29,8 @@ import TeamRadar from './team-radar';
 import { ResultSummary2 } from './result-detail-summary';
 import { getGeneralFields, getPlayerFields } from './export-detail-helpers';
 import { event } from '../analytics';
+
+import './result-detail-card.css';
 
 const { openExternal } = remote.shell;
 
@@ -306,7 +309,19 @@ class ResultDetailCard extends React.Component {
 
     const maximums = this.calculateMaximums(myTeam, otherTeam);
 
+    const myTeamPower = resultChanged.my_estimate_league_point != null ? (
+      resultChanged.my_estimate_league_point
+    ) : resultChanged.my_estimate_fes_power != null ? (
+      resultChanged.my_estimate_fes_power
+    ) : null;
+    const otherTeamPower = resultChanged.other_estimate_league_point != null ? (
+      resultChanged.other_estimate_league_point
+    ) : resultChanged.other_estimate_fes_power != null ? (
+      resultChanged.other_estimate_fes_power
+    ) : null;
+
     return (
+      <div className={resultChanged.game_mode.key}>
       <PanelWithMenu
         header={
           <h3 className="panel-title">
@@ -427,21 +442,15 @@ class ResultDetailCard extends React.Component {
                       id="resultDetails.teamsButton.myTeamTitle"
                       defaultMessage="My Team"
                     />
-                    {resultChanged.tag_id ? (
-                      <span
-                        style={{ fontSize: 12, color: `#bbb`, marginLeft: 10 }}
-                      >
-                        {`${resultChanged.tag_id}`}
-                      </span>
+                    {myTeamPower != null ? (
+                        <Label bsStyle="default" style={{ fontWeight: 'normal', marginLeft: 5, marginRight: 5 }}>
+                          {`Estimate Power: ${myTeamPower}`}
+                        </Label>
                     ) : null}
-                    <span />
-
-                    {resultChanged.my_estimate_league_point ? (
-                      <span
-                        style={{ fontSize: 14, color: `#777`, float: 'right' }}
-                      >
-                        {`Estimate Power: ${resultChanged.my_estimate_league_point}`}
-                      </span>
+                    {resultChanged.tag_id ? (
+                        <Label bsStyle="default" style={{ fontWeight: 'normal', marginRight: 5, }}>
+                          {`${resultChanged.tag_id}`}
+                        </Label>
                     ) : null}
                   </h4>
                   {this.state.show === 1 ? (
@@ -463,17 +472,10 @@ class ResultDetailCard extends React.Component {
                       id="resultDetails.teamsButton.otherTeamTitle"
                       defaultMessage="Enemy Team"
                     />
-                    {resultChanged.other_estimate_league_point ? (
-                      <span
-                        style={{
-                          fontSize: 14,
-                          color: `#555`,
-                          marginLeft: 10,
-                          float: 'right'
-                        }}
-                      >
-                        {`Estimate Power: ${resultChanged.other_estimate_league_point}`}
-                      </span>
+                    {otherTeamPower != null ? (
+                        <Label bsStyle="default" style={{ fontWeight: 'normal', marginLeft: 5 }}>
+                          {`Estimate Power: ${otherTeamPower}`}
+                        </Label>
                     ) : null}
                   </h4>
                   {this.state.show === 1 ? (
@@ -515,6 +517,7 @@ class ResultDetailCard extends React.Component {
           </Row>
         </Grid>
       </PanelWithMenu>
+      </div>
     );
   }
 }

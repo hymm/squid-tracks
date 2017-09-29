@@ -7,7 +7,8 @@ const labelStyle = {
   fontWeight: 'normal',
   marginRight: 5,
   float: 'left',
-  marginBottom: 5
+  marginBottom: 5,
+  padding: '.35em .6em .35em',
 };
 
 const BattleSummary = ({ result }) => {
@@ -43,36 +44,36 @@ const BattleSummary = ({ result }) => {
           >
             {`${result.my_team_result.name} in ${result.elapsed_time} sec`}
           </Label>
-          <Label style={{ background: colorMap.dark, ...labelStyle }}>
+          <Label style={{ background: colorMap.normal, ...labelStyle }}>
             {`${result.game_mode.name}`}
           </Label>
           {result.max_league_point != null && result.max_league_point > 0 ? (
-            <Label style={{ background: 'purple', ...labelStyle }}>
-              {`Max Points ${result.max_league_point}`}
+            <Label style={{ background: colorMap.dark, ...labelStyle }}>
+              {`Max Power ${result.max_league_point}`}
             </Label>
           ) : null}
           {result.league_point != null ? (
-            <Label style={{ background: 'purple', ...labelStyle }}>
-              {`Current Points ${result.league_point}`}
+            <Label style={{ background: colorMap.normal, ...labelStyle }}>
+              {`Current Power ${result.league_point}`}
             </Label>
           ) : null}
           {result.estimate_gachi_power != null ? (
-            <Label bsStyle="primary" style={{ ...labelStyle }}>
-              {`Estimate Points ${result.estimate_gachi_power}`}
+            <Label bsStyle="default" style={{ ...labelStyle }}>
+              {`Estimate Power ${result.estimate_gachi_power}`}
             </Label>
           ) : null}
         </Col>
       </Row>
       <Row>
         <Col md={12}>
-          <ProgressBar>
+          <ProgressBar style={{ height: 30 }}>
             <ProgressBar
               striped
               now={myNow}
               bsStyle="info"
               label={myScore}
               key={1}
-              style={{ fontSize: 16 }}
+              style={{ fontSize: 16, padding: '.35em 0', }}
             />
             <ProgressBar
               striped
@@ -80,7 +81,7 @@ const BattleSummary = ({ result }) => {
               bsStyle="warning"
               label={otherScore}
               key={2}
-              style={{ fontSize: 16 }}
+              style={{ fontSize: 16, padding: '.35em 0', }}
             />
           </ProgressBar>
         </Col>
