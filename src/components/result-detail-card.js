@@ -26,7 +26,6 @@ import TeamInfoTable from './team-info-table';
 import TeamRadarTotals from './team-radar-totals';
 import PanelWithMenu from './panel-with-menu';
 import TeamRadar from './team-radar';
-import { ResultSummary2 } from './result-detail-summary';
 import { getGeneralFields, getPlayerFields } from './export-detail-helpers';
 import { event } from '../analytics';
 
@@ -346,10 +345,9 @@ class ResultDetailCard extends React.Component {
         menu={<ResultDetailMenu result={resultChanged} />}
       >
         <Grid fluid>
-          <BattleSummary result={resultChanged} />
           <Row>
-            <Col sm={6} md={6}>
-              <ResultSummary2 result={resultChanged} />
+            <Col md={12}>
+              <BattleSummary result={resultChanged} />
             </Col>
           </Row>
           <Row>
@@ -444,7 +442,11 @@ class ResultDetailCard extends React.Component {
                     />
                     {myTeamPower != null ? (
                         <Label bsStyle="default" style={{ fontWeight: 'normal', marginLeft: 5, marginRight: 5 }}>
-                          {`Estimate Power: ${myTeamPower}`}
+                            <FormattedMessage
+                              id="resultDetails.summary.estimatePower"
+                              defaultMessage="Estimate Power {power}"
+                              values={{ power: myTeamPower}}
+                            />
                         </Label>
                     ) : null}
                     {resultChanged.tag_id ? (
@@ -474,7 +476,11 @@ class ResultDetailCard extends React.Component {
                     />
                     {otherTeamPower != null ? (
                         <Label bsStyle="default" style={{ fontWeight: 'normal', marginLeft: 5 }}>
-                          {`Estimate Power: ${otherTeamPower}`}
+                            <FormattedMessage
+                              id="resultDetails.summary.estimatePower"
+                              defaultMessage="Estimate Power {power}"
+                              values={{ power: otherTeamPower}}
+                            />
                         </Label>
                     ) : null}
                   </h4>
