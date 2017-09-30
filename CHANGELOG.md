@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Version 0.3.2
+### New Features
+* SquidTracks will auto download info from stat.ink so when new weapons and stages are supported on stat.ink
+they will also be supported by SquidTracks
+* Prettier battle details.
+
+### Bug Fixes
+* Fixed annie store ordering
+* Fixed battle details not showing sometimes
+
 ## Version 0.3.1
 This release is does not fix the login system.  There is an alternative login system
 that uses session cookie hijacking.  A lot of the code has changed so this is release

@@ -9,7 +9,8 @@ import {
   Button,
   Nav,
   NavDropdown,
-  MenuItem
+  MenuItem,
+  Label
 } from 'react-bootstrap';
 import { pick, mapKeys, cloneDeep } from 'lodash';
 import flatten from 'flat';
@@ -18,15 +19,17 @@ import sillyname from 'sillyname';
 import { clipboard, remote } from 'electron';
 import lodash from 'lodash';
 
+import BattleSummary from './result-detail-summary-2';
 import TeamStatsTable from './team-stats-table';
 import TeamGearTable from './team-gear-table';
 import TeamInfoTable from './team-info-table';
 import TeamRadarTotals from './team-radar-totals';
 import PanelWithMenu from './panel-with-menu';
 import TeamRadar from './team-radar';
-import { ResultSummary1, ResultSummary2 } from './result-detail-summary';
 import { getGeneralFields, getPlayerFields } from './export-detail-helpers';
 import { event } from '../analytics';
+
+import './result-detail-card.css';
 
 const { openExternal } = remote.shell;
 
@@ -155,7 +158,7 @@ class ResultDetailMenu extends React.Component {
 class ResultDetailCard extends React.Component {
   state = {
     show: 1,
-    anonymize: false,
+    anonymize: false
   };
 
   showStats = () => {
@@ -277,10 +280,10 @@ class ResultDetailCard extends React.Component {
   anonymize(result) {
     const newResult = cloneDeep(result);
     for (const player of newResult.my_team_members) {
-        player.player.nickname = sillyname();
+      player.player.nickname = sillyname();
     }
     for (const player of newResult.other_team_members) {
-        player.player.nickname = sillyname();
+      player.player.nickname = sillyname();
     }
     return newResult;
   }
@@ -305,7 +308,19 @@ class ResultDetailCard extends React.Component {
 
     const maximums = this.calculateMaximums(myTeam, otherTeam);
 
+    const myTeamPower = resultChanged.my_estimate_league_point != null ? (
+      resultChanged.my_estimate_league_point
+    ) : resultChanged.my_estimate_fes_power != null ? (
+      resultChanged.my_estimate_fes_power
+    ) : null;
+    const otherTeamPower = resultChanged.other_estimate_league_point != null ? (
+      resultChanged.other_estimate_league_point
+    ) : resultChanged.other_estimate_fes_power != null ? (
+      resultChanged.other_estimate_fes_power
+    ) : null;
+
     return (
+      <div className={resultChanged.game_mode.key}>
       <PanelWithMenu
         header={
           <h3 className="panel-title">
@@ -314,28 +329,25 @@ class ResultDetailCard extends React.Component {
               defaultMessage="Battle #{battle_number} Details"
               values={{ battle_number: resultChanged.battle_number }}
             />
-            {linkInfo
-              ? <a
-                  onClick={() =>
-                    openExternal(
-                      `https://stat.ink/@${linkInfo.username}/spl2/${linkInfo.battle}`
-                    )}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
-                </a>
-              : null}
+            {linkInfo ? (
+              <a
+                onClick={() =>
+                  openExternal(
+                    `https://stat.ink/@${linkInfo.username}/spl2/${linkInfo.battle}`
+                  )}
+                style={{ cursor: 'pointer' }}
+              >
+                <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
+              </a>
+            ) : null}
           </h3>
         }
         menu={<ResultDetailMenu result={resultChanged} />}
       >
         <Grid fluid>
           <Row>
-            <Col sm={6} md={6}>
-              <ResultSummary1 result={resultChanged} />
-            </Col>
-            <Col sm={6} md={6}>
-              <ResultSummary2 result={resultChanged} />
+            <Col md={12}>
+              <BattleSummary result={resultChanged} />
             </Col>
           </Row>
           <Row>
@@ -346,7 +358,7 @@ class ResultDetailCard extends React.Component {
                     onClick={this.showStats}
                     active={this.state.show === 1}
                   >
-                    <Glyphicon glyph='th' />
+                    <Glyphicon glyph="th" />
                   </Button>
                   <Button
                     onClick={this.showGear}
@@ -354,9 +366,12 @@ class ResultDetailCard extends React.Component {
                     bsStyle={this.getGearStyle()}
                     style={{ padding: '8px 12px 4px 12px' }}
                   >
-                      <svg width="16" height="14" viewBox="0 0 448 416">
-                          <path fill="#000" d="M448 48L288 0c-13.988 27.227-30.771 40.223-63.769 40.223C191.723 39.676 173.722 27 160 0L0 48l32 88 64-8-16 288h288l-16-288 64 8 32-88z"/>
-                      </svg>
+                    <svg width="16" height="14" viewBox="0 0 448 416">
+                      <path
+                        fill="#000"
+                        d="M448 48L288 0c-13.988 27.227-30.771 40.223-63.769 40.223C191.723 39.676 173.722 27 160 0L0 48l32 88 64-8-16 288h288l-16-288 64 8 32-88z"
+                      />
+                    </svg>
                   </Button>
                   <Button
                     onClick={this.showRadarTotals}
@@ -398,13 +413,13 @@ class ResultDetailCard extends React.Component {
                     onClick={this.showInfo}
                     active={this.state.show === 3}
                   >
-                    <Glyphicon glyph='option-horizontal' />
+                    <Glyphicon glyph="option-horizontal" />
                   </Button>
                 </ButtonGroup>
                 <Button
                   onClick={() => {
-                      event('result-details', 'anonymize', !this.state.anonymize);
-                      this.setState({ anonymize: !this.state.anonymize });
+                    event('result-details', 'anonymize', !this.state.anonymize);
+                    this.setState({ anonymize: !this.state.anonymize });
                   }}
                   active={this.state.anonymize}
                 >
@@ -417,68 +432,98 @@ class ResultDetailCard extends React.Component {
             </Col>
           </Row>
           <Row>
-            {this.state.show < 5
-              ? [
-                  <Col sm={6} md={6} key="myTeam">
-                    <h4>
-                      <FormattedMessage
-                        id="resultDetails.teamsButton.myTeamTitle"
-                        defaultMessage="My Team"
-                      />
-                    </h4>
-                    {this.state.show === 1
-                      ? <TeamStatsTable team={myTeam} />
-                      : null}
-                    {this.state.show === 2
-                      ? <TeamGearTable team={myTeam} />
-                      : null}
-                    {this.state.show === 3
-                      ? <TeamInfoTable team={myTeam} />
-                      : null}
-                    {this.state.show === 4
-                      ? <TeamRadar team={myTeam} maximums={maximums} />
-                      : null}
-                  </Col>,
-                  <Col sm={6} md={6} key="otherTeam">
-                    <h4>
-                      <FormattedMessage
-                        id="resultDetails.teamsButton.otherTeamTitle"
-                        defaultMessage="Enemy Team"
-                      />
-                    </h4>
-                    {this.state.show === 1
-                      ? <TeamStatsTable team={otherTeam} />
-                      : null}
-                    {this.state.show === 2
-                      ? <TeamGearTable team={otherTeam} />
-                      : null}
-                    {this.state.show === 3
-                      ? <TeamInfoTable team={otherTeam} />
-                      : null}
-                    {this.state.show === 4
-                      ? <TeamRadar team={otherTeam} maximums={maximums} />
-                      : null}
-                  </Col>
-                ]
-              : <Col md={12}>
-                  <TeamRadarTotals
-                    myTeam={myTeam}
-                    myCount={
-                      result.my_team_count != null
-                        ? result.my_team_count
-                        : result.my_team_percentage
-                    }
-                    otherTeam={otherTeam}
-                    otherCount={
-                      result.other_team_count != null
-                        ? result.other_team_count
-                        : result.other_team_percentage
-                    }
-                  />
-                </Col>}
+            {this.state.show < 5 ? (
+              [
+                <Col sm={6} md={6} key="myTeam">
+                  <h4>
+                    <FormattedMessage
+                      id="resultDetails.teamsButton.myTeamTitle"
+                      defaultMessage="My Team"
+                    />
+                    {myTeamPower != null ? (
+                        <Label bsStyle="default" style={{ fontWeight: 'normal', marginLeft: 5, marginRight: 5 }}>
+                            <FormattedMessage
+                              id="resultDetails.summary.estimatePower"
+                              defaultMessage="Estimate Power {power}"
+                              values={{ power: myTeamPower}}
+                            />
+                        </Label>
+                    ) : null}
+                    {resultChanged.tag_id ? (
+                        <Label bsStyle="default" style={{ fontWeight: 'normal', marginRight: 5, }}>
+                          {`${resultChanged.tag_id}`}
+                        </Label>
+                    ) : null}
+                  </h4>
+                  {this.state.show === 1 ? (
+                    <TeamStatsTable team={myTeam} />
+                  ) : null}
+                  {this.state.show === 2 ? (
+                    <TeamGearTable team={myTeam} />
+                  ) : null}
+                  {this.state.show === 3 ? (
+                    <TeamInfoTable team={myTeam} />
+                  ) : null}
+                  {this.state.show === 4 ? (
+                    <TeamRadar team={myTeam} maximums={maximums} />
+                  ) : null}
+                </Col>,
+                <Col sm={6} md={6} key="otherTeam">
+                  <h4>
+                    <FormattedMessage
+                      id="resultDetails.teamsButton.otherTeamTitle"
+                      defaultMessage="Enemy Team"
+                    />
+                    {otherTeamPower != null ? (
+                        <Label bsStyle="default" style={{ fontWeight: 'normal', marginLeft: 5 }}>
+                            <FormattedMessage
+                              id="resultDetails.summary.estimatePower"
+                              defaultMessage="Estimate Power {power}"
+                              values={{ power: otherTeamPower}}
+                            />
+                        </Label>
+                    ) : null}
+                  </h4>
+                  {this.state.show === 1 ? (
+                    <TeamStatsTable team={otherTeam} />
+                  ) : null}
+                  {this.state.show === 2 ? (
+                    <TeamGearTable team={otherTeam} />
+                  ) : null}
+                  {this.state.show === 3 ? (
+                    <TeamInfoTable team={otherTeam} />
+                  ) : null}
+                  {this.state.show === 4 ? (
+                    <TeamRadar team={otherTeam} maximums={maximums} />
+                  ) : null}
+                </Col>
+              ]
+            ) : (
+              <Col md={12}>
+                <TeamRadarTotals
+                  myTeam={myTeam}
+                  myCount={
+                    result.my_team_count != null ? (
+                      result.my_team_count
+                    ) : (
+                      result.my_team_percentage
+                    )
+                  }
+                  otherTeam={otherTeam}
+                  otherCount={
+                    result.other_team_count != null ? (
+                      result.other_team_count
+                    ) : (
+                      result.other_team_percentage
+                    )
+                  }
+                />
+              </Col>
+            )}
           </Row>
         </Grid>
       </PanelWithMenu>
+      </div>
     );
   }
 }

@@ -5,6 +5,8 @@
 
 # testing
 /coverage
+stage.json
+weapon.json
 
 # production
 /build

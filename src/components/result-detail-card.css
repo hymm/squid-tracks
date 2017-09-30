@@ -1,0 +1,49 @@
+:root {
+  --regular-light-color: rgb(238, 254, 194);
+  --regular-normal-color: rgb(152, 207, 4);
+  --regular-dark-color: rgb(112, 152, 3);
+
+  --gachi-light-color: rgb(254, 228, 207);
+  --gachi-normal-color: rgb(249, 114, 7);
+  --gachi-dark-color: rgb(220, 102, 5);
+
+  --league-light-color: rgb(252, 228, 238);
+  --league-normal-color: rgb(228, 24, 113);
+  --league-dark-color: rgb(205, 24, 101);
+
+  --private-light-color: rgb(250, 232, 255);
+  --private-normal-color: rgb(157, 0, 200);
+  --private-dark-color: rgb(133, 36, 162);
+}
+
+.regular .panel-heading.nav.navbar-default {
+  background: var(--regular-light-color);
+}
+.gachi .panel-heading.nav.navbar-default {
+  background: var(--gachi-light-color);
+}
+.league_pair .panel-heading.nav.navbar-default {
+  background: var(--league-light-color);
+}
+.league_team .panel-heading.nav.navbar-default {
+  background: var(--league-light-color);
+}
+.private .panel-heading.nav.navbar-default {
+  background: var(--private-light-color);
+}
+
+.regular .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: var(--regular-light-color);
+}
+.gachi .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: var(--gachi-light-color);
+}
+.league_pair .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: var(--league-light-color);
+}
+.league_team .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: var(--league-light-color);
+}
+.private .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: var(--private-light-color);
+}

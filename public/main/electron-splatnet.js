@@ -142,6 +142,9 @@ ipcMain.on('getApi', async (e, url) => {
 ipcMain.on('postApi', async (e, url, body) => {
   try {
     e.returnValue = await splatnet.postSplatnetApi(url, body);
+    if (url.includes('onlineshop/order')) {
+      clearSplatnetCache();
+    }
   } catch (e) {
     const message = `Error posting ${url}: ${e}`;
     uaException(message);

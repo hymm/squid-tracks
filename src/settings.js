@@ -80,12 +80,6 @@ class StatInkSettings extends React.Component {
   }
 }
 
-function handleLogoutClick(callback) {
-  event('user', 'logout');
-  ipcRenderer.sendSync('logout');
-  callback();
-}
-
 class GoogleAnalyticsCheckbox extends React.Component {
   state = { enabled: false };
 
@@ -120,6 +114,10 @@ class IksmToken extends React.Component {
     ipcRenderer.on('iksmToken', this.handleToken);
   }
 
+  componentWillUnmount() {
+    ipcRenderer.removeListener('iksmToken', this.handleToken);
+  }
+
   handleToken = (e, cookie) => {
     this.setState({ cookie: cookie });
   };
@@ -146,18 +144,18 @@ class IksmToken extends React.Component {
 }
 
 const LanguageSettings = ({ setLocale, locale }) => {
-    return (
-        <Row>
-          <Col md={12}>
-            <Panel header={<h3>Splatnet API Language</h3>}>
-              Languages are limited by Nintendo regions, so several of the
-              languages listed will not work. If you think your language should be
-              supported, please contact the developer.
-              <LanguageSelect setLocale={setLocale} locale={locale} />
-            </Panel>
-          </Col>
-        </Row>
-    );
+  return (
+    <Row>
+      <Col md={12}>
+        <Panel header={<h3>Splatnet API Language</h3>}>
+          Languages are limited by Nintendo regions, so several of the languages
+          listed will not work. If you think your language should be supported,
+          please contact the developer.
+          <LanguageSelect setLocale={setLocale} locale={locale} />
+        </Panel>
+      </Col>
+    </Row>
+  );
 };
 
 const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
@@ -211,14 +209,6 @@ const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
             </h4>
             Expiration: {tokenExpiration}
             <IksmToken />
-            <Button
-              block
-              bsStyle="danger"
-              style={{ marginTop: 10 }}
-              onClick={() => handleLogoutClick(logoutCallback)}
-            >
-              Logout
-            </Button>
           </Panel>
         </Col>
       </Row>
