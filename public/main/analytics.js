@@ -9,7 +9,7 @@ const store = new Store({
   configName: 'user-data',
   defaults: {
     uuid: '',
-    gaEnabled: true,
+    gaEnabled: true
   }
 });
 
@@ -39,7 +39,7 @@ module.exports.event = event;
 
 const uaException = (exd, ...args) => {
   if (store.get('gaEnabled')) {
-      visitor.exception({ exd, av: appVersion }, ...args).send();
+    visitor.exception({ exd, av: appVersion }, ...args).send();
   }
-}
+};
 module.exports.uaException = uaException;

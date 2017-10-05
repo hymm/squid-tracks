@@ -148,12 +148,11 @@ export default class LeagueRankings extends React.Component {
         calcStats.totals['uses'][2] *
         100;
       weapons_out[j]['uses'].diff_this_to_last = (weapons_out[j]['uses']
-        .this_week_percent - weapons_out[j]['uses'].last_week_percent).toFixed(
-        1
-      );
+        .this_week_percent - weapons_out[j]['uses'].last_week_percent
+      ).toFixed(1);
       weapons_out[j]['uses'].diff_last_to_last_last = (weapons_out[j]['uses']
-        .last_week_percent -
-        weapons_out[j]['uses'].last_last_week_percent).toFixed(1);
+        .last_week_percent - weapons_out[j]['uses'].last_last_week_percent
+      ).toFixed(1);
 
       weapons_out[j]['total_points'].this_week_percent =
         weapons_out[j]['total_points'].this_week /
@@ -169,31 +168,28 @@ export default class LeagueRankings extends React.Component {
         100;
       weapons_out[j]['total_points'].diff_this_to_last = (weapons_out[j][
         'total_points'
-      ].this_week_percent -
-        weapons_out[j]['total_points'].last_week_percent).toFixed(1);
+      ].this_week_percent - weapons_out[j]['total_points'].last_week_percent
+      ).toFixed(1);
       weapons_out[j]['total_points'].diff_last_to_last_last = (weapons_out[j][
         'total_points'
       ].last_week_percent -
-        weapons_out[j]['total_points'].last_last_week_percent).toFixed(1);
+        weapons_out[j]['total_points'].last_last_week_percent
+      ).toFixed(1);
 
       weapons_out[j]['avg_points'].diff_this_to_last = (weapons_out[j][
         'avg_points'
-      ].this_week - weapons_out[j]['avg_points'].last_week).toFixed(1);
+      ].this_week - weapons_out[j]['avg_points'].last_week
+      ).toFixed(1);
       weapons_out[j]['avg_points'].diff_last_to_last_last = (weapons_out[j][
         'avg_points'
-      ].last_week - weapons_out[j]['avg_points'].last_last_week).toFixed(1);
+      ].last_week - weapons_out[j]['avg_points'].last_last_week
+      ).toFixed(1);
     }
 
     sort(weapons_out, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel
-        header={
-          <h3>
-            {this.props.title}
-          </h3>
-        }
-      >
+      <Panel header={<h3>{this.props.title}</h3>}>
         <Grid fluid>
           <Row>
             <Col sm={12} md={12}>
@@ -229,7 +225,7 @@ export default class LeagueRankings extends React.Component {
               <Table striped bordered condensed hover>
                 <thead>
                   <tr>
-                    {this.columnHeaders.map(header =>
+                    {this.columnHeaders.map(header => (
                       <TableHeader
                         key={header.text}
                         setState={this.setState.bind(this)}
@@ -245,15 +241,13 @@ export default class LeagueRankings extends React.Component {
                         text={header.text}
                         sortColumn={this.state.sortColumn}
                       />
-                    )}
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {weapons_out.map(weapon =>
+                  {weapons_out.map(weapon => (
                     <tr key={weapon.name}>
-                      <td>
-                        {weapon.name}
-                      </td>
+                      <td>{weapon.name}</td>
                       <td>
                         {weapon[
                           this.state.data_to_display
@@ -336,7 +330,7 @@ export default class LeagueRankings extends React.Component {
                         </Label>
                       </td>
                     </tr>
-                  )}
+                  ))}
                 </tbody>
               </Table>
             </Col>

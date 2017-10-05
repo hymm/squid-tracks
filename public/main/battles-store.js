@@ -3,8 +3,7 @@ const Store = require('./store');
 
 const battleStore = new Store({
   configName: 'battles',
-  defaults: {
-  }
+  defaults: {}
 });
 
 ipcMain.on('setBattleToStore', (event, battle) => {
@@ -15,8 +14,8 @@ ipcMain.on('setBattleToStore', (event, battle) => {
 ipcMain.on('getBattleFromStore', (event, number) => {
   const battle = battleStore.get(number);
   if (battle == null) {
-      event.returnValue = null;
-      return;
+    event.returnValue = null;
+    return;
   }
   event.returnValue = battle;
 });

@@ -53,7 +53,10 @@ const Routes = ({
           <Route path="/results" component={Results} />
           <Route path="/meta" component={Meta} />
           <Route path="/store" component={AnnieStore} />
-          <Route path="/error" component={() => <ErrorPage logoutCallback={logoutCallback} />} />
+          <Route
+            path="/error"
+            component={() => <ErrorPage logoutCallback={logoutCallback} />}
+          />
           <Route
             path="/settings"
             component={() => (
@@ -64,13 +67,16 @@ const Routes = ({
       ) : (
         <Login setLogin={setLogin} setLocale={setLocale} locale={locale} />
       )}
-      <Route exact path="/" render={() => (
-        loggedIn ? (
-          <Redirect from="/" to="/home" />
-        ) : (
-          <Redirect from="/" to="/login" />
-        )
-      )}/>
+      <Route
+        exact
+        path="/"
+        render={() =>
+          loggedIn ? (
+            <Redirect from="/" to="/home" />
+          ) : (
+            <Redirect from="/" to="/login" />
+          )}
+      />
     </div>
   );
 };

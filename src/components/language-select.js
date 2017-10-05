@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormControl } from 'react-bootstrap';
-import { event } from '../analytics'
+import { event } from '../analytics';
 
 const languages = [
   { name: 'Default', code: '' },
@@ -21,18 +21,18 @@ export default class LanguageSelect extends React.Component {
   render() {
     const { locale } = this.props;
     return (
-        <FormControl
-          value={locale}
-          id="languageSelect"
-          componentClass="select"
-          onChange={this.handleChange}
-        >
-          {languages.map(language => (
-            <option key={language.code} value={language.code}>
-              {language.name}
-            </option>
-          ))}
-        </FormControl>
+      <FormControl
+        value={locale}
+        id="languageSelect"
+        componentClass="select"
+        onChange={this.handleChange}
+      >
+        {languages.map(language => (
+          <option key={language.code} value={language.code}>
+            {language.name}
+          </option>
+        ))}
+      </FormControl>
     );
   }
 }

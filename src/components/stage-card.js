@@ -188,7 +188,7 @@ class StageCard extends React.Component {
                         defaultMessage="Name"
                       />
                     </th>
-                    {this.columnHeaders.map(header =>
+                    {this.columnHeaders.map(header => (
                       <TableHeader
                         key={header.text}
                         setState={this.setState.bind(this)}
@@ -199,15 +199,13 @@ class StageCard extends React.Component {
                         text={header.text}
                         sortColumn={this.state.sortColumn}
                       />
-                    )}
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {stageStats.map(stage =>
+                  {stageStats.map(stage => (
                     <tr key={stage.stage.name}>
-                      <td>
-                        {stage.stage.name}
-                      </td>
+                      <td>{stage.stage.name}</td>
                       <td>
                         {this.state.percent
                           ? `${stage.area_percent.toFixed(2)}`
@@ -229,7 +227,7 @@ class StageCard extends React.Component {
                           : `${stage.total_win} - ${stage.total_lose}`}
                       </td>
                     </tr>
-                  )}
+                  ))}
                 </tbody>
                 <tfoot>
                   <tr>

@@ -75,14 +75,14 @@ class ResultControl extends React.Component {
             <Glyphicon glyph="triangle-left" />
           </Button>
           <DropdownButton title={currentBattle} id={'battles'}>
-            {results.map((result, idx) =>
+            {results.map((result, idx) => (
               <MenuItem
                 key={result.battle_number}
                 onClick={() => changeResult(idx)}
               >
                 {result.battle_number}
               </MenuItem>
-            )}
+            ))}
           </DropdownButton>
           <Button
             onClick={() => changeResult(resultIndex - 1)}
