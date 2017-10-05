@@ -66,8 +66,9 @@ class App extends Component {
     const message = messages[locale] || messages.en;
     return (
       <IntlProvider locale={locale} messages={message}>
-        <SplatnetProvider>
+
           <Router history={history}>
+              <SplatnetProvider>
             <Routes
               loggedIn={loggedIn}
               setLogin={this.setLogin}
@@ -76,8 +77,9 @@ class App extends Component {
               setLocale={this.setLocale}
               locale={locale}
             />
+            </SplatnetProvider>
           </Router>
-        </SplatnetProvider>
+
       </IntlProvider>
     );
   }
