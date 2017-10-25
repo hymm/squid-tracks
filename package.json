@@ -2,7 +2,7 @@
   "name": "squid-tracks",
   "description": "alternative splatnet2 client with ability to upload to stat.ink",
   "productName": "SquidTracks",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": true,
   "author": "@Wrong_Shoe",
   "devDependencies": {
@@ -72,6 +72,7 @@
     "prepack": "yarn build",
     "pack": "build --em.main=build/electron.js",
     "release": "build --em.main=build/electron.js --publish=always",
+    "release:win": "build --em.main=build/electron.js --ia32 --x64 --publish=always",
     "test": "react-app-rewired test --env=jsdom",
     "test:main": "jest -c=jest.main.config.json --watch",
     "eject": "react-app-rewired eject",

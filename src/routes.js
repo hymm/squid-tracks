@@ -11,6 +11,7 @@ import Navigation from './navigation';
 import AnnieStore from './annie-store';
 import Login from './login';
 import About from './about';
+import ErrorPage from './error';
 
 // trigger an updateRecords on login for user nickname
 class Startup extends React.Component {
@@ -53,6 +54,10 @@ const Routes = ({
           <Route path="/meta" component={Meta} />
           <Route path="/store" component={AnnieStore} />
           <Route
+            path="/error"
+            component={() => <ErrorPage logoutCallback={logoutCallback} />}
+          />
+          <Route
             path="/settings"
             component={() => (
               <Settings token={token} setLocale={setLocale} locale={locale} />
@@ -62,13 +67,16 @@ const Routes = ({
       ) : (
         <Login setLogin={setLogin} setLocale={setLocale} locale={locale} />
       )}
-      <Route exact path="/" render={() => (
-        loggedIn ? (
-          <Redirect from="/" to="/home" />
-        ) : (
-          <Redirect from="/" to="/login" />
-        )
-      )}/>
+      <Route
+        exact
+        path="/"
+        render={() =>
+          loggedIn ? (
+            <Redirect from="/" to="/home" />
+          ) : (
+            <Redirect from="/" to="/login" />
+          )}
+      />
     </div>
   );
 };

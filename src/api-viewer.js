@@ -67,11 +67,11 @@ class ApiTester extends React.Component {
           onChange={this.handleUrlChange}
         />
         <select onClick={this.handleSelectChange}>
-          {this.urls.map(url =>
+          {this.urls.map(url => (
             <option key={url} value={url}>
               {url}
             </option>
-          )}
+          ))}
         </select>
         <Json data={this.state.reply} invertTheme={false} />
       </div>

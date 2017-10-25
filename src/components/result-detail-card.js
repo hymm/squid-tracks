@@ -308,221 +308,236 @@ class ResultDetailCard extends React.Component {
 
     const maximums = this.calculateMaximums(myTeam, otherTeam);
 
-    const myTeamPower = resultChanged.my_estimate_league_point != null ? (
-      resultChanged.my_estimate_league_point
-    ) : resultChanged.my_estimate_fes_power != null ? (
-      resultChanged.my_estimate_fes_power
-    ) : null;
-    const otherTeamPower = resultChanged.other_estimate_league_point != null ? (
-      resultChanged.other_estimate_league_point
-    ) : resultChanged.other_estimate_fes_power != null ? (
-      resultChanged.other_estimate_fes_power
-    ) : null;
+    const myTeamPower =
+      resultChanged.my_estimate_league_point != null
+        ? resultChanged.my_estimate_league_point
+        : resultChanged.my_estimate_fes_power != null
+          ? resultChanged.my_estimate_fes_power
+          : null;
+    const otherTeamPower =
+      resultChanged.other_estimate_league_point != null
+        ? resultChanged.other_estimate_league_point
+        : resultChanged.other_estimate_fes_power != null
+          ? resultChanged.other_estimate_fes_power
+          : null;
 
     return (
       <div className={resultChanged.game_mode.key}>
-      <PanelWithMenu
-        header={
-          <h3 className="panel-title">
-            <FormattedMessage
-              id="resultDetails.title"
-              defaultMessage="Battle #{battle_number} Details"
-              values={{ battle_number: resultChanged.battle_number }}
-            />
-            {linkInfo ? (
-              <a
-                onClick={() =>
-                  openExternal(
-                    `https://stat.ink/@${linkInfo.username}/spl2/${linkInfo.battle}`
-                  )}
-                style={{ cursor: 'pointer' }}
-              >
-                <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
-              </a>
-            ) : null}
-          </h3>
-        }
-        menu={<ResultDetailMenu result={resultChanged} />}
-      >
-        <Grid fluid>
-          <Row>
-            <Col md={12}>
-              <BattleSummary result={resultChanged} />
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              <ButtonToolbar style={{ marginBottom: '10px' }}>
-                <ButtonGroup>
-                  <Button
-                    onClick={this.showStats}
-                    active={this.state.show === 1}
-                  >
-                    <Glyphicon glyph="th" />
-                  </Button>
-                  <Button
-                    onClick={this.showGear}
-                    active={this.state.show === 2}
-                    bsStyle={this.getGearStyle()}
-                    style={{ padding: '8px 12px 4px 12px' }}
-                  >
-                    <svg width="16" height="14" viewBox="0 0 448 416">
-                      <path
-                        fill="#000"
-                        d="M448 48L288 0c-13.988 27.227-30.771 40.223-63.769 40.223C191.723 39.676 173.722 27 160 0L0 48l32 88 64-8-16 288h288l-16-288 64 8 32-88z"
-                      />
-                    </svg>
-                  </Button>
-                  <Button
-                    onClick={this.showRadarTotals}
-                    active={this.state.show === 5}
-                    style={{ padding: '8px 12px 4px 12px' }}
-                  >
-                    <svg width="14" height="14">
-                      <polygon
-                        points="7,0,13.062177826491,3.5,13.062177826491,10.5,7,14,0.93782217350893,10.5,0.93782217350893,3.5"
-                        style={{
-                          fill: '#000'
-                        }}
-                      />
-                    </svg>
-                  </Button>
-                  <Button
-                    onClick={this.showRadarTeam}
-                    active={this.state.show === 4}
-                    style={{ padding: '8px 12px 4px 12px' }}
-                  >
-                    <svg width="16" height="14">
-                      <polygon
-                        points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
-                        style={{
-                          fill: '#000'
-                        }}
-                      />
-                    </svg>
-                    <svg width="14" height="14">
-                      <polygon
-                        points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
-                        style={{
-                          fill: '#000'
-                        }}
-                      />
-                    </svg>
-                  </Button>
-                  <Button
-                    onClick={this.showInfo}
-                    active={this.state.show === 3}
-                  >
-                    <Glyphicon glyph="option-horizontal" />
-                  </Button>
-                </ButtonGroup>
-                <Button
-                  onClick={() => {
-                    event('result-details', 'anonymize', !this.state.anonymize);
-                    this.setState({ anonymize: !this.state.anonymize });
-                  }}
-                  active={this.state.anonymize}
+        <PanelWithMenu
+          header={
+            <h3 className="panel-title">
+              <FormattedMessage
+                id="resultDetails.title"
+                defaultMessage="Battle #{battle_number} Details"
+                values={{ battle_number: resultChanged.battle_number }}
+              />
+              {linkInfo ? (
+                <a
+                  onClick={() =>
+                    openExternal(
+                      `https://stat.ink/@${linkInfo.username}/spl2/${linkInfo.battle}`
+                    )}
+                  style={{ cursor: 'pointer' }}
                 >
-                  <FormattedMessage
-                    id={'resultDetails.anonymizeButton.text'}
-                    defaultMessage={'Anonymize'}
-                  />
-                </Button>
-              </ButtonToolbar>
-            </Col>
-          </Row>
-          <Row>
-            {this.state.show < 5 ? (
-              [
-                <Col sm={6} md={6} key="myTeam">
-                  <h4>
+                  <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
+                </a>
+              ) : null}
+            </h3>
+          }
+          menu={<ResultDetailMenu result={resultChanged} />}
+        >
+          <Grid fluid>
+            <Row>
+              <Col md={12}>
+                <BattleSummary result={resultChanged} />
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}>
+                <ButtonToolbar style={{ marginBottom: '10px' }}>
+                  <ButtonGroup>
+                    <Button
+                      onClick={this.showStats}
+                      active={this.state.show === 1}
+                    >
+                      <Glyphicon glyph="th" />
+                    </Button>
+                    <Button
+                      onClick={this.showGear}
+                      active={this.state.show === 2}
+                      bsStyle={this.getGearStyle()}
+                      style={{ padding: '8px 12px 4px 12px' }}
+                    >
+                      <svg width="16" height="14" viewBox="0 0 448 416">
+                        <path
+                          fill="#000"
+                          d="M448 48L288 0c-13.988 27.227-30.771 40.223-63.769 40.223C191.723 39.676 173.722 27 160 0L0 48l32 88 64-8-16 288h288l-16-288 64 8 32-88z"
+                        />
+                      </svg>
+                    </Button>
+                    <Button
+                      onClick={this.showRadarTotals}
+                      active={this.state.show === 5}
+                      style={{ padding: '8px 12px 4px 12px' }}
+                    >
+                      <svg width="14" height="14">
+                        <polygon
+                          points="7,0,13.062177826491,3.5,13.062177826491,10.5,7,14,0.93782217350893,10.5,0.93782217350893,3.5"
+                          style={{
+                            fill: '#000'
+                          }}
+                        />
+                      </svg>
+                    </Button>
+                    <Button
+                      onClick={this.showRadarTeam}
+                      active={this.state.show === 4}
+                      style={{ padding: '8px 12px 4px 12px' }}
+                    >
+                      <svg width="16" height="14">
+                        <polygon
+                          points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
+                          style={{
+                            fill: '#000'
+                          }}
+                        />
+                      </svg>
+                      <svg width="14" height="14">
+                        <polygon
+                          points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
+                          style={{
+                            fill: '#000'
+                          }}
+                        />
+                      </svg>
+                    </Button>
+                    <Button
+                      onClick={this.showInfo}
+                      active={this.state.show === 3}
+                    >
+                      <Glyphicon glyph="option-horizontal" />
+                    </Button>
+                  </ButtonGroup>
+                  <Button
+                    onClick={() => {
+                      event(
+                        'result-details',
+                        'anonymize',
+                        !this.state.anonymize
+                      );
+                      this.setState({ anonymize: !this.state.anonymize });
+                    }}
+                    active={this.state.anonymize}
+                  >
                     <FormattedMessage
-                      id="resultDetails.teamsButton.myTeamTitle"
-                      defaultMessage="My Team"
+                      id={'resultDetails.anonymizeButton.text'}
+                      defaultMessage={'Anonymize'}
                     />
-                    {myTeamPower != null ? (
-                        <Label bsStyle="default" style={{ fontWeight: 'normal', marginLeft: 5, marginRight: 5 }}>
-                            <FormattedMessage
-                              id="resultDetails.summary.estimatePower"
-                              defaultMessage="Estimate Power {power}"
-                              values={{ power: myTeamPower}}
-                            />
+                  </Button>
+                </ButtonToolbar>
+              </Col>
+            </Row>
+            <Row>
+              {this.state.show < 5 ? (
+                [
+                  <Col sm={6} md={6} key="myTeam">
+                    <h4>
+                      <FormattedMessage
+                        id="resultDetails.teamsButton.myTeamTitle"
+                        defaultMessage="My Team"
+                      />
+                      {myTeamPower != null ? (
+                        <Label
+                          bsStyle="default"
+                          style={{
+                            fontWeight: 'normal',
+                            marginLeft: 5,
+                            marginRight: 5
+                          }}
+                        >
+                          <FormattedMessage
+                            id="resultDetails.summary.estimatePower"
+                            defaultMessage="Estimate Power {power}"
+                            values={{ power: myTeamPower }}
+                          />
                         </Label>
-                    ) : null}
-                    {resultChanged.tag_id ? (
-                        <Label bsStyle="default" style={{ fontWeight: 'normal', marginRight: 5, }}>
+                      ) : null}
+                      {resultChanged.tag_id ? (
+                        <Label
+                          bsStyle="default"
+                          style={{ fontWeight: 'normal', marginRight: 5 }}
+                        >
                           {`${resultChanged.tag_id}`}
                         </Label>
+                      ) : null}
+                    </h4>
+                    {this.state.show === 1 ? (
+                      <TeamStatsTable team={myTeam} />
                     ) : null}
-                  </h4>
-                  {this.state.show === 1 ? (
-                    <TeamStatsTable team={myTeam} />
-                  ) : null}
-                  {this.state.show === 2 ? (
-                    <TeamGearTable team={myTeam} />
-                  ) : null}
-                  {this.state.show === 3 ? (
-                    <TeamInfoTable team={myTeam} />
-                  ) : null}
-                  {this.state.show === 4 ? (
-                    <TeamRadar team={myTeam} maximums={maximums} />
-                  ) : null}
-                </Col>,
-                <Col sm={6} md={6} key="otherTeam">
-                  <h4>
-                    <FormattedMessage
-                      id="resultDetails.teamsButton.otherTeamTitle"
-                      defaultMessage="Enemy Team"
-                    />
-                    {otherTeamPower != null ? (
-                        <Label bsStyle="default" style={{ fontWeight: 'normal', marginLeft: 5 }}>
-                            <FormattedMessage
-                              id="resultDetails.summary.estimatePower"
-                              defaultMessage="Estimate Power {power}"
-                              values={{ power: otherTeamPower}}
-                            />
+                    {this.state.show === 2 ? (
+                      <TeamGearTable team={myTeam} />
+                    ) : null}
+                    {this.state.show === 3 ? (
+                      <TeamInfoTable team={myTeam} />
+                    ) : null}
+                    {this.state.show === 4 ? (
+                      <TeamRadar team={myTeam} maximums={maximums} />
+                    ) : null}
+                  </Col>,
+                  <Col sm={6} md={6} key="otherTeam">
+                    <h4>
+                      <FormattedMessage
+                        id="resultDetails.teamsButton.otherTeamTitle"
+                        defaultMessage="Enemy Team"
+                      />
+                      {otherTeamPower != null ? (
+                        <Label
+                          bsStyle="default"
+                          style={{ fontWeight: 'normal', marginLeft: 5 }}
+                        >
+                          <FormattedMessage
+                            id="resultDetails.summary.estimatePower"
+                            defaultMessage="Estimate Power {power}"
+                            values={{ power: otherTeamPower }}
+                          />
                         </Label>
+                      ) : null}
+                    </h4>
+                    {this.state.show === 1 ? (
+                      <TeamStatsTable team={otherTeam} />
                     ) : null}
-                  </h4>
-                  {this.state.show === 1 ? (
-                    <TeamStatsTable team={otherTeam} />
-                  ) : null}
-                  {this.state.show === 2 ? (
-                    <TeamGearTable team={otherTeam} />
-                  ) : null}
-                  {this.state.show === 3 ? (
-                    <TeamInfoTable team={otherTeam} />
-                  ) : null}
-                  {this.state.show === 4 ? (
-                    <TeamRadar team={otherTeam} maximums={maximums} />
-                  ) : null}
+                    {this.state.show === 2 ? (
+                      <TeamGearTable team={otherTeam} />
+                    ) : null}
+                    {this.state.show === 3 ? (
+                      <TeamInfoTable team={otherTeam} />
+                    ) : null}
+                    {this.state.show === 4 ? (
+                      <TeamRadar team={otherTeam} maximums={maximums} />
+                    ) : null}
+                  </Col>
+                ]
+              ) : (
+                <Col md={12}>
+                  <TeamRadarTotals
+                    myTeam={myTeam}
+                    myCount={
+                      result.my_team_count != null
+                        ? result.my_team_count
+                        : result.my_team_percentage
+                    }
+                    otherTeam={otherTeam}
+                    otherCount={
+                      result.other_team_count != null
+                        ? result.other_team_count
+                        : result.other_team_percentage
+                    }
+                  />
                 </Col>
-              ]
-            ) : (
-              <Col md={12}>
-                <TeamRadarTotals
-                  myTeam={myTeam}
-                  myCount={
-                    result.my_team_count != null ? (
-                      result.my_team_count
-                    ) : (
-                      result.my_team_percentage
-                    )
-                  }
-                  otherTeam={otherTeam}
-                  otherCount={
-                    result.other_team_count != null ? (
-                      result.other_team_count
-                    ) : (
-                      result.other_team_percentage
-                    )
-                  }
-                />
-              </Col>
-            )}
-          </Row>
-        </Grid>
-      </PanelWithMenu>
+              )}
+            </Row>
+          </Grid>
+        </PanelWithMenu>
       </div>
     );
   }

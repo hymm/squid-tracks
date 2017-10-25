@@ -105,25 +105,25 @@ class WeaponCard extends React.Component {
           <thead>
             <tr>
               {this.columnHeaders.map(header => {
-                return header.noSort
-                  ? <th key={header.text}>
-                      {header.text}
-                    </th>
-                  : <TableHeader
-                      key={header.text}
-                      setState={this.setState.bind(this)}
-                      sort={{
-                        sortColumn: header.sortColumn,
-                        sortDirection: header.sortDirection
-                      }}
-                      text={header.text}
-                      sortColumn={this.state.sortColumn}
-                    />;
+                return header.noSort ? (
+                  <th key={header.text}>{header.text}</th>
+                ) : (
+                  <TableHeader
+                    key={header.text}
+                    setState={this.setState.bind(this)}
+                    sort={{
+                      sortColumn: header.sortColumn,
+                      sortDirection: header.sortDirection
+                    }}
+                    text={header.text}
+                    sortColumn={this.state.sortColumn}
+                  />
+                );
               })}
             </tr>
           </thead>
           <tbody>
-            {weaponArray.map(weapon =>
+            {weaponArray.map(weapon => (
               <tr key={weapon.weapon.name}>
                 <td
                   style={{
@@ -139,26 +139,16 @@ class WeaponCard extends React.Component {
                     alt={weapon.weapon.name}
                   />
                 </td>
-                <td>
-                  {weapon.weapon.name}
-                </td>
-                <td>
-                  {weapon.total_count}
-                </td>
-                <td>
-                  {weapon.win_count}
-                </td>
-                <td>
-                  {weapon.lose_count}
-                </td>
-                <td>
-                  {weapon.percentage_count.toFixed(2)}
-                </td>
+                <td>{weapon.weapon.name}</td>
+                <td>{weapon.total_count}</td>
+                <td>{weapon.win_count}</td>
+                <td>{weapon.lose_count}</td>
+                <td>{weapon.percentage_count.toFixed(2)}</td>
                 <td style={{ textAlign: 'right' }}>
                   {weapon.total_paint_point}
                 </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </Table>
       </Panel>

@@ -26,13 +26,13 @@ function getIps() {
 }
 
 function convertPemToDex(pemBuffer) {
-    const { pki, asn1 } = forge;
-    const pemString = pemBuffer.toString('ascii');
-    const cert = pki.certificateFromPem(pemString);
-    var asn1Cert = pki.certificateToAsn1(cert);
-    const derBuffer = asn1.toDer(asn1Cert);
-    const derNode = new Buffer(derBuffer.getBytes(), 'binary');
-    return derNode;
+  const { pki, asn1 } = forge;
+  const pemString = pemBuffer.toString('ascii');
+  const cert = pki.certificateFromPem(pemString);
+  var asn1Cert = pki.certificateToAsn1(cert);
+  const derBuffer = asn1.toDer(asn1Cert);
+  const derNode = new Buffer(derBuffer.getBytes(), 'binary');
+  return derNode;
 }
 
 ipcMain.on('getIps', e => {
@@ -86,7 +86,6 @@ proxy.onRequest((ctx, callback) => {
 
   return callback();
 });
-
 
 ipcMain.on('startMitm', e => {
   proxy.listen({ port, sslCaDir: userDataPath });

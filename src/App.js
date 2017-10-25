@@ -42,13 +42,13 @@ class App extends Component {
     this.setState({ locale: ipcRenderer.sendSync('getFromStore', 'locale') });
   }
 
-  getSessionToken = (logout) => {
+  getSessionToken = logout => {
     this.setState({
       sessionToken: ipcRenderer.sendSync('getSessionToken'),
       loggedIn: false
     });
     if (!logout) {
-        history.push('/')
+      history.push('/');
     }
   };
 
@@ -66,8 +66,8 @@ class App extends Component {
     const message = messages[locale] || messages.en;
     return (
       <IntlProvider locale={locale} messages={message}>
-        <SplatnetProvider>
-          <Router history={history}>
+        <Router history={history}>
+          <SplatnetProvider>
             <Routes
               loggedIn={loggedIn}
               setLogin={this.setLogin}
@@ -76,8 +76,8 @@ class App extends Component {
               setLocale={this.setLocale}
               locale={locale}
             />
-          </Router>
-        </SplatnetProvider>
+          </SplatnetProvider>
+        </Router>
       </IntlProvider>
     );
   }

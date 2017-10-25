@@ -5,7 +5,7 @@ const { shell, app } = require('electron').remote;
 const { openExternal } = shell;
 const appVersion = app.getVersion();
 
-const AboutPage = () =>
+const AboutPage = () => (
   <Grid fluid style={{ marginTop: 65 }}>
     <Row>
       <Col md={12}>
@@ -181,6 +181,7 @@ const AboutPage = () =>
         </p>
       </Col>
     </Row>
-  </Grid>;
+  </Grid>
+);
 
 export default AboutPage;

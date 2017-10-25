@@ -44,11 +44,9 @@ class ResultsContainer extends React.Component {
             }}
             disabled={refreshing}
           >
-            {this.state.refreshing ? (
-              intl.formatMessage(this.messages.refreshed)
-            ) : (
-              intl.formatMessage(this.messages.refresh)
-            )}
+            {this.state.refreshing
+              ? intl.formatMessage(this.messages.refreshed)
+              : intl.formatMessage(this.messages.refresh)}
           </Button>
         </ButtonToolbar>
         <PlayerCard records={records.records} />

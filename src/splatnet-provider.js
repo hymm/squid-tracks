@@ -1,5 +1,6 @@
 import React from 'react';
 import update from 'immutability-helper';
+import { withRouter } from 'react-router-dom';
 import { Broadcast } from 'react-broadcast';
 import { ipcRenderer } from 'electron';
 import log from 'electron-log';
@@ -24,6 +25,7 @@ class SplatnetProvider extends React.Component {
         pair: {}
       }
     },
+    lastError: {},
     comm: {
       updateSchedule: () => {
         ipcRenderer.send('getApiAsync', 'schedules');
@@ -113,6 +115,8 @@ class SplatnetProvider extends React.Component {
   };
 
   handleApiError = (e, err) => {
+    this.setState({ lastError: err });
+    this.props.history.push('/error');
     log.error(err);
   };
 
@@ -140,4 +144,4 @@ class SplatnetProvider extends React.Component {
   }
 }
 
-export default SplatnetProvider;
+export default withRouter(SplatnetProvider);

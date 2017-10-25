@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Image } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-const TeamHeader = ({ player = { player: {} } }) =>
+const TeamHeader = ({ player = { player: {} } }) => (
   <thead>
     <tr>
       <th>
@@ -11,14 +11,14 @@ const TeamHeader = ({ player = { player: {} } }) =>
           defaultMessage="Player"
         />
       </th>
-      {player.player.udemae
-        ? <th>
-            <FormattedMessage
-              id="resultDetails.teamStats.header.rank"
-              defaultMessage="Rank"
-            />
-          </th>
-        : null}
+      {player.player.udemae ? (
+        <th>
+          <FormattedMessage
+            id="resultDetails.teamStats.header.rank"
+            defaultMessage="Rank"
+          />
+        </th>
+      ) : null}
       <th />
       <th>
         <FormattedMessage
@@ -45,7 +45,8 @@ const TeamHeader = ({ player = { player: {} } }) =>
         />
       </th>
     </tr>
-  </thead>;
+  </thead>
+);
 
 const PlayerRow = ({ player }) => {
   return (
@@ -53,18 +54,14 @@ const PlayerRow = ({ player }) => {
       style={{ color: player.game_paint_point === 0 ? 'lightgrey' : undefined }}
     >
       <td>
-        {player.game_paint_point === 0
-          ? <strike>
-              {player.player.nickname}
-            </strike>
-          : player.player.nickname}
+        {player.game_paint_point === 0 ? (
+          <strike>{player.player.nickname}</strike>
+        ) : (
+          player.player.nickname
+        )}
       </td>
 
-      {player.player.udemae
-        ? <td>
-            {`${player.player.udemae.name}`}
-          </td>
-        : null}
+      {player.player.udemae ? <td>{`${player.player.udemae.name}`}</td> : null}
       <td style={{ textAlign: 'center', background: 'darkgrey' }}>
         <Image
           src={`https://app.splatoon2.nintendo.net${player.player.weapon
@@ -73,18 +70,12 @@ const PlayerRow = ({ player }) => {
           alt={player.player.weapon.name}
         />
       </td>
-      <td>
-        {player.game_paint_point}
-      </td>
+      <td>{player.game_paint_point}</td>
       <td>
         {`${player.kill_count + player.assist_count} (${player.assist_count})`}
       </td>
-      <td>
-        {`${player.kill_count} / ${player.death_count}`}
-      </td>
-      <td>
-        {player.special_count}
-      </td>
+      <td>{`${player.kill_count} / ${player.death_count}`}</td>
+      <td>{player.special_count}</td>
     </tr>
   );
 };
@@ -99,9 +90,9 @@ const TeamStatTable = ({ result, team }) => {
     <Table striped bordered condensed hover>
       <TeamHeader player={team[0]} />
       <tbody>
-        {team.map(player =>
+        {team.map(player => (
           <PlayerRow key={player.player.principal_id} player={player} />
-        )}
+        ))}
       </tbody>
       <tfoot>
         <tr>
@@ -116,15 +107,9 @@ const TeamStatTable = ({ result, team }) => {
           <td>
             {team.reduce((sum, player) => sum + player.game_paint_point, 0)}
           </td>
-          <td>
-            {`${total_k + total_a} (${total_a})`}
-          </td>
-          <td>
-            {`${total_k} / ${total_d}`}
-          </td>
-          <td>
-            {`${total_s}`}
-          </td>
+          <td>{`${total_k + total_a} (${total_a})`}</td>
+          <td>{`${total_k} / ${total_d}`}</td>
+          <td>{`${total_s}`}</td>
         </tr>
       </tfoot>
     </Table>

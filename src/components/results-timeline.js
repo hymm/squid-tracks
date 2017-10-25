@@ -25,6 +25,45 @@ class ResultDot extends React.Component {
   }
 }
 
+class BarLabel extends React.Component {
+  render() {
+    const { width, x, y, data, index } = this.props;
+    switch (data[index].rule) {
+      case 'turf_war':
+        return (
+          <rect
+            {...this.props}
+            y={y - width / 2}
+            height={width / 2}
+            fill={'grey'}
+          />
+        );
+      case 'splat_zones':
+        return (
+          <rect {...this.props} y={y - width} height={width} fill={'grey'} />
+        );
+      case 'tower_control':
+        return (
+          <polygon
+            points={`${x},${y} ${x + width},${y} ${x + width / 2},${y - width}`}
+            fill={'grey'}
+          />
+        );
+      case 'rainmaker':
+        return (
+          <circle
+            cx={x + width / 2}
+            cy={y - width / 2}
+            r={width / 2}
+            fill={'grey'}
+          />
+        );
+      default:
+        return null;
+    }
+  }
+}
+
 class ResultsTimeline extends React.Component {
   getModeColor(lobby, result) {
     let color = 'grey';
@@ -85,6 +124,7 @@ class ResultsTimeline extends React.Component {
       lobbyBar: 100,
       inked: getValue(result, 'player_result.game_paint_point'),
       power,
+      rule: result.rule.key,
       lobby: result.game_mode.key,
       result: result.my_team_result.key,
       myScore: counts.mine,
@@ -271,7 +311,12 @@ class ResultsTimeline extends React.Component {
             hide
           />
           <CartesianGrid stroke="#f5f5f5" />
-          <Bar dataKey="lobbyBar" yAxisId="mode" isAnimationActive={false}>
+          <Bar
+            dataKey="lobbyBar"
+            yAxisId="mode"
+            isAnimationActive={false}
+            label={<BarLabel data={data} />}
+          >
             {data.map((entry, index) => {
               const color = this.getModeColor(entry.lobby, entry.result);
               return <Cell key={index} fill={color} fillOpacity={0.8} />;
@@ -279,15 +324,15 @@ class ResultsTimeline extends React.Component {
           </Bar>
           {activeValue === 'power' ? this.renderPowerTrend(powerAvg) : null}
           {activeValue === 'inked' ? this.renderInkedTrend(averages.p) : null}
-          {activeValue === 'killsAndAssists' ? (
-            this.renderKillsAndAssistsTrend(averages.k, averages.a)
-          ) : null}
-          {activeValue === 'killsAndDeaths' ? (
-            this.renderKillsAndDeathsTrend(averages.k, averages.d)
-          ) : null}
-          {activeValue === 'specials' ? (
-            this.renderSpecialsTrend(averages.s)
-          ) : null}
+          {activeValue === 'killsAndAssists'
+            ? this.renderKillsAndAssistsTrend(averages.k, averages.a)
+            : null}
+          {activeValue === 'killsAndDeaths'
+            ? this.renderKillsAndDeathsTrend(averages.k, averages.d)
+            : null}
+          {activeValue === 'specials'
+            ? this.renderSpecialsTrend(averages.s)
+            : null}
         </ComposedChart>
       </ResponsiveContainer>
     );

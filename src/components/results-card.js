@@ -360,15 +360,13 @@ class ResultsCard extends React.Component {
                   <td>{result.stage.name}</td>
                   <td>{result.my_team_result.key}</td>
                   <td>
-                    {result.other_estimate_league_point ? (
-                      result.other_estimate_league_point
-                    ) : result.estimate_gachi_power ? (
-                      result.estimate_gachi_power
-                    ) : result.other_estimate_fes_power ? (
-                      result.other_estimate_fes_power
-                    ) : (
-                      '---'
-                    )}
+                    {result.other_estimate_league_point
+                      ? result.other_estimate_league_point
+                      : result.estimate_gachi_power
+                        ? result.estimate_gachi_power
+                        : result.other_estimate_fes_power
+                          ? result.other_estimate_fes_power
+                          : '---'}
                   </td>
                   <td style={{ textAlign: 'center', background: 'darkgrey' }}>
                     <Image
