@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Version 0.3.4
+* Windows 32bit added to exe installer
+* added indication on trend of rule (RM, TC, SZ)
+* added Error page for when session cookie expires
+
+## Version 0.3.3
+### Bugfix
+* fixed crash when loading radar charts
+
 ## Version 0.3.2
 ### New Features
 * SquidTracks will auto download info from stat.ink so when new weapons and stages are supported on stat.ink
