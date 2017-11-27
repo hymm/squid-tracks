@@ -127,6 +127,24 @@ ipcMain.on('saveBattlesToCsv', (event, file, csv) => {
   fs.writeFileSync(file, csv);
 });
 
+ipcMain.on('getSplatnetImageURL', async (event, result) => {
+  try {
+    event.returnValue = await splatnet.getSplatnetImageURL(
+      result.battle_number
+    );
+  } catch (e) {
+    event.returnValue = 'Error while fetching SplatNet Share picture';
+  }
+});
+
+ipcMain.on('getSplatnetImage', async (event, result) => {
+  try {
+    event.returnValue = await splatnet.getSplatnetImage(result.battle_number);
+  } catch (e) {
+    event.returnValue = 'Error while fetching SplatNet Share picture';
+  }
+});
+
 function isTokenGood(token) {
   return !!token;
 }
