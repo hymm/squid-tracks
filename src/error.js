@@ -45,15 +45,14 @@ class ErrorPage extends React.Component {
 const ErrorPageWithSplatnet = props => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => (
+      {splatnet =>
         <Grid fluid style={{ marginTop: 65 }}>
           <Row>
             <Col md={12}>
               <ErrorPage {...props} splatnet={splatnet} />
             </Col>
           </Row>
-        </Grid>
-      )}
+        </Grid>}
     </Subscriber>
   );
 };

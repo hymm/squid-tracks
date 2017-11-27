@@ -10,7 +10,7 @@ import { event } from './analytics';
 const Navigation = ({ logoutCallback }) => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => (
+      {splatnet =>
         <Navbar fluid fixedTop collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
@@ -85,8 +85,7 @@ const Navigation = ({ logoutCallback }) => {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
-        </Navbar>
-      )}
+        </Navbar>}
     </Subscriber>
   );
 };

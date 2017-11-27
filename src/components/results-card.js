@@ -321,7 +321,7 @@ class ResultsCard extends React.Component {
         <Table striped bordered condensed hover>
           <thead>
             <tr>
-              {columnHeaders.map(header => (
+              {columnHeaders.map(header =>
                 <TableHeader
                   key={header.text}
                   setState={this.setState.bind(this)}
@@ -333,7 +333,7 @@ class ResultsCard extends React.Component {
                   text={header.text}
                   sortColumn={this.state.sortColumn}
                 />
-              ))}
+              )}
             </tr>
           </thead>
           <tbody>
@@ -351,14 +351,25 @@ class ResultsCard extends React.Component {
                     >
                       {result.battle_number}
                     </a>
-                    {linkInfo ? (
-                      <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
-                    ) : null}
+                    {linkInfo
+                      ? <Glyphicon
+                          glyph={'ok-sign'}
+                          style={{ paddingLeft: 6 }}
+                        />
+                      : null}
                   </td>
-                  <td>{result.game_mode.key}</td>
-                  <td>{result.rule.name}</td>
-                  <td>{result.stage.name}</td>
-                  <td>{result.my_team_result.key}</td>
+                  <td>
+                    {result.game_mode.key}
+                  </td>
+                  <td>
+                    {result.rule.name}
+                  </td>
+                  <td>
+                    {result.stage.name}
+                  </td>
+                  <td>
+                    {result.my_team_result.key}
+                  </td>
                   <td>
                     {result.other_estimate_league_point
                       ? result.other_estimate_league_point
@@ -376,8 +387,12 @@ class ResultsCard extends React.Component {
                       alt={result.player_result.player.weapon.name}
                     />
                   </td>
-                  <td>{result.player_result.game_paint_point.toFixed(0)}</td>
-                  <td>{result.k_a.toFixed(normalize ? 1 : 0)}</td>
+                  <td>
+                    {result.player_result.game_paint_point.toFixed(0)}
+                  </td>
+                  <td>
+                    {result.k_a.toFixed(normalize ? 1 : 0)}
+                  </td>
                   <td>
                     {result.player_result.kill_count.toFixed(normalize ? 1 : 0)}
                   </td>

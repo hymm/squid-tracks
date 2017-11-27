@@ -188,7 +188,7 @@ class StageCard extends React.Component {
                         defaultMessage="Name"
                       />
                     </th>
-                    {this.columnHeaders.map(header => (
+                    {this.columnHeaders.map(header =>
                       <TableHeader
                         key={header.text}
                         setState={this.setState.bind(this)}
@@ -199,13 +199,15 @@ class StageCard extends React.Component {
                         text={header.text}
                         sortColumn={this.state.sortColumn}
                       />
-                    ))}
+                    )}
                   </tr>
                 </thead>
                 <tbody>
-                  {stageStats.map(stage => (
+                  {stageStats.map(stage =>
                     <tr key={stage.stage.name}>
-                      <td>{stage.stage.name}</td>
+                      <td>
+                        {stage.stage.name}
+                      </td>
                       <td>
                         {this.state.percent
                           ? `${stage.area_percent.toFixed(2)}`
@@ -227,7 +229,7 @@ class StageCard extends React.Component {
                           : `${stage.total_win} - ${stage.total_lose}`}
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
                 <tfoot>
                   <tr>
@@ -239,11 +241,6 @@ class StageCard extends React.Component {
                     </th>
                     <td>
                       {this.state.percent
-                        ? `${calcStats.rm_percent.toFixed(2)}`
-                        : `${calcStats.rm_win} - ${calcStats.rm_lose}`}
-                    </td>
-                    <td>
-                      {this.state.percent
                         ? `${calcStats.sz_percent.toFixed(2)}`
                         : `${calcStats.sz_win} - ${calcStats.sz_lose}`}
                     </td>
@@ -251,6 +248,11 @@ class StageCard extends React.Component {
                       {this.state.percent
                         ? `${calcStats.tc_percent.toFixed(2)}`
                         : `${calcStats.tc_win} - ${calcStats.tc_lose}`}
+                    </td>
+                    <td>
+                      {this.state.percent
+                        ? `${calcStats.rm_percent.toFixed(2)}`
+                        : `${calcStats.rm_win} - ${calcStats.rm_lose}`}
                     </td>
                     <td>
                       {this.state.percent

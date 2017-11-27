@@ -1,9 +1,9 @@
 .panel-with-menu .dropdown-toggle {
-  padding: 0 15px 0 15px
+  padding: 0 15px 0 15px;
 }
 
 .panel-with-menu .navbar-default li a {
-    color: #777;
+  color: #777;
 }
 
 .panel-with-menu .navbar-default li a:hover,

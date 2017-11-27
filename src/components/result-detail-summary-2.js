@@ -73,60 +73,60 @@ const BattleSummary = ({ result }) => {
           <Label style={{ background: colorMap.normal, ...labelStyle }}>
             {`${result.game_mode.name}`}
           </Label>
-          {result.league_point != null ? (
-            <Label style={{ background: colorMap.normal, ...labelStyle }}>
-              <FormattedMessage
-                id="resultDetails.summary.currentPower"
-                defaultMessage="Current Power {power}"
-                values={{ power: result.league_point }}
-              />
-            </Label>
-          ) : null}
-          {result.max_league_point != null && result.max_league_point > 0 ? (
-            <Label style={{ background: colorMap.dark, ...labelStyle }}>
-              <FormattedMessage
-                id="resultDetails.summary.maxPower"
-                defaultMessage="Max Power {power}"
-                values={{ power: result.max_league_point }}
-              />
-            </Label>
-          ) : null}
-          {result.fes_power ? (
-            <Label style={{ background: colorMap.normal, ...labelStyle }}>
-              <FormattedMessage
-                id="resultDetails.summary.currentPower"
-                defaultMessage="Current Power {power}"
-                values={{ power: result.fes_power }}
-              />
-            </Label>
-          ) : null}
-          {result.max_fes_poser != null ? (
-            <Label style={{ background: colorMap.normal, ...labelStyle }}>
-              <FormattedMessage
-                id="resultDetails.summary.maxPower"
-                defaultMessage="Max Power {power}"
-                values={{ power: result.max_fes_poser }}
-              />
-            </Label>
-          ) : null}
-          {result.estimate_gachi_power != null ? (
-            <Label bsStyle="default" style={{ ...labelStyle }}>
-              <FormattedMessage
-                id="resultDetails.summary.estimatePower"
-                defaultMessage="Estimate Power {power}"
-                values={{ power: result.estimate_gachi_power }}
-              />
-            </Label>
-          ) : null}
-          {result.win_meter != null ? (
-            <Label bsStyle="default" style={{ ...labelStyle }}>
-              <FormattedMessage
-                id="resultDetails.summary.winMeter"
-                defaultMessage="Win Meter {meter}"
-                values={{ meter: result.win_meter }}
-              />
-            </Label>
-          ) : null}
+          {result.league_point != null
+            ? <Label style={{ background: colorMap.normal, ...labelStyle }}>
+                <FormattedMessage
+                  id="resultDetails.summary.currentPower"
+                  defaultMessage="Current Power {power}"
+                  values={{ power: result.league_point }}
+                />
+              </Label>
+            : null}
+          {result.max_league_point != null && result.max_league_point > 0
+            ? <Label style={{ background: colorMap.dark, ...labelStyle }}>
+                <FormattedMessage
+                  id="resultDetails.summary.maxPower"
+                  defaultMessage="Max Power {power}"
+                  values={{ power: result.max_league_point }}
+                />
+              </Label>
+            : null}
+          {result.fes_power
+            ? <Label style={{ background: colorMap.normal, ...labelStyle }}>
+                <FormattedMessage
+                  id="resultDetails.summary.currentPower"
+                  defaultMessage="Current Power {power}"
+                  values={{ power: result.fes_power }}
+                />
+              </Label>
+            : null}
+          {result.max_fes_poser != null
+            ? <Label style={{ background: colorMap.normal, ...labelStyle }}>
+                <FormattedMessage
+                  id="resultDetails.summary.maxPower"
+                  defaultMessage="Max Power {power}"
+                  values={{ power: result.max_fes_poser }}
+                />
+              </Label>
+            : null}
+          {result.estimate_gachi_power != null
+            ? <Label bsStyle="default" style={{ ...labelStyle }}>
+                <FormattedMessage
+                  id="resultDetails.summary.estimatePower"
+                  defaultMessage="Estimate Power {power}"
+                  values={{ power: result.estimate_gachi_power }}
+                />
+              </Label>
+            : null}
+          {result.win_meter != null
+            ? <Label bsStyle="default" style={{ ...labelStyle }}>
+                <FormattedMessage
+                  id="resultDetails.summary.winMeter"
+                  defaultMessage="Win Meter {meter}"
+                  values={{ meter: result.win_meter }}
+                />
+              </Label>
+            : null}
         </Col>
       </Row>
       <Row>

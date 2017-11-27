@@ -59,15 +59,14 @@ class ResultsContainer extends React.Component {
 
 const ResultsContainerIntl = injectIntl(ResultsContainer);
 
-const Records = ({ splatnet }) => (
+const Records = ({ splatnet }) =>
   <Grid fluid style={{ marginTop: 65 }}>
     <Row>
       <Col md={12}>
         <ResultsContainerIntl splatnet={splatnet} />
       </Col>
     </Row>
-  </Grid>
-);
+  </Grid>;
 
 const SubscribedRecords = () => {
   return (

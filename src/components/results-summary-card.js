@@ -11,8 +11,12 @@ const ResultsSummaryValueDisplay = ({ className, onClick, label, value }) => {
       onClick={onClick}
       style={{ cursor: onClick ? 'pointer' : 'default' }}
     >
-      <h4>{label}</h4>
-      <span>{value}</span>
+      <h4>
+        {label}
+      </h4>
+      <span>
+        {value}
+      </span>
     </div>
   );
 };

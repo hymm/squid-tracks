@@ -33,17 +33,17 @@
 }
 
 .regular .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: var(--regular-light-color);
+  background-color: var(--regular-light-color);
 }
 .gachi .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: var(--gachi-light-color);
+  background-color: var(--gachi-light-color);
 }
 .league_pair .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: var(--league-light-color);
+  background-color: var(--league-light-color);
 }
 .league_team .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: var(--league-light-color);
+  background-color: var(--league-light-color);
 }
 .private .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: var(--private-light-color);
+  background-color: var(--private-light-color);
 }

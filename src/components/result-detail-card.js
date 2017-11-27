@@ -16,7 +16,7 @@ import { pick, mapKeys, cloneDeep } from 'lodash';
 import flatten from 'flat';
 import { FormattedMessage } from 'react-intl';
 import sillyname from 'sillyname';
-import { clipboard, remote } from 'electron';
+import { nativeImage, ipcRenderer, clipboard, remote } from 'electron';
 import lodash from 'lodash';
 
 import BattleSummary from './result-detail-summary-2';
@@ -119,6 +119,22 @@ class ResultDetailMenu extends React.Component {
     clipboard.writeText(JSON.stringify(result));
   };
 
+  copyPicture = () => {
+    event('export-data', 'battle-picture');
+    const { result } = this.props;
+    clipboard.writeImage(
+      nativeImage.createFromBuffer(
+        Buffer.from(ipcRenderer.sendSync('getSplatnetImage', result))
+      )
+    );
+  };
+
+  copyPictureURL = () => {
+    event('export-data', 'battle-picture-url');
+    const { result } = this.props;
+    clipboard.writeText(ipcRenderer.sendSync('getSplatnetImageURL', result));
+  };
+
   render() {
     return (
       <Nav className={'navbar-right pull-right'}>
@@ -138,6 +154,19 @@ class ResultDetailMenu extends React.Component {
             <FormattedMessage
               id="resultDetails.export.copyRawJson"
               defaultMessage="Copy Raw Json"
+            />
+          </MenuItem>
+          <MenuItem divider />
+          <MenuItem onClick={this.copyPicture}>
+            <FormattedMessage
+              id="resultDetails.export.copyPicture"
+              defaultMessage="Copy SplatNet Share picture"
+            />
+          </MenuItem>
+          <MenuItem onClick={this.copyPictureURL}>
+            <FormattedMessage
+              id="resultDetails.export.copyPictureURL"
+              defaultMessage="Copy SplatNet Share picture (URL)"
             />
           </MenuItem>
           <MenuItem divider />
@@ -331,17 +360,17 @@ class ResultDetailCard extends React.Component {
                 defaultMessage="Battle #{battle_number} Details"
                 values={{ battle_number: resultChanged.battle_number }}
               />
-              {linkInfo ? (
-                <a
-                  onClick={() =>
-                    openExternal(
-                      `https://stat.ink/@${linkInfo.username}/spl2/${linkInfo.battle}`
-                    )}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
-                </a>
-              ) : null}
+              {linkInfo
+                ? <a
+                    onClick={() =>
+                      openExternal(
+                        `https://stat.ink/@${linkInfo.username}/spl2/${linkInfo.battle}`
+                      )}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
+                  </a>
+                : null}
             </h3>
           }
           menu={<ResultDetailMenu result={resultChanged} />}
@@ -438,103 +467,101 @@ class ResultDetailCard extends React.Component {
               </Col>
             </Row>
             <Row>
-              {this.state.show < 5 ? (
-                [
-                  <Col sm={6} md={6} key="myTeam">
-                    <h4>
-                      <FormattedMessage
-                        id="resultDetails.teamsButton.myTeamTitle"
-                        defaultMessage="My Team"
-                      />
-                      {myTeamPower != null ? (
-                        <Label
-                          bsStyle="default"
-                          style={{
-                            fontWeight: 'normal',
-                            marginLeft: 5,
-                            marginRight: 5
-                          }}
-                        >
-                          <FormattedMessage
-                            id="resultDetails.summary.estimatePower"
-                            defaultMessage="Estimate Power {power}"
-                            values={{ power: myTeamPower }}
-                          />
-                        </Label>
-                      ) : null}
-                      {resultChanged.tag_id ? (
-                        <Label
-                          bsStyle="default"
-                          style={{ fontWeight: 'normal', marginRight: 5 }}
-                        >
-                          {`${resultChanged.tag_id}`}
-                        </Label>
-                      ) : null}
-                    </h4>
-                    {this.state.show === 1 ? (
-                      <TeamStatsTable team={myTeam} />
-                    ) : null}
-                    {this.state.show === 2 ? (
-                      <TeamGearTable team={myTeam} />
-                    ) : null}
-                    {this.state.show === 3 ? (
-                      <TeamInfoTable team={myTeam} />
-                    ) : null}
-                    {this.state.show === 4 ? (
-                      <TeamRadar team={myTeam} maximums={maximums} />
-                    ) : null}
-                  </Col>,
-                  <Col sm={6} md={6} key="otherTeam">
-                    <h4>
-                      <FormattedMessage
-                        id="resultDetails.teamsButton.otherTeamTitle"
-                        defaultMessage="Enemy Team"
-                      />
-                      {otherTeamPower != null ? (
-                        <Label
-                          bsStyle="default"
-                          style={{ fontWeight: 'normal', marginLeft: 5 }}
-                        >
-                          <FormattedMessage
-                            id="resultDetails.summary.estimatePower"
-                            defaultMessage="Estimate Power {power}"
-                            values={{ power: otherTeamPower }}
-                          />
-                        </Label>
-                      ) : null}
-                    </h4>
-                    {this.state.show === 1 ? (
-                      <TeamStatsTable team={otherTeam} />
-                    ) : null}
-                    {this.state.show === 2 ? (
-                      <TeamGearTable team={otherTeam} />
-                    ) : null}
-                    {this.state.show === 3 ? (
-                      <TeamInfoTable team={otherTeam} />
-                    ) : null}
-                    {this.state.show === 4 ? (
-                      <TeamRadar team={otherTeam} maximums={maximums} />
-                    ) : null}
-                  </Col>
-                ]
-              ) : (
-                <Col md={12}>
-                  <TeamRadarTotals
-                    myTeam={myTeam}
-                    myCount={
-                      result.my_team_count != null
-                        ? result.my_team_count
-                        : result.my_team_percentage
-                    }
-                    otherTeam={otherTeam}
-                    otherCount={
-                      result.other_team_count != null
-                        ? result.other_team_count
-                        : result.other_team_percentage
-                    }
-                  />
-                </Col>
-              )}
+              {this.state.show < 5
+                ? [
+                    <Col sm={6} md={6} key="myTeam">
+                      <h4>
+                        <FormattedMessage
+                          id="resultDetails.teamsButton.myTeamTitle"
+                          defaultMessage="My Team"
+                        />
+                        {myTeamPower != null
+                          ? <Label
+                              bsStyle="default"
+                              style={{
+                                fontWeight: 'normal',
+                                marginLeft: 5,
+                                marginRight: 5
+                              }}
+                            >
+                              <FormattedMessage
+                                id="resultDetails.summary.estimatePower"
+                                defaultMessage="Estimate Power {power}"
+                                values={{ power: myTeamPower }}
+                              />
+                            </Label>
+                          : null}
+                        {resultChanged.tag_id
+                          ? <Label
+                              bsStyle="default"
+                              style={{ fontWeight: 'normal', marginRight: 5 }}
+                            >
+                              {`${resultChanged.tag_id}`}
+                            </Label>
+                          : null}
+                      </h4>
+                      {this.state.show === 1
+                        ? <TeamStatsTable team={myTeam} />
+                        : null}
+                      {this.state.show === 2
+                        ? <TeamGearTable team={myTeam} />
+                        : null}
+                      {this.state.show === 3
+                        ? <TeamInfoTable team={myTeam} />
+                        : null}
+                      {this.state.show === 4
+                        ? <TeamRadar team={myTeam} maximums={maximums} />
+                        : null}
+                    </Col>,
+                    <Col sm={6} md={6} key="otherTeam">
+                      <h4>
+                        <FormattedMessage
+                          id="resultDetails.teamsButton.otherTeamTitle"
+                          defaultMessage="Enemy Team"
+                        />
+                        {otherTeamPower != null
+                          ? <Label
+                              bsStyle="default"
+                              style={{ fontWeight: 'normal', marginLeft: 5 }}
+                            >
+                              <FormattedMessage
+                                id="resultDetails.summary.estimatePower"
+                                defaultMessage="Estimate Power {power}"
+                                values={{ power: otherTeamPower }}
+                              />
+                            </Label>
+                          : null}
+                      </h4>
+                      {this.state.show === 1
+                        ? <TeamStatsTable team={otherTeam} />
+                        : null}
+                      {this.state.show === 2
+                        ? <TeamGearTable team={otherTeam} />
+                        : null}
+                      {this.state.show === 3
+                        ? <TeamInfoTable team={otherTeam} />
+                        : null}
+                      {this.state.show === 4
+                        ? <TeamRadar team={otherTeam} maximums={maximums} />
+                        : null}
+                    </Col>
+                  ]
+                : <Col md={12}>
+                    <TeamRadarTotals
+                      myTeam={myTeam}
+                      myCount={
+                        result.my_team_count != null
+                          ? result.my_team_count
+                          : result.my_team_percentage
+                      }
+                      otherTeam={otherTeam}
+                      otherCount={
+                        result.other_team_count != null
+                          ? result.other_team_count
+                          : result.other_team_percentage
+                      }
+                    />
+                  </Col>}
             </Row>
           </Grid>
         </PanelWithMenu>

@@ -27,11 +27,11 @@ export default class LanguageSelect extends React.Component {
         componentClass="select"
         onChange={this.handleChange}
       >
-        {languages.map(language => (
+        {languages.map(language =>
           <option key={language.code} value={language.code}>
             {language.name}
           </option>
-        ))}
+        )}
       </FormControl>
     );
   }

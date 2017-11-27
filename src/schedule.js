@@ -22,12 +22,16 @@ const GachiRow = ({ rotation, intl }) => {
 
   return (
     <tr>
-      <td>{hour}</td>
+      <td>
+        {hour}
+      </td>
       <td>
         <Grid fluid>
           <Row>
             <Col md={12}>
-              <strong>{rotation.rule.name}</strong>
+              <strong>
+                {rotation.rule.name}
+              </strong>
             </Col>
           </Row>
           <Row>
@@ -80,9 +84,9 @@ class Schedule extends React.Component {
             </h2>
             <Table>
               <tbody>
-                {regular.map(rotation => (
+                {regular.map(rotation =>
                   <GachiRowIntl key={rotation.start_time} rotation={rotation} />
-                ))}
+                )}
               </tbody>
             </Table>
           </Col>
@@ -92,9 +96,9 @@ class Schedule extends React.Component {
             </h2>
             <Table>
               <tbody>
-                {gachi.map(rotation => (
+                {gachi.map(rotation =>
                   <GachiRowIntl key={rotation.start_time} rotation={rotation} />
-                ))}
+                )}
               </tbody>
             </Table>
           </Col>
@@ -104,9 +108,9 @@ class Schedule extends React.Component {
             </h2>
             <Table>
               <tbody>
-                {league.map(rotation => (
+                {league.map(rotation =>
                   <GachiRowIntl key={rotation.start_time} rotation={rotation} />
-                ))}
+                )}
               </tbody>
             </Table>
           </Col>

@@ -273,16 +273,16 @@ class AnnieStore extends React.Component {
             </ButtonToolbar>
           </Col>
         </Row>
-        {ordered_info != null && !cancelled ? (
-          <OrderedInfo
-            order={ordered_info}
-            cancel={this.cancel}
-            cancelled={cancelled}
-            intl={intl}
-          />
-        ) : null}
+        {ordered_info != null && !cancelled
+          ? <OrderedInfo
+              order={ordered_info}
+              cancel={this.cancel}
+              cancelled={cancelled}
+              intl={intl}
+            />
+          : null}
         <Row>
-          {merchandises.map(merch => (
+          {merchandises.map(merch =>
             <Merch
               key={merch.id}
               merch={merch}
@@ -290,7 +290,7 @@ class AnnieStore extends React.Component {
               disabled={(ordered_info != null && !cancelled) || ordering}
               intl={intl}
             />
-          ))}
+          )}
         </Row>
       </Grid>
     );

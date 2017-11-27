@@ -98,9 +98,9 @@ class Results extends React.Component {
               setStatInkInfo={this.setStatInkInfo}
               statInk={statInk}
             />
-            {!lodash.isEmpty(currentBattle) ? (
-              <ResultDetailCard result={currentBattle} statInk={statInk} />
-            ) : null}
+            {!lodash.isEmpty(currentBattle)
+              ? <ResultDetailCard result={currentBattle} statInk={statInk} />
+              : null}
             <ResultsCard
               results={results.results}
               statInk={statInk}

@@ -59,21 +59,21 @@ const RadarTeam = ({ team, maximums }) => {
       startAngle={90}
       endAngle={-270}
     >
-      {team.map((player, index) => (
+      {team.map((player, index) =>
         <Radar
           name={
-            player.game_paint_point === 0 ? (
-              <strike>{player.player.nickname}</strike>
-            ) : (
-              player.player.nickname
-            )
+            player.game_paint_point === 0
+              ? <strike>
+                  {player.player.nickname}
+                </strike>
+              : player.player.nickname
           }
           dataKey={player.player.principal_id}
           stroke={colors[0][index]}
           fill={colors[0][index]}
           fillOpacity={0.1}
         />
-      ))}
+      )}
       <PolarGrid />
       <Legend />
       <PolarAngleAxis dataKey="statMax" />

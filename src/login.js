@@ -75,9 +75,11 @@ class ProxyButton extends React.Component {
               defaultMessage="Additional IP Addresses"
             />
           </MenuItem>
-          {address.ips.map(address => (
-            <MenuItem key={address}>{address}</MenuItem>
-          ))}
+          {address.ips.map(address =>
+            <MenuItem key={address}>
+              {address}
+            </MenuItem>
+          )}
         </SplitButton>
       );
     }
@@ -146,7 +148,9 @@ class LoginCookie extends React.Component {
             <Row>
               <Col md={12}>
                 <LinkContainer exact to="/login">
-                  <Button>{'<--'}</Button>
+                  <Button>
+                    {'<--'}
+                  </Button>
                 </LinkContainer>
               </Col>
             </Row>

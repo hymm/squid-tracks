@@ -39,7 +39,7 @@ class App extends Component {
   componentDidMount() {
     this.getSessionToken(true);
     screenview('Start');
-    this.setState({ locale: ipcRenderer.sendSync('getFromStore', 'locale') });
+    this.setLocale(ipcRenderer.sendSync('getFromStore', 'locale'));
   }
 
   getSessionToken = logout => {
