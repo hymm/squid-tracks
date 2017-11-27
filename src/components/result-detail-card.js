@@ -16,7 +16,7 @@ import { pick, mapKeys, cloneDeep } from 'lodash';
 import flatten from 'flat';
 import { FormattedMessage } from 'react-intl';
 import sillyname from 'sillyname';
-import { clipboard, remote } from 'electron';
+import { nativeImage, ipcRenderer, clipboard, remote } from 'electron';
 import lodash from 'lodash';
 
 import BattleSummary from './result-detail-summary-2';
@@ -119,6 +119,22 @@ class ResultDetailMenu extends React.Component {
     clipboard.writeText(JSON.stringify(result));
   };
 
+  copyPicture = () => {
+    event('export-data', 'battle-picture');
+    const { result } = this.props;
+    clipboard.writeImage(
+      nativeImage.createFromBuffer(
+        Buffer.from(ipcRenderer.sendSync('getSplatnetImage', result))
+      )
+    );
+  };
+
+  copyPictureURL = () => {
+    event('export-data', 'battle-picture-url');
+    const { result } = this.props;
+    clipboard.writeText(ipcRenderer.sendSync('getSplatnetImageURL', result));
+  };
+
   render() {
     return (
       <Nav className={'navbar-right pull-right'}>
@@ -138,6 +154,19 @@ class ResultDetailMenu extends React.Component {
             <FormattedMessage
               id="resultDetails.export.copyRawJson"
               defaultMessage="Copy Raw Json"
+            />
+          </MenuItem>
+          <MenuItem divider />
+          <MenuItem onClick={this.copyPicture}>
+            <FormattedMessage
+              id="resultDetails.export.copyPicture"
+              defaultMessage="Copy SplatNet Share picture"
+            />
+          </MenuItem>
+          <MenuItem onClick={this.copyPictureURL}>
+            <FormattedMessage
+              id="resultDetails.export.copyPictureURL"
+              defaultMessage="Copy SplatNet Share picture (URL)"
             />
           </MenuItem>
           <MenuItem divider />
