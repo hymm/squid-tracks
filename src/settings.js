@@ -4,16 +4,19 @@ import {
   Grid,
   Col,
   Row,
-  Well,
   Button,
   FormGroup,
   ControlLabel,
   FormControl,
   HelpBlock,
-  Checkbox
+  Checkbox,
+  Panel,
+  Glyphicon
 } from 'react-bootstrap';
+import jws from 'jws';
 import { event } from './analytics';
-const { remote, ipcRenderer } = window.require('electron');
+import LanguageSelect from './components/language-select';
+const { remote, ipcRenderer, clipboard } = require('electron');
 const { openExternal } = remote.shell;
 
 class StatInkSettings extends React.Component {
@@ -46,40 +49,35 @@ class StatInkSettings extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h3>Stat.ink Settings</h3>
-        <FormGroup>
-          <ControlLabel>API Token</ControlLabel>
-          <HelpBlock>
-            Copy from{' '}
-            <a
-              onClick={() => openExternal('https://stat.ink/profile')}
-              style={{ cursor: 'pointer' }}
-            >
-              https://stat.ink/profile
-            </a>, paste below, and click Save
-          </HelpBlock>
-          <FormControl
-            type="text"
-            value={this.state.apiToken}
-            onChange={this.handleChange}
-          />
-        </FormGroup>
-        <Button
-          type="submit"
-          disabled={this.state.statInkSaveButtonText === 'Token Saved'}
-        >
-          {this.state.statInkSaveButtonText}
-        </Button>
-      </form>
+      <Panel header={<h3>Stat.ink Settings</h3>}>
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup>
+            <ControlLabel>API Token</ControlLabel>
+            <HelpBlock>
+              Copy from{' '}
+              <a
+                onClick={() => openExternal('https://stat.ink/profile')}
+                style={{ cursor: 'pointer' }}
+              >
+                https://stat.ink/profile
+              </a>, paste below, and click Save
+            </HelpBlock>
+            <FormControl
+              type="text"
+              value={this.state.apiToken}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <Button
+            type="submit"
+            disabled={this.state.statInkSaveButtonText === 'Token Saved'}
+          >
+            {this.state.statInkSaveButtonText}
+          </Button>
+        </form>
+      </Panel>
     );
   }
-}
-
-function handleLogoutClick(callback) {
-  event('user', 'logout');
-  ipcRenderer.sendSync('logout');
-  callback();
 }
 
 class GoogleAnalyticsCheckbox extends React.Component {
@@ -92,7 +90,7 @@ class GoogleAnalyticsCheckbox extends React.Component {
   }
 
   handleClick = () => {
-    event('ga', this.state.enabled ? 'enabled' : 'disabled');
+    event('ga', !this.state.enabled ? 'enabled' : 'disabled');
     ipcRenderer.sendSync('setToStore', 'gaEnabled', !this.state.enabled);
     this.setState({ enabled: !this.state.enabled });
   };
@@ -106,46 +104,116 @@ class GoogleAnalyticsCheckbox extends React.Component {
   }
 }
 
-const SettingsScreen = ({ token, logoutCallback }) =>
-  <Grid fluid style={{ marginTop: 65 }}>
+class IksmToken extends React.Component {
+  state = {
+    cookie: { key: '', value: '', expires: '' }
+  };
+
+  componentDidMount() {
+    ipcRenderer.send('getIksmToken');
+    ipcRenderer.on('iksmToken', this.handleToken);
+  }
+
+  componentWillUnmount() {
+    ipcRenderer.removeListener('iksmToken', this.handleToken);
+  }
+
+  handleToken = (e, cookie) => {
+    this.setState({ cookie: cookie });
+  };
+
+  render() {
+    const { cookie } = this.state;
+    return (
+      <div>
+        <h4>
+          iksm Token{' '}
+          <Glyphicon
+            glyph="copy"
+            style={{ fontSize: 20, cursor: 'pointer' }}
+            onClick={() => {
+              clipboard.writeText(cookie.value);
+              event('settings', 'copy-iksm-token');
+            }}
+          />
+        </h4>
+        Expiration: {cookie.expires}
+      </div>
+    );
+  }
+}
+
+const LanguageSettings = ({ setLocale, locale }) => {
+  return (
     <Row>
       <Col md={12}>
-        <StatInkSettings />
+        <Panel header={<h3>Splatnet API Language</h3>}>
+          Languages are limited by Nintendo regions, so several of the languages
+          listed will not work. If you think your language should be supported,
+          please contact the developer.
+          <LanguageSelect setLocale={setLocale} locale={locale} />
+        </Panel>
       </Col>
     </Row>
-    <Row>
-      <Col md={12}>
-        <h3>Google Analytics</h3>
-        This program uses google analytics to track version uptake, activity,
-        bugs, and crashing. If you find this creepy you can disable this feature
-        below.
-        <GoogleAnalyticsCheckbox />
-      </Col>
-    </Row>
-    <Row>
-      <Col md={12}>
-        <h3>Debugging</h3>
-        <Link to="/testApi">
-          <Button>API Checker</Button>
-        </Link>
-      </Col>
-    </Row>
-    <Row>
-      <Col md={12}>
-        <h3>Other Settings</h3>
-        <h4>Session Token</h4>
-        <Well bsSize="large" style={{ wordWrap: 'break-word' }}>
-          {token}
-        </Well>
-        <Button
-          block
-          bsStyle="danger"
-          onClick={() => handleLogoutClick(logoutCallback)}
-        >
-          Logout
-        </Button>
-      </Col>
-    </Row>
-  </Grid>;
+  );
+};
+
+const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
+  const expUnix = token ? JSON.parse(jws.decode(token).payload).exp : 0;
+  const tokenExpiration = token
+    ? new Date(expUnix * 1000).toString()
+    : 'unknown';
+  return (
+    <Grid fluid style={{ marginTop: 65, marginBotton: 30 }}>
+      <LanguageSettings setLocale={setLocale} locale={locale} />
+      <Row>
+        <Col md={12}>
+          <StatInkSettings />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <Panel header={<h3>Google Analytics</h3>}>
+            This program uses google analytics to track version uptake,
+            activity, bugs, and crashing. If you find this creepy you can
+            disable this feature below.
+            <GoogleAnalyticsCheckbox />
+          </Panel>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <Panel header={<h3>Debugging</h3>}>
+            <Link to="/testApi">
+              <Button>API Checker</Button>
+            </Link>
+          </Panel>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <Panel header={<h3>Nintendo User Info</h3>}>
+            <strong>DO NOT SHARE Session Token or iksm Token.</strong> These are
+            available here for debugging purposes. Sharing these could lead to
+            someone stealing your personal information.
+            <h4>
+              Session Token{' '}
+              <Glyphicon
+                glyph="copy"
+                onClick={() => {
+                  clipboard.writeText(token);
+                  event('settings', 'copy-session-token');
+                }}
+                style={{ fontSize: 20, cursor: 'pointer' }}
+              />
+            </h4>
+            Expiration: {tokenExpiration}
+            <IksmToken />
+          </Panel>
+        </Col>
+      </Row>
+    </Grid>
+  );
+};
 
 export default SettingsScreen;

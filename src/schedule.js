@@ -1,16 +1,25 @@
 import React from 'react';
 import { Grid, Row, Col, Table, Image } from 'react-bootstrap';
+import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import { Subscriber } from 'react-broadcast';
 import './schedule.css';
-const { ipcRenderer } = window.require('electron');
 
-const GachiRow = ({ rotation }) => {
+const messages = defineMessages({
+  current: {
+    id: 'Schedule.currentRotation',
+    defaultMessage: 'current'
+  }
+});
+
+const GachiRow = ({ rotation, intl }) => {
   const now = Date.now() / 1000;
   let hour = 0;
   if (now > rotation.start_time && now < rotation.end_time) {
-    hour = 'current';
+    hour = intl.formatMessage(messages.current);
   } else {
     hour = new Date(rotation.start_time * 1000).getHours();
   }
+
   return (
     <tr>
       <td>
@@ -57,49 +66,50 @@ const GachiRow = ({ rotation }) => {
   );
 };
 
-export default class ScheduleContainer extends React.Component {
-  state = {
-    schedules: { gachi: [], league: [], regular: [] }
-  };
+const GachiRowIntl = injectIntl(GachiRow);
+
+class Schedule extends React.Component {
   componentDidMount() {
-    this.getSchedule();
+    this.props.splatnet.comm.updateSchedule();
   }
-
-  getSchedule() {
-    const schedules = ipcRenderer.sendSync('getApi', 'schedules');
-    this.setState({ schedules: schedules });
-  }
-
   render() {
+    const { splatnet } = this.props;
+    const { regular = [], gachi = [], league = [] } = splatnet.current.schedule;
     return (
       <Grid fluid style={{ paddingTop: 65 }}>
         <Row>
           <Col md={4}>
-            <h2>Ranked</h2>
+            <h2>
+              <FormattedMessage id="schedule.regular" defaultMessage="Turf" />
+            </h2>
             <Table>
               <tbody>
-                {this.state.schedules.gachi.map(rotation =>
-                  <GachiRow key={rotation.start_time} rotation={rotation} />
+                {regular.map(rotation =>
+                  <GachiRowIntl key={rotation.start_time} rotation={rotation} />
                 )}
               </tbody>
             </Table>
           </Col>
           <Col md={4}>
-            <h2>League</h2>
+            <h2>
+              <FormattedMessage id="schedule.gachi" defaultMessage="Ranked" />
+            </h2>
             <Table>
               <tbody>
-                {this.state.schedules.league.map(rotation =>
-                  <GachiRow key={rotation.start_time} rotation={rotation} />
+                {gachi.map(rotation =>
+                  <GachiRowIntl key={rotation.start_time} rotation={rotation} />
                 )}
               </tbody>
             </Table>
           </Col>
           <Col md={4}>
-            <h2>Turf</h2>
+            <h2>
+              <FormattedMessage id="schedule.league" defaultMessage="League" />
+            </h2>
             <Table>
               <tbody>
-                {this.state.schedules.regular.map(rotation =>
-                  <GachiRow key={rotation.start_time} rotation={rotation} />
+                {league.map(rotation =>
+                  <GachiRowIntl key={rotation.start_time} rotation={rotation} />
                 )}
               </tbody>
             </Table>
@@ -109,3 +119,13 @@ export default class ScheduleContainer extends React.Component {
     );
   }
 }
+
+const SubscribedSchedule = () => {
+  return (
+    <Subscriber channel="splatnet">
+      {splatnet => <Schedule splatnet={splatnet} />}
+    </Subscriber>
+  );
+};
+
+export default SubscribedSchedule;

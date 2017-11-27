@@ -1,22 +1,74 @@
 import React from 'react';
 import { Panel, Table, Image } from 'react-bootstrap';
+import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
 
-export default class WeaponCard extends React.Component {
+class WeaponCard extends React.Component {
   state = {
     sortColumn: 'percentage_count',
     sortDirection: 'up'
   };
 
-  static columnHeaders = [
+  messages = defineMessages({
+    weapon: {
+      id: 'WeaponCard.header.weapon',
+      defaultMessage: 'Weapon'
+    },
+    total: {
+      id: 'WeaponCard.header.total',
+      defaultMessage: 'Total'
+    },
+    wins: {
+      id: 'WeaponCard.header.wins',
+      defaultMessage: 'Wins'
+    },
+    losses: {
+      id: 'WeaponCard.header.losses',
+      defaultMessage: 'Losses'
+    },
+    percentage: {
+      id: 'WeaponCard.header.percentage',
+      defaultMessage: 'Percentage'
+    },
+    paint: {
+      id: 'WeaponCard.header.paint',
+      defaultMessage: 'Paint'
+    }
+  });
+
+  columnHeaders = [
     { text: '', noSort: true },
-    { text: 'Weapon', sortColumn: 'weapon.name', sortDirection: 'down' },
-    { text: 'Total', sortColumn: 'total_count', sortDirection: 'up' },
-    { text: 'Wins', sortColumn: 'win_count', sortDirection: 'up' },
-    { text: 'Losses', sortColumn: 'lose_count', sortDirection: 'up' },
-    { text: 'Percentage', sortColumn: 'percentage_count', sortDirection: 'up' },
-    { text: 'Paint', sortColumn: 'total_paint_point', sortDirection: 'up' }
+    {
+      text: this.props.intl.formatMessage(this.messages.weapon),
+      sortColumn: 'weapon.name',
+      sortDirection: 'down'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.total),
+      sortColumn: 'total_count',
+      sortDirection: 'up'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.wins),
+      sortColumn: 'win_count',
+      sortDirection: 'up'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.losses),
+      sortColumn: 'lose_count',
+      sortDirection: 'up'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.percentage),
+      sortColumn: 'percentage_count',
+      sortDirection: 'up'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.paint),
+      sortColumn: 'total_paint_point',
+      sortDirection: 'up'
+    }
   ];
 
   render() {
@@ -34,14 +86,27 @@ export default class WeaponCard extends React.Component {
     sort(weaponArray, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel header={<h3>Weapon Stats</h3>}>
-        * Click on column headers to sort
+      <Panel
+        header={
+          <h3>
+            <FormattedMessage
+              id="WeaponCard.title"
+              defaultMessage="Weapon Stats"
+            />
+          </h3>
+        }
+      >
+        <FormattedMessage
+          id="WeaponCard.sortHelp"
+          defaultMessage="* Click on column headers to sort"
+        />
+
         <Table striped bordered condensed hover>
           <thead>
             <tr>
-              {WeaponCard.columnHeaders.map(header => {
+              {this.columnHeaders.map(header => {
                 return header.noSort
-                  ? <th>
+                  ? <th key={header.text}>
                       {header.text}
                     </th>
                   : <TableHeader
@@ -100,3 +165,5 @@ export default class WeaponCard extends React.Component {
     );
   }
 }
+
+export default injectIntl(WeaponCard);

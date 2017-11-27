@@ -1,0 +1,18 @@
+.panel-with-menu .dropdown-toggle {
+  padding: 0 15px 0 15px;
+}
+
+.panel-with-menu .navbar-default li a {
+  color: #777;
+}
+
+.panel-with-menu .navbar-default li a:hover,
+.panel-with-menu .navbar-default li a:focus {
+  color: #333;
+  background-color: transparent;
+}
+
+/* .panel-with-menu .navbar-right .dropdown-menu {
+    right: 0;
+    left: auto;
+} */

@@ -1,59 +1,79 @@
 import React from 'react';
 import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
+import { Subscriber } from 'react-broadcast';
 import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
 import { event } from './analytics';
-const { ipcRenderer } = window.require('electron');
-
-const Records = () =>
-  <Grid fluid style={{ marginTop: 65 }}>
-    <Row>
-      <Col md={12}>
-        <ResultsContainer />
-      </Col>
-    </Row>
-  </Grid>;
+import { defineMessages, injectIntl } from 'react-intl';
 
 class ResultsContainer extends React.Component {
-  state = {
-    records: {
-      records: {}
+  messages = defineMessages({
+    refresh: {
+      id: 'records.refreshButton.refresh',
+      defaultMessage: 'Refresh'
     },
+    refreshed: {
+      id: 'records.refreshButton.refreshed',
+      defaultMessage: 'Refreshed'
+    }
+  });
+
+  state = {
     refreshing: false
   };
 
   componentDidMount() {
-    this.getRecords();
-  }
-
-  getRecords() {
-    const records = ipcRenderer.sendSync('getApi', 'records');
-    this.setState({ records: records });
+    this.props.splatnet.comm.updateRecords();
   }
 
   render() {
+    const { intl, splatnet } = this.props;
+    const { records } = splatnet.current;
+    const { refreshing } = this.state;
+
     return (
       <div>
         <ButtonToolbar style={{ marginBottom: '10px' }}>
           <Button
             onClick={() => {
               event('records', 'refresh');
-              this.getRecords();
+              splatnet.comm.updateRecords();
               this.setState({ refreshing: true });
               setTimeout(() => this.setState({ refreshing: false }), 2000);
             }}
-            disabled={this.state.refreshing}
+            disabled={refreshing}
           >
-            {this.state.refreshing ? 'Refreshed' : 'Refresh'}
+            {this.state.refreshing
+              ? intl.formatMessage(this.messages.refreshed)
+              : intl.formatMessage(this.messages.refresh)}
           </Button>
         </ButtonToolbar>
-        <PlayerCard records={this.state.records.records} />
-        <StageCard records={this.state.records.records} />
-        <WeaponCard records={this.state.records.records} />
+        <PlayerCard records={records.records} />
+        <StageCard records={records.records} />
+        <WeaponCard records={records.records} />
       </div>
     );
   }
 }
 
-export default Records;
+const ResultsContainerIntl = injectIntl(ResultsContainer);
+
+const Records = ({ splatnet }) =>
+  <Grid fluid style={{ marginTop: 65 }}>
+    <Row>
+      <Col md={12}>
+        <ResultsContainerIntl splatnet={splatnet} />
+      </Col>
+    </Row>
+  </Grid>;
+
+const SubscribedRecords = () => {
+  return (
+    <Subscriber channel="splatnet">
+      {splatnet => <Records splatnet={splatnet} />}
+    </Subscriber>
+  );
+};
+
+export default SubscribedRecords;

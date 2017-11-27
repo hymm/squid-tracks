@@ -1,14 +1,35 @@
 import React from 'react';
 import { Table, Image } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
 const TeamHeader = ({ player = { player: {} } }) =>
   <thead>
     <tr>
-      <th>Player</th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamGear.header.player"
+          defaultMessage="Player"
+        />
+      </th>
       <th />
-      <th colSpan="2">Head</th>
-      <th colSpan="2">Clothes</th>
-      <th colSpan="2">Shoes</th>
+      <th colSpan="2">
+        <FormattedMessage
+          id="resultDetails.teamGear.header.head"
+          defaultMessage="Head"
+        />
+      </th>
+      <th colSpan="2">
+        <FormattedMessage
+          id="resultDetails.teamGear.header.clothes"
+          defaultMessage="Clothes"
+        />
+      </th>
+      <th colSpan="2">
+        <FormattedMessage
+          id="resultDetails.teamGear.header.shoes"
+          defaultMessage="Shoes"
+        />
+      </th>
     </tr>
   </thead>;
 
@@ -31,8 +52,17 @@ const AbilityCell = ({ skills }) => {
   const subHeight = 20;
   const background = '#777';
 
+  const shiny = skills.subs.reduce((a, b) => {
+    return a && b && b.id === skills.subs[0].id;
+  }, true);
+
+  let bgcolor = 'darkgrey';
+  if (shiny) {
+    bgcolor = skills.subs[0].id === skills.main.id ? 'lightgreen' : 'skyblue';
+  }
+
   return (
-    <td style={{ textAlign: 'left', background: 'darkgrey' }}>
+    <td style={{ textAlign: 'left', background: bgcolor }}>
       <Image
         circle
         src={`https://app.splatoon2.nintendo.net${skills.main.image}`}
@@ -84,7 +114,7 @@ const TeamStatTable = ({ result, team }) => {
       <TeamHeader player={team[0]} />
       <tbody>
         {team.map(player =>
-          <PlayerRow key={player.player.nickname} player={player} />
+          <PlayerRow key={player.player.principal_id} player={player} />
         )}
       </tbody>
     </Table>

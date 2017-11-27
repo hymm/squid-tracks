@@ -1,7 +1,7 @@
 import React from 'react';
 import Json from 'react-json-tree';
 import { Link } from 'react-router-dom';
-const { ipcRenderer, clipboard } = window.require('electron');
+const { ipcRenderer, clipboard } = require('electron');
 
 class ApiTester extends React.Component {
   state = {

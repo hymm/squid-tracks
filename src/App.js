@@ -1,65 +1,84 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router-dom';
-import createMemoryHistory from 'history/createMemoryHistory';
-import ApiViewer from './api-viewer';
-import { screenview } from './analytics';
-import Schedule from './schedule';
-import Records from './records';
-import Results from './results';
-import Settings from './settings';
-import Navigation from './navigation';
-import About from './about';
-import Login from './login';
+import { Router } from 'react-router-dom';
+import createHashHistory from 'history/createHashHistory';
+import { IntlProvider } from 'react-intl';
+import Routes from './routes';
+import messages from './messages';
+import { screenview, uaException } from './analytics';
+import log from 'electron-log';
+import { ipcRenderer } from 'electron';
+import SplatnetProvider from './splatnet-provider';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-// eslint-disable-next-line
-const { ipcRenderer } = window.require('electron');
 
-const history = createMemoryHistory();
+window.addEventListener('error', event => {
+  const message = `UnhandledError in renderer: ${event.error}`;
+  log.error(message);
+  uaException(message);
+});
+
+window.addEventListener('unhandledrejection', event => {
+  const message = `Unhandled Promise Rejection in renderer: ${event.reason}`;
+  log.error(message);
+  uaException(message);
+});
+
+const history = createHashHistory();
 history.listen(location => {
   screenview(`${location.pathname}${location.search}${location.hash}`);
 });
 
-const Routes = ({ token, logoutCallback }) =>
-  <div>
-    <Navigation />
-    <Route path="/" exact component={About} />
-    <Route path="/testApi" component={ApiViewer} />
-    <Route path="/schedule" component={Schedule} />
-    <Route path="/records" component={Records} />
-    <Route path="/results" component={Results} />
-    <Route
-      path="/settings"
-      component={() =>
-        <Settings token={token} logoutCallback={logoutCallback} />}
-    />
-  </div>;
-
 class App extends Component {
   state = {
-    sessionToken: ''
+    sessionToken: '',
+    locale: 'en',
+    loggedIn: false
   };
 
   componentDidMount() {
-    this.getSessionToken();
+    this.getSessionToken(true);
     screenview('Start');
+    this.setState({ locale: ipcRenderer.sendSync('getFromStore', 'locale') });
   }
 
-  getSessionToken = () => {
-    this.setState({ sessionToken: ipcRenderer.sendSync('getSessionToken') });
+  getSessionToken = logout => {
+    this.setState({
+      sessionToken: ipcRenderer.sendSync('getSessionToken'),
+      loggedIn: false
+    });
+    if (!logout) {
+      history.push('/');
+    }
+  };
+
+  setLocale = locale => {
+    this.setState({ locale });
+    ipcRenderer.sendSync('setUserLangauge', locale);
+  };
+
+  setLogin = loginStatus => {
+    this.setState({ loggedIn: loginStatus });
   };
 
   render() {
+    const { sessionToken, locale, loggedIn } = this.state;
+    const message = messages[locale] || messages.en;
     return (
-      <Router history={history}>
-        {this.state.sessionToken.length !== 0
-          ? <Routes
-              token={this.state.sessionToken}
+      <IntlProvider locale={locale} messages={message}>
+        <Router history={history}>
+          <SplatnetProvider>
+            <Routes
+              loggedIn={loggedIn}
+              setLogin={this.setLogin}
+              token={sessionToken}
               logoutCallback={this.getSessionToken}
+              setLocale={this.setLocale}
+              locale={locale}
             />
-          : <Login />}
-      </Router>
+          </SplatnetProvider>
+        </Router>
+      </IntlProvider>
     );
   }
 }

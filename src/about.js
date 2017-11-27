@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col, Jumbotron } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-const { shell, app } = window.require('electron').remote;
+const { shell, app } = require('electron').remote;
 const { openExternal } = shell;
 const appVersion = app.getVersion();
 
@@ -11,7 +11,7 @@ const AboutPage = () =>
       <Col md={12}>
         <Jumbotron style={{ textAlign: 'center' }}>
           <h1>SquidTracks</h1>
-          <h2>A Splatnet 2 Client for your Desktop</h2>
+          <h2>An Unofficial Splatnet 2 Client for your Desktop</h2>
           <h5>
             {`Beta Version ${appVersion} `}
             <a

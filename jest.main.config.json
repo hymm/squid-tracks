@@ -1,0 +1,6 @@
+{
+  "testMatch": ["**/*.test.{js,jsx,json,css}"],
+  "moduleFileExtensions": ["js", "jsx", "json"],
+  "testPathIgnorePatterns": ["/node_modules/", "/src/", "/build/"],
+  "modulePathIgnorePatterns": ["<rootDir>/build/"]
+}

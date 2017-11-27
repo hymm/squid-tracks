@@ -3,14 +3,25 @@ const crypto = require('crypto');
 const base64url = require('base64url');
 const cheerio = require('cheerio');
 const log = require('electron-log');
-const fs = require('fs');
-// use this like to proxy through fiddler
-/* const request = request2.defaults({
-  proxy: 'http://localhost:8888',
-  rejectUnauthorized: false,
-  jar: true
-}); */
-const request = request2.defaults({ jar: true });
+
+const userAgentVersion = `1.1.0`;
+const userAgentString = `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`;
+const splatnetUrl = `https://app.splatoon2.nintendo.net`;
+
+const jar = request2.jar();
+let request;
+if (process.env.PROXY) {
+  const proxy = 'http://localhost:8888';
+  request = request2.defaults({
+    proxy: proxy,
+    rejectUnauthorized: false,
+    jar: jar
+  });
+  log.info(`Splatnet proxy on ${proxy}`);
+} else {
+  request = request2.defaults({ jar: jar });
+}
+
 let userLanguage = 'en-US';
 let uniqueId = '';
 
@@ -44,8 +55,8 @@ async function getSessionToken(session_token_code, codeVerifier) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': userAgentString
     },
     form: {
       client_id: '71b963c1b7b6d119',
@@ -67,8 +78,8 @@ async function getApiToken(session_token) {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': userAgentString
     },
     json: {
       client_id: '71b963c1b7b6d119',
@@ -90,8 +101,8 @@ async function getUserInfo(token) {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': userAgentString,
       Authorization: `Bearer ${token}`
     },
     json: true
@@ -112,8 +123,8 @@ async function getApiLogin(id_token, userinfo) {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': userAgentString,
       Authorization: 'Bearer'
     },
     body: {
@@ -124,7 +135,8 @@ async function getApiLogin(id_token, userinfo) {
         naIdToken: id_token
       }
     },
-    json: true
+    json: true,
+    gzip: true
   });
 
   return resp.result.webApiServerCredential.accessToken;
@@ -137,8 +149,8 @@ async function getWebServiceToken(token) {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': userAgentString,
       Authorization: `Bearer ${token}`
       // 'Access-Control-Allow-Origin': '*',
     },
@@ -158,46 +170,49 @@ async function getWebServiceToken(token) {
 async function getSplatnetApi(url) {
   const resp = await request({
     method: 'GET',
-    uri: `https://app.splatoon2.nintendo.net/api/${url}`,
+    uri: `${splatnetUrl}/api/${url}`,
     headers: {
-      'Accept': '*/*',
+      Accept: '*/*',
       'Accept-Encoding': 'gzip, deflate',
       'Accept-Language': userLanguage,
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-      'Connection': 'keep-alive'
+      'User-Agent': userAgentString,
+      Connection: 'keep-alive'
     },
     json: true,
-    gzip: true,
+    gzip: true
   });
 
   return resp;
 }
 
-function getUniqueId(body) {
-  const $ = cheerio.load(body);
-  const id = $('html').data('unique-id');
-  if (id == null) {
-    throw Error('Could not read splatnet2 unique id');
-  }
-  return id;
+async function getUniqueId() {
+  const records = await getSplatnetApi('records');
+  uniqueId = records.records.unique_id;
 }
 
-async function postSplatnetApi(url) {
-  const resp = await request({
+async function postSplatnetApi(url, body) {
+  const requestOptions = {
     method: 'POST',
-    uri: `https://app.splatoon2.nintendo.net/api/${url}`,
+    uri: `${splatnetUrl}/api/${url}`,
     headers: {
-      'Accept': '*/*',
+      Accept: '*/*',
       'Accept-Encoding': 'gzip, deflate',
       'Accept-Language': userLanguage,
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
-      'Connection': 'keep-alive',
+      'User-Agent': userAgentString,
+      Connection: 'keep-alive',
       'X-Unique-Id': uniqueId,
       'X-Requested-With': 'XMLHttpRequest'
     },
-    json: true,
-    gzip: true,
-  });
+    formData: body,
+    gzip: true
+  };
+  if (body) {
+    requestOptions.formData = body;
+  } else {
+    requestOptions.json = true;
+  }
+
+  const resp = await request(requestOptions);
 
   return resp;
 }
@@ -205,20 +220,20 @@ async function postSplatnetApi(url) {
 async function getSessionCookie(token) {
   const resp = await request({
     method: 'GET',
-    uri: `https://app.splatoon2.nintendo.net`,
+    uri: splatnetUrl,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
-      'X-ProductVersion': '1.0.4',
-      'User-Agent': 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
+      'X-ProductVersion': userAgentVersion,
+      'User-Agent': userAgentString,
       'x-gamewebtoken': token,
       'x-isappanalyticsoptedin': false,
       'X-Requested-With': 'com.nintendo.znca',
-      'Connection': 'keep-alive'
+      Connection: 'keep-alive'
     }
   });
 
-  const id = getUniqueId(resp)
+  await getUniqueId();
 
   return id;
 }
@@ -249,13 +264,44 @@ async function getSplatnetImage(battle) {
     method: 'GET',
     uri: url,
     headers: {
-      'Content-Type': 'image/png',
+      'Content-Type': 'image/png'
     },
-    encoding: null,
+    encoding: null
   });
 
   // const imgEncoded = imgBuf.toString('binary');
   return imgBuf;
+}
+
+function setIksmToken(cookieValue) {
+  const cookie = request2.cookie(`iksm_session=${cookieValue}`);
+  jar.setCookie(cookie, splatnetUrl);
+  getUniqueId();
+}
+
+function getIksmToken() {
+  const cookies = jar.getCookies(splatnetUrl);
+  const iksmSessionCookie = cookies.find(
+    cookie => cookie.key === 'iksm_session'
+  );
+  if (iksmSessionCookie == null) {
+    throw new Error('Could not get iksm_session cookie');
+  }
+
+  return iksmSessionCookie;
+}
+
+async function checkIksmValid() {
+  try {
+    await getSplatnetApi('records');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function setUserLanguage(language) {
+  userLanguage = language;
 }
 
 exports.getUniqueId = getUniqueId;
@@ -266,3 +312,6 @@ exports.getSplatnetSession = getSplatnetSession;
 exports.getSplatnetApi = getSplatnetApi;
 exports.postSplatnetApi = postSplatnetApi;
 exports.getSplatnetImage = getSplatnetImage;
+exports.getIksmToken = getIksmToken;
+exports.setUserLanguage = setUserLanguage;
+exports.setIksmToken = setIksmToken;

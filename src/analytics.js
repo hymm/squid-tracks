@@ -1,6 +1,6 @@
 import ua from 'universal-analytics';
 import uuid from 'uuid/v4';
-const { ipcRenderer, remote } = window.require('electron');
+const { ipcRenderer, remote } = require('electron');
 const { app } = remote;
 const appVersion = app.getVersion();
 const appName = app.getName();
@@ -24,5 +24,11 @@ export const screenview = screenName => {
 export const event = (...args) => {
   if (ipcRenderer.sendSync('getFromStore', 'gaEnabled')) {
     visitor.event(...args).send();
+  }
+};
+
+export const uaException = (exd, ...args) => {
+  if (ipcRenderer.sendSync('getFromStore', 'gaEnabled')) {
+    visitor.exception({ exd, av: appVersion, ...args }).send();
   }
 };

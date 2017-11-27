@@ -1,33 +1,66 @@
 import React from 'react';
 import { Table, Image } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
 const TeamHeader = ({ player = { player: {} } }) =>
   <thead>
     <tr>
-      <th>Player</th>
-      {player.player.udemae ? <th>Rank</th> : null}
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamStats.header.player"
+          defaultMessage="Player"
+        />
+      </th>
+      {player.player.udemae
+        ? <th>
+            <FormattedMessage
+              id="resultDetails.teamStats.header.rank"
+              defaultMessage="Rank"
+            />
+          </th>
+        : null}
       <th />
-      <th>Inked</th>
-      <th>K+A (A)</th>
-      <th>K / D</th>
-      <th>S</th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamStats.header.inked"
+          defaultMessage="Inked"
+        />
+      </th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamStats.header.killsAndAssists"
+          defaultMessage="K+A (A)"
+        />
+      </th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamStats.header.killsAndDeaths"
+          defaultMessage="K / D"
+        />
+      </th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamStats.header.specials"
+          defaultMessage="S"
+        />
+      </th>
     </tr>
   </thead>;
 
 const PlayerRow = ({ player }) => {
   return (
-    <tr>
+    <tr
+      style={{ color: player.game_paint_point === 0 ? 'lightgrey' : undefined }}
+    >
       <td>
-        {player.player.nickname}
+        {player.game_paint_point === 0
+          ? <strike>
+              {player.player.nickname}
+            </strike>
+          : player.player.nickname}
       </td>
 
-      {player.player.udemae
-        ? <td>
-            {`${player.player.udemae.name}${player.player.udemae.s_plus_number
-              ? player.player.udemae.s_plus_number
-              : player.player.udemae.name === 'S+' ? 0 : ''}`}
-          </td>
-        : null}
+      {player.player.udemae ? <td>{`${player.player.udemae.name}`}</td> : null}
       <td style={{ textAlign: 'center', background: 'darkgrey' }}>
         <Image
           src={`https://app.splatoon2.nintendo.net${player.player.weapon
@@ -42,9 +75,7 @@ const PlayerRow = ({ player }) => {
       <td>
         {`${player.kill_count + player.assist_count} (${player.assist_count})`}
       </td>
-      <td>
-        {`${player.kill_count} / ${player.death_count}`}
-      </td>
+      <td>{`${player.kill_count} / ${player.death_count}`}</td>
       <td>
         {player.special_count}
       </td>
@@ -63,26 +94,25 @@ const TeamStatTable = ({ result, team }) => {
       <TeamHeader player={team[0]} />
       <tbody>
         {team.map(player =>
-          <PlayerRow key={player.player.nickname} player={player} />
+          <PlayerRow key={player.player.principal_id} player={player} />
         )}
       </tbody>
       <tfoot>
         <tr>
-          <th>Totals</th>
+          <th>
+            <FormattedMessage
+              id="resultDetails.teamStats.header.totals"
+              defaultMessage="Totals"
+            />
+          </th>
           <th />
           {team[0].player.udemae ? <th /> : null}
           <td>
             {team.reduce((sum, player) => sum + player.game_paint_point, 0)}
           </td>
-          <td>
-            {`${total_k + total_a} (${total_a})`}
-          </td>
-          <td>
-            {`${total_k} / ${total_d}`}
-          </td>
-          <td>
-            {`${total_s}`}
-          </td>
+          <td>{`${total_k + total_a} (${total_a})`}</td>
+          <td>{`${total_k} / ${total_d}`}</td>
+          <td>{`${total_s}`}</td>
         </tr>
       </tfoot>
     </Table>

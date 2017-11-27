@@ -1,5 +1,92 @@
 # CHANGELOG
 
+## Version 0.3.4
+* Windows 32bit added to exe installer
+* added indication on trend of rule (RM, TC, SZ)
+* added Error page for when session cookie expires
+
+## Version 0.3.3
+### Bugfix
+* fixed crash when loading radar charts
+
+## Version 0.3.2
+### New Features
+* SquidTracks will auto download info from stat.ink so when new weapons and stages are supported on stat.ink
+they will also be supported by SquidTracks
+* Prettier battle details.
+
+### Bug Fixes
+* Fixed annie store ordering
+* Fixed battle details not showing sometimes
+
+## Version 0.3.1
+This release is does not fix the login system.  There is an alternative login system
+that uses session cookie hijacking.  A lot of the code has changed so this is release
+is still a little buggy.
+
+### New Features
+* login with cookie hijacking
+* The most requested feature.  An upload all battles button.
+* Early version of a last 50 battles trend
+* Start day and combine hero weapons checkbox for League Data tab
+
+## Version 0.3.0
+### New Features
+* Functional Annie Store!
+* League Weapon Usage Tab (thanks okuRaku)
+* Export Last 50 Battles to CSV
+* Added support for new stat.ink fields like splatnet_id
+* Partial Japanese language support
+* Gear button now changes color if there's good gear
+* Added anonymizer for people who like to screenshot
+* Added support for custom jr
+* Players who disconnected (inked 0p) are now greyed out in battle details
+* Radar charts now show max values
+* Max game score in radar chart is now always 100
+* Support to show splat fest power
+* Added Enemy Team Power for league battle details
+* Added ability to turn on fiddler proxy with environment variable
+* Added Power to last 50 battles
+* Changed some button text to icons
+* Added tracking for exceptions
+
+### Bug Fixes
+* Fixed bug in battle details when players use the same name
+* Fixed records page displaying sz, tc, and rm ranks with the same label
+* Fixed bug with stat.ink uploaded status being assigned to the wrong battle
+
+## Version 0.2.4
+### New Features
+* added radar charts to battle details
+* user can now pick splatnet language in settings.  Support languages vary by region
+* player level added in more info section of battle details
+* copy a discord pastable json of battle stats to clipboard
+* added estimate gachi power to last 50 battles table
+* added translation support to results, records, and schedule (looking for translators)
+
+### Bug Fixes
+* removed turf bonus points for ranked games
+* calculation for per minutes stats was wrong, now fixed
+* removed s+ numbers from details, splatnet was not sending the real numbers
+* removed bonus from turf inked for ranked games uploaded to stat.ink
+* added logging of uncaught errors to help with debugging
+
+## Version 0.2.3
+
+* add sloshing machine
+* add forge pro
+* add manta maria
+* add highlighting for pure and shiny gear
+* change stat.ink image from image_judge to image_result
+* show session token expiration date on settings page
+* added iksm tokem for debugging purposes
+* show unuploaded battles on last 50 battles table
+* change arrows to increment through array instead of battle number
+* accept stat.ink 302 errors
+* memoize or cache getting game details
+* option to show stats as a rate on last 50 battles
+* move stat.ink upload info into separate file
+
 ## Version 0.2.2
 * added weapon images
 * added sort order to details table
