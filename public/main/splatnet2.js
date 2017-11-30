@@ -273,6 +273,11 @@ async function getSplatnetImage(battle) {
   return imgBuf;
 }
 
+async function getSplatnetImageURL(battle) {
+  const { url } = await postSplatnetApi(`share/results/${battle}`);
+  return url;
+}
+
 function setIksmToken(cookieValue) {
   const cookie = request2.cookie(`iksm_session=${cookieValue}`);
   jar.setCookie(cookie, splatnetUrl);
@@ -312,6 +317,7 @@ exports.getSplatnetSession = getSplatnetSession;
 exports.getSplatnetApi = getSplatnetApi;
 exports.postSplatnetApi = postSplatnetApi;
 exports.getSplatnetImage = getSplatnetImage;
+exports.getSplatnetImageURL = getSplatnetImageURL;
 exports.getIksmToken = getIksmToken;
 exports.setUserLanguage = setUserLanguage;
 exports.setIksmToken = setIksmToken;
