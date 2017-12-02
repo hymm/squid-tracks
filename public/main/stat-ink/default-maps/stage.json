@@ -9,7 +9,11 @@
       "es_ES": "Barrio Congrio",
       "es_MX": "Barrio Congrio",
       "fr_FR": "Allées salées",
-      "fr_CA": "Allées salées"
+      "fr_CA": "Allées salées",
+      "de_DE": "Korallenviertel",
+      "it_IT": "Rione Storione",
+      "nl_NL": "Sushistraat",
+      "ru_RU": "Риф"
     },
     "short_name": {
       "ja_JP": "バッテラ",
@@ -18,7 +22,11 @@
       "es_ES": "Barrio Congrio",
       "es_MX": "Barrio Congrio",
       "fr_FR": "Allées salées",
-      "fr_CA": "Allées salées"
+      "fr_CA": "Allées salées",
+      "de_DE": "Korallenviertel",
+      "it_IT": "Rione Storione",
+      "nl_NL": "Sushistraat",
+      "ru_RU": "Риф"
     },
     "area": 2450,
     "release_at": {
@@ -36,7 +44,11 @@
       "es_ES": "Gimnasio Mejillón",
       "es_MX": "Gimnasio Mejillón",
       "fr_FR": "Gymnase Ancrage",
-      "fr_CA": "Gymnase Ancrage"
+      "fr_CA": "Gymnase Ancrage",
+      "de_DE": "Molluskelbude",
+      "it_IT": "Centro polpisportivo",
+      "nl_NL": "Vinvis Fitness",
+      "ru_RU": "Спортзал «Кревед!»"
     },
     "short_name": {
       "ja_JP": "フジツボ",
@@ -45,7 +57,11 @@
       "es_ES": "Gimnasio Mejillón",
       "es_MX": "Gimnasio Mejillón",
       "fr_FR": "Gymnase Ancrage",
-      "fr_CA": "Gymnase Ancrage"
+      "fr_CA": "Gymnase Ancrage",
+      "de_DE": "Molluskelbude",
+      "it_IT": "Centro polpisportivo",
+      "nl_NL": "Vinvis Fitness",
+      "ru_RU": "Спортзал «Кревед!»"
     },
     "area": 1957,
     "release_at": {
@@ -63,7 +79,11 @@
       "es_ES": "Auditorio Erizo",
       "es_MX": "Auditorio Erizo",
       "fr_FR": "Scène Sirène",
-      "fr_CA": "Scène Sirène"
+      "fr_CA": "Scène Sirène",
+      "de_DE": "Seeigel-Rockbühne",
+      "it_IT": "Palco Plancton",
+      "nl_NL": "Zeesterrenstage",
+      "ru_RU": "КЗ «Иглокожий»"
     },
     "short_name": {
       "ja_JP": "ガンガゼ",
@@ -72,7 +92,11 @@
       "es_ES": "Auditorio Erizo",
       "es_MX": "Auditorio Erizo",
       "fr_FR": "Scène Sirène",
-      "fr_CA": "Scène Sirène"
+      "fr_CA": "Scène Sirène",
+      "de_DE": "Seeigel-Rockbühne",
+      "it_IT": "Palco Plancton",
+      "nl_NL": "Zeesterrenstage",
+      "ru_RU": "КЗ «Иглокожий»"
     },
     "area": 2140,
     "release_at": {
@@ -90,7 +114,11 @@
       "es_ES": "Tiburódromo",
       "es_MX": "Tiburódromo",
       "fr_FR": "Piste Méroule",
-      "fr_CA": "Piste Méroule"
+      "fr_CA": "Piste Méroule",
+      "de_DE": "Buckelwal-Piste",
+      "it_IT": "Tintodromo Montecarpa",
+      "nl_NL": "Lekkerbektrack",
+      "ru_RU": "Велозал «9-й вал»"
     },
     "short_name": {
       "ja_JP": "コンブ",
@@ -99,7 +127,11 @@
       "es_ES": "Tiburódromo",
       "es_MX": "Tiburódromo",
       "fr_FR": "Piste Méroule",
-      "fr_CA": "Piste Méroule"
+      "fr_CA": "Piste Méroule",
+      "de_DE": "Buckelwal-Piste",
+      "it_IT": "Tintodromo Montecarpa",
+      "nl_NL": "Lekkerbektrack",
+      "ru_RU": "Велозал «9-й вал»"
     },
     "area": 2259,
     "release_at": {
@@ -117,7 +149,11 @@
       "es_ES": "Instituto Coralino",
       "es_MX": "Instituto Coralino",
       "fr_FR": "Institut Calam'arts",
-      "fr_CA": "Institut Calm'arts"
+      "fr_CA": "Institut Calm'arts",
+      "de_DE": "Perlmutt-Akademie",
+      "it_IT": "Campus Hippocampus",
+      "nl_NL": "Koraalcampus",
+      "ru_RU": "Академия «Лепота»"
     },
     "short_name": {
       "ja_JP": "アマビ",
@@ -126,7 +162,11 @@
       "es_ES": "Instituto Coralino",
       "es_MX": "Instituto Coralino",
       "fr_FR": "Institut Calam'arts",
-      "fr_CA": "Institut Calm'arts"
+      "fr_CA": "Institut Calm'arts",
+      "de_DE": "Perlmutt-Akademie",
+      "it_IT": "Campus Hippocampus",
+      "nl_NL": "Koraalcampus",
+      "ru_RU": "Академия «Лепота»"
     },
     "area": 2465,
     "release_at": {
@@ -144,7 +184,11 @@
       "es_ES": "Astillero Beluga",
       "es_MX": "Astillero Beluga",
       "fr_FR": "Chantier Narval",
-      "fr_CA": "Chantier Narval"
+      "fr_CA": "Chantier Narval",
+      "de_DE": "Störwerft",
+      "it_IT": "Cantiere Pinnenere",
+      "nl_NL": "Walruswerf",
+      "ru_RU": "Осетровые верфи"
     },
     "short_name": {
       "ja_JP": "チョウザメ",
@@ -153,7 +197,11 @@
       "es_ES": "Astillero Beluga",
       "es_MX": "Astillero Beluga",
       "fr_FR": "Chantier Narval",
-      "fr_CA": "Chantier Narval"
+      "fr_CA": "Chantier Narval",
+      "de_DE": "Störwerft",
+      "it_IT": "Cantiere Pinnenere",
+      "nl_NL": "Walruswerf",
+      "ru_RU": "Осетровые верфи"
     },
     "area": 2355,
     "release_at": {
@@ -171,7 +219,11 @@
       "es_ES": "Puerto Jurel",
       "es_MX": "Puerto Jurel",
       "fr_FR": "Docks Haddock",
-      "fr_CA": "Docks Haddock"
+      "fr_CA": "Docks Haddock",
+      "de_DE": "Heilbutt-Hafen",
+      "it_IT": "Porto Polpo",
+      "nl_NL": "Hamerhaaihaven",
+      "ru_RU": "Порт «Корюшка»"
     },
     "short_name": {
       "ja_JP": "ホッケ",
@@ -180,7 +232,11 @@
       "es_ES": "Puerto Jurel",
       "es_MX": "Puerto Jurel",
       "fr_FR": "Docks Haddock",
-      "fr_CA": "Docks Haddock"
+      "fr_CA": "Docks Haddock",
+      "de_DE": "Heilbutt-Hafen",
+      "it_IT": "Porto Polpo",
+      "nl_NL": "Hamerhaaihaven",
+      "ru_RU": "Порт «Корюшка»"
     },
     "area": 2455,
     "release_at": {
@@ -198,7 +254,11 @@
       "es_ES": "Torres Merluza",
       "es_MX": "Torres Merluza",
       "fr_FR": "Tours Girelle",
-      "fr_CA": "Tours Girelle"
+      "fr_CA": "Tours Girelle",
+      "de_DE": "Muränentürme",
+      "it_IT": "Torri cittadine",
+      "nl_NL": "Tonijntorens",
+      "ru_RU": "Муренские башни"
     },
     "short_name": {
       "ja_JP": "タチウオ",
@@ -207,7 +267,11 @@
       "es_ES": "Torres Merluza",
       "es_MX": "Torres Merluza",
       "fr_FR": "Tours Girelle",
-      "fr_CA": "Tours Girelle"
+      "fr_CA": "Tours Girelle",
+      "de_DE": "Muränentürme",
+      "it_IT": "Torri cittadine",
+      "nl_NL": "Tonijntorens",
+      "ru_RU": "Муренские башни"
     },
     "area": 2215,
     "release_at": {
@@ -225,7 +289,11 @@
       "es_ES": "Área mutante",
       "es_MX": "Área mutante",
       "fr_FR": "Plateforme polymorphe",
-      "fr_CA": "Plateforme polymorphe"
+      "fr_CA": "Plateforme polymorphe",
+      "de_DE": "Wandelzone",
+      "it_IT": "Zona mista",
+      "nl_NL": "Wisselwereld",
+      "ru_RU": "Транстанция"
     },
     "short_name": {
       "ja_JP": "ミステリー",
@@ -234,7 +302,11 @@
       "es_ES": "Área mutante",
       "es_MX": "Área mutante",
       "fr_FR": "Plateforme polymorphe",
-      "fr_CA": "Plateforme polymorphe"
+      "fr_CA": "Plateforme polymorphe",
+      "de_DE": "Wandelzone",
+      "it_IT": "Zona mista",
+      "nl_NL": "Wisselwereld",
+      "ru_RU": "Транстанция"
     },
     "area": null,
     "release_at": {
@@ -252,7 +324,11 @@
       "es_ES": "Corbeta Corvina",
       "es_MX": "Corbeta Corvina",
       "fr_FR": "Manta Maria",
-      "fr_CA": "Manta Maria"
+      "fr_CA": "Manta Maria",
+      "de_DE": "Manta Maria",
+      "it_IT": "Manta Maria",
+      "nl_NL": "Klipvisklipper",
+      "ru_RU": "Манта Мария"
     },
     "short_name": {
       "ja_JP": "マンタ",
@@ -261,12 +337,252 @@
       "es_ES": "Corbeta Corvina",
       "es_MX": "Corbeta Corvina",
       "fr_FR": "Manta",
-      "fr_CA": "Manta"
+      "fr_CA": "Manta",
+      "de_DE": "Manta Maria",
+      "it_IT": "Manta Maria",
+      "nl_NL": "Klipvisklipper",
+      "ru_RU": "Манта Мария"
     },
     "area": 2355,
     "release_at": {
       "time": 1503673200,
       "iso8601": "2017-08-25T15:00:00+00:00"
     }
+  },
+  {
+    "key": "mozuku",
+    "splatnet": 10,
+    "name": {
+      "ja_JP": "モズク農園",
+      "en_US": "Kelp Dome",
+      "en_GB": "Kelp Dome",
+      "es_ES": "Jardín botánico",
+      "es_MX": "Jardín botánico",
+      "fr_FR": "Serre Goémon",
+      "fr_CA": "Serre Goémon",
+      "de_DE": "Tümmlerkuppel",
+      "it_IT": "Serra di alghe",
+      "nl_NL": "Kelpwierkas",
+      "ru_RU": "Ферма ламинарии"
+    },
+    "short_name": {
+      "ja_JP": "モズク",
+      "en_US": "Dome",
+      "en_GB": "Dome",
+      "es_ES": "Jardín botánico",
+      "es_MX": "Jardín botánico",
+      "fr_FR": "Serre Goémon",
+      "fr_CA": "Serre Goémon",
+      "de_DE": "Tümmlerkuppel",
+      "it_IT": "Serra di alghe",
+      "nl_NL": "Kelpwierkas",
+      "ru_RU": "Ферма ламинарии"
+    },
+    "area": 2315,
+    "release_at": {
+      "time": 1505527200,
+      "iso8601": "2017-09-16T02:00:00+00:00"
+    }
+  },
+  {
+    "key": "engawa",
+    "splatnet": 9,
+    "name": {
+      "ja_JP": "エンガワ河川敷",
+      "en_US": "Snapper Canal",
+      "en_GB": "Snapper Canal",
+      "es_ES": "Canal Cormorán",
+      "es_MX": "Canal Cormorán",
+      "fr_FR": "Canalamar",
+      "fr_CA": "Canalamar",
+      "de_DE": "Grätenkanal",
+      "it_IT": "Canale Cannolicchio",
+      "nl_NL": "Moeraalkanaal",
+      "ru_RU": "Подмостовье"
+    },
+    "short_name": {
+      "ja_JP": "エンガワ",
+      "en_US": "Canal",
+      "en_GB": "Canal",
+      "es_ES": "Canal Cormorán",
+      "es_MX": "Canal Cormorán",
+      "fr_FR": "Canalamar",
+      "fr_CA": "Canalamar",
+      "de_DE": "Grätenkanal",
+      "it_IT": "Canale Cannolicchio",
+      "nl_NL": "Moeraalkanaal",
+      "ru_RU": "Подмостовье"
+    },
+    "area": 2250,
+    "release_at": {
+      "time": 1507298400,
+      "iso8601": "2017-10-06T14:00:00+00:00"
+    }
+  },
+  {
+    "key": "bbass",
+    "splatnet": 11,
+    "name": {
+      "ja_JP": "Bバスパーク",
+      "en_US": "Blackbelly Skatepark",
+      "en_GB": "Blackbelly Skatepark",
+      "es_ES": "Parque Lubina",
+      "es_MX": "Parque Lubina",
+      "fr_FR": "Skatepark Mako",
+      "fr_CA": "Plancho Mako",
+      "de_DE": "Punkasius-Skatepark",
+      "it_IT": "Pista Polposkate",
+      "nl_NL": "Snoekduik-skatepark",
+      "ru_RU": "Скейт-парк «Скат»"
+    },
+    "short_name": {
+      "ja_JP": "Bバス",
+      "en_US": "Skatepark",
+      "en_GB": "Skatepark",
+      "es_ES": "Parque Lubina",
+      "es_MX": "Parque Lubina",
+      "fr_FR": "Skatepark Mako",
+      "fr_CA": "Plancho Mako",
+      "de_DE": "Skatepark",
+      "it_IT": "Pista Polposkate",
+      "nl_NL": "Snoekduik-skatepark",
+      "ru_RU": "Скейт-парк «Скат»"
+    },
+    "area": 1947,
+    "release_at": {
+      "time": 1509156000,
+      "iso8601": "2017-10-28T02:00:00+00:00"
+    }
+  },
+  {
+    "key": "zatou",
+    "splatnet": 13,
+    "name": {
+      "ja_JP": "ザトウマーケット",
+      "en_US": "MakoMart",
+      "en_GB": "MakoMart",
+      "es_ES": "Ultramarinos Orca",
+      "es_MX": "Ultramarinos Orca",
+      "fr_FR": "Supermarché Cétacé",
+      "fr_CA": "Supermarché Cétacé",
+      "de_DE": "Cetacea-Markt",
+      "it_IT": "Mercatotano",
+      "nl_NL": "Bultrugbazaar",
+      "ru_RU": "Горбуша-Маркет"
+    },
+    "short_name": {
+      "ja_JP": "ザトウ",
+      "en_US": "Mart",
+      "en_GB": "Mart",
+      "es_ES": "Ultramarinos Orca",
+      "es_MX": "Ultramarinos Orca",
+      "fr_FR": "Supermarché Cétacé",
+      "fr_CA": "Supermarché Cétacé",
+      "de_DE": "Cetacea-Markt",
+      "it_IT": "Mercatotano",
+      "nl_NL": "Bultrugbazaar",
+      "ru_RU": "Горбуша-Маркет"
+    },
+    "area": null,
+    "release_at": {
+      "time": 1511575200,
+      "iso8601": "2017-11-25T02:00:00+00:00"
+    }
+  },
+  {
+    "key": "arowana",
+    "splatnet": null,
+    "name": {
+      "ja_JP": "アロワナモール",
+      "en_US": "Arowana Mall",
+      "en_GB": "Arowana Mall",
+      "es_ES": "Plazuela del Calamar",
+      "es_MX": "Plazuela del Calamar",
+      "fr_FR": "Centre Arowana",
+      "fr_CA": "Centre Arowana",
+      "de_DE": "Arowana Center",
+      "it_IT": "Centro Commerciale",
+      "nl_NL": "Winkelcentrum",
+      "ru_RU": "ТЦ «Аравана»"
+    },
+    "short_name": {
+      "ja_JP": "アロワナ",
+      "en_US": "Mall",
+      "en_GB": "Mall",
+      "es_ES": "Plazuela del Calamar",
+      "es_MX": "Plazuela del Calamar",
+      "fr_FR": "Centre Arowana",
+      "fr_CA": "Centre Arowana",
+      "de_DE": "Arowana Center",
+      "it_IT": "Centro Commerciale",
+      "nl_NL": "Winkelcentrum",
+      "ru_RU": "ТЦ «Аравана»"
+    },
+    "area": null,
+    "release_at": null
+  },
+  {
+    "key": "hakofugu",
+    "splatnet": null,
+    "name": {
+      "ja_JP": "ハコフグ倉庫",
+      "en_US": "Walleye Warehouse",
+      "en_GB": "Walleye Warehouse",
+      "es_ES": "Almacén Rodaballo",
+      "es_MX": "Almacén Rodaballo",
+      "fr_FR": "Encrepôt",
+      "fr_CA": "Encrepôt",
+      "de_DE": "Kofferfisch-Lager",
+      "it_IT": "Magazzino",
+      "nl_NL": "Walleye Warehouse",
+      "ru_RU": "Walleye Warehouse"
+    },
+    "short_name": {
+      "ja_JP": "ハコフグ",
+      "en_US": "Warehouse",
+      "en_GB": "Warehouse",
+      "es_ES": "Almacén Rodaballo",
+      "es_MX": "Almacén Rodaballo",
+      "fr_FR": "Encrepôt",
+      "fr_CA": "Encrepôt",
+      "de_DE": "Kofferfisch-Lager",
+      "it_IT": "Magazzino",
+      "nl_NL": "Warehouse",
+      "ru_RU": "Warehouse"
+    },
+    "area": null,
+    "release_at": null
+  },
+  {
+    "key": "devon",
+    "splatnet": null,
+    "name": {
+      "ja_JP": "デボン海洋博物館",
+      "en_US": "Shellendorf Institute",
+      "en_GB": "Shellendorf Institute",
+      "es_ES": "Shellendorf Institute",
+      "es_MX": "Shellendorf Institute",
+      "fr_FR": "La Galerie des Abysses",
+      "fr_CA": "La Galerie des Abysses",
+      "de_DE": "Shellendorf Institute",
+      "it_IT": "Shellendorf Institute",
+      "nl_NL": "Shellendorf Institute",
+      "ru_RU": "Shellendorf Institute"
+    },
+    "short_name": {
+      "ja_JP": "デボン",
+      "en_US": "Institute",
+      "en_GB": "Institute",
+      "es_ES": "Institute",
+      "es_MX": "Institute",
+      "fr_FR": "La Galerie des Abysses",
+      "fr_CA": "La Galerie des Abysses",
+      "de_DE": "Institute",
+      "it_IT": "Institute",
+      "nl_NL": "Institute",
+      "ru_RU": "Institute"
+    },
+    "area": null,
+    "release_at": null
   }
 ]
