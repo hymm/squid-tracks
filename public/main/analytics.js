@@ -4,6 +4,7 @@ const { app } = require('electron');
 const appVersion = app.getVersion();
 const appName = app.getName();
 const Store = require('./store');
+const log = require('electron-log');
 
 const store = new Store({
   configName: 'user-data',
@@ -22,24 +23,30 @@ if (userUuid.length < 10) {
 }
 const visitor = ua(ua_ID, userUuid);
 
+function errorHandler(err) {
+  if (err) {
+    log.error(`Error with google analytics: ${err}`);
+  }
+}
+
 // support disabling analytics
 const screenview = screenName => {
   if (store.get('gaEnabled')) {
-    visitor.screenview(screenName, appName, appVersion).send();
+    visitor.screenview(screenName, appName, appVersion, errorHandler);
   }
 };
 module.exports.screenView = screenview;
 
 const event = (...args) => {
   if (store.get('gaEnabled')) {
-    visitor.event(...args).send();
+    visitor.event(...args, errorHandler);
   }
 };
 module.exports.event = event;
 
 const uaException = (exd, ...args) => {
   if (store.get('gaEnabled')) {
-    visitor.exception({ exd, av: appVersion }, ...args).send();
+    visitor.exception({ exd, av: appVersion }, ...args, errorHandler);
   }
 };
 module.exports.uaException = uaException;
