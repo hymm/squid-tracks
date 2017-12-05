@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Version 0.3.5
+* French Language Support (Thanks DanSyor)
+* updated default maps
+* Error Handling for google analytics
+
 ## Version 0.3.4
 * Windows 32bit added to exe installer
 * added indication on trend of rule (RM, TC, SZ)
