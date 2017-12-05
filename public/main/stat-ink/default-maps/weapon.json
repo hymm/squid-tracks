@@ -11,7 +11,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -22,7 +26,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -33,7 +41,11 @@
       "es_ES": "Lanzatintas",
       "es_MX": "Rociador",
       "fr_FR": "Liquidateur",
-      "fr_CA": "Liquéficateur"
+      "fr_CA": "Liquéficateur",
+      "de_DE": "Kleckser",
+      "it_IT": "Splasher",
+      "nl_NL": "Superspetter",
+      "ru_RU": "Каплестрел"
     },
     "sub": {
       "key": "quickbomb",
@@ -44,7 +56,11 @@
         "es_ES": "Bomba rápida",
         "es_MX": "Bomba rápida",
         "fr_FR": "Bombe ballon",
-        "fr_CA": "Bombe ballon"
+        "fr_CA": "Bombe ballon",
+        "de_DE": "Insta-Bombe",
+        "it_IT": "Granata",
+        "nl_NL": "Ballonbom",
+        "ru_RU": "Разрывная бомба"
       }
     },
     "special": {
@@ -56,7 +72,11 @@
         "es_ES": "Salto explosivo",
         "es_MX": "Salto explosivo",
         "fr_FR": "Choc chromatique",
-        "fr_CA": "Choc chromatique"
+        "fr_CA": "Choc chromatique",
+        "de_DE": "Tintenschock",
+        "it_IT": "Vernischianto",
+        "nl_NL": "Superlanding",
+        "ru_RU": "Мегаплюх"
       }
     },
     "reskin_of": null,
@@ -74,7 +94,11 @@
         "es_ES": "Dualies",
         "es_MX": "Dualies",
         "fr_FR": "Dualies",
-        "fr_CA": "Dualies"
+        "fr_CA": "Dualies",
+        "de_DE": "Dualies",
+        "it_IT": "Armi \"duplo\"",
+        "nl_NL": "Dualies",
+        "ru_RU": "Dualies"
       },
       "category": {
         "key": "shooter",
@@ -85,7 +109,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -96,7 +124,11 @@
       "es_ES": "Dual diffusor",
       "es_MX": "Dual diffusor",
       "fr_FR": "Double encreur",
-      "fr_CA": "Double encreur"
+      "fr_CA": "Double encreur",
+      "de_DE": "Klecks-Doppler",
+      "it_IT": "Repolper duplo",
+      "nl_NL": "Dubbelknallers",
+      "ru_RU": "Спуртометы"
     },
     "sub": {
       "key": "quickbomb",
@@ -107,7 +139,11 @@
         "es_ES": "Bomba rápida",
         "es_MX": "Bomba rápida",
         "fr_FR": "Bombe ballon",
-        "fr_CA": "Bombe ballon"
+        "fr_CA": "Bombe ballon",
+        "de_DE": "Insta-Bombe",
+        "it_IT": "Granata",
+        "nl_NL": "Ballonbom",
+        "ru_RU": "Разрывная бомба"
       }
     },
     "special": {
@@ -119,7 +155,11 @@
         "es_ES": "Lanzamisiles",
         "es_MX": "Lanzamisiles",
         "fr_FR": "Multi-missile",
-        "fr_CA": "Multi-missile"
+        "fr_CA": "Multi-missile",
+        "de_DE": "Schwarmraketen",
+        "it_IT": "Lanciarazzi",
+        "nl_NL": "Spetterraketten",
+        "ru_RU": "Каракатница"
       }
     },
     "reskin_of": null,
@@ -137,7 +177,11 @@
         "es_ES": "Rodillos",
         "es_MX": "Rodillos",
         "fr_FR": "Rouleau",
-        "fr_CA": "Rouleau"
+        "fr_CA": "Rouleau",
+        "de_DE": "Rollers",
+        "it_IT": "Rollers",
+        "nl_NL": "Rollers",
+        "ru_RU": "Rollers"
       },
       "category": {
         "key": "roller",
@@ -148,7 +192,11 @@
           "es_ES": "Rodillos",
           "es_MX": "Rodillos",
           "fr_FR": "Rouleau",
-          "fr_CA": "Rouleau"
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
         }
       }
     },
@@ -159,7 +207,11 @@
       "es_ES": "Rodillo básico",
       "es_MX": "Rodillo básico",
       "fr_FR": "Rouleau",
-      "fr_CA": "Rouleau"
+      "fr_CA": "Rouleau",
+      "de_DE": "Klecksroller",
+      "it_IT": "Rullo splat",
+      "nl_NL": "Klodderroller",
+      "ru_RU": "Сплат-валик"
     },
     "sub": {
       "key": "curlingbomb",
@@ -170,7 +222,11 @@
         "es_ES": "Bomba deslizante",
         "es_MX": "Bomba deslizante",
         "fr_FR": "Bombe curling",
-        "fr_CA": "Bombe curling"
+        "fr_CA": "Bombe curling",
+        "de_DE": "Curling-Bombe",
+        "it_IT": "Bomba curling",
+        "nl_NL": "Curlingbom",
+        "ru_RU": "Керлинг-бомба"
       }
     },
     "special": {
@@ -182,7 +238,11 @@
         "es_ES": "Salto explosivo",
         "es_MX": "Salto explosivo",
         "fr_FR": "Choc chromatique",
-        "fr_CA": "Choc chromatique"
+        "fr_CA": "Choc chromatique",
+        "de_DE": "Tintenschock",
+        "it_IT": "Vernischianto",
+        "nl_NL": "Superlanding",
+        "ru_RU": "Мегаплюх"
       }
     },
     "reskin_of": null,
@@ -200,7 +260,11 @@
         "es_ES": "Cargatintas",
         "es_MX": "Cargatintas",
         "fr_FR": "Fusil",
-        "fr_CA": "Fusil"
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
       },
       "category": {
         "key": "charger",
@@ -211,7 +275,11 @@
           "es_ES": "Cargatintas",
           "es_MX": "Cargatintas",
           "fr_FR": "Fusil",
-          "fr_CA": "Fusil"
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
         }
       }
     },
@@ -222,7 +290,11 @@
       "es_ES": "Cargatintas",
       "es_MX": "Cargatintas",
       "fr_FR": "Concentraceur",
-      "fr_CA": "Concentraceur"
+      "fr_CA": "Concentraceur",
+      "de_DE": "Klecks-Konzentrator",
+      "it_IT": "Splatter a carica",
+      "nl_NL": "Bloplader",
+      "ru_RU": "Сплатган"
     },
     "sub": {
       "key": "splashbomb",
@@ -233,7 +305,11 @@
         "es_ES": "Bomba básica",
         "es_MX": "Bomba básica",
         "fr_FR": "Bombe splash",
-        "fr_CA": "Bombe splash"
+        "fr_CA": "Bombe splash",
+        "de_DE": "Klecksbombe",
+        "it_IT": "Bomba splash",
+        "nl_NL": "Klodderbom",
+        "ru_RU": "Брызгающая бомба"
       }
     },
     "special": {
@@ -245,7 +321,11 @@
         "es_ES": "Rayo tintódico",
         "es_MX": "Rayo tintódico",
         "fr_FR": "Pigmalance",
-        "fr_CA": "Pigmalance"
+        "fr_CA": "Pigmalance",
+        "de_DE": "Magistraal",
+        "it_IT": "Baccalaser",
+        "nl_NL": "Magistraal",
+        "ru_RU": "Струятор"
       }
     },
     "reskin_of": null,
@@ -263,7 +343,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -274,7 +358,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -285,7 +373,11 @@
       "es_ES": "Lanzatintas plus",
       "es_MX": "Lanzatintas plus",
       "fr_FR": "Liquidateur pro",
-      "fr_CA": "Liquéficateur pro"
+      "fr_CA": "Liquéficateur pro",
+      "de_DE": "Profi-Kleckser",
+      "it_IT": "Splasher élite",
+      "nl_NL": "Superspetter Pro",
+      "ru_RU": "Каплестрел ПРО"
     },
     "sub": {
       "key": "pointsensor",
@@ -296,7 +388,11 @@
         "es_ES": "Rastreador",
         "es_MX": "Rastreador",
         "fr_FR": "Détecteur",
-        "fr_CA": "Détecteur"
+        "fr_CA": "Détecteur",
+        "de_DE": "Detektor",
+        "it_IT": "Cimice",
+        "nl_NL": "Detector",
+        "ru_RU": "Маркер движения"
       }
     },
     "special": {
@@ -308,7 +404,11 @@
         "es_ES": "Atormentador",
         "es_MX": "Atormentador",
         "fr_FR": "Pluie d'encre",
-        "fr_CA": "Pluie d'encre"
+        "fr_CA": "Pluie d'encre",
+        "de_DE": "Tintenschauer",
+        "it_IT": "Pioggia di colore",
+        "nl_NL": "Spetterbui",
+        "ru_RU": "Туча краски"
       }
     },
     "reskin_of": null,
@@ -326,7 +426,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -337,7 +441,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -348,7 +456,11 @@
       "es_ES": "Marcador fino",
       "es_MX": "Marcador fino",
       "fr_FR": "Marqueur léger",
-      "fr_CA": "Marqueur léger"
+      "fr_CA": "Marqueur léger",
+      "de_DE": "Fein-Disperser",
+      "it_IT": "Marker d'assalto",
+      "nl_NL": "Spetterspuit",
+      "ru_RU": "Плюхомет"
     },
     "sub": {
       "key": "poisonmist",
@@ -359,7 +471,11 @@
         "es_ES": "Toxic Mist",
         "es_MX": "Toxic Mist",
         "fr_FR": "Brume toxique",
-        "fr_CA": "Brume toxique"
+        "fr_CA": "Brume toxique",
+        "de_DE": "Sepitox-Nebel",
+        "it_IT": "Nebbia tossica",
+        "nl_NL": "Gifmist",
+        "ru_RU": "Едкий туман"
       }
     },
     "special": {
@@ -371,7 +487,11 @@
         "es_ES": "Propulsor",
         "es_MX": "Propulsor",
         "fr_FR": "Chromo-jet",
-        "fr_CA": "Chromo-jet"
+        "fr_CA": "Chromo-jet",
+        "de_DE": "Tintendüser",
+        "it_IT": "Jet splat",
+        "nl_NL": "Inktjet",
+        "ru_RU": "Красколет"
       }
     },
     "reskin_of": null,
@@ -389,7 +509,11 @@
         "es_ES": "Devastadors",
         "es_MX": "Devastadors",
         "fr_FR": "Éclablaster",
-        "fr_CA": "Éclablaster"
+        "fr_CA": "Éclablaster",
+        "de_DE": "Blasters",
+        "it_IT": "Blasters",
+        "nl_NL": "Blasters",
+        "ru_RU": "Blasters"
       },
       "category": {
         "key": "shooter",
@@ -400,7 +524,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -411,7 +539,11 @@
       "es_ES": "Devastador",
       "es_MX": "Devastador",
       "fr_FR": "Éclablaster",
-      "fr_CA": "Éclablasteur"
+      "fr_CA": "Éclablasteur",
+      "de_DE": "Blaster",
+      "it_IT": "Blaster",
+      "nl_NL": "Klodderblaster",
+      "ru_RU": "Бластер"
     },
     "sub": {
       "key": "poisonmist",
@@ -422,7 +554,11 @@
         "es_ES": "Toxic Mist",
         "es_MX": "Toxic Mist",
         "fr_FR": "Brume toxique",
-        "fr_CA": "Brume toxique"
+        "fr_CA": "Brume toxique",
+        "de_DE": "Sepitox-Nebel",
+        "it_IT": "Nebbia tossica",
+        "nl_NL": "Gifmist",
+        "ru_RU": "Едкий туман"
       }
     },
     "special": {
@@ -434,7 +570,11 @@
         "es_ES": "Salto explosivo",
         "es_MX": "Salto explosivo",
         "fr_FR": "Choc chromatique",
-        "fr_CA": "Choc chromatique"
+        "fr_CA": "Choc chromatique",
+        "de_DE": "Tintenschock",
+        "it_IT": "Vernischianto",
+        "nl_NL": "Superlanding",
+        "ru_RU": "Мегаплюх"
       }
     },
     "reskin_of": null,
@@ -452,7 +592,11 @@
         "es_ES": "Rodillos",
         "es_MX": "Rodillos",
         "fr_FR": "Rouleau",
-        "fr_CA": "Rouleau"
+        "fr_CA": "Rouleau",
+        "de_DE": "Rollers",
+        "it_IT": "Rollers",
+        "nl_NL": "Rollers",
+        "ru_RU": "Rollers"
       },
       "category": {
         "key": "roller",
@@ -463,7 +607,11 @@
           "es_ES": "Rodillos",
           "es_MX": "Rodillos",
           "fr_FR": "Rouleau",
-          "fr_CA": "Rouleau"
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
         }
       }
     },
@@ -474,7 +622,11 @@
       "es_ES": "Dinamorrodillo",
       "es_MX": "Dinamorrodillo",
       "fr_FR": "Dynamo-rouleau",
-      "fr_CA": "Dynamo-rouleau"
+      "fr_CA": "Dynamo-rouleau",
+      "de_DE": "Dynaroller",
+      "it_IT": "Rullo dinamo",
+      "nl_NL": "Dynamoroller",
+      "ru_RU": "Мотовалик"
     },
     "sub": {
       "key": "trap",
@@ -485,7 +637,11 @@
         "es_ES": "Bomba Trampa",
         "es_MX": "Bomba Trampa",
         "fr_FR": "Mine",
-        "fr_CA": "Mine"
+        "fr_CA": "Mine",
+        "de_DE": "Tintenmine",
+        "it_IT": "Mina",
+        "nl_NL": "Inktmijnen",
+        "ru_RU": "Мины"
       }
     },
     "special": {
@@ -497,7 +653,11 @@
         "es_ES": "Rayo tintódico",
         "es_MX": "Rayo tintódico",
         "fr_FR": "Pigmalance",
-        "fr_CA": "Pigmalance"
+        "fr_CA": "Pigmalance",
+        "de_DE": "Magistraal",
+        "it_IT": "Baccalaser",
+        "nl_NL": "Magistraal",
+        "ru_RU": "Струятор"
       }
     },
     "reskin_of": null,
@@ -515,7 +675,11 @@
         "es_ES": "Brochas",
         "es_MX": "Brochas",
         "fr_FR": "Épinceau",
-        "fr_CA": "Épinceau"
+        "fr_CA": "Épinceau",
+        "de_DE": "Brushes",
+        "it_IT": "Brushes",
+        "nl_NL": "Brushes",
+        "ru_RU": "Brushes"
       },
       "category": {
         "key": "roller",
@@ -526,7 +690,11 @@
           "es_ES": "Rodillos",
           "es_MX": "Rodillos",
           "fr_FR": "Rouleau",
-          "fr_CA": "Rouleau"
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
         }
       }
     },
@@ -537,7 +705,11 @@
       "es_ES": "Brocha",
       "es_MX": "Brocha",
       "fr_FR": "Épinceau brosse",
-      "fr_CA": "Épinceau brosse"
+      "fr_CA": "Épinceau brosse",
+      "de_DE": "Kalligraf",
+      "it_IT": "Tinturicchio",
+      "nl_NL": "Octokwast",
+      "ru_RU": "Арт-кисть"
     },
     "sub": {
       "key": "robotbomb",
@@ -548,7 +720,11 @@
         "es_ES": "Autobomb",
         "es_MX": "Autobomb",
         "fr_FR": "Bombe robot",
-        "fr_CA": "Bombe robot"
+        "fr_CA": "Bombe robot",
+        "de_DE": "Robo-Bombe",
+        "it_IT": "Robobomba",
+        "nl_NL": "Robobom",
+        "ru_RU": "Робобомб"
       }
     },
     "special": {
@@ -560,7 +736,11 @@
         "es_ES": "Propulsor",
         "es_MX": "Propulsor",
         "fr_FR": "Chromo-jet",
-        "fr_CA": "Chromo-jet"
+        "fr_CA": "Chromo-jet",
+        "de_DE": "Tintendüser",
+        "it_IT": "Jet splat",
+        "nl_NL": "Inktjet",
+        "ru_RU": "Красколет"
       }
     },
     "reskin_of": null,
@@ -578,7 +758,11 @@
         "es_ES": "Cargatintas",
         "es_MX": "Cargatintas",
         "fr_FR": "Fusil",
-        "fr_CA": "Fusil"
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
       },
       "category": {
         "key": "charger",
@@ -589,7 +773,11 @@
           "es_ES": "Cargatintas",
           "es_MX": "Cargatintas",
           "fr_FR": "Fusil",
-          "fr_CA": "Fusil"
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
         }
       }
     },
@@ -600,7 +788,11 @@
       "es_ES": "Cargatintas con mira",
       "es_MX": "Cargatintas con mira",
       "fr_FR": "Concentraceur zoom",
-      "fr_CA": "Concentraceur zoom"
+      "fr_CA": "Concentraceur zoom",
+      "de_DE": "Ziel-Konzentrator",
+      "it_IT": "Splatter con mirino",
+      "nl_NL": "Schelpschutter",
+      "ru_RU": "Снайпокрас"
     },
     "sub": {
       "key": "splashbomb",
@@ -611,7 +803,11 @@
         "es_ES": "Bomba básica",
         "es_MX": "Bomba básica",
         "fr_FR": "Bombe splash",
-        "fr_CA": "Bombe splash"
+        "fr_CA": "Bombe splash",
+        "de_DE": "Klecksbombe",
+        "it_IT": "Bomba splash",
+        "nl_NL": "Klodderbom",
+        "ru_RU": "Брызгающая бомба"
       }
     },
     "special": {
@@ -623,7 +819,11 @@
         "es_ES": "Rayo tintódico",
         "es_MX": "Rayo tintódico",
         "fr_FR": "Pigmalance",
-        "fr_CA": "Pigmalance"
+        "fr_CA": "Pigmalance",
+        "de_DE": "Magistraal",
+        "it_IT": "Baccalaser",
+        "nl_NL": "Magistraal",
+        "ru_RU": "Струятор"
       }
     },
     "reskin_of": null,
@@ -641,7 +841,11 @@
         "es_ES": "Derramatics",
         "es_MX": "Derramatics",
         "fr_FR": "Seauceur",
-        "fr_CA": "Seauceur"
+        "fr_CA": "Seauceur",
+        "de_DE": "Sloshers",
+        "it_IT": "Sloshers",
+        "nl_NL": "Sloshers",
+        "ru_RU": "Sloshers"
       },
       "category": {
         "key": "slosher",
@@ -652,7 +856,11 @@
           "es_ES": "Derramatics",
           "es_MX": "Derramatics",
           "fr_FR": "Seauceur",
-          "fr_CA": "Seauceur"
+          "fr_CA": "Seauceur",
+          "de_DE": "Sloshers",
+          "it_IT": "Sloshers",
+          "nl_NL": "Sloshers",
+          "ru_RU": "Sloshers"
         }
       }
     },
@@ -663,7 +871,11 @@
       "es_ES": "Derramatic",
       "es_MX": "Derramatic",
       "fr_FR": "Seauceur",
-      "fr_CA": "Seauceur"
+      "fr_CA": "Seauceur",
+      "de_DE": "Schwapper",
+      "it_IT": "Secchiostro",
+      "nl_NL": "Morser",
+      "ru_RU": "Ведроган"
     },
     "sub": {
       "key": "kyubanbomb",
@@ -674,7 +886,11 @@
         "es_ES": "Bomba ventosa",
         "es_MX": "Bomba ventosa",
         "fr_FR": "Bombe gluante",
-        "fr_CA": "Bombe gluante"
+        "fr_CA": "Bombe gluante",
+        "de_DE": "Haftbombe",
+        "it_IT": "Appiccibomba",
+        "nl_NL": "Kleefbom",
+        "ru_RU": "Бомба на присоске"
       }
     },
     "special": {
@@ -686,7 +902,11 @@
         "es_ES": "Lanzamisiles",
         "es_MX": "Lanzamisiles",
         "fr_FR": "Multi-missile",
-        "fr_CA": "Multi-missile"
+        "fr_CA": "Multi-missile",
+        "de_DE": "Schwarmraketen",
+        "it_IT": "Lanciarazzi",
+        "nl_NL": "Spetterraketten",
+        "ru_RU": "Каракатница"
       }
     },
     "reskin_of": null,
@@ -704,7 +924,11 @@
         "es_ES": "Tintralladoras",
         "es_MX": "Garabateadors",
         "fr_FR": "Badigeonneur",
-        "fr_CA": "Badigeonneur"
+        "fr_CA": "Badigeonneur",
+        "de_DE": "Splatlings",
+        "it_IT": "Splatlings",
+        "nl_NL": "Splatlings",
+        "ru_RU": "Splatlings"
       },
       "category": {
         "key": "splatling",
@@ -715,7 +939,11 @@
           "es_ES": "Tintralladoras",
           "es_MX": "Garabateadors",
           "fr_FR": "Badigeonneur",
-          "fr_CA": "Badigeonneur"
+          "fr_CA": "Badigeonneur",
+          "de_DE": "Splatlings",
+          "it_IT": "Splatlings",
+          "nl_NL": "Splatlings",
+          "ru_RU": "Splatlings"
         }
       }
     },
@@ -724,9 +952,13 @@
       "en_US": "Heavy Splatling",
       "en_GB": "Heavy Splatling",
       "es_ES": "Tintralladora",
-      "es_MX": "Tintralladora",
+      "es_MX": "Garabateador Pro",
       "fr_FR": "Badigeonneur",
-      "fr_CA": "Badigeonneur"
+      "fr_CA": "Badigeonneur",
+      "de_DE": "Splatling",
+      "it_IT": "Splatting a tanica",
+      "nl_NL": "Spetling",
+      "ru_RU": "Брызгомет XL"
     },
     "sub": {
       "key": "sprinkler",
@@ -737,7 +969,11 @@
         "es_ES": "Aspersor",
         "es_MX": "Aspersor",
         "fr_FR": "Fontaine",
-        "fr_CA": "Fontaine"
+        "fr_CA": "Fontaine",
+        "de_DE": "Sprinkler",
+        "it_IT": "Spruzzatore",
+        "nl_NL": "Inktsprinkler",
+        "ru_RU": "Распылятор"
       }
     },
     "special": {
@@ -749,7 +985,11 @@
         "es_ES": "Rayo tintódico",
         "es_MX": "Rayo tintódico",
         "fr_FR": "Pigmalance",
-        "fr_CA": "Pigmalance"
+        "fr_CA": "Pigmalance",
+        "de_DE": "Magistraal",
+        "it_IT": "Baccalaser",
+        "nl_NL": "Magistraal",
+        "ru_RU": "Струятор"
       }
     },
     "reskin_of": null,
@@ -767,7 +1007,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -778,7 +1022,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -789,7 +1037,11 @@
       "es_ES": "Lanzatintas B",
       "es_MX": "Rociador Tentáctica",
       "fr_FR": "Liquidateur griffé",
-      "fr_CA": "Liquéficateur Tentatek"
+      "fr_CA": "Liquéficateur Tentatek",
+      "de_DE": "Tentatek-Kleckser",
+      "it_IT": "Splasher logo",
+      "nl_NL": "Tentatek Superspetter",
+      "ru_RU": "Каплестрел «Щуччи»"
     },
     "sub": {
       "key": "splashbomb",
@@ -800,7 +1052,11 @@
         "es_ES": "Bomba básica",
         "es_MX": "Bomba básica",
         "fr_FR": "Bombe splash",
-        "fr_CA": "Bombe splash"
+        "fr_CA": "Bombe splash",
+        "de_DE": "Klecksbombe",
+        "it_IT": "Bomba splash",
+        "nl_NL": "Klodderbom",
+        "ru_RU": "Брызгающая бомба"
       }
     },
     "special": {
@@ -812,7 +1068,11 @@
         "es_ES": "Propulsor",
         "es_MX": "Propulsor",
         "fr_FR": "Chromo-jet",
-        "fr_CA": "Chromo-jet"
+        "fr_CA": "Chromo-jet",
+        "de_DE": "Tintendüser",
+        "it_IT": "Jet splat",
+        "nl_NL": "Inktjet",
+        "ru_RU": "Красколет"
       }
     },
     "reskin_of": null,
@@ -830,7 +1090,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -841,7 +1105,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -849,10 +1117,14 @@
       "ja_JP": "わかばシューター",
       "en_US": "Splattershot Jr.",
       "en_GB": "Splattershot Jr.",
-      "es_ES": "Splattershot Jr.",
-      "es_MX": "Splattershot Jr.",
+      "es_ES": "Lanzatintas novato",
+      "es_MX": "Rociador básico",
       "fr_FR": "Liquidateur Jr.",
-      "fr_CA": "Liquéficateur ultra"
+      "fr_CA": "Liquéficateur ultra",
+      "de_DE": "Junior-Kleckser",
+      "it_IT": "Sparacolore recluta",
+      "nl_NL": "Superspetter jr.",
+      "ru_RU": "Каплестрел-У"
     },
     "sub": {
       "key": "splashbomb",
@@ -863,7 +1135,11 @@
         "es_ES": "Bomba básica",
         "es_MX": "Bomba básica",
         "fr_FR": "Bombe splash",
-        "fr_CA": "Bombe splash"
+        "fr_CA": "Bombe splash",
+        "de_DE": "Klecksbombe",
+        "it_IT": "Bomba splash",
+        "nl_NL": "Klodderbom",
+        "ru_RU": "Брызгающая бомба"
       }
     },
     "special": {
@@ -875,7 +1151,11 @@
         "es_ES": "Ink Armor",
         "es_MX": "Ink Armor",
         "fr_FR": "Armure d'encre",
-        "fr_CA": "Armure d'encre"
+        "fr_CA": "Armure d'encre",
+        "de_DE": "Tintenrüstung",
+        "it_IT": "Armatura d'inchiostro",
+        "nl_NL": "Inktharnas",
+        "ru_RU": "Бронекраска"
       }
     },
     "reskin_of": null,
@@ -893,7 +1173,11 @@
         "es_ES": "Dualies",
         "es_MX": "Dualies",
         "fr_FR": "Dualies",
-        "fr_CA": "Dualies"
+        "fr_CA": "Dualies",
+        "de_DE": "Dualies",
+        "it_IT": "Armi \"duplo\"",
+        "nl_NL": "Dualies",
+        "ru_RU": "Dualies"
       },
       "category": {
         "key": "shooter",
@@ -904,7 +1188,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -912,10 +1200,14 @@
       "ja_JP": "スパッタリー",
       "en_US": "Dapple Dualies",
       "en_GB": "Dapple Dualies",
-      "es_ES": "Dapple Dualies",
-      "es_MX": "Dapple Dualies",
+      "es_ES": "Atomizador dual",
+      "es_MX": "Atomizador dual",
       "fr_FR": "Double moucheteur",
-      "fr_CA": "Double moucheteur"
+      "fr_CA": "Double moucheteur",
+      "de_DE": "Sprenkler",
+      "it_IT": "Ripolpella duplo",
+      "nl_NL": "Dubbelspatters",
+      "ru_RU": "Трубастер"
     },
     "sub": {
       "key": "jumpbeacon",
@@ -926,7 +1218,11 @@
         "es_ES": "Squid Beakon",
         "es_MX": "Squid Beakon",
         "fr_FR": "Balise de saut",
-        "fr_CA": "Balise de saut"
+        "fr_CA": "Balise de saut",
+        "de_DE": "Sprungboje",
+        "it_IT": "Trasferitore",
+        "nl_NL": "Springschotel",
+        "ru_RU": "Прыжковый маячок"
       }
     },
     "special": {
@@ -938,7 +1234,11 @@
         "es_ES": "Bomb Launcher",
         "es_MX": "Bomb Launcher",
         "fr_FR": "Lanceur de bombes",
-        "fr_CA": "Lanceur de bombes"
+        "fr_CA": "Lanceur de bombes",
+        "de_DE": "Bomb Launcher",
+        "it_IT": "Bomb Launcher",
+        "nl_NL": "Bomkanon",
+        "ru_RU": "Бомбомет"
       }
     },
     "reskin_of": null,
@@ -956,7 +1256,11 @@
         "es_ES": "Devastadors",
         "es_MX": "Devastadors",
         "fr_FR": "Éclablaster",
-        "fr_CA": "Éclablaster"
+        "fr_CA": "Éclablaster",
+        "de_DE": "Blasters",
+        "it_IT": "Blasters",
+        "nl_NL": "Blasters",
+        "ru_RU": "Blasters"
       },
       "category": {
         "key": "shooter",
@@ -967,7 +1271,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -975,10 +1283,14 @@
       "ja_JP": "クラッシュブラスター",
       "en_US": "Clash Blaster",
       "en_GB": "Clash Blaster",
-      "es_ES": "Clash Blaster",
-      "es_MX": "Clash Blaster",
+      "es_ES": "Turbodevastador",
+      "es_MX": "Hiperlanzamotas",
       "fr_FR": "Rafablaster",
-      "fr_CA": "Rafalblasteur"
+      "fr_CA": "Rafalblasteur",
+      "de_DE": "Kontra-Blaster",
+      "it_IT": "Blaster da mischia",
+      "nl_NL": "Knalblaster",
+      "ru_RU": "Контрабластер"
     },
     "sub": {
       "key": "splashbomb",
@@ -989,7 +1301,11 @@
         "es_ES": "Bomba básica",
         "es_MX": "Bomba básica",
         "fr_FR": "Bombe splash",
-        "fr_CA": "Bombe splash"
+        "fr_CA": "Bombe splash",
+        "de_DE": "Klecksbombe",
+        "it_IT": "Bomba splash",
+        "nl_NL": "Klodderbom",
+        "ru_RU": "Брызгающая бомба"
       }
     },
     "special": {
@@ -1001,7 +1317,11 @@
         "es_ES": "Rayo tintódico",
         "es_MX": "Rayo tintódico",
         "fr_FR": "Pigmalance",
-        "fr_CA": "Pigmalance"
+        "fr_CA": "Pigmalance",
+        "de_DE": "Magistraal",
+        "it_IT": "Baccalaser",
+        "nl_NL": "Magistraal",
+        "ru_RU": "Струятор"
       }
     },
     "reskin_of": null,
@@ -1019,7 +1339,11 @@
         "es_ES": "Cargatintas",
         "es_MX": "Cargatintas",
         "fr_FR": "Fusil",
-        "fr_CA": "Fusil"
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
       },
       "category": {
         "key": "charger",
@@ -1030,7 +1354,11 @@
           "es_ES": "Cargatintas",
           "es_MX": "Cargatintas",
           "fr_FR": "Fusil",
-          "fr_CA": "Fusil"
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
         }
       }
     },
@@ -1038,10 +1366,14 @@
       "ja_JP": "ソイチューバー",
       "en_US": "Goo Tuber",
       "en_GB": "Goo Tuber",
-      "es_ES": "Goo Tuber",
-      "es_MX": "Goo Tuber",
+      "es_ES": "Tubofusil",
+      "es_MX": "Tubofusil",
       "fr_FR": "Détubeur",
-      "fr_CA": "Détubeur"
+      "fr_CA": "Détubeur",
+      "de_DE": "T-Tuber",
+      "it_IT": "Tintubator",
+      "nl_NL": "Spetbuizer",
+      "ru_RU": "Импрессиометы"
     },
     "sub": {
       "key": "kyubanbomb",
@@ -1052,7 +1384,11 @@
         "es_ES": "Bomba ventosa",
         "es_MX": "Bomba ventosa",
         "fr_FR": "Bombe gluante",
-        "fr_CA": "Bombe gluante"
+        "fr_CA": "Bombe gluante",
+        "de_DE": "Haftbombe",
+        "it_IT": "Appiccibomba",
+        "nl_NL": "Kleefbom",
+        "ru_RU": "Бомба на присоске"
       }
     },
     "special": {
@@ -1064,7 +1400,11 @@
         "es_ES": "Salto explosivo",
         "es_MX": "Salto explosivo",
         "fr_FR": "Choc chromatique",
-        "fr_CA": "Choc chromatique"
+        "fr_CA": "Choc chromatique",
+        "de_DE": "Tintenschock",
+        "it_IT": "Vernischianto",
+        "nl_NL": "Superlanding",
+        "ru_RU": "Мегаплюх"
       }
     },
     "reskin_of": null,
@@ -1082,7 +1422,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -1093,7 +1437,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1101,10 +1449,14 @@
       "ja_JP": "ジェットスイーパー",
       "en_US": "Jet Squelcher",
       "en_GB": "Jet Squelcher",
-      "es_ES": "Jet Squelcher",
-      "es_MX": "Jet Squelcher",
+      "es_ES": "Megabarredora",
+      "es_MX": "Megasoplador",
       "fr_FR": "Nettoyeur XL",
-      "fr_CA": "Méganettoyeur"
+      "fr_CA": "Méganettoyeur",
+      "de_DE": "Platscher",
+      "it_IT": "Sweeper",
+      "nl_NL": "Straalplonzer",
+      "ru_RU": "Плескарь"
     },
     "sub": {
       "key": "poisonmist",
@@ -1115,7 +1467,11 @@
         "es_ES": "Toxic Mist",
         "es_MX": "Toxic Mist",
         "fr_FR": "Brume toxique",
-        "fr_CA": "Brume toxique"
+        "fr_CA": "Brume toxique",
+        "de_DE": "Sepitox-Nebel",
+        "it_IT": "Nebbia tossica",
+        "nl_NL": "Gifmist",
+        "ru_RU": "Едкий туман"
       }
     },
     "special": {
@@ -1127,7 +1483,11 @@
         "es_ES": "Propulsor",
         "es_MX": "Propulsor",
         "fr_FR": "Chromo-jet",
-        "fr_CA": "Chromo-jet"
+        "fr_CA": "Chromo-jet",
+        "de_DE": "Tintendüser",
+        "it_IT": "Jet splat",
+        "nl_NL": "Inktjet",
+        "ru_RU": "Красколет"
       }
     },
     "reskin_of": null,
@@ -1145,7 +1505,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -1156,7 +1520,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1164,10 +1532,14 @@
       "ja_JP": "N-ZAP85",
       "en_US": "N-ZAP '85",
       "en_GB": "N-ZAP '85",
-      "es_ES": "N-ZAP '85",
-      "es_MX": "N-ZAP '85",
+      "es_ES": "N-ZAP 85",
+      "es_MX": "N-ZAP 85",
       "fr_FR": "N-ZAP 85",
-      "fr_CA": "N-ZAP 85"
+      "fr_CA": "N-ZAP 85",
+      "de_DE": "N-ZAP85",
+      "it_IT": "N-ZAP85",
+      "nl_NL": "N-ZAP '85",
+      "ru_RU": "N-ZAP 85"
     },
     "sub": {
       "key": "kyubanbomb",
@@ -1178,7 +1550,11 @@
         "es_ES": "Bomba ventosa",
         "es_MX": "Bomba ventosa",
         "fr_FR": "Bombe gluante",
-        "fr_CA": "Bombe gluante"
+        "fr_CA": "Bombe gluante",
+        "de_DE": "Haftbombe",
+        "it_IT": "Appiccibomba",
+        "nl_NL": "Kleefbom",
+        "ru_RU": "Бомба на присоске"
       }
     },
     "special": {
@@ -1190,7 +1566,11 @@
         "es_ES": "Ink Armor",
         "es_MX": "Ink Armor",
         "fr_FR": "Armure d'encre",
-        "fr_CA": "Armure d'encre"
+        "fr_CA": "Armure d'encre",
+        "de_DE": "Tintenrüstung",
+        "it_IT": "Armatura d'inchiostro",
+        "nl_NL": "Inktharnas",
+        "ru_RU": "Бронекраска"
       }
     },
     "reskin_of": null,
@@ -1208,7 +1588,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -1219,7 +1603,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1227,10 +1615,14 @@
       "ja_JP": "プロモデラーRG",
       "en_US": "Aerospray RG",
       "en_GB": "Aerospray RG",
-      "es_ES": "Aerospray RG",
-      "es_MX": "Aerospray RG",
+      "es_ES": "Aerógrafo plus",
+      "es_MX": "Aerógrafo GN",
       "fr_FR": "Aérogun premium",
-      "fr_CA": "Pouche-pouche premium"
+      "fr_CA": "Pouche-pouche premium",
+      "de_DE": "Airbrush RG",
+      "it_IT": "Aerografo élite",
+      "nl_NL": "Kladderwerper Pro",
+      "ru_RU": "Аэроспрей ДЕЛЮКС"
     },
     "sub": {
       "key": "sprinkler",
@@ -1241,7 +1633,11 @@
         "es_ES": "Aspersor",
         "es_MX": "Aspersor",
         "fr_FR": "Fontaine",
-        "fr_CA": "Fontaine"
+        "fr_CA": "Fontaine",
+        "de_DE": "Sprinkler",
+        "it_IT": "Spruzzatore",
+        "nl_NL": "Inktsprinkler",
+        "ru_RU": "Распылятор"
       }
     },
     "special": {
@@ -1253,7 +1649,11 @@
         "es_ES": "Baller",
         "es_MX": "Baller",
         "fr_FR": "Chromo-sphère",
-        "fr_CA": "Chromo-sphère"
+        "fr_CA": "Chromo-sphère",
+        "de_DE": "Sepisphäre",
+        "it_IT": "Cromosfera",
+        "nl_NL": "Barstbubbel",
+        "ru_RU": "Шарокат"
       }
     },
     "reskin_of": null,
@@ -1271,7 +1671,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -1282,7 +1686,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1290,10 +1698,14 @@
       "ja_JP": "プロモデラーMG",
       "en_US": "Aerospray MG",
       "en_GB": "Aerospray MG",
-      "es_ES": "Aerospray MG",
-      "es_MX": "Aerospray MG",
+      "es_ES": "Aerógrafo pro",
+      "es_MX": "Aerógrafo GP",
       "fr_FR": "Aérogun",
-      "fr_CA": "Pouche-pouche"
+      "fr_CA": "Pouche-pouche",
+      "de_DE": "Airbrush MG",
+      "it_IT": "Aerografo",
+      "nl_NL": "Kladderwerper",
+      "ru_RU": "Аэроспрей"
     },
     "sub": {
       "key": "kyubanbomb",
@@ -1304,7 +1716,11 @@
         "es_ES": "Bomba ventosa",
         "es_MX": "Bomba ventosa",
         "fr_FR": "Bombe gluante",
-        "fr_CA": "Bombe gluante"
+        "fr_CA": "Bombe gluante",
+        "de_DE": "Haftbombe",
+        "it_IT": "Appiccibomba",
+        "nl_NL": "Kleefbom",
+        "ru_RU": "Бомба на присоске"
       }
     },
     "special": {
@@ -1316,7 +1732,11 @@
         "es_ES": "Bomb Launcher",
         "es_MX": "Bomb Launcher",
         "fr_FR": "Lanceur de bombes",
-        "fr_CA": "Lanceur de bombes"
+        "fr_CA": "Lanceur de bombes",
+        "de_DE": "Bomb Launcher",
+        "it_IT": "Bomb Launcher",
+        "nl_NL": "Bomkanon",
+        "ru_RU": "Бомбомет"
       }
     },
     "reskin_of": null,
@@ -1334,7 +1754,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -1345,7 +1769,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1353,10 +1781,14 @@
       "ja_JP": ".52ガロン",
       "en_US": ".52 Gal",
       "en_GB": ".52 Gal",
-      "es_ES": ".52 Gal",
-      "es_MX": ".52 Gal",
+      "es_ES": "Salpicadora 2000",
+      "es_MX": "Salpicadora 2000",
       "fr_FR": "Calibre 2000",
-      "fr_CA": "Calibre 2000"
+      "fr_CA": "Calibre 2000",
+      "de_DE": ".52 Gallon",
+      "it_IT": "Calibro 2000",
+      "nl_NL": ".52 Kaliter",
+      "ru_RU": "Струевик .52"
     },
     "sub": {
       "key": "pointsensor",
@@ -1367,7 +1799,11 @@
         "es_ES": "Rastreador",
         "es_MX": "Rastreador",
         "fr_FR": "Détecteur",
-        "fr_CA": "Détecteur"
+        "fr_CA": "Détecteur",
+        "de_DE": "Detektor",
+        "it_IT": "Cimice",
+        "nl_NL": "Detector",
+        "ru_RU": "Маркер движения"
       }
     },
     "special": {
@@ -1379,7 +1815,11 @@
         "es_ES": "Baller",
         "es_MX": "Baller",
         "fr_FR": "Chromo-sphère",
-        "fr_CA": "Chromo-sphère"
+        "fr_CA": "Chromo-sphère",
+        "de_DE": "Sepisphäre",
+        "it_IT": "Cromosfera",
+        "nl_NL": "Barstbubbel",
+        "ru_RU": "Шарокат"
       }
     },
     "reskin_of": null,
@@ -1397,7 +1837,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -1408,7 +1852,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1416,10 +1864,14 @@
       "ja_JP": ".96ガロン",
       "en_US": ".96 Gal",
       "en_GB": ".96 Gal",
-      "es_ES": ".96 Gal",
-      "es_MX": ".96 Gal",
+      "es_ES": "Salpicadora 3000",
+      "es_MX": "Salpicadora 3000",
       "fr_FR": "Calibre 3000",
-      "fr_CA": "Calibre 3000"
+      "fr_CA": "Calibre 3000",
+      "de_DE": ".96 Gallon",
+      "it_IT": "Calibro 3000",
+      "nl_NL": ".96 Kaliter",
+      "ru_RU": "Струевик .96"
     },
     "sub": {
       "key": "sprinkler",
@@ -1430,7 +1882,11 @@
         "es_ES": "Aspersor",
         "es_MX": "Aspersor",
         "fr_FR": "Fontaine",
-        "fr_CA": "Fontaine"
+        "fr_CA": "Fontaine",
+        "de_DE": "Sprinkler",
+        "it_IT": "Spruzzatore",
+        "nl_NL": "Inktsprinkler",
+        "ru_RU": "Распылятор"
       }
     },
     "special": {
@@ -1442,7 +1898,11 @@
         "es_ES": "Ink Armor",
         "es_MX": "Ink Armor",
         "fr_FR": "Armure d'encre",
-        "fr_CA": "Armure d'encre"
+        "fr_CA": "Armure d'encre",
+        "de_DE": "Tintenrüstung",
+        "it_IT": "Armatura d'inchiostro",
+        "nl_NL": "Inktharnas",
+        "ru_RU": "Бронекраска"
       }
     },
     "reskin_of": null,
@@ -1452,15 +1912,19 @@
     "key": "l3reelgun",
     "splatnet": 300,
     "type": {
-      "key": "shooter",
+      "key": "reelgun",
       "name": {
-        "ja_JP": "シューター",
-        "en_US": "Shooters",
-        "en_GB": "Shooters",
-        "es_ES": "Lanzatintas",
-        "es_MX": "Rociadors",
-        "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "ja_JP": "リールガン",
+        "en_US": "Nozzlenose",
+        "en_GB": "Nozzlenose",
+        "es_ES": "Nozzlenose",
+        "es_MX": "Nozzlenose",
+        "fr_FR": "Nozzlenose",
+        "fr_CA": "Nozzlenose",
+        "de_DE": "Nozzlenose",
+        "it_IT": "Nozzlenose",
+        "nl_NL": "Nozzlenose",
+        "ru_RU": "Nozzlenose"
       },
       "category": {
         "key": "shooter",
@@ -1471,7 +1935,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1479,10 +1947,14 @@
       "ja_JP": "L3リールガン",
       "en_US": "L-3 Nozzlenose",
       "en_GB": "L-3 Nozzlenose",
-      "es_ES": "L-3 Nozzlenose",
-      "es_MX": "L-3 Nozzlenose",
+      "es_ES": "Tintambor ligero",
+      "es_MX": "Manguera ligera",
       "fr_FR": "Arroseur léger",
-      "fr_CA": "Arroseur léger"
+      "fr_CA": "Arroseur léger",
+      "de_DE": "L3 Tintenwerfer",
+      "it_IT": "Triplete compatto",
+      "nl_NL": "L-3 Stompsnuit",
+      "ru_RU": "Каплетрон-компакт"
     },
     "sub": {
       "key": "curlingbomb",
@@ -1493,7 +1965,11 @@
         "es_ES": "Bomba deslizante",
         "es_MX": "Bomba deslizante",
         "fr_FR": "Bombe curling",
-        "fr_CA": "Bombe curling"
+        "fr_CA": "Bombe curling",
+        "de_DE": "Curling-Bombe",
+        "it_IT": "Bomba curling",
+        "nl_NL": "Curlingbom",
+        "ru_RU": "Керлинг-бомба"
       }
     },
     "special": {
@@ -1505,7 +1981,11 @@
         "es_ES": "Baller",
         "es_MX": "Baller",
         "fr_FR": "Chromo-sphère",
-        "fr_CA": "Chromo-sphère"
+        "fr_CA": "Chromo-sphère",
+        "de_DE": "Sepisphäre",
+        "it_IT": "Cromosfera",
+        "nl_NL": "Barstbubbel",
+        "ru_RU": "Шарокат"
       }
     },
     "reskin_of": null,
@@ -1515,15 +1995,19 @@
     "key": "h3reelgun",
     "splatnet": 310,
     "type": {
-      "key": "shooter",
+      "key": "reelgun",
       "name": {
-        "ja_JP": "シューター",
-        "en_US": "Shooters",
-        "en_GB": "Shooters",
-        "es_ES": "Lanzatintas",
-        "es_MX": "Rociadors",
-        "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "ja_JP": "リールガン",
+        "en_US": "Nozzlenose",
+        "en_GB": "Nozzlenose",
+        "es_ES": "Nozzlenose",
+        "es_MX": "Nozzlenose",
+        "fr_FR": "Nozzlenose",
+        "fr_CA": "Nozzlenose",
+        "de_DE": "Nozzlenose",
+        "it_IT": "Nozzlenose",
+        "nl_NL": "Nozzlenose",
+        "ru_RU": "Nozzlenose"
       },
       "category": {
         "key": "shooter",
@@ -1534,7 +2018,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1542,10 +2030,14 @@
       "ja_JP": "H3リールガン",
       "en_US": "H-3 Nozzlenose",
       "en_GB": "H-3 Nozzlenose",
-      "es_ES": "H-3 Nozzlenose",
-      "es_MX": "H-3 Nozzlenose",
+      "es_ES": "Tintambor pesado",
+      "es_MX": "Manguera pesada",
       "fr_FR": "Arroseur lourd",
-      "fr_CA": "Arroseur lourd"
+      "fr_CA": "Arroseur lourd",
+      "de_DE": "S3 Tintenwerfer",
+      "it_IT": "Triplete",
+      "nl_NL": "H-3 Langsnuit",
+      "ru_RU": "Тяжелый каплетрон"
     },
     "sub": {
       "key": "pointsensor",
@@ -1556,7 +2048,11 @@
         "es_ES": "Rastreador",
         "es_MX": "Rastreador",
         "fr_FR": "Détecteur",
-        "fr_CA": "Détecteur"
+        "fr_CA": "Détecteur",
+        "de_DE": "Detektor",
+        "it_IT": "Cimice",
+        "nl_NL": "Detector",
+        "ru_RU": "Маркер движения"
       }
     },
     "special": {
@@ -1568,7 +2064,11 @@
         "es_ES": "Lanzamisiles",
         "es_MX": "Lanzamisiles",
         "fr_FR": "Multi-missile",
-        "fr_CA": "Multi-missile"
+        "fr_CA": "Multi-missile",
+        "de_DE": "Schwarmraketen",
+        "it_IT": "Lanciarazzi",
+        "nl_NL": "Spetterraketten",
+        "ru_RU": "Каракатница"
       }
     },
     "reskin_of": null,
@@ -1586,7 +2086,11 @@
         "es_ES": "Devastadors",
         "es_MX": "Devastadors",
         "fr_FR": "Éclablaster",
-        "fr_CA": "Éclablaster"
+        "fr_CA": "Éclablaster",
+        "de_DE": "Blasters",
+        "it_IT": "Blasters",
+        "nl_NL": "Blasters",
+        "ru_RU": "Blasters"
       },
       "category": {
         "key": "shooter",
@@ -1597,7 +2101,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1605,10 +2113,14 @@
       "ja_JP": "ホットブラスターカスタム",
       "en_US": "Custom Blaster",
       "en_GB": "Custom Blaster",
-      "es_ES": "Custom Blaster",
-      "es_MX": "Custom Blaster",
+      "es_ES": "Devastador SP",
+      "es_MX": "Lanzamotas adaptado",
       "fr_FR": "Éclablaster modifié",
-      "fr_CA": "Éclablasteur modifié"
+      "fr_CA": "Éclablasteur modifié",
+      "de_DE": "Blaster SE",
+      "it_IT": "Blaster CM",
+      "nl_NL": "Gemodde Klodderblaster",
+      "ru_RU": "Бластер «Понт»"
     },
     "sub": {
       "key": "robotbomb",
@@ -1619,7 +2131,11 @@
         "es_ES": "Autobomb",
         "es_MX": "Autobomb",
         "fr_FR": "Bombe robot",
-        "fr_CA": "Bombe robot"
+        "fr_CA": "Bombe robot",
+        "de_DE": "Robo-Bombe",
+        "it_IT": "Robobomba",
+        "nl_NL": "Robobom",
+        "ru_RU": "Робобомб"
       }
     },
     "special": {
@@ -1631,7 +2147,11 @@
         "es_ES": "Propulsor",
         "es_MX": "Propulsor",
         "fr_FR": "Chromo-jet",
-        "fr_CA": "Chromo-jet"
+        "fr_CA": "Chromo-jet",
+        "de_DE": "Tintendüser",
+        "it_IT": "Jet splat",
+        "nl_NL": "Inktjet",
+        "ru_RU": "Красколет"
       }
     },
     "reskin_of": null,
@@ -1649,7 +2169,11 @@
         "es_ES": "Devastadors",
         "es_MX": "Devastadors",
         "fr_FR": "Éclablaster",
-        "fr_CA": "Éclablaster"
+        "fr_CA": "Éclablaster",
+        "de_DE": "Blasters",
+        "it_IT": "Blasters",
+        "nl_NL": "Blasters",
+        "ru_RU": "Blasters"
       },
       "category": {
         "key": "shooter",
@@ -1660,7 +2184,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1668,10 +2196,14 @@
       "ja_JP": "ノヴァブラスター",
       "en_US": "Luna Blaster",
       "en_GB": "Luna Blaster",
-      "es_ES": "Luna Blaster",
-      "es_MX": "Luna Blaster",
+      "es_ES": "Ultradevastador",
+      "es_MX": "Lanzamotas Nova",
       "fr_FR": "Proxiblaster",
-      "fr_CA": "Proxiblasteur"
+      "fr_CA": "Proxiblasteur",
+      "de_DE": "Luna-Blaster",
+      "it_IT": "Blaster lunar",
+      "nl_NL": "Lunablaster",
+      "ru_RU": "Лунобластер"
     },
     "sub": {
       "key": "splashbomb",
@@ -1682,7 +2214,11 @@
         "es_ES": "Bomba básica",
         "es_MX": "Bomba básica",
         "fr_FR": "Bombe splash",
-        "fr_CA": "Bombe splash"
+        "fr_CA": "Bombe splash",
+        "de_DE": "Klecksbombe",
+        "it_IT": "Bomba splash",
+        "nl_NL": "Klodderbom",
+        "ru_RU": "Брызгающая бомба"
       }
     },
     "special": {
@@ -1694,7 +2230,11 @@
         "es_ES": "Baller",
         "es_MX": "Baller",
         "fr_FR": "Chromo-sphère",
-        "fr_CA": "Chromo-sphère"
+        "fr_CA": "Chromo-sphère",
+        "de_DE": "Sepisphäre",
+        "it_IT": "Cromosfera",
+        "nl_NL": "Barstbubbel",
+        "ru_RU": "Шарокат"
       }
     },
     "reskin_of": null,
@@ -1712,7 +2252,11 @@
         "es_ES": "Devastadors",
         "es_MX": "Devastadors",
         "fr_FR": "Éclablaster",
-        "fr_CA": "Éclablaster"
+        "fr_CA": "Éclablaster",
+        "de_DE": "Blasters",
+        "it_IT": "Blasters",
+        "nl_NL": "Blasters",
+        "ru_RU": "Blasters"
       },
       "category": {
         "key": "shooter",
@@ -1723,7 +2267,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1731,10 +2279,14 @@
       "ja_JP": "ラピッドブラスター",
       "en_US": "Rapid Blaster",
       "en_GB": "Rapid Blaster",
-      "es_ES": "Rapid Blaster",
-      "es_MX": "Rapid Blaster",
+      "es_ES": "Devastador exprés",
+      "es_MX": "Turbolanzamotas",
       "fr_FR": "Turboblaster",
-      "fr_CA": "Turboblasteur"
+      "fr_CA": "Turboblasteur",
+      "de_DE": "Turbo-Blaster",
+      "it_IT": "Blaster rapido",
+      "nl_NL": "Flitsblaster",
+      "ru_RU": "Бластермат"
     },
     "sub": {
       "key": "trap",
@@ -1745,7 +2297,11 @@
         "es_ES": "Bomba Trampa",
         "es_MX": "Bomba Trampa",
         "fr_FR": "Mine",
-        "fr_CA": "Mine"
+        "fr_CA": "Mine",
+        "de_DE": "Tintenmine",
+        "it_IT": "Mina",
+        "nl_NL": "Inktmijnen",
+        "ru_RU": "Мины"
       }
     },
     "special": {
@@ -1757,7 +2313,11 @@
         "es_ES": "Bomb Launcher",
         "es_MX": "Bomb Launcher",
         "fr_FR": "Lanceur de bombes",
-        "fr_CA": "Lanceur de bombes"
+        "fr_CA": "Lanceur de bombes",
+        "de_DE": "Bomb Launcher",
+        "it_IT": "Bomb Launcher",
+        "nl_NL": "Bomkanon",
+        "ru_RU": "Бомбомет"
       }
     },
     "reskin_of": null,
@@ -1775,7 +2335,11 @@
         "es_ES": "Dualies",
         "es_MX": "Dualies",
         "fr_FR": "Dualies",
-        "fr_CA": "Dualies"
+        "fr_CA": "Dualies",
+        "de_DE": "Dualies",
+        "it_IT": "Armi \"duplo\"",
+        "nl_NL": "Dualies",
+        "ru_RU": "Dualies"
       },
       "category": {
         "key": "shooter",
@@ -1786,7 +2350,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -1794,10 +2362,14 @@
       "ja_JP": "スプラマニューバーコラボ",
       "en_US": "Enperry Splat Dualies",
       "en_GB": "Enperry Splat Dualies",
-      "es_ES": "Enperry Splat Dualies",
-      "es_MX": "Enperry Splat Dualies",
+      "es_ES": "Difusor dual B",
+      "es_MX": "Difusor dual Emperi",
       "fr_FR": "Double encreur griffé",
-      "fr_CA": "Double encreur DUX"
+      "fr_CA": "Double encreur DUX",
+      "de_DE": "Enperry-Klecks-Doppler",
+      "it_IT": "Repolper duplo logo",
+      "nl_NL": "Enperry Dubbelknallers",
+      "ru_RU": "Спуртометы «К.К.»"
     },
     "sub": {
       "key": "curlingbomb",
@@ -1808,7 +2380,11 @@
         "es_ES": "Bomba deslizante",
         "es_MX": "Bomba deslizante",
         "fr_FR": "Bombe curling",
-        "fr_CA": "Bombe curling"
+        "fr_CA": "Bombe curling",
+        "de_DE": "Curling-Bombe",
+        "it_IT": "Bomba curling",
+        "nl_NL": "Curlingbom",
+        "ru_RU": "Керлинг-бомба"
       }
     },
     "special": {
@@ -1820,7 +2396,11 @@
         "es_ES": "Propulsor",
         "es_MX": "Propulsor",
         "fr_FR": "Chromo-jet",
-        "fr_CA": "Chromo-jet"
+        "fr_CA": "Chromo-jet",
+        "de_DE": "Tintendüser",
+        "it_IT": "Jet splat",
+        "nl_NL": "Inktjet",
+        "ru_RU": "Красколет"
       }
     },
     "reskin_of": null,
@@ -1838,7 +2418,11 @@
         "es_ES": "Rodillos",
         "es_MX": "Rodillos",
         "fr_FR": "Rouleau",
-        "fr_CA": "Rouleau"
+        "fr_CA": "Rouleau",
+        "de_DE": "Rollers",
+        "it_IT": "Rollers",
+        "nl_NL": "Rollers",
+        "ru_RU": "Rollers"
       },
       "category": {
         "key": "roller",
@@ -1849,7 +2433,11 @@
           "es_ES": "Rodillos",
           "es_MX": "Rodillos",
           "fr_FR": "Rouleau",
-          "fr_CA": "Rouleau"
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
         }
       }
     },
@@ -1857,10 +2445,14 @@
       "ja_JP": "スプラローラーコラボ",
       "en_US": "Krak-On Splat Roller",
       "en_GB": "Krak-On Splat Roller",
-      "es_ES": "Krak-On Splat Roller",
-      "es_MX": "Krak-On Splat Roller",
+      "es_ES": "Rodillo básico B",
+      "es_MX": "Rodillo básico Meddux",
       "fr_FR": "Rouleau griffé",
-      "fr_CA": "Rouleau Krakeurs"
+      "fr_CA": "Rouleau Krakeurs",
+      "de_DE": "Medusa-Klecksroller",
+      "it_IT": "Rullo splat logo",
+      "nl_NL": "Krak-On Klodderroller",
+      "ru_RU": "Сплат-валик «Кра-Кен»"
     },
     "sub": {
       "key": "jumpbeacon",
@@ -1871,7 +2463,11 @@
         "es_ES": "Squid Beakon",
         "es_MX": "Squid Beakon",
         "fr_FR": "Balise de saut",
-        "fr_CA": "Balise de saut"
+        "fr_CA": "Balise de saut",
+        "de_DE": "Sprungboje",
+        "it_IT": "Trasferitore",
+        "nl_NL": "Springschotel",
+        "ru_RU": "Прыжковый маячок"
       }
     },
     "special": {
@@ -1883,7 +2479,11 @@
         "es_ES": "Baller",
         "es_MX": "Baller",
         "fr_FR": "Chromo-sphère",
-        "fr_CA": "Chromo-sphère"
+        "fr_CA": "Chromo-sphère",
+        "de_DE": "Sepisphäre",
+        "it_IT": "Cromosfera",
+        "nl_NL": "Barstbubbel",
+        "ru_RU": "Шарокат"
       }
     },
     "reskin_of": null,
@@ -1901,7 +2501,11 @@
         "es_ES": "Rodillos",
         "es_MX": "Rodillos",
         "fr_FR": "Rouleau",
-        "fr_CA": "Rouleau"
+        "fr_CA": "Rouleau",
+        "de_DE": "Rollers",
+        "it_IT": "Rollers",
+        "nl_NL": "Rollers",
+        "ru_RU": "Rollers"
       },
       "category": {
         "key": "roller",
@@ -1912,7 +2516,11 @@
           "es_ES": "Rodillos",
           "es_MX": "Rodillos",
           "fr_FR": "Rouleau",
-          "fr_CA": "Rouleau"
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
         }
       }
     },
@@ -1920,10 +2528,14 @@
       "ja_JP": "ヴァリアブルローラー",
       "en_US": "Flingza Roller",
       "en_GB": "Flingza Roller",
-      "es_ES": "Flingza Roller",
-      "es_MX": "Flingza Roller",
+      "es_ES": "Rodillo versátil",
+      "es_MX": "Rodillo versátil",
       "fr_FR": "Flexi-rouleau",
-      "fr_CA": "Flexi-rouleau"
+      "fr_CA": "Flexi-rouleau",
+      "de_DE": "Flex-Roller",
+      "it_IT": "Flexi-rullo",
+      "nl_NL": "Flexroller",
+      "ru_RU": "Омнивалик"
     },
     "sub": {
       "key": "splashshield",
@@ -1934,7 +2546,11 @@
         "es_ES": "Splash Wall",
         "es_MX": "Splash Wall",
         "fr_FR": "Mur d'encre",
-        "fr_CA": "Mur d'encre"
+        "fr_CA": "Mur d'encre",
+        "de_DE": "Tintenwall",
+        "it_IT": "Muro di colore",
+        "nl_NL": "Inktgordijn",
+        "ru_RU": "Чернильный занавес"
       }
     },
     "special": {
@@ -1946,7 +2562,11 @@
         "es_ES": "Bomb Launcher",
         "es_MX": "Bomb Launcher",
         "fr_FR": "Lanceur de bombes",
-        "fr_CA": "Lanceur de bombes"
+        "fr_CA": "Lanceur de bombes",
+        "de_DE": "Bomb Launcher",
+        "it_IT": "Bomb Launcher",
+        "nl_NL": "Bomkanon",
+        "ru_RU": "Бомбомет"
       }
     },
     "reskin_of": null,
@@ -1964,7 +2584,11 @@
         "es_ES": "Rodillos",
         "es_MX": "Rodillos",
         "fr_FR": "Rouleau",
-        "fr_CA": "Rouleau"
+        "fr_CA": "Rouleau",
+        "de_DE": "Rollers",
+        "it_IT": "Rollers",
+        "nl_NL": "Rollers",
+        "ru_RU": "Rollers"
       },
       "category": {
         "key": "roller",
@@ -1975,7 +2599,11 @@
           "es_ES": "Rodillos",
           "es_MX": "Rodillos",
           "fr_FR": "Rouleau",
-          "fr_CA": "Rouleau"
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
         }
       }
     },
@@ -1983,10 +2611,14 @@
       "ja_JP": "カーボンローラー",
       "en_US": "Carbon Roller",
       "en_GB": "Carbon Roller",
-      "es_ES": "Carbon Roller",
-      "es_MX": "Carbon Roller",
+      "es_ES": "Rodillo de carbono",
+      "es_MX": "Rodillo de carbono",
       "fr_FR": "Rouleau carbone",
-      "fr_CA": "Rouleau carbone"
+      "fr_CA": "Rouleau carbone",
+      "de_DE": "Karbonroller",
+      "it_IT": "Rullo di carbonio",
+      "nl_NL": "Carbonroller",
+      "ru_RU": "Валик ЛАЙТ"
     },
     "sub": {
       "key": "robotbomb",
@@ -1997,7 +2629,11 @@
         "es_ES": "Autobomb",
         "es_MX": "Autobomb",
         "fr_FR": "Bombe robot",
-        "fr_CA": "Bombe robot"
+        "fr_CA": "Bombe robot",
+        "de_DE": "Robo-Bombe",
+        "it_IT": "Robobomba",
+        "nl_NL": "Robobom",
+        "ru_RU": "Робобомб"
       }
     },
     "special": {
@@ -2009,7 +2645,11 @@
         "es_ES": "Atormentador",
         "es_MX": "Atormentador",
         "fr_FR": "Pluie d'encre",
-        "fr_CA": "Pluie d'encre"
+        "fr_CA": "Pluie d'encre",
+        "de_DE": "Tintenschauer",
+        "it_IT": "Pioggia di colore",
+        "nl_NL": "Spetterbui",
+        "ru_RU": "Туча краски"
       }
     },
     "reskin_of": null,
@@ -2027,7 +2667,11 @@
         "es_ES": "Cargatintas",
         "es_MX": "Cargatintas",
         "fr_FR": "Fusil",
-        "fr_CA": "Fusil"
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
       },
       "category": {
         "key": "charger",
@@ -2038,7 +2682,11 @@
           "es_ES": "Cargatintas",
           "es_MX": "Cargatintas",
           "fr_FR": "Fusil",
-          "fr_CA": "Fusil"
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
         }
       }
     },
@@ -2046,10 +2694,14 @@
       "ja_JP": "スプラチャージャーコラボ",
       "en_US": "Firefin Splat Charger",
       "en_GB": "Firefin Splat Charger",
-      "es_ES": "Firefin Splat Charger",
-      "es_MX": "Firefin Splat Charger",
-      "fr_FR": "Firefin Splat Charger",
-      "fr_CA": "Firefin Splat Charger"
+      "es_ES": "Cargatintas Chokkor",
+      "es_MX": "Cargatintas Shachi",
+      "fr_FR": "Concentraceur griffé",
+      "fr_CA": "Concentraceur Arki",
+      "de_DE": "Rilax-Klecks-Konzentrator",
+      "it_IT": "Splatter a carica logo",
+      "nl_NL": "Firefin Bloplader",
+      "ru_RU": "Сплатган «Фритюр»"
     },
     "sub": {
       "key": "splashshield",
@@ -2060,7 +2712,11 @@
         "es_ES": "Splash Wall",
         "es_MX": "Splash Wall",
         "fr_FR": "Mur d'encre",
-        "fr_CA": "Mur d'encre"
+        "fr_CA": "Mur d'encre",
+        "de_DE": "Tintenwall",
+        "it_IT": "Muro di colore",
+        "nl_NL": "Inktgordijn",
+        "ru_RU": "Чернильный занавес"
       }
     },
     "special": {
@@ -2072,7 +2728,11 @@
         "es_ES": "Bomb Launcher",
         "es_MX": "Bomb Launcher",
         "fr_FR": "Lanceur de bombes",
-        "fr_CA": "Lanceur de bombes"
+        "fr_CA": "Lanceur de bombes",
+        "de_DE": "Bomb Launcher",
+        "it_IT": "Bomb Launcher",
+        "nl_NL": "Bomkanon",
+        "ru_RU": "Бомбомет"
       }
     },
     "reskin_of": null,
@@ -2090,7 +2750,11 @@
         "es_ES": "Cargatintas",
         "es_MX": "Cargatintas",
         "fr_FR": "Fusil",
-        "fr_CA": "Fusil"
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
       },
       "category": {
         "key": "charger",
@@ -2101,7 +2765,11 @@
           "es_ES": "Cargatintas",
           "es_MX": "Cargatintas",
           "fr_FR": "Fusil",
-          "fr_CA": "Fusil"
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
         }
       }
     },
@@ -2109,10 +2777,14 @@
       "ja_JP": "スプラスコープコラボ",
       "en_US": "Firefin Splatterscope",
       "en_GB": "Firefin Splatterscope",
-      "es_ES": "Firefin Splatterscope",
-      "es_MX": "Firefin Splatterscope",
-      "fr_FR": "Firefin Splatterscope",
-      "fr_CA": "Firefin Splatterscope"
+      "es_ES": "Cargatintas con mira Chokkor",
+      "es_MX": "Telecargatintas Shachi",
+      "fr_FR": "Concentraceur zoom griffé",
+      "fr_CA": "Concentraceur zoom Arki",
+      "de_DE": "Rilax-Ziel-Konzentrator",
+      "it_IT": "Splatter con mirino logo",
+      "nl_NL": "Firefin-Schelpschutter",
+      "ru_RU": "Снайпокрас «Фритюр»"
     },
     "sub": {
       "key": "splashshield",
@@ -2123,7 +2795,11 @@
         "es_ES": "Splash Wall",
         "es_MX": "Splash Wall",
         "fr_FR": "Mur d'encre",
-        "fr_CA": "Mur d'encre"
+        "fr_CA": "Mur d'encre",
+        "de_DE": "Tintenwall",
+        "it_IT": "Muro di colore",
+        "nl_NL": "Inktgordijn",
+        "ru_RU": "Чернильный занавес"
       }
     },
     "special": {
@@ -2135,7 +2811,11 @@
         "es_ES": "Bomb Launcher",
         "es_MX": "Bomb Launcher",
         "fr_FR": "Lanceur de bombes",
-        "fr_CA": "Lanceur de bombes"
+        "fr_CA": "Lanceur de bombes",
+        "de_DE": "Bomb Launcher",
+        "it_IT": "Bomb Launcher",
+        "nl_NL": "Bomkanon",
+        "ru_RU": "Бомбомет"
       }
     },
     "reskin_of": null,
@@ -2153,7 +2833,11 @@
         "es_ES": "Cargatintas",
         "es_MX": "Cargatintas",
         "fr_FR": "Fusil",
-        "fr_CA": "Fusil"
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
       },
       "category": {
         "key": "charger",
@@ -2164,7 +2848,11 @@
           "es_ES": "Cargatintas",
           "es_MX": "Cargatintas",
           "fr_FR": "Fusil",
-          "fr_CA": "Fusil"
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
         }
       }
     },
@@ -2172,10 +2860,14 @@
       "ja_JP": "リッター4K",
       "en_US": "E-liter 4K",
       "en_GB": "E-liter 4K",
-      "es_ES": "E-liter 4K",
-      "es_MX": "E-liter 4K",
+      "es_ES": "Entintador 4K",
+      "es_MX": "Entintador 4K",
       "fr_FR": "Extraceur +",
-      "fr_CA": "X-traceur +"
+      "fr_CA": "X-traceur +",
+      "de_DE": "E-liter 4K",
+      "it_IT": "Tinter a carica 4K",
+      "nl_NL": "E-liter 4K",
+      "ru_RU": "Э-литр 95"
     },
     "sub": {
       "key": "trap",
@@ -2186,7 +2878,11 @@
         "es_ES": "Bomba Trampa",
         "es_MX": "Bomba Trampa",
         "fr_FR": "Mine",
-        "fr_CA": "Mine"
+        "fr_CA": "Mine",
+        "de_DE": "Tintenmine",
+        "it_IT": "Mina",
+        "nl_NL": "Inktmijnen",
+        "ru_RU": "Мины"
       }
     },
     "special": {
@@ -2198,7 +2894,11 @@
         "es_ES": "Atormentador",
         "es_MX": "Atormentador",
         "fr_FR": "Pluie d'encre",
-        "fr_CA": "Pluie d'encre"
+        "fr_CA": "Pluie d'encre",
+        "de_DE": "Tintenschauer",
+        "it_IT": "Pioggia di colore",
+        "nl_NL": "Spetterbui",
+        "ru_RU": "Туча краски"
       }
     },
     "reskin_of": null,
@@ -2216,7 +2916,11 @@
         "es_ES": "Cargatintas",
         "es_MX": "Cargatintas",
         "fr_FR": "Fusil",
-        "fr_CA": "Fusil"
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
       },
       "category": {
         "key": "charger",
@@ -2227,7 +2931,11 @@
           "es_ES": "Cargatintas",
           "es_MX": "Cargatintas",
           "fr_FR": "Fusil",
-          "fr_CA": "Fusil"
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
         }
       }
     },
@@ -2235,10 +2943,14 @@
       "ja_JP": "4Kスコープ",
       "en_US": "E-liter 4K Scope",
       "en_GB": "E-liter 4K Scope",
-      "es_ES": "E-liter 4K Scope",
-      "es_MX": "E-liter 4K Scope",
+      "es_ES": "Telentintador 4K",
+      "es_MX": "Telentintador 4K",
       "fr_FR": "Extraceur + zoom",
-      "fr_CA": "X-traceur + zoom"
+      "fr_CA": "X-traceur + zoom",
+      "de_DE": "Ziel-E-liter 4K",
+      "it_IT": "Tinter con mirino 4K",
+      "nl_NL": "E-liter 4K met vizier",
+      "ru_RU": "Снайп-э-литр 95"
     },
     "sub": {
       "key": "trap",
@@ -2249,7 +2961,11 @@
         "es_ES": "Bomba Trampa",
         "es_MX": "Bomba Trampa",
         "fr_FR": "Mine",
-        "fr_CA": "Mine"
+        "fr_CA": "Mine",
+        "de_DE": "Tintenmine",
+        "it_IT": "Mina",
+        "nl_NL": "Inktmijnen",
+        "ru_RU": "Мины"
       }
     },
     "special": {
@@ -2261,7 +2977,11 @@
         "es_ES": "Atormentador",
         "es_MX": "Atormentador",
         "fr_FR": "Pluie d'encre",
-        "fr_CA": "Pluie d'encre"
+        "fr_CA": "Pluie d'encre",
+        "de_DE": "Tintenschauer",
+        "it_IT": "Pioggia di colore",
+        "nl_NL": "Spetterbui",
+        "ru_RU": "Туча краски"
       }
     },
     "reskin_of": null,
@@ -2279,7 +2999,11 @@
         "es_ES": "Tintralladoras",
         "es_MX": "Garabateadors",
         "fr_FR": "Badigeonneur",
-        "fr_CA": "Badigeonneur"
+        "fr_CA": "Badigeonneur",
+        "de_DE": "Splatlings",
+        "it_IT": "Splatlings",
+        "nl_NL": "Splatlings",
+        "ru_RU": "Splatlings"
       },
       "category": {
         "key": "splatling",
@@ -2290,7 +3014,11 @@
           "es_ES": "Tintralladoras",
           "es_MX": "Garabateadors",
           "fr_FR": "Badigeonneur",
-          "fr_CA": "Badigeonneur"
+          "fr_CA": "Badigeonneur",
+          "de_DE": "Splatlings",
+          "it_IT": "Splatlings",
+          "nl_NL": "Splatlings",
+          "ru_RU": "Splatlings"
         }
       }
     },
@@ -2298,10 +3026,14 @@
       "ja_JP": "スプラスピナー",
       "en_US": "Mini Splatling",
       "en_GB": "Mini Splatling",
-      "es_ES": "Mini Splatling",
-      "es_MX": "Mini Splatling",
+      "es_ES": "Tintralladora ligera",
+      "es_MX": "Garabateador",
       "fr_FR": "Badigeonneur XS",
-      "fr_CA": "Badigeonneur XP"
+      "fr_CA": "Badigeonneur XP",
+      "de_DE": "Klecks-Splatling",
+      "it_IT": "Mini Splatling",
+      "nl_NL": "Mini-Spetling",
+      "ru_RU": "Брызгомет-М"
     },
     "sub": {
       "key": "quickbomb",
@@ -2312,7 +3044,11 @@
         "es_ES": "Bomba rápida",
         "es_MX": "Bomba rápida",
         "fr_FR": "Bombe ballon",
-        "fr_CA": "Bombe ballon"
+        "fr_CA": "Bombe ballon",
+        "de_DE": "Insta-Bombe",
+        "it_IT": "Granata",
+        "nl_NL": "Ballonbom",
+        "ru_RU": "Разрывная бомба"
       }
     },
     "special": {
@@ -2324,7 +3060,11 @@
         "es_ES": "Lanzamisiles",
         "es_MX": "Lanzamisiles",
         "fr_FR": "Multi-missile",
-        "fr_CA": "Multi-missile"
+        "fr_CA": "Multi-missile",
+        "de_DE": "Schwarmraketen",
+        "it_IT": "Lanciarazzi",
+        "nl_NL": "Spetterraketten",
+        "ru_RU": "Каракатница"
       }
     },
     "reskin_of": null,
@@ -2342,7 +3082,11 @@
         "es_ES": "Derramatics",
         "es_MX": "Derramatics",
         "fr_FR": "Seauceur",
-        "fr_CA": "Seauceur"
+        "fr_CA": "Seauceur",
+        "de_DE": "Sloshers",
+        "it_IT": "Sloshers",
+        "nl_NL": "Sloshers",
+        "ru_RU": "Sloshers"
       },
       "category": {
         "key": "slosher",
@@ -2353,7 +3097,11 @@
           "es_ES": "Derramatics",
           "es_MX": "Derramatics",
           "fr_FR": "Seauceur",
-          "fr_CA": "Seauceur"
+          "fr_CA": "Seauceur",
+          "de_DE": "Sloshers",
+          "it_IT": "Sloshers",
+          "nl_NL": "Sloshers",
+          "ru_RU": "Sloshers"
         }
       }
     },
@@ -2361,10 +3109,14 @@
       "ja_JP": "ヒッセン",
       "en_US": "Tri-Slosher",
       "en_GB": "Tri-Slosher",
-      "es_ES": "Tri-Slosher",
-      "es_MX": "Tri-Slosher",
+      "es_ES": "Derramatic triple",
+      "es_MX": "Derramatic triple",
       "fr_FR": "Dépoteur",
-      "fr_CA": "Seauceur trio"
+      "fr_CA": "Seauceur trio",
+      "de_DE": "3R-Schwapper",
+      "it_IT": "Secchiostro triplo",
+      "nl_NL": "Triomorser",
+      "ru_RU": "Ведроган 3 в 1"
     },
     "sub": {
       "key": "quickbomb",
@@ -2375,7 +3127,11 @@
         "es_ES": "Bomba rápida",
         "es_MX": "Bomba rápida",
         "fr_FR": "Bombe ballon",
-        "fr_CA": "Bombe ballon"
+        "fr_CA": "Bombe ballon",
+        "de_DE": "Insta-Bombe",
+        "it_IT": "Granata",
+        "nl_NL": "Ballonbom",
+        "ru_RU": "Разрывная бомба"
       }
     },
     "special": {
@@ -2387,7 +3143,11 @@
         "es_ES": "Ink Armor",
         "es_MX": "Ink Armor",
         "fr_FR": "Armure d'encre",
-        "fr_CA": "Armure d'encre"
+        "fr_CA": "Armure d'encre",
+        "de_DE": "Tintenrüstung",
+        "it_IT": "Armatura d'inchiostro",
+        "nl_NL": "Inktharnas",
+        "ru_RU": "Бронекраска"
       }
     },
     "reskin_of": null,
@@ -2405,7 +3165,11 @@
         "es_ES": "Brochas",
         "es_MX": "Brochas",
         "fr_FR": "Épinceau",
-        "fr_CA": "Épinceau"
+        "fr_CA": "Épinceau",
+        "de_DE": "Brushes",
+        "it_IT": "Brushes",
+        "nl_NL": "Brushes",
+        "ru_RU": "Brushes"
       },
       "category": {
         "key": "roller",
@@ -2416,7 +3180,11 @@
           "es_ES": "Rodillos",
           "es_MX": "Rodillos",
           "fr_FR": "Rouleau",
-          "fr_CA": "Rouleau"
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
         }
       }
     },
@@ -2424,10 +3192,14 @@
       "ja_JP": "パブロ",
       "en_US": "Inkbrush",
       "en_GB": "Inkbrush",
-      "es_ES": "Inkbrush",
-      "es_MX": "Inkbrush",
+      "es_ES": "Pincel",
+      "es_MX": "Pincel",
       "fr_FR": "Épinceau",
-      "fr_CA": "Épinceau"
+      "fr_CA": "Épinceau",
+      "de_DE": "Quasto",
+      "it_IT": "Calamaravaggio",
+      "nl_NL": "Inktkwast",
+      "ru_RU": "Кисть"
     },
     "sub": {
       "key": "splashbomb",
@@ -2438,7 +3210,11 @@
         "es_ES": "Bomba básica",
         "es_MX": "Bomba básica",
         "fr_FR": "Bombe splash",
-        "fr_CA": "Bombe splash"
+        "fr_CA": "Bombe splash",
+        "de_DE": "Klecksbombe",
+        "it_IT": "Bomba splash",
+        "nl_NL": "Klodderbom",
+        "ru_RU": "Брызгающая бомба"
       }
     },
     "special": {
@@ -2450,7 +3226,11 @@
         "es_ES": "Salto explosivo",
         "es_MX": "Salto explosivo",
         "fr_FR": "Choc chromatique",
-        "fr_CA": "Choc chromatique"
+        "fr_CA": "Choc chromatique",
+        "de_DE": "Tintenschock",
+        "it_IT": "Vernischianto",
+        "nl_NL": "Superlanding",
+        "ru_RU": "Мегаплюх"
       }
     },
     "reskin_of": null,
@@ -2468,7 +3248,11 @@
         "es_ES": "Dualies",
         "es_MX": "Dualies",
         "fr_FR": "Dualies",
-        "fr_CA": "Dualies"
+        "fr_CA": "Dualies",
+        "de_DE": "Dualies",
+        "it_IT": "Armi \"duplo\"",
+        "nl_NL": "Dualies",
+        "ru_RU": "Dualies"
       },
       "category": {
         "key": "shooter",
@@ -2479,7 +3263,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -2490,7 +3278,11 @@
       "es_ES": "Barredora dual",
       "es_MX": "Barredora dual",
       "fr_FR": "Double nettoyeur",
-      "fr_CA": "Double nettoyeur"
+      "fr_CA": "Double nettoyeur",
+      "de_DE": "Dual-Platscher",
+      "it_IT": "Sweeper duplo",
+      "nl_NL": "Dubbelplonzers",
+      "ru_RU": "Спурт-плескари"
     },
     "sub": {
       "key": "pointsensor",
@@ -2501,7 +3293,11 @@
         "es_ES": "Rastreador",
         "es_MX": "Rastreador",
         "fr_FR": "Détecteur",
-        "fr_CA": "Détecteur"
+        "fr_CA": "Détecteur",
+        "de_DE": "Detektor",
+        "it_IT": "Cimice",
+        "nl_NL": "Detector",
+        "ru_RU": "Маркер движения"
       }
     },
     "special": {
@@ -2513,7 +3309,11 @@
         "es_ES": "Lanzamisiles",
         "es_MX": "Lanzamisiles",
         "fr_FR": "Multi-missile",
-        "fr_CA": "Multi-missile"
+        "fr_CA": "Multi-missile",
+        "de_DE": "Schwarmraketen",
+        "it_IT": "Lanciarazzi",
+        "nl_NL": "Spetterraketten",
+        "ru_RU": "Каракатница"
       }
     },
     "reskin_of": null,
@@ -2531,7 +3331,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -2542,7 +3346,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -2553,7 +3361,11 @@
       "es_ES": "Marcador",
       "es_MX": "Marcador grueso",
       "fr_FR": "Marqueur lourd",
-      "fr_CA": "Marqueur lourd"
+      "fr_CA": "Marqueur lourd",
+      "de_DE": "Disperser",
+      "it_IT": "Marker",
+      "nl_NL": "Spettertuit",
+      "ru_RU": "Плюхотрон"
     },
     "sub": {
       "key": "curlingbomb",
@@ -2564,7 +3376,11 @@
         "es_ES": "Bomba deslizante",
         "es_MX": "Bomba deslizante",
         "fr_FR": "Bombe curling",
-        "fr_CA": "Bombe curling"
+        "fr_CA": "Bombe curling",
+        "de_DE": "Curling-Bombe",
+        "it_IT": "Bomba curling",
+        "nl_NL": "Curlingbom",
+        "ru_RU": "Керлинг-бомба"
       }
     },
     "special": {
@@ -2576,7 +3392,11 @@
         "es_ES": "Salto explosivo",
         "es_MX": "Salto explosivo",
         "fr_FR": "Choc chromatique",
-        "fr_CA": "Choc chromatique"
+        "fr_CA": "Choc chromatique",
+        "de_DE": "Tintenschock",
+        "it_IT": "Vernischianto",
+        "nl_NL": "Superlanding",
+        "ru_RU": "Мегаплюх"
       }
     },
     "reskin_of": null,
@@ -2594,7 +3414,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -2605,7 +3429,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -2616,7 +3444,11 @@
       "es_ES": "Pistola de Élite (réplica)",
       "es_MX": "Rociador de élite réplica",
       "fr_FR": "Lanceur héroïque (réplique)",
-      "fr_CA": "Liquéfi. héroïque (rép.)"
+      "fr_CA": "Liquéfi. héroïque (rép.)",
+      "de_DE": "Heldenwaffe Replik",
+      "it_IT": "Pistola élite replica",
+      "nl_NL": "Heldenspetter (replica)",
+      "ru_RU": "Каплестрел-004 (клон)"
     },
     "sub": {
       "key": "quickbomb",
@@ -2627,7 +3459,11 @@
         "es_ES": "Bomba rápida",
         "es_MX": "Bomba rápida",
         "fr_FR": "Bombe ballon",
-        "fr_CA": "Bombe ballon"
+        "fr_CA": "Bombe ballon",
+        "de_DE": "Insta-Bombe",
+        "it_IT": "Granata",
+        "nl_NL": "Ballonbom",
+        "ru_RU": "Разрывная бомба"
       }
     },
     "special": {
@@ -2639,7 +3475,11 @@
         "es_ES": "Salto explosivo",
         "es_MX": "Salto explosivo",
         "fr_FR": "Choc chromatique",
-        "fr_CA": "Choc chromatique"
+        "fr_CA": "Choc chromatique",
+        "de_DE": "Tintenschock",
+        "it_IT": "Vernischianto",
+        "nl_NL": "Superlanding",
+        "ru_RU": "Мегаплюх"
       }
     },
     "reskin_of": "sshooter",
@@ -2657,7 +3497,11 @@
         "es_ES": "Devastadors",
         "es_MX": "Devastadors",
         "fr_FR": "Éclablaster",
-        "fr_CA": "Éclablaster"
+        "fr_CA": "Éclablaster",
+        "de_DE": "Blasters",
+        "it_IT": "Blasters",
+        "nl_NL": "Blasters",
+        "ru_RU": "Blasters"
       },
       "category": {
         "key": "shooter",
@@ -2668,7 +3512,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -2676,10 +3524,14 @@
       "ja_JP": "ヒーローブラスター レプリカ",
       "en_US": "Hero Blaster Replica",
       "en_GB": "Hero Blaster Replica",
-      "es_ES": "Hero Blaster Replica",
-      "es_MX": "Hero Blaster Replica",
+      "es_ES": "Devastador de élite (réplica)",
+      "es_MX": "Lanzamotas de élite réplica",
       "fr_FR": "Hero Blaster Replica",
-      "fr_CA": "Hero Blaster Replica"
+      "fr_CA": "Hero Blaster Replica",
+      "de_DE": "Helden-Blaster Replik",
+      "it_IT": "Blaster élite replica",
+      "nl_NL": "Heldenblaster (replica)",
+      "ru_RU": "Бластер-004 (клон)"
     },
     "sub": {
       "key": "poisonmist",
@@ -2690,7 +3542,11 @@
         "es_ES": "Toxic Mist",
         "es_MX": "Toxic Mist",
         "fr_FR": "Brume toxique",
-        "fr_CA": "Brume toxique"
+        "fr_CA": "Brume toxique",
+        "de_DE": "Sepitox-Nebel",
+        "it_IT": "Nebbia tossica",
+        "nl_NL": "Gifmist",
+        "ru_RU": "Едкий туман"
       }
     },
     "special": {
@@ -2702,7 +3558,11 @@
         "es_ES": "Salto explosivo",
         "es_MX": "Salto explosivo",
         "fr_FR": "Choc chromatique",
-        "fr_CA": "Choc chromatique"
+        "fr_CA": "Choc chromatique",
+        "de_DE": "Tintenschock",
+        "it_IT": "Vernischianto",
+        "nl_NL": "Superlanding",
+        "ru_RU": "Мегаплюх"
       }
     },
     "reskin_of": "hotblaster",
@@ -2720,7 +3580,11 @@
         "es_ES": "Dualies",
         "es_MX": "Dualies",
         "fr_FR": "Dualies",
-        "fr_CA": "Dualies"
+        "fr_CA": "Dualies",
+        "de_DE": "Dualies",
+        "it_IT": "Armi \"duplo\"",
+        "nl_NL": "Dualies",
+        "ru_RU": "Dualies"
       },
       "category": {
         "key": "shooter",
@@ -2731,7 +3595,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -2739,10 +3607,14 @@
       "ja_JP": "ヒーローマニューバー レプリカ",
       "en_US": "Hero Dualie Replicas",
       "en_GB": "Hero Dualie Replicas",
-      "es_ES": "Hero Dualie Replicas",
-      "es_MX": "Hero Dualie Replicas",
+      "es_ES": "Difusor dual de élite (réplica)",
+      "es_MX": "Difusor dual de élite réplica",
       "fr_FR": "Hero Dualie Replicas",
-      "fr_CA": "Hero Dualie Replicas"
+      "fr_CA": "Hero Dualie Replicas",
+      "de_DE": "Helden-Doubler Replik",
+      "it_IT": "Repolper duplo élite replica",
+      "nl_NL": "Heldenknallers (replica)",
+      "ru_RU": "Спуртометы-004 (клон)"
     },
     "sub": {
       "key": "quickbomb",
@@ -2753,7 +3625,11 @@
         "es_ES": "Bomba rápida",
         "es_MX": "Bomba rápida",
         "fr_FR": "Bombe ballon",
-        "fr_CA": "Bombe ballon"
+        "fr_CA": "Bombe ballon",
+        "de_DE": "Insta-Bombe",
+        "it_IT": "Granata",
+        "nl_NL": "Ballonbom",
+        "ru_RU": "Разрывная бомба"
       }
     },
     "special": {
@@ -2765,7 +3641,11 @@
         "es_ES": "Lanzamisiles",
         "es_MX": "Lanzamisiles",
         "fr_FR": "Multi-missile",
-        "fr_CA": "Multi-missile"
+        "fr_CA": "Multi-missile",
+        "de_DE": "Schwarmraketen",
+        "it_IT": "Lanciarazzi",
+        "nl_NL": "Spetterraketten",
+        "ru_RU": "Каракатница"
       }
     },
     "reskin_of": "maneuver",
@@ -2783,7 +3663,11 @@
         "es_ES": "Cargatintas",
         "es_MX": "Cargatintas",
         "fr_FR": "Fusil",
-        "fr_CA": "Fusil"
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
       },
       "category": {
         "key": "charger",
@@ -2794,7 +3678,11 @@
           "es_ES": "Cargatintas",
           "es_MX": "Cargatintas",
           "fr_FR": "Fusil",
-          "fr_CA": "Fusil"
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
         }
       }
     },
@@ -2802,10 +3690,14 @@
       "ja_JP": "ヒーローチャージャー レプリカ",
       "en_US": "Hero Charger Replica",
       "en_GB": "Hero Charger Replica",
-      "es_ES": "Hero Charger Replica",
-      "es_MX": "Hero Charger Replica",
+      "es_ES": "Cargatintas de élite (réplica)",
+      "es_MX": "Cargatintas de élite réplica",
       "fr_FR": "Conc. héroïque (réplique)",
-      "fr_CA": "Conc. héroïque (rép.)"
+      "fr_CA": "Conc. héroïque (rép.)",
+      "de_DE": "Helden-Konzentrator Replik",
+      "it_IT": "Splatter élite replica",
+      "nl_NL": "Heldenlader (replica)",
+      "ru_RU": "Сплатган-004 (клон)"
     },
     "sub": {
       "key": "splashbomb",
@@ -2816,7 +3708,11 @@
         "es_ES": "Bomba básica",
         "es_MX": "Bomba básica",
         "fr_FR": "Bombe splash",
-        "fr_CA": "Bombe splash"
+        "fr_CA": "Bombe splash",
+        "de_DE": "Klecksbombe",
+        "it_IT": "Bomba splash",
+        "nl_NL": "Klodderbom",
+        "ru_RU": "Брызгающая бомба"
       }
     },
     "special": {
@@ -2828,7 +3724,11 @@
         "es_ES": "Rayo tintódico",
         "es_MX": "Rayo tintódico",
         "fr_FR": "Pigmalance",
-        "fr_CA": "Pigmalance"
+        "fr_CA": "Pigmalance",
+        "de_DE": "Magistraal",
+        "it_IT": "Baccalaser",
+        "nl_NL": "Magistraal",
+        "ru_RU": "Струятор"
       }
     },
     "reskin_of": "splatcharger",
@@ -2846,7 +3746,11 @@
         "es_ES": "Rodillos",
         "es_MX": "Rodillos",
         "fr_FR": "Rouleau",
-        "fr_CA": "Rouleau"
+        "fr_CA": "Rouleau",
+        "de_DE": "Rollers",
+        "it_IT": "Rollers",
+        "nl_NL": "Rollers",
+        "ru_RU": "Rollers"
       },
       "category": {
         "key": "roller",
@@ -2857,7 +3761,11 @@
           "es_ES": "Rodillos",
           "es_MX": "Rodillos",
           "fr_FR": "Rouleau",
-          "fr_CA": "Rouleau"
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
         }
       }
     },
@@ -2865,10 +3773,14 @@
       "ja_JP": "ヒーローローラー レプリカ",
       "en_US": "Hero Roller Replica",
       "en_GB": "Hero Roller Replica",
-      "es_ES": "Hero Roller Replica",
-      "es_MX": "Hero Roller Replica",
+      "es_ES": "Rodillo de élite (réplica)",
+      "es_MX": "Rodillo de élite réplica",
       "fr_FR": "Rouleau héroïque (réplique)",
-      "fr_CA": "Rouleau héroïque (rép.)"
+      "fr_CA": "Rouleau héroïque (rép.)",
+      "de_DE": "Helden-Roller Replik",
+      "it_IT": "Rullo élite replica",
+      "nl_NL": "Heldenroller (replica)",
+      "ru_RU": "Валик-004 (клон)"
     },
     "sub": {
       "key": "curlingbomb",
@@ -2879,7 +3791,11 @@
         "es_ES": "Bomba deslizante",
         "es_MX": "Bomba deslizante",
         "fr_FR": "Bombe curling",
-        "fr_CA": "Bombe curling"
+        "fr_CA": "Bombe curling",
+        "de_DE": "Curling-Bombe",
+        "it_IT": "Bomba curling",
+        "nl_NL": "Curlingbom",
+        "ru_RU": "Керлинг-бомба"
       }
     },
     "special": {
@@ -2891,7 +3807,11 @@
         "es_ES": "Salto explosivo",
         "es_MX": "Salto explosivo",
         "fr_FR": "Choc chromatique",
-        "fr_CA": "Choc chromatique"
+        "fr_CA": "Choc chromatique",
+        "de_DE": "Tintenschock",
+        "it_IT": "Vernischianto",
+        "nl_NL": "Superlanding",
+        "ru_RU": "Мегаплюх"
       }
     },
     "reskin_of": "splatroller",
@@ -2909,7 +3829,11 @@
         "es_ES": "Brochas",
         "es_MX": "Brochas",
         "fr_FR": "Épinceau",
-        "fr_CA": "Épinceau"
+        "fr_CA": "Épinceau",
+        "de_DE": "Brushes",
+        "it_IT": "Brushes",
+        "nl_NL": "Brushes",
+        "ru_RU": "Brushes"
       },
       "category": {
         "key": "roller",
@@ -2920,7 +3844,11 @@
           "es_ES": "Rodillos",
           "es_MX": "Rodillos",
           "fr_FR": "Rouleau",
-          "fr_CA": "Rouleau"
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
         }
       }
     },
@@ -2928,10 +3856,14 @@
       "ja_JP": "ヒーローブラシ レプリカ",
       "en_US": "Herobrush Replica",
       "en_GB": "Herobrush Replica",
-      "es_ES": "Herobrush Replica",
-      "es_MX": "Herobrush Replica",
+      "es_ES": "Brocha de élite (réplica)",
+      "es_MX": "Pincel caligrafía de élite réplica",
       "fr_FR": "Herobrush Replica",
-      "fr_CA": "Herobrush Replica"
+      "fr_CA": "Herobrush Replica",
+      "de_DE": "Helden-Pinsel Replik",
+      "it_IT": "Pennello élite replica",
+      "nl_NL": "Heldenkwast (replica)",
+      "ru_RU": "Кисть-004 (клон)"
     },
     "sub": {
       "key": "robotbomb",
@@ -2942,7 +3874,11 @@
         "es_ES": "Autobomb",
         "es_MX": "Autobomb",
         "fr_FR": "Bombe robot",
-        "fr_CA": "Bombe robot"
+        "fr_CA": "Bombe robot",
+        "de_DE": "Robo-Bombe",
+        "it_IT": "Robobomba",
+        "nl_NL": "Robobom",
+        "ru_RU": "Робобомб"
       }
     },
     "special": {
@@ -2954,7 +3890,11 @@
         "es_ES": "Propulsor",
         "es_MX": "Propulsor",
         "fr_FR": "Chromo-jet",
-        "fr_CA": "Chromo-jet"
+        "fr_CA": "Chromo-jet",
+        "de_DE": "Tintendüser",
+        "it_IT": "Jet splat",
+        "nl_NL": "Inktjet",
+        "ru_RU": "Красколет"
       }
     },
     "reskin_of": "hokusai",
@@ -2972,7 +3912,11 @@
         "es_ES": "Derramatics",
         "es_MX": "Derramatics",
         "fr_FR": "Seauceur",
-        "fr_CA": "Seauceur"
+        "fr_CA": "Seauceur",
+        "de_DE": "Sloshers",
+        "it_IT": "Sloshers",
+        "nl_NL": "Sloshers",
+        "ru_RU": "Sloshers"
       },
       "category": {
         "key": "slosher",
@@ -2983,7 +3927,11 @@
           "es_ES": "Derramatics",
           "es_MX": "Derramatics",
           "fr_FR": "Seauceur",
-          "fr_CA": "Seauceur"
+          "fr_CA": "Seauceur",
+          "de_DE": "Sloshers",
+          "it_IT": "Sloshers",
+          "nl_NL": "Sloshers",
+          "ru_RU": "Sloshers"
         }
       }
     },
@@ -2991,10 +3939,14 @@
       "ja_JP": "ヒーロースロッシャー レプリカ",
       "en_US": "Hero Slosher Replica",
       "en_GB": "Hero Slosher Replica",
-      "es_ES": "Hero Slosher Replica",
-      "es_MX": "Hero Slosher Replica",
+      "es_ES": "Derramatic de élite (réplica)",
+      "es_MX": "Derramatic de élite réplica",
       "fr_FR": "Hero Slosher Replica",
-      "fr_CA": "Hero Slosher Replica"
+      "fr_CA": "Hero Slosher Replica",
+      "de_DE": "Helden-Schwapper Replik",
+      "it_IT": "Secchiostro élite replica",
+      "nl_NL": "Heldenmorser (replica)",
+      "ru_RU": "Ведроган-004 (клон)"
     },
     "sub": {
       "key": "kyubanbomb",
@@ -3005,7 +3957,11 @@
         "es_ES": "Bomba ventosa",
         "es_MX": "Bomba ventosa",
         "fr_FR": "Bombe gluante",
-        "fr_CA": "Bombe gluante"
+        "fr_CA": "Bombe gluante",
+        "de_DE": "Haftbombe",
+        "it_IT": "Appiccibomba",
+        "nl_NL": "Kleefbom",
+        "ru_RU": "Бомба на присоске"
       }
     },
     "special": {
@@ -3017,7 +3973,11 @@
         "es_ES": "Lanzamisiles",
         "es_MX": "Lanzamisiles",
         "fr_FR": "Multi-missile",
-        "fr_CA": "Multi-missile"
+        "fr_CA": "Multi-missile",
+        "de_DE": "Schwarmraketen",
+        "it_IT": "Lanciarazzi",
+        "nl_NL": "Spetterraketten",
+        "ru_RU": "Каракатница"
       }
     },
     "reskin_of": "bucketslosher",
@@ -3035,7 +3995,11 @@
         "es_ES": "Tintralladoras",
         "es_MX": "Garabateadors",
         "fr_FR": "Badigeonneur",
-        "fr_CA": "Badigeonneur"
+        "fr_CA": "Badigeonneur",
+        "de_DE": "Splatlings",
+        "it_IT": "Splatlings",
+        "nl_NL": "Splatlings",
+        "ru_RU": "Splatlings"
       },
       "category": {
         "key": "splatling",
@@ -3046,7 +4010,11 @@
           "es_ES": "Tintralladoras",
           "es_MX": "Garabateadors",
           "fr_FR": "Badigeonneur",
-          "fr_CA": "Badigeonneur"
+          "fr_CA": "Badigeonneur",
+          "de_DE": "Splatlings",
+          "it_IT": "Splatlings",
+          "nl_NL": "Splatlings",
+          "ru_RU": "Splatlings"
         }
       }
     },
@@ -3054,10 +4022,14 @@
       "ja_JP": "ヒーロースピナー レプリカ",
       "en_US": "Hero Splatling Replica",
       "en_GB": "Hero Splatling Replica",
-      "es_ES": "Hero Splatling Replica",
-      "es_MX": "Hero Splatling Replica",
+      "es_ES": "Tintralladora de élite (réplica)",
+      "es_MX": "Garabateador de élite réplica",
       "fr_FR": "Hero Splatling Replica",
-      "fr_CA": "Hero Splatling Replica"
+      "fr_CA": "Hero Splatling Replica",
+      "de_DE": "Helden-Splatling Replik",
+      "it_IT": "Splatling élite replica",
+      "nl_NL": "Helden-Spetling (replica)",
+      "ru_RU": "Брызгомет-004 (клон)"
     },
     "sub": {
       "key": "sprinkler",
@@ -3068,7 +4040,11 @@
         "es_ES": "Aspersor",
         "es_MX": "Aspersor",
         "fr_FR": "Fontaine",
-        "fr_CA": "Fontaine"
+        "fr_CA": "Fontaine",
+        "de_DE": "Sprinkler",
+        "it_IT": "Spruzzatore",
+        "nl_NL": "Inktsprinkler",
+        "ru_RU": "Распылятор"
       }
     },
     "special": {
@@ -3080,7 +4056,11 @@
         "es_ES": "Rayo tintódico",
         "es_MX": "Rayo tintódico",
         "fr_FR": "Pigmalance",
-        "fr_CA": "Pigmalance"
+        "fr_CA": "Pigmalance",
+        "de_DE": "Magistraal",
+        "it_IT": "Baccalaser",
+        "nl_NL": "Magistraal",
+        "ru_RU": "Струятор"
       }
     },
     "reskin_of": "barrelspinner",
@@ -3098,7 +4078,11 @@
         "es_ES": "Brellas",
         "es_MX": "Brellas",
         "fr_FR": "Brellas",
-        "fr_CA": "Brellas"
+        "fr_CA": "Brellas",
+        "de_DE": "Brellas",
+        "it_IT": "Brellas",
+        "nl_NL": "Brellas",
+        "ru_RU": "Brellas"
       },
       "category": {
         "key": "brella",
@@ -3109,7 +4093,11 @@
           "es_ES": "Brellas",
           "es_MX": "Brellas",
           "fr_FR": "Brellas",
-          "fr_CA": "Brellas"
+          "fr_CA": "Brellas",
+          "de_DE": "Brellas",
+          "it_IT": "Brellas",
+          "nl_NL": "Brellas",
+          "ru_RU": "Brellas"
         }
       }
     },
@@ -3120,7 +4108,11 @@
       "es_ES": "Paratintas",
       "es_MX": "Paratintas",
       "fr_FR": "Splat Brella",
-      "fr_CA": "Splat Brella"
+      "fr_CA": "Splat Brella",
+      "de_DE": "Parapluviator",
+      "it_IT": "Sparasole",
+      "nl_NL": "Plenzer",
+      "ru_RU": "Сплат-зонт"
     },
     "sub": {
       "key": "sprinkler",
@@ -3131,7 +4123,11 @@
         "es_ES": "Aspersor",
         "es_MX": "Aspersor",
         "fr_FR": "Fontaine",
-        "fr_CA": "Fontaine"
+        "fr_CA": "Fontaine",
+        "de_DE": "Sprinkler",
+        "it_IT": "Spruzzatore",
+        "nl_NL": "Inktsprinkler",
+        "ru_RU": "Распылятор"
       }
     },
     "special": {
@@ -3143,7 +4139,11 @@
         "es_ES": "Atormentador",
         "es_MX": "Atormentador",
         "fr_FR": "Pluie d'encre",
-        "fr_CA": "Pluie d'encre"
+        "fr_CA": "Pluie d'encre",
+        "de_DE": "Tintenschauer",
+        "it_IT": "Pioggia di colore",
+        "nl_NL": "Spetterbui",
+        "ru_RU": "Туча краски"
       }
     },
     "reskin_of": null,
@@ -3161,7 +4161,11 @@
         "es_ES": "Brellas",
         "es_MX": "Brellas",
         "fr_FR": "Brellas",
-        "fr_CA": "Brellas"
+        "fr_CA": "Brellas",
+        "de_DE": "Brellas",
+        "it_IT": "Brellas",
+        "nl_NL": "Brellas",
+        "ru_RU": "Brellas"
       },
       "category": {
         "key": "brella",
@@ -3172,7 +4176,11 @@
           "es_ES": "Brellas",
           "es_MX": "Brellas",
           "fr_FR": "Brellas",
-          "fr_CA": "Brellas"
+          "fr_CA": "Brellas",
+          "de_DE": "Brellas",
+          "it_IT": "Brellas",
+          "nl_NL": "Brellas",
+          "ru_RU": "Brellas"
         }
       }
     },
@@ -3180,10 +4188,14 @@
       "ja_JP": "ヒーローシェルター レプリカ",
       "en_US": "Hero Brella Replica",
       "en_GB": "Hero Brella Replica",
-      "es_ES": "Hero Brella Replica",
-      "es_MX": "Hero Brella Replica",
+      "es_ES": "Paratintas de élite (réplica)",
+      "es_MX": "Paratintas de élite réplica",
       "fr_FR": "Hero Brella Replica",
-      "fr_CA": "Hero Brella Replica"
+      "fr_CA": "Hero Brella Replica",
+      "de_DE": "Helden-Pluviator Replik",
+      "it_IT": "Sparasole élite replica",
+      "nl_NL": "Heldenplenzer (replica)",
+      "ru_RU": "Зонтган-004 (клон)"
     },
     "sub": {
       "key": "sprinkler",
@@ -3194,7 +4206,11 @@
         "es_ES": "Aspersor",
         "es_MX": "Aspersor",
         "fr_FR": "Fontaine",
-        "fr_CA": "Fontaine"
+        "fr_CA": "Fontaine",
+        "de_DE": "Sprinkler",
+        "it_IT": "Spruzzatore",
+        "nl_NL": "Inktsprinkler",
+        "ru_RU": "Распылятор"
       }
     },
     "special": {
@@ -3206,7 +4222,11 @@
         "es_ES": "Atormentador",
         "es_MX": "Atormentador",
         "fr_FR": "Pluie d'encre",
-        "fr_CA": "Pluie d'encre"
+        "fr_CA": "Pluie d'encre",
+        "de_DE": "Tintenschauer",
+        "it_IT": "Pioggia di colore",
+        "nl_NL": "Spetterbui",
+        "ru_RU": "Туча краски"
       }
     },
     "reskin_of": "parashelter",
@@ -3214,7 +4234,7 @@
   },
   {
     "key": "squiclean_a",
-    "splatnet": null,
+    "splatnet": 2000,
     "type": {
       "key": "charger",
       "name": {
@@ -3224,7 +4244,11 @@
         "es_ES": "Cargatintas",
         "es_MX": "Cargatintas",
         "fr_FR": "Fusil",
-        "fr_CA": "Fusil"
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
       },
       "category": {
         "key": "charger",
@@ -3235,7 +4259,11 @@
           "es_ES": "Cargatintas",
           "es_MX": "Cargatintas",
           "fr_FR": "Fusil",
-          "fr_CA": "Fusil"
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
         }
       }
     },
@@ -3246,7 +4274,11 @@
       "es_ES": "Kalarrapid α",
       "es_MX": "Delineador X",
       "fr_FR": "Décap'express Alpha",
-      "fr_CA": "Lignizateur alpha"
+      "fr_CA": "Lignizateur alpha",
+      "de_DE": "Sepiator α",
+      "it_IT": "Kalamarapid α",
+      "nl_NL": "Octopoets",
+      "ru_RU": "Стиратель"
     },
     "sub": {
       "key": "pointsensor",
@@ -3257,7 +4289,11 @@
         "es_ES": "Rastreador",
         "es_MX": "Rastreador",
         "fr_FR": "Détecteur",
-        "fr_CA": "Détecteur"
+        "fr_CA": "Détecteur",
+        "de_DE": "Detektor",
+        "it_IT": "Cimice",
+        "nl_NL": "Detector",
+        "ru_RU": "Маркер движения"
       }
     },
     "special": {
@@ -3269,7 +4305,11 @@
         "es_ES": "Ink Armor",
         "es_MX": "Ink Armor",
         "fr_FR": "Armure d'encre",
-        "fr_CA": "Armure d'encre"
+        "fr_CA": "Armure d'encre",
+        "de_DE": "Tintenrüstung",
+        "it_IT": "Armatura d'inchiostro",
+        "nl_NL": "Inktharnas",
+        "ru_RU": "Бронекраска"
       }
     },
     "reskin_of": null,
@@ -3277,7 +4317,7 @@
   },
   {
     "key": "prime_collabo",
-    "splatnet": null,
+    "splatnet": 71,
     "type": {
       "key": "shooter",
       "name": {
@@ -3287,7 +4327,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -3298,7 +4342,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -3309,7 +4357,11 @@
       "es_ES": "Lanzatintas plus B",
       "es_MX": "Rociador Forima",
       "fr_FR": "Liquidateur pro griffé",
-      "fr_CA": "Liquéficateur pro Fosia"
+      "fr_CA": "Liquéficateur pro Fosia",
+      "de_DE": "Focus-Profi-Kleckser",
+      "it_IT": "Splasher élite logo",
+      "nl_NL": "Forge Superspetter Pro",
+      "ru_RU": "Каплестрел ПРО «Блиц»"
     },
     "sub": {
       "key": "kyubanbomb",
@@ -3320,7 +4372,11 @@
         "es_ES": "Bomba ventosa",
         "es_MX": "Bomba ventosa",
         "fr_FR": "Bombe gluante",
-        "fr_CA": "Bombe gluante"
+        "fr_CA": "Bombe gluante",
+        "de_DE": "Haftbombe",
+        "it_IT": "Appiccibomba",
+        "nl_NL": "Kleefbom",
+        "ru_RU": "Бомба на присоске"
       }
     },
     "special": {
@@ -3332,7 +4388,11 @@
         "es_ES": "Bubble Blower",
         "es_MX": "Bubble Blower",
         "fr_FR": "Lance-bulles",
-        "fr_CA": "Lance-bulles"
+        "fr_CA": "Lance-bulles",
+        "de_DE": "Blubberwerfer",
+        "it_IT": "Soffiabolle",
+        "nl_NL": "Bellenblazer",
+        "ru_RU": "Пузырятор"
       }
     },
     "reskin_of": null,
@@ -3340,7 +4400,7 @@
   },
   {
     "key": "screwslosher",
-    "splatnet": null,
+    "splatnet": 3020,
     "type": {
       "key": "slosher",
       "name": {
@@ -3350,7 +4410,11 @@
         "es_ES": "Derramatics",
         "es_MX": "Derramatics",
         "fr_FR": "Seauceur",
-        "fr_CA": "Seauceur"
+        "fr_CA": "Seauceur",
+        "de_DE": "Sloshers",
+        "it_IT": "Sloshers",
+        "nl_NL": "Sloshers",
+        "ru_RU": "Sloshers"
       },
       "category": {
         "key": "slosher",
@@ -3361,7 +4425,11 @@
           "es_ES": "Derramatics",
           "es_MX": "Derramatics",
           "fr_FR": "Seauceur",
-          "fr_CA": "Seauceur"
+          "fr_CA": "Seauceur",
+          "de_DE": "Sloshers",
+          "it_IT": "Sloshers",
+          "nl_NL": "Sloshers",
+          "ru_RU": "Sloshers"
         }
       }
     },
@@ -3372,7 +4440,11 @@
       "es_ES": "Derramatic centrífugo",
       "es_MX": "Derramatic centrífugo",
       "fr_FR": "Encrifugeur",
-      "fr_CA": "Encrifugeur"
+      "fr_CA": "Encrifugeur",
+      "de_DE": "Trommel-Schwapper",
+      "it_IT": "Secchiostro centrifuga",
+      "nl_NL": "Klotstrommel",
+      "ru_RU": "Центрифугер"
     },
     "sub": {
       "key": "robotbomb",
@@ -3383,7 +4455,11 @@
         "es_ES": "Autobomb",
         "es_MX": "Autobomb",
         "fr_FR": "Bombe robot",
-        "fr_CA": "Bombe robot"
+        "fr_CA": "Bombe robot",
+        "de_DE": "Robo-Bombe",
+        "it_IT": "Robobomba",
+        "nl_NL": "Robobom",
+        "ru_RU": "Робобомб"
       }
     },
     "special": {
@@ -3395,7 +4471,11 @@
         "es_ES": "Rayo tintódico",
         "es_MX": "Rayo tintódico",
         "fr_FR": "Pigmalance",
-        "fr_CA": "Pigmalance"
+        "fr_CA": "Pigmalance",
+        "de_DE": "Magistraal",
+        "it_IT": "Baccalaser",
+        "nl_NL": "Magistraal",
+        "ru_RU": "Струятор"
       }
     },
     "reskin_of": null,
@@ -3403,7 +4483,7 @@
   },
   {
     "key": "momiji",
-    "splatnet": null,
+    "splatnet": 11,
     "type": {
       "key": "shooter",
       "name": {
@@ -3413,7 +4493,11 @@
         "es_ES": "Lanzatintas",
         "es_MX": "Rociadors",
         "fr_FR": "Lanceur",
-        "fr_CA": "Lanceur"
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
       },
       "category": {
         "key": "shooter",
@@ -3424,7 +4508,11 @@
           "es_ES": "Lanzatintas",
           "es_MX": "Rociadors",
           "fr_FR": "Lanceur",
-          "fr_CA": "Lanceur"
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
         }
       }
     },
@@ -3435,7 +4523,11 @@
       "es_ES": "Lanzatintas novato B",
       "es_MX": "Rociador básico adaptado",
       "fr_FR": "Liquidateur Sr.",
-      "fr_CA": "Liquéficateur ultra modifié"
+      "fr_CA": "Liquéficateur ultra modifié",
+      "de_DE": "Junior-Kleckser Plus",
+      "it_IT": "Sparacolore logo",
+      "nl_NL": "Gemodde Superspetter jr.",
+      "ru_RU": "Каплестрел-У 2.0"
     },
     "sub": {
       "key": "robotbomb",
@@ -3446,7 +4538,11 @@
         "es_ES": "Autobomb",
         "es_MX": "Autobomb",
         "fr_FR": "Bombe robot",
-        "fr_CA": "Bombe robot"
+        "fr_CA": "Bombe robot",
+        "de_DE": "Robo-Bombe",
+        "it_IT": "Robobomba",
+        "nl_NL": "Robobom",
+        "ru_RU": "Робобомб"
       }
     },
     "special": {
@@ -3458,10 +4554,1093 @@
         "es_ES": "Atormentador",
         "es_MX": "Atormentador",
         "fr_FR": "Pluie d'encre",
-        "fr_CA": "Pluie d'encre"
+        "fr_CA": "Pluie d'encre",
+        "de_DE": "Tintenschauer",
+        "it_IT": "Pioggia di colore",
+        "nl_NL": "Spetterbui",
+        "ru_RU": "Туча краски"
       }
     },
     "reskin_of": null,
-    "main_ref": "momiji"
+    "main_ref": "wakaba"
+  },
+  {
+    "key": "barrelspinner_deco",
+    "splatnet": 4011,
+    "type": {
+      "key": "splatling",
+      "name": {
+        "ja_JP": "スピナー",
+        "en_US": "Splatlings",
+        "en_GB": "Splatlings",
+        "es_ES": "Tintralladoras",
+        "es_MX": "Garabateadors",
+        "fr_FR": "Badigeonneur",
+        "fr_CA": "Badigeonneur",
+        "de_DE": "Splatlings",
+        "it_IT": "Splatlings",
+        "nl_NL": "Splatlings",
+        "ru_RU": "Splatlings"
+      },
+      "category": {
+        "key": "splatling",
+        "name": {
+          "ja_JP": "スピナー",
+          "en_US": "Splatlings",
+          "en_GB": "Splatlings",
+          "es_ES": "Tintralladoras",
+          "es_MX": "Garabateadors",
+          "fr_FR": "Badigeonneur",
+          "fr_CA": "Badigeonneur",
+          "de_DE": "Splatlings",
+          "it_IT": "Splatlings",
+          "nl_NL": "Splatlings",
+          "ru_RU": "Splatlings"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "バレルスピナーデコ",
+      "en_US": "Heavy Splatling Deco",
+      "en_GB": "Heavy Splatling Deco",
+      "es_ES": "Tintralladora DX",
+      "es_MX": "Garabateador Pro chic",
+      "fr_FR": "Badigeonneur chic",
+      "fr_CA": "Badigeonneur chic",
+      "de_DE": "Splatling Deko",
+      "it_IT": "Splatling a tanica DX",
+      "nl_NL": "Spetling Deco",
+      "ru_RU": "Брызгомет XL «Деко»"
+    },
+    "sub": {
+      "key": "splashshield",
+      "name": {
+        "ja_JP": "スプラッシュシールド",
+        "en_US": "Splash Wall",
+        "en_GB": "Splash Wall",
+        "es_ES": "Splash Wall",
+        "es_MX": "Splash Wall",
+        "fr_FR": "Mur d'encre",
+        "fr_CA": "Mur d'encre",
+        "de_DE": "Tintenwall",
+        "it_IT": "Muro di colore",
+        "nl_NL": "Inktgordijn",
+        "ru_RU": "Чернильный занавес"
+      }
+    },
+    "special": {
+      "key": "bubble",
+      "name": {
+        "ja_JP": "バブルランチャー",
+        "en_US": "Bubble Blower",
+        "en_GB": "Bubble Blower",
+        "es_ES": "Bubble Blower",
+        "es_MX": "Bubble Blower",
+        "fr_FR": "Lance-bulles",
+        "fr_CA": "Lance-bulles",
+        "de_DE": "Blubberwerfer",
+        "it_IT": "Soffiabolle",
+        "nl_NL": "Bellenblazer",
+        "ru_RU": "Пузырятор"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "barrelspinner"
+  },
+  {
+    "key": "rapid_elite",
+    "splatnet": 250,
+    "type": {
+      "key": "blaster",
+      "name": {
+        "ja_JP": "ブラスター",
+        "en_US": "Blasters",
+        "en_GB": "Blasters",
+        "es_ES": "Devastadors",
+        "es_MX": "Devastadors",
+        "fr_FR": "Éclablaster",
+        "fr_CA": "Éclablaster",
+        "de_DE": "Blasters",
+        "it_IT": "Blasters",
+        "nl_NL": "Blasters",
+        "ru_RU": "Blasters"
+      },
+      "category": {
+        "key": "shooter",
+        "name": {
+          "ja_JP": "シューター",
+          "en_US": "Shooters",
+          "en_GB": "Shooters",
+          "es_ES": "Lanzatintas",
+          "es_MX": "Rociadors",
+          "fr_FR": "Lanceur",
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "Rブラスターエリート",
+      "en_US": "Rapid Blaster Pro",
+      "en_GB": "Rapid Blaster Pro",
+      "es_ES": "Superdevastador",
+      "es_MX": "Turbolanzamotas Pro",
+      "fr_FR": "Turboblaster pro",
+      "fr_CA": "Turboblasteur pro",
+      "de_DE": "Turbo-Blaster Plus",
+      "it_IT": "Blaster élite",
+      "nl_NL": "Flitsblaster Pro",
+      "ru_RU": "Бластермат ПРО"
+    },
+    "sub": {
+      "key": "poisonmist",
+      "name": {
+        "ja_JP": "ポイズンミスト",
+        "en_US": "Toxic Mist",
+        "en_GB": "Toxic Mist",
+        "es_ES": "Toxic Mist",
+        "es_MX": "Toxic Mist",
+        "fr_FR": "Brume toxique",
+        "fr_CA": "Brume toxique",
+        "de_DE": "Sepitox-Nebel",
+        "it_IT": "Nebbia tossica",
+        "nl_NL": "Gifmist",
+        "ru_RU": "Едкий туман"
+      }
+    },
+    "special": {
+      "key": "amefurashi",
+      "name": {
+        "ja_JP": "アメフラシ",
+        "en_US": "Ink Storm",
+        "en_GB": "Ink Storm",
+        "es_ES": "Atormentador",
+        "es_MX": "Atormentador",
+        "fr_FR": "Pluie d'encre",
+        "fr_CA": "Pluie d'encre",
+        "de_DE": "Tintenschauer",
+        "it_IT": "Pioggia di colore",
+        "nl_NL": "Spetterbui",
+        "ru_RU": "Туча краски"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "rapid_elite"
+  },
+  {
+    "key": "campingshelter",
+    "splatnet": 6010,
+    "type": {
+      "key": "brella",
+      "name": {
+        "ja_JP": "シェルター",
+        "en_US": "Brellas",
+        "en_GB": "Brellas",
+        "es_ES": "Brellas",
+        "es_MX": "Brellas",
+        "fr_FR": "Brellas",
+        "fr_CA": "Brellas",
+        "de_DE": "Brellas",
+        "it_IT": "Brellas",
+        "nl_NL": "Brellas",
+        "ru_RU": "Brellas"
+      },
+      "category": {
+        "key": "brella",
+        "name": {
+          "ja_JP": "シェルター",
+          "en_US": "Brellas",
+          "en_GB": "Brellas",
+          "es_ES": "Brellas",
+          "es_MX": "Brellas",
+          "fr_FR": "Brellas",
+          "fr_CA": "Brellas",
+          "de_DE": "Brellas",
+          "it_IT": "Brellas",
+          "nl_NL": "Brellas",
+          "ru_RU": "Brellas"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "キャンピングシェルター",
+      "en_US": "Tenta Brella",
+      "en_GB": "Tenta Brella",
+      "es_ES": "Paratintas maxi",
+      "es_MX": "Paratintas maxi",
+      "fr_FR": "Para-encre XL",
+      "fr_CA": "Para-encre XL",
+      "de_DE": "Camp-Pluviator",
+      "it_IT": "Sparatenda",
+      "nl_NL": "Kampeerplenzer",
+      "ru_RU": "Зонтент"
+    },
+    "sub": {
+      "key": "jumpbeacon",
+      "name": {
+        "ja_JP": "ジャンプビーコン",
+        "en_US": "Squid Beakon",
+        "en_GB": "Squid Beakon",
+        "es_ES": "Squid Beakon",
+        "es_MX": "Squid Beakon",
+        "fr_FR": "Balise de saut",
+        "fr_CA": "Balise de saut",
+        "de_DE": "Sprungboje",
+        "it_IT": "Trasferitore",
+        "nl_NL": "Springschotel",
+        "ru_RU": "Прыжковый маячок"
+      }
+    },
+    "special": {
+      "key": "bubble",
+      "name": {
+        "ja_JP": "バブルランチャー",
+        "en_US": "Bubble Blower",
+        "en_GB": "Bubble Blower",
+        "es_ES": "Bubble Blower",
+        "es_MX": "Bubble Blower",
+        "fr_FR": "Lance-bulles",
+        "fr_CA": "Lance-bulles",
+        "de_DE": "Blubberwerfer",
+        "it_IT": "Soffiabolle",
+        "nl_NL": "Bellenblazer",
+        "ru_RU": "Пузырятор"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "campingshelter"
+  },
+  {
+    "key": "bamboo14mk1",
+    "splatnet": 2050,
+    "type": {
+      "key": "charger",
+      "name": {
+        "ja_JP": "チャージャー",
+        "en_US": "Chargers",
+        "en_GB": "Chargers",
+        "es_ES": "Cargatintas",
+        "es_MX": "Cargatintas",
+        "fr_FR": "Fusil",
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
+      },
+      "category": {
+        "key": "charger",
+        "name": {
+          "ja_JP": "チャージャー",
+          "en_US": "Chargers",
+          "en_GB": "Chargers",
+          "es_ES": "Cargatintas",
+          "es_MX": "Cargatintas",
+          "fr_FR": "Fusil",
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "14式竹筒銃・甲",
+      "en_US": "Bamboozler 14 Mk I",
+      "en_GB": "Bamboozler 14 Mk I",
+      "es_ES": "Bambufusil 14-I",
+      "es_MX": "Bamzuka 14-I",
+      "fr_FR": "Bimbamboum Mk I",
+      "fr_CA": "Bimbamboum Mk I",
+      "de_DE": "Klotzer 14-A",
+      "it_IT": "Bimbamboom 14-I",
+      "nl_NL": "Bamboem 14-A",
+      "ru_RU": "Бамбух 14-I"
+    },
+    "sub": {
+      "key": "curlingbomb",
+      "name": {
+        "ja_JP": "カーリングボム",
+        "en_US": "Curling Bomb",
+        "en_GB": "Curling Bomb",
+        "es_ES": "Bomba deslizante",
+        "es_MX": "Bomba deslizante",
+        "fr_FR": "Bombe curling",
+        "fr_CA": "Bombe curling",
+        "de_DE": "Curling-Bombe",
+        "it_IT": "Bomba curling",
+        "nl_NL": "Curlingbom",
+        "ru_RU": "Керлинг-бомба"
+      }
+    },
+    "special": {
+      "key": "missile",
+      "name": {
+        "ja_JP": "マルチミサイル",
+        "en_US": "Tenta Missiles",
+        "en_GB": "Tenta Missiles",
+        "es_ES": "Lanzamisiles",
+        "es_MX": "Lanzamisiles",
+        "fr_FR": "Multi-missile",
+        "fr_CA": "Multi-missile",
+        "de_DE": "Schwarmraketen",
+        "it_IT": "Lanciarazzi",
+        "nl_NL": "Spetterraketten",
+        "ru_RU": "Каракатница"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "bamboo14mk1"
+  },
+  {
+    "key": "liter4k_custom",
+    "splatnet": 2031,
+    "type": {
+      "key": "charger",
+      "name": {
+        "ja_JP": "チャージャー",
+        "en_US": "Chargers",
+        "en_GB": "Chargers",
+        "es_ES": "Cargatintas",
+        "es_MX": "Cargatintas",
+        "fr_FR": "Fusil",
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
+      },
+      "category": {
+        "key": "charger",
+        "name": {
+          "ja_JP": "チャージャー",
+          "en_US": "Chargers",
+          "en_GB": "Chargers",
+          "es_ES": "Cargatintas",
+          "es_MX": "Cargatintas",
+          "fr_FR": "Fusil",
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "リッター4Kカスタム",
+      "en_US": "Custom E-liter 4K",
+      "en_GB": "Custom E-liter 4K",
+      "es_ES": "Entintador 4K SP",
+      "es_MX": "Entintador 4K adaptado",
+      "fr_FR": "Extraceur + modifié",
+      "fr_CA": "X-traceur + modifié",
+      "de_DE": "E-liter 4K SE",
+      "it_IT": "Tinter a carica 4K CM",
+      "nl_NL": "Gemodde E-liter 4K",
+      "ru_RU": "Э-литр 95 «Понт»"
+    },
+    "sub": {
+      "key": "jumpbeacon",
+      "name": {
+        "ja_JP": "ジャンプビーコン",
+        "en_US": "Squid Beakon",
+        "en_GB": "Squid Beakon",
+        "es_ES": "Squid Beakon",
+        "es_MX": "Squid Beakon",
+        "fr_FR": "Balise de saut",
+        "fr_CA": "Balise de saut",
+        "de_DE": "Sprungboje",
+        "it_IT": "Trasferitore",
+        "nl_NL": "Springschotel",
+        "ru_RU": "Прыжковый маячок"
+      }
+    },
+    "special": {
+      "key": "bubble",
+      "name": {
+        "ja_JP": "バブルランチャー",
+        "en_US": "Bubble Blower",
+        "en_GB": "Bubble Blower",
+        "es_ES": "Bubble Blower",
+        "es_MX": "Bubble Blower",
+        "fr_FR": "Lance-bulles",
+        "fr_CA": "Lance-bulles",
+        "de_DE": "Blubberwerfer",
+        "it_IT": "Soffiabolle",
+        "nl_NL": "Bellenblazer",
+        "ru_RU": "Пузырятор"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "liter4k"
+  },
+  {
+    "key": "liter4k_scope_custom",
+    "splatnet": 2041,
+    "type": {
+      "key": "charger",
+      "name": {
+        "ja_JP": "チャージャー",
+        "en_US": "Chargers",
+        "en_GB": "Chargers",
+        "es_ES": "Cargatintas",
+        "es_MX": "Cargatintas",
+        "fr_FR": "Fusil",
+        "fr_CA": "Fusil",
+        "de_DE": "Chargers",
+        "it_IT": "Chargers",
+        "nl_NL": "Chargers",
+        "ru_RU": "Chargers"
+      },
+      "category": {
+        "key": "charger",
+        "name": {
+          "ja_JP": "チャージャー",
+          "en_US": "Chargers",
+          "en_GB": "Chargers",
+          "es_ES": "Cargatintas",
+          "es_MX": "Cargatintas",
+          "fr_FR": "Fusil",
+          "fr_CA": "Fusil",
+          "de_DE": "Chargers",
+          "it_IT": "Chargers",
+          "nl_NL": "Chargers",
+          "ru_RU": "Chargers"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "4Kスコープカスタム",
+      "en_US": "Custom E-liter 4K Scope",
+      "en_GB": "Custom E-liter 4K Scope",
+      "es_ES": "Telentintador 4K SP",
+      "es_MX": "Telentintador 4K adaptado",
+      "fr_FR": "Extraceur + zoom modifié",
+      "fr_CA": "X-traceur + zoom modifié",
+      "de_DE": "Ziel-E-liter 4K SE",
+      "it_IT": "Tinter con mirino 4K CM",
+      "nl_NL": "Gemodde E-liter 4K met vizier",
+      "ru_RU": "Снайп-э-литр 95 «Понт»"
+    },
+    "sub": {
+      "key": "jumpbeacon",
+      "name": {
+        "ja_JP": "ジャンプビーコン",
+        "en_US": "Squid Beakon",
+        "en_GB": "Squid Beakon",
+        "es_ES": "Squid Beakon",
+        "es_MX": "Squid Beakon",
+        "fr_FR": "Balise de saut",
+        "fr_CA": "Balise de saut",
+        "de_DE": "Sprungboje",
+        "it_IT": "Trasferitore",
+        "nl_NL": "Springschotel",
+        "ru_RU": "Прыжковый маячок"
+      }
+    },
+    "special": {
+      "key": "bubble",
+      "name": {
+        "ja_JP": "バブルランチャー",
+        "en_US": "Bubble Blower",
+        "en_GB": "Bubble Blower",
+        "es_ES": "Bubble Blower",
+        "es_MX": "Bubble Blower",
+        "fr_FR": "Lance-bulles",
+        "fr_CA": "Lance-bulles",
+        "de_DE": "Blubberwerfer",
+        "it_IT": "Soffiabolle",
+        "nl_NL": "Bellenblazer",
+        "ru_RU": "Пузырятор"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "liter4k"
+  },
+  {
+    "key": "longblaster",
+    "splatnet": 220,
+    "type": {
+      "key": "blaster",
+      "name": {
+        "ja_JP": "ブラスター",
+        "en_US": "Blasters",
+        "en_GB": "Blasters",
+        "es_ES": "Devastadors",
+        "es_MX": "Devastadors",
+        "fr_FR": "Éclablaster",
+        "fr_CA": "Éclablaster",
+        "de_DE": "Blasters",
+        "it_IT": "Blasters",
+        "nl_NL": "Blasters",
+        "ru_RU": "Blasters"
+      },
+      "category": {
+        "key": "shooter",
+        "name": {
+          "ja_JP": "シューター",
+          "en_US": "Shooters",
+          "en_GB": "Shooters",
+          "es_ES": "Lanzatintas",
+          "es_MX": "Rociadors",
+          "fr_FR": "Lanceur",
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "ロングブラスター",
+      "en_US": "Range Blaster",
+      "en_GB": "Range Blaster",
+      "es_ES": "Teledevastador",
+      "es_MX": "Telelanzamotas",
+      "fr_FR": "Éclablaster XL",
+      "fr_CA": "Éclablasteur LP",
+      "de_DE": "Fern-Blaster",
+      "it_IT": "Blaster a distanza",
+      "nl_NL": "Teleblaster",
+      "ru_RU": "Дальнобластер"
+    },
+    "sub": {
+      "key": "kyubanbomb",
+      "name": {
+        "ja_JP": "キューバンボム",
+        "en_US": "Suction Bomb",
+        "en_GB": "Suction Bomb",
+        "es_ES": "Bomba ventosa",
+        "es_MX": "Bomba ventosa",
+        "fr_FR": "Bombe gluante",
+        "fr_CA": "Bombe gluante",
+        "de_DE": "Haftbombe",
+        "it_IT": "Appiccibomba",
+        "nl_NL": "Kleefbom",
+        "ru_RU": "Бомба на присоске"
+      }
+    },
+    "special": {
+      "key": "amefurashi",
+      "name": {
+        "ja_JP": "アメフラシ",
+        "en_US": "Ink Storm",
+        "en_GB": "Ink Storm",
+        "es_ES": "Atormentador",
+        "es_MX": "Atormentador",
+        "fr_FR": "Pluie d'encre",
+        "fr_CA": "Pluie d'encre",
+        "de_DE": "Tintenschauer",
+        "it_IT": "Pioggia di colore",
+        "nl_NL": "Spetterbui",
+        "ru_RU": "Туча краски"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "longblaster"
+  },
+  {
+    "key": "dynamo_tesla",
+    "splatnet": 1021,
+    "type": {
+      "key": "roller",
+      "name": {
+        "ja_JP": "ローラー",
+        "en_US": "Rollers",
+        "en_GB": "Rollers",
+        "es_ES": "Rodillos",
+        "es_MX": "Rodillos",
+        "fr_FR": "Rouleau",
+        "fr_CA": "Rouleau",
+        "de_DE": "Rollers",
+        "it_IT": "Rollers",
+        "nl_NL": "Rollers",
+        "ru_RU": "Rollers"
+      },
+      "category": {
+        "key": "roller",
+        "name": {
+          "ja_JP": "ローラー",
+          "en_US": "Rollers",
+          "en_GB": "Rollers",
+          "es_ES": "Rodillos",
+          "es_MX": "Rodillos",
+          "fr_FR": "Rouleau",
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "ダイナモローラーテスラ",
+      "en_US": "Gold Dynamo Roller",
+      "en_GB": "Gold Dynamo Roller",
+      "es_ES": "Dinamorrodillo T",
+      "es_MX": "Rodillo Pro dorado",
+      "fr_FR": "Dynamo-rouleau tesla",
+      "fr_CA": "Dynamo-rouleau pro",
+      "de_DE": "Dynaroller Tesla",
+      "it_IT": "Rullo dinamo dorato",
+      "nl_NL": "Gouden Dynamoroller",
+      "ru_RU": "Мотовалик VIP"
+    },
+    "sub": {
+      "key": "splashbomb",
+      "name": {
+        "ja_JP": "スプラッシュボム",
+        "en_US": "Splat Bomb",
+        "en_GB": "Splat Bomb",
+        "es_ES": "Bomba básica",
+        "es_MX": "Bomba básica",
+        "fr_FR": "Bombe splash",
+        "fr_CA": "Bombe splash",
+        "de_DE": "Klecksbombe",
+        "it_IT": "Bomba splash",
+        "nl_NL": "Klodderbom",
+        "ru_RU": "Брызгающая бомба"
+      }
+    },
+    "special": {
+      "key": "armor",
+      "name": {
+        "ja_JP": "インクアーマー",
+        "en_US": "Ink Armor",
+        "en_GB": "Ink Armor",
+        "es_ES": "Ink Armor",
+        "es_MX": "Ink Armor",
+        "fr_FR": "Armure d'encre",
+        "fr_CA": "Armure d'encre",
+        "de_DE": "Tintenrüstung",
+        "it_IT": "Armatura d'inchiostro",
+        "nl_NL": "Inktharnas",
+        "ru_RU": "Бронекраска"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "dynamo"
+  },
+  {
+    "key": "jetsweeper_custom",
+    "splatnet": 91,
+    "type": {
+      "key": "shooter",
+      "name": {
+        "ja_JP": "シューター",
+        "en_US": "Shooters",
+        "en_GB": "Shooters",
+        "es_ES": "Lanzatintas",
+        "es_MX": "Rociadors",
+        "fr_FR": "Lanceur",
+        "fr_CA": "Lanceur",
+        "de_DE": "Shooters",
+        "it_IT": "Shooters",
+        "nl_NL": "Shooters",
+        "ru_RU": "Shooters"
+      },
+      "category": {
+        "key": "shooter",
+        "name": {
+          "ja_JP": "シューター",
+          "en_US": "Shooters",
+          "en_GB": "Shooters",
+          "es_ES": "Lanzatintas",
+          "es_MX": "Rociadors",
+          "fr_FR": "Lanceur",
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "ジェットスイーパーカスタム",
+      "en_US": "Custom Jet Squelcher",
+      "en_GB": "Custom Jet Squelcher",
+      "es_ES": "Megabarredora SP",
+      "es_MX": "Megasoplador adaptado",
+      "fr_FR": "Nettoyeur XL modifié",
+      "fr_CA": "Méganettoyeur modifié",
+      "de_DE": "Platscher SE",
+      "it_IT": "Sweeper CM",
+      "nl_NL": "Gemodde Straalplonzer",
+      "ru_RU": "Плескарь «Понт»"
+    },
+    "sub": {
+      "key": "quickbomb",
+      "name": {
+        "ja_JP": "クイックボム",
+        "en_US": "Burst Bomb",
+        "en_GB": "Burst Bomb",
+        "es_ES": "Bomba rápida",
+        "es_MX": "Bomba rápida",
+        "fr_FR": "Bombe ballon",
+        "fr_CA": "Bombe ballon",
+        "de_DE": "Insta-Bombe",
+        "it_IT": "Granata",
+        "nl_NL": "Ballonbom",
+        "ru_RU": "Разрывная бомба"
+      }
+    },
+    "special": {
+      "key": "presser",
+      "name": {
+        "ja_JP": "ハイパープレッサー",
+        "en_US": "Sting Ray",
+        "en_GB": "Sting Ray",
+        "es_ES": "Rayo tintódico",
+        "es_MX": "Rayo tintódico",
+        "fr_FR": "Pigmalance",
+        "fr_CA": "Pigmalance",
+        "de_DE": "Magistraal",
+        "it_IT": "Baccalaser",
+        "nl_NL": "Magistraal",
+        "ru_RU": "Струятор"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "jetsweeper"
+  },
+  {
+    "key": "pablo_hue",
+    "splatnet": 1101,
+    "type": {
+      "key": "brush",
+      "name": {
+        "ja_JP": "フデ",
+        "en_US": "Brushes",
+        "en_GB": "Brushes",
+        "es_ES": "Brochas",
+        "es_MX": "Brochas",
+        "fr_FR": "Épinceau",
+        "fr_CA": "Épinceau",
+        "de_DE": "Brushes",
+        "it_IT": "Brushes",
+        "nl_NL": "Brushes",
+        "ru_RU": "Brushes"
+      },
+      "category": {
+        "key": "roller",
+        "name": {
+          "ja_JP": "ローラー",
+          "en_US": "Rollers",
+          "en_GB": "Rollers",
+          "es_ES": "Rodillos",
+          "es_MX": "Rodillos",
+          "fr_FR": "Rouleau",
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "パブロ・ヒュー",
+      "en_US": "Inkbrush Nouveau",
+      "en_GB": "Inkbrush Nouveau",
+      "es_ES": "Pincel maestro",
+      "es_MX": "Pincel maestro",
+      "fr_FR": "Épinceau nuancé",
+      "fr_CA": "Épinceau nuancé",
+      "de_DE": "Quasto Fresco",
+      "it_IT": "Calamaravaggio master",
+      "nl_NL": "Inktkwast Nouveau",
+      "ru_RU": "Кисть «НуВо»"
+    },
+    "sub": {
+      "key": "trap",
+      "name": {
+        "ja_JP": "トラップ",
+        "en_US": "Ink Mine",
+        "en_GB": "Ink Mine",
+        "es_ES": "Bomba Trampa",
+        "es_MX": "Bomba Trampa",
+        "fr_FR": "Mine",
+        "fr_CA": "Mine",
+        "de_DE": "Tintenmine",
+        "it_IT": "Mina",
+        "nl_NL": "Inktmijnen",
+        "ru_RU": "Мины"
+      }
+    },
+    "special": {
+      "key": "sphere",
+      "name": {
+        "ja_JP": "イカスフィア",
+        "en_US": "Baller",
+        "en_GB": "Baller",
+        "es_ES": "Baller",
+        "es_MX": "Baller",
+        "fr_FR": "Chromo-sphère",
+        "fr_CA": "Chromo-sphère",
+        "de_DE": "Sepisphäre",
+        "it_IT": "Cromosfera",
+        "nl_NL": "Barstbubbel",
+        "ru_RU": "Шарокат"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "pablo"
+  },
+  {
+    "key": "variableroller_foil",
+    "splatnet": 1031,
+    "type": {
+      "key": "roller",
+      "name": {
+        "ja_JP": "ローラー",
+        "en_US": "Rollers",
+        "en_GB": "Rollers",
+        "es_ES": "Rodillos",
+        "es_MX": "Rodillos",
+        "fr_FR": "Rouleau",
+        "fr_CA": "Rouleau",
+        "de_DE": "Rollers",
+        "it_IT": "Rollers",
+        "nl_NL": "Rollers",
+        "ru_RU": "Rollers"
+      },
+      "category": {
+        "key": "roller",
+        "name": {
+          "ja_JP": "ローラー",
+          "en_US": "Rollers",
+          "en_GB": "Rollers",
+          "es_ES": "Rodillos",
+          "es_MX": "Rodillos",
+          "fr_FR": "Rouleau",
+          "fr_CA": "Rouleau",
+          "de_DE": "Rollers",
+          "it_IT": "Rollers",
+          "nl_NL": "Rollers",
+          "ru_RU": "Rollers"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "ヴァリアブルローラーフォイル",
+      "en_US": "Foil Flingza Roller",
+      "en_GB": "Foil Flingza Roller",
+      "es_ES": "Rodillo versátil B",
+      "es_MX": "Rodillo versátil Foil",
+      "fr_FR": "Flexi-rouleau alu",
+      "fr_CA": "  Flexi-rouleau aluminium",
+      "de_DE": "Flex-Roller Fol",
+      "it_IT": "Flexi-rullo B",
+      "nl_NL": "Foil Flexroller",
+      "ru_RU": "Омнивалик «Блеск»"
+    },
+    "sub": {
+      "key": "kyubanbomb",
+      "name": {
+        "ja_JP": "キューバンボム",
+        "en_US": "Suction Bomb",
+        "en_GB": "Suction Bomb",
+        "es_ES": "Bomba ventosa",
+        "es_MX": "Bomba ventosa",
+        "fr_FR": "Bombe gluante",
+        "fr_CA": "Bombe gluante",
+        "de_DE": "Haftbombe",
+        "it_IT": "Appiccibomba",
+        "nl_NL": "Kleefbom",
+        "ru_RU": "Бомба на присоске"
+      }
+    },
+    "special": {
+      "key": "missile",
+      "name": {
+        "ja_JP": "マルチミサイル",
+        "en_US": "Tenta Missiles",
+        "en_GB": "Tenta Missiles",
+        "es_ES": "Lanzamisiles",
+        "es_MX": "Lanzamisiles",
+        "fr_FR": "Multi-missile",
+        "fr_CA": "Multi-missile",
+        "de_DE": "Schwarmraketen",
+        "it_IT": "Lanciarazzi",
+        "nl_NL": "Spetterraketten",
+        "ru_RU": "Каракатница"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "variableroller"
+  },
+  {
+    "key": "hydra",
+    "splatnet": 4020,
+    "type": {
+      "key": "splatling",
+      "name": {
+        "ja_JP": "スピナー",
+        "en_US": "Splatlings",
+        "en_GB": "Splatlings",
+        "es_ES": "Tintralladoras",
+        "es_MX": "Garabateadors",
+        "fr_FR": "Badigeonneur",
+        "fr_CA": "Badigeonneur",
+        "de_DE": "Splatlings",
+        "it_IT": "Splatlings",
+        "nl_NL": "Splatlings",
+        "ru_RU": "Splatlings"
+      },
+      "category": {
+        "key": "splatling",
+        "name": {
+          "ja_JP": "スピナー",
+          "en_US": "Splatlings",
+          "en_GB": "Splatlings",
+          "es_ES": "Tintralladoras",
+          "es_MX": "Garabateadors",
+          "fr_FR": "Badigeonneur",
+          "fr_CA": "Badigeonneur",
+          "de_DE": "Splatlings",
+          "it_IT": "Splatlings",
+          "nl_NL": "Splatlings",
+          "ru_RU": "Splatlings"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "ハイドラント",
+      "en_US": "Hydra Splatling",
+      "en_GB": "Hydra Splatling",
+      "es_ES": "Extintador",
+      "es_MX": "Garabateador HD",
+      "fr_FR": "Exteinteur",
+      "fr_CA": "Exteinteur",
+      "de_DE": "Hydrant",
+      "it_IT": "Idrante",
+      "nl_NL": "Blusling",
+      "ru_RU": "Брызгомет «Горыныч»"
+    },
+    "sub": {
+      "key": "robotbomb",
+      "name": {
+        "ja_JP": "ロボットボム",
+        "en_US": "Autobomb",
+        "en_GB": "Autobomb",
+        "es_ES": "Autobomb",
+        "es_MX": "Autobomb",
+        "fr_FR": "Bombe robot",
+        "fr_CA": "Bombe robot",
+        "de_DE": "Robo-Bombe",
+        "it_IT": "Robobomba",
+        "nl_NL": "Robobom",
+        "ru_RU": "Робобомб"
+      }
+    },
+    "special": {
+      "key": "chakuchi",
+      "name": {
+        "ja_JP": "スーパーチャクチ",
+        "en_US": "Splashdown",
+        "en_GB": "Splashdown",
+        "es_ES": "Salto explosivo",
+        "es_MX": "Salto explosivo",
+        "fr_FR": "Choc chromatique",
+        "fr_CA": "Choc chromatique",
+        "de_DE": "Tintenschock",
+        "it_IT": "Vernischianto",
+        "nl_NL": "Superlanding",
+        "ru_RU": "Мегаплюх"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "hydra"
+  },
+  {
+    "key": "kelvin525",
+    "splatnet": 5020,
+    "type": {
+      "key": "maneuver",
+      "name": {
+        "ja_JP": "マニューバー",
+        "en_US": "Dualies",
+        "en_GB": "Dualies",
+        "es_ES": "Dualies",
+        "es_MX": "Dualies",
+        "fr_FR": "Dualies",
+        "fr_CA": "Dualies",
+        "de_DE": "Dualies",
+        "it_IT": "Armi \"duplo\"",
+        "nl_NL": "Dualies",
+        "ru_RU": "Dualies"
+      },
+      "category": {
+        "key": "shooter",
+        "name": {
+          "ja_JP": "シューター",
+          "en_US": "Shooters",
+          "en_GB": "Shooters",
+          "es_ES": "Lanzatintas",
+          "es_MX": "Rociadors",
+          "fr_FR": "Lanceur",
+          "fr_CA": "Lanceur",
+          "de_DE": "Shooters",
+          "it_IT": "Shooters",
+          "nl_NL": "Shooters",
+          "ru_RU": "Shooters"
+        }
+      }
+    },
+    "name": {
+      "ja_JP": "ケルビン525",
+      "en_US": "Glooga Dualies",
+      "en_GB": "Glooga Dualies",
+      "es_ES": "Fundidora 525 dual",
+      "es_MX": "Fundidora 525 dual",
+      "fr_FR": "Double Kelvin 525",
+      "fr_CA": "Double Kelvin 525",
+      "de_DE": "Kelvin 525",
+      "it_IT": "Kelvin duplo 525",
+      "nl_NL": "Kelvin 525",
+      "ru_RU": "Термоплюхи 525"
+    },
+    "sub": {
+      "key": "trap",
+      "name": {
+        "ja_JP": "トラップ",
+        "en_US": "Ink Mine",
+        "en_GB": "Ink Mine",
+        "es_ES": "Bomba Trampa",
+        "es_MX": "Bomba Trampa",
+        "fr_FR": "Mine",
+        "fr_CA": "Mine",
+        "de_DE": "Tintenmine",
+        "it_IT": "Mina",
+        "nl_NL": "Inktmijnen",
+        "ru_RU": "Мины"
+      }
+    },
+    "special": {
+      "key": "jetpack",
+      "name": {
+        "ja_JP": "ジェットパック",
+        "en_US": "Inkjet",
+        "en_GB": "Inkjet",
+        "es_ES": "Propulsor",
+        "es_MX": "Propulsor",
+        "fr_FR": "Chromo-jet",
+        "fr_CA": "Chromo-jet",
+        "de_DE": "Tintendüser",
+        "it_IT": "Jet splat",
+        "nl_NL": "Inktjet",
+        "ru_RU": "Красколет"
+      }
+    },
+    "reskin_of": null,
+    "main_ref": "kelvin525"
   }
 ]
