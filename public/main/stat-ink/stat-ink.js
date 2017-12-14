@@ -161,6 +161,7 @@ async function getPlayer(playerResult, team, addBonus) {
     log.error(e);
   }
   player.level = playerResult.player.player_rank;
+  player.star_rank = playerResult.player.star_rank;
   if (playerResult.player.udemae) {
     if (playerResult.player.udemae.name) {
       player.rank = playerResult.player.udemae.name.toLowerCase();
