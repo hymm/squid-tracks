@@ -57,6 +57,30 @@ async function setGameInfo(statInk, result) {
   }
 }
 
+async function setPowerInfo(statInk, result) {
+    if (result.estimate_gachi_power != null) {
+        statInk.estimate_gachi_power = result.estimate_gachi_power;
+    }
+    if (result.league_point != null) {
+        statInk.league_point = result.league_point;
+    }
+    if (result.my_estimate_league_point != null) {
+        statInk.my_team_estimate_league_point = result.my_estimate_league_point;
+    }
+    if (result.other_estimate_league_point != null) {
+        statInk.his_team_estimate_league_point = result.other_estimate_league_point;
+    }
+    if (result.fes_power != null) {
+        statInk.fest_power = result.fes_power;
+    }
+    if (result.my_estimate_fes_power != null) {
+        statInk.my_team_estimate_fes_power = result.my_estimate_fes_power;
+    }
+    if (result.other_estimate_fes_power != null) {
+        statInk.other_team_estimate_fes_power = result.other_estimate_fes_power;
+    }
+}
+
 function setGameResults(statInk, result) {
   statInk.result = result.my_team_result.key === 'victory' ? 'win' : 'lose';
   statInk.knock_out =
@@ -64,10 +88,10 @@ function setGameResults(statInk, result) {
       ? 'yes'
       : 'no';
   // these next parameters depend on turf war vs gachi
-  if (result.my_team_percentage) {
+  if (result.my_team_percentage != null) {
     statInk.my_team_percent = result.my_team_percentage;
   }
-  if (result.other_team_percentage) {
+  if (result.other_team_percentage != null) {
     statInk.his_team_percent = result.other_team_percentage;
   }
   if (result.my_team_count != null) {
@@ -94,6 +118,9 @@ async function setPlayerResults(statInk, result) {
   statInk.special = result.player_result.special_count;
   statInk.level = result.player_result.player.player_rank;
   statInk.level_after = result.player_rank;
+  if (result.star_rank != null) {
+      statInk.star_rank = rsult.star_rank;
+  }
 
   if (result.player_result.player.udemae) {
     if (result.player_result.player.udemae.name) {
