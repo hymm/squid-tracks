@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Version 0.3.6
+* added support for clam blitz
+* added support for newer stat.ink fields (power, star rank)
+
 ## Version 0.3.5
 * French Language Support (Thanks DanSyor)
 * updated default maps

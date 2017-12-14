@@ -34,16 +34,20 @@ class StageCard extends React.Component {
       tc_win = 0,
       tc_lose = 0,
       sz_win = 0,
-      sz_lose = 0;
+      sz_lose = 0,
+      cb_win = 0,
+      cb_lose = 0;
     Object.keys(stage_stats).forEach(weapon => {
       stage_stats[weapon].total_win =
         stage_stats[weapon].hoko_win +
         stage_stats[weapon].area_win +
-        stage_stats[weapon].yagura_win;
+        stage_stats[weapon].yagura_win +
+        stage_stats[weapon].asari_win;
       stage_stats[weapon].total_lose =
         stage_stats[weapon].hoko_lose +
         stage_stats[weapon].area_lose +
-        stage_stats[weapon].yagura_lose;
+        stage_stats[weapon].yagura_lose +
+        stage_stats[weapon].asari_lose;
       stage_stats[weapon].total_percent =
         stage_stats[weapon].total_win /
         (stage_stats[weapon].total_win + stage_stats[weapon].total_lose);
@@ -56,18 +60,24 @@ class StageCard extends React.Component {
       stage_stats[weapon].area_percent =
         stage_stats[weapon].area_win /
         (stage_stats[weapon].area_win + stage_stats[weapon].area_lose);
+      stage_stats[weapon].asari_percent =
+        stage_stats[weapon].asari_win /
+        (stage_stats[weapon].asari_win + stage_stats[weapon].asari_lose);
       rm_win += stage_stats[weapon].hoko_win;
       rm_lose += stage_stats[weapon].hoko_lose;
       tc_win += stage_stats[weapon].yagura_win;
       tc_lose += stage_stats[weapon].yagura_lose;
       sz_win += stage_stats[weapon].area_win;
       sz_lose += stage_stats[weapon].area_lose;
+      cb_win += stage_stats[weapon].asari_win;
+      cb_lose += stage_stats[weapon].asari_lose;
     });
     const rm_percent = rm_win / (rm_win + rm_lose);
     const tc_percent = tc_win / (tc_win + tc_lose);
     const sz_percent = sz_win / (sz_win + sz_lose);
-    const total_win = rm_win + tc_win + sz_win;
-    const total_lose = rm_lose + tc_lose + sz_lose;
+    const cb_percent = cb_win / (cb_win + cb_lose);
+    const total_win = rm_win + tc_win + sz_win + cb_win;
+    const total_lose = rm_lose + tc_lose + sz_lose + cb_lose;
     const total_percent = total_win / (total_win + total_lose);
 
     return {
@@ -77,9 +87,12 @@ class StageCard extends React.Component {
       tc_lose,
       sz_win,
       sz_lose,
+      cb_win,
+      cb_lose,
       rm_percent,
       tc_percent,
       sz_percent,
+      cb_percent,
       total_win,
       total_lose,
       total_percent
@@ -98,6 +111,10 @@ class StageCard extends React.Component {
     rm: {
       id: 'stageCard.header.rainmaker',
       defaultMessage: 'RM'
+    },
+    cb: {
+      id: 'stageCard.header.clamblitz',
+      defaultMessage: 'CB'
     },
     total: {
       id: 'stageCard.header.total',
@@ -119,6 +136,11 @@ class StageCard extends React.Component {
     {
       text: this.props.intl.formatMessage(this.messages.rm),
       sortColumn: 'hoko_percent',
+      sortDirection: 'up'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.cb),
+      sortColumn: 'asari_percent',
       sortDirection: 'up'
     },
     {
@@ -223,6 +245,11 @@ class StageCard extends React.Component {
                       </td>
                       <td>
                         {this.state.percent
+                          ? `${stage.asari_percent.toFixed(2)}`
+                          : `${stage.asari_win} - ${stage.asari_lose}`}
+                      </td>
+                      <td>
+                        {this.state.percent
                           ? `${stage.total_percent.toFixed(2)}`
                           : `${stage.total_win} - ${stage.total_lose}`}
                       </td>
@@ -251,6 +278,11 @@ class StageCard extends React.Component {
                       {this.state.percent
                         ? `${calcStats.rm_percent.toFixed(2)}`
                         : `${calcStats.rm_win} - ${calcStats.rm_lose}`}
+                    </td>
+                    <td>
+                      {this.state.percent
+                        ? `${calcStats.cb_percent.toFixed(2)}`
+                        : `${calcStats.cb_win} - ${calcStats.cb_lose}`}
                     </td>
                     <td>
                       {this.state.percent
