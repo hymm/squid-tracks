@@ -3,9 +3,12 @@ const crypto = require('crypto');
 const base64url = require('base64url');
 const cheerio = require('cheerio');
 const log = require('electron-log');
+const { app } = require('electron');
 
-const userAgentVersion = `1.1.0`;
+const userAgentVersion = `1.1.2`;
 const userAgentString = `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`;
+const appVersion = app.getVersion();
+const squidTracksUserAgentString = `SquidTracks/${appVersion}`;
 const splatnetUrl = `https://app.splatoon2.nintendo.net`;
 
 const jar = request2.jar();
@@ -94,6 +97,20 @@ async function getApiToken(session_token) {
   };
 }
 
+async function getFFromEli(idToken) {
+  const response = await request({
+    method: 'POST',
+    uri: 'https://elifessler.com/s2s/api/gen',
+    header: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'User-Agent': squidTracksUserAgentString
+    },
+    json: true
+  });
+
+  return response.f;
+}
+
 async function getUserInfo(token) {
   const response = await request({
     method: 'GET',
@@ -116,7 +133,7 @@ async function getUserInfo(token) {
   };
 }
 
-async function getApiLogin(id_token, userinfo) {
+async function getApiLogin(id_token, userinfo, f) {
   const resp = await request({
     method: 'POST',
     uri: 'https://api-lp1.znc.srv.nintendo.net/v1/Account/Login',
@@ -132,7 +149,8 @@ async function getApiLogin(id_token, userinfo) {
         language: userinfo.language,
         naCountry: userinfo.country,
         naBirthday: userinfo.birthday,
-        naIdToken: id_token
+        naIdToken: id_token,
+        f: f
       }
     },
     json: true,
@@ -242,7 +260,8 @@ async function getSessionWithSessionToken(sessionToken) {
   const apiTokens = await getApiToken(sessionToken);
   const userInfo = await getUserInfo(apiTokens.access);
   userLanguage = userInfo.language;
-  const apiAccessToken = await getApiLogin(apiTokens.id, userInfo);
+  const f = await getFFromEli(apiTokens.id);
+  const apiAccessToken = await getApiLogin(apiTokens.id, userInfo, f);
   const splatnetToken = await getWebServiceToken(apiAccessToken);
   uniqueId = await getSessionCookie(splatnetToken.accessToken);
   return splatnetToken;
