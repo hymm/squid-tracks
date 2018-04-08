@@ -18,6 +18,9 @@ import { ipcRenderer, remote } from 'electron';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import LanguageSelect from './components/language-select';
 const { openExternal } = remote.shell;
+const { app } = remote;
+
+const appVersion = app.getVersion();
 
 class ProxyButton extends React.Component {
   state = {
@@ -155,10 +158,9 @@ class LoginCookie extends React.Component {
                 <br />
                 <FormattedMessage
                   id="login.cookie.warning"
-                  defaultMessage={`WARNING: This process is less secure than the previous log in method.
-                        If you don't understand the risks, please wait until the
-                        previous login system is reimplemented. This login system is for those desperate to
-                        use SquidTracks.`}
+                  defaultMessage={`WARNING: This process is less secure than the normal log in method.
+                    Please follow the linked instructions carefully and delete the installed certificate
+                    after logging in.`}
                 />
                 <h3>
                   <a
@@ -170,7 +172,7 @@ class LoginCookie extends React.Component {
                   >
                     <FormattedMessage
                       id="login.cookie.instructions"
-                      defaultMessage="View Instructions"
+                      defaultMessage="Click here to view instructions"
                     />
                   </a>
                 </h3>
@@ -213,21 +215,47 @@ const LoginSplash = ({ setLocale, locale }) => {
   return (
     <Grid fluid>
       <Row>
-        <Col md={12} style={{ textAlign: 'center' }}>
-          <Jumbotron style={{ background: 'pink' }}>
-            <h1>SquidTracks</h1>
-            <h2>
+        <Col md={12}>
+          <Jumbotron /* style={{ background: 'pink' }} */>
+            <h1 style={{ textAlign: 'center', width: '100%' }}>SquidTracks</h1>
+            <h5 style={{ textAlign: 'center', width: '100%' }}>
+              {`Beta Version ${appVersion} `}
+              <a
+                onClick={() =>
+                  openExternal(
+                    'https://github.com/hymm/squid-tracks/blob/master/CHANGELOG.md'
+                  )}
+                style={{ cursor: 'pointer' }}
+              >
+                Change Log
+              </a>
+            </h5>
+            <h2 style={{ textAlign: 'center', width: '100%' }}>
               <FormattedMessage
                 id="login.tagLine"
                 defaultMessage="An Unofficial Splatnet Client for your Desktop"
               />
             </h2>
-            <h3>
+            <h4 style={{ textAlign: 'left' }}>
               <FormattedMessage
                 id="login.loginInformation"
-                defaultMessage={`Normal login is currently broken. You can try to login with a
-                    cookie if you know how to get it. Follow progress on Twitter {twitterLink}`}
+                defaultMessage={`Normal login is working again! Login now requires sending
+                  information to a third party api created by @frozenpandaman.  No identifing information is sent.
+                  {apiLink} If you'd still like to login with
+                  the cookie value click "Login with Session Cookie." Otherwise just click "Login." Follow {twitterLink} for
+                  information about updates.`}
                 values={{
+                  apiLink: (
+                    <a
+                      onClick={() =>
+                        openExternal(
+                          'https://github.com/frozenpandaman/splatnet2statink/wiki/api-docs'
+                        )}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      Click here for more information.
+                    </a>
+                  ),
                   twitterLink: (
                     <a
                       onClick={() =>
@@ -239,17 +267,17 @@ const LoginSplash = ({ setLocale, locale }) => {
                   )
                 }}
               />
-            </h3>
+            </h4>
             <ControlLabel>Language</ControlLabel>
             <LanguageSelect setLocale={setLocale} locale={locale} />
             <br />
             <a href={ipcRenderer.sendSync('getLoginUrl')}>
-              <Button block disabled style={{ display: 'none' }}>
+              <Button block bsStyle="primary" style={{ marginBottom: 10 }}>
                 <FormattedMessage id="login.login" defaultMessage="Login" />
               </Button>
             </a>
             <LinkContainer to="/login/cookie">
-              <Button block bsStyle="primary">
+              <Button block>
                 <FormattedMessage
                   id="login.loginWithCookie"
                   defaultMessage="Login with Session Cookie"
