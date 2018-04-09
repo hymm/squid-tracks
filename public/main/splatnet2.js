@@ -101,14 +101,17 @@ async function getFFromEli(idToken) {
   const response = await request({
     method: 'POST',
     uri: 'https://elifessler.com/s2s/api/gen',
-    header: {
-      'Content-Type': 'application/json; charset=utf-8',
+    headers: {
       'User-Agent': squidTracksUserAgentString
     },
-    json: true
+    form: {
+      naIdToken: idToken
+    }
   });
 
-  return response.f;
+  const j = JSON.parse(response);
+
+  return j.f;
 }
 
 async function getUserInfo(token) {
@@ -252,8 +255,6 @@ async function getSessionCookie(token) {
   });
 
   await getUniqueId();
-
-  return id;
 }
 
 async function getSessionWithSessionToken(sessionToken) {
@@ -263,7 +264,7 @@ async function getSessionWithSessionToken(sessionToken) {
   const f = await getFFromEli(apiTokens.id);
   const apiAccessToken = await getApiLogin(apiTokens.id, userInfo, f);
   const splatnetToken = await getWebServiceToken(apiAccessToken);
-  uniqueId = await getSessionCookie(splatnetToken.accessToken);
+  await getSessionCookie(splatnetToken.accessToken);
   return splatnetToken;
 }
 

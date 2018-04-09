@@ -157,7 +157,7 @@ class LoginCookie extends React.Component {
               <Col md={12}>
                 <br />
                 <FormattedMessage
-                  id="login.cookie.warning"
+                  id="login.cookie.warning.v1"
                   defaultMessage={`WARNING: This process is less secure than the normal log in method.
                     Please follow the linked instructions carefully and delete the installed certificate
                     after logging in.`}
@@ -167,7 +167,8 @@ class LoginCookie extends React.Component {
                     onClick={() =>
                       openExternal(
                         intl.formatMessage(this.messages.instructionsUrl)
-                      )}
+                      )
+                    }
                     style={{ cursor: 'pointer' }}
                   >
                     <FormattedMessage
@@ -219,12 +220,13 @@ const LoginSplash = ({ setLocale, locale }) => {
           <Jumbotron /* style={{ background: 'pink' }} */>
             <h1 style={{ textAlign: 'center', width: '100%' }}>SquidTracks</h1>
             <h5 style={{ textAlign: 'center', width: '100%' }}>
-              {`Beta Version ${appVersion} `}
+              {`${appVersion} `}
               <a
                 onClick={() =>
                   openExternal(
                     'https://github.com/hymm/squid-tracks/blob/master/CHANGELOG.md'
-                  )}
+                  )
+                }
                 style={{ cursor: 'pointer' }}
               >
                 Change Log
@@ -238,19 +240,30 @@ const LoginSplash = ({ setLocale, locale }) => {
             </h2>
             <h4 style={{ textAlign: 'left' }}>
               <FormattedMessage
-                id="login.loginInformation"
+                id="login.loginInformation.v1"
                 defaultMessage={`Normal login is working again! Login now requires sending
-                  information to a third party api created by @frozenpandaman.  No identifing information is sent.
+                  information to a third party api created by {pandamanLink}.  No identifing information is sent.
                   {apiLink} If you'd still like to login with
                   the cookie value click "Login with Session Cookie." Otherwise just click "Login." Follow {twitterLink} for
                   information about updates.`}
                 values={{
+                  pandamanLink: (
+                    <a
+                      onClick={() =>
+                        openExternal('https://twitter.com/frozenpandaman')
+                      }
+                      style={{ cursor: 'pointer' }}
+                    >
+                      @frozenpandaman
+                    </a>
+                  ),
                   apiLink: (
                     <a
                       onClick={() =>
                         openExternal(
                           'https://github.com/frozenpandaman/splatnet2statink/wiki/api-docs'
-                        )}
+                        )
+                      }
                       style={{ cursor: 'pointer' }}
                     >
                       Click here for more information.
@@ -259,7 +272,8 @@ const LoginSplash = ({ setLocale, locale }) => {
                   twitterLink: (
                     <a
                       onClick={() =>
-                        openExternal('https://twitter.com/SquidTracks')}
+                        openExternal('https://twitter.com/SquidTracks')
+                      }
                       style={{ cursor: 'pointer' }}
                     >
                       @SquidTracks
