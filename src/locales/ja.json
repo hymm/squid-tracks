@@ -41,8 +41,8 @@
   "login.cookie.warning.v1":
     "警告：この方法は前のログイン方法よりリスクが高いです。リンクの手順に慎重に従ってください。ログインしたら、必ずインストールされた証明書を削除してください。",
   "login.login": "ログイン",
-  "login.loginInformation.v2":
-    "通常ログインがまた可能になりました！　{pandamanLink}により作られたサードパーティーAPIを使う必要があります。個人が特定される情報は一切送信されません。{apilink}それでもクッキーでログインしたい場合は\"Login with Session Cookie\"をクリックしてください。通常ログインは\"Login\"で進みます。最新情報は{twitterLink}で載せます。",
+  "login.loginInformation.v1":
+    "通常ログインがまた可能になりました！　{pandamanLink}により作られたサードパーティーAPIを使う必要があります。個人が特定される情報は一切送信されません。{apiLink}それでもクッキーでログインしたい場合は「セッションクッキーでログイン」をクリックしてください。通常ログインは「ログイン」で進みます。最新情報は{twitterLink}で載せます。",
   "login.loginWithCookie": "セッションクッキーでログイン",
   "login.tagLine": "イカリング２の非公式デスクトップクライアント",
   "nav.league": "リーグ統計",
