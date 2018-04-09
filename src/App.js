@@ -37,14 +37,29 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.getSessionToken(true);
+    // this.getSessionToken(true);
+    this.checkLoginStatus();
     screenview('Start');
     this.setLocale(ipcRenderer.sendSync('getFromStore', 'locale'));
   }
 
+  checkLoginStatus() {
+    const cookie = ipcRenderer.sendSync('getFromStore', 'iksmCookie');
+    ipcRenderer.sendSync('setIksmToken', cookie);
+    if (ipcRenderer.sendSync('checkIksmValid')) {
+      this.setState({ loggedIn: true });
+      history.push('/');
+      return;
+    }
+
+    // getSessionToken();
+    // TryToLoginWithSessionToken();
+  }
+
   getSessionToken = logout => {
+    const token = ipcRenderer.sendSync('getFromStore', 'sessionToken');
     this.setState({
-      sessionToken: ipcRenderer.sendSync('getSessionToken'),
+      sessionToken: token,
       loggedIn: false
     });
     if (!logout) {

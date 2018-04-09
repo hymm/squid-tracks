@@ -317,10 +317,13 @@ function getIksmToken() {
 }
 
 async function checkIksmValid() {
+  console.log('checking iksm');
   try {
     await getSplatnetApi('records');
+    console.log('good iksm');
     return true;
   } catch (e) {
+    console.log('bad iksm');
     return false;
   }
 }
@@ -341,3 +344,4 @@ exports.getSplatnetImageURL = getSplatnetImageURL;
 exports.getIksmToken = getIksmToken;
 exports.setUserLanguage = setUserLanguage;
 exports.setIksmToken = setIksmToken;
+exports.checkIksmValid = checkIksmValid;

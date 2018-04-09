@@ -47,6 +47,11 @@ const statInkStore = new Store({
   }
 });
 
+ipcMain.on('checkIksmValid', async event => {
+  log.info('called checkIksmValid');
+  event.returnValue = await splatnet.checkIksmValid();
+});
+
 ipcMain.on('setUserLangauge', (event, value) => {
   userDataStore.set('locale', value);
   splatnet.setUserLanguage(value);
@@ -72,10 +77,6 @@ ipcMain.on('setToStatInkStore', (event, settingName, value) => {
   event.returnValue = true;
 });
 
-ipcMain.on('getSessionToken', event => {
-  event.returnValue = userDataStore.get('sessionToken');
-});
-
 ipcMain.on('writeToStatInk', async (event, result, type) => {
   try {
     const info = await writeToStatInk(
@@ -94,7 +95,9 @@ ipcMain.on('writeToStatInk', async (event, result, type) => {
         break;
     }
   } catch (e) {
-    const message = `Failed to write #${result.battle_number} to stat.ink: ${e}`;
+    const message = `Failed to write #${
+      result.battle_number
+    } to stat.ink: ${e}`;
     uaException(message);
     log.error(message);
     switch (type) {
@@ -236,7 +239,7 @@ function createMenusMacOS() {
 
 function createWindow() {
   eSplatnet.registerSplatnetHandler();
-  getStoredSessionToken();
+  // getStoredSessionToken();
   // Check if we are on OSX
   if (process.platform === 'darwin') {
     // If so, create the top bar menus which enable copy & paste
