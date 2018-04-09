@@ -11,19 +11,20 @@ const AboutPage = () => (
       <Col md={12}>
         <Jumbotron style={{ textAlign: 'center' }}>
           <h1>SquidTracks</h1>
-          <h2>An Unofficial Splatnet 2 Client for your Desktop</h2>
           <h5>
-            {`Beta Version ${appVersion} `}
+            {`${appVersion} `}
             <a
               onClick={() =>
                 openExternal(
                   'https://github.com/hymm/squid-tracks/blob/master/CHANGELOG.md'
-                )}
+                )
+              }
               style={{ cursor: 'pointer' }}
             >
               Change Log
             </a>
           </h5>
+          <h2>An Unofficial Splatnet 2 Client for your Desktop</h2>
         </Jumbotron>
         <h2>Introduction</h2>
         <p>
@@ -58,7 +59,7 @@ const AboutPage = () => (
         <h4>Setup</h4>
         <ol>
           <li>
-            Go to {' '}
+            Go to{' '}
             <Link to="/settings">
               <strong>Settings</strong>
             </Link>{' '}
@@ -137,7 +138,8 @@ const AboutPage = () => (
         <p>
           <a
             onClick={() =>
-              openExternal('https://github.com/hymm/squid-tracks/issues')}
+              openExternal('https://github.com/hymm/squid-tracks/issues')
+            }
             style={{ cursor: 'pointer' }}
           >
             Github Issues
@@ -161,7 +163,8 @@ const AboutPage = () => (
           If there are problems with that, you can find releases at{' '}
           <a
             onClick={() =>
-              openExternal('https://github.com/hymm/squid-tracks/releases')}
+              openExternal('https://github.com/hymm/squid-tracks/releases')
+            }
             style={{ cursor: 'pointer' }}
           >
             Github Releases
@@ -172,7 +175,8 @@ const AboutPage = () => (
             onClick={() =>
               openExternal(
                 'https://github.com/hymm/squid-tracks/blob/master/README.md'
-              )}
+              )
+            }
             style={{ cursor: 'pointer' }}
           >
             Click Here for More information

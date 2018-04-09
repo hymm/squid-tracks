@@ -1,7 +1,7 @@
 const request2 = require('request-promise-native');
 const crypto = require('crypto');
 const base64url = require('base64url');
-const cheerio = require('cheerio');
+// const cheerio = require('cheerio');
 const log = require('electron-log');
 const { app } = require('electron');
 
@@ -306,24 +306,25 @@ function setIksmToken(cookieValue) {
 
 function getIksmToken() {
   const cookies = jar.getCookies(splatnetUrl);
-  const iksmSessionCookie = cookies.find(
-    cookie => cookie.key === 'iksm_session'
-  );
-  if (iksmSessionCookie == null) {
+  let value;
+  cookies.find(cookie => {
+    if (cookie.key === 'iksm_session') {
+      value = cookie.value;
+    }
+    return cookie.key === 'iksm_session';
+  });
+  if (value == null) {
     throw new Error('Could not get iksm_session cookie');
   }
 
-  return iksmSessionCookie;
+  return value;
 }
 
 async function checkIksmValid() {
-  console.log('checking iksm');
   try {
     await getSplatnetApi('records');
-    console.log('good iksm');
     return true;
   } catch (e) {
-    console.log('bad iksm');
     return false;
   }
 }

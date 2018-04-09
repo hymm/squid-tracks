@@ -52,8 +52,16 @@ class App extends Component {
       return;
     }
 
-    // getSessionToken();
-    // TryToLoginWithSessionToken();
+    const good = ipcRenderer.sendSync('checkStoredSessionToken');
+    if (!good) {
+      return;
+    }
+
+    if (ipcRenderer.sendSync('checkIksmValid')) {
+      this.setState({ loggedIn: true });
+      history.push('/');
+      return;
+    }
   }
 
   getSessionToken = logout => {

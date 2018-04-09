@@ -73,6 +73,8 @@ function registerSplatnetHandler() {
           sessionToken = tokens.sessionToken;
           userDataStore.set('sessionToken', sessionToken);
           await splatnet.getSessionCookie(tokens.accessToken);
+          const iksm = splatnet.getIksmToken();
+          userDataStore.set('iksmCookie', iksm);
           mainWindow.loadURL(startUrl);
         });
     },

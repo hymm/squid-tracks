@@ -17,12 +17,14 @@ const mitm = require('./mitm-read-cookie');
 process.on('uncaughtException', err => {
   const message = `Unhandled Error in Main: ${err}`;
   log.error(message);
+  log.error(err.stack);
   uaException(message);
 });
 
 process.on('unhandledRejection', err => {
   const message = `Unhandled Promise Rejection in Main: ${err}`;
   log.error(message);
+  log.error(err.stack);
   uaException(message);
 });
 
@@ -48,7 +50,6 @@ const statInkStore = new Store({
 });
 
 ipcMain.on('checkIksmValid', async event => {
-  log.info('called checkIksmValid');
   event.returnValue = await splatnet.checkIksmValid();
 });
 
@@ -148,25 +149,31 @@ ipcMain.on('getSplatnetImage', async (event, result) => {
   }
 });
 
+ipcMain.on('checkStoredSessionToken', async event => {
+  event.returnValue = await checkStoredSessionToken();
+});
+
 function isTokenGood(token) {
   return !!token;
 }
 
-async function getStoredSessionToken() {
+async function checkStoredSessionToken() {
   let sessionToken = userDataStore.get('sessionToken');
 
-  if (isTokenGood(sessionToken)) {
-    try {
-      await splatnet.getSessionWithSessionToken(sessionToken);
-      const language = userDataStore.get('locale');
-      if (language.length > 0) {
-        splatnet.setUserLanguage(language);
-      }
-    } catch (e) {
-      log.info(e);
-      log.info('SessionToken has probably expired, please login again');
-      // userDataStore.set('sessionToken', '');
-    }
+  if (!isTokenGood(sessionToken)) {
+    return false;
+  }
+
+  try {
+    await splatnet.getSessionWithSessionToken(sessionToken);
+    const iksm = splatnet.getIksmToken();
+    userDataStore.set('iksmCookie', iksm);
+    return true;
+  } catch (e) {
+    log.info('SessionToken has probably expired, please login again');
+    log.info(e);
+  } finally {
+    return false;
   }
 }
 
