@@ -1,4 +1,5 @@
 {
+  "PlayerCard.clamBlitzShortname": "CB: {name}{number}",
   "PlayerCard.loseCount": "Défaites : {count}",
   "PlayerCard.nickname": "Pseudo : {nickname}",
   "PlayerCard.rainmakerShortname": "MB : {name}{number}",
@@ -38,11 +39,11 @@
     "https://github.com/hymm/squid-tracks/wiki/en_getCookie",
   "login.cookie.proxyRunning": "Proxy en cours sur l'adresse {ip}, port {port}",
   "login.cookie.proxyStart": "Démarrer le proxy",
-  "login.cookie.warning":
-    "AVERTISSEMENT : Ce procédé est moins sécurisé que la méthode de connexion précédente.\n        Si vous ne comprenez pas les risques, veuillez patienter jusqu'à la réimplémentation\n        du système de connexion précédent. Ce système de connexion est pour ceux qui veulent\n        à tout prix utiliser SquidTracks.",
+  "login.cookie.warning.v1":
+    "WARNING: This process is less secure than the normal log in method.\n                    Please follow the linked instructions carefully and delete the installed certificate\n                    after logging in.",
   "login.login": "Se conneter",
-  "login.loginInformation":
-    "La connexion simple n'est pour le moment pas fonctionnelle.\n Vous pouvez essayer la connexion avec cookie si vous savez comment l'obtenir.\n Suivez la progression du développement sur Twitter {twitterLink}.",
+  "login.loginInformation.v2":
+    "Normal login is working again! Login now requires sending\n                  information to a third party api created by {pandamanLink}.  No identifing information is sent.\n                  {apiLink} If you'd still like to login with\n                  the cookie value click \"Login with Session Cookie.\" Otherwise just click \"Login.\" Follow {twitterLink} for\n                  information about updates.",
   "login.loginWithCookie": "Se connecter avec un cookie de session",
   "login.tagLine": "Un client SplatNet non officiel pour PC",
   "nav.league": "Stats de ligue",
@@ -134,6 +135,7 @@
   "schedule.gachi": "Match pro",
   "schedule.league": "Match de ligue",
   "schedule.regular": "Match classique",
+  "stageCard.header.clamblitz": "CB",
   "stageCard.header.rainmaker": "Mission Bazookarpe",
   "stageCard.header.splatzones": "Défense de zone",
   "stageCard.header.total": "Total",
