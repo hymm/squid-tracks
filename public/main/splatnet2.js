@@ -1,7 +1,6 @@
 const request2 = require('request-promise-native');
 const crypto = require('crypto');
 const base64url = require('base64url');
-// const cheerio = require('cheerio');
 const log = require('electron-log');
 const { app } = require('electron');
 
