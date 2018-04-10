@@ -44,6 +44,9 @@
   "login.loginInformation.v1":
     "通常ログインがまた可能になりました！　{pandamanLink}により作られたサードパーティーAPIを使う必要があります。個人が特定される情報は一切送信されません。{apiLink}それでもクッキーでログインしたい場合は「セッションクッキーでログイン」をクリックしてください。通常ログインは「ログイン」で進みます。最新情報は{twitterLink}で載せます。",
   "login.loginWithCookie": "セッションクッキーでログイン",
+  "login.splash.fApiInfo.url":
+    "https://github.com/frozenpandaman/splatnet2statink/wiki/api-docs",
+  "login.splash.fApiInfoLinkText": "Click here for more information.",
   "login.tagLine": "イカリング２の非公式デスクトップクライアント",
   "nav.league": "リーグ統計",
   "nav.records": "武器・ステージ記録",

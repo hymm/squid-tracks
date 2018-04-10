@@ -45,6 +45,10 @@
   "login.loginInformation.v1":
     "La connexion normale fonctionne à nouveau ! Se connecter nécessite maintenant d'envoyer\n                  des informations à une API tiers créée par {pandamanLink}.  Aucune information d'identification n'est envoyée.\n                  {apiLink} Si vous souhaitez encore vous connecter avec\n                  la valeur du cookie, cliquez sur \"Se connecter avec un cookie de session\". Sinon cliquez simplement sur \"Se connecter.\" Suivez {twitterLink} pour\n                  vous tenir au courant des mises à jour.",
   "login.loginWithCookie": "Se connecter avec un cookie de session",
+  "login.splash.fApiInfo.url":
+    "https://github.com/frozenpandaman/splatnet2statink/wiki/api-docs",
+  "login.splash.fApiInfoLinkText":
+    "Cliquez ici pour plus d'information (en anglais).",
   "login.tagLine": "Un client SplatNet non officiel pour PC",
   "nav.league": "Stats de ligue",
   "nav.records": "Stats persos",
