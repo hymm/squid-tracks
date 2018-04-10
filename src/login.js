@@ -217,7 +217,7 @@ const LoginSplash = ({ setLocale, locale }) => {
     <Grid fluid>
       <Row>
         <Col md={12}>
-          <Jumbotron /* style={{ background: 'pink' }} */>
+          <Jumbotron style={{ marginTop: 20 }}>
             <h1 style={{ textAlign: 'center', width: '100%' }}>SquidTracks</h1>
             <h5 style={{ textAlign: 'center', width: '100%' }}>
               {`${appVersion} `}
