@@ -212,7 +212,15 @@ class LoginCookie extends React.Component {
 
 const LoginCookieWithIntl = injectIntl(withRouter(LoginCookie));
 
-const LoginSplash = ({ setLocale, locale }) => {
+const messagesSplash = defineMessages({
+  fApiInfoUrl: {
+    id: 'login.splash.fApiInfo.url',
+    defaultMessage:
+      'https://github.com/frozenpandaman/splatnet2statink/wiki/api-docs'
+  }
+});
+
+const LoginSplash = ({ setLocale, locale, intl }) => {
   return (
     <Grid fluid>
       <Row>
@@ -261,12 +269,15 @@ const LoginSplash = ({ setLocale, locale }) => {
                     <a
                       onClick={() =>
                         openExternal(
-                          'https://github.com/frozenpandaman/splatnet2statink/wiki/api-docs'
+                          intl.formatMessage(messagesSplash.fApiInfoUrl)
                         )
                       }
                       style={{ cursor: 'pointer' }}
                     >
-                      Click here for more information.
+                      <FormattedMessage
+                        id="login.splash.fApiInfoLinkText"
+                        defaultMessage="Click here for more information."
+                      />
                     </a>
                   ),
                   twitterLink: (
@@ -304,11 +315,16 @@ const LoginSplash = ({ setLocale, locale }) => {
     </Grid>
   );
 };
+const LoginSplashWithIntl = injectIntl(LoginSplash);
 
 const LoginRoutes = props => {
   return (
     <Switch>
-      <Route path="/login" exact component={() => <LoginSplash {...props} />} />
+      <Route
+        path="/login"
+        exact
+        component={() => <LoginSplashWithIntl {...props} />}
+      />
       <Route
         path="/login/cookie"
         component={() => <LoginCookieWithIntl {...props} />}
