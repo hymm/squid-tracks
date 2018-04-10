@@ -18,7 +18,7 @@ You will get a warning when running the installer.  Bypass the warning by clicki
 
 ## Contributing
 
-If you're interested in contributing feel free to contact me or create a pull request. Help with translations is especially welcome. See [here](./docs/development.md) for more info.
+If you're interested in contributing feel free to contact me or create a pull request. Help with translations is especially welcome. See [here](./docs/en/development.md) for more info.
 
 ## Built With
 * Electron
