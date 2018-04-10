@@ -1,9 +1,9 @@
 {
-  "PlayerCard.clamBlitzShortname": "CB: {name}{number}",
+  "PlayerCard.clamBlitzShortname": "PdP : {name}{number}",
   "PlayerCard.loseCount": "Défaites : {count}",
   "PlayerCard.nickname": "Pseudo : {nickname}",
   "PlayerCard.rainmakerShortname": "MB : {name}{number}",
-  "PlayerCard.splatzonesShortname": "DDZ : {name}{number}",
+  "PlayerCard.splatzonesShortname": "DdZ : {name}{number}",
   "PlayerCard.towercontrolShortname": "ER : {name}{number}",
   "PlayerCard.winCount": "Victoires : {count}",
   "Results.exportBattlesToCsv": "Exporter au format CSV",
@@ -40,11 +40,15 @@
   "login.cookie.proxyRunning": "Proxy en cours sur l'adresse {ip}, port {port}",
   "login.cookie.proxyStart": "Démarrer le proxy",
   "login.cookie.warning.v1":
-    "WARNING: This process is less secure than the normal log in method.\n                    Please follow the linked instructions carefully and delete the installed certificate\n                    after logging in.",
-  "login.login": "Se conneter",
-  "login.loginInformation.v2":
-    "Normal login is working again! Login now requires sending\n                  information to a third party api created by {pandamanLink}.  No identifing information is sent.\n                  {apiLink} If you'd still like to login with\n                  the cookie value click \"Login with Session Cookie.\" Otherwise just click \"Login.\" Follow {twitterLink} for\n                  information about updates.",
+    "ATTENTION : Ce procédé est moins sécurisé que la méthode de connexion normale.\n                    Veuillez suivre les instructions dans le lien avec soin et supprimer le certificat installé\n                    après vous être connecté.",
+  "login.login": "Se connecter",
+  "login.loginInformation.v1":
+    "La connexion normale fonctionne à nouveau ! Se connecter nécessite maintenant d'envoyer\n                  des informations à une API tiers créée par {pandamanLink}.  Aucune information d'identification n'est envoyée.\n                  {apiLink} Si vous souhaitez encore vous connecter avec\n                  la valeur du cookie, cliquez sur \"Se connecter avec un cookie de session\". Sinon cliquez simplement sur \"Se connecter.\" Suivez {twitterLink} pour\n                  vous tenir au courant des mises à jour.",
   "login.loginWithCookie": "Se connecter avec un cookie de session",
+  "login.splash.fApiInfo.url":
+    "https://github.com/frozenpandaman/splatnet2statink/wiki/api-docs",
+  "login.splash.fApiInfoLinkText":
+    "Cliquez ici pour plus d'information (en anglais).",
   "login.tagLine": "Un client SplatNet non officiel pour PC",
   "nav.league": "Stats de ligue",
   "nav.records": "Stats persos",
@@ -75,7 +79,7 @@
   "resultDetails.teamInfo.header.player": "Joueur",
   "resultDetails.teamInfo.header.playerId": "ID joueur",
   "resultDetails.teamInfo.header.sort": "Tri",
-  "resultDetails.teamInfo.header.star": "Star",
+  "resultDetails.teamInfo.header.star": "★",
   "resultDetails.teamInfo.header.weaponId": "ID arme",
   "resultDetails.teamStats.header.inked": "S. encrée",
   "resultDetails.teamStats.header.killsAndAssists": "K+A (A)",
@@ -135,9 +139,9 @@
   "schedule.gachi": "Match pro",
   "schedule.league": "Match de ligue",
   "schedule.regular": "Match classique",
-  "stageCard.header.clamblitz": "CB",
-  "stageCard.header.rainmaker": "Mission Bazookarpe",
-  "stageCard.header.splatzones": "Défense de zone",
+  "stageCard.header.clamblitz": "PdP",
+  "stageCard.header.rainmaker": "MB",
+  "stageCard.header.splatzones": "DdZ",
   "stageCard.header.total": "Total",
-  "stageCard.header.towercontrol": "Expédition risquée"
+  "stageCard.header.towercontrol": "ER"
 }
