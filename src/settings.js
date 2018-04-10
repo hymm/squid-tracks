@@ -150,7 +150,7 @@ const LanguageSettings = ({ setLocale, locale }) => {
   return (
     <Row>
       <Col md={12}>
-        <Panel header={<h3 />}>
+        <Panel>
           <Panel.Heading>Splatnet API Language</Panel.Heading>
           <Panel.Body>
             Languages are limited by Nintendo regions, so several of the
