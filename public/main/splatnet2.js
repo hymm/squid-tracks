@@ -298,10 +298,13 @@ async function getSplatnetImageURL(battle) {
   return url;
 }
 
-function setIksmToken(cookieValue) {
+async function setIksmToken(cookieValue) {
+  if (cookieValue.length < 5) {
+    return;
+  }
   const cookie = request2.cookie(`iksm_session=${cookieValue}`);
   jar.setCookie(cookie, splatnetUrl);
-  getUniqueId();
+  await getUniqueId();
 }
 
 function getIksmToken() {
@@ -322,6 +325,7 @@ function getIksmToken() {
 
 async function checkIksmValid() {
   try {
+    const cookieValue = getIksmToken();
     await getSplatnetApi('records');
     return true;
   } catch (e) {

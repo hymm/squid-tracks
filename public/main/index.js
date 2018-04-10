@@ -172,7 +172,6 @@ async function checkStoredSessionToken() {
   } catch (e) {
     log.info('SessionToken has probably expired, please login again');
     log.info(e);
-  } finally {
     return false;
   }
 }

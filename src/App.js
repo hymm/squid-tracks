@@ -52,12 +52,7 @@ class App extends Component {
       return;
     }
 
-    const good = ipcRenderer.sendSync('checkStoredSessionToken');
-    if (!good) {
-      return;
-    }
-
-    if (ipcRenderer.sendSync('checkIksmValid')) {
+    if (ipcRenderer.sendSync('checkStoredSessionToken')) {
       this.setState({ loggedIn: true });
       history.push('/');
       return;
