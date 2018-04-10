@@ -49,32 +49,35 @@ class StatInkSettings extends React.Component {
 
   render() {
     return (
-      <Panel header={<h3>Stat.ink Settings</h3>}>
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup>
-            <ControlLabel>API Token</ControlLabel>
-            <HelpBlock>
-              Copy from{' '}
-              <a
-                onClick={() => openExternal('https://stat.ink/profile')}
-                style={{ cursor: 'pointer' }}
-              >
-                https://stat.ink/profile
-              </a>, paste below, and click Save
-            </HelpBlock>
-            <FormControl
-              type="text"
-              value={this.state.apiToken}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <Button
-            type="submit"
-            disabled={this.state.statInkSaveButtonText === 'Token Saved'}
-          >
-            {this.state.statInkSaveButtonText}
-          </Button>
-        </form>
+      <Panel>
+        <Panel.Heading>Stat.ink Settings</Panel.Heading>
+        <Panel.Body>
+          <form onSubmit={this.handleSubmit}>
+            <FormGroup>
+              <ControlLabel>API Token</ControlLabel>
+              <HelpBlock>
+                Copy from{' '}
+                <a
+                  onClick={() => openExternal('https://stat.ink/profile')}
+                  style={{ cursor: 'pointer' }}
+                >
+                  https://stat.ink/profile
+                </a>, paste below, and click Save
+              </HelpBlock>
+              <FormControl
+                type="text"
+                value={this.state.apiToken}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <Button
+              type="submit"
+              disabled={this.state.statInkSaveButtonText === 'Token Saved'}
+            >
+              {this.state.statInkSaveButtonText}
+            </Button>
+          </form>
+        </Panel.Body>
       </Panel>
     );
   }
@@ -147,11 +150,14 @@ const LanguageSettings = ({ setLocale, locale }) => {
   return (
     <Row>
       <Col md={12}>
-        <Panel header={<h3>Splatnet API Language</h3>}>
-          Languages are limited by Nintendo regions, so several of the languages
-          listed will not work. If you think your language should be supported,
-          please contact the developer.
-          <LanguageSelect setLocale={setLocale} locale={locale} />
+        <Panel header={<h3 />}>
+          <Panel.Heading>Splatnet API Language</Panel.Heading>
+          <Panel.Body>
+            Languages are limited by Nintendo regions, so several of the
+            languages listed will not work. If you think your language should be
+            supported, please contact the developer.
+            <LanguageSelect setLocale={setLocale} locale={locale} />
+          </Panel.Body>
         </Panel>
       </Col>
     </Row>
@@ -173,42 +179,51 @@ const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
       </Row>
       <Row>
         <Col md={12}>
-          <Panel header={<h3>Google Analytics</h3>}>
-            This program uses google analytics to track version uptake,
-            activity, bugs, and crashing. If you find this creepy you can
-            disable this feature below.
-            <GoogleAnalyticsCheckbox />
+          <Panel>
+            <Panel.Heading>Google Analytics</Panel.Heading>
+            <Panel.Body>
+              This program uses google analytics to track version uptake,
+              activity, bugs, and crashing. If you find this creepy you can
+              disable this feature below.
+              <GoogleAnalyticsCheckbox />
+            </Panel.Body>
           </Panel>
         </Col>
       </Row>
       <Row>
         <Col md={12}>
-          <Panel header={<h3>Debugging</h3>}>
-            <Link to="/testApi">
-              <Button>API Checker</Button>
-            </Link>
+          <Panel>
+            <Panel.Heading>Debugging</Panel.Heading>
+            <Panel.Body>
+              <Link to="/testApi">
+                <Button>API Checker</Button>
+              </Link>
+            </Panel.Body>
           </Panel>
         </Col>
       </Row>
       <Row>
         <Col md={12}>
-          <Panel header={<h3>Nintendo User Info</h3>}>
-            <strong>DO NOT SHARE Session Token or iksm Token.</strong> These are
-            available here for debugging purposes. Sharing these could lead to
-            someone stealing your personal information.
-            <h4>
-              Session Token{' '}
-              <Glyphicon
-                glyph="copy"
-                onClick={() => {
-                  clipboard.writeText(token);
-                  event('settings', 'copy-session-token');
-                }}
-                style={{ fontSize: 20, cursor: 'pointer' }}
-              />
-            </h4>
-            Expiration: {tokenExpiration}
-            <IksmToken />
+          <Panel>
+            <Panel.Heading>Nintendo User Info</Panel.Heading>
+            <Panel.Body>
+              <strong>DO NOT SHARE Session Token or iksm Token.</strong> These
+              are available here for debugging purposes. Sharing these could
+              lead to someone stealing your personal information.
+              <h4>
+                Session Token{' '}
+                <Glyphicon
+                  glyph="copy"
+                  onClick={() => {
+                    clipboard.writeText(token);
+                    event('settings', 'copy-session-token');
+                  }}
+                  style={{ fontSize: 20, cursor: 'pointer' }}
+                />
+              </h4>
+              Expiration: {tokenExpiration}
+              <IksmToken />
+            </Panel.Body>
           </Panel>
         </Col>
       </Row>

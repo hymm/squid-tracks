@@ -161,140 +161,139 @@ class StageCard extends React.Component {
     sort(stageStats, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel
-        header={
-          <h3>
-            <FormattedMessage
-              id="StageCard.title"
-              defaultMessage="Stage Stats"
-            />
-          </h3>
-        }
-      >
-        <Grid fluid>
-          <Row>
-            <Col sm={12} md={12}>
-              <ButtonToolbar style={{ marginBottom: '10px' }}>
-                <ButtonGroup>
-                  <Button
-                    onClick={this.showPercent}
-                    active={this.state.percent}
-                  >
-                    <FormattedMessage
-                      id="StageCard.button.percent"
-                      defaultMessage="Percent"
-                    />
-                  </Button>
-                  <Button onClick={this.showCount} active={!this.state.percent}>
-                    <FormattedMessage
-                      id="StageCard.button.count"
-                      defaultMessage="Count"
-                    />
-                  </Button>
-                </ButtonGroup>
-              </ButtonToolbar>
-              <FormattedMessage
-                id="StageCard.sortHelp"
-                defaultMessage="* Click on column headers to sort by win percent"
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={12} md={12}>
-              <Table striped bordered condensed hover>
-                <thead>
-                  <tr>
-                    <th>
+      <Panel>
+        <Panel.Heading>
+          <FormattedMessage id="StageCard.title" defaultMessage="Stage Stats" />
+        </Panel.Heading>
+        <Panel.Body>
+          <Grid fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
+            <Row>
+              <Col sm={12} md={12}>
+                <ButtonToolbar style={{ marginBottom: '10px' }}>
+                  <ButtonGroup>
+                    <Button
+                      onClick={this.showPercent}
+                      active={this.state.percent}
+                    >
                       <FormattedMessage
-                        id="StageCard.header.name"
-                        defaultMessage="Name"
+                        id="StageCard.button.percent"
+                        defaultMessage="Percent"
                       />
-                    </th>
-                    {this.columnHeaders.map(header => (
-                      <TableHeader
-                        key={header.text}
-                        setState={this.setState.bind(this)}
-                        sort={{
-                          sortColumn: header.sortColumn,
-                          sortDirection: header.sortDirection
-                        }}
-                        text={header.text}
-                        sortColumn={this.state.sortColumn}
+                    </Button>
+                    <Button
+                      onClick={this.showCount}
+                      active={!this.state.percent}
+                    >
+                      <FormattedMessage
+                        id="StageCard.button.count"
+                        defaultMessage="Count"
                       />
+                    </Button>
+                  </ButtonGroup>
+                </ButtonToolbar>
+                <FormattedMessage
+                  id="StageCard.sortHelp"
+                  defaultMessage="* Click on column headers to sort by win percent"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={12} md={12}>
+                <Table striped bordered condensed hover>
+                  <thead>
+                    <tr>
+                      <th>
+                        <FormattedMessage
+                          id="StageCard.header.name"
+                          defaultMessage="Name"
+                        />
+                      </th>
+                      {this.columnHeaders.map(header => (
+                        <TableHeader
+                          key={header.text}
+                          setState={this.setState.bind(this)}
+                          sort={{
+                            sortColumn: header.sortColumn,
+                            sortDirection: header.sortDirection
+                          }}
+                          text={header.text}
+                          sortColumn={this.state.sortColumn}
+                        />
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {stageStats.map(stage => (
+                      <tr key={stage.stage.name}>
+                        <td>{stage.stage.name}</td>
+                        <td>
+                          {this.state.percent
+                            ? `${stage.area_percent.toFixed(2)}`
+                            : `${stage.area_win} - ${stage.area_lose}`}
+                        </td>
+                        <td>
+                          {this.state.percent
+                            ? `${stage.yagura_percent.toFixed(2)}`
+                            : `${stage.yagura_win} - ${stage.yagura_lose}`}
+                        </td>
+                        <td>
+                          {this.state.percent
+                            ? `${stage.hoko_percent.toFixed(2)}`
+                            : `${stage.hoko_win} - ${stage.hoko_lose}`}
+                        </td>
+                        <td>
+                          {this.state.percent
+                            ? `${stage.asari_percent.toFixed(2)}`
+                            : `${stage.asari_win} - ${stage.asari_lose}`}
+                        </td>
+                        <td>
+                          {this.state.percent
+                            ? `${stage.total_percent.toFixed(2)}`
+                            : `${stage.total_win} - ${stage.total_lose}`}
+                        </td>
+                      </tr>
                     ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {stageStats.map(stage => (
-                    <tr key={stage.stage.name}>
-                      <td>{stage.stage.name}</td>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>
+                        <FormattedMessage
+                          id="StageCard.header.total"
+                          defaultMessage="Total"
+                        />
+                      </th>
                       <td>
                         {this.state.percent
-                          ? `${stage.area_percent.toFixed(2)}`
-                          : `${stage.area_win} - ${stage.area_lose}`}
+                          ? `${calcStats.sz_percent.toFixed(2)}`
+                          : `${calcStats.sz_win} - ${calcStats.sz_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${stage.yagura_percent.toFixed(2)}`
-                          : `${stage.yagura_win} - ${stage.yagura_lose}`}
+                          ? `${calcStats.tc_percent.toFixed(2)}`
+                          : `${calcStats.tc_win} - ${calcStats.tc_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${stage.hoko_percent.toFixed(2)}`
-                          : `${stage.hoko_win} - ${stage.hoko_lose}`}
+                          ? `${calcStats.rm_percent.toFixed(2)}`
+                          : `${calcStats.rm_win} - ${calcStats.rm_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${stage.asari_percent.toFixed(2)}`
-                          : `${stage.asari_win} - ${stage.asari_lose}`}
+                          ? `${calcStats.cb_percent.toFixed(2)}`
+                          : `${calcStats.cb_win} - ${calcStats.cb_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${stage.total_percent.toFixed(2)}`
-                          : `${stage.total_win} - ${stage.total_lose}`}
+                          ? `${calcStats.total_percent.toFixed(2)}`
+                          : `${calcStats.total_win} - ${calcStats.total_lose}`}
                       </td>
                     </tr>
-                  ))}
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th>
-                      <FormattedMessage
-                        id="StageCard.header.total"
-                        defaultMessage="Total"
-                      />
-                    </th>
-                    <td>
-                      {this.state.percent
-                        ? `${calcStats.sz_percent.toFixed(2)}`
-                        : `${calcStats.sz_win} - ${calcStats.sz_lose}`}
-                    </td>
-                    <td>
-                      {this.state.percent
-                        ? `${calcStats.tc_percent.toFixed(2)}`
-                        : `${calcStats.tc_win} - ${calcStats.tc_lose}`}
-                    </td>
-                    <td>
-                      {this.state.percent
-                        ? `${calcStats.rm_percent.toFixed(2)}`
-                        : `${calcStats.rm_win} - ${calcStats.rm_lose}`}
-                    </td>
-                    <td>
-                      {this.state.percent
-                        ? `${calcStats.cb_percent.toFixed(2)}`
-                        : `${calcStats.cb_win} - ${calcStats.cb_lose}`}
-                    </td>
-                    <td>
-                      {this.state.percent
-                        ? `${calcStats.total_percent.toFixed(2)}`
-                        : `${calcStats.total_win} - ${calcStats.total_lose}`}
-                    </td>
-                  </tr>
-                </tfoot>
-              </Table>
-            </Col>
-          </Row>
-        </Grid>
+                  </tfoot>
+                </Table>
+              </Col>
+            </Row>
+          </Grid>
+        </Panel.Body>
       </Panel>
     );
   }
