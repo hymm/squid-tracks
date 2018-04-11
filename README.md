@@ -18,7 +18,7 @@ You will get a warning when running the installer.  Bypass the warning by clicki
 
 ## Contributing
 
-If you're interested in contributing feel free to contact me or create a pull request. Help with translations is especially welcome. See [here](./docs/en/development.md) for more info.
+If you're interested in contributing feel free to contact me or create a pull request.  Check [issues](https://github.com/hymm/squid-tracks/issues) to see if there's anything you would be interested in working on.  Help with translations is especially welcome. See [here](./docs/en/development.md) for information about development.
 
 ## Built With
 * Electron
