@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col, Jumbotron } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 const { shell, app } = require('electron').remote;
 const { openExternal } = shell;
 const appVersion = app.getVersion();
@@ -10,9 +11,15 @@ const AboutPage = () => (
     <Row>
       <Col md={12}>
         <Jumbotron style={{ textAlign: 'center' }}>
-          <h1>SquidTracks</h1>
+          <h1 style={{ textAlign: 'center', width: '100%' }}>SquidTracks</h1>
+          <h2 style={{ textAlign: 'center', width: '100%', marginTop: 0 }}>
+            <FormattedMessage
+              id="login.tagLine"
+              defaultMessage="An Unofficial Splatnet Client for your Desktop"
+            />
+          </h2>
           <h5>
-            {`${appVersion} `}
+            {`Version ${appVersion} `}
             <a
               onClick={() =>
                 openExternal(
@@ -24,7 +31,6 @@ const AboutPage = () => (
               Change Log
             </a>
           </h5>
-          <h2>An Unofficial Splatnet 2 Client for your Desktop</h2>
         </Jumbotron>
         <h2>Introduction</h2>
         <p>

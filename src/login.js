@@ -227,8 +227,14 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
         <Col md={12}>
           <Jumbotron style={{ marginTop: 20 }}>
             <h1 style={{ textAlign: 'center', width: '100%' }}>SquidTracks</h1>
+            <h2 style={{ textAlign: 'center', width: '100%', marginTop: 0 }}>
+              <FormattedMessage
+                id="login.tagLine"
+                defaultMessage="An Unofficial Splatnet Client for your Desktop"
+              />
+            </h2>
             <h5 style={{ textAlign: 'center', width: '100%' }}>
-              {`${appVersion} `}
+              {`Version ${appVersion} `}
               <a
                 onClick={() =>
                   openExternal(
@@ -240,12 +246,6 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
                 Change Log
               </a>
             </h5>
-            <h2 style={{ textAlign: 'center', width: '100%' }}>
-              <FormattedMessage
-                id="login.tagLine"
-                defaultMessage="An Unofficial Splatnet Client for your Desktop"
-              />
-            </h2>
             <h4 style={{ textAlign: 'left' }}>
               <FormattedMessage
                 id="login.loginInformation.v1"
