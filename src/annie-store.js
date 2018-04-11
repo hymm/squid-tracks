@@ -79,8 +79,9 @@ const MerchTable = ({ merch, intl }) => {
           </th>
           <td>
             <Image
-              src={`https://app.splatoon2.nintendo.net${merch.gear.brand
-                .image}`}
+              src={`https://app.splatoon2.nintendo.net${
+                merch.gear.brand.image
+              }`}
             />
           </td>
         </tr>
@@ -90,8 +91,9 @@ const MerchTable = ({ merch, intl }) => {
           </th>
           <td>
             <Image
-              src={`https://app.splatoon2.nintendo.net${merch.gear.brand
-                .frequent_skill.image}`}
+              src={`https://app.splatoon2.nintendo.net${
+                merch.gear.brand.frequent_skill.image
+              }`}
             />
           </td>
         </tr>
@@ -133,36 +135,38 @@ const Merch = ({ merch, order, disabled, intl }) => {
   return (
     <Col sm={6} md={6} lg={4}>
       <Panel>
-        <Row className="merch">
-          <Col
-            sm={6}
-            md={6}
-            style={{ textAlign: 'center', verticalAlign: 'middle' }}
-          >
-            <Image
-              src={`https://app.splatoon2.nintendo.net${merch.gear.image}`}
-            />
-          </Col>
-          <MerchRight merch={merch} intl={intl} />
-        </Row>
-        <Row>
-          <Col md={12}>
-            <Button
-              block
-              bsStyle={
-                merch.skill.id === merch.gear.brand.frequent_skill.id
-                  ? 'success'
-                  : 'primary'
-              }
-              onClick={() => {
-                order(merch.id);
-              }}
-              disabled={disabled}
+        <Panel.Body>
+          <Row className="merch">
+            <Col
+              sm={6}
+              md={6}
+              style={{ textAlign: 'center', verticalAlign: 'middle' }}
             >
-              {intl.formatMessage(messages.orderButtonText)}
-            </Button>
-          </Col>
-        </Row>
+              <Image
+                src={`https://app.splatoon2.nintendo.net${merch.gear.image}`}
+              />
+            </Col>
+            <MerchRight merch={merch} intl={intl} />
+          </Row>
+          <Row>
+            <Col md={12}>
+              <Button
+                block
+                bsStyle={
+                  merch.skill.id === merch.gear.brand.frequent_skill.id
+                    ? 'success'
+                    : 'primary'
+                }
+                onClick={() => {
+                  order(merch.id);
+                }}
+                disabled={disabled}
+              >
+                {intl.formatMessage(messages.orderButtonText)}
+              </Button>
+            </Col>
+          </Row>
+        </Panel.Body>
       </Panel>
     </Col>
   );
@@ -172,48 +176,51 @@ const OrderedInfo = ({ order, cancel, cancelled, intl }) => {
   return (
     <Row>
       <Col sm={12} md={12} lg={12}>
-        <Panel header={intl.formatMessage(messages.ordered)}>
-          <Row className="merch">
-            <Col
-              sm={6}
-              md={6}
-              style={{ textAlign: 'center', verticalAlign: 'middle' }}
-            >
-              <Image
-                src={`https://app.splatoon2.nintendo.net${order.gear.image}`}
-                className="merch"
-              />
-            </Col>
-            <Col sm={6} md={6} className="details">
-              <Row>
-                <Col>
-                  <h3 style={{ textAlign: 'center', marginTop: 0 }}>
-                    {order.gear.name}
-                  </h3>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={12}>
-                  <MerchTable merch={order} intl={intl} />
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              <Button
-                block
-                bsStyle="warning"
-                onClick={() => {
-                  cancel();
-                }}
+        <Panel>
+          <Panel.Heading>{intl.formatMessage(messages.ordered)}</Panel.Heading>
+          <Panel.Body>
+            <Row className="merch">
+              <Col
+                sm={6}
+                md={6}
+                style={{ textAlign: 'center', verticalAlign: 'middle' }}
               >
-                {cancelled
-                  ? intl.formatMessage(messages.uncancelButtonText)
-                  : intl.formatMessage(messages.cancelButtonText)}
-              </Button>
-            </Col>
-          </Row>
+                <Image
+                  src={`https://app.splatoon2.nintendo.net${order.gear.image}`}
+                  className="merch"
+                />
+              </Col>
+              <Col sm={6} md={6} className="details">
+                <Row>
+                  <Col>
+                    <h3 style={{ textAlign: 'center', marginTop: 0 }}>
+                      {order.gear.name}
+                    </h3>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={12}>
+                    <MerchTable merch={order} intl={intl} />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}>
+                <Button
+                  block
+                  bsStyle="warning"
+                  onClick={() => {
+                    cancel();
+                  }}
+                >
+                  {cancelled
+                    ? intl.formatMessage(messages.uncancelButtonText)
+                    : intl.formatMessage(messages.cancelButtonText)}
+                </Button>
+              </Col>
+            </Row>
+          </Panel.Body>
         </Panel>
       </Col>
     </Row>

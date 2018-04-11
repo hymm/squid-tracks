@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Version 1.0.0
+### New Features
+* Normal login is back!! Thank @YDKK and @frozenpandaman for figuring login out and implementing it.
+* New shiny icon to celebrate bump to 1.0.  Thanks @selkaine.
+* Thanks @DanSyor and @okuRaku for updating translations.
+
+### Maintenance
+* Updated dependencies
+
 ## Version 0.3.6
 * added support for clam blitz
 * added support for newer stat.ink fields (power, star rank)

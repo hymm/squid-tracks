@@ -86,71 +86,71 @@ class WeaponCard extends React.Component {
     sort(weaponArray, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel
-        header={
-          <h3>
-            <FormattedMessage
-              id="WeaponCard.title"
-              defaultMessage="Weapon Stats"
-            />
-          </h3>
-        }
-      >
-        <FormattedMessage
-          id="WeaponCard.sortHelp"
-          defaultMessage="* Click on column headers to sort"
-        />
+      <Panel>
+        <Panel.Heading>
+          <FormattedMessage
+            id="WeaponCard.title"
+            defaultMessage="Weapon Stats"
+          />
+        </Panel.Heading>
+        <Panel.Body>
+          <FormattedMessage
+            id="WeaponCard.sortHelp"
+            defaultMessage="* Click on column headers to sort"
+          />
 
-        <Table striped bordered condensed hover>
-          <thead>
-            <tr>
-              {this.columnHeaders.map(header => {
-                return header.noSort ? (
-                  <th key={header.text}>{header.text}</th>
-                ) : (
-                  <TableHeader
-                    key={header.text}
-                    setState={this.setState.bind(this)}
-                    sort={{
-                      sortColumn: header.sortColumn,
-                      sortDirection: header.sortDirection
-                    }}
-                    text={header.text}
-                    sortColumn={this.state.sortColumn}
-                  />
-                );
-              })}
-            </tr>
-          </thead>
-          <tbody>
-            {weaponArray.map(weapon => (
-              <tr key={weapon.weapon.name}>
-                <td
-                  style={{
-                    width: 50,
-                    textAlign: 'center',
-                    background: 'darkgrey'
-                  }}
-                >
-                  <Image
-                    src={`https://app.splatoon2.nintendo.net${weapon.weapon
-                      .thumbnail}`}
-                    style={{ maxHeight: 30 }}
-                    alt={weapon.weapon.name}
-                  />
-                </td>
-                <td>{weapon.weapon.name}</td>
-                <td>{weapon.total_count}</td>
-                <td>{weapon.win_count}</td>
-                <td>{weapon.lose_count}</td>
-                <td>{weapon.percentage_count.toFixed(2)}</td>
-                <td style={{ textAlign: 'right' }}>
-                  {weapon.total_paint_point}
-                </td>
+          <Table striped bordered condensed hover>
+            <thead>
+              <tr>
+                {this.columnHeaders.map(header => {
+                  return header.noSort ? (
+                    <th key={header.text}>{header.text}</th>
+                  ) : (
+                    <TableHeader
+                      key={header.text}
+                      setState={this.setState.bind(this)}
+                      sort={{
+                        sortColumn: header.sortColumn,
+                        sortDirection: header.sortDirection
+                      }}
+                      text={header.text}
+                      sortColumn={this.state.sortColumn}
+                    />
+                  );
+                })}
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {weaponArray.map(weapon => (
+                <tr key={weapon.weapon.name}>
+                  <td
+                    style={{
+                      width: 50,
+                      textAlign: 'center',
+                      background: 'darkgrey'
+                    }}
+                  >
+                    <Image
+                      src={`https://app.splatoon2.nintendo.net${
+                        weapon.weapon.thumbnail
+                      }`}
+                      style={{ maxHeight: 30 }}
+                      alt={weapon.weapon.name}
+                    />
+                  </td>
+                  <td>{weapon.weapon.name}</td>
+                  <td>{weapon.total_count}</td>
+                  <td>{weapon.win_count}</td>
+                  <td>{weapon.lose_count}</td>
+                  <td>{weapon.percentage_count.toFixed(2)}</td>
+                  <td style={{ textAlign: 'right' }}>
+                    {weapon.total_paint_point}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Panel.Body>
       </Panel>
     );
   }

@@ -13,16 +13,18 @@ class ApiTester extends React.Component {
     'league_match_ranking/17073112T/ALL',
     'onlineshop/merchandises',
     'results',
-    'results/180',
-    'nickname_and_icon',
+    'results/{battle#}',
+    'nickname_and_icon?id={principal_id}',
     'schedules',
+    'coop_schedules',
     'records/hero',
     'timeline',
     'data/stages',
     'records',
     'festivals/active',
     'festivals/pasts',
-    'festivals/2050/votes'
+    'festivals/{fest_id}/rankings',
+    'festivals/{fest_id}/votes'
     // POST 'onlineshop/order/4780952683920142604',
     // POST 'share/profile'
     // POST 'share/results/630'

@@ -25,48 +25,51 @@ const PlayerCard = ({ records }) => {
     : udemae_clam.number >= 10 ? 0 : '';
 
   return (
-    <Panel header={<h3>Player Card</h3>}>
-      <FormattedMessage
-        id="PlayerCard.nickname"
-        defaultMessage="Nickname: {nickname}"
-        values={{ nickname: player.nickname }}
-      />
-      <br />
-      <FormattedMessage
-        id="PlayerCard.splatzonesShortname"
-        defaultMessage="SZ: {name}{number}"
-        values={{ name: udemae_zones.name, number: sz_s_plus_number }}
-      />
-      <br />
-      <FormattedMessage
-        id="PlayerCard.towercontrolShortname"
-        defaultMessage="TC: {name}{number}"
-        values={{ name: udemae_tower.name, number: tc_s_plus_number }}
-      />
-      <br />
-      <FormattedMessage
-        id="PlayerCard.rainmakerShortname"
-        defaultMessage="RM: {name}{number}"
-        values={{ name: udemae_rainmaker.name, number: rm_s_plus_number }}
-      />
-      <br />
-      <FormattedMessage
-        id="PlayerCard.clamBlitzShortname"
-        defaultMessage="CB: {name}{number}"
-        values={{ name: udemae_clam.name, number: cb_s_plus_number }}
-      />
-      <br />
-      <FormattedMessage
-        id="PlayerCard.winCount"
-        defaultMessage="Wins: {count}"
-        values={{ count: records.win_count }}
-      />
-      <br />
-      <FormattedMessage
-        id="PlayerCard.loseCount"
-        defaultMessage="Losses: {count}"
-        values={{ count: records.lose_count }}
-      />
+    <Panel>
+      <Panel.Heading>Player Card</Panel.Heading>
+      <Panel.Body>
+        <FormattedMessage
+          id="PlayerCard.nickname"
+          defaultMessage="Nickname: {nickname}"
+          values={{ nickname: player.nickname }}
+        />
+        <br />
+        <FormattedMessage
+          id="PlayerCard.splatzonesShortname"
+          defaultMessage="SZ: {name}{number}"
+          values={{ name: udemae_zones.name, number: sz_s_plus_number }}
+        />
+        <br />
+        <FormattedMessage
+          id="PlayerCard.towercontrolShortname"
+          defaultMessage="TC: {name}{number}"
+          values={{ name: udemae_tower.name, number: tc_s_plus_number }}
+        />
+        <br />
+        <FormattedMessage
+          id="PlayerCard.rainmakerShortname"
+          defaultMessage="RM: {name}{number}"
+          values={{ name: udemae_rainmaker.name, number: rm_s_plus_number }}
+        />
+        <br />
+        <FormattedMessage
+          id="PlayerCard.clamBlitzShortname"
+          defaultMessage="CB: {name}{number}"
+          values={{ name: udemae_clam.name, number: cb_s_plus_number }}
+        />
+        <br />
+        <FormattedMessage
+          id="PlayerCard.winCount"
+          defaultMessage="Wins: {count}"
+          values={{ count: records.win_count }}
+        />
+        <br />
+        <FormattedMessage
+          id="PlayerCard.loseCount"
+          defaultMessage="Losses: {count}"
+          values={{ count: records.lose_count }}
+        />
+      </Panel.Body>
     </Panel>
   );
 };

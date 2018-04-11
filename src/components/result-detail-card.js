@@ -364,8 +364,11 @@ class ResultDetailCard extends React.Component {
                 <a
                   onClick={() =>
                     openExternal(
-                      `https://stat.ink/@${linkInfo.username}/spl2/${linkInfo.battle}`
-                    )}
+                      `https://stat.ink/@${linkInfo.username}/spl2/${
+                        linkInfo.battle
+                      }`
+                    )
+                  }
                   style={{ cursor: 'pointer' }}
                 >
                   <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
@@ -375,7 +378,7 @@ class ResultDetailCard extends React.Component {
           }
           menu={<ResultDetailMenu result={resultChanged} />}
         >
-          <Grid fluid>
+          <Grid fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
             <Row>
               <Col md={12}>
                 <BattleSummary result={resultChanged} />

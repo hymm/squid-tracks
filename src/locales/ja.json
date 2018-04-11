@@ -1,4 +1,5 @@
 {
+  "PlayerCard.clamBlitzShortname": "アサリ：{name}{number}",
   "PlayerCard.loseCount": "敗北数: {count}",
   "PlayerCard.nickname": "ニックネーム: {nickname}",
   "PlayerCard.rainmakerShortname": "ホコ: {name}{number}",
@@ -37,12 +38,15 @@
     "https://github.com/hymm/squid-tracks/wiki/jp_getCookie",
   "login.cookie.proxyRunning": "{ip}:{port}でプロキシ起動中",
   "login.cookie.proxyStart": "プロキシサーバーを起動する",
-  "login.cookie.warning":
-    "警告: 前のログイン方法より安全性が低くなっています。リスクを了承できない場合は\n                        前のログイン方法が可能になるまでにお待ちください。それでもSquidTracksを使い続きたい人のために入れています。",
+  "login.cookie.warning.v1":
+    "警告：この方法は前のログイン方法よりリスクが高いです。リンクの手順に慎重に従ってください。ログインしたら、必ずインストールされた証明書を削除してください。",
   "login.login": "ログイン",
-  "login.loginInformation":
-    "標準のログイン方法は今故障中でございます。許可されたクッキーを手に入れてるなら、それでログインできるかもしれません。\n                    状況が変わる次第{twitterLink}で報告する予定です。",
+  "login.loginInformation.v1":
+    "通常ログインがまた可能になりました！　{pandamanLink}により作られたサードパーティーAPIを使う必要があります。個人が特定される情報は一切送信されません。{apiLink}それでもクッキーでログインしたい場合は「セッションクッキーでログイン」をクリックしてください。通常ログインは「ログイン」で進みます。最新情報は{twitterLink}で載せます。",
   "login.loginWithCookie": "セッションクッキーでログイン",
+  "login.splash.fApiInfo.url":
+    "https://github.com/frozenpandaman/splatnet2statink/wiki/api-docs",
+  "login.splash.fApiInfoLinkText": "Click here for more information.",
   "login.tagLine": "イカリング２の非公式デスクトップクライアント",
   "nav.league": "リーグ統計",
   "nav.records": "武器・ステージ記録",
@@ -53,8 +57,9 @@
   "records.refreshButton.refresh": "更新",
   "records.refreshButton.refreshed": "更新済",
   "resultDetails.anonymizeButton.text": "匿名化",
-  "resultDetails.export.copyPicture": "Copy SplatNet Share picture",
-  "resultDetails.export.copyPictureURL": "Copy SplatNet Share picture (URL)",
+  "resultDetails.export.copyPicture": "イカリング２のシェア写真をコピー",
+  "resultDetails.export.copyPictureURL":
+    "イカリング２のシェア写真をコピー(URLのみ)",
   "resultDetails.export.copyRawJson": "Raw Jsonをコピー",
   "resultDetails.export.copySimpleJson": "Simplified Jsonをコピー",
   "resultDetails.export.saveToFile": "ファイルに保存",
@@ -125,6 +130,7 @@
   "schedule.gachi": "ガチマッチ",
   "schedule.league": "リーグマッチ",
   "schedule.regular": "レギュラー",
+  "stageCard.header.clamblitz": "アサリ",
   "stageCard.header.rainmaker": "ホコ",
   "stageCard.header.splatzones": "エリア",
   "stageCard.header.total": "合計",

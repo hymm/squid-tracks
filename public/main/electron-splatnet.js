@@ -73,6 +73,8 @@ function registerSplatnetHandler() {
           sessionToken = tokens.sessionToken;
           userDataStore.set('sessionToken', sessionToken);
           await splatnet.getSessionCookie(tokens.accessToken);
+          const iksm = splatnet.getIksmToken();
+          userDataStore.set('iksmCookie', iksm);
           mainWindow.loadURL(startUrl);
         });
     },
@@ -99,9 +101,13 @@ ipcMain.on('loadSplatnet', e => {
   });
 });
 
-ipcMain.on('setIksmToken', (e, value) => {
-  splatnet.setIksmToken(value);
-  e.returnValue = true;
+ipcMain.on('setIksmToken', async (e, value) => {
+  try {
+    await splatnet.setIksmToken(value);
+    e.returnValue = true;
+  } catch (err) {
+    e.returnValue = false;
+  }
 });
 
 ipcMain.on('getIksmToken', async e => {
