@@ -31,12 +31,23 @@ class BarLabel extends React.Component {
     switch (data[index].rule) {
       case 'turf_war':
         return (
-          <rect
-            {...this.props}
-            y={y - width / 2}
-            height={width / 2}
-            fill={'grey'}
-          />
+          <g>
+            <polygon
+              points={`${x},${y} ${x + width * 0.25},${y} ${x},${y -
+                width * 0.5}`}
+              fill={'grey'}
+            />
+            <polygon
+              points={`${x + width * 0.25},${y} ${x + width * 0.5},${y -
+                width * 0.5} ${x + width * 0.75},${y}`}
+              fill={'grey'}
+            />
+            <polygon
+              points={`${x + width * 0.75},${y} ${x + width},${y} ${x +
+                width},${y - width * 0.5}`}
+              fill={'grey'}
+            />
+          </g>
         );
       case 'splat_zones':
         return (
@@ -55,6 +66,17 @@ class BarLabel extends React.Component {
             cx={x + width / 2}
             cy={y - width / 2}
             r={width / 2}
+            fill={'grey'}
+          />
+        );
+      case 'clam_blitz':
+        const radius = width * 0.9;
+        return (
+          <path
+            d={`M ${x},${y}
+              A ${radius} ${radius} 1 0 1 ${x + width} ${y - width}
+              A ${radius} ${radius} 1 0 1 ${x} ${y}
+              Z`}
             fill={'grey'}
           />
         );
