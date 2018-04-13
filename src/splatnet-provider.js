@@ -14,6 +14,7 @@ class SplatnetProvider extends React.Component {
       },
       annie: { merchandises: [] },
       schedule: { gachi: [], league: [], regular: [] },
+      coop_schedules: { details: [], schedules: [] },
       records: {
         records: { player: { nickname: '' } }
       }
@@ -27,6 +28,9 @@ class SplatnetProvider extends React.Component {
     },
     lastError: {},
     comm: {
+      updateCoop: () => {
+        ipcRenderer.send('getApiAsync', 'coop_schedules');
+      },
       updateSchedule: () => {
         ipcRenderer.send('getApiAsync', 'schedules');
       },
@@ -84,6 +88,13 @@ class SplatnetProvider extends React.Component {
     }
 
     switch (url) {
+      case 'coop_schedules':
+        this.setState({
+          current: update(this.state.current, {
+            $merge: { coop_schedules: data }
+          })
+        });
+        return;
       case 'schedules':
         this.setState({
           current: update(this.state.current, { $merge: { schedule: data } })

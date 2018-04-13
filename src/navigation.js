@@ -28,6 +28,14 @@ const Navigation = ({ logoutCallback }) => {
                   />
                 </NavItem>
               </LinkContainer>
+              <LinkContainer to="/salmon">
+                <NavItem eventKey={3.1}>
+                  <FormattedMessage
+                    id={'nav.salmon'}
+                    defaultMessage={'Salmon'}
+                  />
+                </NavItem>
+              </LinkContainer>
               <LinkContainer to="/records">
                 <NavItem eventKey={3}>
                   <FormattedMessage
