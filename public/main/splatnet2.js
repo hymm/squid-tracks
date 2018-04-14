@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const base64url = require('base64url');
 const log = require('electron-log');
 const { app } = require('electron');
+const Memo = require('promise-memoize');
 
 const userAgentVersion = `1.1.2`;
 const userAgentString = `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`;
@@ -205,10 +206,12 @@ async function getSplatnetApi(url) {
   return resp;
 }
 
-async function getUniqueId() {
+async function getUniqueId(token) {
   const records = await getSplatnetApi('records');
   uniqueId = records.records.unique_id;
+  return uniqueId;
 }
+const getUniqueIdMemo10 = Memo(getUniqueId, { maxAge: 10000 });
 
 async function postSplatnetApi(url, body) {
   const requestOptions = {
@@ -253,7 +256,8 @@ async function getSessionCookie(token) {
     }
   });
 
-  await getUniqueId();
+  const iksmToken = getIksmToken();
+  await getUniqueIdMemo10(iksmToken);
 }
 
 async function getSessionWithSessionToken(sessionToken) {
@@ -303,7 +307,7 @@ async function setIksmToken(cookieValue) {
   }
   const cookie = request2.cookie(`iksm_session=${cookieValue}`);
   jar.setCookie(cookie, splatnetUrl);
-  await getUniqueId();
+  await getUniqueIdMemo10(cookieValue);
 }
 
 function getIksmToken() {
@@ -325,7 +329,7 @@ function getIksmToken() {
 async function checkIksmValid() {
   try {
     const cookieValue = getIksmToken();
-    await getSplatnetApi('records');
+    await getSplatnetApi('schedule');
     return true;
   } catch (e) {
     return false;
