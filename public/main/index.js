@@ -263,7 +263,7 @@ function createWindow() {
   });
 
   mitm.setMainWindow(mainWindow);
-  eSplatnet.setMainWindow(mainWindow, startUrl, loggingInUrl);
+  eSplatnet.setMainWindow(mainWindow, startUrl);
 
   // comment this in on first run to get dev tools
   if (isDev) {
