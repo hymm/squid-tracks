@@ -22,10 +22,11 @@ module.exports.clearSplatnetCache = clearSplatnetCache;
 let authParams = {};
 let sessionToken = '';
 
-let mainWindow, startUrl;
-function setMainWindow(win, url) {
+let mainWindow, startUrl, loginUrl;
+function setMainWindow(win, url, loggingInUrl) {
   mainWindow = win;
   startUrl = url;
+  loginUrl = loggingInUrl;
 }
 module.exports.setMainWindow = setMainWindow;
 
@@ -57,6 +58,7 @@ function registerSplatnetHandler() {
   protocol.registerHttpProtocol(
     'npf71b963c1b7b6d119',
     (request, callback) => {
+      mainWindow.loadURL(loginUrl);
       const url = request.url;
       const params = {};
       url

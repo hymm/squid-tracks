@@ -38,6 +38,10 @@ const startUrl = isDev
   ? 'http://localhost:3000'
   : `file://${path.join(__dirname, '../../build/index.html')}`;
 
+const loggingInUrl = isDev
+  ? 'http://localhost:3000/loading.html'
+  : `file://${path.join(__dirname, '../../build/loading.html')}`;
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -259,7 +263,7 @@ function createWindow() {
   });
 
   mitm.setMainWindow(mainWindow);
-  eSplatnet.setMainWindow(mainWindow, startUrl);
+  eSplatnet.setMainWindow(mainWindow, startUrl, loggingInUrl);
 
   // comment this in on first run to get dev tools
   if (isDev) {
