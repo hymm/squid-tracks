@@ -30,14 +30,7 @@ const SalmonDay = ({ schedules, unixTime }) => {
 
 function getTimesWithinDay(unixTime, schedules) {
   const day = new Date(unixTime * 1000);
-  const dayStart = new Date(
-    day.getFullYear(),
-    day.getMonth(),
-    day.getDate(),
-    0,
-    0,
-    0
-  );
+  const dayStart = new Date(day.getFullYear(), day.getMonth(), day.getDate());
   const unixStart = dayStart.getTime() / 1000;
   const unixEnd = unixStart + 86400;
   const times = [];
@@ -68,15 +61,6 @@ function getTimesWithinDay(unixTime, schedules) {
   }
 
   return { times, day };
-}
-
-function getPartsWithinDay({ unixDayStart, unixDayEnd, times }) {
-  const fraction1 = (times[0].time - unixDayStart) / 864; // 100 / seconds in day
-  const isSalmon1 = !times[0].isStart;
-  const fraction2 = (times[1].time - times[0].time) / 864;
-  const isSalmon2 = times[0].isStart;
-  const fraction3 = (unixDayEnd - times[1]) / 864;
-  const isSalmon = times[1].isStart;
 }
 
 const SalmonCalendar = ({ schedules }) => {
@@ -192,20 +176,24 @@ class Salmon extends React.Component {
     return (
       <Grid fluid style={{ paddingTop: 65 }}>
         <Row>
-          <Col md={4}>
+          <Col md={12}>
             <h1>
               <FormattedMessage
                 id="salmon.title"
                 defaultMessage="Shift Schedule"
               />
             </h1>
-            {coop_schedules.details.map(d => (
-              <SalmonDetail key={d.start_time} detail={d} />
-            ))}
           </Col>
-          <Col md={12}>
+        </Row>
+        <Row>
+          <Col xs={12} sm={6} md={4}>
             <SalmonCalendar schedules={coop_schedules.schedules} />
           </Col>
+          {coop_schedules.details.map(d => (
+            <Col xs={12} sm={6} md={4} key={d.start_time}>
+              <SalmonDetail detail={d} />
+            </Col>
+          ))}
         </Row>
       </Grid>
     );
