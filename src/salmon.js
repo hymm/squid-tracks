@@ -50,8 +50,15 @@ const SalmonDay = ({ schedules, unixTime }) => {
   return (
     <div className="salmon-day">
       {times.map(time => {
+        if (time === lastTime) {
+          return null;
+        }
+
         const height = (time.time - lastTime.time) / 864;
+        const dayStart = lastTime.dayStart;
+        const dayEnd = time.dayEnd;
         lastTime = time;
+
         if (time.isStart) {
           return (
             <div
@@ -77,7 +84,9 @@ const SalmonDay = ({ schedules, unixTime }) => {
           >
             <div
               key={time.time}
-              className={`cell work`}
+              className={`cell work ${dayStart ? 'day-start' : ''} ${
+                dayEnd ? 'day-end' : ''
+              }`}
               style={{ height: `${height}%` }}
             />
           </OverlayTrigger>
@@ -118,18 +127,30 @@ function getTimesWithinDay(unixTime, schedules) {
     times.unshift({
       time: unixStart,
       isStart: !times[0].isStart,
-      scheduleNum: times[0].scheduleNum
+      scheduleNum: times[0].scheduleNum,
+      dayStart: true
     });
     times.push({
       time: unixEnd,
       isStart: !times[times.length - 1].isStart,
-      scheduleNum: times[times.length - 1].scheduleNum
+      scheduleNum: times[times.length - 1].scheduleNum,
+      dayEnd: true
     });
   }
 
   if (allDay) {
-    times.push({ time: unixStart, isStart: true, scheduleNum: allDayNum });
-    times.push({ time: unixEnd, isStart: false, scheduleNum: allDayNum });
+    times.push({
+      time: unixStart,
+      isStart: true,
+      scheduleNum: allDayNum,
+      dayStart: true
+    });
+    times.push({
+      time: unixEnd,
+      isStart: false,
+      scheduleNum: allDayNum,
+      dayEnd: true
+    });
   }
 
   return { times, day };

@@ -19,14 +19,29 @@
 .salmon-day .cell {
   position: relative;
   width: 100%;
+  border-radius: 4px;
+}
+
+.salmon-day .cell.work.day-start {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
+}
+
+.salmon-day .cell.work.day-end {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: none;
 }
 
 .salmon-day .cell.work {
   background: #ffcb87;
+  border: 1px orange solid;
 }
 
 .salmon-day .date {
   position: absolute;
+  margin-left: 4px;
   top: 0;
   left: 0;
 }
