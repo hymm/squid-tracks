@@ -1,0 +1,27 @@
+.salmon-day {
+  width: 14.2857%;
+  border: 1px black solid;
+  float: left;
+  height: 72px;
+  position: relative;
+}
+
+.salmon-day.header {
+  height: auto;
+  text-align: center;
+}
+
+.salmon-day .cell {
+  position: relative;
+  width: 100%;
+}
+
+.salmon-day .cell.work {
+  background: orange;
+}
+
+.salmon-day .date {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
