@@ -18,6 +18,7 @@ const SalmonDay = ({ schedules, unixTime }) => {
         lastTime = time;
         return (
           <div
+            key={time.time}
             className={`cell ${!time.isStart ? 'work' : undefined}`}
             style={{ height: `${height}%` }}
           />
@@ -99,7 +100,7 @@ const SalmonCalendar = ({ schedules }) => {
   }
 
   return (
-    <div>
+    <div className="salmon-calendar">
       <div>
         <div className="salmon-day header">S</div>
         <div className="salmon-day header">M</div>

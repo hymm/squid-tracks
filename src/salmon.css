@@ -1,6 +1,11 @@
+.salmon-calendar {
+  margin-bottom: 20px;
+  overflow: auto;
+}
+
 .salmon-day {
   width: 14.2857%;
-  border: 1px black solid;
+  border: 1px #ddd solid;
   float: left;
   height: 72px;
   position: relative;
@@ -17,7 +22,7 @@
 }
 
 .salmon-day .cell.work {
-  background: orange;
+  background: #ffcb87;
 }
 
 .salmon-day .date {
