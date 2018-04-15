@@ -1,8 +1,44 @@
 import React from 'react';
 import { Subscriber } from 'react-broadcast';
 import { FormattedDate, FormattedTime, FormattedMessage } from 'react-intl';
-import { Grid, Row, Col, Image, Panel } from 'react-bootstrap';
+import {
+  Grid,
+  Row,
+  Col,
+  Image,
+  Panel,
+  OverlayTrigger,
+  Tooltip
+} from 'react-bootstrap';
 import './salmon.css';
+
+const SalmonTime = ({ unixTime }) => {
+  return (
+    <React.Fragment>
+      <FormattedDate
+        value={new Date(unixTime * 1000)}
+        month="numeric"
+        day="2-digit"
+      />{' '}
+      <FormattedTime value={new Date(unixTime * 1000)} />
+    </React.Fragment>
+  );
+};
+
+const TodayMarker = ({ day }) => {
+  const now = new Date().getTime() / 1000;
+  const dayStart = new Date(day.getFullYear(), day.getMonth(), day.getDate());
+  const unixStart = dayStart.getTime() / 1000;
+  const unixEnd = unixStart + 86400;
+
+  if (now < unixStart || now > unixEnd) {
+    return null;
+  }
+
+  const percent = (now - unixStart) / 864;
+
+  return <div className="currentTime" style={{ top: `${percent}%` }} />;
+};
 
 const SalmonDay = ({ schedules, unixTime }) => {
   if (unixTime == null) {
@@ -16,15 +52,39 @@ const SalmonDay = ({ schedules, unixTime }) => {
       {times.map(time => {
         const height = (time.time - lastTime.time) / 864;
         lastTime = time;
+        if (time.isStart) {
+          return (
+            <div
+              key={time.time}
+              className={`cell`}
+              style={{ height: `${height}%` }}
+            />
+          );
+        }
+
         return (
-          <div
-            key={time.time}
-            className={`cell ${!time.isStart ? 'work' : undefined}`}
-            style={{ height: `${height}%` }}
-          />
+          <OverlayTrigger
+            overlay={
+              <Tooltip>
+                <SalmonTime unixTime={schedules[time.scheduleNum].start_time} />
+                {` - `}
+                <SalmonTime unixTime={schedules[time.scheduleNum].end_time} />
+              </Tooltip>
+            }
+            placement="top"
+            delayShow={300}
+            delayHide={150}
+          >
+            <div
+              key={time.time}
+              className={`cell work`}
+              style={{ height: `${height}%` }}
+            />
+          </OverlayTrigger>
         );
       })}
       <div className="date">{day.getDate()}</div>
+      <TodayMarker day={day} />
     </div>
   );
 };
@@ -37,28 +97,39 @@ function getTimesWithinDay(unixTime, schedules) {
   const times = [];
 
   let allDay = false;
-  for (const s of schedules) {
+  let allDayNum = -1;
+  for (let i = 0; i < schedules.length; i++) {
+    const s = schedules[i];
     if (s.start_time >= unixStart && s.start_time < unixEnd) {
-      times.push({ time: s.start_time, isStart: true });
+      times.push({ time: s.start_time, isStart: true, scheduleNum: i });
     }
 
     if (s.end_time > unixStart && s.end_time <= unixEnd) {
-      times.push({ time: s.end_time, isStart: false });
+      times.push({ time: s.end_time, isStart: false, scheduleNum: i });
     }
 
     if (unixStart >= s.start_time && unixEnd <= s.end_time) {
       allDay = true;
+      allDayNum = i;
     }
   }
 
   if (times.length > 0) {
-    times.unshift({ time: unixStart, isStart: !times[0].isStart });
-    times.push({ time: unixEnd, isStart: !times[times.length - 1].isStart });
+    times.unshift({
+      time: unixStart,
+      isStart: !times[0].isStart,
+      scheduleNum: times[0].scheduleNum
+    });
+    times.push({
+      time: unixEnd,
+      isStart: !times[times.length - 1].isStart,
+      scheduleNum: times[times.length - 1].scheduleNum
+    });
   }
 
   if (allDay) {
-    times.push({ time: unixStart, isStart: true });
-    times.push({ time: unixEnd, isStart: false });
+    times.push({ time: unixStart, isStart: true, scheduleNum: allDayNum });
+    times.push({ time: unixEnd, isStart: false, scheduleNum: allDayNum });
   }
 
   return { times, day };
@@ -178,7 +249,7 @@ class Salmon extends React.Component {
       <Grid fluid style={{ paddingTop: 65 }}>
         <Row>
           <Col md={12}>
-            <h1>
+            <h1 style={{ marginTop: 0 }}>
               <FormattedMessage
                 id="salmon.title"
                 defaultMessage="Shift Schedule"
@@ -187,11 +258,11 @@ class Salmon extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} sm={6} md={4}>
+          <Col xs={12} sm={6} md={4} lg={3}>
             <SalmonCalendar schedules={coop_schedules.schedules} />
           </Col>
           {coop_schedules.details.map(d => (
-            <Col xs={12} sm={6} md={4} key={d.start_time}>
+            <Col xs={12} sm={6} md={4} lg={3} key={d.start_time}>
               <SalmonDetail detail={d} />
             </Col>
           ))}
