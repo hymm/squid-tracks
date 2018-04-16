@@ -22,7 +22,6 @@ class Results extends React.Component {
       initialized: false,
       currentResultIndex: 0
     });
-    console.log('results did mount');
   }
 
   getResults = () => {

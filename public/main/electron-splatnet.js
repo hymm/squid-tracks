@@ -57,6 +57,7 @@ function registerSplatnetHandler() {
   protocol.registerHttpProtocol(
     'npf71b963c1b7b6d119',
     (request, callback) => {
+      mainWindow.loadURL(`${startUrl}?loggingIn=1`);
       const url = request.url;
       const params = {};
       url
@@ -91,6 +92,7 @@ module.exports.registerSplatnetHandler = registerSplatnetHandler;
 
 ipcMain.on('logout', event => {
   userDataStore.set('sessionToken', '');
+  userDataStore.set('iksmCookie', '');
   event.returnValue = true;
 });
 

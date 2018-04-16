@@ -1,0 +1,53 @@
+.salmon-calendar {
+  margin-bottom: 20px;
+  overflow: auto;
+}
+
+.salmon-day {
+  width: 14.2857%;
+  border: 1px #ddd solid;
+  float: left;
+  height: 72px;
+  position: relative;
+}
+
+.salmon-day.header {
+  height: auto;
+  text-align: center;
+}
+
+.salmon-day .cell {
+  position: relative;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.salmon-day .cell.work.day-start {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
+}
+
+.salmon-day .cell.work.day-end {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: none;
+}
+
+.salmon-day .cell.work {
+  background: #ffcb87;
+  border: 1px orange solid;
+}
+
+.salmon-day .date {
+  position: absolute;
+  margin-left: 4px;
+  top: 0;
+  left: 0;
+}
+
+.salmon-day .currentTime {
+  position: absolute;
+  border-top: 1px red solid;
+  width: 100%;
+}

@@ -7,7 +7,7 @@ import WeaponCard from './components/weapon-card';
 import { event } from './analytics';
 import { defineMessages, injectIntl } from 'react-intl';
 
-class ResultsContainer extends React.Component {
+class RecordsContainer extends React.Component {
   messages = defineMessages({
     refresh: {
       id: 'records.refreshButton.refresh',
@@ -57,13 +57,13 @@ class ResultsContainer extends React.Component {
   }
 }
 
-const ResultsContainerIntl = injectIntl(ResultsContainer);
+const RecordsContainerIntl = injectIntl(RecordsContainer);
 
 const Records = ({ splatnet }) => (
   <Grid fluid style={{ marginTop: 65 }}>
     <Row>
       <Col md={12}>
-        <ResultsContainerIntl splatnet={splatnet} />
+        <RecordsContainerIntl splatnet={splatnet} />
       </Col>
     </Row>
   </Grid>

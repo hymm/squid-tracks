@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { Subscriber } from 'react-broadcast';
 import ApiViewer from './api-viewer';
 import Schedule from './schedule';
+import Salmon from './salmon';
 import Records from './records';
 import Results from './results';
 import Meta from './meta';
@@ -49,6 +50,7 @@ const Routes = ({
           <Route path="/home" exact component={About} />
           <Route path="/testApi" component={ApiViewer} />
           <Route path="/schedule" component={Schedule} />
+          <Route path="/salmon" component={Salmon} />
           <Route path="/records" component={Records} />
           <Route path="/results" component={Results} />
           <Route path="/meta" component={Meta} />
@@ -75,7 +77,8 @@ const Routes = ({
             <Redirect from="/" to="/home" />
           ) : (
             <Redirect from="/" to="/login" />
-          )}
+          )
+        }
       />
     </div>
   );

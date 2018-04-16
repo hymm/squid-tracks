@@ -33,7 +33,8 @@ class App extends Component {
   state = {
     sessionToken: '',
     locale: 'en',
-    loggedIn: false
+    loggedIn: false,
+    loggingIn: false
   };
 
   componentDidMount() {
@@ -41,6 +42,9 @@ class App extends Component {
     this.checkLoginStatus();
     screenview('Start');
     this.setLocale(ipcRenderer.sendSync('getFromStore', 'locale'));
+    this.setState({
+      loggingIn: this.getLoggingInState(global.location.search)
+    });
   }
 
   checkLoginStatus() {
@@ -79,9 +83,23 @@ class App extends Component {
     this.setState({ loggedIn: loginStatus });
   };
 
+  getLoggingInState(search) {
+    const params = new URLSearchParams(search);
+    const loggingIn = params.get('loggingIn');
+    if (loggingIn === '1') {
+      return true;
+    }
+
+    return false;
+  }
+
   render() {
-    const { sessionToken, locale, loggedIn } = this.state;
+    const { sessionToken, locale, loggedIn, loggingIn } = this.state;
     const message = messages[locale] || messages.en;
+    if (loggingIn) {
+      return <div>logging in</div>;
+    }
+
     return (
       <IntlProvider locale={locale} messages={message}>
         <Router history={history}>
