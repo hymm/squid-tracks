@@ -109,7 +109,7 @@ class GoogleAnalyticsCheckbox extends React.Component {
 
 class IksmToken extends React.Component {
   state = {
-    cookie: { key: '', value: '', expires: '' }
+    cookie: ''
   };
 
   componentDidMount() {
@@ -131,16 +131,17 @@ class IksmToken extends React.Component {
       <div>
         <h4>
           iksm Token{' '}
-          <Glyphicon
-            glyph="copy"
-            style={{ fontSize: 20, cursor: 'pointer' }}
-            onClick={() => {
-              clipboard.writeText(cookie.value);
-              event('settings', 'copy-iksm-token');
-            }}
-          />
+          {cookie.length > 0 ? (
+            <Glyphicon
+              glyph="copy"
+              style={{ fontSize: 20, cursor: 'pointer' }}
+              onClick={() => {
+                clipboard.writeText(cookie);
+                event('settings', 'copy-iksm-token');
+              }}
+            />
+          ) : null}
         </h4>
-        Expiration: {cookie.expires}
       </div>
     );
   }
@@ -164,11 +165,44 @@ const LanguageSettings = ({ setLocale, locale }) => {
   );
 };
 
+class SessionToken extends React.Component {
+  state = { token: '' };
+
+  componentDidMount() {
+    this.setState({
+      token: ipcRenderer.sendSync('getFromStore', 'sessionToken')
+    });
+  }
+
+  render() {
+    const { token } = this.state;
+    const expUnix = token ? JSON.parse(jws.decode(token).payload).exp : 0;
+    const tokenExpiration = token
+      ? new Date(expUnix * 1000).toString()
+      : 'unknown';
+
+    return (
+      <React.Fragment>
+        <h4>
+          Session Token{' '}
+          {token.length > 0 ? (
+            <Glyphicon
+              glyph="copy"
+              onClick={() => {
+                clipboard.writeText(token);
+                event('settings', 'copy-session-token');
+              }}
+              style={{ fontSize: 20, cursor: 'pointer' }}
+            />
+          ) : null}
+        </h4>
+        Expiration: {tokenExpiration}
+      </React.Fragment>
+    );
+  }
+}
+
 const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
-  const expUnix = token ? JSON.parse(jws.decode(token).payload).exp : 0;
-  const tokenExpiration = token
-    ? new Date(expUnix * 1000).toString()
-    : 'unknown';
   return (
     <Grid fluid style={{ marginTop: 65, marginBotton: 30 }}>
       <LanguageSettings setLocale={setLocale} locale={locale} />
@@ -210,18 +244,7 @@ const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
               <strong>DO NOT SHARE Session Token or iksm Token.</strong> These
               are available here for debugging purposes. Sharing these could
               lead to someone stealing your personal information.
-              <h4>
-                Session Token{' '}
-                <Glyphicon
-                  glyph="copy"
-                  onClick={() => {
-                    clipboard.writeText(token);
-                    event('settings', 'copy-session-token');
-                  }}
-                  style={{ fontSize: 20, cursor: 'pointer' }}
-                />
-              </h4>
-              Expiration: {tokenExpiration}
+              <SessionToken />
               <IksmToken />
             </Panel.Body>
           </Panel>
