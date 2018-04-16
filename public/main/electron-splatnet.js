@@ -92,6 +92,7 @@ module.exports.registerSplatnetHandler = registerSplatnetHandler;
 
 ipcMain.on('logout', event => {
   userDataStore.set('sessionToken', '');
+  userDataStore.set('iksmCookie', '');
   event.returnValue = true;
 });
 
