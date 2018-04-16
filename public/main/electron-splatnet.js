@@ -77,13 +77,17 @@ function registerSplatnetHandler() {
           const iksm = splatnet.getIksmToken();
           userDataStore.set('iksmCookie', iksm);
           mainWindow.loadURL(startUrl);
+        })
+        .catch(e => {
+          const message = `Error Logging into Nintendo: ${e}`;
+          uaException(message);
+          log.error(message);
+          mainWindow.loadURL(`${startUrl}?error=1`);
         });
     },
     e => {
       if (e) {
-        const message = `Error Logging into Nintendo: ${e}`;
-        uaException(message);
-        log.error(message);
+        console.error('Failed to register protocol');
       }
     }
   );
