@@ -2,6 +2,16 @@
 
 If you're interested in contributing feel free to contact me or create a pull request.
 
+## Submitting a pull request
+
+These instructions are a bit rough.  Feel free to message me with questions.
+1. [Fork the project](https://help.github.com/articles/fork-a-repo/)
+2. Create a new branch off your fork from latest beta branch
+3. Commit your changes to the new branch
+4. When you're ready to submit your pull request, [Sync to beta branch](https://gist.github.com/ravibhure/a7e0918ff4937c9ea1c456698dcd58aa) and rebase your branch onto the
+newest commit in the latest beta branch
+5. [Submit your pull request](https://help.github.com/articles/about-pull-requests/)
+
 ## Running Development Mode
 To run in development mode install [yarn](https://yarnpkg.com).
 ```

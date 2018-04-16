@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## Version 1.1.0
+### New Features
+* Salmon Run Schedule
+* Added icon for Clam Blitz to Battle History Trend
+
+### Bugfix
+* New Icon should be less blurry in some places
+* Switches to temp screen to prevent multiple clicks on logging in
+* Logout will now actually log you out.
+* Copying tokens on settings page works again
+
 ## Version 1.0.0
 ### New Features
 * Normal login is back!! Thank @YDKK and @frozenpandaman for figuring login out and implementing it.
