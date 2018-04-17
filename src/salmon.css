@@ -51,3 +51,15 @@
   border-top: 1px red solid;
   width: 100%;
 }
+
+.mystery {
+  display: inline-block;
+  text-align: center;
+  width: 30px;
+  background: grey;
+  height: 30px;
+  vertical-align: middle;
+  color: white;
+  font-size: 1.5em;
+  border-radius: 20px;
+}
