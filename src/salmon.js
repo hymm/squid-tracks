@@ -245,14 +245,19 @@ const SalmonDetail = ({ detail }) => {
           alt={detail.stage.name}
         />
         <br />
-        {detail.weapons.map((weapon, i) => (
-          <Image
-            key={i}
-            src={`https://app.splatoon2.nintendo.net${weapon.thumbnail}`}
-            style={{ maxHeight: 40 }}
-            alt={weapon.name}
-          />
-        ))}
+        {detail.weapons.map(
+          (weapon, i) =>
+            weapon == null ? (
+              <div className="mystery">?</div>
+            ) : (
+              <Image
+                key={i}
+                src={`https://app.splatoon2.nintendo.net${weapon.thumbnail}`}
+                style={{ maxHeight: 40 }}
+                alt={weapon.name}
+              />
+            )
+        )}
       </Panel.Body>
     </Panel>
   );

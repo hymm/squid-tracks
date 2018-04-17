@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Version 1.1.1
+### Bugfix
+* Fixed crashing with Salmon Run Schedule when there's a mystery weapon
+
 ## Version 1.1.0
 ### New Features
 * Salmon Run Schedule
