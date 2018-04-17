@@ -180,7 +180,8 @@ class ResultsTimeline extends React.Component {
       result: result.my_team_result.key,
       stageId: result.stage.id,
       myScore: counts.mine,
-      otherScore: counts.other
+      otherScore: counts.other,
+      battle_number: result.battle_number
     };
   }
 
@@ -336,7 +337,7 @@ class ResultsTimeline extends React.Component {
   }
 
   render() {
-    const { activeValue, averages, results } = this.props;
+    const { activeValue, averages, results, changeResult } = this.props;
     // const results = this.props.splatnet.current.results.results;
     const data = results.map(result => this.getValues(result));
 
@@ -371,7 +372,18 @@ class ResultsTimeline extends React.Component {
           >
             {data.map((entry, index) => {
               const color = this.getModeColor(entry.lobby, entry.result);
-              return <Cell key={index} fill={color} fillOpacity={0.8} />;
+              return (
+                <Cell
+                  key={index}
+                  fill={color}
+                  fillOpacity={0.8}
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => {
+                    document.body.scrollTop = 0;
+                    changeResult(entry.battle_number);
+                  }}
+                />
+              );
             })}
           </Bar>
           {activeValue === 'power' ? this.renderPowerTrend(powerAvg) : null}
