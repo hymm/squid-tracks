@@ -69,6 +69,17 @@ const PlayerCard = ({ records }) => {
           defaultMessage="Losses: {count}"
           values={{ count: records.lose_count }}
         />
+        <br />
+        <FormattedMessage
+          id="PlayerCard.winPercentage"
+          defaultMessage="Win %: {count}"
+          values={{
+            count: (
+              records.win_count /
+              (records.lose_count + records.win_count)
+            ).toFixed(2)
+          }}
+        />
       </Panel.Body>
     </Panel>
   );
