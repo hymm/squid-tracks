@@ -3,8 +3,12 @@ const msgpack = require('msgpack-lite');
 const LobbyModeMap = require('./lobby-mode-map');
 const RuleMap = require('./rule-map');
 const StatInkMap = require('./stat-ink-map');
+const AbilityMap = require('./ability-map');
 const defaultStageMap = require('./default-maps/stage.json');
 const defaultWeaponMap = require('./default-maps/weapon.json');
+const defaultHeadMap = require('./default-maps/head.json');
+const defaultShirtMap = require('./default-maps/shirt.json');
+const defaultShoesMap = require('./default-maps/shoes.json');
 const { getSplatnetImage } = require('../splatnet2');
 const app = require('electron').app;
 const appVersion = app.getVersion();
@@ -36,6 +40,24 @@ const weaponMap = new StatInkMap(
   'weapon.json',
   'https://stat.ink/api/v2/weapon',
   defaultWeaponMap
+);
+
+const headMap = new StatInkMap(
+  'head.json',
+  'https://stat.ink/api/v2/gear?type=headgear',
+  defaultHeadMap
+);
+
+const shirtMap = new StatInkMap(
+  'shirt.json',
+  'https://stat.ink/api/v2/gear?type=clothing',
+  defaultShirtMap
+);
+
+const shoesMap = new StatInkMap(
+  'shoes.json',
+  'https://stat.ink/api/v2/gear?type=shoes',
+  defaultShoesMap
 );
 
 async function setGameInfo(statInk, result) {
@@ -212,6 +234,35 @@ function setSplatFest(statInk, result) {
   statInk.fest_title_after = FestRankMap[result.fes_grade.rank];
 }
 
+async function setGear(statInkGear, gearId, abilities, gearMap) {
+  try {
+    statInkGear.gear = await gearMap.getKey(gearId);
+  } catch (e) {
+    log.error(e);
+  }
+
+  statInkGear.primary_ability = AbilityMap[abilities.main.id];
+  statInkGear.secondary_abilities = [];
+  for (const sub of abilities.subs) {
+    statInkGear.secondary_abilities.push(
+      sub == null ? null : AbilityMap[sub.id]
+    );
+  }
+}
+
+async function setPlayerGear(statInk, result) {
+  statInk.gears = { headgear: {}, clothing: {}, shoes: {} };
+  const player = result.player_result.player;
+  setGear(statInk.gears.headgear, player.head.id, player.head_skills, headMap);
+  setGear(
+    statInk.gears.clothing,
+    player.clothes.id,
+    player.clothes_skills,
+    shirtMap
+  );
+  setGear(statInk.gears.shoes, player.shoes.id, player.shoes_skills, shoesMap);
+}
+
 async function convertResultToStatInk(result, disableGetImage) {
   const statInk = {};
   setUuid(statInk, result);
@@ -220,6 +271,7 @@ async function convertResultToStatInk(result, disableGetImage) {
   setGameResults(statInk, result);
 
   await setPlayerResults(statInk, result);
+  await setPlayerGear(statInk, result);
   await setPlayers(statInk, result);
   setClientInfo(statInk, result);
 
