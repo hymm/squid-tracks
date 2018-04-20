@@ -62,7 +62,7 @@ const SalmonDay = ({ schedules, unixTime }) => {
         if (time.isStart) {
           return (
             <div
-              key={time.time}
+              key={`start.${time.time}`}
               className={`cell`}
               style={{ height: `${height}%` }}
             />
@@ -72,7 +72,7 @@ const SalmonDay = ({ schedules, unixTime }) => {
         return (
           <OverlayTrigger
             overlay={
-              <Tooltip>
+              <Tooltip id={schedules[time.scheduleNum].start_time}>
                 <SalmonTime unixTime={schedules[time.scheduleNum].start_time} />
                 {` - `}
                 <SalmonTime unixTime={schedules[time.scheduleNum].end_time} />
@@ -81,9 +81,9 @@ const SalmonDay = ({ schedules, unixTime }) => {
             placement="top"
             delayShow={300}
             delayHide={150}
+            key={`day.${time.time}`}
           >
             <div
-              key={time.time}
               className={`cell work ${dayStart ? 'day-start' : ''} ${
                 dayEnd ? 'day-end' : ''
               }`}
@@ -187,8 +187,8 @@ const SalmonCalendar = ({ schedules }) => {
       calendar.push(<div key={i.getDate()}>{currentWeek}</div>);
     }
   }
-  if (currentWeek.length < 6) {
-    calendar.push(<div key={endDate.getDate()}>{currentWeek}</div>);
+  if (currentWeek.length < 7) {
+    calendar.push(currentWeek);
   }
 
   return (
@@ -248,7 +248,9 @@ const SalmonDetail = ({ detail }) => {
         {detail.weapons.map(
           (weapon, i) =>
             weapon == null ? (
-              <div className="mystery">?</div>
+              <div key={i} className="mystery">
+                ?
+              </div>
             ) : (
               <Image
                 key={i}
