@@ -35,6 +35,15 @@ const PlayerCard = ({ records }) => {
         />
         <br />
         <FormattedMessage
+          id="PlayerCard.level"
+          defaultMessage="Level: {rank}{star}"
+          values={{
+            star: player.star_rank > 0 ? `★${player.star_rank}` : '',
+            rank: player.player_rank
+          }}
+        />
+        <br />
+        <FormattedMessage
           id="PlayerCard.splatzonesShortname"
           defaultMessage="SZ: {name}{number}"
           values={{ name: udemae_zones.name, number: sz_s_plus_number }}

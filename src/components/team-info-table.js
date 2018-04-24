@@ -25,12 +25,6 @@ const TeamHeader = ({ player = { player: {} } }) => (
       </th>
       <th colSpan="1">
         <FormattedMessage
-          id="resultDetails.teamInfo.header.star"
-          defaultMessage="Star"
-        />
-      </th>
-      <th colSpan="1">
-        <FormattedMessage
           id="resultDetails.teamInfo.header.weaponId"
           defaultMessage="Weapon ID"
         />
@@ -49,9 +43,10 @@ const PlayerRow = ({ player }) => {
   return (
     <tr>
       <td>{player.player.nickname}</td>
-      <td>{player.player.player_rank}</td>
+      <td>{`${player.player.player_rank}${
+        player.player.star_rank > 0 ? `★${player.player.star_rank}` : ''
+      }`}</td>
       <td>{player.sort_score}</td>
-      <td>{player.player.star_rank}</td>
       <td>{player.player.weapon.id}</td>
       <td>{player.player.principal_id}</td>
     </tr>
