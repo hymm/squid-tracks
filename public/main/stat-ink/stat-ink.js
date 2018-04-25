@@ -10,6 +10,7 @@ const defaultHeadMap = require('./default-maps/head.json');
 const defaultShirtMap = require('./default-maps/shirt.json');
 const defaultShoesMap = require('./default-maps/shoes.json');
 const { getSplatnetImage } = require('../splatnet2');
+const log = require('electron-log');
 const app = require('electron').app;
 const appVersion = app.getVersion();
 const appName = app.getName();
@@ -100,6 +101,12 @@ async function setPowerInfo(statInk, result) {
   }
   if (result.other_estimate_fes_power != null) {
     statInk.other_team_estimate_fes_power = result.other_estimate_fes_power;
+  }
+  if (result.x_power != null) {
+    statInk.x_power_after = result.x_power;
+  }
+  if (result.estimate_x_power != null) {
+    statInk.estimate_gachi_power = result.estimate_x_power;
   }
 }
 
