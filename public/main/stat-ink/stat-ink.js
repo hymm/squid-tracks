@@ -106,7 +106,7 @@ async function setPowerInfo(statInk, result) {
     statInk.x_power_after = result.x_power;
   }
   if (result.estimate_x_power != null) {
-    statInk.estimate_gachi_power = result.estimate_x_power;
+    statInk.estimate_x_power = result.estimate_x_power;
   }
 }
 
