@@ -148,12 +148,14 @@ class ResultsTimeline extends React.Component {
 
   getPower(result) {
     let power = null;
-    if (result.other_estimate_league_point) {
+    if (result.other_estimate_league_point != null) {
       power = result.other_estimate_league_point;
-    } else if (result.other_estimate_fes_power) {
+    } else if (result.other_estimate_fes_power != null) {
       power = result.other_estimate_fes_power;
-    } else if (result.estimate_gachi_power) {
+    } else if (result.estimate_gachi_power != null) {
       power = result.estimate_gachi_power;
+    } else if (result.estimate_x_power != null) {
+      power = result.estimate_x_power;
     }
 
     return power;

@@ -504,7 +504,7 @@ class ResultDetailCard extends React.Component {
                       ) : null}
                     </h4>
                     {this.state.show === 1 ? (
-                      <TeamStatsTable team={myTeam} />
+                      <TeamStatsTable team={myTeam} result={result} />
                     ) : null}
                     {this.state.show === 2 ? (
                       <TeamGearTable team={myTeam} />
@@ -536,7 +536,7 @@ class ResultDetailCard extends React.Component {
                       ) : null}
                     </h4>
                     {this.state.show === 1 ? (
-                      <TeamStatsTable team={otherTeam} />
+                      <TeamStatsTable team={otherTeam} result={result} />
                     ) : null}
                     {this.state.show === 2 ? (
                       <TeamGearTable team={otherTeam} />
