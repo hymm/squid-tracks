@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Broadcast } from 'react-broadcast';
 import { ipcRenderer } from 'electron';
 import log from 'electron-log';
+import { languages } from './components/language-select';
 
 class SplatnetProvider extends React.Component {
   state = {
@@ -12,6 +13,7 @@ class SplatnetProvider extends React.Component {
         summary: {},
         results: []
       },
+      annieOriginal: [],
       annie: { merchandises: [] },
       schedule: { gachi: [], league: [], regular: [] },
       coop_schedules: { details: [], schedules: [] },
@@ -74,6 +76,7 @@ class SplatnetProvider extends React.Component {
   componentDidMount() {
     ipcRenderer.on('apiData', this.handleApiData);
     ipcRenderer.on('apiDataError', this.handleApiError);
+    ipcRenderer.on('originalAbility', this.handleOriginalAbility);
   }
 
   componentWillUnmount() {
@@ -111,6 +114,8 @@ class SplatnetProvider extends React.Component {
         });
         return;
       case 'onlineshop/merchandises':
+        this.getOriginalAbilities(data);
+        // data.original = [];
         this.setState({
           current: update(this.state.current, { $merge: { annie: data } })
         });
@@ -118,6 +123,36 @@ class SplatnetProvider extends React.Component {
       default:
         return;
     }
+  };
+
+  getLocalizationString(locale) {
+    const localizationRow = languages.find(l => l.code === locale);
+
+    if (localizationRow == null) {
+      throw new Error('locale string not found');
+    }
+
+    return localizationRow.statInk;
+  }
+
+  getOriginalAbilities(data) {
+    const localization = this.getLocalizationString(this.props.locale);
+    for (const merchandise of data.merchandises) {
+      ipcRenderer.send(
+        'getOriginalAbility',
+        merchandise.kind,
+        merchandise.gear.id,
+        localization
+      );
+    }
+  }
+
+  handleOriginalAbility = (e, originalAbility) => {
+    this.setState({
+      current: update(this.state.current, {
+        annieOriginal: { $push: [originalAbility] }
+      })
+    });
   };
 
   handleBattleResult = battle => {
