@@ -76,7 +76,7 @@ class StatInkMap {
   }
 
   async getKey(id) {
-    return await this.getInfoWithRetry(id).key;
+    return (await this.getInfoWithRetry(id)).key;
   }
 }
 module.exports = StatInkMap;
