@@ -48,7 +48,7 @@ const TeamHeader = ({ player = { player: {} } }) => (
   </thead>
 );
 
-const PlayerRow = ({ player }) => {
+const PlayerRow = ({ player, crown }) => {
   return (
     <tr
       style={{ color: player.game_paint_point === 0 ? 'lightgrey' : undefined }}
@@ -61,11 +61,14 @@ const PlayerRow = ({ player }) => {
         )}
       </td>
 
-      {player.player.udemae ? <td>{`${player.player.udemae.name}`}</td> : null}
+      {player.player.udemae ? (
+        <td>{`${player.player.udemae.name}${crown ? '👑' : ''}`}</td>
+      ) : null}
       <td style={{ textAlign: 'center', background: 'darkgrey' }}>
         <Image
-          src={`https://app.splatoon2.nintendo.net${player.player.weapon
-            .thumbnail}`}
+          src={`https://app.splatoon2.nintendo.net${
+            player.player.weapon.thumbnail
+          }`}
           style={{ maxHeight: 30 }}
           alt={player.player.weapon.name}
         />
@@ -91,7 +94,15 @@ const TeamStatTable = ({ result, team }) => {
       <TeamHeader player={team[0]} />
       <tbody>
         {team.map(player => (
-          <PlayerRow key={player.player.principal_id} player={player} />
+          <PlayerRow
+            key={player.player.principal_id}
+            player={player}
+            crown={
+              result.crown_players
+                ? result.crown_players.includes(player.player.principal_id)
+                : false
+            }
+          />
         ))}
       </tbody>
       <tfoot>

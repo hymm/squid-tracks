@@ -25,6 +25,10 @@ const messages = defineMessages({
     id: 'Store.mainAbility',
     defaultMessage: 'Main'
   },
+  original: {
+    id: 'Store.originalAbility',
+    defaultMessage: 'Original'
+  },
   brand: {
     id: 'Store.brand',
     defaultMessage: 'Brand'
@@ -59,7 +63,7 @@ const messages = defineMessages({
   }
 });
 
-const MerchTable = ({ merch, intl }) => {
+const MerchTable = ({ merch, intl, original }) => {
   return (
     <Table bordered>
       <tbody>
@@ -73,6 +77,14 @@ const MerchTable = ({ merch, intl }) => {
             />
           </td>
         </tr>
+        {original != null ? (
+          <tr>
+            <th style={{ verticalAlign: 'middle' }}>
+              {intl.formatMessage(messages.original)}
+            </th>
+            <td>{original}</td>
+          </tr>
+        ) : null}
         <tr>
           <th style={{ verticalAlign: 'middle' }}>
             {intl.formatMessage(messages.brand)}
@@ -102,7 +114,7 @@ const MerchTable = ({ merch, intl }) => {
   );
 };
 
-const MerchRight = ({ merch, intl }) => {
+const MerchRight = ({ merch, intl, original }) => {
   const now = new Date().getTime();
   const timeLeftInSeconds = merch.end_time - now / 1000;
   const timeLeftInHours = timeLeftInSeconds / 3600;
@@ -124,14 +136,14 @@ const MerchRight = ({ merch, intl }) => {
       </Row>
       <Row>
         <Col md={12}>
-          <MerchTable merch={merch} intl={intl} />
+          <MerchTable merch={merch} intl={intl} original={original} />
         </Col>
       </Row>
     </Col>
   );
 };
 
-const Merch = ({ merch, order, disabled, intl }) => {
+const Merch = ({ merch, order, disabled, intl, original }) => {
   return (
     <Col sm={6} md={6} lg={4}>
       <Panel>
@@ -146,7 +158,7 @@ const Merch = ({ merch, order, disabled, intl }) => {
                 src={`https://app.splatoon2.nintendo.net${merch.gear.image}`}
               />
             </Col>
-            <MerchRight merch={merch} intl={intl} />
+            <MerchRight merch={merch} intl={intl} original={original} />
           </Row>
           <Row>
             <Col md={12}>
@@ -172,7 +184,7 @@ const Merch = ({ merch, order, disabled, intl }) => {
   );
 };
 
-const OrderedInfo = ({ order, cancel, cancelled, intl }) => {
+const OrderedInfo = ({ order, cancel, cancelled, intl, original }) => {
   return (
     <Row>
       <Col sm={12} md={12} lg={12}>
@@ -200,7 +212,7 @@ const OrderedInfo = ({ order, cancel, cancelled, intl }) => {
                 </Row>
                 <Row>
                   <Col md={12}>
-                    <MerchTable merch={order} intl={intl} />
+                    <MerchTable merch={order} intl={intl} original={original} />
                   </Col>
                 </Row>
               </Col>
@@ -266,7 +278,8 @@ class AnnieStore extends React.Component {
     const { splatnet, intl } = this.props;
     const { cancelled, ordering } = this.state;
     const { merchandises, ordered_info } = splatnet.current.annie;
-
+    const { annieOriginal = [] } = splatnet.current;
+    console.log(annieOriginal);
     return (
       <Grid fluid style={{ marginTop: 65 }}>
         <Row>
@@ -289,12 +302,13 @@ class AnnieStore extends React.Component {
           />
         ) : null}
         <Row>
-          {merchandises.map(merch => (
+          {merchandises.map((merch, i) => (
             <Merch
               key={merch.id}
               merch={merch}
               order={this.order}
               disabled={(ordered_info != null && !cancelled) || ordering}
+              original={annieOriginal.length > i ? annieOriginal[i] : ''}
               intl={intl}
             />
           ))}

@@ -1,6 +1,11 @@
 import React from 'react';
 import { Panel, Table, Image } from 'react-bootstrap';
-import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
+import {
+  defineMessages,
+  injectIntl,
+  FormattedMessage,
+  FormattedDate
+} from 'react-intl';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
 
@@ -34,6 +39,18 @@ class WeaponCard extends React.Component {
     paint: {
       id: 'WeaponCard.header.paint',
       defaultMessage: 'Paint'
+    },
+    lastUsed: {
+      id: 'WeaponCard.header.lastUsed',
+      defaultMessage: 'Last Used'
+    },
+    winMeter: {
+      id: 'WeaponCard.header.winMeter',
+      defaultMessage: '⚑'
+    },
+    maxWinMeter: {
+      id: 'WeaponCard.header.maxWinMeter',
+      defaultMessage: 'Max ⚑'
     }
   });
 
@@ -43,6 +60,21 @@ class WeaponCard extends React.Component {
       text: this.props.intl.formatMessage(this.messages.weapon),
       sortColumn: 'weapon.name',
       sortDirection: 'down'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.lastUsed),
+      sortColumn: 'last_use_time',
+      sortDirection: 'up'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.winMeter),
+      sortColumn: 'win_meter',
+      sortDirection: 'up'
+    },
+    {
+      text: this.props.intl.formatMessage(this.messages.maxWinMeter),
+      sortColumn: 'max_win_meter',
+      sortDirection: 'up'
     },
     {
       text: this.props.intl.formatMessage(this.messages.total),
@@ -139,6 +171,16 @@ class WeaponCard extends React.Component {
                     />
                   </td>
                   <td>{weapon.weapon.name}</td>
+                  <td>
+                    <FormattedDate
+                      value={new Date(weapon.last_use_time * 1000)}
+                      year="numeric"
+                      month="numeric"
+                      day="2-digit"
+                    />
+                  </td>
+                  <td>{weapon.win_meter}</td>
+                  <td>{weapon.max_win_meter}</td>
                   <td>{weapon.total_count}</td>
                   <td>{weapon.win_count}</td>
                   <td>{weapon.lose_count}</td>

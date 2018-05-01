@@ -6,7 +6,6 @@ import {
   Row,
   Button,
   FormGroup,
-  ControlLabel,
   FormControl,
   HelpBlock,
   Checkbox,
@@ -16,14 +15,31 @@ import {
 import jws from 'jws';
 import { event } from './analytics';
 import LanguageSelect from './components/language-select';
+import {
+  defineMessages,
+  FormattedMessage,
+  injectIntl,
+  FormattedHTMLMessage
+} from 'react-intl';
 const { remote, ipcRenderer, clipboard } = require('electron');
 const { openExternal } = remote.shell;
 
 class StatInkSettings extends React.Component {
   state = {
     apiToken: '',
-    statInkSaveButtonText: 'Save Token'
+    saved: false
   };
+
+  messages = defineMessages({
+    saveToken: {
+      id: 'Settings.StatInk.ButtonText.saveToken',
+      defaultMessage: 'Save Token'
+    },
+    tokenSaved: {
+      id: 'Settings.StatInk.ButtonText.tokenSaved',
+      defaultMessage: 'Token Saved'
+    }
+  });
 
   componentDidMount() {
     this.getStatInkApiToken();
@@ -40,29 +56,42 @@ class StatInkSettings extends React.Component {
   handleSubmit = e => {
     event('stat.ink', 'saved-token');
     ipcRenderer.sendSync('setStatInkApiToken', this.state.apiToken);
-    this.setState({ statInkSaveButtonText: 'Token Saved' });
+    this.setState({ saved: true });
     setTimeout(() => {
-      this.setState({ statInkSaveButtonText: 'Save Token' });
+      this.setState({ saved: false });
     }, 1000);
     e.preventDefault();
   };
 
   render() {
+    const { saved } = this.state;
+    const { intl } = this.props;
     return (
       <Panel>
-        <Panel.Heading>Stat.ink Settings</Panel.Heading>
+        <Panel.Heading>
+          <FormattedMessage
+            id="Settings.StatInk.title"
+            defaultMessage="stat.ink API Token"
+          />
+        </Panel.Heading>
         <Panel.Body>
           <form onSubmit={this.handleSubmit}>
             <FormGroup>
-              <ControlLabel>API Token</ControlLabel>
               <HelpBlock>
-                Copy from{' '}
-                <a
-                  onClick={() => openExternal('https://stat.ink/profile')}
-                  style={{ cursor: 'pointer' }}
-                >
-                  https://stat.ink/profile
-                </a>, paste below, and click Save
+                <FormattedMessage
+                  id="Settings.StatInk.HelpMessage"
+                  defaultMessage="Copy API Token from {link}, paste below, and click Save"
+                  values={{
+                    link: (
+                      <a
+                        onClick={() => openExternal('https://stat.ink/profile')}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        https://stat.ink/profile
+                      </a>
+                    )
+                  }}
+                />
               </HelpBlock>
               <FormControl
                 type="text"
@@ -70,11 +99,10 @@ class StatInkSettings extends React.Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <Button
-              type="submit"
-              disabled={this.state.statInkSaveButtonText === 'Token Saved'}
-            >
-              {this.state.statInkSaveButtonText}
+            <Button type="submit" disabled={saved}>
+              {intl.formatMessage(
+                saved ? this.messages.tokenSaved : this.messages.saveToken
+              )}
             </Button>
           </form>
         </Panel.Body>
@@ -101,7 +129,10 @@ class GoogleAnalyticsCheckbox extends React.Component {
   render() {
     return (
       <Checkbox checked={this.state.enabled} onClick={this.handleClick}>
-        Enabled
+        <FormattedMessage
+          id="Settings.GoogleAnalytics.EnabledCheckboxLabel"
+          defaultMessage="Enabled"
+        />
       </Checkbox>
     );
   }
@@ -130,7 +161,10 @@ class IksmToken extends React.Component {
     return (
       <div>
         <h4>
-          iksm Token{' '}
+          <FormattedMessage
+            id="Settings.Tokens.iksmToken.title"
+            defaultMessage="iksm Token"
+          />{' '}
           {cookie.length > 0 ? (
             <Glyphicon
               glyph="copy"
@@ -152,11 +186,17 @@ const LanguageSettings = ({ setLocale, locale }) => {
     <Row>
       <Col md={12}>
         <Panel>
-          <Panel.Heading>Splatnet API Language</Panel.Heading>
+          <Panel.Heading>
+            <FormattedMessage
+              id="Settings.Language.title"
+              defaultMessage="Language"
+            />
+          </Panel.Heading>
           <Panel.Body>
-            Languages are limited by Nintendo regions, so several of the
-            languages listed will not work. If you think your language should be
-            supported, please contact the developer.
+            <FormattedMessage
+              id="Settings.Language.warning"
+              defaultMessage="Languages in the Splatnet API are limited by Nintendo regions, so some languages may not work correctly."
+            />
             <LanguageSelect setLocale={setLocale} locale={locale} />
           </Panel.Body>
         </Panel>
@@ -184,7 +224,11 @@ class SessionToken extends React.Component {
     return (
       <React.Fragment>
         <h4>
-          Session Token{' '}
+          <FormattedMessage
+            id="Settings.tokens.sessionToken"
+            defaultMessage="Session Token"
+            description="long term session token that can be used to obtain a new cookie"
+          />{' '}
           {token.length > 0 ? (
             <Glyphicon
               glyph="copy"
@@ -196,62 +240,115 @@ class SessionToken extends React.Component {
             />
           ) : null}
         </h4>
-        Expiration: {tokenExpiration}
+        <FormattedMessage
+          id="Settings.Tokens.sessionTokenExpiration"
+          defaultMessage="Expiration: {tokenExpiration}"
+          values={{ tokenExpiration }}
+        />
       </React.Fragment>
     );
   }
 }
 
-const SettingsScreen = ({ token, logoutCallback, setLocale, locale }) => {
+const GoogleAnalyticsSettings = () => {
+  return (
+    <Panel>
+      <Panel.Heading>
+        <FormattedMessage
+          id="Settings.GoogleAnalytics.title"
+          defaultMessage="Google Analytics"
+        />
+      </Panel.Heading>
+      <Panel.Body>
+        <FormattedMessage
+          id="Settings.GoogleAnalytics.description"
+          defaultMessage={`
+            This program uses google analytics to track version uptake,
+            user activity, bugs, and crashing. If you find this creepy you can
+            disable this feature below.
+          `}
+        />
+        <GoogleAnalyticsCheckbox />
+      </Panel.Body>
+    </Panel>
+  );
+};
+
+const Debugging = () => {
+  return (
+    <Panel>
+      <Panel.Heading>
+        <FormattedMessage
+          id="Settings.Debugging.title"
+          defaultMessage="Debugging"
+        />
+      </Panel.Heading>
+      <Panel.Body>
+        <Link to="/testApi">
+          <Button>
+            <FormattedMessage
+              id="Settings.Debugging.buttonText.openApiChecker"
+              defaultMessage="API Checker"
+            />
+          </Button>
+        </Link>
+      </Panel.Body>
+    </Panel>
+  );
+};
+
+const SecurityTokens = () => {
+  return (
+    <Panel>
+      <Panel.Heading>
+        <FormattedMessage
+          id="Settings.Tokens.title"
+          defaultMessage="Splatnet 2 Access Tokens"
+        />
+      </Panel.Heading>
+      <Panel.Body>
+        <FormattedHTMLMessage
+          id="Settings.Tokens.warning"
+          defaultMessage={`
+            <strong>DO NOT SHARE Session Token or iksm Token.</strong> These
+            are available here for debugging purposes. Sharing these could
+            lead to someone stealing your personal information.
+          `}
+        />
+
+        <SessionToken />
+        <IksmToken />
+      </Panel.Body>
+    </Panel>
+  );
+};
+
+const SettingsScreen = ({ token, logoutCallback, setLocale, locale, intl }) => {
   return (
     <Grid fluid style={{ marginTop: 65, marginBotton: 30 }}>
       <LanguageSettings setLocale={setLocale} locale={locale} />
       <Row>
         <Col md={12}>
-          <StatInkSettings />
+          <StatInkSettings intl={intl} />
         </Col>
       </Row>
       <Row>
         <Col md={12}>
-          <Panel>
-            <Panel.Heading>Google Analytics</Panel.Heading>
-            <Panel.Body>
-              This program uses google analytics to track version uptake,
-              activity, bugs, and crashing. If you find this creepy you can
-              disable this feature below.
-              <GoogleAnalyticsCheckbox />
-            </Panel.Body>
-          </Panel>
+          <GoogleAnalyticsSettings />
         </Col>
       </Row>
       <Row>
         <Col md={12}>
-          <Panel>
-            <Panel.Heading>Debugging</Panel.Heading>
-            <Panel.Body>
-              <Link to="/testApi">
-                <Button>API Checker</Button>
-              </Link>
-            </Panel.Body>
-          </Panel>
+          <Debugging />
         </Col>
       </Row>
       <Row>
         <Col md={12}>
-          <Panel>
-            <Panel.Heading>Nintendo User Info</Panel.Heading>
-            <Panel.Body>
-              <strong>DO NOT SHARE Session Token or iksm Token.</strong> These
-              are available here for debugging purposes. Sharing these could
-              lead to someone stealing your personal information.
-              <SessionToken />
-              <IksmToken />
-            </Panel.Body>
-          </Panel>
+          <SecurityTokens />
         </Col>
       </Row>
     </Grid>
   );
 };
 
-export default SettingsScreen;
+export default injectIntl(SettingsScreen);

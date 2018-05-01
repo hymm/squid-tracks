@@ -315,6 +315,7 @@ class ResultsCard extends React.Component {
             summary={summary}
             averages={averages}
             results={normalized}
+            changeResult={changeResult}
           />
           <FormattedMessage
             id="results.table.sortHelp"

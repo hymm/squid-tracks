@@ -55,7 +55,7 @@ class StatInkMap {
     }
   }
 
-  getKeyFromMap(id) {
+  getRowWithId(id) {
     const row = this.map.find(
       row => parseInt(row.splatnet, 10) === parseInt(id, 10)
     );
@@ -63,16 +63,20 @@ class StatInkMap {
       throw Error(`Could not get id ${id} from map`);
     }
 
-    return row.key;
+    return row;
+  }
+
+  async getInfoWithRetry(id) {
+    try {
+      return this.getRowWithId(id);
+    } catch (e) {
+      await this.getFromStatInk();
+      return this.getRowWithId(id);
+    }
   }
 
   async getKey(id) {
-    try {
-      return this.getKeyFromMap(id);
-    } catch (e) {
-      await this.getFromStatInk();
-      return this.getKeyFromMap(id);
-    }
+    return (await this.getInfoWithRetry(id)).key;
   }
 }
 module.exports = StatInkMap;

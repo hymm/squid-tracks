@@ -4,6 +4,7 @@ import { Subscriber } from 'react-broadcast';
 import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
+import LeagueCard from './components/league-card';
 import { event } from './analytics';
 import { defineMessages, injectIntl } from 'react-intl';
 
@@ -52,6 +53,7 @@ class RecordsContainer extends React.Component {
         <PlayerCard records={records.records} />
         <StageCard records={records.records} />
         <WeaponCard records={records.records} />
+        <LeagueCard records={records.records} />
       </div>
     );
   }

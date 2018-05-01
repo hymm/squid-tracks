@@ -15,6 +15,29 @@ import {
 } from 'recharts';
 import { getValue } from './sort-array';
 
+const stageColors = [
+  '#191970',
+  '#2c2376',
+  '#3a2e7c',
+  '#473982',
+  '#544488',
+  '#604f8e',
+  '#6c5a94',
+  '#77659a',
+  '#8271a0',
+  '#8e7da6',
+  '#998aab',
+  '#a496b2',
+  '#afa3b7',
+  '#bbafbd',
+  '#c6bdc3',
+  '#d1c9c9',
+  '#ddd6cf',
+  '#e8e4d4',
+  '#f4f2da',
+  '#ffffe0'
+];
+
 class ResultDot extends React.Component {
   render() {
     const { payload } = this.props;
@@ -28,6 +51,12 @@ class ResultDot extends React.Component {
 class BarLabel extends React.Component {
   render() {
     const { width, x, y, data, index } = this.props;
+    let color = stageColors[data[index].stageId];
+    color = color == null ? 'grey' : color;
+    if (data[index].stageId === '9999') {
+      color = 'ORCHID';
+    }
+
     switch (data[index].rule) {
       case 'turf_war':
         return (
@@ -35,29 +64,29 @@ class BarLabel extends React.Component {
             <polygon
               points={`${x},${y} ${x + width * 0.25},${y} ${x},${y -
                 width * 0.5}`}
-              fill={'grey'}
+              fill={color}
             />
             <polygon
               points={`${x + width * 0.25},${y} ${x + width * 0.5},${y -
                 width * 0.5} ${x + width * 0.75},${y}`}
-              fill={'grey'}
+              fill={color}
             />
             <polygon
               points={`${x + width * 0.75},${y} ${x + width},${y} ${x +
                 width},${y - width * 0.5}`}
-              fill={'grey'}
+              fill={color}
             />
           </g>
         );
       case 'splat_zones':
         return (
-          <rect {...this.props} y={y - width} height={width} fill={'grey'} />
+          <rect {...this.props} y={y - width} height={width} fill={color} />
         );
       case 'tower_control':
         return (
           <polygon
             points={`${x},${y} ${x + width},${y} ${x + width / 2},${y - width}`}
-            fill={'grey'}
+            fill={color}
           />
         );
       case 'rainmaker':
@@ -66,7 +95,7 @@ class BarLabel extends React.Component {
             cx={x + width / 2}
             cy={y - width / 2}
             r={width / 2}
-            fill={'grey'}
+            fill={color}
           />
         );
       case 'clam_blitz':
@@ -77,7 +106,7 @@ class BarLabel extends React.Component {
               A ${radius} ${radius} 1 0 1 ${x + width} ${y - width}
               A ${radius} ${radius} 1 0 1 ${x} ${y}
               Z`}
-            fill={'grey'}
+            fill={color}
           />
         );
       default:
@@ -119,12 +148,14 @@ class ResultsTimeline extends React.Component {
 
   getPower(result) {
     let power = null;
-    if (result.other_estimate_league_point) {
+    if (result.other_estimate_league_point != null) {
       power = result.other_estimate_league_point;
-    } else if (result.other_estimate_fes_power) {
+    } else if (result.other_estimate_fes_power != null) {
       power = result.other_estimate_fes_power;
-    } else if (result.estimate_gachi_power) {
+    } else if (result.estimate_gachi_power != null) {
       power = result.estimate_gachi_power;
+    } else if (result.estimate_x_power != null) {
+      power = result.estimate_x_power;
     }
 
     return power;
@@ -149,8 +180,10 @@ class ResultsTimeline extends React.Component {
       rule: result.rule.key,
       lobby: result.game_mode.key,
       result: result.my_team_result.key,
+      stageId: result.stage.id,
       myScore: counts.mine,
-      otherScore: counts.other
+      otherScore: counts.other,
+      battle_number: result.battle_number
     };
   }
 
@@ -306,7 +339,7 @@ class ResultsTimeline extends React.Component {
   }
 
   render() {
-    const { activeValue, averages, results } = this.props;
+    const { activeValue, averages, results, changeResult } = this.props;
     // const results = this.props.splatnet.current.results.results;
     const data = results.map(result => this.getValues(result));
 
@@ -341,7 +374,18 @@ class ResultsTimeline extends React.Component {
           >
             {data.map((entry, index) => {
               const color = this.getModeColor(entry.lobby, entry.result);
-              return <Cell key={index} fill={color} fillOpacity={0.8} />;
+              return (
+                <Cell
+                  key={index}
+                  fill={color}
+                  fillOpacity={0.8}
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => {
+                    document.body.scrollTop = 0;
+                    changeResult(entry.battle_number);
+                  }}
+                />
+              );
             })}
           </Bar>
           {activeValue === 'power' ? this.renderPowerTrend(powerAvg) : null}

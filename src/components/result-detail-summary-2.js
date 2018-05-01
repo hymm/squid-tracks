@@ -91,6 +91,24 @@ const BattleSummary = ({ result }) => {
               />
             </Label>
           ) : null}
+          {result.x_power != null ? (
+            <Label bsStyle="default" style={{ ...labelStyle }}>
+              <FormattedMessage
+                id="resultDetails.summary.xPower"
+                defaultMessage="X Power {power}"
+                values={{ power: result.x_power }}
+              />
+            </Label>
+          ) : null}
+          {result.rank != null ? (
+            <Label bsStyle="default" style={{ ...labelStyle }}>
+              <FormattedMessage
+                id="resultDetails.summary.globalRank"
+                defaultMessage="Global Rank {rank}"
+                values={{ rank: result.rank }}
+              />
+            </Label>
+          ) : null}
           {result.fes_power ? (
             <Label style={{ background: colorMap.normal, ...labelStyle }}>
               <FormattedMessage
@@ -112,9 +130,18 @@ const BattleSummary = ({ result }) => {
           {result.estimate_gachi_power != null ? (
             <Label bsStyle="default" style={{ ...labelStyle }}>
               <FormattedMessage
-                id="resultDetails.summary.estimatePower"
-                defaultMessage="Estimate Power {power}"
+                id="resultDetails.summary.estimatePower.v2"
+                defaultMessage="8-Squid Power {power}"
                 values={{ power: result.estimate_gachi_power }}
+              />
+            </Label>
+          ) : null}
+          {result.estimate_x_power != null ? (
+            <Label bsStyle="default" style={{ ...labelStyle }}>
+              <FormattedMessage
+                id="resultDetails.summary.estimatePower.v2"
+                defaultMessage="8-Squid Power {power}"
+                values={{ power: result.estimate_x_power }}
               />
             </Label>
           ) : null}

@@ -44,7 +44,7 @@ class ResultsSummaryCard extends React.Component {
   };
 
   render() {
-    const { summary, averages, results } = this.props;
+    const { summary, averages, results, changeResult } = this.props;
     const { activeValue } = this.state;
 
     return (
@@ -134,6 +134,7 @@ class ResultsSummaryCard extends React.Component {
             activeValue={activeValue}
             averages={averages}
             results={results}
+            changeResult={changeResult}
           />
         </div>
       </div>

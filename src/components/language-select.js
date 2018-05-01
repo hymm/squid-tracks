@@ -3,14 +3,15 @@ import { FormControl } from 'react-bootstrap';
 import { event } from '../analytics';
 
 const languages = [
-  { name: 'Default', code: '' },
-  { name: 'Deutsch', code: 'de' },
-  { name: 'English', code: 'en' },
-  { name: 'Español', code: 'es' },
-  { name: 'Francais', code: 'fr' },
-  { name: 'Italiano', code: 'it' },
-  { name: '日本語', code: 'ja' }
+  { name: 'Default', code: '', statInk: '' },
+  { name: 'Deutsch', code: 'de', statInk: 'de_DE' },
+  { name: 'English', code: 'en', statInk: 'en_US' },
+  { name: 'Español', code: 'es', statInk: 'es_ES' },
+  { name: 'Francais', code: 'fr', statInk: 'fr_FR' },
+  { name: 'Italiano', code: 'it', statInk: 'it_IT' },
+  { name: '日本語', code: 'ja', statInk: 'ja_JP' }
 ];
+export { languages };
 
 export default class LanguageSelect extends React.Component {
   handleChange = e => {

@@ -103,7 +103,7 @@ class App extends Component {
     return (
       <IntlProvider locale={locale} messages={message}>
         <Router history={history}>
-          <SplatnetProvider>
+          <SplatnetProvider locale={locale}>
             <Routes
               loggedIn={loggedIn}
               setLogin={this.setLogin}

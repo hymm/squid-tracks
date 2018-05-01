@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## Version 1.2.0
+### New Features
+* Added support for rank X
+* Mode Icon at the top of the Battle trend now changes color to help you tell when you're sucking on
+a specific map
+* Added original ability of gear to Annie store page (currently text only, no image)
+* Click on background of trend to show details of a battle
+* Added win percent to Player Card
+* Gear used by user is now uploaded to stat.ink
+* Show a prestige players level with a star
+* Added turf vibe meter and last used time to weapon table
+* Added league medals to records
+
+### Bugfix
+* Fixed bug with some of salmon schedule not showing up 
+
 ## Version 1.1.1
 ### Bugfix
 * Fixed crashing with Salmon Run Schedule when there's a mystery weapon

@@ -163,7 +163,10 @@ class StageCard extends React.Component {
     return (
       <Panel>
         <Panel.Heading>
-          <FormattedMessage id="StageCard.title" defaultMessage="Stage Stats" />
+          <FormattedMessage
+            id="StageCard.title.v2"
+            defaultMessage="Ranked and League Stage Stats"
+          />
         </Panel.Heading>
         <Panel.Body>
           <Grid fluid style={{ paddingLeft: 0, paddingRight: 0 }}>

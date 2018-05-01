@@ -5,6 +5,7 @@ const { ipcMain, protocol } = require('electron');
 const log = require('electron-log');
 const { userDataStore } = require('./stores');
 const { uaException } = require('./analytics');
+const getOriginalAbility = require('./stat-ink/get-original-ability');
 
 const getSplatnetApiMemo120 = Memo(splatnet.getSplatnetApi, { maxAge: 120000 });
 const getSplatnetApiMemo10 = Memo(splatnet.getSplatnetApi, { maxAge: 10000 });
@@ -189,6 +190,18 @@ ipcMain.on('getApiAsync', async (e, url) => {
     e.sender.send('apiData', url, value);
   } catch (err) {
     const message = `Error getting ${url}: ${err}`;
+    uaException(message);
+    log.error(message);
+    e.sender.send('apiDataError', message);
+  }
+});
+
+ipcMain.on('getOriginalAbility', async (e, type, id, localization) => {
+  try {
+    const ability = await getOriginalAbility(type, id, localization);
+    e.sender.send('originalAbility', ability);
+  } catch (err) {
+    const message = `Error getting ${type}:${id}: ${err}`;
     uaException(message);
     log.error(message);
     e.sender.send('apiDataError', message);

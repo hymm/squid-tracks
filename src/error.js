@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col, Button, Alert, Panel } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import { Subscriber } from 'react-broadcast';
 import { ipcRenderer } from 'electron';
 import { event } from './analytics';
@@ -23,11 +24,20 @@ class ErrorPage extends React.Component {
     const { splatnet } = this.props;
     return (
       <Alert bsStyle="danger">
-        <h4>Error calling Splatnet API</h4>
+        <h4>
+          <FormattedMessage
+            id="Error.title"
+            defaultMessage="Error calling Splatnet 2 API"
+          />
+        </h4>
         <p>
-          Your session has probably expired. Please logout and use the proxy to
-          get another session.
-          <Button onClick={this.handleClick}>More</Button>
+          <FormattedMessage
+            id="Error.helpText"
+            defaultMessage="Your session has probably expired. Try logging out and logging back in with a new session."
+          />
+          <Button onClick={this.handleClick}>
+            <FormattedMessage id="Error.buttonMoreInfo" defaultMessage="More" />
+          </Button>
         </p>
         <p>
           <Panel collapsible expanded={this.state.open}>
@@ -35,7 +45,7 @@ class ErrorPage extends React.Component {
           </Panel>
         </p>
         <Button block bsStyle="primary" onClick={this.handleLogout}>
-          Logout
+          <FormattedMessage id="Error.buttonLogout" defaultMessage="Logout" />
         </Button>
       </Alert>
     );
