@@ -117,7 +117,10 @@ class SplatnetProvider extends React.Component {
         this.getOriginalAbilities(data);
         // data.original = [];
         this.setState({
-          current: update(this.state.current, { $merge: { annie: data } })
+          current: update(this.state.current, {
+            $merge: { annie: data },
+            annieOriginal: { $set: [] }
+          })
         });
         return;
       default:
