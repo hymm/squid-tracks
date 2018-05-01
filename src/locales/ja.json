@@ -57,6 +57,7 @@
   "Store.endTime": "{hours} 時間",
   "Store.mainAbility": "基本ギアパワー",
   "Store.orderButton.text": "注文する",
+  "Store.originalAbility": "Original",
   "Store.refreshButton.refresh": "更新",
   "Store.refreshButton.refreshing": "更新中",
   "WeaponCard.header.lastUsed": "Last Used",

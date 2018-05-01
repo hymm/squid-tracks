@@ -58,6 +58,7 @@
   "Store.endTime": "Offre valable encore {hours}h",
   "Store.mainAbility": "Bonus primaire",
   "Store.orderButton.text": "Commander",
+  "Store.originalAbility": "Original",
   "Store.refreshButton.refresh": "Actualiser",
   "Store.refreshButton.refreshing": "Actualisation en cours",
   "WeaponCard.header.lastUsed": "Last Used",
