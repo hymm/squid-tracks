@@ -39,7 +39,7 @@ describe('convertResultToStatInk', () => {
     result.my_team_result.key = 'victory';
 
     const res = await convertResultToStatInk(result, true);
-
+    console.log(res);
     expect(res.players[1].point).toEqual(
       result.my_team_members[0].game_paint_point + 1000
     );
@@ -152,5 +152,19 @@ describe('convertResultToStatInk', () => {
     const res = await convertResultToStatInk(result, true);
 
     expect(res.knock_out).toEqual('no');
+  });
+
+  it('should set player to "no" if player not in crown list', async () => {
+    const result = getDefaultResult();
+    result.crown_players = [];
+    const res = await convertResultToStatInk(result, true);
+    expect(res.players[0].top_500).toEqual('no');
+  });
+
+  it('should set player to "yes" if player in crown list', async () => {
+    const result = getDefaultResult();
+    result.crown_players = [result.player_result.player.principal_id];
+    const res = await convertResultToStatInk(result, true);
+    expect(res.players[0].top_500).toEqual('yes');
   });
 });
