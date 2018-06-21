@@ -200,13 +200,16 @@ class ResultsCard extends React.Component {
     const p = this.average(results, 'player_result.game_paint_point');
     const powers = results.map(result => {
       let power = null;
-      if (result.other_estimate_league_point) {
+      if (result.other_estimate_league_point != null) {
         power = result.other_estimate_league_point;
-      } else if (result.other_estimate_fes_power) {
+      } else if (result.other_estimate_fes_power != null) {
         power = result.other_estimate_fes_power;
-      } else if (result.estimate_gachi_power) {
+      } else if (result.estimate_gachi_power != null) {
         power = result.estimate_gachi_power;
+      } else if (result.estimate_x_power != null) {
+        power = result.estimate_x_power;
       }
+
       return power;
     });
 
