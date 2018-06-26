@@ -231,27 +231,27 @@ class StageCard extends React.Component {
                         <td>{stage.stage.name}</td>
                         <td>
                           {this.state.percent
-                            ? `${stage.area_percent.toFixed(2)}`
+                            ? `${(stage.area_percent * 100).toFixed(1)}%`
                             : `${stage.area_win} - ${stage.area_lose}`}
                         </td>
                         <td>
                           {this.state.percent
-                            ? `${stage.yagura_percent.toFixed(2)}`
+                            ? `${(stage.yagura_percent * 100).toFixed(1)}%`
                             : `${stage.yagura_win} - ${stage.yagura_lose}`}
                         </td>
                         <td>
                           {this.state.percent
-                            ? `${stage.hoko_percent.toFixed(2)}`
+                            ? `${(stage.hoko_percent * 100).toFixed(1)}%`
                             : `${stage.hoko_win} - ${stage.hoko_lose}`}
                         </td>
                         <td>
                           {this.state.percent
-                            ? `${stage.asari_percent.toFixed(2)}`
+                            ? `${(stage.asari_percent * 100).toFixed(1)}%`
                             : `${stage.asari_win} - ${stage.asari_lose}`}
                         </td>
                         <td>
                           {this.state.percent
-                            ? `${stage.total_percent.toFixed(2)}`
+                            ? `${(stage.total_percent * 100).toFixed(1)}%`
                             : `${stage.total_win} - ${stage.total_lose}`}
                         </td>
                       </tr>
@@ -267,27 +267,27 @@ class StageCard extends React.Component {
                       </th>
                       <td>
                         {this.state.percent
-                          ? `${calcStats.sz_percent.toFixed(2)}`
+                          ? `${(calcStats.sz_percent * 100).toFixed(1)}%`
                           : `${calcStats.sz_win} - ${calcStats.sz_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${calcStats.tc_percent.toFixed(2)}`
+                          ? `${(calcStats.tc_percent * 100).toFixed(1)}%`
                           : `${calcStats.tc_win} - ${calcStats.tc_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${calcStats.rm_percent.toFixed(2)}`
+                          ? `${(calcStats.rm_percent * 100).toFixed(1)}%`
                           : `${calcStats.rm_win} - ${calcStats.rm_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${calcStats.cb_percent.toFixed(2)}`
+                          ? `${(calcStats.cb_percent * 100).toFixed(1)}%`
                           : `${calcStats.cb_win} - ${calcStats.cb_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${calcStats.total_percent.toFixed(2)}`
+                          ? `${(calcStats.total_percent * 100).toFixed(1)}%`
                           : `${calcStats.total_win} - ${calcStats.total_lose}`}
                       </td>
                     </tr>
