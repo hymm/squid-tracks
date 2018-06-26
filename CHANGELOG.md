@@ -1,5 +1,63 @@
 # CHANGELOG
 
+## Version 1.2.0
+### New Features
+* Added support for rank X
+* Mode Icon at the top of the Battle trend now changes color to help you tell when you're sucking on
+a specific map
+* Added original ability of gear to Annie store page (currently text only, no image)
+* Click on background of trend to show details of a battle
+* Added win percent to Player Card
+* Gear used by user is now uploaded to stat.ink
+* Show a prestige players level with a star
+* Added turf vibe meter and last used time to weapon table
+* Added league medals to records
+
+### Bugfix
+* Fixed bug with some of salmon schedule not showing up 
+
+## Version 1.1.1
+### Bugfix
+* Fixed crashing with Salmon Run Schedule when there's a mystery weapon
+
+## Version 1.1.0
+### New Features
+* Salmon Run Schedule
+* Added icon for Clam Blitz to Battle History Trend
+
+### Bugfix
+* New Icon should be less blurry in some places
+* Switches to temp screen to prevent multiple clicks on logging in
+* Logout will now actually log you out.
+* Copying tokens on settings page works again
+
+## Version 1.0.0
+### New Features
+* Normal login is back!! Thank @YDKK and @frozenpandaman for figuring login out and implementing it.
+* New shiny icon to celebrate bump to 1.0.  Thanks @selkaine.
+* Thanks @DanSyor and @okuRaku for updating translations.
+
+### Maintenance
+* Updated dependencies
+
+## Version 0.3.6
+* added support for clam blitz
+* added support for newer stat.ink fields (power, star rank)
+
+## Version 0.3.5
+* French Language Support (Thanks DanSyor)
+* updated default maps
+* Error Handling for google analytics
+
+## Version 0.3.4
+* Windows 32bit added to exe installer
+* added indication on trend of rule (RM, TC, SZ)
+* added Error page for when session cookie expires
+
+## Version 0.3.3
+### Bugfix
+* fixed crash when loading radar charts
+
 ## Version 0.3.2
 ### New Features
 * SquidTracks will auto download info from stat.ink so when new weapons and stages are supported on stat.ink

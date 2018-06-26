@@ -5,6 +5,7 @@ const { ipcMain, protocol } = require('electron');
 const log = require('electron-log');
 const { userDataStore } = require('./stores');
 const { uaException } = require('./analytics');
+const getOriginalAbility = require('./stat-ink/get-original-ability');
 
 const getSplatnetApiMemo120 = Memo(splatnet.getSplatnetApi, { maxAge: 120000 });
 const getSplatnetApiMemo10 = Memo(splatnet.getSplatnetApi, { maxAge: 10000 });
@@ -57,6 +58,7 @@ function registerSplatnetHandler() {
   protocol.registerHttpProtocol(
     'npf71b963c1b7b6d119',
     (request, callback) => {
+      mainWindow.loadURL(`${startUrl}?loggingIn=1`);
       const url = request.url;
       const params = {};
       url
@@ -73,14 +75,20 @@ function registerSplatnetHandler() {
           sessionToken = tokens.sessionToken;
           userDataStore.set('sessionToken', sessionToken);
           await splatnet.getSessionCookie(tokens.accessToken);
+          const iksm = splatnet.getIksmToken();
+          userDataStore.set('iksmCookie', iksm);
           mainWindow.loadURL(startUrl);
+        })
+        .catch(e => {
+          const message = `Error Logging into Nintendo: ${e}`;
+          uaException(message);
+          log.error(message);
+          mainWindow.loadURL(`${startUrl}?error=1`);
         });
     },
     e => {
       if (e) {
-        const message = `Error Logging into Nintendo: ${e}`;
-        uaException(message);
-        log.error(message);
+        console.error('Failed to register protocol');
       }
     }
   );
@@ -89,6 +97,7 @@ module.exports.registerSplatnetHandler = registerSplatnetHandler;
 
 ipcMain.on('logout', event => {
   userDataStore.set('sessionToken', '');
+  userDataStore.set('iksmCookie', '');
   event.returnValue = true;
 });
 
@@ -99,9 +108,13 @@ ipcMain.on('loadSplatnet', e => {
   });
 });
 
-ipcMain.on('setIksmToken', (e, value) => {
-  splatnet.setIksmToken(value);
-  e.returnValue = true;
+ipcMain.on('setIksmToken', async (e, value) => {
+  try {
+    await splatnet.setIksmToken(value);
+    e.returnValue = true;
+  } catch (err) {
+    e.returnValue = false;
+  }
 });
 
 ipcMain.on('getIksmToken', async e => {
@@ -177,6 +190,18 @@ ipcMain.on('getApiAsync', async (e, url) => {
     e.sender.send('apiData', url, value);
   } catch (err) {
     const message = `Error getting ${url}: ${err}`;
+    uaException(message);
+    log.error(message);
+    e.sender.send('apiDataError', message);
+  }
+});
+
+ipcMain.on('getOriginalAbility', async (e, type, id, localization) => {
+  try {
+    const ability = await getOriginalAbility(type, id, localization);
+    e.sender.send('originalAbility', ability);
+  } catch (err) {
+    const message = `Error getting ${type}:${id}: ${err}`;
     uaException(message);
     log.error(message);
     e.sender.send('apiDataError', message);

@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-const TeamHeader = ({ player = { player: {} } }) =>
+const TeamHeader = ({ player = { player: {} } }) => (
   <thead>
     <tr>
       <th>
@@ -25,12 +25,6 @@ const TeamHeader = ({ player = { player: {} } }) =>
       </th>
       <th colSpan="1">
         <FormattedMessage
-          id="resultDetails.teamInfo.header.star"
-          defaultMessage="Star"
-        />
-      </th>
-      <th colSpan="1">
-        <FormattedMessage
           id="resultDetails.teamInfo.header.weaponId"
           defaultMessage="Weapon ID"
         />
@@ -42,29 +36,19 @@ const TeamHeader = ({ player = { player: {} } }) =>
         />
       </th>
     </tr>
-  </thead>;
+  </thead>
+);
 
 const PlayerRow = ({ player }) => {
   return (
     <tr>
-      <td>
-        {player.player.nickname}
-      </td>
-      <td>
-        {player.player.player_rank}
-      </td>
-      <td>
-        {player.sort_score}
-      </td>
-      <td>
-        {player.player.star_rank}
-      </td>
-      <td>
-        {player.player.weapon.id}
-      </td>
-      <td>
-        {player.player.principal_id}
-      </td>
+      <td>{player.player.nickname}</td>
+      <td>{`${player.player.player_rank}${
+        player.player.star_rank > 0 ? `★${player.player.star_rank}` : ''
+      }`}</td>
+      <td>{player.sort_score}</td>
+      <td>{player.player.weapon.id}</td>
+      <td>{player.player.principal_id}</td>
     </tr>
   );
 };
@@ -74,9 +58,9 @@ const TeamInfoTable = ({ result, team }) => {
     <Table striped bordered condensed hover>
       <TeamHeader player={team[0]} />
       <tbody>
-        {team.map(player =>
+        {team.map(player => (
           <PlayerRow key={player.player.principal_id} player={player} />
-        )}
+        ))}
       </tbody>
     </Table>
   );

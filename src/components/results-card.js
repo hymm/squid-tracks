@@ -247,162 +247,170 @@ class ResultsCard extends React.Component {
     );
 
     return (
-      <Panel header={<h3>Last 50 Battles</h3>}>
-        <ButtonToolbar style={{ marginBottom: '10px' }}>
-          <ButtonGroup>
-            <Button
-              onClick={() => {
-                event('last-50-battles', 'show-stats-raw');
-                this.setState({ normalize: false });
-              }}
-              active={!normalize}
-            >
-              <FormattedMessage
-                id="results.table.button.raw"
-                defaultMessage="Raw"
-              />
-            </Button>
-            <SplitButton
-              title={
+      <Panel>
+        <Panel.Heading>Last 50 Battles</Panel.Heading>
+        <Panel.Body>
+          <ButtonToolbar style={{ marginBottom: '10px' }}>
+            <ButtonGroup>
+              <Button
+                onClick={() => {
+                  event('last-50-battles', 'show-stats-raw');
+                  this.setState({ normalize: false });
+                }}
+                active={!normalize}
+              >
                 <FormattedMessage
-                  id="results.table.button.normalize"
-                  defaultMessage="Normalize to {normalizeTime} minutes"
-                  values={{ normalizeTime }}
+                  id="results.table.button.raw"
+                  defaultMessage="Raw"
                 />
-              }
-              onClick={() => {
-                event(
-                  'last-50-battles',
-                  'show-stats-normailzed',
-                  this.state.normalizeTime
-                );
-                this.setState({ normalize: true });
-              }}
-              active={normalize}
-              id="minutes"
-            >
-              <MenuItem
+              </Button>
+              <SplitButton
+                title={
+                  <FormattedMessage
+                    id="results.table.button.normalize"
+                    defaultMessage="Normalize to {normalizeTime} minutes"
+                    values={{ normalizeTime }}
+                  />
+                }
                 onClick={() => {
-                  event('last-50-battles', 'show-stats-normailzed', 1);
-                  this.setState({ normalizeTime: 1 });
+                  event(
+                    'last-50-battles',
+                    'show-stats-normailzed',
+                    this.state.normalizeTime
+                  );
+                  this.setState({ normalize: true });
                 }}
+                active={normalize}
+                id="minutes"
               >
-                1
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  event('last-50-battles', 'show-stats-normailzed', 3);
-                  this.setState({ normalizeTime: 3 });
-                }}
-              >
-                3
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  event('last-50-battles', 'show-stats-normailzed', 5);
-                  this.setState({ normalizeTime: 5 });
-                }}
-              >
-                5
-              </MenuItem>
-            </SplitButton>
-          </ButtonGroup>
-          <ExportButton />
-        </ButtonToolbar>
-        <ResultsSummary
-          summary={summary}
-          averages={averages}
-          results={normalized}
-        />
-        <FormattedMessage
-          id="results.table.sortHelp"
-          defaultMessage="* Click on column headers to sort"
-        />
-        <Table striped bordered condensed hover>
-          <thead>
-            <tr>
-              {columnHeaders.map(header => (
-                <TableHeader
-                  key={header.text}
-                  setState={this.setState.bind(this)}
-                  sort={{
-                    sortColumn: header.sortColumn,
-                    sortDirection: header.sortDirection,
-                    sortFunction: header.sortFunction
+                <MenuItem
+                  onClick={() => {
+                    event('last-50-battles', 'show-stats-normailzed', 1);
+                    this.setState({ normalizeTime: 1 });
                   }}
-                  text={header.text}
-                  sortColumn={this.state.sortColumn}
-                />
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {sortedResults.map(result => {
-              const linkInfo = statInk[result.battle_number];
-              return (
-                <tr key={result.start_time}>
-                  <td>
-                    <a
-                      onClick={() => {
-                        document.body.scrollTop = 0;
-                        changeResult(result.battle_number);
-                      }}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      {result.battle_number}
-                    </a>
-                    {linkInfo ? (
-                      <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
-                    ) : null}
-                  </td>
-                  <td>{result.game_mode.key}</td>
-                  <td>{result.rule.name}</td>
-                  <td>{result.stage.name}</td>
-                  <td>{result.my_team_result.key}</td>
-                  <td>
-                    {result.other_estimate_league_point ? (
-                      result.other_estimate_league_point
-                    ) : result.estimate_gachi_power ? (
-                      result.estimate_gachi_power
-                    ) : result.other_estimate_fes_power ? (
-                      result.other_estimate_fes_power
-                    ) : (
-                      '---'
-                    )}
-                  </td>
-                  <td style={{ textAlign: 'center', background: 'darkgrey' }}>
-                    <Image
-                      src={`https://app.splatoon2.nintendo.net${result
-                        .player_result.player.weapon.thumbnail}`}
-                      style={{ maxHeight: 30 }}
-                      alt={result.player_result.player.weapon.name}
-                    />
-                  </td>
-                  <td>{result.player_result.game_paint_point.toFixed(0)}</td>
-                  <td>{result.k_a.toFixed(normalize ? 1 : 0)}</td>
-                  <td>
-                    {result.player_result.kill_count.toFixed(normalize ? 1 : 0)}
-                  </td>
-                  <td>
-                    {result.player_result.assist_count.toFixed(
-                      normalize ? 1 : 0
-                    )}
-                  </td>
-                  <td>
-                    {result.player_result.death_count.toFixed(
-                      normalize ? 1 : 0
-                    )}
-                  </td>
-                  <td>
-                    {result.player_result.special_count.toFixed(
-                      normalize ? 1 : 0
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+                >
+                  1
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    event('last-50-battles', 'show-stats-normailzed', 3);
+                    this.setState({ normalizeTime: 3 });
+                  }}
+                >
+                  3
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    event('last-50-battles', 'show-stats-normailzed', 5);
+                    this.setState({ normalizeTime: 5 });
+                  }}
+                >
+                  5
+                </MenuItem>
+              </SplitButton>
+            </ButtonGroup>
+            <ExportButton />
+          </ButtonToolbar>
+          <ResultsSummary
+            summary={summary}
+            averages={averages}
+            results={normalized}
+            changeResult={changeResult}
+          />
+          <FormattedMessage
+            id="results.table.sortHelp"
+            defaultMessage="* Click on column headers to sort"
+          />
+          <Table striped bordered condensed hover>
+            <thead>
+              <tr>
+                {columnHeaders.map(header => (
+                  <TableHeader
+                    key={header.text}
+                    setState={this.setState.bind(this)}
+                    sort={{
+                      sortColumn: header.sortColumn,
+                      sortDirection: header.sortDirection,
+                      sortFunction: header.sortFunction
+                    }}
+                    text={header.text}
+                    sortColumn={this.state.sortColumn}
+                  />
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {sortedResults.map(result => {
+                const linkInfo = statInk[result.battle_number];
+                return (
+                  <tr key={result.start_time}>
+                    <td>
+                      <a
+                        onClick={() => {
+                          document.body.scrollTop = 0;
+                          changeResult(result.battle_number);
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {result.battle_number}
+                      </a>
+                      {linkInfo ? (
+                        <Glyphicon
+                          glyph={'ok-sign'}
+                          style={{ paddingLeft: 6 }}
+                        />
+                      ) : null}
+                    </td>
+                    <td>{result.game_mode.key}</td>
+                    <td>{result.rule.name}</td>
+                    <td>{result.stage.name}</td>
+                    <td>{result.my_team_result.key}</td>
+                    <td>
+                      {result.other_estimate_league_point
+                        ? result.other_estimate_league_point
+                        : result.estimate_gachi_power
+                          ? result.estimate_gachi_power
+                          : result.other_estimate_fes_power
+                            ? result.other_estimate_fes_power
+                            : '---'}
+                    </td>
+                    <td style={{ textAlign: 'center', background: 'darkgrey' }}>
+                      <Image
+                        src={`https://app.splatoon2.nintendo.net${
+                          result.player_result.player.weapon.thumbnail
+                        }`}
+                        style={{ maxHeight: 30 }}
+                        alt={result.player_result.player.weapon.name}
+                      />
+                    </td>
+                    <td>{result.player_result.game_paint_point.toFixed(0)}</td>
+                    <td>{result.k_a.toFixed(normalize ? 1 : 0)}</td>
+                    <td>
+                      {result.player_result.kill_count.toFixed(
+                        normalize ? 1 : 0
+                      )}
+                    </td>
+                    <td>
+                      {result.player_result.assist_count.toFixed(
+                        normalize ? 1 : 0
+                      )}
+                    </td>
+                    <td>
+                      {result.player_result.death_count.toFixed(
+                        normalize ? 1 : 0
+                      )}
+                    </td>
+                    <td>
+                      {result.player_result.special_count.toFixed(
+                        normalize ? 1 : 0
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </Panel.Body>
       </Panel>
     );
   }

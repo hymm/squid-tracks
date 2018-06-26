@@ -147,13 +147,14 @@ export default class LeagueRankings extends React.Component {
         weapons_out[j]['uses'].last_last_week /
         calcStats.totals['uses'][2] *
         100;
-      weapons_out[j]['uses'].diff_this_to_last = (weapons_out[j]['uses']
-        .this_week_percent - weapons_out[j]['uses'].last_week_percent).toFixed(
-        1
-      );
-      weapons_out[j]['uses'].diff_last_to_last_last = (weapons_out[j]['uses']
-        .last_week_percent -
-        weapons_out[j]['uses'].last_last_week_percent).toFixed(1);
+      weapons_out[j]['uses'].diff_this_to_last = (
+        weapons_out[j]['uses'].this_week_percent -
+        weapons_out[j]['uses'].last_week_percent
+      ).toFixed(1);
+      weapons_out[j]['uses'].diff_last_to_last_last = (
+        weapons_out[j]['uses'].last_week_percent -
+        weapons_out[j]['uses'].last_last_week_percent
+      ).toFixed(1);
 
       weapons_out[j]['total_points'].this_week_percent =
         weapons_out[j]['total_points'].this_week /
@@ -167,181 +168,181 @@ export default class LeagueRankings extends React.Component {
         weapons_out[j]['total_points'].last_last_week /
         calcStats.totals['total_points'][2] *
         100;
-      weapons_out[j]['total_points'].diff_this_to_last = (weapons_out[j][
-        'total_points'
-      ].this_week_percent -
-        weapons_out[j]['total_points'].last_week_percent).toFixed(1);
-      weapons_out[j]['total_points'].diff_last_to_last_last = (weapons_out[j][
-        'total_points'
-      ].last_week_percent -
-        weapons_out[j]['total_points'].last_last_week_percent).toFixed(1);
+      weapons_out[j]['total_points'].diff_this_to_last = (
+        weapons_out[j]['total_points'].this_week_percent -
+        weapons_out[j]['total_points'].last_week_percent
+      ).toFixed(1);
+      weapons_out[j]['total_points'].diff_last_to_last_last = (
+        weapons_out[j]['total_points'].last_week_percent -
+        weapons_out[j]['total_points'].last_last_week_percent
+      ).toFixed(1);
 
-      weapons_out[j]['avg_points'].diff_this_to_last = (weapons_out[j][
-        'avg_points'
-      ].this_week - weapons_out[j]['avg_points'].last_week).toFixed(1);
-      weapons_out[j]['avg_points'].diff_last_to_last_last = (weapons_out[j][
-        'avg_points'
-      ].last_week - weapons_out[j]['avg_points'].last_last_week).toFixed(1);
+      weapons_out[j]['avg_points'].diff_this_to_last = (
+        weapons_out[j]['avg_points'].this_week -
+        weapons_out[j]['avg_points'].last_week
+      ).toFixed(1);
+      weapons_out[j]['avg_points'].diff_last_to_last_last = (
+        weapons_out[j]['avg_points'].last_week -
+        weapons_out[j]['avg_points'].last_last_week
+      ).toFixed(1);
     }
 
     sort(weapons_out, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel
-        header={
-          <h3>
-            {this.props.title}
-          </h3>
-        }
-      >
-        <Grid fluid>
-          <Row>
-            <Col sm={12} md={12}>
-              <ButtonToolbar style={{ marginBottom: '10px' }}>
-                <ButtonGroup>
-                  <Button
-                    onClick={this.setDataToDisplay}
-                    value="uses"
-                    active={this.state.data_to_display === 'uses'}
-                  >
-                    Uses
-                  </Button>
-                  <Button
-                    onClick={this.setDataToDisplay}
-                    value="total_points"
-                    active={this.state.data_to_display === 'total_points'}
-                  >
-                    Total Rating
-                  </Button>
-                  <Button
-                    onClick={this.setDataToDisplay}
-                    value="avg_points"
-                    active={this.state.data_to_display === 'avg_points'}
-                  >
-                    Average Rating
-                  </Button>
-                </ButtonGroup>
-              </ButtonToolbar>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={12} md={12}>
-              <Table striped bordered condensed hover>
-                <thead>
-                  <tr>
-                    {this.columnHeaders.map(header =>
-                      <TableHeader
-                        key={header.text}
-                        setState={this.setState.bind(this)}
-                        sort={{
-                          sortColumn:
-                            header.sortColumn === 'name'
-                              ? header.sortColumn
-                              : this.state.data_to_display +
-                                '.' +
-                                header.sortColumn,
-                          sortDirection: header.sortDirection
-                        }}
-                        text={header.text}
-                        sortColumn={this.state.sortColumn}
-                      />
-                    )}
-                  </tr>
-                </thead>
-                <tbody>
-                  {weapons_out.map(weapon =>
-                    <tr key={weapon.name}>
-                      <td>
-                        {weapon.name}
-                      </td>
-                      <td>
-                        {weapon[
-                          this.state.data_to_display
-                        ].last_last_week.toFixed(0)}
-                        {this.state.data_to_display === 'avg_points'
-                          ? ``
-                          : ` (${weapon[
-                              this.state.data_to_display
-                            ].last_last_week_percent.toFixed(1)}%)`}
-                      </td>
-                      <td>
-                        {weapon[this.state.data_to_display].last_week.toFixed(
-                          0
-                        )}
-                        {this.state.data_to_display === 'avg_points'
-                          ? ` `
-                          : ` (${weapon[
-                              this.state.data_to_display
-                            ].last_week_percent.toFixed(1)}%) `}
-                        <Label
-                          bsStyle={
-                            weapon[this.state.data_to_display]
-                              .diff_last_to_last_last > 0
-                              ? 'success'
-                              : weapon[this.state.data_to_display]
-                                  .diff_last_to_last_last < 0
-                                ? 'danger'
-                                : 'default'
-                          }
-                        >
-                          <Glyphicon
-                            glyph={
+      <Panel>
+        <Panel.Heading>{this.props.title}</Panel.Heading>
+        <Panel.Body>
+          <Grid fluid>
+            <Row>
+              <Col sm={12} md={12}>
+                <ButtonToolbar style={{ marginBottom: '10px' }}>
+                  <ButtonGroup>
+                    <Button
+                      onClick={this.setDataToDisplay}
+                      value="uses"
+                      active={this.state.data_to_display === 'uses'}
+                    >
+                      Uses
+                    </Button>
+                    <Button
+                      onClick={this.setDataToDisplay}
+                      value="total_points"
+                      active={this.state.data_to_display === 'total_points'}
+                    >
+                      Total Rating
+                    </Button>
+                    <Button
+                      onClick={this.setDataToDisplay}
+                      value="avg_points"
+                      active={this.state.data_to_display === 'avg_points'}
+                    >
+                      Average Rating
+                    </Button>
+                  </ButtonGroup>
+                </ButtonToolbar>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={12} md={12}>
+                <Table striped bordered condensed hover>
+                  <thead>
+                    <tr>
+                      {this.columnHeaders.map(header => (
+                        <TableHeader
+                          key={header.text}
+                          setState={this.setState.bind(this)}
+                          sort={{
+                            sortColumn:
+                              header.sortColumn === 'name'
+                                ? header.sortColumn
+                                : this.state.data_to_display +
+                                  '.' +
+                                  header.sortColumn,
+                            sortDirection: header.sortDirection
+                          }}
+                          text={header.text}
+                          sortColumn={this.state.sortColumn}
+                        />
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {weapons_out.map(weapon => (
+                      <tr key={weapon.name}>
+                        <td>{weapon.name}</td>
+                        <td>
+                          {weapon[
+                            this.state.data_to_display
+                          ].last_last_week.toFixed(0)}
+                          {this.state.data_to_display === 'avg_points'
+                            ? ``
+                            : ` (${weapon[
+                                this.state.data_to_display
+                              ].last_last_week_percent.toFixed(1)}%)`}
+                        </td>
+                        <td>
+                          {weapon[this.state.data_to_display].last_week.toFixed(
+                            0
+                          )}
+                          {this.state.data_to_display === 'avg_points'
+                            ? ` `
+                            : ` (${weapon[
+                                this.state.data_to_display
+                              ].last_week_percent.toFixed(1)}%) `}
+                          <Label
+                            bsStyle={
                               weapon[this.state.data_to_display]
                                 .diff_last_to_last_last > 0
-                                ? 'arrow-up'
+                                ? 'success'
                                 : weapon[this.state.data_to_display]
                                     .diff_last_to_last_last < 0
-                                  ? 'arrow-down'
-                                  : 'arrow-right'
+                                  ? 'danger'
+                                  : 'default'
                             }
-                          />
-                          {
-                            weapon[this.state.data_to_display]
-                              .diff_last_to_last_last
-                          }
-                        </Label>
-                      </td>
-                      <td>
-                        {weapon[this.state.data_to_display].this_week.toFixed(
-                          0
-                        )}
-                        {this.state.data_to_display === 'avg_points'
-                          ? ` `
-                          : ` (${weapon[
-                              this.state.data_to_display
-                            ].this_week_percent.toFixed(1)}%) `}
-                        <Label
-                          bsStyle={
-                            weapon[this.state.data_to_display]
-                              .diff_this_to_last > 0
-                              ? 'success'
-                              : weapon[this.state.data_to_display]
-                                  .diff_this_to_last < 0
-                                ? 'danger'
-                                : 'default'
-                          }
-                        >
-                          <Glyphicon
-                            glyph={
+                          >
+                            <Glyphicon
+                              glyph={
+                                weapon[this.state.data_to_display]
+                                  .diff_last_to_last_last > 0
+                                  ? 'arrow-up'
+                                  : weapon[this.state.data_to_display]
+                                      .diff_last_to_last_last < 0
+                                    ? 'arrow-down'
+                                    : 'arrow-right'
+                              }
+                            />
+                            {
+                              weapon[this.state.data_to_display]
+                                .diff_last_to_last_last
+                            }
+                          </Label>
+                        </td>
+                        <td>
+                          {weapon[this.state.data_to_display].this_week.toFixed(
+                            0
+                          )}
+                          {this.state.data_to_display === 'avg_points'
+                            ? ` `
+                            : ` (${weapon[
+                                this.state.data_to_display
+                              ].this_week_percent.toFixed(1)}%) `}
+                          <Label
+                            bsStyle={
                               weapon[this.state.data_to_display]
                                 .diff_this_to_last > 0
-                                ? 'arrow-up'
+                                ? 'success'
                                 : weapon[this.state.data_to_display]
                                     .diff_this_to_last < 0
-                                  ? 'arrow-down'
-                                  : 'arrow-right'
+                                  ? 'danger'
+                                  : 'default'
                             }
-                          />
-                          {weapon[this.state.data_to_display].diff_this_to_last}
-                        </Label>
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </Table>
-            </Col>
-          </Row>
-        </Grid>
+                          >
+                            <Glyphicon
+                              glyph={
+                                weapon[this.state.data_to_display]
+                                  .diff_this_to_last > 0
+                                  ? 'arrow-up'
+                                  : weapon[this.state.data_to_display]
+                                      .diff_this_to_last < 0
+                                    ? 'arrow-down'
+                                    : 'arrow-right'
+                              }
+                            />
+                            {
+                              weapon[this.state.data_to_display]
+                                .diff_this_to_last
+                            }
+                          </Label>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+          </Grid>
+        </Panel.Body>
       </Panel>
     );
   }

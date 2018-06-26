@@ -4,8 +4,9 @@ const fs = require('fs');
 
 class Store {
   constructor(opts) {
-    const userDataPath = (electron.app || electron.remote.app)
-      .getPath('userData');
+    const userDataPath = (electron.app || electron.remote.app).getPath(
+      'userData'
+    );
     this.path = path.join(userDataPath, opts.configName + '.json');
     this.defaults = opts.defaults;
     this.data = this.parseDataFile(this.path, opts.defaults);

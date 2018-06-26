@@ -33,22 +33,44 @@ class App extends Component {
   state = {
     sessionToken: '',
     locale: 'en',
-    loggedIn: false
+    loggedIn: false,
+    loggingIn: false
   };
 
   componentDidMount() {
-    this.getSessionToken(true);
+    // this.getSessionToken(true);
+    this.checkLoginStatus();
     screenview('Start');
-    this.setState({ locale: ipcRenderer.sendSync('getFromStore', 'locale') });
+    this.setLocale(ipcRenderer.sendSync('getFromStore', 'locale'));
+    this.setState({
+      loggingIn: this.getLoggingInState(global.location.search)
+    });
   }
 
-  getSessionToken = (logout) => {
+  checkLoginStatus() {
+    const cookie = ipcRenderer.sendSync('getFromStore', 'iksmCookie');
+    ipcRenderer.sendSync('setIksmToken', cookie);
+    if (ipcRenderer.sendSync('checkIksmValid')) {
+      this.setState({ loggedIn: true });
+      history.push('/');
+      return;
+    }
+
+    if (ipcRenderer.sendSync('checkStoredSessionToken')) {
+      this.setState({ loggedIn: true });
+      history.push('/');
+      return;
+    }
+  }
+
+  getSessionToken = logout => {
+    const token = ipcRenderer.sendSync('getFromStore', 'sessionToken');
     this.setState({
-      sessionToken: ipcRenderer.sendSync('getSessionToken'),
+      sessionToken: token,
       loggedIn: false
     });
     if (!logout) {
-        history.push('/')
+      history.push('/');
     }
   };
 
@@ -61,13 +83,27 @@ class App extends Component {
     this.setState({ loggedIn: loginStatus });
   };
 
+  getLoggingInState(search) {
+    const params = new URLSearchParams(search);
+    const loggingIn = params.get('loggingIn');
+    if (loggingIn === '1') {
+      return true;
+    }
+
+    return false;
+  }
+
   render() {
-    const { sessionToken, locale, loggedIn } = this.state;
+    const { sessionToken, locale, loggedIn, loggingIn } = this.state;
     const message = messages[locale] || messages.en;
+    if (loggingIn) {
+      return <div>logging in</div>;
+    }
+
     return (
       <IntlProvider locale={locale} messages={message}>
-        <SplatnetProvider>
-          <Router history={history}>
+        <Router history={history}>
+          <SplatnetProvider locale={locale}>
             <Routes
               loggedIn={loggedIn}
               setLogin={this.setLogin}
@@ -76,8 +112,8 @@ class App extends Component {
               setLocale={this.setLocale}
               locale={locale}
             />
-          </Router>
-        </SplatnetProvider>
+          </SplatnetProvider>
+        </Router>
       </IntlProvider>
     );
   }

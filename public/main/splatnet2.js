@@ -1,11 +1,14 @@
 const request2 = require('request-promise-native');
 const crypto = require('crypto');
 const base64url = require('base64url');
-const cheerio = require('cheerio');
 const log = require('electron-log');
+const { app } = require('electron');
+const Memo = require('promise-memoize');
 
-const userAgentVersion = `1.1.0`;
+const userAgentVersion = `1.1.2`;
 const userAgentString = `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`;
+const appVersion = app.getVersion();
+const squidTracksUserAgentString = `SquidTracks/${appVersion}`;
 const splatnetUrl = `https://app.splatoon2.nintendo.net`;
 
 const jar = request2.jar();
@@ -94,6 +97,23 @@ async function getApiToken(session_token) {
   };
 }
 
+async function getFFromEli(idToken) {
+  const response = await request({
+    method: 'POST',
+    uri: 'https://elifessler.com/s2s/api/gen',
+    headers: {
+      'User-Agent': squidTracksUserAgentString
+    },
+    form: {
+      naIdToken: idToken
+    }
+  });
+
+  const j = JSON.parse(response);
+
+  return j.f;
+}
+
 async function getUserInfo(token) {
   const response = await request({
     method: 'GET',
@@ -116,7 +136,7 @@ async function getUserInfo(token) {
   };
 }
 
-async function getApiLogin(id_token, userinfo) {
+async function getApiLogin(id_token, userinfo, f) {
   const resp = await request({
     method: 'POST',
     uri: 'https://api-lp1.znc.srv.nintendo.net/v1/Account/Login',
@@ -132,7 +152,8 @@ async function getApiLogin(id_token, userinfo) {
         language: userinfo.language,
         naCountry: userinfo.country,
         naBirthday: userinfo.birthday,
-        naIdToken: id_token
+        naIdToken: id_token,
+        f: f
       }
     },
     json: true,
@@ -185,10 +206,12 @@ async function getSplatnetApi(url) {
   return resp;
 }
 
-async function getUniqueId() {
+async function getUniqueId(token) {
   const records = await getSplatnetApi('records');
   uniqueId = records.records.unique_id;
+  return uniqueId;
 }
+const getUniqueIdMemo10 = Memo(getUniqueId, { maxAge: 10000 });
 
 async function postSplatnetApi(url, body) {
   const requestOptions = {
@@ -233,18 +256,18 @@ async function getSessionCookie(token) {
     }
   });
 
-  await getUniqueId();
-
-  return id;
+  const iksmToken = getIksmToken();
+  await getUniqueIdMemo10(iksmToken);
 }
 
 async function getSessionWithSessionToken(sessionToken) {
   const apiTokens = await getApiToken(sessionToken);
   const userInfo = await getUserInfo(apiTokens.access);
   userLanguage = userInfo.language;
-  const apiAccessToken = await getApiLogin(apiTokens.id, userInfo);
+  const f = await getFFromEli(apiTokens.id);
+  const apiAccessToken = await getApiLogin(apiTokens.id, userInfo, f);
   const splatnetToken = await getWebServiceToken(apiAccessToken);
-  uniqueId = await getSessionCookie(splatnetToken.accessToken);
+  await getSessionCookie(splatnetToken.accessToken);
   return splatnetToken;
 }
 
@@ -273,27 +296,40 @@ async function getSplatnetImage(battle) {
   return imgBuf;
 }
 
-function setIksmToken(cookieValue) {
+async function getSplatnetImageURL(battle) {
+  const { url } = await postSplatnetApi(`share/results/${battle}`);
+  return url;
+}
+
+async function setIksmToken(cookieValue) {
+  if (cookieValue.length < 5) {
+    return;
+  }
   const cookie = request2.cookie(`iksm_session=${cookieValue}`);
   jar.setCookie(cookie, splatnetUrl);
-  getUniqueId();
+  await getUniqueIdMemo10(cookieValue);
 }
 
 function getIksmToken() {
   const cookies = jar.getCookies(splatnetUrl);
-  const iksmSessionCookie = cookies.find(
-    cookie => cookie.key === 'iksm_session'
-  );
-  if (iksmSessionCookie == null) {
+  let value;
+  cookies.find(cookie => {
+    if (cookie.key === 'iksm_session') {
+      value = cookie.value;
+    }
+    return cookie.key === 'iksm_session';
+  });
+  if (value == null) {
     throw new Error('Could not get iksm_session cookie');
   }
 
-  return iksmSessionCookie;
+  return value;
 }
 
 async function checkIksmValid() {
   try {
-    await getSplatnetApi('records');
+    const cookieValue = getIksmToken();
+    await getSplatnetApi('schedule');
     return true;
   } catch (e) {
     return false;
@@ -312,6 +348,8 @@ exports.getSplatnetSession = getSplatnetSession;
 exports.getSplatnetApi = getSplatnetApi;
 exports.postSplatnetApi = postSplatnetApi;
 exports.getSplatnetImage = getSplatnetImage;
+exports.getSplatnetImageURL = getSplatnetImageURL;
 exports.getIksmToken = getIksmToken;
 exports.setUserLanguage = setUserLanguage;
 exports.setIksmToken = setIksmToken;
+exports.checkIksmValid = checkIksmValid;

@@ -1,11 +1,19 @@
 import React from 'react';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import {
+  Navbar,
+  Nav,
+  NavItem,
+  NavDropdown,
+  MenuItem,
+  Image
+} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Subscriber } from 'react-broadcast';
 import { FormattedMessage } from 'react-intl';
 import { ipcRenderer } from 'electron';
 import { event } from './analytics';
+import Logo from './images/icon.png';
 
 const Navigation = ({ logoutCallback }) => {
   return (
@@ -13,8 +21,10 @@ const Navigation = ({ logoutCallback }) => {
       {splatnet => (
         <Navbar fluid fixedTop collapseOnSelect>
           <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">Home</Link>
+            <Navbar.Brand className="squid-tracks">
+              <Link to="/">
+                <Image src={Logo} style={{ maxHeight: 40 }} />
+              </Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
@@ -25,6 +35,14 @@ const Navigation = ({ logoutCallback }) => {
                   <FormattedMessage
                     id={'nav.schedule'}
                     defaultMessage={'Schedule'}
+                  />
+                </NavItem>
+              </LinkContainer>
+              <LinkContainer to="/salmon">
+                <NavItem eventKey={3.1}>
+                  <FormattedMessage
+                    id={'nav.salmon'}
+                    defaultMessage={'Salmon'}
                   />
                 </NavItem>
               </LinkContainer>

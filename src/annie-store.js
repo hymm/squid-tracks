@@ -25,6 +25,10 @@ const messages = defineMessages({
     id: 'Store.mainAbility',
     defaultMessage: 'Main'
   },
+  original: {
+    id: 'Store.originalAbility',
+    defaultMessage: 'Original'
+  },
   brand: {
     id: 'Store.brand',
     defaultMessage: 'Brand'
@@ -59,7 +63,7 @@ const messages = defineMessages({
   }
 });
 
-const MerchTable = ({ merch, intl }) => {
+const MerchTable = ({ merch, intl, original }) => {
   return (
     <Table bordered>
       <tbody>
@@ -73,14 +77,23 @@ const MerchTable = ({ merch, intl }) => {
             />
           </td>
         </tr>
+        {original != null ? (
+          <tr>
+            <th style={{ verticalAlign: 'middle' }}>
+              {intl.formatMessage(messages.original)}
+            </th>
+            <td>{original}</td>
+          </tr>
+        ) : null}
         <tr>
           <th style={{ verticalAlign: 'middle' }}>
             {intl.formatMessage(messages.brand)}
           </th>
           <td>
             <Image
-              src={`https://app.splatoon2.nintendo.net${merch.gear.brand
-                .image}`}
+              src={`https://app.splatoon2.nintendo.net${
+                merch.gear.brand.image
+              }`}
             />
           </td>
         </tr>
@@ -90,8 +103,9 @@ const MerchTable = ({ merch, intl }) => {
           </th>
           <td>
             <Image
-              src={`https://app.splatoon2.nintendo.net${merch.gear.brand
-                .frequent_skill.image}`}
+              src={`https://app.splatoon2.nintendo.net${
+                merch.gear.brand.frequent_skill.image
+              }`}
             />
           </td>
         </tr>
@@ -100,7 +114,7 @@ const MerchTable = ({ merch, intl }) => {
   );
 };
 
-const MerchRight = ({ merch, intl }) => {
+const MerchRight = ({ merch, intl, original }) => {
   const now = new Date().getTime();
   const timeLeftInSeconds = merch.end_time - now / 1000;
   const timeLeftInHours = timeLeftInSeconds / 3600;
@@ -122,57 +136,18 @@ const MerchRight = ({ merch, intl }) => {
       </Row>
       <Row>
         <Col md={12}>
-          <MerchTable merch={merch} intl={intl} />
+          <MerchTable merch={merch} intl={intl} original={original} />
         </Col>
       </Row>
     </Col>
   );
 };
 
-const Merch = ({ merch, order, disabled, intl }) => {
+const Merch = ({ merch, order, disabled, intl, original }) => {
   return (
     <Col sm={6} md={6} lg={4}>
       <Panel>
-        <Row className="merch">
-          <Col
-            sm={6}
-            md={6}
-            style={{ textAlign: 'center', verticalAlign: 'middle' }}
-          >
-            <Image
-              src={`https://app.splatoon2.nintendo.net${merch.gear.image}`}
-            />
-          </Col>
-          <MerchRight merch={merch} intl={intl} />
-        </Row>
-        <Row>
-          <Col md={12}>
-            <Button
-              block
-              bsStyle={
-                merch.skill.id === merch.gear.brand.frequent_skill.id
-                  ? 'success'
-                  : 'primary'
-              }
-              onClick={() => {
-                order(merch.id);
-              }}
-              disabled={disabled}
-            >
-              {intl.formatMessage(messages.orderButtonText)}
-            </Button>
-          </Col>
-        </Row>
-      </Panel>
-    </Col>
-  );
-};
-
-const OrderedInfo = ({ order, cancel, cancelled, intl }) => {
-  return (
-    <Row>
-      <Col sm={12} md={12} lg={12}>
-        <Panel header={intl.formatMessage(messages.ordered)}>
+        <Panel.Body>
           <Row className="merch">
             <Col
               sm={6}
@@ -180,40 +155,84 @@ const OrderedInfo = ({ order, cancel, cancelled, intl }) => {
               style={{ textAlign: 'center', verticalAlign: 'middle' }}
             >
               <Image
-                src={`https://app.splatoon2.nintendo.net${order.gear.image}`}
-                className="merch"
+                src={`https://app.splatoon2.nintendo.net${merch.gear.image}`}
               />
             </Col>
-            <Col sm={6} md={6} className="details">
-              <Row>
-                <Col>
-                  <h3 style={{ textAlign: 'center', marginTop: 0 }}>
-                    {order.gear.name}
-                  </h3>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={12}>
-                  <MerchTable merch={order} intl={intl} />
-                </Col>
-              </Row>
-            </Col>
+            <MerchRight merch={merch} intl={intl} original={original} />
           </Row>
           <Row>
             <Col md={12}>
               <Button
                 block
-                bsStyle="warning"
+                bsStyle={
+                  merch.skill.id === merch.gear.brand.frequent_skill.id
+                    ? 'success'
+                    : 'primary'
+                }
                 onClick={() => {
-                  cancel();
+                  order(merch.id);
                 }}
+                disabled={disabled}
               >
-                {cancelled
-                  ? intl.formatMessage(messages.uncancelButtonText)
-                  : intl.formatMessage(messages.cancelButtonText)}
+                {intl.formatMessage(messages.orderButtonText)}
               </Button>
             </Col>
           </Row>
+        </Panel.Body>
+      </Panel>
+    </Col>
+  );
+};
+
+const OrderedInfo = ({ order, cancel, cancelled, intl, original }) => {
+  return (
+    <Row>
+      <Col sm={12} md={12} lg={12}>
+        <Panel>
+          <Panel.Heading>{intl.formatMessage(messages.ordered)}</Panel.Heading>
+          <Panel.Body>
+            <Row className="merch">
+              <Col
+                sm={6}
+                md={6}
+                style={{ textAlign: 'center', verticalAlign: 'middle' }}
+              >
+                <Image
+                  src={`https://app.splatoon2.nintendo.net${order.gear.image}`}
+                  className="merch"
+                />
+              </Col>
+              <Col sm={6} md={6} className="details">
+                <Row>
+                  <Col>
+                    <h3 style={{ textAlign: 'center', marginTop: 0 }}>
+                      {order.gear.name}
+                    </h3>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={12}>
+                    <MerchTable merch={order} intl={intl} original={original} />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}>
+                <Button
+                  block
+                  bsStyle="warning"
+                  onClick={() => {
+                    cancel();
+                  }}
+                >
+                  {cancelled
+                    ? intl.formatMessage(messages.uncancelButtonText)
+                    : intl.formatMessage(messages.cancelButtonText)}
+                </Button>
+              </Col>
+            </Row>
+          </Panel.Body>
         </Panel>
       </Col>
     </Row>
@@ -259,7 +278,8 @@ class AnnieStore extends React.Component {
     const { splatnet, intl } = this.props;
     const { cancelled, ordering } = this.state;
     const { merchandises, ordered_info } = splatnet.current.annie;
-
+    const { annieOriginal = [] } = splatnet.current;
+    console.log(annieOriginal);
     return (
       <Grid fluid style={{ marginTop: 65 }}>
         <Row>
@@ -273,24 +293,25 @@ class AnnieStore extends React.Component {
             </ButtonToolbar>
           </Col>
         </Row>
-        {ordered_info != null && !cancelled
-          ? <OrderedInfo
-              order={ordered_info}
-              cancel={this.cancel}
-              cancelled={cancelled}
-              intl={intl}
-            />
-          : null}
+        {ordered_info != null && !cancelled ? (
+          <OrderedInfo
+            order={ordered_info}
+            cancel={this.cancel}
+            cancelled={cancelled}
+            intl={intl}
+          />
+        ) : null}
         <Row>
-          {merchandises.map(merch =>
+          {merchandises.map((merch, i) => (
             <Merch
               key={merch.id}
               merch={merch}
               order={this.order}
               disabled={(ordered_info != null && !cancelled) || ordering}
+              original={annieOriginal.length > i ? annieOriginal[i] : ''}
               intl={intl}
             />
-          )}
+          ))}
         </Row>
       </Grid>
     );

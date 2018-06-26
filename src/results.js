@@ -11,14 +11,17 @@ class Results extends React.Component {
   state = {
     currentResultIndex: -1,
     statInk: {},
-    initialized: false,
+    initialized: false
   };
 
   componentDidMount() {
     this.getResults();
     const statInkInfo = ipcRenderer.sendSync('getFromStatInkStore', 'info');
-    this.setState({ statInk: statInkInfo, initialized: false, currentResultIndex: 0 });
-    console.log('results did mount');
+    this.setState({
+      statInk: statInkInfo,
+      initialized: false,
+      currentResultIndex: 0
+    });
   }
 
   getResults = () => {
@@ -42,14 +45,17 @@ class Results extends React.Component {
 
     const { results } = this.props.splatnet.current.results;
 
-    if (results[currentResultIndex] == null || results[currentResultIndex].battle_number == null) {
-        return {};
+    if (
+      results[currentResultIndex] == null ||
+      results[currentResultIndex].battle_number == null
+    ) {
+      return {};
     }
     const battleNumber = results[currentResultIndex].battle_number;
 
     if (this.props.splatnet.cache.battles[battleNumber] == null) {
-        splatnet.comm.getBattle(battleNumber);
-        return {};
+      splatnet.comm.getBattle(battleNumber);
+      return {};
     }
 
     const battle = this.props.splatnet.cache.battles[battleNumber];

@@ -4,10 +4,11 @@ import { Subscriber } from 'react-broadcast';
 import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
+import LeagueCard from './components/league-card';
 import { event } from './analytics';
 import { defineMessages, injectIntl } from 'react-intl';
 
-class ResultsContainer extends React.Component {
+class RecordsContainer extends React.Component {
   messages = defineMessages({
     refresh: {
       id: 'records.refreshButton.refresh',
@@ -44,28 +45,27 @@ class ResultsContainer extends React.Component {
             }}
             disabled={refreshing}
           >
-            {this.state.refreshing ? (
-              intl.formatMessage(this.messages.refreshed)
-            ) : (
-              intl.formatMessage(this.messages.refresh)
-            )}
+            {this.state.refreshing
+              ? intl.formatMessage(this.messages.refreshed)
+              : intl.formatMessage(this.messages.refresh)}
           </Button>
         </ButtonToolbar>
         <PlayerCard records={records.records} />
         <StageCard records={records.records} />
         <WeaponCard records={records.records} />
+        <LeagueCard records={records.records} />
       </div>
     );
   }
 }
 
-const ResultsContainerIntl = injectIntl(ResultsContainer);
+const RecordsContainerIntl = injectIntl(RecordsContainer);
 
 const Records = ({ splatnet }) => (
   <Grid fluid style={{ marginTop: 65 }}>
     <Row>
       <Col md={12}>
-        <ResultsContainerIntl splatnet={splatnet} />
+        <RecordsContainerIntl splatnet={splatnet} />
       </Col>
     </Row>
   </Grid>
