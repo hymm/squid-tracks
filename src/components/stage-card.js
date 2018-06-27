@@ -231,27 +231,37 @@ class StageCard extends React.Component {
                         <td>{stage.stage.name}</td>
                         <td>
                           {this.state.percent
-                            ? `${(stage.area_percent * 100).toFixed(1)}%`
+                            ? isFinite(stage.area_percent)
+                              ? `${(stage.area_percent * 100).toFixed(1)}%`
+                              : 'No Play'
                             : `${stage.area_win} - ${stage.area_lose}`}
                         </td>
                         <td>
                           {this.state.percent
-                            ? `${(stage.yagura_percent * 100).toFixed(1)}%`
+                            ? isFinite(stage.yagura_percent)
+                              ? `${(stage.yagura_percent * 100).toFixed(1)}%`
+                              : 'No Play'
                             : `${stage.yagura_win} - ${stage.yagura_lose}`}
                         </td>
                         <td>
                           {this.state.percent
-                            ? `${(stage.hoko_percent * 100).toFixed(1)}%`
+                            ? isFinite(stage.hoko_percent)
+                              ? `${(stage.hoko_percent * 100).toFixed(1)}%`
+                              : 'No Play'
                             : `${stage.hoko_win} - ${stage.hoko_lose}`}
                         </td>
                         <td>
                           {this.state.percent
-                            ? `${(stage.asari_percent * 100).toFixed(1)}%`
+                            ? isFinite(stage.asari_percent)
+                              ? `${(stage.asari_percent * 100).toFixed(1)}%`
+                              : 'No Play'
                             : `${stage.asari_win} - ${stage.asari_lose}`}
                         </td>
                         <td>
                           {this.state.percent
-                            ? `${(stage.total_percent * 100).toFixed(1)}%`
+                            ? isFinite(stage.total_percent)
+                              ? `${(stage.total_percent * 100).toFixed(1)}%`
+                              : 'No Play'
                             : `${stage.total_win} - ${stage.total_lose}`}
                         </td>
                       </tr>
@@ -267,27 +277,37 @@ class StageCard extends React.Component {
                       </th>
                       <td>
                         {this.state.percent
-                          ? `${(calcStats.sz_percent * 100).toFixed(1)}%`
+                          ? isFinite(calcStats.sz_percent)
+                            ? `${(calcStats.sz_percent * 100).toFixed(1)}%`
+                            : 'No Play'
                           : `${calcStats.sz_win} - ${calcStats.sz_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${(calcStats.tc_percent * 100).toFixed(1)}%`
+                          ? isFinite(calcStats.tc_percent)
+                            ? `${(calcStats.tc_percent * 100).toFixed(1)}%`
+                            : 'No Play'
                           : `${calcStats.tc_win} - ${calcStats.tc_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${(calcStats.rm_percent * 100).toFixed(1)}%`
+                          ? isFinite(calcStats.rm_percent)
+                            ? `${(calcStats.rm_percent * 100).toFixed(1)}%`
+                            : 'No Play'
                           : `${calcStats.rm_win} - ${calcStats.rm_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${(calcStats.cb_percent * 100).toFixed(1)}%`
+                          ? isFinite(calcStats.cb_percent)
+                            ? `${(calcStats.cb_percent * 100).toFixed(1)}%`
+                            : 'No Play'
                           : `${calcStats.cb_win} - ${calcStats.cb_lose}`}
                       </td>
                       <td>
                         {this.state.percent
-                          ? `${(calcStats.total_percent * 100).toFixed(1)}%`
+                          ? isFinite(calcStats.total_percent)
+                            ? `${(calcStats.total_percent * 100).toFixed(1)}%`
+                            : 'No Play'
                           : `${calcStats.total_win} - ${calcStats.total_lose}`}
                       </td>
                     </tr>
