@@ -25,13 +25,18 @@ export function sort(array, sortColumn, sortDirection, convertFunc) {
         ? convertFunc(getValue(b, sortColumn))
         : getValue(b, sortColumn);
 
-    if (valA > valB) {
-      return sortDirection === 'up' ? -1 : 1;
+    if (!isFinite(valA) && !isFinite(valB)) {
+      return 0;
     }
-    if (valA < valB) {
-      return sortDirection === 'up' ? 1 : -1;
+    if (!isFinite(valA)) {
+      return 1;
     }
-    return 0;
+    if (!isFinite(valB)) {
+      return -1;
+    }
+
+    return valB - valA;
   });
+
   return array;
 }
