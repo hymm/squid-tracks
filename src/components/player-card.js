@@ -3,7 +3,6 @@ import { Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 const PlayerCard = ({ records }) => {
-  console.log(records);
   const { player = {} } = records;
   const {
     udemae_rainmaker = {},
