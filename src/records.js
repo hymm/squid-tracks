@@ -55,7 +55,7 @@ class RecordsContainer extends React.Component {
         <StageCard records={records.records} />
         <WeaponCard records={records.records} />
         <LeagueCard records={records.records} />
-        <FesCard records={records.records} />
+        <FesCard records={records.records} festivals={records.festivals} />
       </div>
     );
   }

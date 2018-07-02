@@ -2,10 +2,10 @@ import React from 'react';
 import { Panel, Table, Grid, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-const FesTable = ({ fes_id, fes_grade, fes_power }) => {
+const FesTable = ({ fes_name, fes_id, fes_grade, fes_power }) => {
   return (
     <Col md={6}>
-      <h4>{fes_id}</h4>
+      <h4>{fes_name}</h4>
       <Table striped bordered condensed hover>
         <thead>
           <tr />
@@ -35,11 +35,19 @@ const FesTable = ({ fes_id, fes_grade, fes_power }) => {
   );
 };
 
-const FesCard = ({ records }) => {
+const FesCard = ({ records, festivals }) => {
   const { fes_results = {} } = records;
   const fesArray = [];
+  const fesVs = {};
   Object.keys(fes_results).forEach(fes => {
     fesArray.push(fes_results[fes]);
+  });
+
+  Object.keys(festivals).forEach(fes => {
+    fesVs[festivals[fes].festival_id] =
+      festivals[fes].names.alpha_short +
+      ' vs. ' +
+      festivals[fes].names.bravo_short;
   });
 
   return (
@@ -55,6 +63,7 @@ const FesCard = ({ records }) => {
           {fesArray.map(fes => (
             <FesTable
               key={fes.fes_id}
+              fes_name={fesVs[fes.fes_id]}
               fes_id={fes.fes_id}
               fes_grade={fes.fes_grade.name}
               fes_power={fes.fes_power}
