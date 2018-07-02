@@ -233,35 +233,35 @@ class StageCard extends React.Component {
                           {this.state.percent
                             ? isFinite(stage.area_percent)
                               ? `${(stage.area_percent * 100).toFixed(1)}%`
-                              : 'No Play'
+                              : '---'
                             : `${stage.area_win} - ${stage.area_lose}`}
                         </td>
                         <td>
                           {this.state.percent
                             ? isFinite(stage.yagura_percent)
                               ? `${(stage.yagura_percent * 100).toFixed(1)}%`
-                              : 'No Play'
+                              : '---'
                             : `${stage.yagura_win} - ${stage.yagura_lose}`}
                         </td>
                         <td>
                           {this.state.percent
                             ? isFinite(stage.hoko_percent)
                               ? `${(stage.hoko_percent * 100).toFixed(1)}%`
-                              : 'No Play'
+                              : '---'
                             : `${stage.hoko_win} - ${stage.hoko_lose}`}
                         </td>
                         <td>
                           {this.state.percent
                             ? isFinite(stage.asari_percent)
                               ? `${(stage.asari_percent * 100).toFixed(1)}%`
-                              : 'No Play'
+                              : '---'
                             : `${stage.asari_win} - ${stage.asari_lose}`}
                         </td>
                         <td>
                           {this.state.percent
                             ? isFinite(stage.total_percent)
                               ? `${(stage.total_percent * 100).toFixed(1)}%`
-                              : 'No Play'
+                              : '---'
                             : `${stage.total_win} - ${stage.total_lose}`}
                         </td>
                       </tr>
@@ -279,35 +279,35 @@ class StageCard extends React.Component {
                         {this.state.percent
                           ? isFinite(calcStats.sz_percent)
                             ? `${(calcStats.sz_percent * 100).toFixed(1)}%`
-                            : 'No Play'
+                            : '---'
                           : `${calcStats.sz_win} - ${calcStats.sz_lose}`}
                       </td>
                       <td>
                         {this.state.percent
                           ? isFinite(calcStats.tc_percent)
                             ? `${(calcStats.tc_percent * 100).toFixed(1)}%`
-                            : 'No Play'
+                            : '---'
                           : `${calcStats.tc_win} - ${calcStats.tc_lose}`}
                       </td>
                       <td>
                         {this.state.percent
                           ? isFinite(calcStats.rm_percent)
                             ? `${(calcStats.rm_percent * 100).toFixed(1)}%`
-                            : 'No Play'
+                            : '---'
                           : `${calcStats.rm_win} - ${calcStats.rm_lose}`}
                       </td>
                       <td>
                         {this.state.percent
                           ? isFinite(calcStats.cb_percent)
                             ? `${(calcStats.cb_percent * 100).toFixed(1)}%`
-                            : 'No Play'
+                            : '---'
                           : `${calcStats.cb_win} - ${calcStats.cb_lose}`}
                       </td>
                       <td>
                         {this.state.percent
                           ? isFinite(calcStats.total_percent)
                             ? `${(calcStats.total_percent * 100).toFixed(1)}%`
-                            : 'No Play'
+                            : '---'
                           : `${calcStats.total_win} - ${calcStats.total_lose}`}
                       </td>
                     </tr>

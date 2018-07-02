@@ -25,17 +25,26 @@ export function sort(array, sortColumn, sortDirection, convertFunc) {
         ? convertFunc(getValue(b, sortColumn))
         : getValue(b, sortColumn);
 
-    if (!isFinite(valA) && !isFinite(valB)) {
-      return 0;
-    }
-    if (!isFinite(valA)) {
-      return 1;
-    }
-    if (!isFinite(valB)) {
-      return -1;
+    if (typeof valA !== 'string' && valB !== 'string') {
+      if (!isFinite(valA) && !isFinite(valB)) {
+        return 0;
+      }
+      if (!isFinite(valA)) {
+        return 1;
+      }
+      if (!isFinite(valB)) {
+        return -1;
+      }
     }
 
-    return valB - valA;
+    if (valA > valB) {
+      return sortDirection === 'up' ? -1 : 1;
+    }
+    if (valA < valB) {
+      return sortDirection === 'up' ? 1 : -1;
+    }
+
+    return 0;
   });
 
   return array;
