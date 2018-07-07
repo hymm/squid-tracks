@@ -1,8 +1,9 @@
 {
   "name": "squid-tracks",
-  "description": "alternative splatnet2 client with ability to upload to stat.ink",
+  "description":
+    "alternative splatnet2 client with ability to upload to stat.ink",
   "productName": "SquidTracks",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "author": "@Wrong_Shoe",
   "devDependencies": {
@@ -69,13 +70,15 @@
     "pack": "build --c.extraMetadata.main=build/electron.js",
     "pack:win": "build --c.extraMetadata.main=build/electron.js --ia32 --x64",
     "release": "build -c.extraMetadata.main=build/electron.js --publish=always",
-    "release:win": "build -c.extraMetadata.main=build/electron.js --ia32 --x64 --publish=always",
+    "release:win":
+      "build -c.extraMetadata.main=build/electron.js --ia32 --x64 --publish=always",
     "test": "react-app-rewired test --env=jsdom",
     "test:main": "jest -c=jest.main.config.json --watch",
     "eject": "react-app-rewired eject",
     "electron": "electron .",
     "electron-dev": "node public/main/dev.js .",
-    "dev": "concurrently \"yarn react-start\" \"wait-on http://localhost:3000/ && yarn electron-dev\"",
+    "dev":
+      "concurrently \"yarn react-start\" \"wait-on http://localhost:3000/ && yarn electron-dev\"",
     "manage:translations": "node ./translationRunner.js"
   },
   "build": {

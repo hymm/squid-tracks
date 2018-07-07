@@ -26,13 +26,15 @@ class ApiTester extends React.Component {
     'festivals/{fest_id}/rankings',
     'festivals/{fest_id}/votes',
     'festivals/{fest_id}/results',
-    'x_power_ranking/180401T00_180601T00/summary'
+    'x_power_ranking/180401T00_180601T00/summary',
+    'x_power_ranking/180401T00_180601T00/splat_zones?page=1'
     // POST 'onlineshop/order/4780952683920142604',
     // POST 'share/profile'
     // POST 'share/results/summary'
     // POST 'share/results/630'
     // POST 'share/challenges/tenflod_squid_research_lab'
     // POST 'share/challenges/great_pyramid_at_giza'
+    // POST 'share/challenges_season_2/...'
   ];
 
   handleButtonClick = async () => {

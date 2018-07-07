@@ -1,5 +1,14 @@
 import React from 'react';
-import { Grid, Row, Col, Button, Alert, Panel } from 'react-bootstrap';
+import {
+  Grid,
+  Row,
+  Col,
+  Button,
+  Alert,
+  Panel,
+  ButtonToolbar
+} from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Subscriber } from 'react-broadcast';
 import { ipcRenderer } from 'electron';
@@ -20,6 +29,10 @@ class ErrorPage extends React.Component {
     this.props.logoutCallback();
   };
 
+  handleIgnore = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     const { splatnet } = this.props;
     return (
@@ -33,24 +46,35 @@ class ErrorPage extends React.Component {
         <p>
           <FormattedMessage
             id="Error.helpText"
-            defaultMessage="Your session has probably expired. Try logging out and logging back in with a new session."
+            defaultMessage="If you see this multiple times your session has probably expired. Try logging out and logging back in with a new session."
           />
           <Button onClick={this.handleClick}>
             <FormattedMessage id="Error.buttonMoreInfo" defaultMessage="More" />
           </Button>
         </p>
         <p>
-          <Panel collapsible expanded={this.state.open}>
-            {splatnet.lastError ? splatnet.lastError : 'Error'}
+          <Panel expanded={this.state.open}>
+            <Panel.Collapse>
+              <Panel.Body>
+                {splatnet.lastError != null ? splatnet.lastError : 'Error'}
+              </Panel.Body>
+            </Panel.Collapse>
           </Panel>
         </p>
-        <Button block bsStyle="primary" onClick={this.handleLogout}>
-          <FormattedMessage id="Error.buttonLogout" defaultMessage="Logout" />
-        </Button>
+        <ButtonToolbar>
+          <Button bsStyle="danger" onClick={this.handleLogout}>
+            <FormattedMessage id="Error.buttonLogout" defaultMessage="Logout" />
+          </Button>
+          <Button bsStyle="default" onClick={this.handleIgnore}>
+            <FormattedMessage id="Error.buttonIgnore" defaultMessage="Ignore" />
+          </Button>
+        </ButtonToolbar>
       </Alert>
     );
   }
 }
+
+const ErrorPageWithRouter = withRouter(ErrorPage);
 
 const ErrorPageWithSplatnet = props => {
   return (
@@ -59,7 +83,7 @@ const ErrorPageWithSplatnet = props => {
         <Grid fluid style={{ marginTop: 65 }}>
           <Row>
             <Col md={12}>
-              <ErrorPage {...props} splatnet={splatnet} />
+              <ErrorPageWithRouter {...props} splatnet={splatnet} />
             </Col>
           </Row>
         </Grid>

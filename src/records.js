@@ -5,6 +5,7 @@ import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
 import LeagueCard from './components/league-card';
+import FesCard from './components/fes-card';
 import { event } from './analytics';
 import { defineMessages, injectIntl } from 'react-intl';
 
@@ -54,6 +55,7 @@ class RecordsContainer extends React.Component {
         <StageCard records={records.records} />
         <WeaponCard records={records.records} />
         <LeagueCard records={records.records} />
+        <FesCard records={records.records} festivals={records.festivals} />
       </div>
     );
   }

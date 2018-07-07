@@ -270,6 +270,20 @@ async function setPlayerGear(statInk, result) {
   setGear(statInk.gears.shoes, player.shoes.id, player.shoes_skills, shoesMap);
 }
 
+function setCrownPlayers(statInk, result) {
+  if (result.crown_players == null) {
+    return;
+  }
+
+  for (const player of statInk.players) {
+    if (result.crown_players.includes(player.splatnet_id)) {
+      player.top_500 = 'yes';
+    } else {
+      player.top_500 = 'no';
+    }
+  }
+}
+
 async function convertResultToStatInk(result, disableGetImage) {
   const statInk = {};
   setUuid(statInk, result);
@@ -280,6 +294,7 @@ async function convertResultToStatInk(result, disableGetImage) {
   await setPlayerResults(statInk, result);
   await setPlayerGear(statInk, result);
   await setPlayers(statInk, result);
+  setCrownPlayers(statInk, result);
   setClientInfo(statInk, result);
 
   if (result.game_mode.key === 'fest') {

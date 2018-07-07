@@ -3,7 +3,7 @@ import { FormControl } from 'react-bootstrap';
 import { event } from '../analytics';
 
 const languages = [
-  { name: 'Default', code: '', statInk: '' },
+  { name: 'Default', code: '', statInk: 'en_US' },
   { name: 'Deutsch', code: 'de', statInk: 'de_DE' },
   { name: 'English', code: 'en', statInk: 'en_US' },
   { name: 'Español', code: 'es', statInk: 'es_ES' },

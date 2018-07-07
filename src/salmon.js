@@ -254,9 +254,11 @@ const SalmonDetail = ({ detail }) => {
             ) : (
               <Image
                 key={i}
-                src={`https://app.splatoon2.nintendo.net${weapon.thumbnail}`}
+                src={`https://app.splatoon2.nintendo.net${
+                  weapon.weapon.thumbnail
+                }`}
                 style={{ maxHeight: 40 }}
-                alt={weapon.name}
+                alt={weapon.weapon.name}
               />
             )
         )}
