@@ -60,13 +60,24 @@ const messages = defineMessages({
   refreshed: {
     id: 'Store.refreshButton.refreshing',
     defaultMessage: 'Refreshing'
+  },
+  rarity: {
+    id: 'Store.rarity',
+    defaultMessage: 'Rarity'
   }
 });
 
 const MerchTable = ({ merch, intl, original }) => {
+  let rarity = merch.gear.rarity + 1;
   return (
     <Table bordered>
       <tbody>
+        <tr>
+          <th style={{ verticalAlign: 'middle' }}>
+            {intl.formatMessage(messages.rarity)}
+          </th>
+          <td>{rarity}</td>
+        </tr>
         <tr>
           <th style={{ verticalAlign: 'middle' }}>
             {intl.formatMessage(messages.main)}
