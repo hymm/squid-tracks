@@ -79,7 +79,6 @@ function registerSplatnetHandler() {
       splatnet
         .getSplatnetSession(params.session_token_code, authParams.codeVerifier)
         .then(async tokens => {
-          throw new Error('test error');
           try {
             sessionToken = tokens.sessionToken;
             userDataStore.set('sessionToken', sessionToken);
