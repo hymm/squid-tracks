@@ -247,10 +247,15 @@ const SalmonDetail = ({ detail }) => {
         <br />
         {detail.weapons.map(
           (weapon, i) =>
-            weapon == null ? (
-              <div key={i} className="mystery">
-                ?
-              </div>
+            weapon.coop_special_weapon != null ? (
+              <Image
+                key={i}
+                src={`https://app.splatoon2.nintendo.net${
+                  weapon.coop_special_weapon.image
+                }`}
+                style={{ maxHeight: 40 }}
+                alt={weapon.coop_special_weapon.name}
+              />
             ) : (
               <Image
                 key={i}
