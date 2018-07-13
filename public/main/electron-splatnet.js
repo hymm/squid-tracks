@@ -53,6 +53,13 @@ ipcMain.on('getLoginUrl', event => {
   event.returnValue = `https://accounts.nintendo.com/connect/1.0.0/authorize?${stringParams}`;
 });
 
+function handleLoginError(e) {
+  const message = `Error Logging into Nintendo: ${e}`;
+  log.error(message);
+  uaException(message);
+  mainWindow.loadURL(`${startUrl}?error=1`);
+}
+
 protocol.registerStandardSchemes(['npf71b963c1b7b6d119', 'https', 'http']);
 function registerSplatnetHandler() {
   protocol.registerHttpProtocol(
@@ -72,19 +79,19 @@ function registerSplatnetHandler() {
       splatnet
         .getSplatnetSession(params.session_token_code, authParams.codeVerifier)
         .then(async tokens => {
-          sessionToken = tokens.sessionToken;
-          userDataStore.set('sessionToken', sessionToken);
-          await splatnet.getSessionCookie(tokens.accessToken);
-          const iksm = splatnet.getIksmToken();
-          userDataStore.set('iksmCookie', iksm);
-          mainWindow.loadURL(startUrl);
+          throw new Error('test error');
+          try {
+            sessionToken = tokens.sessionToken;
+            userDataStore.set('sessionToken', sessionToken);
+            await splatnet.getSessionCookie(tokens.accessToken);
+            const iksm = splatnet.getIksmToken();
+            userDataStore.set('iksmCookie', iksm);
+            mainWindow.loadURL(startUrl);
+          } catch (e) {
+            handleLoginError(e);
+          }
         })
-        .catch(e => {
-          const message = `Error Logging into Nintendo: ${e}`;
-          uaException(message);
-          log.error(message);
-          mainWindow.loadURL(`${startUrl}?error=1`);
-        });
+        .catch(handleLoginError);
     },
     e => {
       if (e) {
