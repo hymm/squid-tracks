@@ -64,6 +64,10 @@ const messages = defineMessages({
   rarity: {
     id: 'Store.rarity',
     defaultMessage: 'Rarity'
+  },
+  price: {
+    id: 'Store.price',
+    defaultMessage: 'Price'
   }
 });
 
@@ -74,9 +78,15 @@ const MerchTable = ({ merch, intl, original }) => {
       <tbody>
         <tr>
           <th style={{ verticalAlign: 'middle' }}>
+            {intl.formatMessage(messages.price)}
+          </th>
+          <td>{merch.price}</td>
+        </tr>
+        <tr>
+          <th style={{ verticalAlign: 'middle' }}>
             {intl.formatMessage(messages.rarity)}
           </th>
-          <td>{rarity}</td>
+          <td>{'★'.repeat(rarity)}</td>
         </tr>
         <tr>
           <th style={{ verticalAlign: 'middle' }}>
