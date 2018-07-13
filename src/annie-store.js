@@ -279,7 +279,6 @@ class AnnieStore extends React.Component {
     const { cancelled, ordering } = this.state;
     const { merchandises, ordered_info } = splatnet.current.annie;
     const { annieOriginal = [] } = splatnet.current;
-    console.log(annieOriginal);
     return (
       <Grid fluid style={{ marginTop: 65 }}>
         <Row>
