@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## Version 1.2.2
+
+### New Features
+
+* Added rarity to Annie Store
+* Added badges for splatfest teams
+
+### Bugfix
+
+* Fixed bug with exporting last 50 battles to csv
+* Fixed initial S+ rank missing when ranking up to s+0
+* Added another error handler for some unhandled errors
+* Fixed salmon run page for new weapon type
+
 ## Version 1.2.1
 
 ### New Features
