@@ -165,7 +165,7 @@ async function setPlayerResults(statInk, result) {
     }
 
     if (result.udemae.s_plus_number != null) {
-      statInk.rank_exp_after = result.player_result.player.udemae.s_plus_number;
+      statInk.rank_exp_after = result.udemae.s_plus_number;
     }
   }
 

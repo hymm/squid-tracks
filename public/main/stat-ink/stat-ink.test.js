@@ -39,7 +39,6 @@ describe('convertResultToStatInk', () => {
     result.my_team_result.key = 'victory';
 
     const res = await convertResultToStatInk(result, true);
-    console.log(res);
     expect(res.players[1].point).toEqual(
       result.my_team_members[0].game_paint_point + 1000
     );

@@ -184,6 +184,50 @@ class ResultDetailMenu extends React.Component {
   }
 }
 
+const TeamBadges = ({ power, id, theme }) => {
+  return (
+    <React.Fragment>
+      {theme != null ? (
+        <Label
+          bsStyle="default"
+          style={{
+            fontWeight: 'normal',
+            marginLeft: 5,
+            marginRight: 5,
+            background: theme.color.css_rgb
+          }}
+        >
+          {theme.name}
+        </Label>
+      ) : null}
+      {power != null ? (
+        <Label
+          bsStyle="default"
+          style={{
+            fontWeight: 'normal',
+            marginLeft: 5,
+            marginRight: 5
+          }}
+        >
+          <FormattedMessage
+            id="resultDetails.summary.estimatePower"
+            defaultMessage="Estimate Power {power}"
+            values={{ power: power }}
+          />
+        </Label>
+      ) : null}
+      {id ? (
+        <Label
+          bsStyle="default"
+          style={{ fontWeight: 'normal', marginRight: 5 }}
+        >
+          {`${id}`}
+        </Label>
+      ) : null}
+    </React.Fragment>
+  );
+};
+
 class ResultDetailCard extends React.Component {
   state = {
     show: 1,
@@ -478,30 +522,11 @@ class ResultDetailCard extends React.Component {
                         id="resultDetails.teamsButton.myTeamTitle"
                         defaultMessage="My Team"
                       />
-                      {myTeamPower != null ? (
-                        <Label
-                          bsStyle="default"
-                          style={{
-                            fontWeight: 'normal',
-                            marginLeft: 5,
-                            marginRight: 5
-                          }}
-                        >
-                          <FormattedMessage
-                            id="resultDetails.summary.estimatePower"
-                            defaultMessage="Estimate Power {power}"
-                            values={{ power: myTeamPower }}
-                          />
-                        </Label>
-                      ) : null}
-                      {resultChanged.tag_id ? (
-                        <Label
-                          bsStyle="default"
-                          style={{ fontWeight: 'normal', marginRight: 5 }}
-                        >
-                          {`${resultChanged.tag_id}`}
-                        </Label>
-                      ) : null}
+                      <TeamBadges
+                        power={myTeamPower}
+                        theme={result.my_team_fes_theme}
+                        id={resultChanged.tag_id}
+                      />
                     </h4>
                     {this.state.show === 1 ? (
                       <TeamStatsTable team={myTeam} result={result} />
@@ -522,18 +547,10 @@ class ResultDetailCard extends React.Component {
                         id="resultDetails.teamsButton.otherTeamTitle"
                         defaultMessage="Enemy Team"
                       />
-                      {otherTeamPower != null ? (
-                        <Label
-                          bsStyle="default"
-                          style={{ fontWeight: 'normal', marginLeft: 5 }}
-                        >
-                          <FormattedMessage
-                            id="resultDetails.summary.estimatePower"
-                            defaultMessage="Estimate Power {power}"
-                            values={{ power: otherTeamPower }}
-                          />
-                        </Label>
-                      ) : null}
+                      <TeamBadges
+                        power={otherTeamPower}
+                        theme={result.other_team_fes_theme}
+                      />
                     </h4>
                     {this.state.show === 1 ? (
                       <TeamStatsTable team={otherTeam} result={result} />

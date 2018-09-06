@@ -60,13 +60,34 @@ const messages = defineMessages({
   refreshed: {
     id: 'Store.refreshButton.refreshing',
     defaultMessage: 'Refreshing'
+  },
+  rarity: {
+    id: 'Store.rarity',
+    defaultMessage: 'Rarity'
+  },
+  price: {
+    id: 'Store.price',
+    defaultMessage: 'Price'
   }
 });
 
 const MerchTable = ({ merch, intl, original }) => {
+  let rarity = merch.gear.rarity + 1;
   return (
     <Table bordered>
       <tbody>
+        <tr>
+          <th style={{ verticalAlign: 'middle' }}>
+            {intl.formatMessage(messages.price)}
+          </th>
+          <td>{merch.price}</td>
+        </tr>
+        <tr>
+          <th style={{ verticalAlign: 'middle' }}>
+            {intl.formatMessage(messages.rarity)}
+          </th>
+          <td>{'★'.repeat(rarity)}</td>
+        </tr>
         <tr>
           <th style={{ verticalAlign: 'middle' }}>
             {intl.formatMessage(messages.main)}
@@ -279,7 +300,6 @@ class AnnieStore extends React.Component {
     const { cancelled, ordering } = this.state;
     const { merchandises, ordered_info } = splatnet.current.annie;
     const { annieOriginal = [] } = splatnet.current;
-    console.log(annieOriginal);
     return (
       <Grid fluid style={{ marginTop: 65 }}>
         <Row>

@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { Subscriber } from 'react-broadcast';
 import { FormattedMessage } from 'react-intl';
 import flatten from 'flat';
-import json2csv from 'json2csv';
+import { parse as json2csv } from 'json2csv';
 import { remote, ipcRenderer } from 'electron';
 import { event } from '../analytics';
 const { dialog } = remote;
@@ -14,7 +14,7 @@ class ExportBattlesToCsvButton extends React.Component {
       return flatten(battle);
     });
 
-    return json2csv({ data: battlesFlattened });
+    return json2csv(battlesFlattened);
   }
 
   exportBattlesToCsv = () => {
