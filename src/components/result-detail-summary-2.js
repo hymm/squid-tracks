@@ -74,6 +74,7 @@ const XRankLabels = ({ result, colorMap }) => {
 const splatfestExp = [
   10, // Fan
   35, // Fiend
+  50,
   85, // Defender
   184 // Champion
   // 184, // King/Queen
