@@ -5,7 +5,7 @@ const log = require('electron-log');
 const { app } = require('electron');
 const Memo = require('promise-memoize');
 
-const userAgentVersion = `1.1.2`;
+const userAgentVersion = `1.4.1`;
 const userAgentString = `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`;
 const appVersion = app.getVersion();
 const squidTracksUserAgentString = `SquidTracks/${appVersion}`;
@@ -137,9 +137,10 @@ async function getUserInfo(token) {
 }
 
 async function getApiLogin(id_token, userinfo, f) {
+  const uri = 'https://api-lp1.znc.srv.nintendo.net/v1/Account/Login';
   const resp = await request({
     method: 'POST',
-    uri: 'https://api-lp1.znc.srv.nintendo.net/v1/Account/Login',
+    uri: uri,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
@@ -159,6 +160,10 @@ async function getApiLogin(id_token, userinfo, f) {
     json: true,
     gzip: true
   });
+
+  if (resp.errorMessage != null) {
+    throw Error(`Error on POST to ${uri}: ${resp.errorMessage}`);
+  }
 
   return resp.result.webApiServerCredential.accessToken;
 }
