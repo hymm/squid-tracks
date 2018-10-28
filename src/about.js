@@ -20,7 +20,8 @@ const AboutPage = () => (
           </h2>
           <h5>
             {`Version ${appVersion} `}
-            <a
+            <button
+              className="button-as-link"
               onClick={() =>
                 openExternal(
                   'https://github.com/hymm/squid-tracks/blob/master/CHANGELOG.md'
@@ -29,7 +30,7 @@ const AboutPage = () => (
               style={{ cursor: 'pointer' }}
             >
               Change Log
-            </a>
+            </button>
           </h5>
         </Jumbotron>
         <h2>Introduction</h2>
@@ -53,12 +54,13 @@ const AboutPage = () => (
         </p>
         <h2>Stat.ink Integration</h2>
         <p>
-          <a
+          <button
+            className="button-as-link"
             onClick={() => openExternal('https://stat.ink/')}
             style={{ cursor: 'pointer' }}
           >
             Stat.ink
-          </a>{' '}
+          </button>{' '}
           is a website that aggregates splatoon battle data and presents it on
           the web. Splatnet only saves the last 50 games, so this is a way to{' '}
         </p>
@@ -138,27 +140,29 @@ const AboutPage = () => (
         disable tracking in{' '}
         <Link to="/settings">
           <strong>Settings</strong>
-        </Link>.
-        <h2>For Help and Bug Filing</h2>
+        </Link>
+        .<h2>For Help and Bug Filing</h2>
         <p>Send cries for help, bug reports, and feature requests to</p>
         <p>
-          <a
+          <button
+            className="button-as-link"
             onClick={() =>
               openExternal('https://github.com/hymm/squid-tracks/issues')
             }
             style={{ cursor: 'pointer' }}
           >
             Github Issues
-          </a>
+          </button>
         </p>
         <p>
           Twitter:{' '}
-          <a
+          <button
+            className="button-as-link"
             onClick={() => openExternal('https://twitter.com/SquidTracks')}
             style={{ cursor: 'pointer' }}
           >
             @SquidTracks
-          </a>
+          </button>
         </p>
         <h2>Releases</h2>
         <p>
@@ -167,17 +171,19 @@ const AboutPage = () => (
         </p>
         <p>
           If there are problems with that, you can find releases at{' '}
-          <a
+          <button
+            className="button-as-link"
             onClick={() =>
               openExternal('https://github.com/hymm/squid-tracks/releases')
             }
             style={{ cursor: 'pointer' }}
           >
             Github Releases
-          </a>
+          </button>
         </p>
         <p>
-          <a
+          <button
+            className="button-as-link"
             onClick={() =>
               openExternal(
                 'https://github.com/hymm/squid-tracks/blob/master/README.md'
@@ -186,7 +192,7 @@ const AboutPage = () => (
             style={{ cursor: 'pointer' }}
           >
             Click Here for More information
-          </a>{' '}
+          </button>{' '}
           including the Roadmap for future Releases
         </p>
       </Col>

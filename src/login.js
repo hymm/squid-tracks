@@ -163,7 +163,8 @@ class LoginCookie extends React.Component {
                     after logging in.`}
                 />
                 <h3>
-                  <a
+                  <button
+                    className="button-as-link"
                     onClick={() =>
                       openExternal(
                         intl.formatMessage(this.messages.instructionsUrl)
@@ -175,7 +176,7 @@ class LoginCookie extends React.Component {
                       id="login.cookie.instructions"
                       defaultMessage="Click here to view instructions"
                     />
-                  </a>
+                  </button>
                 </h3>
               </Col>
             </Row>
@@ -235,7 +236,8 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
             </h2>
             <h5 style={{ textAlign: 'center', width: '100%' }}>
               {`Version ${appVersion} `}
-              <a
+              <button
+                className="button-as-link"
                 onClick={() =>
                   openExternal(
                     'https://github.com/hymm/squid-tracks/blob/master/CHANGELOG.md'
@@ -244,7 +246,7 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
                 style={{ cursor: 'pointer' }}
               >
                 Change Log
-              </a>
+              </button>
             </h5>
             <h4 style={{ textAlign: 'left' }}>
               <FormattedMessage
@@ -256,17 +258,19 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
                   information about updates.`}
                 values={{
                   pandamanLink: (
-                    <a
+                    <button
+                      className="button-as-link"
                       onClick={() =>
                         openExternal('https://twitter.com/frozenpandaman')
                       }
                       style={{ cursor: 'pointer' }}
                     >
                       @frozenpandaman
-                    </a>
+                    </button>
                   ),
                   apiLink: (
-                    <a
+                    <button
+                      className="button-as-link"
                       onClick={() =>
                         openExternal(
                           intl.formatMessage(messagesSplash.fApiInfoUrl)
@@ -278,17 +282,18 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
                         id="login.splash.fApiInfoLinkText"
                         defaultMessage="Click here for more information."
                       />
-                    </a>
+                    </button>
                   ),
                   twitterLink: (
-                    <a
+                    <button
+                      className="button-as-link"
                       onClick={() =>
                         openExternal('https://twitter.com/SquidTracks')
                       }
                       style={{ cursor: 'pointer' }}
                     >
                       @SquidTracks
-                    </a>
+                    </button>
                   )
                 }}
               />

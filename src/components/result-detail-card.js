@@ -405,7 +405,8 @@ class ResultDetailCard extends React.Component {
                 values={{ battle_number: resultChanged.battle_number }}
               />
               {linkInfo ? (
-                <a
+                <button
+                  className="button-as-link"
                   onClick={() =>
                     openExternal(
                       `https://stat.ink/@${linkInfo.username}/spl2/${
@@ -416,7 +417,7 @@ class ResultDetailCard extends React.Component {
                   style={{ cursor: 'pointer' }}
                 >
                   <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
-                </a>
+                </button>
               ) : null}
             </h3>
           }

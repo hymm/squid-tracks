@@ -83,12 +83,13 @@ class StatInkSettings extends React.Component {
                   defaultMessage="Copy API Token from {link}, paste below, and click Save"
                   values={{
                     link: (
-                      <a
+                      <button
+                        className="button-as-link"
                         onClick={() => openExternal('https://stat.ink/profile')}
                         style={{ cursor: 'pointer' }}
                       >
                         https://stat.ink/profile
-                      </a>
+                      </button>
                     )
                   }}
                 />
