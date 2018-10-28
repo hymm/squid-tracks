@@ -91,8 +91,9 @@ const PlayerRow = ({ player }) => {
       <td>{player.player.nickname}</td>
       <td style={{ textAlign: 'center', background: 'darkgrey' }}>
         <Image
-          src={`https://app.splatoon2.nintendo.net${player.player.weapon
-            .thumbnail}`}
+          src={`https://app.splatoon2.nintendo.net${
+            player.player.weapon.thumbnail
+          }`}
           style={{ maxHeight: 30 }}
           alt={player.player.weapon.name}
         />

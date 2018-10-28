@@ -137,8 +137,8 @@ class ResultsTimeline extends React.Component {
       result.other_team_percentage
     );
     const total = my_count_raw + other_count_raw;
-    const mine = my_count_raw * 100 / total;
-    const other = other_count_raw * 100 / total;
+    const mine = (my_count_raw * 100) / total;
+    const other = (other_count_raw * 100) / total;
 
     return {
       mine,

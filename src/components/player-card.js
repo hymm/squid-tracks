@@ -92,7 +92,7 @@ const PlayerCard = ({ records }) => {
           defaultMessage="Win %: {count}"
           values={{
             count: (
-              (records.win_count*100) /
+              (records.win_count * 100) /
               (records.lose_count + records.win_count)
             ).toFixed(2)
           }}
