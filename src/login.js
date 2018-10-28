@@ -226,7 +226,7 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
     <Grid fluid>
       <Row>
         <Col md={12}>
-          <Jumbotron style={{ marginTop: 20 }}>
+          <Jumbotron style={{ marginTop: 20, background: 'pink' }}>
             <h1 style={{ textAlign: 'center', width: '100%' }}>SquidTracks</h1>
             <h2 style={{ textAlign: 'center', width: '100%', marginTop: 0 }}>
               <FormattedMessage
@@ -250,40 +250,11 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
             </h5>
             <h4 style={{ textAlign: 'left' }}>
               <FormattedMessage
-                id="login.loginInformation.v1"
-                defaultMessage={`Normal login is working again! Login now requires sending
-                  information to a third party api created by {pandamanLink}.  No identifing information is sent.
-                  {apiLink} If you'd still like to login with
-                  the cookie value click "Login with Session Cookie." Otherwise just click "Login." Follow {twitterLink} for
+                id="login.loginInformation.v2"
+                defaultMessage={`Normal login is currently broken.  The
+                  "Login with Session Cookie" method may work for you. Follow {twitterLink} for
                   information about updates.`}
                 values={{
-                  pandamanLink: (
-                    <button
-                      className="button-as-link"
-                      onClick={() =>
-                        openExternal('https://twitter.com/frozenpandaman')
-                      }
-                      style={{ cursor: 'pointer' }}
-                    >
-                      @frozenpandaman
-                    </button>
-                  ),
-                  apiLink: (
-                    <button
-                      className="button-as-link"
-                      onClick={() =>
-                        openExternal(
-                          intl.formatMessage(messagesSplash.fApiInfoUrl)
-                        )
-                      }
-                      style={{ cursor: 'pointer' }}
-                    >
-                      <FormattedMessage
-                        id="login.splash.fApiInfoLinkText"
-                        defaultMessage="Click here for more information."
-                      />
-                    </button>
-                  ),
                   twitterLink: (
                     <button
                       className="button-as-link"
@@ -301,7 +272,10 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
             <ControlLabel>Language</ControlLabel>
             <LanguageSelect setLocale={setLocale} locale={locale} />
             <br />
-            <a href={ipcRenderer.sendSync('getLoginUrl')}>
+            <a
+              href={ipcRenderer.sendSync('getLoginUrl')}
+              style={{ display: 'none' }}
+            >
               <Button block bsStyle="primary" style={{ marginBottom: 10 }}>
                 <FormattedMessage id="login.login" defaultMessage="Login" />
               </Button>
