@@ -1,0 +1,3938 @@
+{
+  "results": [
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 9
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 11
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 6
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 3
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 6
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 6 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 4
+        }
+      },
+      "danger_rate": 132.4,
+      "end_time": 1539972000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 210,
+      "grade_point_delta": 20,
+      "job_id": 642,
+      "job_rate": 240,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 76,
+      "kuma_point": 182,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 2
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 1
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 1
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 0
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 3
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 2 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 0
+          }
+        },
+        "dead_count": 2,
+        "golden_ikura_num": 13,
+        "help_count": 4,
+        "ikura_num": 966,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "8",
+          "image_a": "/images/special/9871c82952ed0141be0310ace1942c9f5f66d655.png",
+          "image_b": "/images/special/26e8117808ce17dadb0f23943359e5909fef4085.png",
+          "name": "Inkjet"
+        },
+        "special_counts": [0, 1, 1],
+        "weapon_list": [
+          {
+            "id": "2000",
+            "weapon": {
+              "id": "2000",
+              "image": "/images/weapon/5a0a20324f1374a363363d721a605849e36ffff2.png",
+              "name": "Classic Squiffer",
+              "thumbnail": "/images/weapon/a0730bdef035d247bcc5d2361abb561aa4a4d6ed.png"
+            }
+          },
+          {
+            "id": "6000",
+            "weapon": {
+              "id": "6000",
+              "image": "/images/weapon/f1fa6db2e21f32cd1c2cd093ec24f1a450d4650c.png",
+              "name": "Splat Brella",
+              "thumbnail": "/images/weapon/9a1adf1c38c1a017bad0be0cac13255ae0f8d25b.png"
+            }
+          },
+          {
+            "id": "50",
+            "weapon": {
+              "id": "50",
+              "image": "/images/weapon/df04ddaf086cea94491df553a6d2550230a4da3c.png",
+              "name": ".52 Gal",
+              "thumbnail": "/images/weapon/3e69eaa1b1463689ddbe4fe23661f007dc216b08.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1539917804,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1539972000,
+        "stage": {
+          "image": "/images/coop_stage/65c68c6f0641cc5654434b78a6f10b0ad32ccdee.png",
+          "name": "Spawning Grounds"
+        },
+        "start_time": 1539864000,
+        "weapons": [
+          {
+            "id": "50",
+            "weapon": {
+              "id": "50",
+              "image": "/images/weapon/df04ddaf086cea94491df553a6d2550230a4da3c.png",
+              "name": ".52 Gal",
+              "thumbnail": "/images/weapon/3e69eaa1b1463689ddbe4fe23661f007dc216b08.png"
+            }
+          },
+          {
+            "id": "6000",
+            "weapon": {
+              "id": "6000",
+              "image": "/images/weapon/f1fa6db2e21f32cd1c2cd093ec24f1a450d4650c.png",
+              "name": "Splat Brella",
+              "thumbnail": "/images/weapon/9a1adf1c38c1a017bad0be0cac13255ae0f8d25b.png"
+            }
+          },
+          {
+            "id": "4010",
+            "weapon": {
+              "id": "4010",
+              "image": "/images/weapon/6f42c9f8fde07510a01072a669125545f6effb99.png",
+              "name": "Heavy Splatling",
+              "thumbnail": "/images/weapon/c8d18b0264f1acd1e7d374a8b2c3b6fc526c790a.png"
+            }
+          },
+          {
+            "id": "2000",
+            "weapon": {
+              "id": "2000",
+              "image": "/images/weapon/5a0a20324f1374a363363d721a605849e36ffff2.png",
+              "name": "Classic Squiffer",
+              "thumbnail": "/images/weapon/a0730bdef035d247bcc5d2361abb561aa4a4d6ed.png"
+            }
+          }
+        ]
+      },
+      "start_time": 1539864000,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 24,
+          "golden_ikura_pop_num": 33,
+          "ikura_num": 617,
+          "quota_num": 15,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 18,
+          "golden_ikura_pop_num": 30,
+          "ikura_num": 680,
+          "quota_num": 16,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 23,
+          "golden_ikura_pop_num": 36,
+          "ikura_num": 1065,
+          "quota_num": 18,
+          "water_level": { "key": "high", "name": "High tide" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 1
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 3
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 2
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 3
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 1
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 3 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 1
+        }
+      },
+      "danger_rate": 143,
+      "end_time": 1539972000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 190,
+      "grade_point_delta": -10,
+      "job_id": 641,
+      "job_rate": 235,
+      "job_result": {
+        "failure_reason": "time_limit",
+        "failure_wave": 1,
+        "is_clear": false
+      },
+      "job_score": 21,
+      "kuma_point": 49,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 0
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 0
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 1
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 0
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 1 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 0
+          }
+        },
+        "dead_count": 1,
+        "golden_ikura_num": 5,
+        "help_count": 2,
+        "ikura_num": 93,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "9",
+          "image_a": "/images/special/324d41e9582d84101152849bc8c96d6595c9b0ff.png",
+          "image_b": "/images/special/4eb81e00f5d707248879a7c7037d8475716a8045.png",
+          "name": "Splashdown"
+        },
+        "special_counts": [0],
+        "weapon_list": [
+          {
+            "id": "50",
+            "weapon": {
+              "id": "50",
+              "image": "/images/weapon/df04ddaf086cea94491df553a6d2550230a4da3c.png",
+              "name": ".52 Gal",
+              "thumbnail": "/images/weapon/3e69eaa1b1463689ddbe4fe23661f007dc216b08.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1539917620,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1539972000,
+        "stage": {
+          "image": "/images/coop_stage/65c68c6f0641cc5654434b78a6f10b0ad32ccdee.png",
+          "name": "Spawning Grounds"
+        },
+        "start_time": 1539864000,
+        "weapons": [
+          {
+            "id": "50",
+            "weapon": {
+              "id": "50",
+              "image": "/images/weapon/df04ddaf086cea94491df553a6d2550230a4da3c.png",
+              "name": ".52 Gal",
+              "thumbnail": "/images/weapon/3e69eaa1b1463689ddbe4fe23661f007dc216b08.png"
+            }
+          },
+          {
+            "id": "6000",
+            "weapon": {
+              "id": "6000",
+              "image": "/images/weapon/f1fa6db2e21f32cd1c2cd093ec24f1a450d4650c.png",
+              "name": "Splat Brella",
+              "thumbnail": "/images/weapon/9a1adf1c38c1a017bad0be0cac13255ae0f8d25b.png"
+            }
+          },
+          {
+            "id": "4010",
+            "weapon": {
+              "id": "4010",
+              "image": "/images/weapon/6f42c9f8fde07510a01072a669125545f6effb99.png",
+              "name": "Heavy Splatling",
+              "thumbnail": "/images/weapon/c8d18b0264f1acd1e7d374a8b2c3b6fc526c790a.png"
+            }
+          },
+          {
+            "id": "2000",
+            "weapon": {
+              "id": "2000",
+              "image": "/images/weapon/5a0a20324f1374a363363d721a605849e36ffff2.png",
+              "name": "Classic Squiffer",
+              "thumbnail": "/images/weapon/a0730bdef035d247bcc5d2361abb561aa4a4d6ed.png"
+            }
+          }
+        ]
+      },
+      "start_time": 1539864000,
+      "wave_details": [
+        {
+          "event_type": { "key": "cohock-charge", "name": "Cohock Charge" },
+          "golden_ikura_num": 15,
+          "golden_ikura_pop_num": 24,
+          "ikura_num": 1279,
+          "quota_num": 16,
+          "water_level": { "key": "low", "name": "Low tide" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 14
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 0
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 0
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 0
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 0
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 0
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 0 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 0
+        }
+      },
+      "danger_rate": 128,
+      "end_time": 1539972000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 200,
+      "grade_point_delta": -20,
+      "job_id": 640,
+      "job_rate": 240,
+      "job_result": {
+        "failure_reason": "wipe_out",
+        "failure_wave": 1,
+        "is_clear": false
+      },
+      "job_score": 24,
+      "kuma_point": 57,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 5
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 0
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 0
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 0
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 0
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 0 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 0
+          }
+        },
+        "dead_count": 2,
+        "golden_ikura_num": 6,
+        "help_count": 5,
+        "ikura_num": 407,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "8",
+          "image_a": "/images/special/9871c82952ed0141be0310ace1942c9f5f66d655.png",
+          "image_b": "/images/special/26e8117808ce17dadb0f23943359e5909fef4085.png",
+          "name": "Inkjet"
+        },
+        "special_counts": [1],
+        "weapon_list": [
+          {
+            "id": "4010",
+            "weapon": {
+              "id": "4010",
+              "image": "/images/weapon/6f42c9f8fde07510a01072a669125545f6effb99.png",
+              "name": "Heavy Splatling",
+              "thumbnail": "/images/weapon/c8d18b0264f1acd1e7d374a8b2c3b6fc526c790a.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1539917446,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1539972000,
+        "stage": {
+          "image": "/images/coop_stage/65c68c6f0641cc5654434b78a6f10b0ad32ccdee.png",
+          "name": "Spawning Grounds"
+        },
+        "start_time": 1539864000,
+        "weapons": [
+          {
+            "id": "50",
+            "weapon": {
+              "id": "50",
+              "image": "/images/weapon/df04ddaf086cea94491df553a6d2550230a4da3c.png",
+              "name": ".52 Gal",
+              "thumbnail": "/images/weapon/3e69eaa1b1463689ddbe4fe23661f007dc216b08.png"
+            }
+          },
+          {
+            "id": "6000",
+            "weapon": {
+              "id": "6000",
+              "image": "/images/weapon/f1fa6db2e21f32cd1c2cd093ec24f1a450d4650c.png",
+              "name": "Splat Brella",
+              "thumbnail": "/images/weapon/9a1adf1c38c1a017bad0be0cac13255ae0f8d25b.png"
+            }
+          },
+          {
+            "id": "4010",
+            "weapon": {
+              "id": "4010",
+              "image": "/images/weapon/6f42c9f8fde07510a01072a669125545f6effb99.png",
+              "name": "Heavy Splatling",
+              "thumbnail": "/images/weapon/c8d18b0264f1acd1e7d374a8b2c3b6fc526c790a.png"
+            }
+          },
+          {
+            "id": "2000",
+            "weapon": {
+              "id": "2000",
+              "image": "/images/weapon/5a0a20324f1374a363363d721a605849e36ffff2.png",
+              "name": "Classic Squiffer",
+              "thumbnail": "/images/weapon/a0730bdef035d247bcc5d2361abb561aa4a4d6ed.png"
+            }
+          }
+        ]
+      },
+      "start_time": 1539864000,
+      "wave_details": [
+        {
+          "event_type": { "key": "rush", "name": "Rush" },
+          "golden_ikura_num": 17,
+          "golden_ikura_pop_num": 36,
+          "ikura_num": 1430,
+          "quota_num": 15,
+          "water_level": { "key": "high", "name": "High tide" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 6
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 8
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 6
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 6
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 8
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 4 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 10
+        }
+      },
+      "danger_rate": 142,
+      "end_time": 1539972000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 220,
+      "grade_point_delta": 20,
+      "job_id": 639,
+      "job_rate": 245,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 79,
+      "kuma_point": 193,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 1
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 1
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 2
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 2
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 0 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 1
+          }
+        },
+        "dead_count": 4,
+        "golden_ikura_num": 14,
+        "help_count": 4,
+        "ikura_num": 646,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "8",
+          "image_a": "/images/special/9871c82952ed0141be0310ace1942c9f5f66d655.png",
+          "image_b": "/images/special/26e8117808ce17dadb0f23943359e5909fef4085.png",
+          "name": "Inkjet"
+        },
+        "special_counts": [0, 0, 1],
+        "weapon_list": [
+          {
+            "id": "2000",
+            "weapon": {
+              "id": "2000",
+              "image": "/images/weapon/5a0a20324f1374a363363d721a605849e36ffff2.png",
+              "name": "Classic Squiffer",
+              "thumbnail": "/images/weapon/a0730bdef035d247bcc5d2361abb561aa4a4d6ed.png"
+            }
+          },
+          {
+            "id": "6000",
+            "weapon": {
+              "id": "6000",
+              "image": "/images/weapon/f1fa6db2e21f32cd1c2cd093ec24f1a450d4650c.png",
+              "name": "Splat Brella",
+              "thumbnail": "/images/weapon/9a1adf1c38c1a017bad0be0cac13255ae0f8d25b.png"
+            }
+          },
+          {
+            "id": "50",
+            "weapon": {
+              "id": "50",
+              "image": "/images/weapon/df04ddaf086cea94491df553a6d2550230a4da3c.png",
+              "name": ".52 Gal",
+              "thumbnail": "/images/weapon/3e69eaa1b1463689ddbe4fe23661f007dc216b08.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1539917006,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1539972000,
+        "stage": {
+          "image": "/images/coop_stage/65c68c6f0641cc5654434b78a6f10b0ad32ccdee.png",
+          "name": "Spawning Grounds"
+        },
+        "start_time": 1539864000,
+        "weapons": [
+          {
+            "id": "50",
+            "weapon": {
+              "id": "50",
+              "image": "/images/weapon/df04ddaf086cea94491df553a6d2550230a4da3c.png",
+              "name": ".52 Gal",
+              "thumbnail": "/images/weapon/3e69eaa1b1463689ddbe4fe23661f007dc216b08.png"
+            }
+          },
+          {
+            "id": "6000",
+            "weapon": {
+              "id": "6000",
+              "image": "/images/weapon/f1fa6db2e21f32cd1c2cd093ec24f1a450d4650c.png",
+              "name": "Splat Brella",
+              "thumbnail": "/images/weapon/9a1adf1c38c1a017bad0be0cac13255ae0f8d25b.png"
+            }
+          },
+          {
+            "id": "4010",
+            "weapon": {
+              "id": "4010",
+              "image": "/images/weapon/6f42c9f8fde07510a01072a669125545f6effb99.png",
+              "name": "Heavy Splatling",
+              "thumbnail": "/images/weapon/c8d18b0264f1acd1e7d374a8b2c3b6fc526c790a.png"
+            }
+          },
+          {
+            "id": "2000",
+            "weapon": {
+              "id": "2000",
+              "image": "/images/weapon/5a0a20324f1374a363363d721a605849e36ffff2.png",
+              "name": "Classic Squiffer",
+              "thumbnail": "/images/weapon/a0730bdef035d247bcc5d2361abb561aa4a4d6ed.png"
+            }
+          }
+        ]
+      },
+      "start_time": 1539864000,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 20,
+          "golden_ikura_pop_num": 36,
+          "ikura_num": 928,
+          "quota_num": 16,
+          "water_level": { "key": "high", "name": "High tide" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 26,
+          "golden_ikura_pop_num": 45,
+          "ikura_num": 715,
+          "quota_num": 17,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 21,
+          "golden_ikura_pop_num": 42,
+          "ikura_num": 892,
+          "quota_num": 19,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 15
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 5
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 4
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 6
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 5
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 5
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 5 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 6
+        }
+      },
+      "danger_rate": 149,
+      "end_time": 1539820800,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 270,
+      "grade_point_delta": 20,
+      "job_id": 638,
+      "job_rate": 255,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 87,
+      "kuma_point": 221,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 6
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 0
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 2
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 1
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 2
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 2 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 0
+          }
+        },
+        "dead_count": 4,
+        "golden_ikura_num": 9,
+        "help_count": 5,
+        "ikura_num": 991,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "8",
+          "image_a": "/images/special/9871c82952ed0141be0310ace1942c9f5f66d655.png",
+          "image_b": "/images/special/26e8117808ce17dadb0f23943359e5909fef4085.png",
+          "name": "Inkjet"
+        },
+        "special_counts": [0, 0, 2],
+        "weapon_list": [
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          },
+          {
+            "id": "250",
+            "weapon": {
+              "id": "250",
+              "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+              "name": "Rapid Blaster Pro",
+              "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1539747080,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1539820800,
+        "stage": {
+          "image": "/images/coop_stage/e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png",
+          "name": "Salmonid Smokeyard"
+        },
+        "start_time": 1539712800,
+        "weapons": [
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          },
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          },
+          {
+            "id": "250",
+            "weapon": {
+              "id": "250",
+              "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+              "name": "Rapid Blaster Pro",
+              "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+            }
+          }
+        ]
+      },
+      "start_time": 1539712800,
+      "wave_details": [
+        {
+          "event_type": { "key": "rush", "name": "Rush" },
+          "golden_ikura_num": 24,
+          "golden_ikura_pop_num": 42,
+          "ikura_num": 2177,
+          "quota_num": 16,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 21,
+          "golden_ikura_pop_num": 36,
+          "ikura_num": 789,
+          "quota_num": 18,
+          "water_level": { "key": "low", "name": "Low tide" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 23,
+          "golden_ikura_pop_num": 42,
+          "ikura_num": 879,
+          "quota_num": 20,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 6
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 4
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 5
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 2
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 4
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 5 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 6
+        }
+      },
+      "danger_rate": 151,
+      "end_time": 1539820800,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 250,
+      "grade_point_delta": -10,
+      "job_id": 637,
+      "job_rate": 250,
+      "job_result": {
+        "failure_reason": "wipe_out",
+        "failure_wave": 2,
+        "is_clear": false
+      },
+      "job_score": 43,
+      "kuma_point": 107,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 1
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 1
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 0
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 0
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 1 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 1
+          }
+        },
+        "dead_count": 1,
+        "golden_ikura_num": 11,
+        "help_count": 2,
+        "ikura_num": 306,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "8",
+          "image_a": "/images/special/9871c82952ed0141be0310ace1942c9f5f66d655.png",
+          "image_b": "/images/special/26e8117808ce17dadb0f23943359e5909fef4085.png",
+          "name": "Inkjet"
+        },
+        "special_counts": [0, 1],
+        "weapon_list": [
+          {
+            "id": "250",
+            "weapon": {
+              "id": "250",
+              "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+              "name": "Rapid Blaster Pro",
+              "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+            }
+          },
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1539746796,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1539820800,
+        "stage": {
+          "image": "/images/coop_stage/e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png",
+          "name": "Salmonid Smokeyard"
+        },
+        "start_time": 1539712800,
+        "weapons": [
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          },
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          },
+          {
+            "id": "250",
+            "weapon": {
+              "id": "250",
+              "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+              "name": "Rapid Blaster Pro",
+              "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+            }
+          }
+        ]
+      },
+      "start_time": 1539712800,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 17,
+          "golden_ikura_pop_num": 33,
+          "ikura_num": 901,
+          "quota_num": 17,
+          "water_level": { "key": "low", "name": "Low tide" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 18,
+          "golden_ikura_pop_num": 36,
+          "ikura_num": 725,
+          "quota_num": 18,
+          "water_level": { "key": "low", "name": "Low tide" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 6
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 9
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 6
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 8
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 11
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 4 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 7
+        }
+      },
+      "danger_rate": 147,
+      "end_time": 1539820800,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 260,
+      "grade_point_delta": 20,
+      "job_id": 636,
+      "job_rate": 255,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 77,
+      "kuma_point": 196,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 1
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 2
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 1
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 0
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 3
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 0 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 2
+          }
+        },
+        "dead_count": 3,
+        "golden_ikura_num": 12,
+        "help_count": 1,
+        "ikura_num": 604,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "9",
+          "image_a": "/images/special/324d41e9582d84101152849bc8c96d6595c9b0ff.png",
+          "image_b": "/images/special/4eb81e00f5d707248879a7c7037d8475716a8045.png",
+          "name": "Splashdown"
+        },
+        "special_counts": [0, 0, 2],
+        "weapon_list": [
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          },
+          {
+            "id": "250",
+            "weapon": {
+              "id": "250",
+              "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+              "name": "Rapid Blaster Pro",
+              "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1539746373,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1539820800,
+        "stage": {
+          "image": "/images/coop_stage/e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png",
+          "name": "Salmonid Smokeyard"
+        },
+        "start_time": 1539712800,
+        "weapons": [
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          },
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          },
+          {
+            "id": "250",
+            "weapon": {
+              "id": "250",
+              "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+              "name": "Rapid Blaster Pro",
+              "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+            }
+          }
+        ]
+      },
+      "start_time": 1539712800,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 17,
+          "golden_ikura_pop_num": 27,
+          "ikura_num": 598,
+          "quota_num": 16,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 25,
+          "golden_ikura_pop_num": 33,
+          "ikura_num": 688,
+          "quota_num": 18,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 24,
+          "golden_ikura_pop_num": 54,
+          "ikura_num": 1030,
+          "quota_num": 20,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 4
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 4
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 6
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 4
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 4
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 4 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 8 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 6
+        }
+      },
+      "danger_rate": 143,
+      "end_time": 1539820800,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 240,
+      "grade_point_delta": 20,
+      "job_id": 635,
+      "job_rate": 250,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 78,
+      "kuma_point": 195,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 0
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 1
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 3
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 1
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 1 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 1
+          }
+        },
+        "dead_count": 2,
+        "golden_ikura_num": 17,
+        "help_count": 3,
+        "ikura_num": 724,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "9",
+          "image_a": "/images/special/324d41e9582d84101152849bc8c96d6595c9b0ff.png",
+          "image_b": "/images/special/4eb81e00f5d707248879a7c7037d8475716a8045.png",
+          "name": "Splashdown"
+        },
+        "special_counts": [0, 0, 2],
+        "weapon_list": [
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          },
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1539745953,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1539820800,
+        "stage": {
+          "image": "/images/coop_stage/e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png",
+          "name": "Salmonid Smokeyard"
+        },
+        "start_time": 1539712800,
+        "weapons": [
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          },
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          },
+          {
+            "id": "250",
+            "weapon": {
+              "id": "250",
+              "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+              "name": "Rapid Blaster Pro",
+              "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+            }
+          }
+        ]
+      },
+      "start_time": 1539712800,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 17,
+          "golden_ikura_pop_num": 30,
+          "ikura_num": 726,
+          "quota_num": 16,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "griller", "name": "The Griller" },
+          "golden_ikura_num": 25,
+          "golden_ikura_pop_num": 30,
+          "ikura_num": 866,
+          "quota_num": 17,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 25,
+          "golden_ikura_pop_num": 42,
+          "ikura_num": 719,
+          "quota_num": 19,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 7
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 5
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 5
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 8
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 7
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 6 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 10
+        }
+      },
+      "danger_rate": 143,
+      "end_time": 1539820800,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 220,
+      "grade_point_delta": 0,
+      "job_id": 634,
+      "job_rate": 245,
+      "job_result": {
+        "failure_reason": "wipe_out",
+        "failure_wave": 3,
+        "is_clear": false
+      },
+      "job_score": 56,
+      "kuma_point": 137,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 1
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 1
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 0
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 2
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 0
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 1 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 2
+          }
+        },
+        "dead_count": 3,
+        "golden_ikura_num": 9,
+        "help_count": 5,
+        "ikura_num": 708,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "9",
+          "image_a": "/images/special/324d41e9582d84101152849bc8c96d6595c9b0ff.png",
+          "image_b": "/images/special/4eb81e00f5d707248879a7c7037d8475716a8045.png",
+          "name": "Splashdown"
+        },
+        "special_counts": [0, 0, 2],
+        "weapon_list": [
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          },
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1539745551,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1539820800,
+        "stage": {
+          "image": "/images/coop_stage/e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png",
+          "name": "Salmonid Smokeyard"
+        },
+        "start_time": 1539712800,
+        "weapons": [
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          },
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          },
+          {
+            "id": "250",
+            "weapon": {
+              "id": "250",
+              "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+              "name": "Rapid Blaster Pro",
+              "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+            }
+          }
+        ]
+      },
+      "start_time": 1539712800,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 21,
+          "golden_ikura_pop_num": 24,
+          "ikura_num": 750,
+          "quota_num": 16,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 17,
+          "golden_ikura_pop_num": 24,
+          "ikura_num": 612,
+          "quota_num": 17,
+          "water_level": { "key": "low", "name": "Low tide" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 9,
+          "golden_ikura_pop_num": 21,
+          "ikura_num": 532,
+          "quota_num": 19,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 3
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 5
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 3
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 3
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 6
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 7 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 6 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 3
+        }
+      },
+      "danger_rate": 125.4,
+      "end_time": 1539820800,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 220,
+      "grade_point_delta": 0,
+      "job_id": 633,
+      "job_rate": 245,
+      "job_result": {
+        "failure_reason": "time_limit",
+        "failure_wave": 3,
+        "is_clear": false
+      },
+      "job_score": 62,
+      "kuma_point": 151,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 2
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 1
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 0
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 1
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 1 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 1
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 0
+          }
+        },
+        "dead_count": 3,
+        "golden_ikura_num": 19,
+        "help_count": 3,
+        "ikura_num": 343,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "7",
+          "image_a": "/images/special/7af300fdd872feb27b3d8e68a969457fac8b3bb7.png",
+          "image_b": "/images/special/485b748720bbf809d8b28f9f4ee1a505cbcb339b.png",
+          "name": "Sting Ray"
+        },
+        "special_counts": [0, 0, 1],
+        "weapon_list": [
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          },
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          },
+          {
+            "id": "250",
+            "weapon": {
+              "id": "250",
+              "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+              "name": "Rapid Blaster Pro",
+              "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1539744550,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1539820800,
+        "stage": {
+          "image": "/images/coop_stage/e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png",
+          "name": "Salmonid Smokeyard"
+        },
+        "start_time": 1539712800,
+        "weapons": [
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          },
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          },
+          {
+            "id": "250",
+            "weapon": {
+              "id": "250",
+              "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+              "name": "Rapid Blaster Pro",
+              "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+            }
+          }
+        ]
+      },
+      "start_time": 1539712800,
+      "wave_details": [
+        {
+          "event_type": { "key": "cohock-charge", "name": "Cohock Charge" },
+          "golden_ikura_num": 23,
+          "golden_ikura_pop_num": 39,
+          "ikura_num": 1595,
+          "quota_num": 15,
+          "water_level": { "key": "low", "name": "Low tide" }
+        },
+        {
+          "event_type": { "key": "griller", "name": "The Griller" },
+          "golden_ikura_num": 18,
+          "golden_ikura_pop_num": 20,
+          "ikura_num": 612,
+          "quota_num": 16,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 7,
+          "golden_ikura_pop_num": 24,
+          "ikura_num": 705,
+          "quota_num": 18,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 14
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 4
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 3
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 7
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 3
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 4
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 5 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 6
+        }
+      },
+      "danger_rate": 146.6,
+      "end_time": 1539820800,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 220,
+      "grade_point_delta": 20,
+      "job_id": 632,
+      "job_rate": 245,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 84,
+      "kuma_point": 205,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 1
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 0
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 0
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 1
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 1
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 1 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 1
+          }
+        },
+        "dead_count": 3,
+        "golden_ikura_num": 15,
+        "help_count": 2,
+        "ikura_num": 1067,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "8",
+          "image_a": "/images/special/9871c82952ed0141be0310ace1942c9f5f66d655.png",
+          "image_b": "/images/special/26e8117808ce17dadb0f23943359e5909fef4085.png",
+          "name": "Inkjet"
+        },
+        "special_counts": [0, 0, 1],
+        "weapon_list": [
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          },
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1539744085,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1539820800,
+        "stage": {
+          "image": "/images/coop_stage/e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png",
+          "name": "Salmonid Smokeyard"
+        },
+        "start_time": 1539712800,
+        "weapons": [
+          {
+            "id": "1010",
+            "weapon": {
+              "id": "1010",
+              "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+              "name": "Splat Roller",
+              "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+            }
+          },
+          {
+            "id": "60",
+            "weapon": {
+              "id": "60",
+              "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+              "name": "N-ZAP '85",
+              "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+            }
+          },
+          {
+            "id": "4030",
+            "weapon": {
+              "id": "4030",
+              "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+              "name": "Ballpoint Splatling",
+              "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+            }
+          },
+          {
+            "id": "250",
+            "weapon": {
+              "id": "250",
+              "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+              "name": "Rapid Blaster Pro",
+              "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+            }
+          }
+        ]
+      },
+      "start_time": 1539712800,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 25,
+          "golden_ikura_pop_num": 30,
+          "ikura_num": 727,
+          "quota_num": 16,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 20,
+          "golden_ikura_pop_num": 30,
+          "ikura_num": 701,
+          "quota_num": 18,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "rush", "name": "Rush" },
+          "golden_ikura_num": 23,
+          "golden_ikura_pop_num": 39,
+          "ikura_num": 1862,
+          "quota_num": 20,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 20
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 1
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 0
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 2
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 1
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 4
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 4 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 1
+        }
+      },
+      "danger_rate": 141,
+      "end_time": 1538928000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 200,
+      "grade_point_delta": 20,
+      "job_id": 631,
+      "job_rate": 240,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 99,
+      "kuma_point": 237,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 0
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 0
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 0
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 3
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 0 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 0
+          }
+        },
+        "dead_count": 0,
+        "golden_ikura_num": 21,
+        "help_count": 0,
+        "ikura_num": 566,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "8",
+          "image_a": "/images/special/9871c82952ed0141be0310ace1942c9f5f66d655.png",
+          "image_b": "/images/special/26e8117808ce17dadb0f23943359e5909fef4085.png",
+          "name": "Inkjet"
+        },
+        "special_counts": [0, 0, 0],
+        "weapon_list": [
+          {
+            "id": "20000",
+            "weapon": {
+              "id": "20000",
+              "image": "/images/weapon/db39203d81d60a7370d3ae966bc02ed14398366f.png",
+              "name": "Grizzco Blaster",
+              "thumbnail": "/images/weapon/85ac26a4ba7f6a264c3832138380f19354016da5.png"
+            }
+          },
+          {
+            "id": "20000",
+            "weapon": {
+              "id": "20000",
+              "image": "/images/weapon/db39203d81d60a7370d3ae966bc02ed14398366f.png",
+              "name": "Grizzco Blaster",
+              "thumbnail": "/images/weapon/85ac26a4ba7f6a264c3832138380f19354016da5.png"
+            }
+          },
+          {
+            "id": "20020",
+            "weapon": {
+              "id": "20020",
+              "image": "/images/weapon/95077fe72924bcd64f37cd43aa49a12cd6329a7e.png",
+              "name": "Grizzco Charger",
+              "thumbnail": "/images/weapon/6d9246d994614a666aca4f24864c69d660b395dd.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1538795611,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1538928000,
+        "stage": {
+          "image": "/images/coop_stage/e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png",
+          "name": "Marooner's Bay"
+        },
+        "start_time": 1538762400,
+        "weapons": [
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          }
+        ]
+      },
+      "start_time": 1538762400,
+      "wave_details": [
+        {
+          "event_type": { "key": "rush", "name": "Rush" },
+          "golden_ikura_num": 25,
+          "golden_ikura_pop_num": 39,
+          "ikura_num": 1752,
+          "quota_num": 16,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "fog", "name": "Fog" },
+          "golden_ikura_num": 29,
+          "golden_ikura_pop_num": 48,
+          "ikura_num": 668,
+          "quota_num": 17,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "goldie-seeking", "name": "Goldie Seeking" },
+          "golden_ikura_num": 29,
+          "golden_ikura_pop_num": 40,
+          "ikura_num": 938,
+          "quota_num": 19,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 3
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 4
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 2
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 2
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 1
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 2 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 1
+        }
+      },
+      "danger_rate": 145,
+      "end_time": 1538928000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 180,
+      "grade_point_delta": -20,
+      "job_id": 630,
+      "job_rate": 235,
+      "job_result": {
+        "failure_reason": "time_limit",
+        "failure_wave": 1,
+        "is_clear": false
+      },
+      "job_score": 18,
+      "kuma_point": 42,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 1
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 0
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 0
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 1
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 0 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 0
+          }
+        },
+        "dead_count": 1,
+        "golden_ikura_num": 4,
+        "help_count": 1,
+        "ikura_num": 168,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "8",
+          "image_a": "/images/special/9871c82952ed0141be0310ace1942c9f5f66d655.png",
+          "image_b": "/images/special/26e8117808ce17dadb0f23943359e5909fef4085.png",
+          "name": "Inkjet"
+        },
+        "special_counts": [0],
+        "weapon_list": [
+          {
+            "id": "20000",
+            "weapon": {
+              "id": "20000",
+              "image": "/images/weapon/db39203d81d60a7370d3ae966bc02ed14398366f.png",
+              "name": "Grizzco Blaster",
+              "thumbnail": "/images/weapon/85ac26a4ba7f6a264c3832138380f19354016da5.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1538795440,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1538928000,
+        "stage": {
+          "image": "/images/coop_stage/e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png",
+          "name": "Marooner's Bay"
+        },
+        "start_time": 1538762400,
+        "weapons": [
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          }
+        ]
+      },
+      "start_time": 1538762400,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 15,
+          "golden_ikura_pop_num": 33,
+          "ikura_num": 628,
+          "quota_num": 16,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 9
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 7
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 4
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 3
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 6
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 13 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 6
+        }
+      },
+      "danger_rate": 141,
+      "end_time": 1538928000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 200,
+      "grade_point_delta": 20,
+      "job_id": 629,
+      "job_rate": 240,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 91,
+      "kuma_point": 218,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 0
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 1
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 1
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 2
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 5 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 1
+          }
+        },
+        "dead_count": 4,
+        "golden_ikura_num": 17,
+        "help_count": 2,
+        "ikura_num": 581,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "9",
+          "image_a": "/images/special/324d41e9582d84101152849bc8c96d6595c9b0ff.png",
+          "image_b": "/images/special/4eb81e00f5d707248879a7c7037d8475716a8045.png",
+          "name": "Splashdown"
+        },
+        "special_counts": [0, 0, 2],
+        "weapon_list": [
+          {
+            "id": "20000",
+            "weapon": {
+              "id": "20000",
+              "image": "/images/weapon/db39203d81d60a7370d3ae966bc02ed14398366f.png",
+              "name": "Grizzco Blaster",
+              "thumbnail": "/images/weapon/85ac26a4ba7f6a264c3832138380f19354016da5.png"
+            }
+          },
+          {
+            "id": "20000",
+            "weapon": {
+              "id": "20000",
+              "image": "/images/weapon/db39203d81d60a7370d3ae966bc02ed14398366f.png",
+              "name": "Grizzco Blaster",
+              "thumbnail": "/images/weapon/85ac26a4ba7f6a264c3832138380f19354016da5.png"
+            }
+          },
+          {
+            "id": "20030",
+            "weapon": {
+              "id": "20030",
+              "image": "/images/weapon/c2c0653d3246ea6df2b595c68e907f68eda49b08.png",
+              "name": "Grizzco Slosher",
+              "thumbnail": "/images/weapon/7eaa5e6a2eb6a03d31b72945d4fb94b67a478ce9.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1538795019,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1538928000,
+        "stage": {
+          "image": "/images/coop_stage/e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png",
+          "name": "Marooner's Bay"
+        },
+        "start_time": 1538762400,
+        "weapons": [
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          }
+        ]
+      },
+      "start_time": 1538762400,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 25,
+          "golden_ikura_pop_num": 39,
+          "ikura_num": 660,
+          "quota_num": 16,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 18,
+          "golden_ikura_pop_num": 33,
+          "ikura_num": 524,
+          "quota_num": 17,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 36,
+          "golden_ikura_pop_num": 51,
+          "ikura_num": 1232,
+          "quota_num": 19,
+          "water_level": { "key": "low", "name": "Low tide" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 3
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 7
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 7
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 4
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 4
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 10
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 6 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 7
+        }
+      },
+      "danger_rate": 141,
+      "end_time": 1538928000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 180,
+      "grade_point_delta": 0,
+      "job_id": 628,
+      "job_rate": 235,
+      "job_result": {
+        "failure_reason": "time_limit",
+        "failure_wave": 3,
+        "is_clear": false
+      },
+      "job_score": 61,
+      "kuma_point": 143,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 1
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 1
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 1
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 1
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 2
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 6
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 1 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 1
+          }
+        },
+        "dead_count": 1,
+        "golden_ikura_num": 13,
+        "help_count": 1,
+        "ikura_num": 449,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "7",
+          "image_a": "/images/special/7af300fdd872feb27b3d8e68a969457fac8b3bb7.png",
+          "image_b": "/images/special/485b748720bbf809d8b28f9f4ee1a505cbcb339b.png",
+          "name": "Sting Ray"
+        },
+        "special_counts": [0, 0, 1],
+        "weapon_list": [
+          {
+            "id": "20030",
+            "weapon": {
+              "id": "20030",
+              "image": "/images/weapon/c2c0653d3246ea6df2b595c68e907f68eda49b08.png",
+              "name": "Grizzco Slosher",
+              "thumbnail": "/images/weapon/7eaa5e6a2eb6a03d31b72945d4fb94b67a478ce9.png"
+            }
+          },
+          {
+            "id": "20000",
+            "weapon": {
+              "id": "20000",
+              "image": "/images/weapon/db39203d81d60a7370d3ae966bc02ed14398366f.png",
+              "name": "Grizzco Blaster",
+              "thumbnail": "/images/weapon/85ac26a4ba7f6a264c3832138380f19354016da5.png"
+            }
+          },
+          {
+            "id": "20010",
+            "weapon": {
+              "id": "20010",
+              "image": "/images/weapon/7d5ff3a57c3c3aaf28217bc3a79e02d665f13ba7.png",
+              "name": "Grizzco Brella",
+              "thumbnail": "/images/weapon/4e70c142250569814e5164fd687678a4af1e82a0.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1538794586,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1538928000,
+        "stage": {
+          "image": "/images/coop_stage/e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png",
+          "name": "Marooner's Bay"
+        },
+        "start_time": 1538762400,
+        "weapons": [
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          }
+        ]
+      },
+      "start_time": 1538762400,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 18,
+          "golden_ikura_pop_num": 36,
+          "ikura_num": 725,
+          "quota_num": 16,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "fog", "name": "Fog" },
+          "golden_ikura_num": 22,
+          "golden_ikura_pop_num": 46,
+          "ikura_num": 553,
+          "quota_num": 17,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 12,
+          "golden_ikura_pop_num": 39,
+          "ikura_num": 670,
+          "quota_num": 19,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 10
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 5
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 5
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 5
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 6
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 9 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 8
+        }
+      },
+      "danger_rate": 137,
+      "end_time": 1538928000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 180,
+      "grade_point_delta": 20,
+      "job_id": 627,
+      "job_rate": 235,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 67,
+      "kuma_point": 157,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 0
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 1
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 1
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 1
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 5
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 1 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 2
+          }
+        },
+        "dead_count": 3,
+        "golden_ikura_num": 15,
+        "help_count": 2,
+        "ikura_num": 610,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "2",
+          "image_a": "/images/special/18990f646c551ee77c5b283ec814e371f692a553.png",
+          "image_b": "/images/special/9e89e1d67803c3021203182ecc7f38bc2c0f5400.png",
+          "name": "Splat-Bomb Launcher"
+        },
+        "special_counts": [0, 0, 0],
+        "weapon_list": [
+          {
+            "id": "20000",
+            "weapon": {
+              "id": "20000",
+              "image": "/images/weapon/db39203d81d60a7370d3ae966bc02ed14398366f.png",
+              "name": "Grizzco Blaster",
+              "thumbnail": "/images/weapon/85ac26a4ba7f6a264c3832138380f19354016da5.png"
+            }
+          },
+          {
+            "id": "20010",
+            "weapon": {
+              "id": "20010",
+              "image": "/images/weapon/7d5ff3a57c3c3aaf28217bc3a79e02d665f13ba7.png",
+              "name": "Grizzco Brella",
+              "thumbnail": "/images/weapon/4e70c142250569814e5164fd687678a4af1e82a0.png"
+            }
+          },
+          {
+            "id": "20010",
+            "weapon": {
+              "id": "20010",
+              "image": "/images/weapon/7d5ff3a57c3c3aaf28217bc3a79e02d665f13ba7.png",
+              "name": "Grizzco Brella",
+              "thumbnail": "/images/weapon/4e70c142250569814e5164fd687678a4af1e82a0.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1538794162,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1538928000,
+        "stage": {
+          "image": "/images/coop_stage/e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png",
+          "name": "Marooner's Bay"
+        },
+        "start_time": 1538762400,
+        "weapons": [
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          }
+        ]
+      },
+      "start_time": 1538762400,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 18,
+          "golden_ikura_pop_num": 30,
+          "ikura_num": 562,
+          "quota_num": 15,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 17,
+          "golden_ikura_pop_num": 30,
+          "ikura_num": 522,
+          "quota_num": 17,
+          "water_level": { "key": "normal", "name": "Normal" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 23,
+          "golden_ikura_pop_num": 42,
+          "ikura_num": 823,
+          "quota_num": 19,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 3
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 5
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 3
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 7
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 6
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 6
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 11 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 4
+        }
+      },
+      "danger_rate": 133,
+      "end_time": 1538928000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 160,
+      "grade_point_delta": 20,
+      "job_id": 626,
+      "job_rate": 230,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 98,
+      "kuma_point": 225,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 1
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 1
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 0
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 2
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 1
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 3 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 1
+          }
+        },
+        "dead_count": 1,
+        "golden_ikura_num": 17,
+        "help_count": 3,
+        "ikura_num": 587,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "9",
+          "image_a": "/images/special/324d41e9582d84101152849bc8c96d6595c9b0ff.png",
+          "image_b": "/images/special/4eb81e00f5d707248879a7c7037d8475716a8045.png",
+          "name": "Splashdown"
+        },
+        "special_counts": [0, 1, 1],
+        "weapon_list": [
+          {
+            "id": "20030",
+            "weapon": {
+              "id": "20030",
+              "image": "/images/weapon/c2c0653d3246ea6df2b595c68e907f68eda49b08.png",
+              "name": "Grizzco Slosher",
+              "thumbnail": "/images/weapon/7eaa5e6a2eb6a03d31b72945d4fb94b67a478ce9.png"
+            }
+          },
+          {
+            "id": "20020",
+            "weapon": {
+              "id": "20020",
+              "image": "/images/weapon/95077fe72924bcd64f37cd43aa49a12cd6329a7e.png",
+              "name": "Grizzco Charger",
+              "thumbnail": "/images/weapon/6d9246d994614a666aca4f24864c69d660b395dd.png"
+            }
+          },
+          {
+            "id": "20000",
+            "weapon": {
+              "id": "20000",
+              "image": "/images/weapon/db39203d81d60a7370d3ae966bc02ed14398366f.png",
+              "name": "Grizzco Blaster",
+              "thumbnail": "/images/weapon/85ac26a4ba7f6a264c3832138380f19354016da5.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1538793505,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1538928000,
+        "stage": {
+          "image": "/images/coop_stage/e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png",
+          "name": "Marooner's Bay"
+        },
+        "start_time": 1538762400,
+        "weapons": [
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          }
+        ]
+      },
+      "start_time": 1538762400,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 25,
+          "golden_ikura_pop_num": 33,
+          "ikura_num": 1057,
+          "quota_num": 15,
+          "water_level": { "key": "high", "name": "High tide" }
+        },
+        {
+          "event_type": { "key": "fog", "name": "Fog" },
+          "golden_ikura_num": 42,
+          "golden_ikura_pop_num": 52,
+          "ikura_num": 1020,
+          "quota_num": 16,
+          "water_level": { "key": "low", "name": "Low tide" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 18,
+          "golden_ikura_pop_num": 30,
+          "ikura_num": 715,
+          "quota_num": 18,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 3
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 8
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 7
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 3
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 8
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 5
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 7 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 4
+        }
+      },
+      "danger_rate": 129,
+      "end_time": 1538928000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 140,
+      "grade_point_delta": 20,
+      "job_id": 625,
+      "job_rate": 225,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 87,
+      "kuma_point": 195,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 2
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 0
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 0
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 2
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 1
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 2 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 2
+          }
+        },
+        "dead_count": 2,
+        "golden_ikura_num": 23,
+        "help_count": 1,
+        "ikura_num": 607,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "2",
+          "image_a": "/images/special/18990f646c551ee77c5b283ec814e371f692a553.png",
+          "image_b": "/images/special/9e89e1d67803c3021203182ecc7f38bc2c0f5400.png",
+          "name": "Splat-Bomb Launcher"
+        },
+        "special_counts": [0, 0, 0],
+        "weapon_list": [
+          {
+            "id": "20000",
+            "weapon": {
+              "id": "20000",
+              "image": "/images/weapon/db39203d81d60a7370d3ae966bc02ed14398366f.png",
+              "name": "Grizzco Blaster",
+              "thumbnail": "/images/weapon/85ac26a4ba7f6a264c3832138380f19354016da5.png"
+            }
+          },
+          {
+            "id": "20020",
+            "weapon": {
+              "id": "20020",
+              "image": "/images/weapon/95077fe72924bcd64f37cd43aa49a12cd6329a7e.png",
+              "name": "Grizzco Charger",
+              "thumbnail": "/images/weapon/6d9246d994614a666aca4f24864c69d660b395dd.png"
+            }
+          },
+          {
+            "id": "20000",
+            "weapon": {
+              "id": "20000",
+              "image": "/images/weapon/db39203d81d60a7370d3ae966bc02ed14398366f.png",
+              "name": "Grizzco Blaster",
+              "thumbnail": "/images/weapon/85ac26a4ba7f6a264c3832138380f19354016da5.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1538793080,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1538928000,
+        "stage": {
+          "image": "/images/coop_stage/e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png",
+          "name": "Marooner's Bay"
+        },
+        "start_time": 1538762400,
+        "weapons": [
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          }
+        ]
+      },
+      "start_time": 1538762400,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 22,
+          "golden_ikura_pop_num": 39,
+          "ikura_num": 1043,
+          "quota_num": 15,
+          "water_level": { "key": "high", "name": "High tide" }
+        },
+        {
+          "event_type": { "key": "cohock-charge", "name": "Cohock Charge" },
+          "golden_ikura_num": 22,
+          "golden_ikura_pop_num": 45,
+          "ikura_num": 2689,
+          "quota_num": 16,
+          "water_level": { "key": "low", "name": "Low tide" }
+        },
+        {
+          "event_type": { "key": "fog", "name": "Fog" },
+          "golden_ikura_num": 22,
+          "golden_ikura_pop_num": 52,
+          "ikura_num": 574,
+          "quota_num": 18,
+          "water_level": { "key": "normal", "name": "Normal" }
+        }
+      ]
+    },
+    {
+      "boss_counts": {
+        "3": {
+          "boss": { "key": "sakelien-golden", "name": "Goldie" },
+          "count": 0
+        },
+        "6": {
+          "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+          "count": 10
+        },
+        "9": {
+          "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+          "count": 5
+        },
+        "12": {
+          "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+          "count": 6
+        },
+        "13": {
+          "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+          "count": 7
+        },
+        "14": {
+          "boss": { "key": "sakelien-tower", "name": "Stinger" },
+          "count": 2
+        },
+        "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 11 },
+        "16": { "boss": { "key": "sakedozer", "name": "Griller" }, "count": 0 },
+        "21": {
+          "boss": { "key": "sakerocket", "name": "Drizzler" },
+          "count": 4
+        }
+      },
+      "danger_rate": 125,
+      "end_time": 1538928000,
+      "grade": {
+        "id": "5",
+        "long_name": "Profreshional",
+        "name": "Profreshional"
+      },
+      "grade_point": 120,
+      "grade_point_delta": 20,
+      "job_id": 624,
+      "job_rate": 220,
+      "job_result": {
+        "failure_reason": null,
+        "failure_wave": null,
+        "is_clear": true
+      },
+      "job_score": 95,
+      "kuma_point": 209,
+      "my_result": {
+        "boss_kill_counts": {
+          "3": {
+            "boss": { "key": "sakelien-golden", "name": "Goldie" },
+            "count": 0
+          },
+          "6": {
+            "boss": { "key": "sakelien-bomber", "name": "Steelhead" },
+            "count": 3
+          },
+          "9": {
+            "boss": { "key": "sakelien-cup-twins", "name": "Flyfish" },
+            "count": 1
+          },
+          "12": {
+            "boss": { "key": "sakelien-shield", "name": "Scrapper" },
+            "count": 2
+          },
+          "13": {
+            "boss": { "key": "sakelien-snake", "name": "Steel Eel" },
+            "count": 1
+          },
+          "14": {
+            "boss": { "key": "sakelien-tower", "name": "Stinger" },
+            "count": 0
+          },
+          "15": { "boss": { "key": "sakediver", "name": "Maws" }, "count": 2 },
+          "16": {
+            "boss": { "key": "sakedozer", "name": "Griller" },
+            "count": 0
+          },
+          "21": {
+            "boss": { "key": "sakerocket", "name": "Drizzler" },
+            "count": 1
+          }
+        },
+        "dead_count": 2,
+        "golden_ikura_num": 17,
+        "help_count": 2,
+        "ikura_num": 1084,
+        "name": "∞O Shoe",
+        "pid": "74e509edbfd7fde5",
+        "special": {
+          "id": "2",
+          "image_a": "/images/special/18990f646c551ee77c5b283ec814e371f692a553.png",
+          "image_b": "/images/special/9e89e1d67803c3021203182ecc7f38bc2c0f5400.png",
+          "name": "Splat-Bomb Launcher"
+        },
+        "special_counts": [0, 0, 0],
+        "weapon_list": [
+          {
+            "id": "20030",
+            "weapon": {
+              "id": "20030",
+              "image": "/images/weapon/c2c0653d3246ea6df2b595c68e907f68eda49b08.png",
+              "name": "Grizzco Slosher",
+              "thumbnail": "/images/weapon/7eaa5e6a2eb6a03d31b72945d4fb94b67a478ce9.png"
+            }
+          },
+          {
+            "id": "20020",
+            "weapon": {
+              "id": "20020",
+              "image": "/images/weapon/95077fe72924bcd64f37cd43aa49a12cd6329a7e.png",
+              "name": "Grizzco Charger",
+              "thumbnail": "/images/weapon/6d9246d994614a666aca4f24864c69d660b395dd.png"
+            }
+          },
+          {
+            "id": "20010",
+            "weapon": {
+              "id": "20010",
+              "image": "/images/weapon/7d5ff3a57c3c3aaf28217bc3a79e02d665f13ba7.png",
+              "name": "Grizzco Brella",
+              "thumbnail": "/images/weapon/4e70c142250569814e5164fd687678a4af1e82a0.png"
+            }
+          }
+        ]
+      },
+      "play_time": 1538792643,
+      "player_type": { "species": "octolings", "style": "girl" },
+      "schedule": {
+        "end_time": 1538928000,
+        "stage": {
+          "image": "/images/coop_stage/e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png",
+          "name": "Marooner's Bay"
+        },
+        "start_time": 1538762400,
+        "weapons": [
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          },
+          {
+            "coop_special_weapon": {
+              "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+              "name": "Random"
+            },
+            "id": "-2"
+          }
+        ]
+      },
+      "start_time": 1538762400,
+      "wave_details": [
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 19,
+          "golden_ikura_pop_num": 36,
+          "ikura_num": 1160,
+          "quota_num": 15,
+          "water_level": { "key": "high", "name": "High tide" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 36,
+          "golden_ikura_pop_num": 45,
+          "ikura_num": 1154,
+          "quota_num": 16,
+          "water_level": { "key": "low", "name": "Low tide" }
+        },
+        {
+          "event_type": { "key": "water-levels", "name": "-" },
+          "golden_ikura_num": 22,
+          "golden_ikura_pop_num": 45,
+          "ikura_num": 1360,
+          "quota_num": 18,
+          "water_level": { "key": "high", "name": "High tide" }
+        }
+      ]
+    }
+  ],
+  "reward_gear": {
+    "brand": {
+      "id": "97",
+      "image": "/images/brand/ec85f17c315e0a1ea4dee55041fd30a88d6aba93.png",
+      "name": "Grizzco"
+    },
+    "id": "21008",
+    "image": "/images/clothes/a4e9e3285e9412f9219e79b12733c1c4704506ab.png",
+    "kind": "clothes",
+    "name": "Dev Uniform",
+    "rarity": 2,
+    "thumbnail": "/images/clothes/ed4e8315fa5a7464b6b8fd5011a337f308ce5711.png"
+  },
+  "summary": {
+    "card": {
+      "golden_ikura_total": 0,
+      "help_total": 0,
+      "ikura_total": 0,
+      "job_num": 0,
+      "kuma_point": 0,
+      "kuma_point_total": 0
+    },
+    "stats": [
+      {
+        "clear_num": 2,
+        "dead_total": 9,
+        "end_time": 1539972000,
+        "failure_counts": [2, 0, 0],
+        "grade": { "id": "5", "name": "Profreshional" },
+        "grade_point": 210,
+        "help_total": 15,
+        "job_num": 4,
+        "kuma_point_total": 481,
+        "my_golden_ikura_total": 38,
+        "my_ikura_total": 2112,
+        "schedule": {
+          "end_time": 1539972000,
+          "stage": {
+            "image": "/images/coop_stage/65c68c6f0641cc5654434b78a6f10b0ad32ccdee.png",
+            "name": "Spawning Grounds"
+          },
+          "start_time": 1539864000,
+          "weapons": [
+            {
+              "id": "50",
+              "weapon": {
+                "id": "50",
+                "image": "/images/weapon/df04ddaf086cea94491df553a6d2550230a4da3c.png",
+                "name": ".52 Gal",
+                "thumbnail": "/images/weapon/3e69eaa1b1463689ddbe4fe23661f007dc216b08.png"
+              }
+            },
+            {
+              "id": "6000",
+              "weapon": {
+                "id": "6000",
+                "image": "/images/weapon/f1fa6db2e21f32cd1c2cd093ec24f1a450d4650c.png",
+                "name": "Splat Brella",
+                "thumbnail": "/images/weapon/9a1adf1c38c1a017bad0be0cac13255ae0f8d25b.png"
+              }
+            },
+            {
+              "id": "4010",
+              "weapon": {
+                "id": "4010",
+                "image": "/images/weapon/6f42c9f8fde07510a01072a669125545f6effb99.png",
+                "name": "Heavy Splatling",
+                "thumbnail": "/images/weapon/c8d18b0264f1acd1e7d374a8b2c3b6fc526c790a.png"
+              }
+            },
+            {
+              "id": "2000",
+              "weapon": {
+                "id": "2000",
+                "image": "/images/weapon/5a0a20324f1374a363363d721a605849e36ffff2.png",
+                "name": "Classic Squiffer",
+                "thumbnail": "/images/weapon/a0730bdef035d247bcc5d2361abb561aa4a4d6ed.png"
+              }
+            }
+          ]
+        },
+        "start_time": 1539864000,
+        "team_golden_ikura_total": 164,
+        "team_ikura_total": 7606
+      },
+      {
+        "clear_num": 4,
+        "dead_total": 19,
+        "end_time": 1539820800,
+        "failure_counts": [0, 1, 2],
+        "grade": { "id": "5", "name": "Profreshional" },
+        "grade_point": 270,
+        "help_total": 21,
+        "job_num": 7,
+        "kuma_point_total": 1212,
+        "my_golden_ikura_total": 92,
+        "my_ikura_total": 4743,
+        "schedule": {
+          "end_time": 1539820800,
+          "stage": {
+            "image": "/images/coop_stage/e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png",
+            "name": "Salmonid Smokeyard"
+          },
+          "start_time": 1539712800,
+          "weapons": [
+            {
+              "id": "1010",
+              "weapon": {
+                "id": "1010",
+                "image": "/images/weapon/1041dbdd11b3036671148d47c2e0798cecf3dba2.png",
+                "name": "Splat Roller",
+                "thumbnail": "/images/weapon/626210255f99cb22bee1eded39457c51aa9622aa.png"
+              }
+            },
+            {
+              "id": "60",
+              "weapon": {
+                "id": "60",
+                "image": "/images/weapon/1f2b1db5917ef7a4e62f0e15b8805275e33f2179.png",
+                "name": "N-ZAP '85",
+                "thumbnail": "/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png"
+              }
+            },
+            {
+              "id": "4030",
+              "weapon": {
+                "id": "4030",
+                "image": "/images/weapon/f208b6222acb5014ab96285e9b9a3e98039c884b.png",
+                "name": "Ballpoint Splatling",
+                "thumbnail": "/images/weapon/dee7a86b925710935d1ac9d3039d4867bc9ea5db.png"
+              }
+            },
+            {
+              "id": "250",
+              "weapon": {
+                "id": "250",
+                "image": "/images/weapon/8f64580bb033ba86fa0179179cfeb56b5544fda6.png",
+                "name": "Rapid Blaster Pro",
+                "thumbnail": "/images/weapon/91208c6fe9fc4e62e81412d6e772fc696b1a7317.png"
+              }
+            }
+          ]
+        },
+        "start_time": 1539712800,
+        "team_golden_ikura_total": 399,
+        "team_ikura_total": 18194
+      },
+      {
+        "clear_num": 6,
+        "dead_total": 14,
+        "end_time": 1538928000,
+        "failure_counts": [1, 0, 1],
+        "grade": { "id": "5", "name": "Profreshional" },
+        "grade_point": 200,
+        "help_total": 12,
+        "job_num": 8,
+        "kuma_point_total": 1426,
+        "my_golden_ikura_total": 127,
+        "my_ikura_total": 4652,
+        "schedule": {
+          "end_time": 1538928000,
+          "stage": {
+            "image": "/images/coop_stage/e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png",
+            "name": "Marooner's Bay"
+          },
+          "start_time": 1538762400,
+          "weapons": [
+            {
+              "coop_special_weapon": {
+                "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+                "name": "Random"
+              },
+              "id": "-2"
+            },
+            {
+              "coop_special_weapon": {
+                "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+                "name": "Random"
+              },
+              "id": "-2"
+            },
+            {
+              "coop_special_weapon": {
+                "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+                "name": "Random"
+              },
+              "id": "-2"
+            },
+            {
+              "coop_special_weapon": {
+                "image": "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png",
+                "name": "Random"
+              },
+              "id": "-2"
+            }
+          ]
+        },
+        "start_time": 1538762400,
+        "team_golden_ikura_total": 515,
+        "team_ikura_total": 21029
+      }
+    ]
+  }
+}
