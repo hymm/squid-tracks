@@ -37,30 +37,32 @@ class StageCard extends React.Component {
       sz_lose = 0,
       cb_win = 0,
       cb_lose = 0;
+    const summary = {};
     Object.keys(stage_stats).forEach(weapon => {
-      stage_stats[weapon].total_win =
+      summary[weapon] = {};
+      summary[weapon].total_win =
         stage_stats[weapon].hoko_win +
         stage_stats[weapon].area_win +
         stage_stats[weapon].yagura_win +
         stage_stats[weapon].asari_win;
-      stage_stats[weapon].total_lose =
+      summary[weapon].total_lose =
         stage_stats[weapon].hoko_lose +
         stage_stats[weapon].area_lose +
         stage_stats[weapon].yagura_lose +
         stage_stats[weapon].asari_lose;
-      stage_stats[weapon].total_percent =
-        stage_stats[weapon].total_win /
-        (stage_stats[weapon].total_win + stage_stats[weapon].total_lose);
-      stage_stats[weapon].hoko_percent =
+      summary[weapon].total_percent =
+        summary[weapon].total_win /
+        (summary[weapon].total_win + summary[weapon].total_lose);
+      summary[weapon].hoko_percent =
         stage_stats[weapon].hoko_win /
         (stage_stats[weapon].hoko_win + stage_stats[weapon].hoko_lose);
-      stage_stats[weapon].yagura_percent =
+      summary[weapon].yagura_percent =
         stage_stats[weapon].yagura_win /
         (stage_stats[weapon].yagura_win + stage_stats[weapon].yagura_lose);
-      stage_stats[weapon].area_percent =
+      summary[weapon].area_percent =
         stage_stats[weapon].area_win /
         (stage_stats[weapon].area_win + stage_stats[weapon].area_lose);
-      stage_stats[weapon].asari_percent =
+      summary[weapon].asari_percent =
         stage_stats[weapon].asari_win /
         (stage_stats[weapon].asari_win + stage_stats[weapon].asari_lose);
       rm_win += stage_stats[weapon].hoko_win;
@@ -95,7 +97,8 @@ class StageCard extends React.Component {
       cb_percent,
       total_win,
       total_lose,
-      total_percent
+      total_percent,
+      summary
     };
   }
 
@@ -226,46 +229,51 @@ class StageCard extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {stageStats.map(stage => (
-                      <tr key={stage.stage.name}>
-                        <td>{stage.stage.name}</td>
-                        <td>
-                          {this.state.percent
-                            ? isFinite(stage.area_percent)
-                              ? `${(stage.area_percent * 100).toFixed(1)}%`
-                              : '---'
-                            : `${stage.area_win} - ${stage.area_lose}`}
-                        </td>
-                        <td>
-                          {this.state.percent
-                            ? isFinite(stage.yagura_percent)
-                              ? `${(stage.yagura_percent * 100).toFixed(1)}%`
-                              : '---'
-                            : `${stage.yagura_win} - ${stage.yagura_lose}`}
-                        </td>
-                        <td>
-                          {this.state.percent
-                            ? isFinite(stage.hoko_percent)
-                              ? `${(stage.hoko_percent * 100).toFixed(1)}%`
-                              : '---'
-                            : `${stage.hoko_win} - ${stage.hoko_lose}`}
-                        </td>
-                        <td>
-                          {this.state.percent
-                            ? isFinite(stage.asari_percent)
-                              ? `${(stage.asari_percent * 100).toFixed(1)}%`
-                              : '---'
-                            : `${stage.asari_win} - ${stage.asari_lose}`}
-                        </td>
-                        <td>
-                          {this.state.percent
-                            ? isFinite(stage.total_percent)
-                              ? `${(stage.total_percent * 100).toFixed(1)}%`
-                              : '---'
-                            : `${stage.total_win} - ${stage.total_lose}`}
-                        </td>
-                      </tr>
-                    ))}
+                    {stageStats.map((stage, index) => {
+                      const summary = calcStats.summary[index];
+                      return (
+                        <tr key={stage.stage.name}>
+                          <td>{stage.stage.name}</td>
+                          <td>
+                            {this.state.percent
+                              ? isFinite(summary.area_percent)
+                                ? `${(summary.area_percent * 100).toFixed(1)}%`
+                                : '---'
+                              : `${stage.area_win} - ${stage.area_lose}`}
+                          </td>
+                          <td>
+                            {this.state.percent
+                              ? isFinite(summary.yagura_percent)
+                                ? `${(summary.yagura_percent * 100).toFixed(
+                                    1
+                                  )}%`
+                                : '---'
+                              : `${stage.yagura_win} - ${stage.yagura_lose}`}
+                          </td>
+                          <td>
+                            {this.state.percent
+                              ? isFinite(summary.hoko_percent)
+                                ? `${(summary.hoko_percent * 100).toFixed(1)}%`
+                                : '---'
+                              : `${stage.hoko_win} - ${stage.hoko_lose}`}
+                          </td>
+                          <td>
+                            {this.state.percent
+                              ? isFinite(summary.asari_percent)
+                                ? `${(summary.asari_percent * 100).toFixed(1)}%`
+                                : '---'
+                              : `${stage.asari_win} - ${stage.asari_lose}`}
+                          </td>
+                          <td>
+                            {this.state.percent
+                              ? isFinite(summary.total_percent)
+                                ? `${(summary.total_percent * 100).toFixed(1)}%`
+                                : '---'
+                              : `${summary.total_win} - ${summary.total_lose}`}
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                   <tfoot>
                     <tr>
