@@ -15,7 +15,7 @@ function useCoopResults() {
     ipcRenderer.on('apiData.coop_results', handleResult);
     return () =>
       ipcRenderer.removeListener('apiData.coop_results', handleResult);
-  });
+  }, []);
 
   function refresh() {
     ipcRenderer.send('getApiAsyncV2', 'coop_results');
