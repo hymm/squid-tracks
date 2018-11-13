@@ -1,6 +1,4 @@
 import React from 'react';
-import LobbyColors from './lobby-colors';
-import { Subscriber } from 'react-broadcast';
 import {
   ResponsiveContainer,
   ComposedChart,
@@ -129,7 +127,7 @@ class ResultsTimeline extends React.Component {
     if (result.job_result.is_clear) {
       lobbyBar = 100;
     } else {
-      lobbyBar = 33.3 * result.job_result.failure_wave;
+      lobbyBar = 33.3 * (result.job_result.failure_wave - 1);
     }
     return {
       lobbyBar: lobbyBar,
@@ -223,11 +221,7 @@ class ResultsTimeline extends React.Component {
 const TimelineSubscribed = ({ ...props }) => {
   const [coopResults] = useCoopResults();
 
-  return (
-    <Subscriber channel="splatnet">
-      {splatnet => <ResultsTimeline results={coopResults.results} {...props} />}
-    </Subscriber>
-  );
+  return <ResultsTimeline results={coopResults.results} {...props} />;
 };
 
 export default TimelineSubscribed;
