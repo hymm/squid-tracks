@@ -77,7 +77,8 @@
     "electron-dev": "node public/main/dev.js .",
     "dev": "concurrently \"yarn react-start\" \"wait-on http://localhost:3000/ && yarn electron-dev\"",
     "manage:translations": "node ./translationRunner.js",
-    "prettier": "./node_modules/.bin/prettier --single-quote --write \"src/**/*.{js,jsx}\" \"public/**/*.{js,jsx}\""
+    "prettier": "./node_modules/.bin/prettier --single-quote --write \"src/**/*.{js,jsx}\" \"public/**/*.{js,jsx}\"",
+    "eslint": "./node_modules/.bin/eslint src/**/*.js public/**/*.js"
   },
   "build": {
     "appId": "com.shoesoft.splat-track",

@@ -272,10 +272,7 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
             <ControlLabel>Language</ControlLabel>
             <LanguageSelect setLocale={setLocale} locale={locale} />
             <br />
-            <a
-              href={ipcRenderer.sendSync('getLoginUrl')}
-              style={{ display: 'none' }}
-            >
+            <a href={ipcRenderer.sendSync('getLoginUrl')}>
               <Button block bsStyle="primary" style={{ marginBottom: 10 }}>
                 <FormattedMessage id="login.login" defaultMessage="Login" />
               </Button>
