@@ -1,12 +1,12 @@
 const request2 = require('request-promise-native');
 const crypto = require('crypto');
 const base64url = require('base64url');
+const { v4: uuidv4 } = require('uuid');
 const log = require('electron-log');
 const { app } = require('electron');
 const Memo = require('promise-memoize');
-const uuidv4 = require('uuid/v4');
 
-const userAgentVersion = `1.4.1`;
+const userAgentVersion = `1.6.1.2`;
 const userAgentString = `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`;
 const appVersion = app.getVersion();
 const squidTracksUserAgentString = `SquidTracks/${appVersion}`;
@@ -56,7 +56,7 @@ async function requestWithErrorHandling(options) {
   try {
     return await request(options);
   } catch (e) {
-    throw new Error(`Error requesting uri ${options.uri}`);
+    throw new Error(`Error requesting uri ${options.uri}: ${e.toString()}`);
   }
 }
 
@@ -106,24 +106,7 @@ async function getApiToken(session_token) {
   };
 }
 
-/* async function getFFromEli(idToken) {
-  const response = await request({
-    method: 'POST',
-    uri: 'https://elifessler.com/s2s/api/gen',
-    headers: {
-      'User-Agent': squidTracksUserAgentString
-    },
-    form: {
-      naIdToken: idToken,
-    }
-  });
-
-  const j = JSON.parse(response);
-
-  return j.f;
-} */
-
-async function getHashFromEli(idToken, timestamp) {
+async function getHash(idToken, timestamp) {
   const response = await requestWithErrorHandling({
     method: 'POST',
     uri: 'https://elifessler.com/s2s/api/gen2',
@@ -135,23 +118,30 @@ async function getHashFromEli(idToken, timestamp) {
       timestamp: timestamp
     }
   });
-  const j = JSON.parse(response);
-  return j.hash;
+
+  const responseObject = JSON.parse(response);
+
+  return responseObject.hash;
 }
 
-async function getFFromFlapg(idToken, guid, timestamp) {
+async function callFlapg(idToken, guid, timestamp, login) {
+  const hash = await getHash(idToken, timestamp);
   const response = await requestWithErrorHandling({
     method: 'GET',
-    uri: 'https://flapg.com/ika2/api/login',
+    uri: 'https://flapg.com/ika2/api/login?public',
     headers: {
       'x-token': idToken,
-      'x-time': timestamp.toString(),
+      'x-time': timestamp,
       'x-guid': guid,
-      'x-hash': await getHashFromEli(idToken, timestamp)
+      'x-hash': hash,
+      'x-ver': '3',
+      'x-iid': login
     }
   });
-  const j = JSON.parse(response);
-  return j.f;
+
+  const responseObject = JSON.parse(response);
+
+  return responseObject.result;
 }
 
 async function getUserInfo(token) {
@@ -176,11 +166,10 @@ async function getUserInfo(token) {
   };
 }
 
-async function getApiLogin({ idToken, userInfo, f, guid, timestamp }) {
-  const uri = 'https://api-lp1.znc.srv.nintendo.net/v1/Account/Login';
+async function getApiLogin(userinfo, flapg_nso) {
   const resp = await requestWithErrorHandling({
     method: 'POST',
-    uri: uri,
+    uri: 'https://api-lp1.znc.srv.nintendo.net/v1/Account/Login',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
@@ -190,30 +179,25 @@ async function getApiLogin({ idToken, userInfo, f, guid, timestamp }) {
     },
     body: {
       parameter: {
-        language: userInfo.language,
-        naCountry: userInfo.country,
-        naBirthday: userInfo.birthday,
-        naIdToken: idToken,
-        f: f,
-        requestId: guid,
-        timestamp: timestamp
+        language: userinfo.language,
+        naCountry: userinfo.country,
+        naBirthday: userinfo.birthday,
+        f: flapg_nso.f,
+        naIdToken: flapg_nso.p1,
+        timestamp: flapg_nso.p2,
+        requestId: flapg_nso.p3
       }
     },
     json: true,
     gzip: true
   });
-
-  if (resp.errorMessage != null) {
-    throw Error(`Error on POST to ${uri}: ${resp.errorMessage}`);
-  }
-
   return resp.result.webApiServerCredential.accessToken;
 }
 
-async function getWebServiceToken(token) {
+async function getWebServiceToken(token, flapg_app) {
   const resp = await requestWithErrorHandling({
     method: 'POST',
-    uri: 'https://api-lp1.znc.srv.nintendo.net/v1/Game/GetWebServiceToken',
+    uri: 'https://api-lp1.znc.srv.nintendo.net/v2/Game/GetWebServiceToken',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
@@ -224,7 +208,11 @@ async function getWebServiceToken(token) {
     },
     json: {
       parameter: {
-        id: 5741031244955648 // SplatNet 2 ID
+        id: 5741031244955648, // SplatNet 2 ID
+        f: flapg_app.f,
+        registrationToken: flapg_app.p1,
+        timestamp: flapg_app.p2,
+        requestId: flapg_app.p3
       }
     }
   });
@@ -311,17 +299,12 @@ async function getSessionWithSessionToken(sessionToken) {
   const apiTokens = await getApiToken(sessionToken);
   const userInfo = await getUserInfo(apiTokens.access);
   userLanguage = userInfo.language;
-  const guid = uuidv4();
-  const timestamp = new Date().getTime();
-  const f = await getFFromFlapg(apiTokens.id, guid, timestamp);
-  const apiAccessToken = await getApiLogin({
-    idToken: apiTokens.id,
-    userInfo,
-    f,
-    guid,
-    timestamp
-  });
-  const splatnetToken = await getWebServiceToken(apiAccessToken);
+  guid = uuidv4();
+  timestamp = String(Date.now());
+  const flapg_nso = await callFlapg(apiTokens.id, guid, timestamp, 'nso');
+  const apiAccessToken = await getApiLogin(userInfo, flapg_nso);
+  const flapg_app = await callFlapg(apiAccessToken, guid, timestamp, 'app');
+  const splatnetToken = await getWebServiceToken(apiAccessToken, flapg_app);
   await getSessionCookie(splatnetToken.accessToken);
   return splatnetToken;
 }
