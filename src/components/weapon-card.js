@@ -165,9 +165,7 @@ class WeaponCard extends React.Component {
                     }}
                   >
                     <Image
-                      src={`https://app.splatoon2.nintendo.net${
-                        weapon.weapon.thumbnail
-                      }`}
+                      src={`https://app.splatoon2.nintendo.net${weapon.weapon.thumbnail}`}
                       style={{ maxHeight: 30 }}
                       alt={weapon.weapon.name}
                     />

@@ -100,9 +100,7 @@ ipcMain.on('writeToStatInk', async (event, result, type) => {
         break;
     }
   } catch (e) {
-    const message = `Failed to write #${
-      result.battle_number
-    } to stat.ink: ${e}`;
+    const message = `Failed to write #${result.battle_number} to stat.ink: ${e}`;
     uaException(message);
     log.error(message);
     switch (type) {

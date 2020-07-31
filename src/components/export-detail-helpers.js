@@ -51,8 +51,7 @@ export function getPlayerFields() {
 }
 
 export function mapKeysDeep(obj, cb) {
-  return mapValues(
-    mapKeys(obj, cb),
-    val => (isObject(val) ? mapKeysDeep(val, cb) : val)
+  return mapValues(mapKeys(obj, cb), val =>
+    isObject(val) ? mapKeysDeep(val, cb) : val
   );
 }

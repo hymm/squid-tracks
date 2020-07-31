@@ -276,8 +276,8 @@ export default class LeagueRankings extends React.Component {
                                 ? 'success'
                                 : weapon[this.state.data_to_display]
                                     .diff_last_to_last_last < 0
-                                  ? 'danger'
-                                  : 'default'
+                                ? 'danger'
+                                : 'default'
                             }
                           >
                             <Glyphicon
@@ -287,8 +287,8 @@ export default class LeagueRankings extends React.Component {
                                   ? 'arrow-up'
                                   : weapon[this.state.data_to_display]
                                       .diff_last_to_last_last < 0
-                                    ? 'arrow-down'
-                                    : 'arrow-right'
+                                  ? 'arrow-down'
+                                  : 'arrow-right'
                               }
                             />
                             {
@@ -313,8 +313,8 @@ export default class LeagueRankings extends React.Component {
                                 ? 'success'
                                 : weapon[this.state.data_to_display]
                                     .diff_this_to_last < 0
-                                  ? 'danger'
-                                  : 'default'
+                                ? 'danger'
+                                : 'default'
                             }
                           >
                             <Glyphicon
@@ -324,8 +324,8 @@ export default class LeagueRankings extends React.Component {
                                   ? 'arrow-up'
                                   : weapon[this.state.data_to_display]
                                       .diff_this_to_last < 0
-                                    ? 'arrow-down'
-                                    : 'arrow-right'
+                                  ? 'arrow-down'
+                                  : 'arrow-right'
                               }
                             />
                             {

@@ -373,18 +373,16 @@ class ResultsCard extends React.Component {
                       {result.other_estimate_league_point != null
                         ? result.other_estimate_league_point
                         : result.estimate_gachi_power != null
-                          ? result.estimate_gachi_power
-                          : result.estimate_x_power != null
-                            ? result.estimate_x_power
-                            : result.other_estimate_fes_power != null
-                              ? result.other_estimate_fes_power
-                              : '---'}
+                        ? result.estimate_gachi_power
+                        : result.estimate_x_power != null
+                        ? result.estimate_x_power
+                        : result.other_estimate_fes_power != null
+                        ? result.other_estimate_fes_power
+                        : '---'}
                     </td>
                     <td style={{ textAlign: 'center', background: 'darkgrey' }}>
                       <Image
-                        src={`https://app.splatoon2.nintendo.net${
-                          result.player_result.player.weapon.thumbnail
-                        }`}
+                        src={`https://app.splatoon2.nintendo.net${result.player_result.player.weapon.thumbnail}`}
                         style={{ maxHeight: 30 }}
                         alt={result.player_result.player.weapon.name}
                       />

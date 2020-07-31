@@ -112,9 +112,7 @@ const MerchTable = ({ merch, intl, original }) => {
           </th>
           <td>
             <Image
-              src={`https://app.splatoon2.nintendo.net${
-                merch.gear.brand.image
-              }`}
+              src={`https://app.splatoon2.nintendo.net${merch.gear.brand.image}`}
             />
           </td>
         </tr>
@@ -124,9 +122,7 @@ const MerchTable = ({ merch, intl, original }) => {
           </th>
           <td>
             <Image
-              src={`https://app.splatoon2.nintendo.net${
-                merch.gear.brand.frequent_skill.image
-              }`}
+              src={`https://app.splatoon2.nintendo.net${merch.gear.brand.frequent_skill.image}`}
             />
           </td>
         </tr>

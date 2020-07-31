@@ -247,27 +247,22 @@ const SalmonDetail = ({ detail }) => {
           alt={detail.stage.name}
         />
         <br />
-        {detail.weapons.map(
-          (weapon, i) =>
-            weapon.coop_special_weapon != null ? (
-              <Image
-                key={i}
-                src={`https://app.splatoon2.nintendo.net${
-                  weapon.coop_special_weapon.image
-                }`}
-                style={{ maxHeight: 40 }}
-                alt={weapon.coop_special_weapon.name}
-              />
-            ) : (
-              <Image
-                key={i}
-                src={`https://app.splatoon2.nintendo.net${
-                  weapon.weapon.thumbnail
-                }`}
-                style={{ maxHeight: 40 }}
-                alt={weapon.weapon.name}
-              />
-            )
+        {detail.weapons.map((weapon, i) =>
+          weapon.coop_special_weapon != null ? (
+            <Image
+              key={i}
+              src={`https://app.splatoon2.nintendo.net${weapon.coop_special_weapon.image}`}
+              style={{ maxHeight: 40 }}
+              alt={weapon.coop_special_weapon.name}
+            />
+          ) : (
+            <Image
+              key={i}
+              src={`https://app.splatoon2.nintendo.net${weapon.weapon.thumbnail}`}
+              style={{ maxHeight: 40 }}
+              alt={weapon.weapon.name}
+            />
+          )
         )}
       </Panel.Body>
     </Panel>

@@ -70,16 +70,15 @@ const AbilityCell = ({ skills }) => {
         style={{ maxHeight: mainHeight, background }}
         alt={skills.main.name}
       />
-      {skills.subs.map(
-        skill =>
-          skill ? (
-            <Image
-              circle
-              src={`https://app.splatoon2.nintendo.net${skill.image}`}
-              style={{ maxHeight: subHeight, background }}
-              alt={skill.name}
-            />
-          ) : null
+      {skills.subs.map(skill =>
+        skill ? (
+          <Image
+            circle
+            src={`https://app.splatoon2.nintendo.net${skill.image}`}
+            style={{ maxHeight: subHeight, background }}
+            alt={skill.name}
+          />
+        ) : null
       )}
     </td>
   );
@@ -91,9 +90,7 @@ const PlayerRow = ({ player }) => {
       <td>{player.player.nickname}</td>
       <td style={{ textAlign: 'center', background: 'darkgrey' }}>
         <Image
-          src={`https://app.splatoon2.nintendo.net${
-            player.player.weapon.thumbnail
-          }`}
+          src={`https://app.splatoon2.nintendo.net${player.player.weapon.thumbnail}`}
           style={{ maxHeight: 30 }}
           alt={player.player.weapon.name}
         />
