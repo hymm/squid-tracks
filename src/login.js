@@ -213,6 +213,8 @@ class LoginCookie extends React.Component {
 
 const LoginCookieWithIntl = injectIntl(withRouter(LoginCookie));
 
+/*
+// taken out since login is broken 
 const messagesSplash = defineMessages({
   fApiInfoUrl: {
     id: 'login.splash.fApiInfo.url',
@@ -220,7 +222,7 @@ const messagesSplash = defineMessages({
       'https://github.com/frozenpandaman/splatnet2statink/wiki/api-docs'
   }
 });
-
+*/
 const LoginSplash = ({ setLocale, locale, intl }) => {
   return (
     <Grid fluid>

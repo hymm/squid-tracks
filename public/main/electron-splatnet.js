@@ -202,6 +202,36 @@ ipcMain.on('getApiAsync', async (e, url) => {
   }
 });
 
+ipcMain.on('getApiAsyncV2', async (e, url) => {
+  try {
+    const battleRegex = /^results\/\d{1,}$/;
+    const leagueRegex = /^league_match_ranking\/.*$/;
+    let value;
+    if (url.match(battleRegex) || url.match(leagueRegex)) {
+      value = await getSplatnetApiMemoInf(url).catch(function(error) {
+        if (
+          error.statusCode === 404 &&
+          error.options.uri.includes('league_match_ranking')
+        ) {
+          /*do nothing*/
+        } else {
+          throw error;
+        }
+      });
+    } else if (url === 'results') {
+      value = await getSplatnetApiMemo10(url);
+    } else {
+      value = await getSplatnetApiMemo120(url);
+    }
+    e.sender.send(`apiData.${url}`, value);
+  } catch (err) {
+    const message = `Error getting ${url}: ${err}`;
+    uaException(message);
+    log.error(message);
+    e.sender.send('apiDataError', message);
+  }
+});
+
 ipcMain.on('getOriginalAbility', async (e, type, id, localization) => {
   try {
     const ability = await getOriginalAbility(type, id, localization);

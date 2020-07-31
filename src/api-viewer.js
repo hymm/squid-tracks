@@ -17,6 +17,8 @@ class ApiTester extends React.Component {
     'nickname_and_icon?id={principal_id}',
     'schedules',
     'coop_schedules',
+    'coop_results',
+    'coop_results/{battle_number}',
     'records/hero',
     'timeline',
     'data/stages',

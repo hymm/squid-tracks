@@ -10,6 +10,8 @@ import {
   OverlayTrigger,
   Tooltip
 } from 'react-bootstrap';
+import CoopResults from './components/coop-results-summary';
+import CoopTrend from './components/coop-trend';
 import './salmon.css';
 
 const SalmonTime = ({ unixTime }) => {
@@ -301,6 +303,16 @@ class Salmon extends React.Component {
               <SalmonDetail detail={d} />
             </Col>
           ))}
+        </Row>
+        <Row>
+          <Col xs={12} sm={6} md={4} lg={3}>
+            <CoopResults />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} sm={12} md={12} lg={12}>
+            <CoopTrend />
+          </Col>
         </Row>
       </Grid>
     );
