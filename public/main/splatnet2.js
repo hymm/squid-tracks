@@ -6,8 +6,8 @@ const log = require('electron-log');
 const { app } = require('electron');
 const Memo = require('promise-memoize');
 
-const userAgentVersion = `1.6.1.2`;
-const userAgentString = `com.nintendo.znca/${userAgentVersion} (Android/4.4.2)`;
+const userAgentVersion = `1.8.0`;
+const userAgentString = `com.nintendo.znca/${userAgentVersion} (Android/7.1.2)`;
 const appVersion = app.getVersion();
 const squidTracksUserAgentString = `SquidTracks/${appVersion}`;
 const splatnetUrl = `https://app.splatoon2.nintendo.net`;
@@ -68,7 +68,7 @@ async function getSessionToken(session_token_code, codeVerifier) {
       'Content-Type': 'application/x-www-form-urlencoded',
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
-      'User-Agent': userAgentString
+      'User-Agent': `OnlineLounge/${userAgentVersion} NASDKAPI Android`
     },
     form: {
       client_id: '71b963c1b7b6d119',
@@ -91,7 +91,7 @@ async function getApiToken(session_token) {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
-      'User-Agent': userAgentString
+      'User-Agent': `OnlineLounge/${userAgentVersion} NASDKAPI Android`
     },
     json: {
       client_id: '71b963c1b7b6d119',
@@ -130,6 +130,11 @@ async function callFlapg(idToken, guid, timestamp, login) {
     method: 'GET',
     uri: 'https://flapg.com/ika2/api/login?public',
     headers: {
+      Host: 'flapg.com',
+      'User-Agent': squidTracksUserAgentString,
+      'Accept-Encoding': 'gzip, deflate',
+      Accept: '*/*',
+      Connection: 'keep-alive',
       'x-token': idToken,
       'x-time': timestamp,
       'x-guid': guid,
@@ -152,7 +157,7 @@ async function getUserInfo(token) {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
-      'User-Agent': userAgentString,
+      'User-Agent': `OnlineLounge/${userAgentVersion} NASDKAPI Android`,
       Authorization: `Bearer ${token}`
     },
     json: true
@@ -299,8 +304,8 @@ async function getSessionWithSessionToken(sessionToken) {
   const apiTokens = await getApiToken(sessionToken);
   const userInfo = await getUserInfo(apiTokens.access);
   userLanguage = userInfo.language;
-  guid = uuidv4();
-  timestamp = String(Date.now());
+  const guid = uuidv4();
+  const timestamp = String(Math.floor(Date.now() / 1000));
   const flapg_nso = await callFlapg(apiTokens.id, guid, timestamp, 'nso');
   const apiAccessToken = await getApiLogin(userInfo, flapg_nso);
   const flapg_app = await callFlapg(apiAccessToken, guid, timestamp, 'app');
