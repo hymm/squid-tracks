@@ -228,7 +228,7 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
     <Grid fluid>
       <Row>
         <Col md={12}>
-          <Jumbotron style={{ marginTop: 20, background: 'pink' }}>
+          <Jumbotron style={{ marginTop: 20 }}>
             <h1 style={{ textAlign: 'center', width: '100%' }}>SquidTracks</h1>
             <h2 style={{ textAlign: 'center', width: '100%', marginTop: 0 }}>
               <FormattedMessage
@@ -253,8 +253,7 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
             <h4 style={{ textAlign: 'left' }}>
               <FormattedMessage
                 id="login.loginInformation.v2"
-                defaultMessage={`Normal login is currently broken.  The
-                  "Login with Session Cookie" method may work for you. Follow {twitterLink} for
+                defaultMessage={`Follow {twitterLink} for
                   information about updates.`}
                 values={{
                   twitterLink: (
