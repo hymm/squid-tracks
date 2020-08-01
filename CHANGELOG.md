@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Version 1.3.0
+
+### New Features
+
+* Added some Salmon run data
+
+### Bugfix
+
+* Fixed NSO login
+
 ## Version 1.2.2
 
 ### New Features

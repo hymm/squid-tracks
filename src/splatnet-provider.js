@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Broadcast } from 'react-broadcast';
 import { ipcRenderer } from 'electron';
 import log from 'electron-log';
+import produce from 'immer';
 import { languages } from './components/language-select';
 
 class SplatnetProvider extends React.Component {
@@ -99,19 +100,25 @@ class SplatnetProvider extends React.Component {
         });
         return;
       case 'schedules':
-        this.setState({
-          current: update(this.state.current, { $merge: { schedule: data } })
-        });
+        this.setState(
+          produce(draft => {
+            draft.current.schedule = data;
+          })
+        );
         return;
       case 'records':
-        this.setState({
-          current: update(this.state.current, { $merge: { records: data } })
-        });
+        this.setState(
+          produce(draft => {
+            draft.current.records = data;
+          })
+        );
         return;
       case 'results':
-        this.setState({
-          current: update(this.state.current, { $merge: { results: data } })
-        });
+        this.setState(
+          produce(draft => {
+            draft.current.results = data;
+          })
+        );
         return;
       case 'onlineshop/merchandises':
         this.getOriginalAbilities(data);

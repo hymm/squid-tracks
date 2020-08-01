@@ -158,15 +158,15 @@ class ResultsCard extends React.Component {
       // assume is turf war if elapsed_time is not defined
       const time = result.elapsed_time ? result.elapsed_time : 180;
       result.player_result.game_paint_point =
-        result.player_result.game_paint_point * 60 * normalizeTime / time;
+        (result.player_result.game_paint_point * 60 * normalizeTime) / time;
       result.player_result.kill_count =
-        result.player_result.kill_count * 60 * normalizeTime / time;
+        (result.player_result.kill_count * 60 * normalizeTime) / time;
       result.player_result.assist_count =
-        result.player_result.assist_count * 60 * normalizeTime / time;
+        (result.player_result.assist_count * 60 * normalizeTime) / time;
       result.player_result.death_count =
-        result.player_result.death_count * 60 * normalizeTime / time;
+        (result.player_result.death_count * 60 * normalizeTime) / time;
       result.player_result.special_count =
-        result.player_result.special_count * 60 * normalizeTime / time;
+        (result.player_result.special_count * 60 * normalizeTime) / time;
     });
 
     return normalized;
@@ -186,7 +186,7 @@ class ResultsCard extends React.Component {
     }, 0);
 
     if (this.state.normalize) {
-      return sum * 60 * this.state.normalizeTime / totalTime;
+      return (sum * 60 * this.state.normalizeTime) / totalTime;
     }
 
     return sum;
@@ -348,7 +348,8 @@ class ResultsCard extends React.Component {
                 return (
                   <tr key={result.start_time}>
                     <td>
-                      <a
+                      <button
+                        className="button-as-link"
                         onClick={() => {
                           document.body.scrollTop = 0;
                           changeResult(result.battle_number);
@@ -356,7 +357,7 @@ class ResultsCard extends React.Component {
                         style={{ cursor: 'pointer' }}
                       >
                         {result.battle_number}
-                      </a>
+                      </button>
                       {linkInfo ? (
                         <Glyphicon
                           glyph={'ok-sign'}
@@ -372,18 +373,16 @@ class ResultsCard extends React.Component {
                       {result.other_estimate_league_point != null
                         ? result.other_estimate_league_point
                         : result.estimate_gachi_power != null
-                          ? result.estimate_gachi_power
-                          : result.estimate_x_power != null
-                            ? result.estimate_x_power
-                            : result.other_estimate_fes_power != null
-                              ? result.other_estimate_fes_power
-                              : '---'}
+                        ? result.estimate_gachi_power
+                        : result.estimate_x_power != null
+                        ? result.estimate_x_power
+                        : result.other_estimate_fes_power != null
+                        ? result.other_estimate_fes_power
+                        : '---'}
                     </td>
                     <td style={{ textAlign: 'center', background: 'darkgrey' }}>
                       <Image
-                        src={`https://app.splatoon2.nintendo.net${
-                          result.player_result.player.weapon.thumbnail
-                        }`}
+                        src={`https://app.splatoon2.nintendo.net${result.player_result.player.weapon.thumbnail}`}
                         style={{ maxHeight: 30 }}
                         alt={result.player_result.player.weapon.name}
                       />

@@ -33,11 +33,13 @@ If you're interested in contributing feel free to contact me or create a pull re
 * [stat.ink](https://stat.ink/) The button on the top right allows you to enter data manually.
 * [ikaRec](https://play.google.com/store/apps/details?id=ink.pocketgopher.ikarec&hl=en) Manually enter data using this android app.
 
-## Authors
+## Contributors
 * **[hymm](https://github.com/hymm)** *Maintainer* [@Wrong_Shoe](https://twitter.com/Wrong_Shoe) (Discord) WrongShoe#9733
 * **[DanSyor](https://github.com/DanSyor)** *Schedule tab appearance*, fr Translations [@DanSyor](https://twitter.com/DanSyor) (Discord) BlueDan#8041
 * **[okuRaku](https://github.com/okuRaku)** *League Tab, ja Translations* [@okuRaku](https://twitter.com/okuRakuu) (Discord) okuRaku#1417
 * **[mcescalante](https://github.com/mcescalante)** *Mac Releases* [@mcescalante](https://twitter.com/mcescalante) (Discord) sofly#3729
+* **[ZelenkaChris](https://github.com/ZelenkaChris)** *Annie Store improvements, bug fixes*
+* **[wkoichi](https://github.com/wkoichi)** *Bug fixes*
 
 ## Acknowledgements
 * [frozenpandaman](https://github.com/frozenpandaman/): I referenced his [python uploader](https://github.com/frozenpandaman/splatnet2statink) for parsing splatnet-2 to stat.ink.  For creating part of the login API

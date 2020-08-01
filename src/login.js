@@ -163,7 +163,8 @@ class LoginCookie extends React.Component {
                     after logging in.`}
                 />
                 <h3>
-                  <a
+                  <button
+                    className="button-as-link"
                     onClick={() =>
                       openExternal(
                         intl.formatMessage(this.messages.instructionsUrl)
@@ -175,7 +176,7 @@ class LoginCookie extends React.Component {
                       id="login.cookie.instructions"
                       defaultMessage="Click here to view instructions"
                     />
-                  </a>
+                  </button>
                 </h3>
               </Col>
             </Row>
@@ -212,6 +213,8 @@ class LoginCookie extends React.Component {
 
 const LoginCookieWithIntl = injectIntl(withRouter(LoginCookie));
 
+/*
+// taken out since login is broken 
 const messagesSplash = defineMessages({
   fApiInfoUrl: {
     id: 'login.splash.fApiInfo.url',
@@ -219,7 +222,7 @@ const messagesSplash = defineMessages({
       'https://github.com/frozenpandaman/splatnet2statink/wiki/api-docs'
   }
 });
-
+*/
 const LoginSplash = ({ setLocale, locale, intl }) => {
   return (
     <Grid fluid>
@@ -235,7 +238,8 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
             </h2>
             <h5 style={{ textAlign: 'center', width: '100%' }}>
               {`Version ${appVersion} `}
-              <a
+              <button
+                className="button-as-link"
                 onClick={() =>
                   openExternal(
                     'https://github.com/hymm/squid-tracks/blob/master/CHANGELOG.md'
@@ -244,51 +248,24 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
                 style={{ cursor: 'pointer' }}
               >
                 Change Log
-              </a>
+              </button>
             </h5>
             <h4 style={{ textAlign: 'left' }}>
               <FormattedMessage
-                id="login.loginInformation.v1"
-                defaultMessage={`Normal login is working again! Login now requires sending
-                  information to a third party api created by {pandamanLink}.  No identifing information is sent.
-                  {apiLink} If you'd still like to login with
-                  the cookie value click "Login with Session Cookie." Otherwise just click "Login." Follow {twitterLink} for
+                id="login.loginInformation.v2"
+                defaultMessage={`Follow {twitterLink} for
                   information about updates.`}
                 values={{
-                  pandamanLink: (
-                    <a
-                      onClick={() =>
-                        openExternal('https://twitter.com/frozenpandaman')
-                      }
-                      style={{ cursor: 'pointer' }}
-                    >
-                      @frozenpandaman
-                    </a>
-                  ),
-                  apiLink: (
-                    <a
-                      onClick={() =>
-                        openExternal(
-                          intl.formatMessage(messagesSplash.fApiInfoUrl)
-                        )
-                      }
-                      style={{ cursor: 'pointer' }}
-                    >
-                      <FormattedMessage
-                        id="login.splash.fApiInfoLinkText"
-                        defaultMessage="Click here for more information."
-                      />
-                    </a>
-                  ),
                   twitterLink: (
-                    <a
+                    <button
+                      className="button-as-link"
                       onClick={() =>
                         openExternal('https://twitter.com/SquidTracks')
                       }
                       style={{ cursor: 'pointer' }}
                     >
                       @SquidTracks
-                    </a>
+                    </button>
                   )
                 }}
               />

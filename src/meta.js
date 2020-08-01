@@ -208,47 +208,48 @@ class MetaContainer extends React.Component {
         this.desired_start_of_week
       );
       Object.keys(league_dict[league].rankings).forEach(team => {
-        Object.keys(
-          league_dict[league].rankings[team].tag_members
-        ).forEach(player => {
-          let weap_name =
-            league_dict[league].rankings[team].tag_members[player].weapon.name;
-          let weap_id =
-            league_dict[league].rankings[team].tag_members[player].weapon.id;
-          let is_replica = false;
-          if (this.state.combine_replicas_toggle) {
-            const replica_equivalents = {
-              '45': '40',
-              '1015': '1010',
-              '4015': '4010',
-              '5015': '5010',
-              '6005': '6000',
-              '215': '210',
-              '1115': '1110',
-              '2015': '2010',
-              '3005': '3000'
-            };
-            if (weap_id in replica_equivalents) {
-              weap_id = replica_equivalents[weap_id];
-              is_replica = true;
+        Object.keys(league_dict[league].rankings[team].tag_members).forEach(
+          player => {
+            let weap_name =
+              league_dict[league].rankings[team].tag_members[player].weapon
+                .name;
+            let weap_id =
+              league_dict[league].rankings[team].tag_members[player].weapon.id;
+            let is_replica = false;
+            if (this.state.combine_replicas_toggle) {
+              const replica_equivalents = {
+                '45': '40',
+                '1015': '1010',
+                '4015': '4010',
+                '5015': '5010',
+                '6005': '6000',
+                '215': '210',
+                '1115': '1110',
+                '2015': '2010',
+                '3005': '3000'
+              };
+              if (weap_id in replica_equivalents) {
+                weap_id = replica_equivalents[weap_id];
+                is_replica = true;
+              }
+            }
+            if (weap_id in weapons_stats[week_index]) {
+              if (!is_replica) {
+                weapons_stats[week_index][weap_id].name = weap_name;
+              }
+              weapons_stats[week_index][weap_id].uses += 1;
+              weapons_stats[week_index][weap_id].total_points +=
+                league_dict[league].rankings[team].point;
+            } else {
+              weapons_stats[week_index][weap_id] = {
+                name: weap_name,
+                uses: 1,
+                total_points: league_dict[league].rankings[team].point,
+                avg_points: 0
+              };
             }
           }
-          if (weap_id in weapons_stats[week_index]) {
-            if (!is_replica) {
-              weapons_stats[week_index][weap_id].name = weap_name;
-            }
-            weapons_stats[week_index][weap_id].uses += 1;
-            weapons_stats[week_index][weap_id].total_points +=
-              league_dict[league].rankings[team].point;
-          } else {
-            weapons_stats[week_index][weap_id] = {
-              name: weap_name,
-              uses: 1,
-              total_points: league_dict[league].rankings[team].point,
-              avg_points: 0
-            };
-          }
-        });
+        );
       });
     });
 

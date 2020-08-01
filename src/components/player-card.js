@@ -14,23 +14,23 @@ const PlayerCard = ({ records }) => {
   const sz_s_plus_number = udemae_zones.s_plus_number
     ? udemae_zones.s_plus_number
     : udemae_zones.number >= 10 && udemae_zones.number !== 128
-      ? 0
-      : '';
+    ? 0
+    : '';
   const tc_s_plus_number = udemae_tower.s_plus_number
     ? udemae_tower.s_plus_number
     : udemae_tower.number >= 10 && udemae_tower.number !== 128
-      ? 0
-      : '';
+    ? 0
+    : '';
   const rm_s_plus_number = udemae_rainmaker.s_plus_number
     ? udemae_rainmaker.s_plus_number
     : udemae_rainmaker.number >= 10 && udemae_rainmaker.number !== 128
-      ? 0
-      : '';
+    ? 0
+    : '';
   const cb_s_plus_number = udemae_clam.s_plus_number
     ? udemae_clam.s_plus_number
     : udemae_clam.number >= 10 && udemae_clam.number !== 128
-      ? 0
-      : '';
+    ? 0
+    : '';
 
   return (
     <Panel>
@@ -92,7 +92,7 @@ const PlayerCard = ({ records }) => {
           defaultMessage="Win %: {count}"
           values={{
             count: (
-              (records.win_count*100) /
+              (records.win_count * 100) /
               (records.lose_count + records.win_count)
             ).toFixed(2)
           }}

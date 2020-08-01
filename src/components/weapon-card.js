@@ -1,4 +1,5 @@
 import React from 'react';
+import update from 'immutability-helper';
 import { Panel, Table, Image } from 'react-bootstrap';
 import {
   defineMessages,
@@ -108,11 +109,12 @@ class WeaponCard extends React.Component {
     const { weapon_stats = {} } = records;
     const weaponArray = [];
     Object.keys(weapon_stats).forEach(weapon => {
-      weapon_stats[weapon].total_count =
+      const calcStats = {};
+      calcStats.total_count =
         weapon_stats[weapon].win_count + weapon_stats[weapon].lose_count;
-      weapon_stats[weapon].percentage_count =
-        weapon_stats[weapon].win_count / weapon_stats[weapon].total_count;
-      weaponArray.push(weapon_stats[weapon]);
+      calcStats.percentage_count =
+        weapon_stats[weapon].win_count / calcStats.total_count;
+      weaponArray.push(update(calcStats, { $merge: weapon_stats[weapon] }));
     });
 
     sort(weaponArray, this.state.sortColumn, this.state.sortDirection);
@@ -163,9 +165,7 @@ class WeaponCard extends React.Component {
                     }}
                   >
                     <Image
-                      src={`https://app.splatoon2.nintendo.net${
-                        weapon.weapon.thumbnail
-                      }`}
+                      src={`https://app.splatoon2.nintendo.net${weapon.weapon.thumbnail}`}
                       style={{ maxHeight: 30 }}
                       alt={weapon.weapon.name}
                     />

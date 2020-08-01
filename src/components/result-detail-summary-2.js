@@ -191,8 +191,8 @@ const BattleSummary = ({ result }) => {
       ? result.other_team_percentage
       : result.other_team_count;
   const totalScore = myScore + otherScore;
-  const myNow = myScore * 100 / totalScore;
-  const otherNow = otherScore * 100 / totalScore;
+  const myNow = (myScore * 100) / totalScore;
+  const otherNow = (otherScore * 100) / totalScore;
   return (
     <div>
       <Row>

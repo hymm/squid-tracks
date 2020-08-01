@@ -140,12 +140,11 @@ export default class LeagueRankings extends React.Component {
 
     for (let j = 0; j < weapons_out.length; j++) {
       weapons_out[j]['uses'].this_week_percent =
-        weapons_out[j]['uses'].this_week / calcStats.totals['uses'][0] * 100;
+        (weapons_out[j]['uses'].this_week / calcStats.totals['uses'][0]) * 100;
       weapons_out[j]['uses'].last_week_percent =
-        weapons_out[j]['uses'].last_week / calcStats.totals['uses'][1] * 100;
+        (weapons_out[j]['uses'].last_week / calcStats.totals['uses'][1]) * 100;
       weapons_out[j]['uses'].last_last_week_percent =
-        weapons_out[j]['uses'].last_last_week /
-        calcStats.totals['uses'][2] *
+        (weapons_out[j]['uses'].last_last_week / calcStats.totals['uses'][2]) *
         100;
       weapons_out[j]['uses'].diff_this_to_last = (
         weapons_out[j]['uses'].this_week_percent -
@@ -157,16 +156,16 @@ export default class LeagueRankings extends React.Component {
       ).toFixed(1);
 
       weapons_out[j]['total_points'].this_week_percent =
-        weapons_out[j]['total_points'].this_week /
-        calcStats.totals['total_points'][0] *
+        (weapons_out[j]['total_points'].this_week /
+          calcStats.totals['total_points'][0]) *
         100;
       weapons_out[j]['total_points'].last_week_percent =
-        weapons_out[j]['total_points'].last_week /
-        calcStats.totals['total_points'][1] *
+        (weapons_out[j]['total_points'].last_week /
+          calcStats.totals['total_points'][1]) *
         100;
       weapons_out[j]['total_points'].last_last_week_percent =
-        weapons_out[j]['total_points'].last_last_week /
-        calcStats.totals['total_points'][2] *
+        (weapons_out[j]['total_points'].last_last_week /
+          calcStats.totals['total_points'][2]) *
         100;
       weapons_out[j]['total_points'].diff_this_to_last = (
         weapons_out[j]['total_points'].this_week_percent -
@@ -277,8 +276,8 @@ export default class LeagueRankings extends React.Component {
                                 ? 'success'
                                 : weapon[this.state.data_to_display]
                                     .diff_last_to_last_last < 0
-                                  ? 'danger'
-                                  : 'default'
+                                ? 'danger'
+                                : 'default'
                             }
                           >
                             <Glyphicon
@@ -288,8 +287,8 @@ export default class LeagueRankings extends React.Component {
                                   ? 'arrow-up'
                                   : weapon[this.state.data_to_display]
                                       .diff_last_to_last_last < 0
-                                    ? 'arrow-down'
-                                    : 'arrow-right'
+                                  ? 'arrow-down'
+                                  : 'arrow-right'
                               }
                             />
                             {
@@ -314,8 +313,8 @@ export default class LeagueRankings extends React.Component {
                                 ? 'success'
                                 : weapon[this.state.data_to_display]
                                     .diff_this_to_last < 0
-                                  ? 'danger'
-                                  : 'default'
+                                ? 'danger'
+                                : 'default'
                             }
                           >
                             <Glyphicon
@@ -325,8 +324,8 @@ export default class LeagueRankings extends React.Component {
                                   ? 'arrow-up'
                                   : weapon[this.state.data_to_display]
                                       .diff_this_to_last < 0
-                                    ? 'arrow-down'
-                                    : 'arrow-right'
+                                  ? 'arrow-down'
+                                  : 'arrow-right'
                               }
                             />
                             {

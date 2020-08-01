@@ -385,14 +385,14 @@ class ResultDetailCard extends React.Component {
       resultChanged.my_estimate_league_point != null
         ? resultChanged.my_estimate_league_point
         : resultChanged.my_estimate_fes_power != null
-          ? resultChanged.my_estimate_fes_power
-          : null;
+        ? resultChanged.my_estimate_fes_power
+        : null;
     const otherTeamPower =
       resultChanged.other_estimate_league_point != null
         ? resultChanged.other_estimate_league_point
         : resultChanged.other_estimate_fes_power != null
-          ? resultChanged.other_estimate_fes_power
-          : null;
+        ? resultChanged.other_estimate_fes_power
+        : null;
 
     return (
       <div className={resultChanged.game_mode.key}>
@@ -405,18 +405,17 @@ class ResultDetailCard extends React.Component {
                 values={{ battle_number: resultChanged.battle_number }}
               />
               {linkInfo ? (
-                <a
+                <button
+                  className="button-as-link"
                   onClick={() =>
                     openExternal(
-                      `https://stat.ink/@${linkInfo.username}/spl2/${
-                        linkInfo.battle
-                      }`
+                      `https://stat.ink/@${linkInfo.username}/spl2/${linkInfo.battle}`
                     )
                   }
                   style={{ cursor: 'pointer' }}
                 >
                   <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
-                </a>
+                </button>
               ) : null}
             </h3>
           }
