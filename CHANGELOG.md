@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Version 1.3.2
+
+* Bump Version to fix broken linux and mac build
+
 ## Version 1.3.0
 
 ### New Features
