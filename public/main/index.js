@@ -257,14 +257,17 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
-    icon: path.join(__dirname, '../icon.png')
+    icon: path.join(__dirname, '../icon.png'),
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
 
   mitm.setMainWindow(mainWindow);
   eSplatnet.setMainWindow(mainWindow, startUrl);
 
   // comment this in on first run to get dev tools
-  if (isDev) {
+  /*if (isDev) {
     const {
       default: installExtension,
       REACT_DEVELOPER_TOOLS
@@ -272,7 +275,7 @@ function createWindow() {
     installExtension(REACT_DEVELOPER_TOOLS)
       .then(name => console.log(`Added Extension:  ${name}`))
       .catch(err => console.log('An error occurred: ', err));
-  }
+  }*/
 
   mainWindow.loadURL(startUrl);
 

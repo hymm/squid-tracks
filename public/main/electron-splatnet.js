@@ -60,7 +60,12 @@ function handleLoginError(e) {
   mainWindow.loadURL(`${startUrl}?error=1`);
 }
 
-protocol.registerStandardSchemes(['npf71b963c1b7b6d119', 'https', 'http']);
+// protocol.registerStandardSchemes(['npf71b963c1b7b6d119', 'https', 'http']);
+protocol.registerSchemesAsPrivileged([
+  { scheme: 'npf71b963c1b7b6d119' },
+  { scheme: 'https' },
+  { scheme: 'http' }
+]);
 function registerSplatnetHandler() {
   protocol.registerHttpProtocol(
     'npf71b963c1b7b6d119',
