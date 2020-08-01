@@ -1,4 +1,4 @@
-osx_image: xcode9.0
+osx_image: xcode10.2
 
 sudo: required
 services: docker
@@ -12,7 +12,7 @@ matrix:
   include:
     - os: osx
       language: node_js
-      node_js: "8"
+      node_js: "12"
     - os: linux
       language: generic
 
@@ -29,7 +29,7 @@ script:
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       docker run --rm -ti \
-        --env-file <(env | grep -iE 'DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS_TAG|TRAVIS|TRAVIS_REPO_|TRAVIS_BUILD_|TRAVIS_BRANCH|TRAVIS_PULL_REQUEST_|APPVEYOR_|CSC_|GH_|GITHUB_|BT_|AWS_|STRIP|BUILD_') \
+        -e GH_TOKEN=$GH_TOKEN \
         --env ELECTRON_CACHE="/root/.cache/electron" \
         --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder" \
         -v ${PWD}:/project \
