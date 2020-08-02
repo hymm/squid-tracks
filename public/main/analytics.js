@@ -1,5 +1,5 @@
 const ua = require('universal-analytics');
-const uuid = require('uuid/v4');
+const { v4: uuid } = require('uuid');
 const { app } = require('electron');
 const appVersion = app.getVersion();
 const appName = app.getName();

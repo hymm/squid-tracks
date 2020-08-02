@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
-import { Subscriber } from 'react-broadcast';
 import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
@@ -8,6 +7,7 @@ import LeagueCard from './components/league-card';
 import FesCard from './components/fes-card';
 import { event } from './analytics';
 import { defineMessages, injectIntl } from 'react-intl';
+import { useSplatnet } from './splatnet-provider';
 
 class RecordsContainer extends React.Component {
   messages = defineMessages({
@@ -74,11 +74,8 @@ const Records = ({ splatnet }) => (
 );
 
 const SubscribedRecords = () => {
-  return (
-    <Subscriber channel="splatnet">
-      {(splatnet) => <Records splatnet={splatnet} />}
-    </Subscriber>
-  );
+  const splatnet = useSplatnet();
+  return <Records splatnet={splatnet} />;
 };
 
 export default SubscribedRecords;

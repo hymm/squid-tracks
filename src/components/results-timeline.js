@@ -1,6 +1,6 @@
 import React from 'react';
 import LobbyColors from './lobby-colors';
-import { Subscriber } from 'react-broadcast';
+import { useSplatnet } from '../splatnet-provider';
 import {
   ResponsiveContainer,
   ComposedChart,
@@ -409,11 +409,8 @@ class ResultsTimeline extends React.Component {
 }
 
 const TimelineSubscribed = ({ ...props }) => {
-  return (
-    <Subscriber channel="splatnet">
-      {(splatnet) => <ResultsTimeline splatnet={splatnet} {...props} />}
-    </Subscriber>
-  );
+  const splatnet = useSplatnet();
+  return <ResultsTimeline splatnet={splatnet} {...props} />;
 };
 
 export default TimelineSubscribed;

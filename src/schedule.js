@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, Row, Col, Table, Image } from 'react-bootstrap';
-import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
-import { Subscriber } from 'react-broadcast';
+import { FormattedMessage, defineMessages, useIntl } from 'react-intl';
+import { useSplatnet } from './splatnet-provider';
 import './schedule.css';
 
 const messages = defineMessages({
@@ -11,7 +11,8 @@ const messages = defineMessages({
   },
 });
 
-const GachiRow = ({ rotation, intl }) => {
+const GachiRow = ({ rotation }) => {
+  const intl = useIntl();
   const now = Date.now() / 1000;
   let hour = 0;
   if (now > rotation.start_time && now < rotation.end_time) {
@@ -62,66 +63,50 @@ const GachiRow = ({ rotation, intl }) => {
   );
 };
 
-const GachiRowIntl = injectIntl(GachiRow);
-
-class Schedule extends React.Component {
-  componentDidMount() {
-    this.props.splatnet.comm.updateSchedule();
-  }
-  render() {
-    const { splatnet } = this.props;
-    const { regular = [], gachi = [], league = [] } = splatnet.current.schedule;
-    return (
-      <Grid fluid style={{ paddingTop: 65 }}>
-        <Row>
-          <Col md={4}>
-            <h2>
-              <FormattedMessage id="schedule.regular" defaultMessage="Turf" />
-            </h2>
-            <Table>
-              <tbody>
-                {regular.map((rotation) => (
-                  <GachiRowIntl key={rotation.start_time} rotation={rotation} />
-                ))}
-              </tbody>
-            </Table>
-          </Col>
-          <Col md={4}>
-            <h2>
-              <FormattedMessage id="schedule.gachi" defaultMessage="Ranked" />
-            </h2>
-            <Table>
-              <tbody>
-                {gachi.map((rotation) => (
-                  <GachiRowIntl key={rotation.start_time} rotation={rotation} />
-                ))}
-              </tbody>
-            </Table>
-          </Col>
-          <Col md={4}>
-            <h2>
-              <FormattedMessage id="schedule.league" defaultMessage="League" />
-            </h2>
-            <Table>
-              <tbody>
-                {league.map((rotation) => (
-                  <GachiRowIntl key={rotation.start_time} rotation={rotation} />
-                ))}
-              </tbody>
-            </Table>
-          </Col>
-        </Row>
-      </Grid>
-    );
-  }
-}
-
-const SubscribedSchedule = () => {
+export default function Schedule() {
+  const splatnet = useSplatnet();
+  useEffect(splatnet.comm.updateSchedule, [splatnet]);
+  const { regular = [], gachi = [], league = [] } = splatnet.current.schedule;
   return (
-    <Subscriber channel="splatnet">
-      {(splatnet) => <Schedule splatnet={splatnet} />}
-    </Subscriber>
+    <Grid fluid style={{ paddingTop: 65 }}>
+      <Row>
+        <Col md={4}>
+          <h2>
+            <FormattedMessage id="schedule.regular" defaultMessage="Turf" />
+          </h2>
+          <Table>
+            <tbody>
+              {regular.map((rotation) => (
+                <GachiRow key={rotation.start_time} rotation={rotation} />
+              ))}
+            </tbody>
+          </Table>
+        </Col>
+        <Col md={4}>
+          <h2>
+            <FormattedMessage id="schedule.gachi" defaultMessage="Ranked" />
+          </h2>
+          <Table>
+            <tbody>
+              {gachi.map((rotation) => (
+                <GachiRow key={rotation.start_time} rotation={rotation} />
+              ))}
+            </tbody>
+          </Table>
+        </Col>
+        <Col md={4}>
+          <h2>
+            <FormattedMessage id="schedule.league" defaultMessage="League" />
+          </h2>
+          <Table>
+            <tbody>
+              {league.map((rotation) => (
+                <GachiRow key={rotation.start_time} rotation={rotation} />
+              ))}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+    </Grid>
   );
-};
-
-export default SubscribedSchedule;
+}

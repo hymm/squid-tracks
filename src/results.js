@@ -4,8 +4,8 @@ import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
 import ResultsControl from './components/results-controls';
 import { ipcRenderer } from 'electron';
-import { Subscriber } from 'react-broadcast';
 import lodash from 'lodash';
+import { useSplatnet } from './splatnet-provider';
 
 class Results extends React.Component {
   state = {
@@ -114,11 +114,8 @@ class Results extends React.Component {
 }
 
 const SubscribedResults = () => {
-  return (
-    <Subscriber channel="splatnet">
-      {(splatnet) => <Results splatnet={splatnet} />}
-    </Subscriber>
-  );
+  const splatnet = useSplatnet();
+  return <Results splatnet={splatnet} />;
 };
 
 export default SubscribedResults;

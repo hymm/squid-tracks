@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { Subscriber } from 'react-broadcast';
+import { useSplatnet } from '../splatnet-provider';
 import { ipcRenderer } from 'electron';
 import { injectIntl, defineMessages } from 'react-intl';
 import { event } from '../analytics';
@@ -128,11 +128,8 @@ class UploadAllBattlesButton extends React.Component {
 }
 
 const UploadAllBattlesButtonInjected = ({ ...args }) => {
-  return (
-    <Subscriber channel="splatnet">
-      {(splatnet) => <UploadAllBattlesButton splatnet={splatnet} {...args} />}
-    </Subscriber>
-  );
+  const splatnet = useSplatnet();
+  return <UploadAllBattlesButton splatnet={splatnet} {...args} />;
 };
 
 export default injectIntl(UploadAllBattlesButtonInjected);

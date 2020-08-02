@@ -7,7 +7,7 @@ function CoopResultsSummary() {
   const [coopResults, refreshCoopResults] = useCoopResults();
   const { card } = coopResults.summary;
 
-  useEffect(() => refreshCoopResults(), []);
+  useEffect(refreshCoopResults, []);
 
   return (
     <>

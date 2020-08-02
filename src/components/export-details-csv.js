@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { Subscriber } from 'react-broadcast';
 import { FormattedMessage } from 'react-intl';
 import flatten from 'flat';
 import { parse as json2csv } from 'json2csv';
 import { remote, ipcRenderer } from 'electron';
 import { event } from '../analytics';
+import { useSplatnet } from '../splatnet-provider';
 const { dialog } = remote;
 
 class ExportBattlesToCsvButton extends React.Component {
@@ -49,13 +49,9 @@ class ExportBattlesToCsvButton extends React.Component {
 }
 
 const ButtonInjected = () => {
-  return (
-    <Subscriber channel="splatnet">
-      {(splatnet) => {
-        return <ExportBattlesToCsvButton splatnet={splatnet} />;
-      }}
-    </Subscriber>
-  );
+  const splatnet = useSplatnet();
+
+  return <ExportBattlesToCsvButton splatnet={splatnet} />;
 };
 
 export default ButtonInjected;

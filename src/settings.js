@@ -15,12 +15,7 @@ import {
 import jws from 'jws';
 import { event } from './analytics';
 import LanguageSelect from './components/language-select';
-import {
-  defineMessages,
-  FormattedMessage,
-  injectIntl,
-  FormattedHTMLMessage,
-} from 'react-intl';
+import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 const { remote, ipcRenderer, clipboard } = require('electron');
 const { openExternal } = remote.shell;
 
@@ -308,10 +303,10 @@ const SecurityTokens = () => {
         />
       </Panel.Heading>
       <Panel.Body>
-        <FormattedHTMLMessage
+        <FormattedMessage
           id="Settings.Tokens.warning"
           defaultMessage={`
-            <strong>DO NOT SHARE Session Token or iksm Token.</strong> These
+            <b>DO NOT SHARE Session Token or iksm Token.</b> These
             are available here for debugging purposes. Sharing these could
             lead to someone stealing your personal information.
           `}

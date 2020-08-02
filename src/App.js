@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Router } from 'react-router-dom';
-import createHashHistory from 'history/createHashHistory';
+import { MemoryRouter as Router, withRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import Routes from './routes';
 import messages from './messages';
@@ -24,11 +23,6 @@ window.addEventListener('unhandledrejection', (event) => {
   uaException(message);
 });
 
-const history = createHashHistory();
-history.listen((location) => {
-  screenview(`${location.pathname}${location.search}${location.hash}`);
-});
-
 class App extends Component {
   state = {
     sessionToken: '',
@@ -45,6 +39,10 @@ class App extends Component {
     this.setState({
       loggingIn: this.getLoggingInState(global.location.search),
     });
+
+    this.props.history.listen((location) => {
+      screenview(`${location.pathname}${location.search}${location.hash}`);
+    });
   }
 
   checkLoginStatus() {
@@ -52,13 +50,13 @@ class App extends Component {
     ipcRenderer.sendSync('setIksmToken', cookie);
     if (ipcRenderer.sendSync('checkIksmValid')) {
       this.setState({ loggedIn: true });
-      history.push('/');
+      this.props.history.push('/');
       return;
     }
 
     if (ipcRenderer.sendSync('checkStoredSessionToken')) {
       this.setState({ loggedIn: true });
-      history.push('/');
+      this.props.history.push('/');
       return;
     }
   }
@@ -70,7 +68,7 @@ class App extends Component {
       loggedIn: false,
     });
     if (!logout) {
-      history.push('/');
+      this.props.history.push('/');
     }
   };
 
@@ -102,21 +100,29 @@ class App extends Component {
 
     return (
       <IntlProvider locale={locale} messages={message}>
-        <Router history={history}>
-          <SplatnetProvider locale={locale}>
-            <Routes
-              loggedIn={loggedIn}
-              setLogin={this.setLogin}
-              token={sessionToken}
-              logoutCallback={this.getSessionToken}
-              setLocale={this.setLocale}
-              locale={locale}
-            />
-          </SplatnetProvider>
-        </Router>
+        <SplatnetProvider locale={locale}>
+          <Routes
+            loggedIn={loggedIn}
+            setLogin={this.setLogin}
+            token={sessionToken}
+            logoutCallback={this.getSessionToken}
+            setLocale={this.setLocale}
+            locale={locale}
+          />
+        </SplatnetProvider>
       </IntlProvider>
     );
   }
 }
 
-export default App;
+const AppWithRouter = withRouter(App);
+
+function App2() {
+  return (
+    <Router>
+      <AppWithRouter />
+    </Router>
+  );
+}
+
+export default App2;

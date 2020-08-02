@@ -10,9 +10,9 @@ import {
 } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { Subscriber } from 'react-broadcast';
 import { ipcRenderer } from 'electron';
 import { event } from './analytics';
+import { useSplatnet } from './splatnet-provider';
 
 class ErrorPage extends React.Component {
   state = {
@@ -77,18 +77,15 @@ class ErrorPage extends React.Component {
 const ErrorPageWithRouter = withRouter(ErrorPage);
 
 const ErrorPageWithSplatnet = (props) => {
+  const splatnet = useSplatnet();
   return (
-    <Subscriber channel="splatnet">
-      {(splatnet) => (
-        <Grid fluid style={{ marginTop: 65 }}>
-          <Row>
-            <Col md={12}>
-              <ErrorPageWithRouter {...props} splatnet={splatnet} />
-            </Col>
-          </Row>
-        </Grid>
-      )}
-    </Subscriber>
+    <Grid fluid style={{ marginTop: 65 }}>
+      <Row>
+        <Col md={12}>
+          <ErrorPageWithRouter {...props} splatnet={splatnet} />
+        </Col>
+      </Row>
+    </Grid>
   );
 };
 

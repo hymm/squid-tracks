@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import update from 'immutability-helper';
 import { withRouter } from 'react-router-dom';
-import { Broadcast } from 'react-broadcast';
 import { ipcRenderer } from 'electron';
 import log from 'electron-log';
 import produce from 'immer';
 import { languages } from './components/language-select';
+
+const SplatnetContext = createContext();
 
 class SplatnetProvider extends React.Component {
   state = {
@@ -193,11 +194,15 @@ class SplatnetProvider extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <Broadcast channel="splatnet" value={this.state}>
+      <SplatnetContext.Provider value={this.state}>
         {children}
-      </Broadcast>
+      </SplatnetContext.Provider>
     );
   }
+}
+
+export function useSplatnet() {
+  return useContext(SplatnetContext);
 }
 
 export default withRouter(SplatnetProvider);

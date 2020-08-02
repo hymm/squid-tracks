@@ -1,5 +1,4 @@
 import React from 'react';
-import { Subscriber } from 'react-broadcast';
 import {
   Grid,
   Row,
@@ -11,8 +10,9 @@ import {
   Table,
 } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
-import { defineMessages, injectIntl } from 'react-intl';
+import { defineMessages, useIntl } from 'react-intl';
 import { event } from './analytics';
+import { useSplatnet } from './splatnet-provider';
 
 import './annie-store.css';
 
@@ -334,12 +334,10 @@ class AnnieStore extends React.Component {
   }
 }
 
-const SubscribedAnnieStore = ({ intl }) => {
-  return (
-    <Subscriber channel="splatnet">
-      {(splatnet) => <AnnieStore splatnet={splatnet} intl={intl} />}
-    </Subscriber>
-  );
+const SubscribedAnnieStore = () => {
+  const intl = useIntl();
+  const splatnet = useSplatnet();
+  return <AnnieStore splatnet={splatnet} intl={intl} />;
 };
 
-export default injectIntl(SubscribedAnnieStore);
+export default SubscribedAnnieStore;
