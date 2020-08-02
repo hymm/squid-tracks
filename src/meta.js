@@ -10,7 +10,7 @@ import {
   Checkbox,
   ControlLabel,
   FormControl,
-  Form
+  Form,
 } from 'react-bootstrap';
 import LeagueRankings from './components/league-rankings';
 import { event } from './analytics';
@@ -39,7 +39,7 @@ class MetaContainer extends React.Component {
     region: 'ALL',
     title: 'Select Data Above',
     next_desired_start_of_week: 1,
-    combine_replicas_toggle: false
+    combine_replicas_toggle: false,
   };
 
   url = 'league_match_ranking/';
@@ -59,7 +59,7 @@ class MetaContainer extends React.Component {
       combine_replicas_toggle: ipcRenderer.sendSync(
         'getFromStore',
         'combineReplicaLeagueStats'
-      )
+      ),
     });
   }
 
@@ -68,9 +68,7 @@ class MetaContainer extends React.Component {
   }
 
   getMetaRequest() {
-    let endUtc = moment()
-      .utc()
-      .startOf('day');
+    let endUtc = moment().utc().startOf('day');
     let startUtc = moment().utc();
     if (
       startUtc.hour() < 2 ||
@@ -117,7 +115,7 @@ class MetaContainer extends React.Component {
       let newEntry = {};
       newEntry[data.league_id] = data;
       this.setState({
-        league_dict: update(this.state.league_dict, { $merge: newEntry })
+        league_dict: update(this.state.league_dict, { $merge: newEntry }),
       });
     }
     this.desired_start_of_week = this.state.next_desired_start_of_week;
@@ -131,11 +129,11 @@ class MetaContainer extends React.Component {
     this.setState({ full_teams: true });
   };
 
-  setRegion = e => {
+  setRegion = (e) => {
     this.setState({ region: e.target.value });
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ league_time: e.target.value });
   };
 
@@ -150,11 +148,11 @@ class MetaContainer extends React.Component {
       !this.state.combine_replicas_toggle
     );
     this.setState({
-      combine_replicas_toggle: !this.state.combine_replicas_toggle
+      combine_replicas_toggle: !this.state.combine_replicas_toggle,
     });
   };
 
-  setDesiredStartDayOfWeek = e => {
+  setDesiredStartDayOfWeek = (e) => {
     this.setState({ next_desired_start_of_week: e.target.value });
   };
 
@@ -199,17 +197,17 @@ class MetaContainer extends React.Component {
       Object.keys(league_dict).length === 0
     ) {
       return {
-        weapons_stats
+        weapons_stats,
       };
     }
-    Object.keys(league_dict).forEach(league => {
+    Object.keys(league_dict).forEach((league) => {
       let week_index = this.getWeekIndex(
         league_dict[league].start_time * 1000,
         this.desired_start_of_week
       );
-      Object.keys(league_dict[league].rankings).forEach(team => {
+      Object.keys(league_dict[league].rankings).forEach((team) => {
         Object.keys(league_dict[league].rankings[team].tag_members).forEach(
-          player => {
+          (player) => {
             let weap_name =
               league_dict[league].rankings[team].tag_members[player].weapon
                 .name;
@@ -226,7 +224,7 @@ class MetaContainer extends React.Component {
                 '215': '210',
                 '1115': '1110',
                 '2015': '2010',
-                '3005': '3000'
+                '3005': '3000',
               };
               if (weap_id in replica_equivalents) {
                 weap_id = replica_equivalents[weap_id];
@@ -245,7 +243,7 @@ class MetaContainer extends React.Component {
                 name: weap_name,
                 uses: 1,
                 total_points: league_dict[league].rankings[team].point,
-                avg_points: 0
+                avg_points: 0,
               };
             }
           }
@@ -258,7 +256,7 @@ class MetaContainer extends React.Component {
     for (let i = 0; i < weapons_stats.length; i++) {
       let running_total_points_for_week = 0;
       let running_total_uses_for_week = 0;
-      Object.keys(weapons_stats[i]).forEach(weapon => {
+      Object.keys(weapons_stats[i]).forEach((weapon) => {
         running_total_points_for_week += weapons_stats[i][weapon].total_points;
         running_total_uses_for_week += weapons_stats[i][weapon].uses;
         weapons_stats[i][weapon].avg_points =
@@ -270,12 +268,12 @@ class MetaContainer extends React.Component {
 
     let totals = {
       uses: total_uses_by_week,
-      total_points: total_points_by_week
+      total_points: total_points_by_week,
     };
 
     return {
       weapons_stats,
-      totals
+      totals,
     };
   }
 
@@ -300,7 +298,7 @@ class MetaContainer extends React.Component {
                     this.state.region +
                     ' Region ' +
                     (this.state.full_teams ? 'Teams' : 'Pairs') +
-                    ' League Weapon Stats'
+                    ' League Weapon Stats',
                 });
                 this.getMetaRequest();
                 setTimeout(() => this.setState({ refreshing: false }), 4000);

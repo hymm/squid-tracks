@@ -36,10 +36,10 @@ const SelectableValue = ({
 
 class ResultsSummaryCard extends React.Component {
   state = {
-    activeValue: 'power'
+    activeValue: 'power',
   };
 
-  setActiveValue = activeValue => {
+  setActiveValue = (activeValue) => {
     this.setState({ activeValue });
   };
 

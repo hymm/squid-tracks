@@ -7,7 +7,7 @@ import {
   Table,
   Grid,
   Col,
-  Row
+  Row,
 } from 'react-bootstrap';
 import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import { sort } from './sort-array';
@@ -17,7 +17,7 @@ class StageCard extends React.Component {
   state = {
     percent: true,
     sortColumn: 'total_percent',
-    sortDirection: 'up'
+    sortDirection: 'up',
   };
 
   showCount = () => {
@@ -38,7 +38,7 @@ class StageCard extends React.Component {
       cb_win = 0,
       cb_lose = 0;
     const summary = {};
-    Object.keys(stage_stats).forEach(weapon => {
+    Object.keys(stage_stats).forEach((weapon) => {
       summary[weapon] = {};
       summary[weapon].total_win =
         stage_stats[weapon].hoko_win +
@@ -98,59 +98,59 @@ class StageCard extends React.Component {
       total_win,
       total_lose,
       total_percent,
-      summary
+      summary,
     };
   }
 
   messages = defineMessages({
     sz: {
       id: 'stageCard.header.splatzones',
-      defaultMessage: 'SZ'
+      defaultMessage: 'SZ',
     },
     tc: {
       id: 'stageCard.header.towercontrol',
-      defaultMessage: 'TC'
+      defaultMessage: 'TC',
     },
     rm: {
       id: 'stageCard.header.rainmaker',
-      defaultMessage: 'RM'
+      defaultMessage: 'RM',
     },
     cb: {
       id: 'stageCard.header.clamblitz',
-      defaultMessage: 'CB'
+      defaultMessage: 'CB',
     },
     total: {
       id: 'stageCard.header.total',
-      defaultMessage: 'Total'
-    }
+      defaultMessage: 'Total',
+    },
   });
 
   columnHeaders = [
     {
       text: this.props.intl.formatMessage(this.messages.sz),
       sortColumn: 'area_percent',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.tc),
       sortColumn: 'yagura_percent',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.rm),
       sortColumn: 'hoko_percent',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.cb),
       sortColumn: 'asari_percent',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.total),
       sortColumn: 'total_percent',
-      sortDirection: 'up'
-    }
+      sortDirection: 'up',
+    },
   ];
 
   render() {
@@ -158,7 +158,7 @@ class StageCard extends React.Component {
 
     const calcStats = this.getCalculatedStats(stage_stats);
     const stageStats = [];
-    Object.keys(stage_stats).forEach(stage =>
+    Object.keys(stage_stats).forEach((stage) =>
       stageStats.push(stage_stats[stage])
     );
     sort(stageStats, this.state.sortColumn, this.state.sortDirection);
@@ -214,13 +214,13 @@ class StageCard extends React.Component {
                           defaultMessage="Name"
                         />
                       </th>
-                      {this.columnHeaders.map(header => (
+                      {this.columnHeaders.map((header) => (
                         <TableHeader
                           key={header.text}
                           setState={this.setState.bind(this)}
                           sort={{
                             sortColumn: header.sortColumn,
-                            sortDirection: header.sortDirection
+                            sortDirection: header.sortDirection,
                           }}
                           text={header.text}
                           sortColumn={this.state.sortColumn}

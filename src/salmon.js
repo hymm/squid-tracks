@@ -8,7 +8,7 @@ import {
   Image,
   Panel,
   OverlayTrigger,
-  Tooltip
+  Tooltip,
 } from 'react-bootstrap';
 import CoopResults from './components/coop-results-summary';
 import CoopTrend from './components/coop-trend';
@@ -51,7 +51,7 @@ const SalmonDay = ({ schedules, unixTime }) => {
   let lastTime = times[0];
   return (
     <div className="salmon-day">
-      {times.map(time => {
+      {times.map((time) => {
         if (time === lastTime) {
           return null;
         }
@@ -130,13 +130,13 @@ function getTimesWithinDay(unixTime, schedules) {
       time: unixStart,
       isStart: !times[0].isStart,
       scheduleNum: times[0].scheduleNum,
-      dayStart: true
+      dayStart: true,
     });
     times.push({
       time: unixEnd,
       isStart: !times[times.length - 1].isStart,
       scheduleNum: times[times.length - 1].scheduleNum,
-      dayEnd: true
+      dayEnd: true,
     });
   }
 
@@ -145,13 +145,13 @@ function getTimesWithinDay(unixTime, schedules) {
       time: unixStart,
       isStart: true,
       scheduleNum: allDayNum,
-      dayStart: true
+      dayStart: true,
     });
     times.push({
       time: unixEnd,
       isStart: false,
       scheduleNum: allDayNum,
-      dayEnd: true
+      dayEnd: true,
     });
   }
 
@@ -293,7 +293,7 @@ class Salmon extends React.Component {
           <Col xs={12} sm={6} md={4} lg={3}>
             <SalmonCalendar schedules={coop_schedules.schedules} />
           </Col>
-          {coop_schedules.details.map(d => (
+          {coop_schedules.details.map((d) => (
             <Col xs={12} sm={6} md={4} lg={3} key={d.start_time}>
               <SalmonDetail detail={d} />
             </Col>
@@ -317,7 +317,7 @@ class Salmon extends React.Component {
 const SalmonWithSplatnet = () => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => <Salmon splatnet={splatnet} />}
+      {(splatnet) => <Salmon splatnet={splatnet} />}
     </Subscriber>
   );
 };

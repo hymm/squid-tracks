@@ -13,16 +13,16 @@ class RecordsContainer extends React.Component {
   messages = defineMessages({
     refresh: {
       id: 'records.refreshButton.refresh',
-      defaultMessage: 'Refresh'
+      defaultMessage: 'Refresh',
     },
     refreshed: {
       id: 'records.refreshButton.refreshed',
-      defaultMessage: 'Refreshed'
-    }
+      defaultMessage: 'Refreshed',
+    },
   });
 
   state = {
-    refreshing: false
+    refreshing: false,
   };
 
   componentDidMount() {
@@ -76,7 +76,7 @@ const Records = ({ splatnet }) => (
 const SubscribedRecords = () => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => <Records splatnet={splatnet} />}
+      {(splatnet) => <Records splatnet={splatnet} />}
     </Subscriber>
   );
 };

@@ -39,11 +39,11 @@ const FesCard = ({ records, festivals }) => {
   const { fes_results = {} } = records;
   const fesArray = [];
   const fesVs = {};
-  Object.keys(fes_results).forEach(fes => {
+  Object.keys(fes_results).forEach((fes) => {
     fesArray.push(fes_results[fes]);
   });
 
-  Object.keys(festivals).forEach(fes => {
+  Object.keys(festivals).forEach((fes) => {
     fesVs[festivals[fes].festival_id] =
       festivals[fes].names.alpha_short +
       ' vs. ' +
@@ -60,7 +60,7 @@ const FesCard = ({ records, festivals }) => {
       </Panel.Heading>
       <Panel.Body>
         <Grid fluid>
-          {fesArray.map(fes => (
+          {fesArray.map((fes) => (
             <FesTable
               key={fes.fes_id}
               fes_name={fesVs[fes.fes_id]}

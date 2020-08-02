@@ -70,7 +70,7 @@ const AbilityCell = ({ skills }) => {
         style={{ maxHeight: mainHeight, background }}
         alt={skills.main.name}
       />
-      {skills.subs.map(skill =>
+      {skills.subs.map((skill) =>
         skill ? (
           <Image
             circle
@@ -110,7 +110,7 @@ const TeamStatTable = ({ result, team }) => {
     <Table striped bordered condensed hover>
       <TeamHeader player={team[0]} />
       <tbody>
-        {team.map(player => (
+        {team.map((player) => (
           <PlayerRow key={player.player.principal_id} player={player} />
         ))}
       </tbody>

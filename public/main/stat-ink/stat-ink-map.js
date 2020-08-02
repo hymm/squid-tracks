@@ -9,7 +9,7 @@ if (process.env.PROXY) {
   request = request2.defaults({
     proxy: 'http://localhost:8888',
     rejectUnauthorized: false,
-    jar: true
+    jar: true,
   });
 } else {
   request = request2;
@@ -47,7 +47,7 @@ class StatInkMap {
       this.map = await request({
         method: 'GET',
         uri: this.uri,
-        json: true
+        json: true,
       });
       await this.save();
     } catch (e) {
@@ -57,7 +57,7 @@ class StatInkMap {
 
   getRowWithId(id) {
     const row = this.map.find(
-      row => parseInt(row.splatnet, 10) === parseInt(id, 10)
+      (row) => parseInt(row.splatnet, 10) === parseInt(id, 10)
     );
     if (row == null) {
       throw Error(`Could not get id ${id} from map`);

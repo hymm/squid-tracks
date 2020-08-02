@@ -5,7 +5,7 @@ import {
   ButtonGroup,
   Glyphicon,
   DropdownButton,
-  MenuItem
+  MenuItem,
 } from 'react-bootstrap';
 import { defineMessages, injectIntl } from 'react-intl';
 import { ipcRenderer } from 'electron';
@@ -18,17 +18,17 @@ class ResultControl extends React.Component {
   messages = defineMessages({
     refresh: {
       id: 'results.refreshButton.refresh',
-      defaultMessage: 'Refresh'
+      defaultMessage: 'Refresh',
     },
     refreshed: {
       id: 'results.refreshButton.refreshed',
-      defaultMessage: 'Refreshed'
-    }
+      defaultMessage: 'Refreshed',
+    },
   });
 
   state = {
     tokenExists: false,
-    refreshing: false
+    refreshing: false,
   };
 
   componentDidMount() {
@@ -45,7 +45,7 @@ class ResultControl extends React.Component {
       results,
       setStatInkInfo,
       statInk,
-      intl
+      intl,
     } = this.props;
     const { tokenExists } = this.state;
 

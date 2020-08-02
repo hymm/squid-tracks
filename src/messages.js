@@ -8,5 +8,5 @@ addLocaleData([...jaLocaleData, ...frLocaleData]);
 
 export default {
   ja,
-  fr
+  fr,
 };

@@ -5,7 +5,7 @@ import {
   NavItem,
   NavDropdown,
   MenuItem,
-  Image
+  Image,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -18,7 +18,7 @@ import Logo from './images/icon.png';
 const Navigation = ({ logoutCallback }) => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => (
+      {(splatnet) => (
         <Navbar fluid fixedTop collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand className="squid-tracks">

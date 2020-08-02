@@ -10,7 +10,7 @@ import {
   Nav,
   NavDropdown,
   MenuItem,
-  Label
+  Label,
 } from 'react-bootstrap';
 import { pick, mapKeys, cloneDeep } from 'lodash';
 import flatten from 'flat';
@@ -56,7 +56,7 @@ class ResultDetailMenu extends React.Component {
       'my_team_result.key': 'my_team_result',
       'other_team_result.key': 'other_team_result',
       'game_mode.key': 'game_mode',
-      'rule.key': 'rule'
+      'rule.key': 'rule',
     };
 
     const mapped = mapKeys(flattened, (value, key) => {
@@ -79,7 +79,7 @@ class ResultDetailMenu extends React.Component {
       assist_count: 'a',
       death_count: 'd',
       special_count: 's',
-      game_paint_point: 'p'
+      game_paint_point: 'p',
     };
 
     const mapped = mapKeys(flattened, (value, key) => {
@@ -194,7 +194,7 @@ const TeamBadges = ({ power, id, theme }) => {
             fontWeight: 'normal',
             marginLeft: 5,
             marginRight: 5,
-            background: theme.color.css_rgb
+            background: theme.color.css_rgb,
           }}
         >
           {theme.name}
@@ -206,7 +206,7 @@ const TeamBadges = ({ power, id, theme }) => {
           style={{
             fontWeight: 'normal',
             marginLeft: 5,
-            marginRight: 5
+            marginRight: 5,
           }}
         >
           <FormattedMessage
@@ -231,7 +231,7 @@ const TeamBadges = ({ power, id, theme }) => {
 class ResultDetailCard extends React.Component {
   state = {
     show: 1,
-    anonymize: false
+    anonymize: false,
   };
 
   showStats = () => {
@@ -333,10 +333,10 @@ class ResultDetailCard extends React.Component {
     const gearResults = [];
     // don't check own gear
     // gearResults.push(this.checkPlayerGear(result.player_result.player));
-    result.my_team_members.forEach(player => {
+    result.my_team_members.forEach((player) => {
       gearResults.push(this.checkPlayerGear(player.player));
     });
-    result.other_team_members.forEach(player => {
+    result.other_team_members.forEach((player) => {
       gearResults.push(this.checkPlayerGear(player.player));
     });
 
@@ -459,7 +459,7 @@ class ResultDetailCard extends React.Component {
                         <polygon
                           points="7,0,13.062177826491,3.5,13.062177826491,10.5,7,14,0.93782217350893,10.5,0.93782217350893,3.5"
                           style={{
-                            fill: '#000'
+                            fill: '#000',
                           }}
                         />
                       </svg>
@@ -473,7 +473,7 @@ class ResultDetailCard extends React.Component {
                         <polygon
                           points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
                           style={{
-                            fill: '#000'
+                            fill: '#000',
                           }}
                         />
                       </svg>
@@ -481,7 +481,7 @@ class ResultDetailCard extends React.Component {
                         <polygon
                           points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
                           style={{
-                            fill: '#000'
+                            fill: '#000',
                           }}
                         />
                       </svg>
@@ -563,7 +563,7 @@ class ResultDetailCard extends React.Component {
                     {this.state.show === 4 ? (
                       <TeamRadar team={otherTeam} maximums={maximums} />
                     ) : null}
-                  </Col>
+                  </Col>,
                 ]
               ) : (
                 <Col md={12}>

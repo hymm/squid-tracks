@@ -7,8 +7,8 @@ import './schedule.css';
 const messages = defineMessages({
   current: {
     id: 'Schedule.currentRotation',
-    defaultMessage: 'current'
-  }
+    defaultMessage: 'current',
+  },
 });
 
 const GachiRow = ({ rotation, intl }) => {
@@ -80,7 +80,7 @@ class Schedule extends React.Component {
             </h2>
             <Table>
               <tbody>
-                {regular.map(rotation => (
+                {regular.map((rotation) => (
                   <GachiRowIntl key={rotation.start_time} rotation={rotation} />
                 ))}
               </tbody>
@@ -92,7 +92,7 @@ class Schedule extends React.Component {
             </h2>
             <Table>
               <tbody>
-                {gachi.map(rotation => (
+                {gachi.map((rotation) => (
                   <GachiRowIntl key={rotation.start_time} rotation={rotation} />
                 ))}
               </tbody>
@@ -104,7 +104,7 @@ class Schedule extends React.Component {
             </h2>
             <Table>
               <tbody>
-                {league.map(rotation => (
+                {league.map((rotation) => (
                   <GachiRowIntl key={rotation.start_time} rotation={rotation} />
                 ))}
               </tbody>
@@ -119,7 +119,7 @@ class Schedule extends React.Component {
 const SubscribedSchedule = () => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => <Schedule splatnet={splatnet} />}
+      {(splatnet) => <Schedule splatnet={splatnet} />}
     </Subscriber>
   );
 };

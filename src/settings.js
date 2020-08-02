@@ -10,7 +10,7 @@ import {
   HelpBlock,
   Checkbox,
   Panel,
-  Glyphicon
+  Glyphicon,
 } from 'react-bootstrap';
 import jws from 'jws';
 import { event } from './analytics';
@@ -19,7 +19,7 @@ import {
   defineMessages,
   FormattedMessage,
   injectIntl,
-  FormattedHTMLMessage
+  FormattedHTMLMessage,
 } from 'react-intl';
 const { remote, ipcRenderer, clipboard } = require('electron');
 const { openExternal } = remote.shell;
@@ -27,18 +27,18 @@ const { openExternal } = remote.shell;
 class StatInkSettings extends React.Component {
   state = {
     apiToken: '',
-    saved: false
+    saved: false,
   };
 
   messages = defineMessages({
     saveToken: {
       id: 'Settings.StatInk.ButtonText.saveToken',
-      defaultMessage: 'Save Token'
+      defaultMessage: 'Save Token',
     },
     tokenSaved: {
       id: 'Settings.StatInk.ButtonText.tokenSaved',
-      defaultMessage: 'Token Saved'
-    }
+      defaultMessage: 'Token Saved',
+    },
   });
 
   componentDidMount() {
@@ -49,11 +49,11 @@ class StatInkSettings extends React.Component {
     this.setState({ apiToken: ipcRenderer.sendSync('getStatInkApiToken') });
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ apiToken: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     event('stat.ink', 'saved-token');
     ipcRenderer.sendSync('setStatInkApiToken', this.state.apiToken);
     this.setState({ saved: true });
@@ -90,7 +90,7 @@ class StatInkSettings extends React.Component {
                       >
                         https://stat.ink/profile
                       </button>
-                    )
+                    ),
                   }}
                 />
               </HelpBlock>
@@ -117,7 +117,7 @@ class GoogleAnalyticsCheckbox extends React.Component {
 
   componentDidMount() {
     this.setState({
-      enabled: ipcRenderer.sendSync('getFromStore', 'gaEnabled')
+      enabled: ipcRenderer.sendSync('getFromStore', 'gaEnabled'),
     });
   }
 
@@ -141,7 +141,7 @@ class GoogleAnalyticsCheckbox extends React.Component {
 
 class IksmToken extends React.Component {
   state = {
-    cookie: ''
+    cookie: '',
   };
 
   componentDidMount() {
@@ -211,7 +211,7 @@ class SessionToken extends React.Component {
 
   componentDidMount() {
     this.setState({
-      token: ipcRenderer.sendSync('getFromStore', 'sessionToken')
+      token: ipcRenderer.sendSync('getFromStore', 'sessionToken'),
     });
   }
 

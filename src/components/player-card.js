@@ -8,7 +8,7 @@ const PlayerCard = ({ records }) => {
     udemae_rainmaker = {},
     udemae_tower = {},
     udemae_zones = {},
-    udemae_clam = {}
+    udemae_clam = {},
   } = player;
 
   const sz_s_plus_number = udemae_zones.s_plus_number
@@ -47,7 +47,7 @@ const PlayerCard = ({ records }) => {
           defaultMessage="Level: {rank}{star}"
           values={{
             star: player.star_rank > 0 ? `★${player.star_rank}` : '',
-            rank: player.player_rank
+            rank: player.player_rank,
           }}
         />
         <br />
@@ -94,7 +94,7 @@ const PlayerCard = ({ records }) => {
             count: (
               (records.win_count * 100) /
               (records.lose_count + records.win_count)
-            ).toFixed(2)
+            ).toFixed(2),
           }}
         />
       </Panel.Body>

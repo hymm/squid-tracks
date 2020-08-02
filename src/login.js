@@ -10,7 +10,7 @@ import {
   ControlLabel,
   ButtonToolbar,
   SplitButton,
-  MenuItem
+  MenuItem,
 } from 'react-bootstrap';
 import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -25,18 +25,18 @@ const appVersion = app.getVersion();
 class ProxyButton extends React.Component {
   state = {
     mitm: false,
-    address: { ips: [], port: 0 }
+    address: { ips: [], port: 0 },
   };
 
   messages = defineMessages({
     proxyStart: {
       id: 'login.cookie.proxyStart',
-      defaultMessage: 'Start Proxy'
+      defaultMessage: 'Start Proxy',
     },
     proxyRunning: {
       id: 'login.cookie.proxyRunning',
-      defaultMessage: 'Proxy running on {ip}, Port {port}'
-    }
+      defaultMessage: 'Proxy running on {ip}, Port {port}',
+    },
   });
 
   handleMitmClick = () => {
@@ -62,7 +62,7 @@ class ProxyButton extends React.Component {
     const buttonText = mitm
       ? intl.formatMessage(this.messages.proxyRunning, {
           ip: address.ips[0],
-          port: address.port
+          port: address.port,
         })
       : intl.formatMessage(this.messages.proxyStart);
     if (address.ips.length > 1) {
@@ -78,7 +78,7 @@ class ProxyButton extends React.Component {
               defaultMessage="Additional IP Addresses"
             />
           </MenuItem>
-          {address.ips.map(address => (
+          {address.ips.map((address) => (
             <MenuItem key={address}>{address}</MenuItem>
           ))}
         </SplitButton>
@@ -101,17 +101,17 @@ class LoginCookie extends React.Component {
   messages = defineMessages({
     instructionsUrl: {
       id: 'login.cookie.instructionsUrl',
-      defaultMessage: 'https://github.com/hymm/squid-tracks/wiki/en_getCookie'
-    }
+      defaultMessage: 'https://github.com/hymm/squid-tracks/wiki/en_getCookie',
+    },
   });
   state = {
-    token: ''
+    token: '',
   };
 
   componentDidMount() {
     ipcRenderer.once('interceptedIksm', this.handleIntercept);
     this.setState({
-      token: ipcRenderer.sendSync('getFromStore', 'iksmCookie')
+      token: ipcRenderer.sendSync('getFromStore', 'iksmCookie'),
     });
   }
 
@@ -124,11 +124,11 @@ class LoginCookie extends React.Component {
     this.login(value);
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ token: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     this.login(this.state.token);
   };
 
@@ -266,7 +266,7 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
                     >
                       @SquidTracks
                     </button>
-                  )
+                  ),
                 }}
               />
             </h4>
@@ -294,7 +294,7 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
 };
 const LoginSplashWithIntl = injectIntl(LoginSplash);
 
-const LoginRoutes = props => {
+const LoginRoutes = (props) => {
   return (
     <Switch>
       <Route
@@ -311,7 +311,7 @@ const LoginRoutes = props => {
   );
 };
 
-const Login = props => {
+const Login = (props) => {
   return <LoginRoutes {...props} />;
 };
 

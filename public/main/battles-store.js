@@ -3,7 +3,7 @@ const Store = require('./store');
 
 const battleStore = new Store({
   configName: 'battles',
-  defaults: {}
+  defaults: {},
 });
 
 ipcMain.on('setBattleToStore', (event, battle) => {

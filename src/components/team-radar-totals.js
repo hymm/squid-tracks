@@ -4,7 +4,7 @@ import {
   RadarChart,
   PolarGrid,
   Legend,
-  PolarAngleAxis /* PolarRadiusAxis */
+  PolarAngleAxis /* PolarRadiusAxis */,
 } from 'recharts';
 
 const dataTypes = [
@@ -13,7 +13,7 @@ const dataTypes = [
   { stat: 'Paint', key: 'p', fullMark: 2500 },
   { stat: 'Deaths', key: 'd', fullMark: 20 },
   { stat: 'Kills', key: 'k', fullMark: 20 },
-  { stat: 'Score', key: 'c', fullMark: 100 }
+  { stat: 'Score', key: 'c', fullMark: 100 },
 ];
 
 function getTotal(team) {
@@ -27,11 +27,11 @@ function getTotal(team) {
 }
 
 function getMaximums(myTeam, otherTeam) {
-  const keys = dataTypes.map(type => type.key);
+  const keys = dataTypes.map((type) => type.key);
   const maximums = {};
 
   keys.forEach(
-    key =>
+    (key) =>
       (maximums[key] =
         myTeam[key] > otherTeam[key] ? myTeam[key] : otherTeam[key])
   );
@@ -40,9 +40,9 @@ function getMaximums(myTeam, otherTeam) {
 }
 
 function normalize(team, maximums) {
-  const keys = dataTypes.map(type => type.key);
+  const keys = dataTypes.map((type) => type.key);
   const normalized = {};
-  keys.forEach(key => {
+  keys.forEach((key) => {
     normalized[key] = team[key] / maximums[key];
   });
 
@@ -59,7 +59,7 @@ const RadarTotalsChart = ({ myTeam, otherTeam, myCount, otherCount }) => {
   const myTeamNormalized = normalize(myTeamTotals, maximums);
   const otherTeamNormalized = normalize(otherTeamTotals, maximums);
 
-  const data = dataTypes.map(row => {
+  const data = dataTypes.map((row) => {
     row.myTeam = myTeamNormalized[row.key];
     row.otherTeam = otherTeamNormalized[row.key];
     row.fullMark = 1;

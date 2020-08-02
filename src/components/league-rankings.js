@@ -9,7 +9,7 @@ import {
   Col,
   Row,
   Label,
-  Glyphicon
+  Glyphicon,
 } from 'react-bootstrap';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
@@ -18,10 +18,10 @@ export default class LeagueRankings extends React.Component {
   state = {
     sortColumn: 'total_points.last_week',
     sortDirection: 'up',
-    data_to_display: 'total_points'
+    data_to_display: 'total_points',
   };
 
-  setDataToDisplay = e => {
+  setDataToDisplay = (e) => {
     this.setState({ data_to_display: e.target.value });
   };
 
@@ -30,18 +30,18 @@ export default class LeagueRankings extends React.Component {
     {
       text: 'Two Weeks Ago',
       sortColumn: 'last_last_week',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: 'Last Week',
       sortColumn: 'last_week',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: 'This Week',
       sortColumn: 'this_week',
-      sortDirection: 'up'
-    }
+      sortDirection: 'up',
+    },
   ];
 
   updateColumnHeaders() {
@@ -71,13 +71,13 @@ export default class LeagueRankings extends React.Component {
     const snapshot_table = {};
     // should be three iterations, starting with this week
     for (let i = 0; i < calcStats.weapons_stats.length; i++) {
-      Object.keys(calcStats.weapons_stats[i]).forEach(weapon => {
+      Object.keys(calcStats.weapons_stats[i]).forEach((weapon) => {
         if (weapon in snapshot_table) {
           snapshot_table[weapon].display_stats.push({
             uses_by_week: calcStats.weapons_stats[i][weapon].uses,
             total_points_by_week:
               calcStats.weapons_stats[i][weapon].total_points,
-            avg_points_by_week: calcStats.weapons_stats[i][weapon].avg_points
+            avg_points_by_week: calcStats.weapons_stats[i][weapon].avg_points,
           });
         } else {
           snapshot_table[weapon] = {
@@ -88,16 +88,16 @@ export default class LeagueRankings extends React.Component {
                 total_points_by_week:
                   calcStats.weapons_stats[i][weapon].total_points,
                 avg_points_by_week:
-                  calcStats.weapons_stats[i][weapon].avg_points
-              }
-            ]
+                  calcStats.weapons_stats[i][weapon].avg_points,
+              },
+            ],
           };
         }
       });
     }
 
     const weapons_out = [];
-    Object.keys(snapshot_table).forEach(weapon =>
+    Object.keys(snapshot_table).forEach((weapon) =>
       weapons_out.push({
         name: snapshot_table[weapon].name,
         uses: {
@@ -109,7 +109,7 @@ export default class LeagueRankings extends React.Component {
           last_last_week:
             snapshot_table[weapon].display_stats.length > 2
               ? snapshot_table[weapon].display_stats[2]['uses_by_week']
-              : 0
+              : 0,
         },
         total_points: {
           this_week:
@@ -121,7 +121,7 @@ export default class LeagueRankings extends React.Component {
           last_last_week:
             snapshot_table[weapon].display_stats.length > 2
               ? snapshot_table[weapon].display_stats[2]['total_points_by_week']
-              : 0
+              : 0,
         },
         avg_points: {
           this_week:
@@ -133,8 +133,8 @@ export default class LeagueRankings extends React.Component {
           last_last_week:
             snapshot_table[weapon].display_stats.length > 2
               ? snapshot_table[weapon].display_stats[2]['avg_points_by_week']
-              : 0
-        }
+              : 0,
+        },
       })
     );
 
@@ -227,7 +227,7 @@ export default class LeagueRankings extends React.Component {
                 <Table striped bordered condensed hover>
                   <thead>
                     <tr>
-                      {this.columnHeaders.map(header => (
+                      {this.columnHeaders.map((header) => (
                         <TableHeader
                           key={header.text}
                           setState={this.setState.bind(this)}
@@ -238,7 +238,7 @@ export default class LeagueRankings extends React.Component {
                                 : this.state.data_to_display +
                                   '.' +
                                   header.sortColumn,
-                            sortDirection: header.sortDirection
+                            sortDirection: header.sortDirection,
                           }}
                           text={header.text}
                           sortColumn={this.state.sortColumn}
@@ -247,7 +247,7 @@ export default class LeagueRankings extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {weapons_out.map(weapon => (
+                    {weapons_out.map((weapon) => (
                       <tr key={weapon.name}>
                         <td>{weapon.name}</td>
                         <td>

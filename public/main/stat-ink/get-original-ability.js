@@ -21,7 +21,7 @@ const shoesMap = new StatInkMap(
   defaultShoesMap
 );
 
-module.exports = async function(type, id, localization) {
+module.exports = async function (type, id, localization) {
   switch (type) {
     case 'head':
       const headInfo = await headMap.getInfoWithRetry(id);

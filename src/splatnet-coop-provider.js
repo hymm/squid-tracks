@@ -34,5 +34,5 @@ function CoopResultsProvider(props) {
 export {
   CoopResultsProvider as default,
   Consumer as CoopResultsConsumer,
-  useCoopResults
+  useCoopResults,
 };

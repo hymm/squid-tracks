@@ -13,7 +13,7 @@ const generalFields = [
   'stage.name',
   'stage.id',
   'game_mode.key',
-  'rule.key'
+  'rule.key',
 ];
 
 export function getGeneralFields() {
@@ -28,7 +28,7 @@ const playerFields = [
   'game_paint_point',
   'player.nickname',
   'player.principal_id',
-  'player.weapon.id'
+  'player.weapon.id',
   // '.player.head.id',
   // '.player.shoes.id',
   // '.player.clothes.id',
@@ -51,7 +51,7 @@ export function getPlayerFields() {
 }
 
 export function mapKeysDeep(obj, cb) {
-  return mapValues(mapKeys(obj, cb), val =>
+  return mapValues(mapKeys(obj, cb), (val) =>
     isObject(val) ? mapKeysDeep(val, cb) : val
   );
 }

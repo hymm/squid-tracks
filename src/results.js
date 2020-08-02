@@ -11,7 +11,7 @@ class Results extends React.Component {
   state = {
     currentResultIndex: -1,
     statInk: {},
-    initialized: false
+    initialized: false,
   };
 
   componentDidMount() {
@@ -20,7 +20,7 @@ class Results extends React.Component {
     this.setState({
       statInk: statInkInfo,
       initialized: false,
-      currentResultIndex: 0
+      currentResultIndex: 0,
     });
   }
 
@@ -29,13 +29,13 @@ class Results extends React.Component {
     splatnet.comm.updateResults();
   };
 
-  changeResult = arrayIndex => {
+  changeResult = (arrayIndex) => {
     const { splatnet } = this.props;
     const results = splatnet.current.results.results;
     const battleNumber = results[arrayIndex].battle_number;
     splatnet.comm.getBattle(battleNumber);
     this.setState({
-      currentResultIndex: arrayIndex
+      currentResultIndex: arrayIndex,
     });
   };
 
@@ -62,13 +62,13 @@ class Results extends React.Component {
     return battle;
   }
 
-  changeResultByBattleNumber = battleNumber => {
+  changeResultByBattleNumber = (battleNumber) => {
     const { splatnet } = this.props;
     splatnet.comm.getBattle(battleNumber);
     this.setState({
       currentResultIndex: splatnet.current.results.results.findIndex(
-        a => a.battle_number === battleNumber
-      )
+        (a) => a.battle_number === battleNumber
+      ),
     });
   };
 
@@ -116,7 +116,7 @@ class Results extends React.Component {
 const SubscribedResults = () => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => <Results splatnet={splatnet} />}
+      {(splatnet) => <Results splatnet={splatnet} />}
     </Subscriber>
   );
 };

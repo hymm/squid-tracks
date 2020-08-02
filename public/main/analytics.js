@@ -10,8 +10,8 @@ const store = new Store({
   configName: 'user-data',
   defaults: {
     uuid: '',
-    gaEnabled: true
-  }
+    gaEnabled: true,
+  },
 });
 
 const ua_ID = 'UA-104941988-1';
@@ -30,7 +30,7 @@ function errorHandler(err) {
 }
 
 // support disabling analytics
-const screenview = screenName => {
+const screenview = (screenName) => {
   if (store.get('gaEnabled')) {
     visitor.screenview(screenName, appName, appVersion, errorHandler);
   }

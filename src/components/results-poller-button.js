@@ -9,31 +9,31 @@ class ResultsPoller extends React.Component {
   messages = defineMessages({
     inactive: {
       id: 'results.autoupload.inactiveButton',
-      defaultMessage: 'Auto-upload to stat.ink'
+      defaultMessage: 'Auto-upload to stat.ink',
     },
     activeDefault: {
       id: 'results.autoupload.activeDefault',
-      defaultMessage: 'Waiting for Battle Data'
+      defaultMessage: 'Waiting for Battle Data',
     },
     writingBattle: {
       id: 'results.autoupload.writingBattle',
-      defaultMessage: 'Writing Battle #{battle_number}'
+      defaultMessage: 'Writing Battle #{battle_number}',
     },
     wroteBattle: {
       id: 'results.autoupload.wroteBattle',
-      defaultMessage: 'Wrote Battle #{battle_number}'
+      defaultMessage: 'Wrote Battle #{battle_number}',
     },
     error: {
       id: 'results.autoupload.error',
-      defaultMessage: 'Error Writing Battle #{battle_number}'
-    }
+      defaultMessage: 'Error Writing Battle #{battle_number}',
+    },
   });
 
   state = {
     active: false,
     lastBattleUploaded: 0,
     buttonText: this.props.intl.formatMessage(this.messages.inactive),
-    writingToStatInk: false
+    writingToStatInk: false,
   };
 
   componentDidMount() {
@@ -50,7 +50,7 @@ class ResultsPoller extends React.Component {
     const { intl } = this.props;
     this.setState({
       active: true,
-      buttonText: intl.formatMessage(this.messages.activeDefault)
+      buttonText: intl.formatMessage(this.messages.activeDefault),
     });
     this.poll(true);
   };
@@ -59,11 +59,11 @@ class ResultsPoller extends React.Component {
     const { intl } = this.props;
     this.setState({
       active: false,
-      buttonText: intl.formatMessage(this.messages.inactive)
+      buttonText: intl.formatMessage(this.messages.inactive),
     });
   };
 
-  poll = start => {
+  poll = (start) => {
     if (!this.state.active && !start) {
       return;
     }
@@ -94,9 +94,9 @@ class ResultsPoller extends React.Component {
     const { result, intl } = this.props;
     this.setState({
       buttonText: intl.formatMessage(this.messages.writingBattle, {
-        battle_number: result.battle_number
+        battle_number: result.battle_number,
       }),
-      writingToStatInk: true
+      writingToStatInk: true,
     });
     ipcRenderer.send('writeToStatInk', result, 'auto');
   };
@@ -106,8 +106,8 @@ class ResultsPoller extends React.Component {
     event('stat.ink', 'wrote-battle', 'auto');
     this.setState({
       buttonText: intl.formatMessage(this.messages.wroteBattle, {
-        battle_number: result.battle_number
-      })
+        battle_number: result.battle_number,
+      }),
     });
 
     if (info.username) {
@@ -117,7 +117,7 @@ class ResultsPoller extends React.Component {
       () =>
         this.setState({
           buttonText: intl.formatMessage(this.messages.activeDefault),
-          writingToStatInk: false
+          writingToStatInk: false,
         }),
       10000
     );
@@ -127,14 +127,14 @@ class ResultsPoller extends React.Component {
     const { result, intl } = this.props;
     this.setState({
       buttonText: intl.formatMessage(this.messages.error, {
-        battle_number: result.battle_number
-      })
+        battle_number: result.battle_number,
+      }),
     });
     setTimeout(
       () =>
         this.setState({
           buttonText: intl.formatMessage(this.messages.activeDefault),
-          writingToStatInk: false
+          writingToStatInk: false,
         }),
       10000
     );

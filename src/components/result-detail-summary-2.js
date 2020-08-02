@@ -9,7 +9,7 @@ const labelStyle = {
   marginRight: 5,
   float: 'left',
   marginBottom: 5,
-  padding: '.35em .6em .35em'
+  padding: '.35em .6em .35em',
 };
 
 const LeagueLabels = ({ result, colorMap }) => {
@@ -76,7 +76,7 @@ const splatfestExp = [
   35, // Fiend
   50,
   85, // Defender
-  184 // Champion
+  184, // Champion
   // 184, // King/Queen
 ];
 
@@ -164,7 +164,7 @@ const BattleLabels = ({ result }) => {
           defaultMessage="{result} in {time} sec"
           values={{
             result: result.my_team_result.name,
-            time: result.elapsed_time
+            time: result.elapsed_time,
           }}
         />
       </Label>
@@ -203,7 +203,7 @@ const BattleSummary = ({ result }) => {
               defaultMessage="{rule} on {map}"
               values={{
                 rule: result.rule.name,
-                map: result.stage.name
+                map: result.stage.name,
               }}
             />
           </h2>

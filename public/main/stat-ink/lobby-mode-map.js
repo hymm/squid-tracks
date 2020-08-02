@@ -5,5 +5,5 @@ module.exports = {
   league_team: { lobby: 'squad_4', mode: 'gachi' },
   fes_solo: { lobby: 'standard', mode: 'fest' },
   fes_team: { lobby: 'squad_4', mode: 'fest' },
-  private: { lobby: 'private', mode: 'private' }
+  private: { lobby: 'private', mode: 'private' },
 };

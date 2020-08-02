@@ -28,7 +28,7 @@ class Startup extends React.Component {
 const StartupWithSplatnet = () => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => <Startup splatnet={splatnet} />}
+      {(splatnet) => <Startup splatnet={splatnet} />}
     </Subscriber>
   );
 };
@@ -39,7 +39,7 @@ const Routes = ({
   setLocale,
   locale,
   loggedIn,
-  setLogin
+  setLogin,
 }) => {
   return (
     <div>

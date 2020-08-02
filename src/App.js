@@ -12,20 +12,20 @@ import SplatnetProvider from './splatnet-provider';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
-window.addEventListener('error', event => {
+window.addEventListener('error', (event) => {
   const message = `UnhandledError in renderer: ${event.error}`;
   log.error(message);
   uaException(message);
 });
 
-window.addEventListener('unhandledrejection', event => {
+window.addEventListener('unhandledrejection', (event) => {
   const message = `Unhandled Promise Rejection in renderer: ${event.reason}`;
   log.error(message);
   uaException(message);
 });
 
 const history = createHashHistory();
-history.listen(location => {
+history.listen((location) => {
   screenview(`${location.pathname}${location.search}${location.hash}`);
 });
 
@@ -34,7 +34,7 @@ class App extends Component {
     sessionToken: '',
     locale: 'en',
     loggedIn: false,
-    loggingIn: false
+    loggingIn: false,
   };
 
   componentDidMount() {
@@ -43,7 +43,7 @@ class App extends Component {
     screenview('Start');
     this.setLocale(ipcRenderer.sendSync('getFromStore', 'locale'));
     this.setState({
-      loggingIn: this.getLoggingInState(global.location.search)
+      loggingIn: this.getLoggingInState(global.location.search),
     });
   }
 
@@ -63,23 +63,23 @@ class App extends Component {
     }
   }
 
-  getSessionToken = logout => {
+  getSessionToken = (logout) => {
     const token = ipcRenderer.sendSync('getFromStore', 'sessionToken');
     this.setState({
       sessionToken: token,
-      loggedIn: false
+      loggedIn: false,
     });
     if (!logout) {
       history.push('/');
     }
   };
 
-  setLocale = locale => {
+  setLocale = (locale) => {
     this.setState({ locale });
     ipcRenderer.sendSync('setUserLangauge', locale);
   };
 
-  setLogin = loginStatus => {
+  setLogin = (loginStatus) => {
     this.setState({ loggedIn: loginStatus });
   };
 

@@ -22,7 +22,7 @@ function errorHandler(err) {
 }
 
 // support disabling analytics
-export const screenview = screenName => {
+export const screenview = (screenName) => {
   if (ipcRenderer.sendSync('getFromStore', 'gaEnabled')) {
     visitor.screenview(screenName, appName, appVersion, errorHandler).send();
   }

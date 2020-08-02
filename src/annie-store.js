@@ -8,7 +8,7 @@ import {
   Image,
   ButtonToolbar,
   Button,
-  Table
+  Table,
 } from 'react-bootstrap';
 import { ipcRenderer } from 'electron';
 import { defineMessages, injectIntl } from 'react-intl';
@@ -19,56 +19,56 @@ import './annie-store.css';
 const messages = defineMessages({
   endTime: {
     id: 'Store.endTime',
-    defaultMessage: 'Offer ends in {hours} Hours'
+    defaultMessage: 'Offer ends in {hours} Hours',
   },
   main: {
     id: 'Store.mainAbility',
-    defaultMessage: 'Main'
+    defaultMessage: 'Main',
   },
   original: {
     id: 'Store.originalAbility',
-    defaultMessage: 'Original'
+    defaultMessage: 'Original',
   },
   brand: {
     id: 'Store.brand',
-    defaultMessage: 'Brand'
+    defaultMessage: 'Brand',
   },
   brandFavors: {
     id: 'Store.brandFavors',
-    defaultMessage: 'Favors'
+    defaultMessage: 'Favors',
   },
   ordered: {
     id: 'Store.GearOrderedTitle',
-    defaultMessage: 'Ordered'
+    defaultMessage: 'Ordered',
   },
   orderButtonText: {
     id: 'Store.orderButton.text',
-    defaultMessage: 'Order'
+    defaultMessage: 'Order',
   },
   cancelButtonText: {
     id: 'Store.cancelButton.text',
-    defaultMessage: 'Cancel'
+    defaultMessage: 'Cancel',
   },
   uncancelButtonText: {
     id: 'Store.cancelButton.uncancel',
-    defaultMessage: 'Uncancel'
+    defaultMessage: 'Uncancel',
   },
   refresh: {
     id: 'Store.refreshButton.refresh',
-    defaultMessage: 'Refresh'
+    defaultMessage: 'Refresh',
   },
   refreshed: {
     id: 'Store.refreshButton.refreshing',
-    defaultMessage: 'Refreshing'
+    defaultMessage: 'Refreshing',
   },
   rarity: {
     id: 'Store.rarity',
-    defaultMessage: 'Rarity'
+    defaultMessage: 'Rarity',
   },
   price: {
     id: 'Store.price',
-    defaultMessage: 'Price'
-  }
+    defaultMessage: 'Price',
+  },
 });
 
 const MerchTable = ({ merch, intl, original }) => {
@@ -145,7 +145,7 @@ const MerchRight = ({ merch, intl, original }) => {
             <br />
             <small>
               {intl.formatMessage(messages.endTime, {
-                hours: timeLeftInHours.toFixed(2)
+                hours: timeLeftInHours.toFixed(2),
               })}
             </small>
           </h3>
@@ -260,7 +260,7 @@ class AnnieStore extends React.Component {
   state = {
     cancelled: false,
     ordering: false,
-    refreshing: false
+    refreshing: false,
   };
 
   componentDidMount() {
@@ -274,11 +274,11 @@ class AnnieStore extends React.Component {
     setTimeout(() => this.setState({ refreshing: false }), 2000);
   };
 
-  order = merchId => {
+  order = (merchId) => {
     event('annie-store', 'order');
     this.setState({ ordering: true });
     ipcRenderer.send('postApi', `onlineshop/order/${merchId}`, {
-      override: '1'
+      override: '1',
     });
     setTimeout(() => {
       this.setState({ cancelled: false, ordering: true });
@@ -337,7 +337,7 @@ class AnnieStore extends React.Component {
 const SubscribedAnnieStore = ({ intl }) => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => <AnnieStore splatnet={splatnet} intl={intl} />}
+      {(splatnet) => <AnnieStore splatnet={splatnet} intl={intl} />}
     </Subscriber>
   );
 };

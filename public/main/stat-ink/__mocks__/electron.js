@@ -5,7 +5,7 @@ const electron = {
   match: jest.genMockFunction(),
   app: jest.genMockFunction(),
   remote: jest.genMockFunction(),
-  dialog: jest.genMockFunction()
+  dialog: jest.genMockFunction(),
 };
 
 electron.app.getVersion = () => '1.1';

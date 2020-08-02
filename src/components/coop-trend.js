@@ -8,7 +8,7 @@ import {
   YAxis,
   CartesianGrid,
   ReferenceLine,
-  Dot
+  Dot,
   // Area
 } from 'recharts';
 
@@ -34,7 +34,7 @@ const stageColors = [
   '#ddd6cf',
   '#e8e4d4',
   '#f4f2da',
-  '#ffffe0'
+  '#ffffe0',
 ];
 
 class ResultDot extends React.Component {
@@ -61,18 +61,21 @@ class BarLabel extends React.Component {
         return (
           <g>
             <polygon
-              points={`${x},${y} ${x + width * 0.25},${y} ${x},${y -
-                width * 0.5}`}
+              points={`${x},${y} ${x + width * 0.25},${y} ${x},${
+                y - width * 0.5
+              }`}
               fill={color}
             />
             <polygon
-              points={`${x + width * 0.25},${y} ${x + width * 0.5},${y -
-                width * 0.5} ${x + width * 0.75},${y}`}
+              points={`${x + width * 0.25},${y} ${x + width * 0.5},${
+                y - width * 0.5
+              } ${x + width * 0.75},${y}`}
               fill={color}
             />
             <polygon
-              points={`${x + width * 0.75},${y} ${x + width},${y} ${x +
-                width},${y - width * 0.5}`}
+              points={`${x + width * 0.75},${y} ${x + width},${y} ${
+                x + width
+              },${y - width * 0.5}`}
               fill={color}
             />
           </g>
@@ -135,7 +138,7 @@ class ResultsTimeline extends React.Component {
       grade_point: result.grade_point,
       job_rate: result.job_rate,
       job_score: result.job_score,
-      danger_rate: result.danger_rate
+      danger_rate: result.danger_rate,
     };
   }
 
@@ -162,14 +165,14 @@ class ResultsTimeline extends React.Component {
         y={average}
         stroke="white"
         strokeOpacity={0.5}
-      />
+      />,
     ];
   }
 
   render() {
     const { results, changeResult } = this.props;
     // const results = this.props.splatnet.current.results.results;
-    const data = results.map(result => this.getValues(result));
+    const data = results.map((result) => this.getValues(result));
 
     return (
       <ResponsiveContainer minHeight={200}>

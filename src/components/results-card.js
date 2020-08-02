@@ -8,7 +8,7 @@ import {
   ButtonGroup,
   Button,
   SplitButton,
-  MenuItem
+  MenuItem,
 } from 'react-bootstrap';
 import { cloneDeep } from 'lodash';
 import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
@@ -23,52 +23,52 @@ class ResultsCard extends React.Component {
   messages = defineMessages({
     battleNumber: {
       id: 'results.table.header.battleNumber',
-      defaultMessage: 'Battle'
+      defaultMessage: 'Battle',
     },
     mode: {
       id: 'results.table.header.gameMode',
-      defaultMessage: 'Mode'
+      defaultMessage: 'Mode',
     },
     rule: {
       id: 'results.table.header.rule',
-      defaultMessage: 'Rule'
+      defaultMessage: 'Rule',
     },
     stage: {
       id: 'results.table.header.stage',
-      defaultMessage: 'Stage'
+      defaultMessage: 'Stage',
     },
     winLoss: {
       id: 'results.table.header.result',
-      defaultMessage: 'W/L'
+      defaultMessage: 'W/L',
     },
     power: {
       id: 'results.table.header.power',
-      defaultMessage: 'Power'
+      defaultMessage: 'Power',
     },
     paint: {
       id: 'results.table.header.paint',
-      defaultMessage: 'Paint'
+      defaultMessage: 'Paint',
     },
     ka: {
       id: 'results.table.header.killsAndAssists',
-      defaultMessage: 'K+A'
+      defaultMessage: 'K+A',
     },
     k: {
       id: 'results.table.header.kills',
-      defaultMessage: 'K'
+      defaultMessage: 'K',
     },
     a: {
       id: 'results.table.header.assists',
-      defaultMessage: 'A'
+      defaultMessage: 'A',
     },
     d: {
       id: 'results.table.header.deaths',
-      defaultMessage: 'D'
+      defaultMessage: 'D',
     },
     s: {
       id: 'results.table.header.specials',
-      defaultMessage: 'S'
-    }
+      defaultMessage: 'S',
+    },
   });
 
   state = {
@@ -76,7 +76,7 @@ class ResultsCard extends React.Component {
     sortDirection: 'up',
     sortFunction: parseFloat,
     normalize: false,
-    normalizeTime: 5
+    normalizeTime: 5,
   };
 
   columnHeaders = [
@@ -84,68 +84,68 @@ class ResultsCard extends React.Component {
       text: this.props.intl.formatMessage(this.messages.battleNumber),
       sortColumn: 'battle_number',
       sortDirection: 'up',
-      sortFunction: parseFloat
+      sortFunction: parseFloat,
     },
     {
       text: this.props.intl.formatMessage(this.messages.mode),
       sortColumn: 'game_mode.key',
-      sortDirection: 'down'
+      sortDirection: 'down',
     },
     {
       text: this.props.intl.formatMessage(this.messages.rule),
       sortColumn: 'rule.key',
-      sortDirection: 'down'
+      sortDirection: 'down',
     },
     {
       text: this.props.intl.formatMessage(this.messages.stage),
       sortColumn: 'stage.name',
-      sortDirection: 'down'
+      sortDirection: 'down',
     },
     {
       text: this.props.intl.formatMessage(this.messages.winLoss),
       sortColumn: 'my_team_result.key',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.power),
       sortColumn: 'estimate_gachi_power',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: '',
       sortColumn: 'player_result.player.weapon.name',
-      sortDirection: 'down'
+      sortDirection: 'down',
     },
     {
       text: this.props.intl.formatMessage(this.messages.paint),
       sortColumn: 'player_result.game_paint_point',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.ka),
       sortColumn: 'k_a',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.k),
       sortColumn: 'player_result.kill_count',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.a),
       sortColumn: 'player_result.assist_count',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.d),
       sortColumn: 'player_result.death_count',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.s),
       sortColumn: 'player_result.special_count',
-      sortDirection: 'up'
-    }
+      sortDirection: 'up',
+    },
   ];
 
   normalize(results, normalizeTime) {
@@ -154,7 +154,7 @@ class ResultsCard extends React.Component {
       return normalized;
     }
 
-    normalized.forEach(result => {
+    normalized.forEach((result) => {
       // assume is turf war if elapsed_time is not defined
       const time = result.elapsed_time ? result.elapsed_time : 180;
       result.player_result.game_paint_point =
@@ -198,7 +198,7 @@ class ResultsCard extends React.Component {
     const a = this.average(results, 'player_result.assist_count');
     const s = this.average(results, 'player_result.special_count');
     const p = this.average(results, 'player_result.game_paint_point');
-    const powers = results.map(result => {
+    const powers = results.map((result) => {
       let power = null;
       if (result.other_estimate_league_point != null) {
         power = result.other_estimate_league_point;
@@ -214,7 +214,7 @@ class ResultsCard extends React.Component {
     });
 
     const power = powers
-      .filter(a => a != null)
+      .filter((a) => a != null)
       .reduce((avg, v, i, a) => avg + v / a.length, 0);
 
     return {
@@ -224,7 +224,7 @@ class ResultsCard extends React.Component {
       a: a.toFixed(2),
       s: s.toFixed(2),
       p: p.toFixed(0),
-      power: power.toFixed(0)
+      power: power.toFixed(0),
     };
   }
 
@@ -237,7 +237,7 @@ class ResultsCard extends React.Component {
     const normalized = this.normalize(results, normalizeTime);
     const sortedResults = cloneDeep(normalized);
     sortedResults.forEach(
-      result =>
+      (result) =>
         (result.k_a =
           result.player_result.kill_count + result.player_result.assist_count)
     );
@@ -327,14 +327,14 @@ class ResultsCard extends React.Component {
           <Table striped bordered condensed hover>
             <thead>
               <tr>
-                {columnHeaders.map(header => (
+                {columnHeaders.map((header) => (
                   <TableHeader
                     key={header.text}
                     setState={this.setState.bind(this)}
                     sort={{
                       sortColumn: header.sortColumn,
                       sortDirection: header.sortDirection,
-                      sortFunction: header.sortFunction
+                      sortFunction: header.sortFunction,
                     }}
                     text={header.text}
                     sortColumn={this.state.sortColumn}
@@ -343,7 +343,7 @@ class ResultsCard extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {sortedResults.map(result => {
+              {sortedResults.map((result) => {
                 const linkInfo = statInk[result.battle_number];
                 return (
                   <tr key={result.start_time}>

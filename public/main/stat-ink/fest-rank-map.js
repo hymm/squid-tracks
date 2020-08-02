@@ -3,5 +3,5 @@ module.exports = {
   1: 'fiend',
   2: 'defender',
   3: 'champion',
-  4: 'king'
+  4: 'king',
 };

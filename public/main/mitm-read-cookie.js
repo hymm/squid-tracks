@@ -19,9 +19,9 @@ module.exports.setMainWindow = setMainWindow;
 
 function getIps() {
   const result = Object.keys(ifs)
-    .map(x => [x, ifs[x].filter(x => x.family === 'IPv4')[0]])
-    .filter(x => x[1])
-    .map(x => x[1].address);
+    .map((x) => [x, ifs[x].filter((x) => x.family === 'IPv4')[0]])
+    .filter((x) => x[1])
+    .map((x) => x[1].address);
   return result;
 }
 
@@ -35,19 +35,19 @@ function convertPemToDex(pemBuffer) {
   return derNode;
 }
 
-ipcMain.on('getIps', e => {
+ipcMain.on('getIps', (e) => {
   const ips = getIps();
 
   e.returnValue = {
     ips: ips,
-    port
+    port,
   };
 });
 
 proxy.onCertificateRequired = (hostname, callback) => {
   return callback(null, {
     keyFile: `${userDataPath}/certs/${hostname}.key`,
-    certFile: `${userDataPath}/certs/${hostname}.crt`
+    certFile: `${userDataPath}/certs/${hostname}.crt`,
   });
 };
 
@@ -66,7 +66,7 @@ proxy.onRequest((ctx, callback) => {
     if (ctx.clientToProxyRequest.headers.host === 'squidtracks.ink') {
       if (ctx.clientToProxyRequest.url === '/squidtracks.cer') {
         ctx.proxyToClientResponse.writeHead(200, {
-          'Content-Type': 'application/x-x509-user-cert'
+          'Content-Type': 'application/x-x509-user-cert',
         });
         fs.readFile(`${userDataPath}/certs/ca.pem`, (err, data) => {
           ctx.proxyToClientResponse.write(convertPemToDex(data));
@@ -74,7 +74,7 @@ proxy.onRequest((ctx, callback) => {
         });
       } else {
         ctx.proxyToClientResponse.writeHead(200, {
-          'Content-Type': 'text/html'
+          'Content-Type': 'text/html',
         });
         ctx.proxyToClientResponse.write(
           '<a href="/squidtracks.cer">Download Certificate</a>'
@@ -87,13 +87,13 @@ proxy.onRequest((ctx, callback) => {
   return callback();
 });
 
-ipcMain.on('startMitm', e => {
+ipcMain.on('startMitm', (e) => {
   proxy.listen({ port, sslCaDir: userDataPath });
   log.debug(`running mitm proxy on port ${port}`);
   e.returnValue = true;
 });
 
-ipcMain.on('stopMitm', e => {
+ipcMain.on('stopMitm', (e) => {
   proxy.close();
   log.debug(`mitm proxy stopped`);
   e.returnValue = true;

@@ -10,7 +10,7 @@ const { dialog } = remote;
 
 class ExportBattlesToCsvButton extends React.Component {
   convertBattlesToCsv(battles) {
-    const battlesFlattened = battles.map(battle => {
+    const battlesFlattened = battles.map((battle) => {
       return flatten(battle);
     });
 
@@ -21,16 +21,16 @@ class ExportBattlesToCsvButton extends React.Component {
     event('export-data', '50-battles-csv');
     // loop through current and get battles
     const { splatnet } = this.props;
-    const battles = splatnet.current.results.results.map(battle => {
+    const battles = splatnet.current.results.results.map((battle) => {
       return splatnet.comm.getBattle(battle.battle_number, 'sync');
     });
 
     const battlesCsv = this.convertBattlesToCsv(battles);
     dialog.showSaveDialog(
       {
-        filters: [{ name: 'csv', extensions: ['csv'] }]
+        filters: [{ name: 'csv', extensions: ['csv'] }],
       },
-      file => {
+      (file) => {
         ipcRenderer.send('saveBattlesToCsv', file, battlesCsv);
       }
     );
@@ -51,7 +51,7 @@ class ExportBattlesToCsvButton extends React.Component {
 const ButtonInjected = () => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => {
+      {(splatnet) => {
         return <ExportBattlesToCsvButton splatnet={splatnet} />;
       }}
     </Subscriber>

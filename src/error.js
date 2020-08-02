@@ -6,7 +6,7 @@ import {
   Button,
   Alert,
   Panel,
-  ButtonToolbar
+  ButtonToolbar,
 } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -16,7 +16,7 @@ import { event } from './analytics';
 
 class ErrorPage extends React.Component {
   state = {
-    open: false
+    open: false,
   };
 
   handleClick = () => {
@@ -76,10 +76,10 @@ class ErrorPage extends React.Component {
 
 const ErrorPageWithRouter = withRouter(ErrorPage);
 
-const ErrorPageWithSplatnet = props => {
+const ErrorPageWithSplatnet = (props) => {
   return (
     <Subscriber channel="splatnet">
-      {splatnet => (
+      {(splatnet) => (
         <Grid fluid style={{ marginTop: 65 }}>
           <Row>
             <Col md={12}>

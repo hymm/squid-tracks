@@ -30,7 +30,7 @@ function setMainWindow(win, url) {
 }
 module.exports.setMainWindow = setMainWindow;
 
-ipcMain.on('getLoginUrl', event => {
+ipcMain.on('getLoginUrl', (event) => {
   authParams = splatnet.generateAuthenticationParams();
   const params = {
     state: authParams.state,
@@ -39,7 +39,7 @@ ipcMain.on('getLoginUrl', event => {
     response_type: 'session_token_code',
     session_token_code_challenge: authParams.codeChallenge,
     session_token_code_challenge_method: 'S256',
-    theme: 'login_form'
+    theme: 'login_form',
   };
 
   const arrayParams = [];
@@ -64,7 +64,7 @@ function handleLoginError(e) {
 protocol.registerSchemesAsPrivileged([
   { scheme: 'npf71b963c1b7b6d119' },
   { scheme: 'https' },
-  { scheme: 'http' }
+  { scheme: 'http' },
 ]);
 function registerSplatnetHandler() {
   protocol.registerHttpProtocol(
@@ -76,14 +76,14 @@ function registerSplatnetHandler() {
       url
         .split('#')[1]
         .split('&')
-        .forEach(str => {
+        .forEach((str) => {
           const splitStr = str.split('=');
           params[splitStr[0]] = splitStr[1];
         });
 
       splatnet
         .getSplatnetSession(params.session_token_code, authParams.codeVerifier)
-        .then(async tokens => {
+        .then(async (tokens) => {
           try {
             sessionToken = tokens.sessionToken;
             userDataStore.set('sessionToken', sessionToken);
@@ -97,7 +97,7 @@ function registerSplatnetHandler() {
         })
         .catch(handleLoginError);
     },
-    e => {
+    (e) => {
       if (e) {
         console.error('Failed to register protocol');
       }
@@ -106,16 +106,16 @@ function registerSplatnetHandler() {
 }
 module.exports.registerSplatnetHandler = registerSplatnetHandler;
 
-ipcMain.on('logout', event => {
+ipcMain.on('logout', (event) => {
   userDataStore.set('sessionToken', '');
   userDataStore.set('iksmCookie', '');
   event.returnValue = true;
 });
 
-ipcMain.on('loadSplatnet', e => {
+ipcMain.on('loadSplatnet', (e) => {
   const url = `https://app.splatoon2.nintendo.net?lang=en-US`;
   mainWindow.loadURL(url, {
-    userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)'
+    userAgent: 'com.nintendo.znca/1.0.4 (Android/4.4.2)',
   });
 });
 
@@ -128,7 +128,7 @@ ipcMain.on('setIksmToken', async (e, value) => {
   }
 });
 
-ipcMain.on('getIksmToken', async e => {
+ipcMain.on('getIksmToken', async (e) => {
   try {
     const cookie = splatnet.getIksmToken();
     e.sender.send('iksmToken', cookie);
@@ -183,7 +183,7 @@ ipcMain.on('getApiAsync', async (e, url) => {
     const leagueRegex = /^league_match_ranking\/.*$/;
     let value;
     if (url.match(battleRegex) || url.match(leagueRegex)) {
-      value = await getSplatnetApiMemoInf(url).catch(function(error) {
+      value = await getSplatnetApiMemoInf(url).catch(function (error) {
         if (
           error.statusCode === 404 &&
           error.options.uri.includes('league_match_ranking')
@@ -213,7 +213,7 @@ ipcMain.on('getApiAsyncV2', async (e, url) => {
     const leagueRegex = /^league_match_ranking\/.*$/;
     let value;
     if (url.match(battleRegex) || url.match(leagueRegex)) {
-      value = await getSplatnetApiMemoInf(url).catch(function(error) {
+      value = await getSplatnetApiMemoInf(url).catch(function (error) {
         if (
           error.statusCode === 404 &&
           error.options.uri.includes('league_match_ranking')
