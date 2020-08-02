@@ -8,7 +8,7 @@
   "devDependencies": {
     "babel-plugin-react-intl": "^7.9.2",
     "electron": "^9.1.2",
-    "electron-builder": "^20.29.0",
+    "electron-builder": "^22.8.0",
     "react-intl-translations-manager": "^5.0.3",
     "react-scripts": "3.4.1"
   },
@@ -66,10 +66,10 @@
     "react-start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "prepack": "yarn build",
-    "pack": "build --c.extraMetadata.main=build/electron.js",
-    "pack:win": "build --c.extraMetadata.main=build/electron.js --ia32 --x64",
-    "release": "build -c.extraMetadata.main=build/electron.js --publish=always",
-    "release:win": "build -c.extraMetadata.main=build/electron.js --ia32 --x64 --publish=always",
+    "pack": "electron-builder --c.extraMetadata.main=build/electron.js",
+    "pack:win": "electron-builder --c.extraMetadata.main=build/electron.js --ia32 --x64",
+    "release": "electron-builder -c.extraMetadata.main=build/electron.js --publish=always",
+    "release:win": "electron-builder -c.extraMetadata.main=build/electron.js --ia32 --x64 --publish=always",
     "test": "react-app-rewired test --env=jsdom",
     "test:main": "jest -c=jest.main.config.json --watch",
     "eject": "react-app-rewired eject",
