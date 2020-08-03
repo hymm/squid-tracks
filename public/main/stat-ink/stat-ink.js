@@ -1,5 +1,5 @@
 const request2 = require('request-promise-native');
-const msgpack = require('msgpack-lite');
+const { encode } = require('@msgpack/msgpack');
 const LobbyModeMap = require('./lobby-mode-map');
 const RuleMap = require('./rule-map');
 const StatInkMap = require('./stat-ink-map');
@@ -319,7 +319,7 @@ async function writeToStatInk(apiKey, result) {
       'Content-Type': 'application/x-msgpack',
       Authorization: `Bearer ${apiKey}`,
     },
-    body: msgpack.encode(await convertResultToStatInk(result)),
+    body: encode(await convertResultToStatInk(result)),
     resolveWithFullResponse: true,
     simple: false,
   });

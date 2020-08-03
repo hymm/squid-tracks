@@ -13,6 +13,7 @@
     "react-scripts": "3.4.1"
   },
   "dependencies": {
+    "@msgpack/msgpack": "^1.12.2",
     "babel-preset-electron": "^1.4.15",
     "babel-register": "^6.26.0",
     "base64url": "^3.0.0",
@@ -35,7 +36,6 @@
     "lint-staged": "^10.2.11",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
-    "msgpack-lite": "^0.1.26",
     "mz": "^2.7.0",
     "node-forge": "^0.9.1",
     "piping": "^1.0.0-rc.4",

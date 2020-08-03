@@ -67,42 +67,34 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'http' },
 ]);
 function registerSplatnetHandler() {
-  protocol.registerHttpProtocol(
-    'npf71b963c1b7b6d119',
-    (request, callback) => {
-      mainWindow.loadURL(`${startUrl}?loggingIn=1`);
-      const url = request.url;
-      const params = {};
-      url
-        .split('#')[1]
-        .split('&')
-        .forEach((str) => {
-          const splitStr = str.split('=');
-          params[splitStr[0]] = splitStr[1];
-        });
+  protocol.registerHttpProtocol('npf71b963c1b7b6d119', (request) => {
+    mainWindow.loadURL(`${startUrl}?loggingIn=1`);
+    const url = request.url;
+    const params = {};
+    url
+      .split('#')[1]
+      .split('&')
+      .forEach((str) => {
+        const splitStr = str.split('=');
+        params[splitStr[0]] = splitStr[1];
+      });
 
-      splatnet
-        .getSplatnetSession(params.session_token_code, authParams.codeVerifier)
-        .then(async (tokens) => {
-          try {
-            sessionToken = tokens.sessionToken;
-            userDataStore.set('sessionToken', sessionToken);
-            await splatnet.getSessionCookie(tokens.accessToken);
-            const iksm = splatnet.getIksmToken();
-            userDataStore.set('iksmCookie', iksm);
-            mainWindow.loadURL(startUrl);
-          } catch (e) {
-            handleLoginError(e);
-          }
-        })
-        .catch(handleLoginError);
-    },
-    (e) => {
-      if (e) {
-        console.error('Failed to register protocol');
-      }
-    }
-  );
+    splatnet
+      .getSplatnetSession(params.session_token_code, authParams.codeVerifier)
+      .then(async (tokens) => {
+        try {
+          sessionToken = tokens.sessionToken;
+          userDataStore.set('sessionToken', sessionToken);
+          await splatnet.getSessionCookie(tokens.accessToken);
+          const iksm = splatnet.getIksmToken();
+          userDataStore.set('iksmCookie', iksm);
+          mainWindow.loadURL(startUrl);
+        } catch (e) {
+          handleLoginError(e);
+        }
+      })
+      .catch(handleLoginError);
+  });
 }
 module.exports.registerSplatnetHandler = registerSplatnetHandler;
 

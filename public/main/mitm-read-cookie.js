@@ -31,7 +31,7 @@ function convertPemToDex(pemBuffer) {
   const cert = pki.certificateFromPem(pemString);
   var asn1Cert = pki.certificateToAsn1(cert);
   const derBuffer = asn1.toDer(asn1Cert);
-  const derNode = new Buffer(derBuffer.getBytes(), 'binary');
+  const derNode = Buffer.alloc(derBuffer.getBytes(), 0, 'binary');
   return derNode;
 }
 
