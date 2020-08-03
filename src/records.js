@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
+import { Container, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
 import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
@@ -64,13 +64,13 @@ class RecordsContainer extends React.Component {
 const RecordsContainerIntl = injectIntl(RecordsContainer);
 
 const Records = ({ splatnet }) => (
-  <Grid fluid style={{ marginTop: 65 }}>
+  <Container fluid style={{ marginTop: '1rem' }}>
     <Row>
       <Col md={12}>
         <RecordsContainerIntl splatnet={splatnet} />
       </Col>
     </Row>
-  </Grid>
+  </Container>
 );
 
 const SubscribedRecords = () => {

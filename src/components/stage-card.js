@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  Panel,
+  Card,
   ButtonGroup,
   ButtonToolbar,
   Button,
   Table,
-  Grid,
+  Container,
   Col,
   Row,
 } from 'react-bootstrap';
@@ -164,15 +164,15 @@ class StageCard extends React.Component {
     sort(stageStats, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel>
-        <Panel.Heading>
+      <Card>
+        <Card.Header>
           <FormattedMessage
             id="StageCard.title.v2"
             defaultMessage="Ranked and League Stage Stats"
           />
-        </Panel.Heading>
-        <Panel.Body>
-          <Grid fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
+        </Card.Header>
+        <Card.Body>
+          <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
             <Row>
               <Col sm={12} md={12}>
                 <ButtonToolbar style={{ marginBottom: '10px' }}>
@@ -205,7 +205,7 @@ class StageCard extends React.Component {
             </Row>
             <Row>
               <Col sm={12} md={12}>
-                <Table striped bordered condensed hover>
+                <Table striped bordered hover>
                   <thead>
                     <tr>
                       <th>
@@ -323,9 +323,9 @@ class StageCard extends React.Component {
                 </Table>
               </Col>
             </Row>
-          </Grid>
-        </Panel.Body>
-      </Panel>
+          </Container>
+        </Card.Body>
+      </Card>
     );
   }
 }

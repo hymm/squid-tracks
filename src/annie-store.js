@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  Grid,
+  Container,
   Row,
   Col,
-  Panel,
+  Card,
   Image,
   ButtonToolbar,
   Button,
@@ -163,8 +163,8 @@ const MerchRight = ({ merch, intl, original }) => {
 const Merch = ({ merch, order, disabled, intl, original }) => {
   return (
     <Col sm={6} md={6} lg={4}>
-      <Panel>
-        <Panel.Body>
+      <Card>
+        <Card.Body>
           <Row className="merch">
             <Col
               sm={6}
@@ -181,7 +181,7 @@ const Merch = ({ merch, order, disabled, intl, original }) => {
             <Col md={12}>
               <Button
                 block
-                bsStyle={
+                variant={
                   merch.skill.id === merch.gear.brand.frequent_skill.id
                     ? 'success'
                     : 'primary'
@@ -195,8 +195,8 @@ const Merch = ({ merch, order, disabled, intl, original }) => {
               </Button>
             </Col>
           </Row>
-        </Panel.Body>
-      </Panel>
+        </Card.Body>
+      </Card>
     </Col>
   );
 };
@@ -205,9 +205,9 @@ const OrderedInfo = ({ order, cancel, cancelled, intl, original }) => {
   return (
     <Row>
       <Col sm={12} md={12} lg={12}>
-        <Panel>
-          <Panel.Heading>{intl.formatMessage(messages.ordered)}</Panel.Heading>
-          <Panel.Body>
+        <Card>
+          <Card.Header>{intl.formatMessage(messages.ordered)}</Card.Header>
+          <Card.Body>
             <Row className="merch">
               <Col
                 sm={6}
@@ -238,7 +238,7 @@ const OrderedInfo = ({ order, cancel, cancelled, intl, original }) => {
               <Col md={12}>
                 <Button
                   block
-                  bsStyle="warning"
+                  variant="warning"
                   onClick={() => {
                     cancel();
                   }}
@@ -249,8 +249,8 @@ const OrderedInfo = ({ order, cancel, cancelled, intl, original }) => {
                 </Button>
               </Col>
             </Row>
-          </Panel.Body>
-        </Panel>
+          </Card.Body>
+        </Card>
       </Col>
     </Row>
   );
@@ -297,7 +297,7 @@ class AnnieStore extends React.Component {
     const { merchandises, ordered_info } = splatnet.current.annie;
     const { annieOriginal = [] } = splatnet.current;
     return (
-      <Grid fluid style={{ marginTop: 65 }}>
+      <Container fluid style={{ marginTop: 65 }}>
         <Row>
           <Col md={12}>
             <ButtonToolbar style={{ marginBottom: '10px' }}>
@@ -329,7 +329,7 @@ class AnnieStore extends React.Component {
             />
           ))}
         </Row>
-      </Grid>
+      </Container>
     );
   }
 }

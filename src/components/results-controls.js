@@ -3,10 +3,10 @@ import {
   ButtonToolbar,
   Button,
   ButtonGroup,
-  Glyphicon,
   DropdownButton,
-  MenuItem,
+  Dropdown,
 } from 'react-bootstrap';
+import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
 import { defineMessages, injectIntl } from 'react-intl';
 import { ipcRenderer } from 'electron';
 import StatInkManualButton from './results-upload-manual-button';
@@ -72,23 +72,23 @@ class ResultControl extends React.Component {
             onClick={() => changeResult(resultIndex + 1)}
             disabled={resultIndex === results.length - 1}
           >
-            <Glyphicon glyph="triangle-left" />
+            <FaCaretLeft />
           </Button>
           <DropdownButton title={currentBattle} id={'battles'}>
             {results.map((result, idx) => (
-              <MenuItem
+              <Dropdown.Item
                 key={result.battle_number}
                 onClick={() => changeResult(idx)}
               >
                 {result.battle_number}
-              </MenuItem>
+              </Dropdown.Item>
             ))}
           </DropdownButton>
           <Button
             onClick={() => changeResult(resultIndex - 1)}
             disabled={resultIndex === 0}
           >
-            <Glyphicon glyph="triangle-right" />
+            <FaCaretRight />
           </Button>
         </ButtonGroup>
         <ButtonGroup>

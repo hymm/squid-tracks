@@ -1,16 +1,14 @@
 import React from 'react';
 import {
-  Grid,
+  Container,
   Row,
   Col,
   Jumbotron,
   Button,
-  FormControl,
-  FormGroup,
-  ControlLabel,
+  Form,
   ButtonToolbar,
   SplitButton,
-  MenuItem,
+  Dropdown,
 } from 'react-bootstrap';
 import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -70,16 +68,16 @@ class ProxyButton extends React.Component {
         <SplitButton
           title={buttonText}
           onClick={this.handleMitmClick}
-          bsStyle={mitm ? 'warning' : 'default'}
+          variant={mitm ? 'warning' : 'default'}
         >
-          <MenuItem header>
+          <Dropdown.Item header>
             <FormattedMessage
               id="login.cookie.additionalIps"
               defaultMessage="Additional IP Addresses"
             />
-          </MenuItem>
+          </Dropdown.Item>
           {address.ips.map((address) => (
-            <MenuItem key={address}>{address}</MenuItem>
+            <Dropdown.Item key={address}>{address}</Dropdown.Item>
           ))}
         </SplitButton>
       );
@@ -87,7 +85,7 @@ class ProxyButton extends React.Component {
     return (
       <Button
         onClick={this.handleMitmClick}
-        bsStyle={mitm ? 'warning' : 'default'}
+        variant={mitm ? 'warning' : 'default'}
       >
         {buttonText}
       </Button>
@@ -143,7 +141,7 @@ class LoginCookie extends React.Component {
     const { token } = this.state;
     const { intl } = this.props;
     return (
-      <Grid fluid>
+      <Container fluid>
         <Row>
           <Col md={6}>
             <Row>
@@ -183,19 +181,19 @@ class LoginCookie extends React.Component {
             <Row>
               <Col md={12}>
                 <form onSubmit={this.handleSubmit}>
-                  <FormGroup>
-                    <ControlLabel>iksm session Token</ControlLabel>
-                    <FormControl
+                  <Form.Group>
+                    <Form.Label>iksm session Token</Form.Label>
+                    <Form.Control
                       type="text"
                       value={this.state.token}
                       onChange={this.handleChange}
                     />
-                  </FormGroup>
+                  </Form.Group>
                   <ButtonToolbar>
                     <ProxyButtonWithIntl />
                     <Button
                       type="submit"
-                      bsStyle="primary"
+                      variant="primary"
                       disabled={token.length <= 0}
                     >
                       Login
@@ -206,7 +204,7 @@ class LoginCookie extends React.Component {
             </Row>
           </Col>
         </Row>
-      </Grid>
+      </Container>
     );
   }
 }
@@ -225,7 +223,7 @@ const messagesSplash = defineMessages({
 */
 const LoginSplash = ({ setLocale, locale, intl }) => {
   return (
-    <Grid fluid>
+    <Container fluid>
       <Row>
         <Col md={12}>
           <Jumbotron style={{ marginTop: 20 }}>
@@ -270,11 +268,11 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
                 }}
               />
             </h4>
-            <ControlLabel>Language</ControlLabel>
+            <Form.Label>Language</Form.Label>
             <LanguageSelect setLocale={setLocale} locale={locale} />
             <br />
             <a href={ipcRenderer.sendSync('getLoginUrl')}>
-              <Button block bsStyle="primary" style={{ marginBottom: 10 }}>
+              <Button block variant="primary" style={{ marginBottom: 10 }}>
                 <FormattedMessage id="login.login" defaultMessage="Login" />
               </Button>
             </a>
@@ -289,7 +287,7 @@ const LoginSplash = ({ setLocale, locale, intl }) => {
           </Jumbotron>
         </Col>
       </Row>
-    </Grid>
+    </Container>
   );
 };
 const LoginSplashWithIntl = injectIntl(LoginSplash);

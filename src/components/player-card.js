@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 const PlayerCard = ({ records }) => {
@@ -33,9 +33,9 @@ const PlayerCard = ({ records }) => {
     : '';
 
   return (
-    <Panel>
-      <Panel.Heading>Player Card</Panel.Heading>
-      <Panel.Body>
+    <Card>
+      <Card.Header>Player Card</Card.Header>
+      <Card.Body>
         <FormattedMessage
           id="PlayerCard.nickname"
           defaultMessage="Nickname: {nickname}"
@@ -97,8 +97,8 @@ const PlayerCard = ({ records }) => {
             ).toFixed(2),
           }}
         />
-      </Panel.Body>
-    </Panel>
+      </Card.Body>
+    </Card>
   );
 };
 

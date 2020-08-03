@@ -23,9 +23,9 @@ export default class LanguageSelect extends React.Component {
     const { locale } = this.props;
     return (
       <FormControl
+        as="select"
         value={locale}
         id="languageSelect"
-        componentClass="select"
         onChange={this.handleChange}
       >
         {languages.map((language) => (

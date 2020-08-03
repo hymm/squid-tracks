@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid, Row, Col, Table, Image } from 'react-bootstrap';
+import { Container, Row, Col, Table, Image } from 'react-bootstrap';
 import { FormattedMessage, defineMessages, useIntl } from 'react-intl';
 import { useSplatnet } from './splatnet-provider';
 import './schedule.css';
@@ -22,44 +22,38 @@ const GachiRow = ({ rotation }) => {
   }
 
   return (
-    <tr>
-      <td>{hour}</td>
-      <td>
-        <Grid fluid>
-          <Row>
-            <Col md={12}>
-              <strong>{rotation.rule.name}</strong>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={6} style={{ minWidth: 111, maxWidth: 360, padding: 0 }}>
-              <div className="rotation-map">
-                <Image
-                  src={
-                    'https://app.splatoon2.nintendo.net' +
-                    rotation.stage_a.image
-                  }
-                  responsive
-                />
-                {rotation.stage_a.name}
-              </div>
-            </Col>
-            <Col md={6} style={{ minWidth: 111, maxWidth: 360, padding: 0 }}>
-              <div className="rotation-map">
-                <Image
-                  src={
-                    'https://app.splatoon2.nintendo.net' +
-                    rotation.stage_b.image
-                  }
-                  responsive
-                />
-                {rotation.stage_b.name}
-              </div>
-            </Col>
-          </Row>
-        </Grid>
-      </td>
-    </tr>
+    <Container>
+      <Row>{hour}</Row>
+      <Row>
+        <Col>
+          <strong>{rotation.rule.name}</strong>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div className="rotation-map">
+            <Image
+              src={
+                'https://app.splatoon2.nintendo.net' + rotation.stage_a.image
+              }
+              fluid
+            />
+            {rotation.stage_a.name}
+          </div>
+        </Col>
+        <Col>
+          <div className="rotation-map">
+            <Image
+              src={
+                'https://app.splatoon2.nintendo.net' + rotation.stage_b.image
+              }
+              fluid
+            />
+            {rotation.stage_b.name}
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
@@ -68,45 +62,33 @@ export default function Schedule() {
   useEffect(splatnet.comm.updateSchedule, [splatnet]);
   const { regular = [], gachi = [], league = [] } = splatnet.current.schedule;
   return (
-    <Grid fluid style={{ paddingTop: 65 }}>
+    <Container style={{ paddingTop: '1rem' }}>
       <Row>
         <Col md={4}>
           <h2>
             <FormattedMessage id="schedule.regular" defaultMessage="Turf" />
           </h2>
-          <Table>
-            <tbody>
-              {regular.map((rotation) => (
-                <GachiRow key={rotation.start_time} rotation={rotation} />
-              ))}
-            </tbody>
-          </Table>
+          {regular.map((rotation) => (
+            <GachiRow key={rotation.start_time} rotation={rotation} />
+          ))}
         </Col>
         <Col md={4}>
           <h2>
             <FormattedMessage id="schedule.gachi" defaultMessage="Ranked" />
           </h2>
-          <Table>
-            <tbody>
-              {gachi.map((rotation) => (
-                <GachiRow key={rotation.start_time} rotation={rotation} />
-              ))}
-            </tbody>
-          </Table>
+          {gachi.map((rotation) => (
+            <GachiRow key={rotation.start_time} rotation={rotation} />
+          ))}
         </Col>
         <Col md={4}>
           <h2>
             <FormattedMessage id="schedule.league" defaultMessage="League" />
           </h2>
-          <Table>
-            <tbody>
-              {league.map((rotation) => (
-                <GachiRow key={rotation.start_time} rotation={rotation} />
-              ))}
-            </tbody>
-          </Table>
+          {league.map((rotation) => (
+            <GachiRow key={rotation.start_time} rotation={rotation} />
+          ))}
         </Col>
       </Row>
-    </Grid>
+    </Container>
   );
 }

@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Navbar,
-  Nav,
-  NavItem,
-  NavDropdown,
-  MenuItem,
-  Image,
-} from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Dropdown, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FormattedMessage } from 'react-intl';
@@ -18,73 +11,69 @@ import Logo from './images/icon.png';
 const Navigation = ({ logoutCallback }) => {
   const splatnet = useSplatnet();
   return (
-    <Navbar fluid fixedTop collapseOnSelect>
-      <Navbar.Header>
-        <Navbar.Brand className="squid-tracks">
-          <Link to="/">
-            <Image src={Logo} style={{ maxHeight: 40 }} />
-          </Link>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-      </Navbar.Header>
+    <Navbar bg="light" sticky="top">
+      <Navbar.Brand className="squid-tracks">
+        <Link to="/">
+          <Image src={Logo} style={{ maxHeight: 40 }} />
+        </Link>
+      </Navbar.Brand>
+      <Navbar.Toggle />
       <Navbar.Collapse>
-        <Nav>
+        <Nav className="mr-auto">
           <LinkContainer to="/schedule">
-            <NavItem eventKey={3}>
+            <Nav.Link>
               <FormattedMessage
                 id={'nav.schedule'}
                 defaultMessage={'Schedule'}
               />
-            </NavItem>
+            </Nav.Link>
           </LinkContainer>
           <LinkContainer to="/salmon">
-            <NavItem eventKey={3.1}>
+            <Nav.Link>
               <FormattedMessage id={'nav.salmon'} defaultMessage={'Salmon'} />
-            </NavItem>
+            </Nav.Link>
           </LinkContainer>
           <LinkContainer to="/records">
-            <NavItem eventKey={3}>
+            <Nav.Link>
               <FormattedMessage id={'nav.records'} defaultMessage={'Records'} />
-            </NavItem>
+            </Nav.Link>
           </LinkContainer>
           <LinkContainer to="/results">
-            <NavItem eventKey={4}>
+            <Nav.Link>
               <FormattedMessage
                 id={'nav.results'}
                 defaultMessage={'Battle History'}
               />
-            </NavItem>
+            </Nav.Link>
           </LinkContainer>
           <LinkContainer to="/store">
-            <NavItem eventKey={5}>
+            <Nav.Link>
               <FormattedMessage id={'nav.store'} defaultMessage={'Store'} />
-            </NavItem>
+            </Nav.Link>
           </LinkContainer>
           <LinkContainer to="/meta">
-            <NavItem eventKey={6}>
+            <Nav.Link>
               <FormattedMessage
                 id={'nav.league'}
                 defaultMessage={'League Stats'}
               />
-            </NavItem>
+            </Nav.Link>
           </LinkContainer>
           <LinkContainer to="/settings">
-            <NavItem eventKey={7}>
+            <Nav.Link>
               <FormattedMessage
                 id={'nav.settings'}
                 defaultMessage={'Settings'}
               />
-            </NavItem>
+            </Nav.Link>
           </LinkContainer>
         </Nav>
-        <Nav pullRight>
+        <Nav>
           <NavDropdown
-            eventKey={10}
             title={splatnet.current.records.records.player.nickname}
             id="basic-nav-dropdown"
           >
-            <MenuItem
-              eventKey={10.1}
+            <Dropdown.Item
               onClick={() => {
                 event('user', 'logout');
                 ipcRenderer.sendSync('logout');
@@ -92,7 +81,7 @@ const Navigation = ({ logoutCallback }) => {
               }}
             >
               Logout
-            </MenuItem>
+            </Dropdown.Item>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>

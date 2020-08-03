@@ -1,17 +1,17 @@
 import React from 'react';
 import {
-  Grid,
+  Container,
   Row,
   Col,
-  Glyphicon,
   ButtonToolbar,
   ButtonGroup,
   Button,
   Nav,
   NavDropdown,
-  MenuItem,
-  Label,
+  Dropdown,
+  Badge,
 } from 'react-bootstrap';
+import { FaEllipsisV, FaCheckCircle, FaTh, FaEllipsisH } from 'react-icons/fa';
 import { pick, mapKeys, cloneDeep } from 'lodash';
 import flatten from 'flat';
 import { FormattedMessage } from 'react-intl';
@@ -140,44 +140,44 @@ class ResultDetailMenu extends React.Component {
       <Nav className={'navbar-right pull-right'}>
         <NavDropdown
           id={'details-menu'}
-          title={<Glyphicon glyph={'option-vertical'} />}
+          title={<FaEllipsisV />}
           noCaret
           pullRight
         >
-          <MenuItem onClick={this.copySimplifiedToJson}>
+          <Dropdown.Item onClick={this.copySimplifiedToJson}>
             <FormattedMessage
               id="resultDetails.export.copySimpleJson"
               defaultMessage="Copy Simplified Json"
             />
-          </MenuItem>
-          <MenuItem onClick={this.copyToJson}>
+          </Dropdown.Item>
+          <Dropdown.Item onClick={this.copyToJson}>
             <FormattedMessage
               id="resultDetails.export.copyRawJson"
               defaultMessage="Copy Raw Json"
             />
-          </MenuItem>
-          <MenuItem divider />
-          <MenuItem onClick={this.copyPicture}>
+          </Dropdown.Item>
+          <Dropdown.Item divider />
+          <Dropdown.Item onClick={this.copyPicture}>
             <FormattedMessage
               id="resultDetails.export.copyPicture"
               defaultMessage="Copy SplatNet Share picture"
             />
-          </MenuItem>
-          <MenuItem onClick={this.copyPictureURL}>
+          </Dropdown.Item>
+          <Dropdown.Item onClick={this.copyPictureURL}>
             <FormattedMessage
               id="resultDetails.export.copyPictureURL"
               defaultMessage="Copy SplatNet Share picture (URL)"
             />
-          </MenuItem>
-          <MenuItem divider />
-          <MenuItem>
+          </Dropdown.Item>
+          <Dropdown.Item divider />
+          <Dropdown.Item>
             <strike>
               <FormattedMessage
                 id="resultDetails.export.saveToFile"
                 defaultMessage="Save to File"
               />
             </strike>
-          </MenuItem>
+          </Dropdown.Item>
         </NavDropdown>
       </Nav>
     );
@@ -188,8 +188,8 @@ const TeamBadges = ({ power, id, theme }) => {
   return (
     <React.Fragment>
       {theme != null ? (
-        <Label
-          bsStyle="default"
+        <Badge
+          variant="default"
           style={{
             fontWeight: 'normal',
             marginLeft: 5,
@@ -198,11 +198,11 @@ const TeamBadges = ({ power, id, theme }) => {
           }}
         >
           {theme.name}
-        </Label>
+        </Badge>
       ) : null}
       {power != null ? (
-        <Label
-          bsStyle="default"
+        <Badge
+          variant="default"
           style={{
             fontWeight: 'normal',
             marginLeft: 5,
@@ -214,15 +214,15 @@ const TeamBadges = ({ power, id, theme }) => {
             defaultMessage="Estimate Power {power}"
             values={{ power: power }}
           />
-        </Label>
+        </Badge>
       ) : null}
       {id ? (
-        <Label
-          bsStyle="default"
+        <Badge
+          variant="default"
           style={{ fontWeight: 'normal', marginRight: 5 }}
         >
           {`${id}`}
-        </Label>
+        </Badge>
       ) : null}
     </React.Fragment>
   );
@@ -414,14 +414,14 @@ class ResultDetailCard extends React.Component {
                   }
                   style={{ cursor: 'pointer' }}
                 >
-                  <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
+                  <FaCheckCircle style={{ paddingLeft: 6 }} />
                 </button>
               ) : null}
             </h3>
           }
           menu={<ResultDetailMenu result={resultChanged} />}
         >
-          <Grid fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
+          <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
             <Row>
               <Col md={12}>
                 <BattleSummary result={resultChanged} />
@@ -435,12 +435,12 @@ class ResultDetailCard extends React.Component {
                       onClick={this.showStats}
                       active={this.state.show === 1}
                     >
-                      <Glyphicon glyph="th" />
+                      <FaTh />
                     </Button>
                     <Button
                       onClick={this.showGear}
                       active={this.state.show === 2}
-                      bsStyle={this.getGearStyle()}
+                      variant={this.getGearStyle()}
                       style={{ padding: '8px 12px 4px 12px' }}
                     >
                       <svg width="16" height="14" viewBox="0 0 448 416">
@@ -490,7 +490,7 @@ class ResultDetailCard extends React.Component {
                       onClick={this.showInfo}
                       active={this.state.show === 3}
                     >
-                      <Glyphicon glyph="option-horizontal" />
+                      <FaEllipsisH />
                     </Button>
                   </ButtonGroup>
                   <Button
@@ -584,7 +584,7 @@ class ResultDetailCard extends React.Component {
                 </Col>
               )}
             </Row>
-          </Grid>
+          </Container>
         </PanelWithMenu>
       </div>
     );

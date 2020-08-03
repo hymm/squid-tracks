@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  Grid,
+  Container,
   Row,
   Col,
   Button,
   Alert,
-  Panel,
+  Card,
   ButtonToolbar,
 } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
@@ -36,7 +36,7 @@ class ErrorPage extends React.Component {
   render() {
     const { splatnet } = this.props;
     return (
-      <Alert bsStyle="danger">
+      <Alert variant="danger">
         <h4>
           <FormattedMessage
             id="Error.title"
@@ -53,19 +53,19 @@ class ErrorPage extends React.Component {
           </Button>
         </p>
         <p>
-          <Panel expanded={this.state.open}>
-            <Panel.Collapse>
-              <Panel.Body>
+          <Card expanded={this.state.open}>
+            <Card.Collapse>
+              <Card.Body>
                 {splatnet.lastError != null ? splatnet.lastError : 'Error'}
-              </Panel.Body>
-            </Panel.Collapse>
-          </Panel>
+              </Card.Body>
+            </Card.Collapse>
+          </Card>
         </p>
         <ButtonToolbar>
-          <Button bsStyle="danger" onClick={this.handleLogout}>
+          <Button variant="danger" onClick={this.handleLogout}>
             <FormattedMessage id="Error.buttonLogout" defaultMessage="Logout" />
           </Button>
-          <Button bsStyle="default" onClick={this.handleIgnore}>
+          <Button variant="default" onClick={this.handleIgnore}>
             <FormattedMessage id="Error.buttonIgnore" defaultMessage="Ignore" />
           </Button>
         </ButtonToolbar>
@@ -79,13 +79,13 @@ const ErrorPageWithRouter = withRouter(ErrorPage);
 const ErrorPageWithSplatnet = (props) => {
   const splatnet = useSplatnet();
   return (
-    <Grid fluid style={{ marginTop: 65 }}>
+    <Container fluid style={{ marginTop: 65 }}>
       <Row>
         <Col md={12}>
           <ErrorPageWithRouter {...props} splatnet={splatnet} />
         </Col>
       </Row>
-    </Grid>
+    </Container>
   );
 };
 

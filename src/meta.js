@@ -1,14 +1,12 @@
 import React from 'react';
 import {
-  Grid,
+  Container,
   Row,
   Col,
   ButtonToolbar,
   ButtonGroup,
   Button,
   FormGroup,
-  Checkbox,
-  ControlLabel,
   FormControl,
   Form,
 } from 'react-bootstrap';
@@ -22,13 +20,13 @@ import './meta.css';
 const { ipcRenderer } = require('electron');
 
 const Meta = () => (
-  <Grid fluid style={{ marginTop: 65 }}>
+  <Container fluid style={{ marginTop: 65 }}>
     <Row>
       <Col md={12}>
         <MetaContainer />
       </Col>
     </Row>
-  </Grid>
+  </Container>
 );
 
 class MetaContainer extends React.Component {
@@ -283,7 +281,7 @@ class MetaContainer extends React.Component {
         <Form inline className="league_top">
           <ButtonToolbar>
             <Button
-              bsStyle="primary"
+              variant="primary"
               onClick={() => {
                 event(
                   'league_dict',
@@ -347,7 +345,7 @@ class MetaContainer extends React.Component {
               </Button>
             </ButtonGroup>
             <FormGroup controlId="startOfWeekSelect">
-              <ControlLabel className="text">Start of Week (UTC):</ControlLabel>
+              <Form.Label className="text">Start of Week (UTC):</Form.Label>
               <FormControl
                 onChange={this.setDesiredStartDayOfWeek}
                 componentClass="select"
@@ -363,13 +361,13 @@ class MetaContainer extends React.Component {
                 <option value="6">Saturday</option>
               </FormControl>
             </FormGroup>
-            <Checkbox
+            <Form.Check
               className="text"
               checked={this.state.combine_replicas_toggle}
               onClick={this.handleReplicaToggleClick}
             >
               Combine Hero Versions
-            </Checkbox>
+            </Form.Check>
           </ButtonToolbar>
         </Form>
         <br />

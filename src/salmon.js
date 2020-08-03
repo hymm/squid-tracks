@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { FormattedDate, FormattedTime, FormattedMessage } from 'react-intl';
 import {
-  Grid,
+  Container,
   Row,
   Col,
   Image,
-  Panel,
+  Card,
   OverlayTrigger,
   Tooltip,
 } from 'react-bootstrap';
@@ -213,8 +213,8 @@ const SalmonDetail = ({ detail }) => {
   const now = new Date().getTime() / 1000;
   const active = now < detail.end_time && now > detail.start_time;
   return (
-    <Panel>
-      <Panel.Heading
+    <Card>
+      <Card.Header
         style={
           active ? { background: 'darkorange', color: 'white' } : undefined
         }
@@ -238,8 +238,8 @@ const SalmonDetail = ({ detail }) => {
           day="2-digit"
         />{' '}
         <FormattedTime value={new Date(detail.end_time * 1000)} />
-      </Panel.Heading>
-      <Panel.Body>
+      </Card.Header>
+      <Card.Body>
         <h4 style={{ marginTop: 0 }}>{detail.stage.name}</h4>
         <Image
           src={`https://app.splatoon2.nintendo.net${detail.stage.image}`}
@@ -264,8 +264,8 @@ const SalmonDetail = ({ detail }) => {
             />
           )
         )}
-      </Panel.Body>
-    </Panel>
+      </Card.Body>
+    </Card>
   );
 };
 
@@ -274,7 +274,7 @@ export default function Salmon() {
   useEffect(splatnet.comm.updateCoop, [splatnet]);
   const { coop_schedules } = splatnet?.current;
   return (
-    <Grid fluid style={{ paddingTop: 65 }}>
+    <Container fluid style={{ paddingTop: '1rem' }}>
       <Row>
         <Col md={12}>
           <h1 style={{ marginTop: 0 }}>
@@ -286,11 +286,11 @@ export default function Salmon() {
         </Col>
       </Row>
       <Row>
-        <Col xs={12} sm={6} md={4} lg={3}>
+        <Col>
           <SalmonCalendar schedules={coop_schedules.schedules} />
         </Col>
         {coop_schedules.details.map((d) => (
-          <Col xs={12} sm={6} md={4} lg={3} key={d.start_time}>
+          <Col key={d.start_time}>
             <SalmonDetail detail={d} />
           </Col>
         ))}
@@ -305,6 +305,6 @@ export default function Salmon() {
           <CoopTrend />
         </Col>
       </Row>
-    </Grid>
+    </Container>
   );
 }

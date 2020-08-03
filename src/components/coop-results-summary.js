@@ -17,7 +17,7 @@ function CoopResultsSummary() {
           defaultMessage="Grizzco Point Card"
         />
       </h4>
-      <Table striped bordered condensed hover>
+      <Table striped bordered hover>
         <thead>
           <tr />
         </thead>

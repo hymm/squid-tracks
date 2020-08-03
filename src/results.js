@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
 import ResultsControl from './components/results-controls';
@@ -85,7 +85,7 @@ class Results extends React.Component {
     const currentBattle = this.getCurrentBattle();
 
     return (
-      <Grid fluid style={{ marginTop: 65 }}>
+      <Container fluid style={{ marginTop: 65 }}>
         <Row>
           <Col md={12}>
             <ResultsControl
@@ -108,7 +108,7 @@ class Results extends React.Component {
             />
           </Col>
         </Row>
-      </Grid>
+      </Container>
     );
   }
 }

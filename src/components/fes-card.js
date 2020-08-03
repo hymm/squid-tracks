@@ -1,12 +1,12 @@
 import React from 'react';
-import { Panel, Table, Grid, Col } from 'react-bootstrap';
+import { Card, Table, Container, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 const FesTable = ({ fes_name, fes_id, fes_grade, fes_power }) => {
   return (
     <Col md={6}>
       <h4>{fes_name}</h4>
-      <Table striped bordered condensed hover>
+      <Table striped bordered hover>
         <thead>
           <tr />
         </thead>
@@ -51,15 +51,15 @@ const FesCard = ({ records, festivals }) => {
   });
 
   return (
-    <Panel>
-      <Panel.Heading>
+    <Card>
+      <Card.Header>
         <FormattedMessage
           id="FesCard.title"
           defaultMessage="Splatfest Results"
         />
-      </Panel.Heading>
-      <Panel.Body>
-        <Grid fluid>
+      </Card.Header>
+      <Card.Body>
+        <Container fluid>
           {fesArray.map((fes) => (
             <FesTable
               key={fes.fes_id}
@@ -69,9 +69,9 @@ const FesCard = ({ records, festivals }) => {
               fes_power={fes.fes_power}
             />
           ))}
-        </Grid>
-      </Panel.Body>
-    </Panel>
+        </Container>
+      </Card.Body>
+    </Card>
   );
 };
 

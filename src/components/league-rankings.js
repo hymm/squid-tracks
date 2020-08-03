@@ -1,16 +1,16 @@
 import React from 'react';
 import {
-  Panel,
+  Card,
   ButtonGroup,
   ButtonToolbar,
   Button,
   Table,
-  Grid,
+  Container,
   Col,
   Row,
-  Label,
-  Glyphicon,
+  Badge,
 } from 'react-bootstrap';
+import { FaArrowDown, FaArrowUp, FaArrowRight } from 'react-icons/fa';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
 
@@ -189,10 +189,10 @@ export default class LeagueRankings extends React.Component {
     sort(weapons_out, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel>
-        <Panel.Heading>{this.props.title}</Panel.Heading>
-        <Panel.Body>
-          <Grid fluid>
+      <Card>
+        <Card.Header>{this.props.title}</Card.Header>
+        <Card.Body>
+          <Container fluid>
             <Row>
               <Col sm={12} md={12}>
                 <ButtonToolbar style={{ marginBottom: '10px' }}>
@@ -224,7 +224,7 @@ export default class LeagueRankings extends React.Component {
             </Row>
             <Row>
               <Col sm={12} md={12}>
-                <Table striped bordered condensed hover>
+                <Table striped bordered hover>
                   <thead>
                     <tr>
                       {this.columnHeaders.map((header) => (
@@ -269,8 +269,8 @@ export default class LeagueRankings extends React.Component {
                             : ` (${weapon[
                                 this.state.data_to_display
                               ].last_week_percent.toFixed(1)}%) `}
-                          <Label
-                            bsStyle={
+                          <Badge
+                            variant={
                               weapon[this.state.data_to_display]
                                 .diff_last_to_last_last > 0
                                 ? 'success'
@@ -280,22 +280,21 @@ export default class LeagueRankings extends React.Component {
                                 : 'default'
                             }
                           >
-                            <Glyphicon
-                              glyph={
-                                weapon[this.state.data_to_display]
-                                  .diff_last_to_last_last > 0
-                                  ? 'arrow-up'
-                                  : weapon[this.state.data_to_display]
-                                      .diff_last_to_last_last < 0
-                                  ? 'arrow-down'
-                                  : 'arrow-right'
-                              }
-                            />
+                            {weapon[this.state.data_to_display]
+                              .diff_last_to_last_last > 0 ? (
+                              <FaArrowUp />
+                            ) : weapon[this.state.data_to_display]
+                                .diff_last_to_last_last < 0 ? (
+                              <FaArrowDown />
+                            ) : (
+                              <FaArrowRight />
+                            )}
+
                             {
                               weapon[this.state.data_to_display]
                                 .diff_last_to_last_last
                             }
-                          </Label>
+                          </Badge>
                         </td>
                         <td>
                           {weapon[this.state.data_to_display].this_week.toFixed(
@@ -306,8 +305,8 @@ export default class LeagueRankings extends React.Component {
                             : ` (${weapon[
                                 this.state.data_to_display
                               ].this_week_percent.toFixed(1)}%) `}
-                          <Label
-                            bsStyle={
+                          <Badge
+                            variant={
                               weapon[this.state.data_to_display]
                                 .diff_this_to_last > 0
                                 ? 'success'
@@ -317,22 +316,20 @@ export default class LeagueRankings extends React.Component {
                                 : 'default'
                             }
                           >
-                            <Glyphicon
-                              glyph={
-                                weapon[this.state.data_to_display]
-                                  .diff_this_to_last > 0
-                                  ? 'arrow-up'
-                                  : weapon[this.state.data_to_display]
-                                      .diff_this_to_last < 0
-                                  ? 'arrow-down'
-                                  : 'arrow-right'
-                              }
-                            />
+                            {weapon[this.state.data_to_display]
+                              .diff_this_to_last > 0 ? (
+                              <FaArrowUp />
+                            ) : weapon[this.state.data_to_display]
+                                .diff_this_to_last < 0 ? (
+                              <FaArrowDown />
+                            ) : (
+                              <FaArrowRight />
+                            )}
                             {
                               weapon[this.state.data_to_display]
                                 .diff_this_to_last
                             }
-                          </Label>
+                          </Badge>
                         </td>
                       </tr>
                     ))}
@@ -340,9 +337,9 @@ export default class LeagueRankings extends React.Component {
                 </Table>
               </Col>
             </Row>
-          </Grid>
-        </Panel.Body>
-      </Panel>
+          </Container>
+        </Card.Body>
+      </Card>
     );
   }
 }

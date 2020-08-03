@@ -1,15 +1,15 @@
 import React from 'react';
 import {
-  Panel,
+  Card,
   Table,
   Image,
-  Glyphicon,
   ButtonToolbar,
   ButtonGroup,
   Button,
   SplitButton,
-  MenuItem,
+  Dropdown,
 } from 'react-bootstrap';
+import { FaCheckCircle } from 'react-icons/fa';
 import { cloneDeep } from 'lodash';
 import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import { sort } from './sort-array';
@@ -250,9 +250,9 @@ class ResultsCard extends React.Component {
     );
 
     return (
-      <Panel>
-        <Panel.Heading>Last 50 Battles</Panel.Heading>
-        <Panel.Body>
+      <Card>
+        <Card.Header>Last 50 Battles</Card.Header>
+        <Card.Body>
           <ButtonToolbar style={{ marginBottom: '10px' }}>
             <ButtonGroup>
               <Button
@@ -286,30 +286,30 @@ class ResultsCard extends React.Component {
                 active={normalize}
                 id="minutes"
               >
-                <MenuItem
+                <Dropdown.Item
                   onClick={() => {
                     event('last-50-battles', 'show-stats-normailzed', 1);
                     this.setState({ normalizeTime: 1 });
                   }}
                 >
                   1
-                </MenuItem>
-                <MenuItem
+                </Dropdown.Item>
+                <Dropdown.Item
                   onClick={() => {
                     event('last-50-battles', 'show-stats-normailzed', 3);
                     this.setState({ normalizeTime: 3 });
                   }}
                 >
                   3
-                </MenuItem>
-                <MenuItem
+                </Dropdown.Item>
+                <Dropdown.Item
                   onClick={() => {
                     event('last-50-battles', 'show-stats-normailzed', 5);
                     this.setState({ normalizeTime: 5 });
                   }}
                 >
                   5
-                </MenuItem>
+                </Dropdown.Item>
               </SplitButton>
             </ButtonGroup>
             <ExportButton />
@@ -324,7 +324,7 @@ class ResultsCard extends React.Component {
             id="results.table.sortHelp"
             defaultMessage="* Click on column headers to sort"
           />
-          <Table striped bordered condensed hover>
+          <Table striped bordered hover>
             <thead>
               <tr>
                 {columnHeaders.map((header) => (
@@ -359,10 +359,7 @@ class ResultsCard extends React.Component {
                         {result.battle_number}
                       </button>
                       {linkInfo ? (
-                        <Glyphicon
-                          glyph={'ok-sign'}
-                          style={{ paddingLeft: 6 }}
-                        />
+                        <FaCheckCircle style={{ paddingLeft: 6 }} />
                       ) : null}
                     </td>
                     <td>{result.game_mode.key}</td>
@@ -414,8 +411,8 @@ class ResultsCard extends React.Component {
               })}
             </tbody>
           </Table>
-        </Panel.Body>
-      </Panel>
+        </Card.Body>
+      </Card>
     );
   }
 }

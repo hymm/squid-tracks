@@ -1,6 +1,6 @@
 import React from 'react';
 import update from 'immutability-helper';
-import { Panel, Table, Image } from 'react-bootstrap';
+import { Card, Table, Image } from 'react-bootstrap';
 import {
   defineMessages,
   injectIntl,
@@ -120,20 +120,20 @@ class WeaponCard extends React.Component {
     sort(weaponArray, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel>
-        <Panel.Heading>
+      <Card>
+        <Card.Header>
           <FormattedMessage
             id="WeaponCard.title"
             defaultMessage="Weapon Stats"
           />
-        </Panel.Heading>
-        <Panel.Body>
+        </Card.Header>
+        <Card.Body>
           <FormattedMessage
             id="WeaponCard.sortHelp"
             defaultMessage="* Click on column headers to sort"
           />
 
-          <Table striped bordered condensed hover>
+          <Table striped bordered hover>
             <thead>
               <tr>
                 {this.columnHeaders.map((header) => {
@@ -192,8 +192,8 @@ class WeaponCard extends React.Component {
               ))}
             </tbody>
           </Table>
-        </Panel.Body>
-      </Panel>
+        </Card.Body>
+      </Card>
     );
   }
 }
