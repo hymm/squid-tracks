@@ -271,7 +271,7 @@ const SalmonDetail = ({ detail }) => {
 
 export default function Salmon() {
   const splatnet = useSplatnet();
-  useEffect(splatnet.comm.updateCoop, [splatnet]);
+  useEffect(splatnet.comm.updateCoop, []);
   const { coop_schedules } = splatnet?.current;
   return (
     <Container fluid style={{ paddingTop: '1rem' }}>

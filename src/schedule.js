@@ -59,7 +59,7 @@ const GachiRow = ({ rotation }) => {
 
 export default function Schedule() {
   const splatnet = useSplatnet();
-  useEffect(splatnet.comm.updateSchedule, [splatnet]);
+  useEffect(splatnet.comm.updateSchedule, []);
   const { regular = [], gachi = [], league = [] } = splatnet.current.schedule;
   return (
     <Container style={{ paddingTop: '1rem' }}>

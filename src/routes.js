@@ -14,13 +14,9 @@ import About from './about';
 import ErrorPage from './error';
 import { useSplatnet } from './splatnet-provider';
 
-const StartupWithSplatnet = () => {
+const useUpdateRecords = () => {
   const splatnet = useSplatnet();
-  useEffect(() => {
-    splatnet.comm.updateRecords();
-  }, [splatnet]);
-
-  return null;
+  useEffect(splatnet.comm.updateRecords, []);
 };
 
 const Routes = ({
@@ -31,11 +27,11 @@ const Routes = ({
   loggedIn,
   setLogin,
 }) => {
+  useUpdateRecords();
   return (
     <div>
       {loggedIn ? (
         <div>
-          <StartupWithSplatnet />
           <Navigation logoutCallback={logoutCallback} />
           <Switch>
             <Route path="/home" exact>
