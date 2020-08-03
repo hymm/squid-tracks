@@ -65,7 +65,7 @@ const AbilityCell = ({ skills }) => {
   return (
     <td style={{ textAlign: 'left', background: bgcolor }}>
       <Image
-        circle
+        roundedCircle
         src={`https://app.splatoon2.nintendo.net${skills.main.image}`}
         style={{ maxHeight: mainHeight, background }}
         alt={skills.main.name}
@@ -73,7 +73,7 @@ const AbilityCell = ({ skills }) => {
       {skills.subs.map((skill) =>
         skill ? (
           <Image
-            circle
+            roundedCircle
             src={`https://app.splatoon2.nintendo.net${skill.image}`}
             style={{ maxHeight: subHeight, background }}
             alt={skill.name}
@@ -107,7 +107,7 @@ const PlayerRow = ({ player }) => {
 
 const TeamStatTable = ({ result, team }) => {
   return (
-    <Table striped bordered hover>
+    <Table className="mb-0" size="sm" striped bordered hover>
       <TeamHeader player={team[0]} />
       <tbody>
         {team.map((player) => (

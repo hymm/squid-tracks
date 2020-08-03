@@ -29,9 +29,9 @@ const Routes = ({
 }) => {
   useUpdateRecords();
   return (
-    <div>
+    <>
       {loggedIn ? (
-        <div>
+        <>
           <Navigation logoutCallback={logoutCallback} />
           <Switch>
             <Route path="/home" exact>
@@ -55,7 +55,7 @@ const Routes = ({
               )}
             />
           </Switch>
-        </div>
+        </>
       ) : (
         <Login setLogin={setLogin} setLocale={setLocale} locale={locale} />
       )}
@@ -72,7 +72,7 @@ const Routes = ({
           }
         />
       </Switch>
-    </div>
+    </>
   );
 };
 

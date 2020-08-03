@@ -6,6 +6,7 @@ import LobbyColors from './lobby-colors';
 const BadgeStyle = {
   fontSize: 16,
   fontWeight: 'normal',
+  color: 'white',
   marginRight: 5,
   float: 'left',
   marginBottom: 5,
@@ -41,7 +42,7 @@ const XRankBadges = ({ result, colorMap }) => {
   return (
     <React.Fragment>
       {result.x_power != null ? (
-        <Badge variant="default" style={{ ...BadgeStyle }}>
+        <Badge variant="secondary" style={{ ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.xPower"
             defaultMessage="X Power {power}"
@@ -50,7 +51,7 @@ const XRankBadges = ({ result, colorMap }) => {
         </Badge>
       ) : null}
       {result.rank != null ? (
-        <Badge variant="default" style={{ ...BadgeStyle }}>
+        <Badge variant="secondary" style={{ ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.globalRank"
             defaultMessage="Global Rank {rank}"
@@ -59,7 +60,7 @@ const XRankBadges = ({ result, colorMap }) => {
         </Badge>
       ) : null}
       {result.estimate_x_power != null ? (
-        <Badge variant="default" style={{ ...BadgeStyle }}>
+        <Badge variant="secondary" style={{ ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.estimatePower.v2"
             defaultMessage="8-Squid Power {power}"
@@ -121,7 +122,7 @@ const RankedBadges = ({ result, colorMap }) => {
   return (
     <React.Fragment>
       {result.estimate_gachi_power != null ? (
-        <Badge variant="default" style={{ ...BadgeStyle }}>
+        <Badge variant="secondary" style={{ ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.estimatePower.v2"
             defaultMessage="8-Squid Power {power}"
@@ -137,7 +138,7 @@ const TurfBadges = ({ result, colorMap }) => {
   return (
     <React.Fragment>
       {result.win_meter != null ? (
-        <Badge variant="default" style={{ ...BadgeStyle }}>
+        <Badge variant="secondary" style={{ ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.winMeter"
             defaultMessage="Win Meter {meter}"
@@ -194,7 +195,7 @@ const BattleSummary = ({ result }) => {
   const myNow = (myScore * 100) / totalScore;
   const otherNow = (otherScore * 100) / totalScore;
   return (
-    <div>
+    <>
       <Row>
         <Col md={12}>
           <h2 style={{ marginTop: 0 }}>
@@ -225,14 +226,14 @@ const BattleSummary = ({ result }) => {
           <BattleBadges result={result} />
         </Col>
       </Row>
-      <Row>
+      <Row className="mb-3">
         <Col md={12}>
           <ProgressBar style={{ height: 30 }}>
             <ProgressBar
               striped
               now={myNow}
               variant="info"
-              Badge={myScore}
+              label={myScore}
               key={1}
               style={{ fontSize: 16, padding: '.35em 0' }}
             />
@@ -240,14 +241,14 @@ const BattleSummary = ({ result }) => {
               striped
               now={otherNow}
               variant="warning"
-              Badge={otherScore}
+              label={otherScore}
               key={2}
               style={{ fontSize: 16, padding: '.35em 0' }}
             />
           </ProgressBar>
         </Col>
       </Row>
-    </div>
+    </>
   );
 };
 

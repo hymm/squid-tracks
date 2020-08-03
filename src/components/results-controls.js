@@ -53,8 +53,15 @@ class ResultControl extends React.Component {
     const uploaded = statInk ? statInk[currentBattle] != null : false;
 
     return (
-      <ButtonToolbar style={{ marginBottom: 10 }}>
+      <ButtonToolbar
+        size="sm"
+        variant="outline-dark"
+        style={{ marginBottom: 10 }}
+      >
         <Button
+          size="sm"
+          className="mr-2"
+          variant="outline-secondary"
           onClick={() => {
             getResults();
             event('results', 'refresh');
@@ -67,14 +74,20 @@ class ResultControl extends React.Component {
             ? intl.formatMessage(this.messages.refreshed)
             : intl.formatMessage(this.messages.refresh)}
         </Button>
-        <ButtonGroup>
+        <ButtonGroup className="mr-2" size="sm">
           <Button
+            variant="outline-secondary"
             onClick={() => changeResult(resultIndex + 1)}
             disabled={resultIndex === results.length - 1}
           >
             <FaCaretLeft />
           </Button>
-          <DropdownButton title={currentBattle} id={'battles'}>
+          <DropdownButton
+            as={ButtonGroup}
+            variant="outline-secondary"
+            title={currentBattle}
+            id={'battles'}
+          >
             {results.map((result, idx) => (
               <Dropdown.Item
                 key={result.battle_number}
@@ -85,13 +98,14 @@ class ResultControl extends React.Component {
             ))}
           </DropdownButton>
           <Button
+            variant="outline-secondary"
             onClick={() => changeResult(resultIndex - 1)}
             disabled={resultIndex === 0}
           >
             <FaCaretRight />
           </Button>
         </ButtonGroup>
-        <ButtonGroup>
+        <ButtonGroup className="mr-2">
           <StatInkManualButton
             result={result}
             currentBattle={currentBattle}
@@ -101,6 +115,7 @@ class ResultControl extends React.Component {
           />
         </ButtonGroup>
         <ResultsPoller
+          className="mr-1"
           getResults={getResults}
           result={result}
           disabled={!tokenExists}

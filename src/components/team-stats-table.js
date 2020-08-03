@@ -88,7 +88,7 @@ const TeamStatTable = ({ result, team }) => {
   const total_s = team.reduce((sum, player) => sum + player.special_count, 0);
 
   return (
-    <Table striped bordered hover>
+    <Table size="sm" className="mb-0" striped bordered hover>
       <TeamHeader player={team[0]} />
       <tbody>
         {team.map((player) => (

@@ -55,7 +55,7 @@ const PlayerRow = ({ player }) => {
 
 const TeamInfoTable = ({ result, team }) => {
   return (
-    <Table striped bordered hover>
+    <Table className="mb-0" size="sm" striped bordered hover>
       <TeamHeader player={team[0]} />
       <tbody>
         {team.map((player) => (

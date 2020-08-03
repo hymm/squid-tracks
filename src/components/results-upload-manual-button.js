@@ -98,6 +98,7 @@ class StatInkManualButton extends React.Component {
 
     return (
       <Button
+        variant="outline-secondary"
         onClick={this.handleClick}
         disabled={disabled || writingToStatInk || uploaded}
       >

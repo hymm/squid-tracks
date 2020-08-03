@@ -8,8 +8,8 @@ import log from 'electron-log';
 import { ipcRenderer } from 'electron';
 import SplatnetProvider from './splatnet-provider';
 
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
 
 window.addEventListener('error', (event) => {
   const message = `UnhandledError in renderer: ${event.error}`;

@@ -1,18 +1,25 @@
-.panel-with-menu .dropdown-toggle {
-  padding: 0 15px 0 15px
+.card-with-menu .dropdown-toggle {
+  padding: 0;
 }
 
-.panel-with-menu .navbar-default li a {
-    color: #777;
+.card-with-menu .card-title {
+  margin-bottom: 0;
 }
 
-.panel-with-menu .navbar-default li a:hover,
-.panel-with-menu .navbar-default li a:focus {
+.card-with-menu .nav a {
+  color: #777;
+}
+
+.card-with-menu .nav a:hover,
+.card-with-menu .nav a:focus {
   color: #333;
   background-color: transparent;
 }
 
-/* .panel-with-menu .navbar-right .dropdown-menu {
-    right: 0;
-    left: auto;
-} */
+.card-with-menu .dropdown-toggle::after {
+  display: none;
+}
+
+.card-with-menu .dropdown-menu {
+  font-family: VarelaRound;
+}

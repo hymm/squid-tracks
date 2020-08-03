@@ -143,6 +143,8 @@ class ResultsPoller extends React.Component {
   render() {
     return (
       <Button
+        className={`${this.props.className}`}
+        variant="outline-secondary"
         onClick={this.handleClick}
         active={this.state.active}
         disabled={this.props.disabled}

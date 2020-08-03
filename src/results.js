@@ -85,7 +85,7 @@ class Results extends React.Component {
     const currentBattle = this.getCurrentBattle();
 
     return (
-      <Container fluid style={{ marginTop: 65 }}>
+      <Container fluid style={{ marginTop: '1rem' }}>
         <Row>
           <Col md={12}>
             <ResultsControl
