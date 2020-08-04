@@ -7,7 +7,6 @@ import {
   ButtonGroup,
   Button,
   FormGroup,
-  FormControl,
   Form,
 } from 'react-bootstrap';
 import LeagueRankings from './components/league-rankings';
@@ -20,7 +19,7 @@ import './meta.css';
 const { ipcRenderer } = require('electron');
 
 const Meta = () => (
-  <Container fluid style={{ marginTop: 65 }}>
+  <Container fluid style={{ marginTop: '1rem' }}>
     <Row>
       <Col md={12}>
         <MetaContainer />
@@ -281,6 +280,7 @@ class MetaContainer extends React.Component {
         <Form inline className="league_top">
           <ButtonToolbar>
             <Button
+              className="mr-2"
               variant="primary"
               onClick={() => {
                 event(
@@ -305,17 +305,26 @@ class MetaContainer extends React.Component {
             >
               {this.state.refreshing ? 'Loaded' : 'Load Data'}
             </Button>
-            <ButtonGroup>
-              <Button onClick={this.showTeams} active={this.state.full_teams}>
+            <ButtonGroup className="mr-2">
+              <Button
+                variant="outline-secondary"
+                onClick={this.showTeams}
+                active={this.state.full_teams}
+              >
                 Teams
               </Button>
-              <Button onClick={this.showPairs} active={!this.state.full_teams}>
+              <Button
+                variant="outline-secondary"
+                onClick={this.showPairs}
+                active={!this.state.full_teams}
+              >
                 Pairs
               </Button>
             </ButtonGroup>
 
             <ButtonGroup>
               <Button
+                variant="outline-secondary"
                 onClick={this.setRegion}
                 value="ALL"
                 active={this.state.region === 'ALL'}
@@ -323,6 +332,7 @@ class MetaContainer extends React.Component {
                 All Regions
               </Button>
               <Button
+                variant="outline-secondary"
                 onClick={this.setRegion}
                 value="JP"
                 active={this.state.region === 'JP'}
@@ -330,6 +340,7 @@ class MetaContainer extends React.Component {
                 Japan
               </Button>
               <Button
+                variant="outline-secondary"
                 onClick={this.setRegion}
                 value="US"
                 active={this.state.region === 'US'}
@@ -337,6 +348,7 @@ class MetaContainer extends React.Component {
                 NA/AU/NZ
               </Button>
               <Button
+                variant="outline-secondary"
                 onClick={this.setRegion}
                 value="EU"
                 active={this.state.region === 'EU'}
@@ -346,9 +358,9 @@ class MetaContainer extends React.Component {
             </ButtonGroup>
             <FormGroup controlId="startOfWeekSelect">
               <Form.Label className="text">Start of Week (UTC):</Form.Label>
-              <FormControl
+              <Form.Control
                 onChange={this.setDesiredStartDayOfWeek}
-                componentClass="select"
+                as="select"
                 placeholder="Monday"
                 value={this.state.next_desired_start_of_week}
               >
@@ -359,15 +371,15 @@ class MetaContainer extends React.Component {
                 <option value="4">Thursday</option>
                 <option value="5">Friday</option>
                 <option value="6">Saturday</option>
-              </FormControl>
+              </Form.Control>
             </FormGroup>
             <Form.Check
+              type="checkbox"
               className="text"
               checked={this.state.combine_replicas_toggle}
               onClick={this.handleReplicaToggleClick}
-            >
-              Combine Hero Versions
-            </Form.Check>
+              label="Combine Hero Versions"
+            />
           </ButtonToolbar>
         </Form>
         <br />

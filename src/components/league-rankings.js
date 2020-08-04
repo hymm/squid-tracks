@@ -198,6 +198,7 @@ export default class LeagueRankings extends React.Component {
                 <ButtonToolbar style={{ marginBottom: '10px' }}>
                   <ButtonGroup>
                     <Button
+                      variant="outline-secondary"
                       onClick={this.setDataToDisplay}
                       value="uses"
                       active={this.state.data_to_display === 'uses'}
@@ -205,6 +206,7 @@ export default class LeagueRankings extends React.Component {
                       Uses
                     </Button>
                     <Button
+                      variant="outline-secondary"
                       onClick={this.setDataToDisplay}
                       value="total_points"
                       active={this.state.data_to_display === 'total_points'}
@@ -212,6 +214,7 @@ export default class LeagueRankings extends React.Component {
                       Total Rating
                     </Button>
                     <Button
+                      variant="outline-secondary"
                       onClick={this.setDataToDisplay}
                       value="avg_points"
                       active={this.state.data_to_display === 'avg_points'}
