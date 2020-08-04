@@ -44,10 +44,9 @@ const Routes = ({
             <Route path="/results" component={Results} />
             <Route path="/meta" component={Meta} />
             <Route path="/store" component={AnnieStore} />
-            <Route
-              path="/error"
-              component={() => <ErrorPage logoutCallback={logoutCallback} />}
-            />
+            <Route path="/error">
+              <ErrorPage logoutCallback={logoutCallback} />
+            </Route>
             <Route
               path="/settings"
               component={() => (

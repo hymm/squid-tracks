@@ -7,8 +7,9 @@ import {
   Alert,
   Card,
   ButtonToolbar,
+  Accordion,
 } from 'react-bootstrap';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { ipcRenderer } from 'electron';
 import { event } from './analytics';
@@ -48,24 +49,19 @@ class ErrorPage extends React.Component {
             id="Error.helpText"
             defaultMessage="If you see this multiple times your session has probably expired. Try logging out and logging back in with a new session."
           />
-          <Button onClick={this.handleClick}>
-            <FormattedMessage id="Error.buttonMoreInfo" defaultMessage="More" />
-          </Button>
         </p>
         <p>
-          <Card expanded={this.state.open}>
-            <Card.Collapse>
-              <Card.Body>
-                {splatnet.lastError != null ? splatnet.lastError : 'Error'}
-              </Card.Body>
-            </Card.Collapse>
+          <Card>
+            <Card.Body>
+              {splatnet.lastError != null ? splatnet.lastError : 'Error'}
+            </Card.Body>
           </Card>
         </p>
         <ButtonToolbar>
-          <Button variant="danger" onClick={this.handleLogout}>
+          <Button className="mr-2" variant="danger" onClick={this.handleLogout}>
             <FormattedMessage id="Error.buttonLogout" defaultMessage="Logout" />
           </Button>
-          <Button variant="default" onClick={this.handleIgnore}>
+          <Button variant="outline-secondary" onClick={this.handleIgnore}>
             <FormattedMessage id="Error.buttonIgnore" defaultMessage="Ignore" />
           </Button>
         </ButtonToolbar>
@@ -74,19 +70,18 @@ class ErrorPage extends React.Component {
   }
 }
 
-const ErrorPageWithRouter = withRouter(ErrorPage);
-
-const ErrorPageWithSplatnet = (props) => {
+function ErrorPageWithSplatnet(props) {
   const splatnet = useSplatnet();
+  const history = useHistory();
   return (
-    <Container fluid style={{ marginTop: 65 }}>
+    <Container fluid style={{ marginTop: '1rem' }}>
       <Row>
         <Col md={12}>
-          <ErrorPageWithRouter {...props} splatnet={splatnet} />
+          <ErrorPage {...props} history={history} splatnet={splatnet} />
         </Col>
       </Row>
     </Container>
   );
-};
+}
 
 export default ErrorPageWithSplatnet;
