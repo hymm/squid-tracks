@@ -38,7 +38,7 @@ class ExportBattlesToCsvButton extends React.Component {
 
   render() {
     return (
-      <Button onClick={this.exportBattlesToCsv}>
+      <Button variant="outline-secondary" onClick={this.exportBattlesToCsv}>
         <FormattedMessage
           id="Results.exportBattlesToCsv"
           defaultMessage="Export to CSV"

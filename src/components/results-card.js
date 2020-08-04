@@ -254,8 +254,9 @@ class ResultsCard extends React.Component {
         <Card.Header>Last 50 Battles</Card.Header>
         <Card.Body>
           <ButtonToolbar style={{ marginBottom: '10px' }}>
-            <ButtonGroup>
+            <ButtonGroup className="mr-2">
               <Button
+                variant="outline-secondary"
                 onClick={() => {
                   event('last-50-battles', 'show-stats-raw');
                   this.setState({ normalize: false });
@@ -267,50 +268,57 @@ class ResultsCard extends React.Component {
                   defaultMessage="Raw"
                 />
               </Button>
-              <SplitButton
-                title={
+              <Dropdown as={ButtonGroup}>
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => {
+                    event(
+                      'last-50-battles',
+                      'show-stats-normailzed',
+                      this.state.normalizeTime
+                    );
+                    this.setState({ normalize: true });
+                  }}
+                  active={normalize}
+                >
                   <FormattedMessage
                     id="results.table.button.normalize"
                     defaultMessage="Normalize to {normalizeTime} minutes"
                     values={{ normalizeTime }}
                   />
-                }
-                onClick={() => {
-                  event(
-                    'last-50-battles',
-                    'show-stats-normailzed',
-                    this.state.normalizeTime
-                  );
-                  this.setState({ normalize: true });
-                }}
-                active={normalize}
-                id="minutes"
-              >
-                <Dropdown.Item
-                  onClick={() => {
-                    event('last-50-battles', 'show-stats-normailzed', 1);
-                    this.setState({ normalizeTime: 1 });
-                  }}
-                >
-                  1
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => {
-                    event('last-50-battles', 'show-stats-normailzed', 3);
-                    this.setState({ normalizeTime: 3 });
-                  }}
-                >
-                  3
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => {
-                    event('last-50-battles', 'show-stats-normailzed', 5);
-                    this.setState({ normalizeTime: 5 });
-                  }}
-                >
-                  5
-                </Dropdown.Item>
-              </SplitButton>
+                </Button>
+                <Dropdown.Toggle
+                  split
+                  variant="outline-secondary"
+                  id="dropdown-split-basic"
+                />
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    onClick={() => {
+                      event('last-50-battles', 'show-stats-normailzed', 1);
+                      this.setState({ normalizeTime: 1 });
+                    }}
+                  >
+                    1
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => {
+                      event('last-50-battles', 'show-stats-normailzed', 3);
+                      this.setState({ normalizeTime: 3 });
+                    }}
+                  >
+                    3
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => {
+                      event('last-50-battles', 'show-stats-normailzed', 5);
+                      this.setState({ normalizeTime: 5 });
+                    }}
+                  >
+                    5
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </ButtonGroup>
             <ExportButton />
           </ButtonToolbar>
@@ -324,7 +332,7 @@ class ResultsCard extends React.Component {
             id="results.table.sortHelp"
             defaultMessage="* Click on column headers to sort"
           />
-          <Table striped bordered hover>
+          <Table size="sm" striped bordered hover>
             <thead>
               <tr>
                 {columnHeaders.map((header) => (
@@ -359,7 +367,14 @@ class ResultsCard extends React.Component {
                         {result.battle_number}
                       </button>
                       {linkInfo ? (
-                        <FaCheckCircle style={{ paddingLeft: 6 }} />
+                        <FaCheckCircle
+                          style={{
+                            paddingLeft: 6,
+                            width: 20,
+                            height: 20,
+                            marginTop: -4,
+                          }}
+                        />
                       ) : null}
                     </td>
                     <td>{result.game_mode.key}</td>
