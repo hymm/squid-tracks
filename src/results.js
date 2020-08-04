@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
@@ -15,7 +15,6 @@ class Results extends React.Component {
   };
 
   componentDidMount() {
-    this.getResults();
     const statInkInfo = ipcRenderer.sendSync('getFromStatInkStore', 'info');
     this.setState({
       statInk: statInkInfo,
@@ -115,6 +114,7 @@ class Results extends React.Component {
 
 const SubscribedResults = () => {
   const splatnet = useSplatnet();
+  useEffect(splatnet.comm.updateResults, []);
   return <Results splatnet={splatnet} />;
 };
 
