@@ -35,9 +35,10 @@ class RecordsContainer extends React.Component {
     const { refreshing } = this.state;
 
     return (
-      <div>
+      <>
         <ButtonToolbar style={{ marginBottom: '10px' }}>
           <Button
+            variant="outline-secondary"
             onClick={() => {
               event('records', 'refresh');
               splatnet.comm.updateRecords();
@@ -51,12 +52,12 @@ class RecordsContainer extends React.Component {
               : intl.formatMessage(this.messages.refresh)}
           </Button>
         </ButtonToolbar>
-        <PlayerCard records={records.records} />
-        <StageCard records={records.records} />
-        <WeaponCard records={records.records} />
-        <LeagueCard records={records.records} />
+        <PlayerCard className="mb-3" records={records.records} />
+        <StageCard className="mb-3" records={records.records} />
+        <WeaponCard className="mb-3" records={records.records} />
+        <LeagueCard className="mb-3" records={records.records} />
         <FesCard records={records.records} festivals={records.festivals} />
-      </div>
+      </>
     );
   }
 }

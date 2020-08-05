@@ -164,7 +164,7 @@ class StageCard extends React.Component {
     sort(stageStats, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Card>
+      <Card className={this.props.className}>
         <Card.Header>
           <FormattedMessage
             id="StageCard.title.v2"
@@ -178,6 +178,7 @@ class StageCard extends React.Component {
                 <ButtonToolbar style={{ marginBottom: '10px' }}>
                   <ButtonGroup>
                     <Button
+                      variant="outline-secondary"
                       onClick={this.showPercent}
                       active={this.state.percent}
                     >
@@ -187,6 +188,7 @@ class StageCard extends React.Component {
                       />
                     </Button>
                     <Button
+                      variant="outline-secondary"
                       onClick={this.showCount}
                       active={!this.state.percent}
                     >
@@ -205,7 +207,7 @@ class StageCard extends React.Component {
             </Row>
             <Row>
               <Col sm={12} md={12}>
-                <Table striped bordered hover>
+                <Table size="sm" striped bordered hover>
                   <thead>
                     <tr>
                       <th>

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card, Table, Container, Col } from 'react-bootstrap';
+import { Card, Table, Container, Col, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 const FesTable = ({ fes_name, fes_id, fes_grade, fes_power }) => {
   return (
-    <Col md={6}>
+    <Col md={6} lg={4} xl={3}>
       <h4>{fes_name}</h4>
       <Table striped bordered hover>
         <thead>
@@ -35,7 +35,7 @@ const FesTable = ({ fes_name, fes_id, fes_grade, fes_power }) => {
   );
 };
 
-const FesCard = ({ records, festivals }) => {
+const FesCard = ({ records, festivals, className }) => {
   const { fes_results = {} } = records;
   const fesArray = [];
   const fesVs = {};
@@ -51,7 +51,7 @@ const FesCard = ({ records, festivals }) => {
   });
 
   return (
-    <Card>
+    <Card className={className}>
       <Card.Header>
         <FormattedMessage
           id="FesCard.title"
@@ -60,15 +60,17 @@ const FesCard = ({ records, festivals }) => {
       </Card.Header>
       <Card.Body>
         <Container fluid>
-          {fesArray.map((fes) => (
-            <FesTable
-              key={fes.fes_id}
-              fes_name={fesVs[fes.fes_id]}
-              fes_id={fes.fes_id}
-              fes_grade={fes.fes_grade.name}
-              fes_power={fes.fes_power}
-            />
-          ))}
+          <Row>
+            {fesArray.map((fes) => (
+              <FesTable
+                key={fes.fes_id}
+                fes_name={fesVs[fes.fes_id]}
+                fes_id={fes.fes_id}
+                fes_grade={fes.fes_grade.name}
+                fes_power={fes.fes_power}
+              />
+            ))}
+          </Row>
         </Container>
       </Card.Body>
     </Card>

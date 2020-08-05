@@ -182,25 +182,21 @@ class IksmToken extends React.Component {
 
 const LanguageSettings = ({ setLocale, locale }) => {
   return (
-    <Row>
-      <Col md={12}>
-        <Card>
-          <Card.Header>
-            <FormattedMessage
-              id="Settings.Language.title"
-              defaultMessage="Language"
-            />
-          </Card.Header>
-          <Card.Body>
-            <FormattedMessage
-              id="Settings.Language.warning"
-              defaultMessage="Languages in the Splatnet API are limited by Nintendo regions, so some languages may not work correctly."
-            />
-            <LanguageSelect setLocale={setLocale} locale={locale} />
-          </Card.Body>
-        </Card>
-      </Col>
-    </Row>
+    <Card>
+      <Card.Header>
+        <FormattedMessage
+          id="Settings.Language.title"
+          defaultMessage="Language"
+        />
+      </Card.Header>
+      <Card.Body>
+        <FormattedMessage
+          id="Settings.Language.warning"
+          defaultMessage="Languages in the Splatnet API are limited by Nintendo regions, so some languages may not work correctly."
+        />
+        <LanguageSelect setLocale={setLocale} locale={locale} />
+      </Card.Body>
+    </Card>
   );
 };
 
@@ -327,18 +323,22 @@ const SecurityTokens = () => {
 const SettingsScreen = ({ token, logoutCallback, setLocale, locale, intl }) => {
   return (
     <Container fluid style={{ marginTop: '1rem', marginBotton: 30 }}>
-      <LanguageSettings setLocale={setLocale} locale={locale} />
-      <Row>
+      <Row className="mb-3">
+        <Col md={12}>
+          <LanguageSettings setLocale={setLocale} locale={locale} />
+        </Col>
+      </Row>
+      <Row className="mb-3">
         <Col md={12}>
           <StatInkSettings intl={intl} />
         </Col>
       </Row>
-      <Row>
+      <Row className="mb-3">
         <Col md={12}>
           <GoogleAnalyticsSettings />
         </Col>
       </Row>
-      <Row>
+      <Row className="mb-3">
         <Col md={12}>
           <Debugging />
         </Col>

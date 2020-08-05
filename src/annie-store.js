@@ -137,7 +137,7 @@ const MerchRight = ({ merch, intl, original }) => {
   const timeLeftInHours = timeLeftInSeconds / 3600;
 
   return (
-    <Col sm={6} md={6} className="details">
+    <Col md={6} className="details">
       <Row>
         <Col>
           <h3 style={{ textAlign: 'center', marginTop: 0 }}>
@@ -163,11 +163,10 @@ const MerchRight = ({ merch, intl, original }) => {
 const Merch = ({ merch, order, disabled, intl, original }) => {
   return (
     <Col sm={6} md={6} lg={4}>
-      <Card>
+      <Card className="mb-3">
         <Card.Body>
           <Row className="merch">
             <Col
-              sm={6}
               md={6}
               style={{ textAlign: 'center', verticalAlign: 'middle' }}
             >
@@ -203,56 +202,54 @@ const Merch = ({ merch, order, disabled, intl, original }) => {
 
 const OrderedInfo = ({ order, cancel, cancelled, intl, original }) => {
   return (
-    <Row>
-      <Col sm={12} md={12} lg={12}>
-        <Card>
-          <Card.Header>{intl.formatMessage(messages.ordered)}</Card.Header>
-          <Card.Body>
-            <Row className="merch">
-              <Col
-                sm={6}
-                md={6}
-                style={{ textAlign: 'center', verticalAlign: 'middle' }}
+    <Col sm={12} md={12} lg={12}>
+      <Card className="mb-3">
+        <Card.Header>{intl.formatMessage(messages.ordered)}</Card.Header>
+        <Card.Body>
+          <Row className="merch">
+            <Col
+              sm={6}
+              md={6}
+              style={{ textAlign: 'center', verticalAlign: 'middle' }}
+            >
+              <Image
+                src={`https://app.splatoon2.nintendo.net${order.gear.image}`}
+                className="merch"
+              />
+            </Col>
+            <Col sm={6} md={6} className="details">
+              <Row>
+                <Col>
+                  <h3 style={{ textAlign: 'center', marginTop: 0 }}>
+                    {order.gear.name}
+                  </h3>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={12}>
+                  <MerchTable merch={order} intl={intl} original={original} />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <Button
+                block
+                variant="warning"
+                onClick={() => {
+                  cancel();
+                }}
               >
-                <Image
-                  src={`https://app.splatoon2.nintendo.net${order.gear.image}`}
-                  className="merch"
-                />
-              </Col>
-              <Col sm={6} md={6} className="details">
-                <Row>
-                  <Col>
-                    <h3 style={{ textAlign: 'center', marginTop: 0 }}>
-                      {order.gear.name}
-                    </h3>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col md={12}>
-                    <MerchTable merch={order} intl={intl} original={original} />
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={12}>
-                <Button
-                  block
-                  variant="warning"
-                  onClick={() => {
-                    cancel();
-                  }}
-                >
-                  {cancelled
-                    ? intl.formatMessage(messages.uncancelButtonText)
-                    : intl.formatMessage(messages.cancelButtonText)}
-                </Button>
-              </Col>
-            </Row>
-          </Card.Body>
-        </Card>
-      </Col>
-    </Row>
+                {cancelled
+                  ? intl.formatMessage(messages.uncancelButtonText)
+                  : intl.formatMessage(messages.cancelButtonText)}
+              </Button>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 };
 
@@ -297,11 +294,15 @@ class AnnieStore extends React.Component {
     const { merchandises, ordered_info } = splatnet.current.annie;
     const { annieOriginal = [] } = splatnet.current;
     return (
-      <Container fluid style={{ marginTop: 65 }}>
+      <Container fluid style={{ marginTop: '1rem' }}>
         <Row>
           <Col md={12}>
             <ButtonToolbar style={{ marginBottom: '10px' }}>
-              <Button onClick={this.update} disabled={this.state.refreshing}>
+              <Button
+                variant="outline-secondary"
+                onClick={this.update}
+                disabled={this.state.refreshing}
+              >
                 {this.state.refreshing
                   ? intl.formatMessage(messages.refreshed)
                   : intl.formatMessage(messages.refresh)}
@@ -309,14 +310,16 @@ class AnnieStore extends React.Component {
             </ButtonToolbar>
           </Col>
         </Row>
-        {ordered_info != null && !cancelled ? (
-          <OrderedInfo
-            order={ordered_info}
-            cancel={this.cancel}
-            cancelled={cancelled}
-            intl={intl}
-          />
-        ) : null}
+        <Row>
+          {ordered_info != null && !cancelled ? (
+            <OrderedInfo
+              order={ordered_info}
+              cancel={this.cancel}
+              cancelled={cancelled}
+              intl={intl}
+            />
+          ) : null}
+        </Row>
         <Row>
           {merchandises.map((merch, i) => (
             <Merch

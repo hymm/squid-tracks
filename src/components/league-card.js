@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 const LeagueTable = ({ medals, max_rank }) => {
   return (
-    <Table striped bordered hover>
+    <Table size="sm" striped bordered hover>
       <thead>
         <tr />
       </thead>
@@ -59,10 +59,10 @@ const LeagueTable = ({ medals, max_rank }) => {
   );
 };
 
-const LeagueCard = ({ records }) => {
+const LeagueCard = ({ records, className }) => {
   const { player, league_stats } = records;
   return (
-    <Card>
+    <Card className={className}>
       <Card.Header>
         <FormattedMessage id="LeagueCard.title" defaultMessage="League Stats" />
       </Card.Header>

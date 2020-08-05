@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-const PlayerCard = ({ records }) => {
+const PlayerCard = ({ records, className }) => {
   const { player = {} } = records;
   const {
     udemae_rainmaker = {},
@@ -33,7 +33,7 @@ const PlayerCard = ({ records }) => {
     : '';
 
   return (
-    <Card>
+    <Card className={className}>
       <Card.Header>Player Card</Card.Header>
       <Card.Body>
         <FormattedMessage

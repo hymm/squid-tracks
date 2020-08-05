@@ -120,7 +120,7 @@ class WeaponCard extends React.Component {
     sort(weaponArray, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Card>
+      <Card className={this.props.className}>
         <Card.Header>
           <FormattedMessage
             id="WeaponCard.title"
@@ -133,7 +133,7 @@ class WeaponCard extends React.Component {
             defaultMessage="* Click on column headers to sort"
           />
 
-          <Table striped bordered hover>
+          <Table size="sm" striped bordered hover>
             <thead>
               <tr>
                 {this.columnHeaders.map((header) => {
