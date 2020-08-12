@@ -226,6 +226,9 @@ function createMenusMacOS() {
         { label: 'Zoom Out', role: 'zoomout' },
         { type: 'separator' },
         { label: 'Toggle Full Screen', role: 'togglefullscreen' },
+        ...(isDev
+          ? [{ label: 'Toggle Developer Tools', role: 'toggledevtools' }]
+          : []),
       ],
     },
     {
@@ -278,8 +281,6 @@ function createWindow() {
   }*/
 
   mainWindow.loadURL(startUrl);
-
-  // mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows
