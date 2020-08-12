@@ -7,7 +7,6 @@ import {
   Alert,
   Card,
   ButtonToolbar,
-  Accordion,
 } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
