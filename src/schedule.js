@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, Row, Col, Table, Image } from 'react-bootstrap';
+import { Container, Row, Col, Image } from 'react-bootstrap';
 import { FormattedMessage, defineMessages, useIntl } from 'react-intl';
 import { useSplatnet } from './splatnet-provider';
 import './schedule.css';
