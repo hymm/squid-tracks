@@ -22,38 +22,26 @@ const GachiRow = ({ rotation }) => {
   }
 
   return (
-    <Container>
-      <Row>{hour}</Row>
-      <Row>
-        <Col>
-          <strong>{rotation.rule.name}</strong>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <div className="rotation-map">
-            <Image
-              src={
-                'https://app.splatoon2.nintendo.net' + rotation.stage_a.image
-              }
-              fluid
-            />
-            {rotation.stage_a.name}
-          </div>
-        </Col>
-        <Col>
-          <div className="rotation-map">
-            <Image
-              src={
-                'https://app.splatoon2.nintendo.net' + rotation.stage_b.image
-              }
-              fluid
-            />
-            {rotation.stage_b.name}
-          </div>
-        </Col>
-      </Row>
-    </Container>
+    <div className="schedule-row">
+      <div className="schedule-hour">{hour}</div>
+      <div className="schedule-rule">
+        <strong>{rotation.rule.name}</strong>
+      </div>
+      <div className="rotation-map rotation-map-1">
+        <Image
+          src={'https://app.splatoon2.nintendo.net' + rotation.stage_a.image}
+          fluid
+        />
+        {rotation.stage_a.name}
+      </div>
+      <div className="rotation-map">
+        <Image
+          src={'https://app.splatoon2.nintendo.net' + rotation.stage_b.image}
+          fluid
+        />
+        {rotation.stage_b.name}
+      </div>
+    </div>
   );
 };
 
@@ -62,33 +50,31 @@ export default function Schedule() {
   useEffect(splatnet.comm.updateSchedule, []);
   const { regular = [], gachi = [], league = [] } = splatnet.current.schedule;
   return (
-    <Container style={{ paddingTop: '1rem' }}>
-      <Row>
-        <Col md={4}>
-          <h2>
-            <FormattedMessage id="schedule.regular" defaultMessage="Turf" />
-          </h2>
-          {regular.map((rotation) => (
-            <GachiRow key={rotation.start_time} rotation={rotation} />
-          ))}
-        </Col>
-        <Col md={4}>
-          <h2>
-            <FormattedMessage id="schedule.gachi" defaultMessage="Ranked" />
-          </h2>
-          {gachi.map((rotation) => (
-            <GachiRow key={rotation.start_time} rotation={rotation} />
-          ))}
-        </Col>
-        <Col md={4}>
-          <h2>
-            <FormattedMessage id="schedule.league" defaultMessage="League" />
-          </h2>
-          {league.map((rotation) => (
-            <GachiRow key={rotation.start_time} rotation={rotation} />
-          ))}
-        </Col>
-      </Row>
-    </Container>
+    <div className="schedule-page" style={{ paddingTop: '1rem' }}>
+      <div className="schedule-mode">
+        <h2>
+          <FormattedMessage id="schedule.regular" defaultMessage="Turf" />
+        </h2>
+        {regular.map((rotation) => (
+          <GachiRow key={rotation.start_time} rotation={rotation} />
+        ))}
+      </div>
+      <div className="schedule-mode">
+        <h2>
+          <FormattedMessage id="schedule.gachi" defaultMessage="Ranked" />
+        </h2>
+        {gachi.map((rotation) => (
+          <GachiRow key={rotation.start_time} rotation={rotation} />
+        ))}
+      </div>
+      <div className="schedule-mode">
+        <h2>
+          <FormattedMessage id="schedule.league" defaultMessage="League" />
+        </h2>
+        {league.map((rotation) => (
+          <GachiRow key={rotation.start_time} rotation={rotation} />
+        ))}
+      </div>
+    </div>
   );
 }

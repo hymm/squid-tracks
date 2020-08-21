@@ -11,3 +11,21 @@
   border-radius: 20px 20px 0px 0px;
   margin-bottom: 3px;
 }
+
+.schedule-page {
+  margin: 1rem;
+  margin-top: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.schedule-mode {
+  grid-column: span 2;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 1rem;
+}
