@@ -28,16 +28,13 @@ before_install:
 script:
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      docker run --rm -ti \
+      docker run --rm \
         -e GH_TOKEN=$GH_TOKEN \
-        --env ELECTRON_CACHE="/root/.cache/electron" \
-        --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder" \
         -v ${PWD}:/project \
-        -v ${PWD##*/}-node-modules:/project/node_modules \
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
-        /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn build && yarn release --linux"
+        /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn build && yarn release --linux --win"
     else
       yarn build && yarn release
     fi
