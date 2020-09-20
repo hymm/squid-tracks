@@ -62,7 +62,7 @@ const PlayerRow = ({ player, crown }) => {
       </td>
 
       {player.player.udemae ? (
-        <td>{`${player.player.udemae.name}${crown ? '👑' : ''}`}</td>
+        <td>{`${player.player.udemae.name || 'C-'}${crown ? '👑' : ''}`}</td>
       ) : null}
       <td style={{ textAlign: 'center', background: 'darkgrey' }}>
         <Image
