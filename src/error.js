@@ -1,22 +1,22 @@
 import React from 'react';
 import {
-  Grid,
+  Container,
   Row,
   Col,
   Button,
   Alert,
-  Panel,
-  ButtonToolbar
+  Card,
+  ButtonToolbar,
 } from 'react-bootstrap';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { Subscriber } from 'react-broadcast';
 import { ipcRenderer } from 'electron';
 import { event } from './analytics';
+import { useSplatnet } from './splatnet-provider';
 
 class ErrorPage extends React.Component {
   state = {
-    open: false
+    open: false,
   };
 
   handleClick = () => {
@@ -36,7 +36,7 @@ class ErrorPage extends React.Component {
   render() {
     const { splatnet } = this.props;
     return (
-      <Alert bsStyle="danger">
+      <Alert variant="danger">
         <h4>
           <FormattedMessage
             id="Error.title"
@@ -48,24 +48,19 @@ class ErrorPage extends React.Component {
             id="Error.helpText"
             defaultMessage="If you see this multiple times your session has probably expired. Try logging out and logging back in with a new session."
           />
-          <Button onClick={this.handleClick}>
-            <FormattedMessage id="Error.buttonMoreInfo" defaultMessage="More" />
-          </Button>
         </p>
         <p>
-          <Panel expanded={this.state.open}>
-            <Panel.Collapse>
-              <Panel.Body>
-                {splatnet.lastError != null ? splatnet.lastError : 'Error'}
-              </Panel.Body>
-            </Panel.Collapse>
-          </Panel>
+          <Card>
+            <Card.Body>
+              {splatnet.lastError != null ? splatnet.lastError : 'Error'}
+            </Card.Body>
+          </Card>
         </p>
         <ButtonToolbar>
-          <Button bsStyle="danger" onClick={this.handleLogout}>
+          <Button className="mr-2" variant="danger" onClick={this.handleLogout}>
             <FormattedMessage id="Error.buttonLogout" defaultMessage="Logout" />
           </Button>
-          <Button bsStyle="default" onClick={this.handleIgnore}>
+          <Button variant="outline-secondary" onClick={this.handleIgnore}>
             <FormattedMessage id="Error.buttonIgnore" defaultMessage="Ignore" />
           </Button>
         </ButtonToolbar>
@@ -74,22 +69,18 @@ class ErrorPage extends React.Component {
   }
 }
 
-const ErrorPageWithRouter = withRouter(ErrorPage);
-
-const ErrorPageWithSplatnet = props => {
+function ErrorPageWithSplatnet(props) {
+  const splatnet = useSplatnet();
+  const history = useHistory();
   return (
-    <Subscriber channel="splatnet">
-      {splatnet => (
-        <Grid fluid style={{ marginTop: 65 }}>
-          <Row>
-            <Col md={12}>
-              <ErrorPageWithRouter {...props} splatnet={splatnet} />
-            </Col>
-          </Row>
-        </Grid>
-      )}
-    </Subscriber>
+    <Container fluid style={{ marginTop: '1rem' }}>
+      <Row>
+        <Col md={12}>
+          <ErrorPage {...props} history={history} splatnet={splatnet} />
+        </Col>
+      </Row>
+    </Container>
   );
-};
+}
 
 export default ErrorPageWithSplatnet;

@@ -16,34 +16,43 @@
   --private-dark-color: rgb(133, 36, 162);
 }
 
-.regular .panel-heading.nav.navbar-default {
+.regular .card-header.nav.navbar-default {
   background: var(--regular-light-color);
 }
-.gachi .panel-heading.nav.navbar-default {
+.gachi .card-header.nav.navbar-default {
   background: var(--gachi-light-color);
 }
-.league_pair .panel-heading.nav.navbar-default {
+.league_pair .card-header.nav.navbar-default {
   background: var(--league-light-color);
 }
-.league_team .panel-heading.nav.navbar-default {
+.league_team .card-header.nav.navbar-default {
   background: var(--league-light-color);
 }
-.private .panel-heading.nav.navbar-default {
+.private .card-header.nav.navbar-default {
   background: var(--private-light-color);
 }
 
 .regular .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: var(--regular-light-color);
+  background-color: var(--regular-light-color);
 }
 .gachi .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: var(--gachi-light-color);
+  background-color: var(--gachi-light-color);
 }
 .league_pair .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: var(--league-light-color);
+  background-color: var(--league-light-color);
 }
 .league_team .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: var(--league-light-color);
+  background-color: var(--league-light-color);
 }
 .private .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: var(--private-light-color);
+  background-color: var(--private-light-color);
+}
+
+.btn.active {
+  fill: white;
+}
+
+h4 .badge {
+  font-family: VarelaRound;
+  font-size: 16px;
 }

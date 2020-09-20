@@ -1,26 +1,25 @@
-import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import ResultsCard from './components/results-card';
 import ResultDetailCard from './components/result-detail-card';
 import ResultsControl from './components/results-controls';
 import { ipcRenderer } from 'electron';
-import { Subscriber } from 'react-broadcast';
 import lodash from 'lodash';
+import { useSplatnet } from './splatnet-provider';
 
 class Results extends React.Component {
   state = {
     currentResultIndex: -1,
     statInk: {},
-    initialized: false
+    initialized: false,
   };
 
   componentDidMount() {
-    this.getResults();
     const statInkInfo = ipcRenderer.sendSync('getFromStatInkStore', 'info');
     this.setState({
       statInk: statInkInfo,
       initialized: false,
-      currentResultIndex: 0
+      currentResultIndex: 0,
     });
   }
 
@@ -29,13 +28,13 @@ class Results extends React.Component {
     splatnet.comm.updateResults();
   };
 
-  changeResult = arrayIndex => {
+  changeResult = (arrayIndex) => {
     const { splatnet } = this.props;
     const results = splatnet.current.results.results;
     const battleNumber = results[arrayIndex].battle_number;
     splatnet.comm.getBattle(battleNumber);
     this.setState({
-      currentResultIndex: arrayIndex
+      currentResultIndex: arrayIndex,
     });
   };
 
@@ -62,13 +61,13 @@ class Results extends React.Component {
     return battle;
   }
 
-  changeResultByBattleNumber = battleNumber => {
+  changeResultByBattleNumber = (battleNumber) => {
     const { splatnet } = this.props;
     splatnet.comm.getBattle(battleNumber);
     this.setState({
       currentResultIndex: splatnet.current.results.results.findIndex(
-        a => a.battle_number === battleNumber
-      )
+        (a) => a.battle_number === battleNumber
+      ),
     });
   };
 
@@ -85,7 +84,7 @@ class Results extends React.Component {
     const currentBattle = this.getCurrentBattle();
 
     return (
-      <Grid fluid style={{ marginTop: 65 }}>
+      <Container fluid style={{ marginTop: '1rem' }}>
         <Row>
           <Col md={12}>
             <ResultsControl
@@ -108,17 +107,15 @@ class Results extends React.Component {
             />
           </Col>
         </Row>
-      </Grid>
+      </Container>
     );
   }
 }
 
 const SubscribedResults = () => {
-  return (
-    <Subscriber channel="splatnet">
-      {splatnet => <Results splatnet={splatnet} />}
-    </Subscriber>
-  );
+  const splatnet = useSplatnet();
+  useEffect(splatnet.comm.updateResults, []);
+  return <Results splatnet={splatnet} />;
 };
 
 export default SubscribedResults;

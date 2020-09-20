@@ -4,7 +4,7 @@ import {
   RadarChart,
   PolarGrid,
   Legend,
-  PolarAngleAxis /* PolarRadiusAxis */
+  PolarAngleAxis /* PolarRadiusAxis */,
 } from 'recharts';
 
 const dataTypes = [
@@ -12,16 +12,16 @@ const dataTypes = [
   { stat: 'Specials', key: 's', fullMark: 10 },
   { stat: 'Paint', key: 'p', fullMark: 2500 },
   { stat: 'Deaths', key: 'd', fullMark: 20 },
-  { stat: 'Kills', key: 'k', fullMark: 20 }
+  { stat: 'Kills', key: 'k', fullMark: 20 },
 ];
 
 const colors = [['#C83D79', '#CF581B', 'darkblue', 'green'], []];
 
 function normalize(team, maximums) {
-  const keys = dataTypes.map(type => type.key);
-  const normalized = team.map(player => {
+  const keys = dataTypes.map((type) => type.key);
+  const normalized = team.map((player) => {
     const tempObj = {};
-    keys.forEach(key => {
+    keys.forEach((key) => {
       tempObj[key] = player[key] / maximums[key];
     });
     return tempObj;
@@ -31,17 +31,17 @@ function normalize(team, maximums) {
 }
 
 const RadarTeam = ({ team, maximums }) => {
-  const mappedTeam = team.map(player => {
+  const mappedTeam = team.map((player) => {
     return {
       k: player.kill_count,
       a: player.assist_count,
       d: player.death_count,
       s: player.special_count,
-      p: player.game_paint_point
+      p: player.game_paint_point,
     };
   });
   const normalized = normalize(mappedTeam, maximums);
-  const data = dataTypes.map(row => {
+  const data = dataTypes.map((row) => {
     team.forEach((player, index) => {
       row[player.player.principal_id] = normalized[index][row.key];
       row.statMax = `${row.stat} (${maximums[row.key]})`;

@@ -1,5 +1,5 @@
 import ua from 'universal-analytics';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 const { ipcRenderer, remote } = require('electron');
 const { app } = remote;
 const appVersion = app.getVersion();
@@ -22,7 +22,7 @@ function errorHandler(err) {
 }
 
 // support disabling analytics
-export const screenview = screenName => {
+export const screenview = (screenName) => {
   if (ipcRenderer.sendSync('getFromStore', 'gaEnabled')) {
     visitor.screenview(screenName, appName, appVersion, errorHandler).send();
   }

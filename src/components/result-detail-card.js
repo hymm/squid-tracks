@@ -1,17 +1,18 @@
 import React from 'react';
 import {
-  Grid,
+  Container,
   Row,
   Col,
-  Glyphicon,
   ButtonToolbar,
   ButtonGroup,
   Button,
   Nav,
   NavDropdown,
-  MenuItem,
-  Label
+  Dropdown,
+  Badge,
+  Card,
 } from 'react-bootstrap';
+import { FaEllipsisV, FaCheckCircle, FaTh, FaEllipsisH } from 'react-icons/fa';
 import { pick, mapKeys, cloneDeep } from 'lodash';
 import flatten from 'flat';
 import { FormattedMessage } from 'react-intl';
@@ -56,7 +57,7 @@ class ResultDetailMenu extends React.Component {
       'my_team_result.key': 'my_team_result',
       'other_team_result.key': 'other_team_result',
       'game_mode.key': 'game_mode',
-      'rule.key': 'rule'
+      'rule.key': 'rule',
     };
 
     const mapped = mapKeys(flattened, (value, key) => {
@@ -79,7 +80,7 @@ class ResultDetailMenu extends React.Component {
       assist_count: 'a',
       death_count: 'd',
       special_count: 's',
-      game_paint_point: 'p'
+      game_paint_point: 'p',
     };
 
     const mapped = mapKeys(flattened, (value, key) => {
@@ -138,46 +139,41 @@ class ResultDetailMenu extends React.Component {
   render() {
     return (
       <Nav className={'navbar-right pull-right'}>
-        <NavDropdown
-          id={'details-menu'}
-          title={<Glyphicon glyph={'option-vertical'} />}
-          noCaret
-          pullRight
-        >
-          <MenuItem onClick={this.copySimplifiedToJson}>
+        <NavDropdown id={'details-menu'} title={<FaEllipsisV />}>
+          <Dropdown.Item onClick={this.copySimplifiedToJson}>
             <FormattedMessage
               id="resultDetails.export.copySimpleJson"
               defaultMessage="Copy Simplified Json"
             />
-          </MenuItem>
-          <MenuItem onClick={this.copyToJson}>
+          </Dropdown.Item>
+          <Dropdown.Item onClick={this.copyToJson}>
             <FormattedMessage
               id="resultDetails.export.copyRawJson"
               defaultMessage="Copy Raw Json"
             />
-          </MenuItem>
-          <MenuItem divider />
-          <MenuItem onClick={this.copyPicture}>
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item onClick={this.copyPicture}>
             <FormattedMessage
               id="resultDetails.export.copyPicture"
               defaultMessage="Copy SplatNet Share picture"
             />
-          </MenuItem>
-          <MenuItem onClick={this.copyPictureURL}>
+          </Dropdown.Item>
+          <Dropdown.Item onClick={this.copyPictureURL}>
             <FormattedMessage
               id="resultDetails.export.copyPictureURL"
               defaultMessage="Copy SplatNet Share picture (URL)"
             />
-          </MenuItem>
-          <MenuItem divider />
-          <MenuItem>
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item>
             <strike>
               <FormattedMessage
                 id="resultDetails.export.saveToFile"
                 defaultMessage="Save to File"
               />
             </strike>
-          </MenuItem>
+          </Dropdown.Item>
         </NavDropdown>
       </Nav>
     );
@@ -188,25 +184,25 @@ const TeamBadges = ({ power, id, theme }) => {
   return (
     <React.Fragment>
       {theme != null ? (
-        <Label
-          bsStyle="default"
+        <Badge
+          variant="secondary"
           style={{
             fontWeight: 'normal',
             marginLeft: 5,
             marginRight: 5,
-            background: theme.color.css_rgb
+            background: theme.color.css_rgb,
           }}
         >
           {theme.name}
-        </Label>
+        </Badge>
       ) : null}
       {power != null ? (
-        <Label
-          bsStyle="default"
+        <Badge
+          variant="secondary"
           style={{
             fontWeight: 'normal',
             marginLeft: 5,
-            marginRight: 5
+            marginRight: 5,
           }}
         >
           <FormattedMessage
@@ -214,15 +210,15 @@ const TeamBadges = ({ power, id, theme }) => {
             defaultMessage="Estimate Power {power}"
             values={{ power: power }}
           />
-        </Label>
+        </Badge>
       ) : null}
       {id ? (
-        <Label
-          bsStyle="default"
+        <Badge
+          variant="secondary"
           style={{ fontWeight: 'normal', marginRight: 5 }}
         >
           {`${id}`}
-        </Label>
+        </Badge>
       ) : null}
     </React.Fragment>
   );
@@ -231,7 +227,7 @@ const TeamBadges = ({ power, id, theme }) => {
 class ResultDetailCard extends React.Component {
   state = {
     show: 1,
-    anonymize: false
+    anonymize: false,
   };
 
   showStats = () => {
@@ -333,10 +329,10 @@ class ResultDetailCard extends React.Component {
     const gearResults = [];
     // don't check own gear
     // gearResults.push(this.checkPlayerGear(result.player_result.player));
-    result.my_team_members.forEach(player => {
+    result.my_team_members.forEach((player) => {
       gearResults.push(this.checkPlayerGear(player.player));
     });
-    result.other_team_members.forEach(player => {
+    result.other_team_members.forEach((player) => {
       gearResults.push(this.checkPlayerGear(player.player));
     });
 
@@ -347,7 +343,7 @@ class ResultDetailCard extends React.Component {
     if (res === 'perfect') {
       return 'info';
     }
-    return 'default';
+    return 'outline-secondary';
   }
 
   anonymize(result) {
@@ -395,198 +391,177 @@ class ResultDetailCard extends React.Component {
         : null;
 
     return (
-      <div className={resultChanged.game_mode.key}>
-        <PanelWithMenu
-          header={
-            <h3 className="panel-title">
-              <FormattedMessage
-                id="resultDetails.title"
-                defaultMessage="Battle #{battle_number} Details"
-                values={{ battle_number: resultChanged.battle_number }}
-              />
-              {linkInfo ? (
-                <button
-                  className="button-as-link"
-                  onClick={() =>
-                    openExternal(
-                      `https://stat.ink/@${linkInfo.username}/spl2/${linkInfo.battle}`
-                    )
-                  }
-                  style={{ cursor: 'pointer' }}
-                >
-                  <Glyphicon glyph={'ok-sign'} style={{ paddingLeft: 6 }} />
-                </button>
-              ) : null}
-            </h3>
-          }
-          menu={<ResultDetailMenu result={resultChanged} />}
-        >
-          <Grid fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
-            <Row>
-              <Col md={12}>
-                <BattleSummary result={resultChanged} />
-              </Col>
-            </Row>
-            <Row>
-              <Col md={12}>
-                <ButtonToolbar style={{ marginBottom: '10px' }}>
-                  <ButtonGroup>
-                    <Button
-                      onClick={this.showStats}
-                      active={this.state.show === 1}
-                    >
-                      <Glyphicon glyph="th" />
-                    </Button>
-                    <Button
-                      onClick={this.showGear}
-                      active={this.state.show === 2}
-                      bsStyle={this.getGearStyle()}
-                      style={{ padding: '8px 12px 4px 12px' }}
-                    >
-                      <svg width="16" height="14" viewBox="0 0 448 416">
-                        <path
-                          fill="#000"
-                          d="M448 48L288 0c-13.988 27.227-30.771 40.223-63.769 40.223C191.723 39.676 173.722 27 160 0L0 48l32 88 64-8-16 288h288l-16-288 64 8 32-88z"
-                        />
-                      </svg>
-                    </Button>
-                    <Button
-                      onClick={this.showRadarTotals}
-                      active={this.state.show === 5}
-                      style={{ padding: '8px 12px 4px 12px' }}
-                    >
-                      <svg width="14" height="14">
-                        <polygon
-                          points="7,0,13.062177826491,3.5,13.062177826491,10.5,7,14,0.93782217350893,10.5,0.93782217350893,3.5"
-                          style={{
-                            fill: '#000'
-                          }}
-                        />
-                      </svg>
-                    </Button>
-                    <Button
-                      onClick={this.showRadarTeam}
-                      active={this.state.show === 4}
-                      style={{ padding: '8px 12px 4px 12px' }}
-                    >
-                      <svg width="16" height="14">
-                        <polygon
-                          points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
-                          style={{
-                            fill: '#000'
-                          }}
-                        />
-                      </svg>
-                      <svg width="14" height="14">
-                        <polygon
-                          points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754"
-                          style={{
-                            fill: '#000'
-                          }}
-                        />
-                      </svg>
-                    </Button>
-                    <Button
-                      onClick={this.showInfo}
-                      active={this.state.show === 3}
-                    >
-                      <Glyphicon glyph="option-horizontal" />
-                    </Button>
-                  </ButtonGroup>
+      <PanelWithMenu
+        className={['mb-3', resultChanged.game_mode.key].join(' ')}
+        header={
+          <Card.Title>
+            <FormattedMessage
+              id="resultDetails.title"
+              defaultMessage="Battle #{battle_number} Details"
+              values={{ battle_number: resultChanged.battle_number }}
+            />
+            {linkInfo ? (
+              <button
+                className="button-as-link"
+                onClick={() =>
+                  openExternal(
+                    `https://stat.ink/@${linkInfo.username}/spl2/${linkInfo.battle}`
+                  )
+                }
+                style={{ cursor: 'pointer' }}
+              >
+                <FaCheckCircle style={{ paddingLeft: 6 }} />
+              </button>
+            ) : null}
+          </Card.Title>
+        }
+        menu={<ResultDetailMenu result={resultChanged} />}
+      >
+        <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
+          <Row>
+            <Col md={12} style={{ marginTop: '-0.5rem' }}>
+              <BattleSummary result={resultChanged} />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <ButtonToolbar style={{ marginBottom: '10px' }}>
+                <ButtonGroup className="mr-2">
                   <Button
-                    onClick={() => {
-                      event(
-                        'result-details',
-                        'anonymize',
-                        !this.state.anonymize
-                      );
-                      this.setState({ anonymize: !this.state.anonymize });
-                    }}
-                    active={this.state.anonymize}
+                    variant="outline-secondary"
+                    onClick={this.showStats}
+                    active={this.state.show === 1}
                   >
-                    <FormattedMessage
-                      id={'resultDetails.anonymizeButton.text'}
-                      defaultMessage={'Anonymize'}
-                    />
+                    <FaTh />
                   </Button>
-                </ButtonToolbar>
-              </Col>
-            </Row>
-            <Row>
-              {this.state.show < 5 ? (
-                [
-                  <Col sm={6} md={6} key="myTeam">
-                    <h4>
-                      <FormattedMessage
-                        id="resultDetails.teamsButton.myTeamTitle"
-                        defaultMessage="My Team"
-                      />
-                      <TeamBadges
-                        power={myTeamPower}
-                        theme={result.my_team_fes_theme}
-                        id={resultChanged.tag_id}
-                      />
-                    </h4>
-                    {this.state.show === 1 ? (
-                      <TeamStatsTable team={myTeam} result={result} />
-                    ) : null}
-                    {this.state.show === 2 ? (
-                      <TeamGearTable team={myTeam} />
-                    ) : null}
-                    {this.state.show === 3 ? (
-                      <TeamInfoTable team={myTeam} />
-                    ) : null}
-                    {this.state.show === 4 ? (
-                      <TeamRadar team={myTeam} maximums={maximums} />
-                    ) : null}
-                  </Col>,
-                  <Col sm={6} md={6} key="otherTeam">
-                    <h4>
-                      <FormattedMessage
-                        id="resultDetails.teamsButton.otherTeamTitle"
-                        defaultMessage="Enemy Team"
-                      />
-                      <TeamBadges
-                        power={otherTeamPower}
-                        theme={result.other_team_fes_theme}
-                      />
-                    </h4>
-                    {this.state.show === 1 ? (
-                      <TeamStatsTable team={otherTeam} result={result} />
-                    ) : null}
-                    {this.state.show === 2 ? (
-                      <TeamGearTable team={otherTeam} />
-                    ) : null}
-                    {this.state.show === 3 ? (
-                      <TeamInfoTable team={otherTeam} />
-                    ) : null}
-                    {this.state.show === 4 ? (
-                      <TeamRadar team={otherTeam} maximums={maximums} />
-                    ) : null}
-                  </Col>
-                ]
-              ) : (
-                <Col md={12}>
-                  <TeamRadarTotals
-                    myTeam={myTeam}
-                    myCount={
-                      result.my_team_count != null
-                        ? result.my_team_count
-                        : result.my_team_percentage
-                    }
-                    otherTeam={otherTeam}
-                    otherCount={
-                      result.other_team_count != null
-                        ? result.other_team_count
-                        : result.other_team_percentage
-                    }
+                  <Button
+                    onClick={this.showGear}
+                    active={this.state.show === 2}
+                    variant={this.getGearStyle()}
+                  >
+                    <svg width="16" height="14" viewBox="0 0 448 416">
+                      <path d="M448 48L288 0c-13.988 27.227-30.771 40.223-63.769 40.223C191.723 39.676 173.722 27 160 0L0 48l32 88 64-8-16 288h288l-16-288 64 8 32-88z" />
+                    </svg>
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    onClick={this.showRadarTotals}
+                    active={this.state.show === 5}
+                  >
+                    <svg width="14" height="14">
+                      <polygon points="7,0,13.062177826491,3.5,13.062177826491,10.5,7,14,0.93782217350893,10.5,0.93782217350893,3.5" />
+                    </svg>
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    onClick={this.showRadarTeam}
+                    active={this.state.show === 4}
+                  >
+                    <svg width="16" height="14">
+                      <polygon points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754" />
+                    </svg>
+                    <svg width="14" height="14">
+                      <polygon points="7,0,13.657395614066,4.8368810393754,11.114496766047,12.663118960625,2.8855032339527,12.663118960625,0.34260438593392,4.8368810393754" />
+                    </svg>
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    onClick={this.showInfo}
+                    active={this.state.show === 3}
+                  >
+                    <FaEllipsisH />
+                  </Button>
+                </ButtonGroup>
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => {
+                    event('result-details', 'anonymize', !this.state.anonymize);
+                    this.setState({ anonymize: !this.state.anonymize });
+                  }}
+                  active={this.state.anonymize}
+                >
+                  <FormattedMessage
+                    id={'resultDetails.anonymizeButton.text'}
+                    defaultMessage={'Anonymize'}
                   />
-                </Col>
-              )}
-            </Row>
-          </Grid>
-        </PanelWithMenu>
-      </div>
+                </Button>
+              </ButtonToolbar>
+            </Col>
+          </Row>
+          <Row>
+            {this.state.show < 5 ? (
+              [
+                <Col sm={6} md={6} key="myTeam">
+                  <h4>
+                    <FormattedMessage
+                      id="resultDetails.teamsButton.myTeamTitle"
+                      defaultMessage="My Team"
+                    />
+                    <TeamBadges
+                      power={myTeamPower}
+                      theme={result.my_team_fes_theme}
+                      id={resultChanged.tag_id}
+                    />
+                  </h4>
+                  {this.state.show === 1 ? (
+                    <TeamStatsTable team={myTeam} result={result} />
+                  ) : null}
+                  {this.state.show === 2 ? (
+                    <TeamGearTable team={myTeam} />
+                  ) : null}
+                  {this.state.show === 3 ? (
+                    <TeamInfoTable team={myTeam} />
+                  ) : null}
+                  {this.state.show === 4 ? (
+                    <TeamRadar team={myTeam} maximums={maximums} />
+                  ) : null}
+                </Col>,
+                <Col sm={6} md={6} key="otherTeam">
+                  <h4>
+                    <FormattedMessage
+                      id="resultDetails.teamsButton.otherTeamTitle"
+                      defaultMessage="Enemy Team"
+                    />
+                    <TeamBadges
+                      power={otherTeamPower}
+                      theme={result.other_team_fes_theme}
+                    />
+                  </h4>
+                  {this.state.show === 1 ? (
+                    <TeamStatsTable team={otherTeam} result={result} />
+                  ) : null}
+                  {this.state.show === 2 ? (
+                    <TeamGearTable team={otherTeam} />
+                  ) : null}
+                  {this.state.show === 3 ? (
+                    <TeamInfoTable team={otherTeam} />
+                  ) : null}
+                  {this.state.show === 4 ? (
+                    <TeamRadar team={otherTeam} maximums={maximums} />
+                  ) : null}
+                </Col>,
+              ]
+            ) : (
+              <Col md={12}>
+                <TeamRadarTotals
+                  myTeam={myTeam}
+                  myCount={
+                    result.my_team_count != null
+                      ? result.my_team_count
+                      : result.my_team_percentage
+                  }
+                  otherTeam={otherTeam}
+                  otherCount={
+                    result.other_team_count != null
+                      ? result.other_team_count
+                      : result.other_team_percentage
+                  }
+                />
+              </Col>
+            )}
+          </Row>
+        </Container>
+      </PanelWithMenu>
     );
   }
 }

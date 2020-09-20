@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col, Jumbotron } from 'react-bootstrap';
+import { Container, Row, Col, Jumbotron } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 const { shell, app } = require('electron').remote;
@@ -7,7 +7,7 @@ const { openExternal } = shell;
 const appVersion = app.getVersion();
 
 const AboutPage = () => (
-  <Grid fluid style={{ marginTop: 65 }}>
+  <Container fluid style={{ paddingTop: '1rem' }}>
     <Row>
       <Col md={12}>
         <Jumbotron style={{ textAlign: 'center' }}>
@@ -197,7 +197,7 @@ const AboutPage = () => (
         </p>
       </Col>
     </Row>
-  </Grid>
+  </Container>
 );
 
 export default AboutPage;

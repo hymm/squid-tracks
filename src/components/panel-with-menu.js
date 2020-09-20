@@ -1,13 +1,13 @@
 import React from 'react';
 import './panel-with-menu.css';
 
-const PanelWithMenu = ({ children, header, menu }) => (
-  <div className="panel panel-default panel-with-menu">
-    <div className="panel-heading nav navbar-default">
-      <div className="pull-left">{header}</div>
+const PanelWithMenu = ({ children, header, menu, className }) => (
+  <div className={[`card card-default card-with-menu`, className].join(' ')}>
+    <div className="card-header nav navbar-default">
+      <div className="mr-auto">{header}</div>
       {menu}
     </div>
-    <div className="panel-body">{children}</div>
+    <div className="card-body">{children}</div>
   </div>
 );
 

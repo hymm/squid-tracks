@@ -1,16 +1,13 @@
 import React from 'react';
 import {
-  Grid,
+  Container,
   Row,
   Col,
   ButtonToolbar,
   ButtonGroup,
   Button,
   FormGroup,
-  Checkbox,
-  ControlLabel,
-  FormControl,
-  Form
+  Form,
 } from 'react-bootstrap';
 import LeagueRankings from './components/league-rankings';
 import { event } from './analytics';
@@ -22,13 +19,13 @@ import './meta.css';
 const { ipcRenderer } = require('electron');
 
 const Meta = () => (
-  <Grid fluid style={{ marginTop: 65 }}>
+  <Container fluid style={{ marginTop: '1rem' }}>
     <Row>
       <Col md={12}>
         <MetaContainer />
       </Col>
     </Row>
-  </Grid>
+  </Container>
 );
 
 class MetaContainer extends React.Component {
@@ -39,7 +36,7 @@ class MetaContainer extends React.Component {
     region: 'ALL',
     title: 'Select Data Above',
     next_desired_start_of_week: 1,
-    combine_replicas_toggle: false
+    combine_replicas_toggle: false,
   };
 
   url = 'league_match_ranking/';
@@ -59,7 +56,7 @@ class MetaContainer extends React.Component {
       combine_replicas_toggle: ipcRenderer.sendSync(
         'getFromStore',
         'combineReplicaLeagueStats'
-      )
+      ),
     });
   }
 
@@ -68,9 +65,7 @@ class MetaContainer extends React.Component {
   }
 
   getMetaRequest() {
-    let endUtc = moment()
-      .utc()
-      .startOf('day');
+    let endUtc = moment().utc().startOf('day');
     let startUtc = moment().utc();
     if (
       startUtc.hour() < 2 ||
@@ -117,7 +112,7 @@ class MetaContainer extends React.Component {
       let newEntry = {};
       newEntry[data.league_id] = data;
       this.setState({
-        league_dict: update(this.state.league_dict, { $merge: newEntry })
+        league_dict: update(this.state.league_dict, { $merge: newEntry }),
       });
     }
     this.desired_start_of_week = this.state.next_desired_start_of_week;
@@ -131,11 +126,11 @@ class MetaContainer extends React.Component {
     this.setState({ full_teams: true });
   };
 
-  setRegion = e => {
+  setRegion = (e) => {
     this.setState({ region: e.target.value });
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ league_time: e.target.value });
   };
 
@@ -150,11 +145,11 @@ class MetaContainer extends React.Component {
       !this.state.combine_replicas_toggle
     );
     this.setState({
-      combine_replicas_toggle: !this.state.combine_replicas_toggle
+      combine_replicas_toggle: !this.state.combine_replicas_toggle,
     });
   };
 
-  setDesiredStartDayOfWeek = e => {
+  setDesiredStartDayOfWeek = (e) => {
     this.setState({ next_desired_start_of_week: e.target.value });
   };
 
@@ -199,17 +194,17 @@ class MetaContainer extends React.Component {
       Object.keys(league_dict).length === 0
     ) {
       return {
-        weapons_stats
+        weapons_stats,
       };
     }
-    Object.keys(league_dict).forEach(league => {
+    Object.keys(league_dict).forEach((league) => {
       let week_index = this.getWeekIndex(
         league_dict[league].start_time * 1000,
         this.desired_start_of_week
       );
-      Object.keys(league_dict[league].rankings).forEach(team => {
+      Object.keys(league_dict[league].rankings).forEach((team) => {
         Object.keys(league_dict[league].rankings[team].tag_members).forEach(
-          player => {
+          (player) => {
             let weap_name =
               league_dict[league].rankings[team].tag_members[player].weapon
                 .name;
@@ -226,7 +221,7 @@ class MetaContainer extends React.Component {
                 '215': '210',
                 '1115': '1110',
                 '2015': '2010',
-                '3005': '3000'
+                '3005': '3000',
               };
               if (weap_id in replica_equivalents) {
                 weap_id = replica_equivalents[weap_id];
@@ -245,7 +240,7 @@ class MetaContainer extends React.Component {
                 name: weap_name,
                 uses: 1,
                 total_points: league_dict[league].rankings[team].point,
-                avg_points: 0
+                avg_points: 0,
               };
             }
           }
@@ -258,7 +253,7 @@ class MetaContainer extends React.Component {
     for (let i = 0; i < weapons_stats.length; i++) {
       let running_total_points_for_week = 0;
       let running_total_uses_for_week = 0;
-      Object.keys(weapons_stats[i]).forEach(weapon => {
+      Object.keys(weapons_stats[i]).forEach((weapon) => {
         running_total_points_for_week += weapons_stats[i][weapon].total_points;
         running_total_uses_for_week += weapons_stats[i][weapon].uses;
         weapons_stats[i][weapon].avg_points =
@@ -270,12 +265,12 @@ class MetaContainer extends React.Component {
 
     let totals = {
       uses: total_uses_by_week,
-      total_points: total_points_by_week
+      total_points: total_points_by_week,
     };
 
     return {
       weapons_stats,
-      totals
+      totals,
     };
   }
 
@@ -285,7 +280,8 @@ class MetaContainer extends React.Component {
         <Form inline className="league_top">
           <ButtonToolbar>
             <Button
-              bsStyle="primary"
+              className="mr-2"
+              variant="primary"
               onClick={() => {
                 event(
                   'league_dict',
@@ -300,7 +296,7 @@ class MetaContainer extends React.Component {
                     this.state.region +
                     ' Region ' +
                     (this.state.full_teams ? 'Teams' : 'Pairs') +
-                    ' League Weapon Stats'
+                    ' League Weapon Stats',
                 });
                 this.getMetaRequest();
                 setTimeout(() => this.setState({ refreshing: false }), 4000);
@@ -309,17 +305,26 @@ class MetaContainer extends React.Component {
             >
               {this.state.refreshing ? 'Loaded' : 'Load Data'}
             </Button>
-            <ButtonGroup>
-              <Button onClick={this.showTeams} active={this.state.full_teams}>
+            <ButtonGroup className="mr-2">
+              <Button
+                variant="outline-secondary"
+                onClick={this.showTeams}
+                active={this.state.full_teams}
+              >
                 Teams
               </Button>
-              <Button onClick={this.showPairs} active={!this.state.full_teams}>
+              <Button
+                variant="outline-secondary"
+                onClick={this.showPairs}
+                active={!this.state.full_teams}
+              >
                 Pairs
               </Button>
             </ButtonGroup>
 
             <ButtonGroup>
               <Button
+                variant="outline-secondary"
                 onClick={this.setRegion}
                 value="ALL"
                 active={this.state.region === 'ALL'}
@@ -327,6 +332,7 @@ class MetaContainer extends React.Component {
                 All Regions
               </Button>
               <Button
+                variant="outline-secondary"
                 onClick={this.setRegion}
                 value="JP"
                 active={this.state.region === 'JP'}
@@ -334,6 +340,7 @@ class MetaContainer extends React.Component {
                 Japan
               </Button>
               <Button
+                variant="outline-secondary"
                 onClick={this.setRegion}
                 value="US"
                 active={this.state.region === 'US'}
@@ -341,6 +348,7 @@ class MetaContainer extends React.Component {
                 NA/AU/NZ
               </Button>
               <Button
+                variant="outline-secondary"
                 onClick={this.setRegion}
                 value="EU"
                 active={this.state.region === 'EU'}
@@ -349,10 +357,10 @@ class MetaContainer extends React.Component {
               </Button>
             </ButtonGroup>
             <FormGroup controlId="startOfWeekSelect">
-              <ControlLabel className="text">Start of Week (UTC):</ControlLabel>
-              <FormControl
+              <Form.Label className="text">Start of Week (UTC):</Form.Label>
+              <Form.Control
                 onChange={this.setDesiredStartDayOfWeek}
-                componentClass="select"
+                as="select"
                 placeholder="Monday"
                 value={this.state.next_desired_start_of_week}
               >
@@ -363,15 +371,15 @@ class MetaContainer extends React.Component {
                 <option value="4">Thursday</option>
                 <option value="5">Friday</option>
                 <option value="6">Saturday</option>
-              </FormControl>
+              </Form.Control>
             </FormGroup>
-            <Checkbox
+            <Form.Check
+              type="checkbox"
               className="text"
               checked={this.state.combine_replicas_toggle}
               onClick={this.handleReplicaToggleClick}
-            >
-              Combine Hero Versions
-            </Checkbox>
+              label="Combine Hero Versions"
+            />
           </ButtonToolbar>
         </Form>
         <br />

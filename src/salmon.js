@@ -1,17 +1,17 @@
-import React from 'react';
-import { Subscriber } from 'react-broadcast';
+import React, { useEffect } from 'react';
 import { FormattedDate, FormattedTime, FormattedMessage } from 'react-intl';
 import {
-  Grid,
+  Container,
   Row,
   Col,
   Image,
-  Panel,
+  Card,
   OverlayTrigger,
-  Tooltip
+  Tooltip,
 } from 'react-bootstrap';
 import CoopResults from './components/coop-results-summary';
 import CoopTrend from './components/coop-trend';
+import { useSplatnet } from './splatnet-provider';
 import './salmon.css';
 
 const SalmonTime = ({ unixTime }) => {
@@ -51,7 +51,7 @@ const SalmonDay = ({ schedules, unixTime }) => {
   let lastTime = times[0];
   return (
     <div className="salmon-day">
-      {times.map(time => {
+      {times.map((time) => {
         if (time === lastTime) {
           return null;
         }
@@ -130,13 +130,13 @@ function getTimesWithinDay(unixTime, schedules) {
       time: unixStart,
       isStart: !times[0].isStart,
       scheduleNum: times[0].scheduleNum,
-      dayStart: true
+      dayStart: true,
     });
     times.push({
       time: unixEnd,
       isStart: !times[times.length - 1].isStart,
       scheduleNum: times[times.length - 1].scheduleNum,
-      dayEnd: true
+      dayEnd: true,
     });
   }
 
@@ -145,13 +145,13 @@ function getTimesWithinDay(unixTime, schedules) {
       time: unixStart,
       isStart: true,
       scheduleNum: allDayNum,
-      dayStart: true
+      dayStart: true,
     });
     times.push({
       time: unixEnd,
       isStart: false,
       scheduleNum: allDayNum,
-      dayEnd: true
+      dayEnd: true,
     });
   }
 
@@ -213,8 +213,8 @@ const SalmonDetail = ({ detail }) => {
   const now = new Date().getTime() / 1000;
   const active = now < detail.end_time && now > detail.start_time;
   return (
-    <Panel>
-      <Panel.Heading
+    <Card>
+      <Card.Header
         style={
           active ? { background: 'darkorange', color: 'white' } : undefined
         }
@@ -238,8 +238,8 @@ const SalmonDetail = ({ detail }) => {
           day="2-digit"
         />{' '}
         <FormattedTime value={new Date(detail.end_time * 1000)} />
-      </Panel.Heading>
-      <Panel.Body>
+      </Card.Header>
+      <Card.Body>
         <h4 style={{ marginTop: 0 }}>{detail.stage.name}</h4>
         <Image
           src={`https://app.splatoon2.nintendo.net${detail.stage.image}`}
@@ -264,62 +264,47 @@ const SalmonDetail = ({ detail }) => {
             />
           )
         )}
-      </Panel.Body>
-    </Panel>
+      </Card.Body>
+    </Card>
   );
 };
 
-class Salmon extends React.Component {
-  componentDidMount() {
-    this.props.splatnet.comm.updateCoop();
-  }
-
-  render() {
-    const { splatnet } = this.props;
-    const { coop_schedules } = splatnet.current;
-    return (
-      <Grid fluid style={{ paddingTop: 65 }}>
-        <Row>
-          <Col md={12}>
-            <h1 style={{ marginTop: 0 }}>
-              <FormattedMessage
-                id="salmon.title"
-                defaultMessage="Shift Schedule"
-              />
-            </h1>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12} sm={6} md={4} lg={3}>
-            <SalmonCalendar schedules={coop_schedules.schedules} />
-          </Col>
-          {coop_schedules.details.map(d => (
-            <Col xs={12} sm={6} md={4} lg={3} key={d.start_time}>
-              <SalmonDetail detail={d} />
-            </Col>
-          ))}
-        </Row>
-        <Row>
-          <Col xs={12} sm={6} md={4} lg={3}>
-            <CoopResults />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12} sm={12} md={12} lg={12}>
-            <CoopTrend />
-          </Col>
-        </Row>
-      </Grid>
-    );
-  }
-}
-
-const SalmonWithSplatnet = () => {
+export default function Salmon() {
+  const splatnet = useSplatnet();
+  useEffect(splatnet.comm.updateCoop, []);
+  const { coop_schedules } = splatnet?.current;
   return (
-    <Subscriber channel="splatnet">
-      {splatnet => <Salmon splatnet={splatnet} />}
-    </Subscriber>
+    <Container fluid style={{ paddingTop: '1rem' }}>
+      <Row>
+        <Col md={12}>
+          <h1 style={{ marginTop: 0 }}>
+            <FormattedMessage
+              id="salmon.title"
+              defaultMessage="Shift Schedule"
+            />
+          </h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <SalmonCalendar schedules={coop_schedules.schedules} />
+        </Col>
+        {coop_schedules.details.map((d) => (
+          <Col key={d.start_time}>
+            <SalmonDetail detail={d} />
+          </Col>
+        ))}
+      </Row>
+      <Row>
+        <Col xs={12} sm={6} md={4} lg={3}>
+          <CoopResults />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} sm={12} md={12} lg={12}>
+          <CoopTrend />
+        </Col>
+      </Row>
+    </Container>
   );
-};
-
-export default SalmonWithSplatnet;
+}

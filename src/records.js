@@ -1,6 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
-import { Subscriber } from 'react-broadcast';
+import { Container, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
 import StageCard from './components/stage-card';
 import PlayerCard from './components/player-card';
 import WeaponCard from './components/weapon-card';
@@ -8,21 +7,22 @@ import LeagueCard from './components/league-card';
 import FesCard from './components/fes-card';
 import { event } from './analytics';
 import { defineMessages, injectIntl } from 'react-intl';
+import { useSplatnet } from './splatnet-provider';
 
 class RecordsContainer extends React.Component {
   messages = defineMessages({
     refresh: {
       id: 'records.refreshButton.refresh',
-      defaultMessage: 'Refresh'
+      defaultMessage: 'Refresh',
     },
     refreshed: {
       id: 'records.refreshButton.refreshed',
-      defaultMessage: 'Refreshed'
-    }
+      defaultMessage: 'Refreshed',
+    },
   });
 
   state = {
-    refreshing: false
+    refreshing: false,
   };
 
   componentDidMount() {
@@ -35,9 +35,10 @@ class RecordsContainer extends React.Component {
     const { refreshing } = this.state;
 
     return (
-      <div>
+      <>
         <ButtonToolbar style={{ marginBottom: '10px' }}>
           <Button
+            variant="outline-secondary"
             onClick={() => {
               event('records', 'refresh');
               splatnet.comm.updateRecords();
@@ -51,12 +52,12 @@ class RecordsContainer extends React.Component {
               : intl.formatMessage(this.messages.refresh)}
           </Button>
         </ButtonToolbar>
-        <PlayerCard records={records.records} />
-        <StageCard records={records.records} />
-        <WeaponCard records={records.records} />
-        <LeagueCard records={records.records} />
+        <PlayerCard className="mb-3" records={records.records} />
+        <StageCard className="mb-3" records={records.records} />
+        <WeaponCard className="mb-3" records={records.records} />
+        <LeagueCard className="mb-3" records={records.records} />
         <FesCard records={records.records} festivals={records.festivals} />
-      </div>
+      </>
     );
   }
 }
@@ -64,21 +65,18 @@ class RecordsContainer extends React.Component {
 const RecordsContainerIntl = injectIntl(RecordsContainer);
 
 const Records = ({ splatnet }) => (
-  <Grid fluid style={{ marginTop: 65 }}>
+  <Container fluid style={{ marginTop: '1rem' }}>
     <Row>
       <Col md={12}>
         <RecordsContainerIntl splatnet={splatnet} />
       </Col>
     </Row>
-  </Grid>
+  </Container>
 );
 
 const SubscribedRecords = () => {
-  return (
-    <Subscriber channel="splatnet">
-      {splatnet => <Records splatnet={splatnet} />}
-    </Subscriber>
-  );
+  const splatnet = useSplatnet();
+  return <Records splatnet={splatnet} />;
 };
 
 export default SubscribedRecords;

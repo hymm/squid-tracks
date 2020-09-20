@@ -1,5 +1,53 @@
+@font-face {
+  font-family: Kanit-Regular;
+  src: url(./fonts/Kanit-Regular.ttf);
+}
+
+@font-face {
+  font-family: Kanit-Black;
+  src: url(./fonts/Kanit-Black.ttf);
+}
+
+@font-face {
+  font-family: VarelaRound;
+  src: url(./fonts/VarelaRound-Regular.ttf);
+}
+
+body {
+  font-family: VarelaRound;
+  font-size: 14px;
+}
+
+.navbar {
+  font-family: Kanit-Regular;
+  font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Kanit-Black;
+}
+
+.jumbotron h1 {
+  font-size: 5rem;
+}
+
+.card-header {
+  font-family: Kanit-Regular;
+  font-size: 1.2rem;
+}
+
+.jumbotron h2,
+h5 {
+  font-family: Kanit-Regular;
+}
+
 .squid-tracks.navbar-brand {
-  padding: 5px 10px 5px 10px;
+  padding: 0;
 }
 
 .button-as-link {
@@ -8,4 +56,9 @@
   border: none;
   background: none;
   padding: 0;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
 }

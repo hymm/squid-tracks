@@ -2,7 +2,7 @@ const { sort } = require('./sort-array');
 const defaultArray = [
   { name: 'apple', number: '3' },
   { name: 'orange', number: '1' },
-  { name: 'banana', number: '10' }
+  { name: 'banana', number: '10' },
 ];
 
 describe('sort', () => {

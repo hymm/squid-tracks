@@ -2,6 +2,7 @@ const StatInkMap = require('./stat-ink-map');
 const defaultHeadMap = require('./default-maps/head.json');
 const defaultShirtMap = require('./default-maps/shirt.json');
 const defaultShoesMap = require('./default-maps/shoes.json');
+const log = require('electron-log');
 
 const headMap = new StatInkMap(
   'head.json',
@@ -21,18 +22,23 @@ const shoesMap = new StatInkMap(
   defaultShoesMap
 );
 
-module.exports = async function(type, id, localization) {
-  switch (type) {
-    case 'head':
-      const headInfo = await headMap.getInfoWithRetry(id);
-      return headInfo.primary_ability.name[localization];
-    case 'clothes':
-      const shirtInfo = await shirtMap.getInfoWithRetry(id);
-      return shirtInfo.primary_ability.name[localization];
-    case 'shoes':
-      const shoesInfo = await shoesMap.getInfoWithRetry(id);
-      return shoesInfo.primary_ability.name[localization];
-    default:
-      throw new Error(`Error Unsupported Clothing Type: ${type}`);
+module.exports = async function (type, id, localization) {
+  try {
+    switch (type) {
+      case 'head':
+        const headInfo = await headMap.getInfoWithRetry(id);
+        return headInfo.primary_ability.name[localization];
+      case 'clothes':
+        const shirtInfo = await shirtMap.getInfoWithRetry(id);
+        return shirtInfo.primary_ability.name[localization];
+      case 'shoes':
+        const shoesInfo = await shoesMap.getInfoWithRetry(id);
+        return shoesInfo.primary_ability.name[localization];
+      default:
+        throw new Error(`Error Unsupported Clothing Type: ${type}`);
+    }
+  } catch (e) {
+    log.error(e);
+    return '???';
   }
 };

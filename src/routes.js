@@ -1,6 +1,5 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { Subscriber } from 'react-broadcast';
+import React, { useEffect } from 'react';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import ApiViewer from './api-viewer';
 import Schedule from './schedule';
 import Salmon from './salmon';
@@ -13,24 +12,11 @@ import AnnieStore from './annie-store';
 import Login from './login';
 import About from './about';
 import ErrorPage from './error';
+import { useSplatnet } from './splatnet-provider';
 
-// trigger an updateRecords on login for user nickname
-class Startup extends React.Component {
-  componentDidMount() {
-    this.props.splatnet.comm.updateRecords();
-  }
-
-  render() {
-    return <div />;
-  }
-}
-
-const StartupWithSplatnet = () => {
-  return (
-    <Subscriber channel="splatnet">
-      {splatnet => <Startup splatnet={splatnet} />}
-    </Subscriber>
-  );
+const useUpdateRecords = () => {
+  const splatnet = useSplatnet();
+  useEffect(splatnet.comm.updateRecords, []);
 };
 
 const Routes = ({
@@ -39,48 +25,53 @@ const Routes = ({
   setLocale,
   locale,
   loggedIn,
-  setLogin
+  setLogin,
 }) => {
+  useUpdateRecords();
   return (
-    <div>
+    <>
       {loggedIn ? (
-        <div>
-          <StartupWithSplatnet />
+        <>
           <Navigation logoutCallback={logoutCallback} />
-          <Route path="/home" exact component={About} />
-          <Route path="/testApi" component={ApiViewer} />
-          <Route path="/schedule" component={Schedule} />
-          <Route path="/salmon" component={Salmon} />
-          <Route path="/records" component={Records} />
-          <Route path="/results" component={Results} />
-          <Route path="/meta" component={Meta} />
-          <Route path="/store" component={AnnieStore} />
-          <Route
-            path="/error"
-            component={() => <ErrorPage logoutCallback={logoutCallback} />}
-          />
-          <Route
-            path="/settings"
-            component={() => (
-              <Settings token={token} setLocale={setLocale} locale={locale} />
-            )}
-          />
-        </div>
+          <Switch>
+            <Route path="/home" exact>
+              <About />
+            </Route>
+            <Route path="/testApi" component={ApiViewer} />
+            <Route path="/schedule" component={Schedule} />
+            <Route path="/salmon" component={Salmon} />
+            <Route path="/records" component={Records} />
+            <Route path="/results" component={Results} />
+            <Route path="/meta" component={Meta} />
+            <Route path="/store" component={AnnieStore} />
+            <Route path="/error">
+              <ErrorPage logoutCallback={logoutCallback} />
+            </Route>
+            <Route
+              path="/settings"
+              component={() => (
+                <Settings token={token} setLocale={setLocale} locale={locale} />
+              )}
+            />
+          </Switch>
+        </>
       ) : (
         <Login setLogin={setLogin} setLocale={setLocale} locale={locale} />
       )}
-      <Route
-        exact
-        path="/"
-        render={() =>
-          loggedIn ? (
-            <Redirect from="/" to="/home" />
-          ) : (
-            <Redirect from="/" to="/login" />
-          )
-        }
-      />
-    </div>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() =>
+            loggedIn ? (
+              <Redirect from="/" to="/home" />
+            ) : (
+              <Redirect from="/" to="/login" />
+            )
+          }
+        />
+      </Switch>
+    </>
   );
 };
 

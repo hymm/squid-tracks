@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  Panel,
+  Card,
   ButtonGroup,
   ButtonToolbar,
   Button,
   Table,
-  Grid,
+  Container,
   Col,
-  Row
+  Row,
 } from 'react-bootstrap';
 import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import { sort } from './sort-array';
@@ -17,7 +17,7 @@ class StageCard extends React.Component {
   state = {
     percent: true,
     sortColumn: 'total_percent',
-    sortDirection: 'up'
+    sortDirection: 'up',
   };
 
   showCount = () => {
@@ -38,41 +38,41 @@ class StageCard extends React.Component {
       cb_win = 0,
       cb_lose = 0;
     const summary = {};
-    Object.keys(stage_stats).forEach(weapon => {
-      summary[weapon] = {};
-      summary[weapon].total_win =
-        stage_stats[weapon].hoko_win +
-        stage_stats[weapon].area_win +
-        stage_stats[weapon].yagura_win +
-        stage_stats[weapon].asari_win;
-      summary[weapon].total_lose =
-        stage_stats[weapon].hoko_lose +
-        stage_stats[weapon].area_lose +
-        stage_stats[weapon].yagura_lose +
-        stage_stats[weapon].asari_lose;
-      summary[weapon].total_percent =
-        summary[weapon].total_win /
-        (summary[weapon].total_win + summary[weapon].total_lose);
-      summary[weapon].hoko_percent =
-        stage_stats[weapon].hoko_win /
-        (stage_stats[weapon].hoko_win + stage_stats[weapon].hoko_lose);
-      summary[weapon].yagura_percent =
-        stage_stats[weapon].yagura_win /
-        (stage_stats[weapon].yagura_win + stage_stats[weapon].yagura_lose);
-      summary[weapon].area_percent =
-        stage_stats[weapon].area_win /
-        (stage_stats[weapon].area_win + stage_stats[weapon].area_lose);
-      summary[weapon].asari_percent =
-        stage_stats[weapon].asari_win /
-        (stage_stats[weapon].asari_win + stage_stats[weapon].asari_lose);
-      rm_win += stage_stats[weapon].hoko_win;
-      rm_lose += stage_stats[weapon].hoko_lose;
-      tc_win += stage_stats[weapon].yagura_win;
-      tc_lose += stage_stats[weapon].yagura_lose;
-      sz_win += stage_stats[weapon].area_win;
-      sz_lose += stage_stats[weapon].area_lose;
-      cb_win += stage_stats[weapon].asari_win;
-      cb_lose += stage_stats[weapon].asari_lose;
+    Object.keys(stage_stats).forEach((stage) => {
+      summary[stage] = {};
+      summary[stage].total_win =
+        stage_stats[stage].hoko_win +
+        stage_stats[stage].area_win +
+        stage_stats[stage].yagura_win +
+        stage_stats[stage].asari_win;
+      summary[stage].total_lose =
+        stage_stats[stage].hoko_lose +
+        stage_stats[stage].area_lose +
+        stage_stats[stage].yagura_lose +
+        stage_stats[stage].asari_lose;
+      summary[stage].total_percent =
+        summary[stage].total_win /
+        (summary[stage].total_win + summary[stage].total_lose);
+      summary[stage].hoko_percent =
+        stage_stats[stage].hoko_win /
+        (stage_stats[stage].hoko_win + stage_stats[stage].hoko_lose);
+      summary[stage].yagura_percent =
+        stage_stats[stage].yagura_win /
+        (stage_stats[stage].yagura_win + stage_stats[stage].yagura_lose);
+      summary[stage].area_percent =
+        stage_stats[stage].area_win /
+        (stage_stats[stage].area_win + stage_stats[stage].area_lose);
+      summary[stage].asari_percent =
+        stage_stats[stage].asari_win /
+        (stage_stats[stage].asari_win + stage_stats[stage].asari_lose);
+      rm_win += stage_stats[stage].hoko_win;
+      rm_lose += stage_stats[stage].hoko_lose;
+      tc_win += stage_stats[stage].yagura_win;
+      tc_lose += stage_stats[stage].yagura_lose;
+      sz_win += stage_stats[stage].area_win;
+      sz_lose += stage_stats[stage].area_lose;
+      cb_win += stage_stats[stage].asari_win;
+      cb_lose += stage_stats[stage].asari_lose;
     });
     const rm_percent = rm_win / (rm_win + rm_lose);
     const tc_percent = tc_win / (tc_win + tc_lose);
@@ -98,59 +98,59 @@ class StageCard extends React.Component {
       total_win,
       total_lose,
       total_percent,
-      summary
+      summary,
     };
   }
 
   messages = defineMessages({
     sz: {
       id: 'stageCard.header.splatzones',
-      defaultMessage: 'SZ'
+      defaultMessage: 'SZ',
     },
     tc: {
       id: 'stageCard.header.towercontrol',
-      defaultMessage: 'TC'
+      defaultMessage: 'TC',
     },
     rm: {
       id: 'stageCard.header.rainmaker',
-      defaultMessage: 'RM'
+      defaultMessage: 'RM',
     },
     cb: {
       id: 'stageCard.header.clamblitz',
-      defaultMessage: 'CB'
+      defaultMessage: 'CB',
     },
     total: {
       id: 'stageCard.header.total',
-      defaultMessage: 'Total'
-    }
+      defaultMessage: 'Total',
+    },
   });
 
   columnHeaders = [
     {
       text: this.props.intl.formatMessage(this.messages.sz),
       sortColumn: 'area_percent',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.tc),
       sortColumn: 'yagura_percent',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.rm),
       sortColumn: 'hoko_percent',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.cb),
       sortColumn: 'asari_percent',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: this.props.intl.formatMessage(this.messages.total),
       sortColumn: 'total_percent',
-      sortDirection: 'up'
-    }
+      sortDirection: 'up',
+    },
   ];
 
   render() {
@@ -158,26 +158,27 @@ class StageCard extends React.Component {
 
     const calcStats = this.getCalculatedStats(stage_stats);
     const stageStats = [];
-    Object.keys(stage_stats).forEach(stage =>
-      stageStats.push(stage_stats[stage])
+    Object.keys(stage_stats).forEach((stage) =>
+      stageStats.push({ ...stage_stats[stage], ...calcStats.summary[stage] })
     );
     sort(stageStats, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel>
-        <Panel.Heading>
+      <Card className={this.props.className}>
+        <Card.Header>
           <FormattedMessage
             id="StageCard.title.v2"
             defaultMessage="Ranked and League Stage Stats"
           />
-        </Panel.Heading>
-        <Panel.Body>
-          <Grid fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
+        </Card.Header>
+        <Card.Body>
+          <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
             <Row>
               <Col sm={12} md={12}>
                 <ButtonToolbar style={{ marginBottom: '10px' }}>
                   <ButtonGroup>
                     <Button
+                      variant="outline-secondary"
                       onClick={this.showPercent}
                       active={this.state.percent}
                     >
@@ -187,6 +188,7 @@ class StageCard extends React.Component {
                       />
                     </Button>
                     <Button
+                      variant="outline-secondary"
                       onClick={this.showCount}
                       active={!this.state.percent}
                     >
@@ -205,7 +207,7 @@ class StageCard extends React.Component {
             </Row>
             <Row>
               <Col sm={12} md={12}>
-                <Table striped bordered condensed hover>
+                <Table size="sm" striped bordered hover>
                   <thead>
                     <tr>
                       <th>
@@ -214,13 +216,13 @@ class StageCard extends React.Component {
                           defaultMessage="Name"
                         />
                       </th>
-                      {this.columnHeaders.map(header => (
+                      {this.columnHeaders.map((header) => (
                         <TableHeader
                           key={header.text}
                           setState={this.setState.bind(this)}
                           sort={{
                             sortColumn: header.sortColumn,
-                            sortDirection: header.sortDirection
+                            sortDirection: header.sortDirection,
                           }}
                           text={header.text}
                           sortColumn={this.state.sortColumn}
@@ -230,46 +232,43 @@ class StageCard extends React.Component {
                   </thead>
                   <tbody>
                     {stageStats.map((stage, index) => {
-                      const summary = calcStats.summary[index];
                       return (
                         <tr key={stage.stage.name}>
                           <td>{stage.stage.name}</td>
                           <td>
                             {this.state.percent
-                              ? isFinite(summary.area_percent)
-                                ? `${(summary.area_percent * 100).toFixed(1)}%`
+                              ? isFinite(stage.area_percent)
+                                ? `${(stage.area_percent * 100).toFixed(1)}%`
                                 : '---'
                               : `${stage.area_win} - ${stage.area_lose}`}
                           </td>
                           <td>
                             {this.state.percent
-                              ? isFinite(summary.yagura_percent)
-                                ? `${(summary.yagura_percent * 100).toFixed(
-                                    1
-                                  )}%`
+                              ? isFinite(stage.yagura_percent)
+                                ? `${(stage.yagura_percent * 100).toFixed(1)}%`
                                 : '---'
                               : `${stage.yagura_win} - ${stage.yagura_lose}`}
                           </td>
                           <td>
                             {this.state.percent
-                              ? isFinite(summary.hoko_percent)
-                                ? `${(summary.hoko_percent * 100).toFixed(1)}%`
+                              ? isFinite(stage.hoko_percent)
+                                ? `${(stage.hoko_percent * 100).toFixed(1)}%`
                                 : '---'
                               : `${stage.hoko_win} - ${stage.hoko_lose}`}
                           </td>
                           <td>
                             {this.state.percent
-                              ? isFinite(summary.asari_percent)
-                                ? `${(summary.asari_percent * 100).toFixed(1)}%`
+                              ? isFinite(stage.asari_percent)
+                                ? `${(stage.asari_percent * 100).toFixed(1)}%`
                                 : '---'
                               : `${stage.asari_win} - ${stage.asari_lose}`}
                           </td>
                           <td>
                             {this.state.percent
-                              ? isFinite(summary.total_percent)
-                                ? `${(summary.total_percent * 100).toFixed(1)}%`
+                              ? isFinite(stage.total_percent)
+                                ? `${(stage.total_percent * 100).toFixed(1)}%`
                                 : '---'
-                              : `${summary.total_win} - ${summary.total_lose}`}
+                              : `${stage.total_win} - ${stage.total_lose}`}
                           </td>
                         </tr>
                       );
@@ -323,9 +322,9 @@ class StageCard extends React.Component {
                 </Table>
               </Col>
             </Row>
-          </Grid>
-        </Panel.Body>
-      </Panel>
+          </Container>
+        </Card.Body>
+      </Card>
     );
   }
 }

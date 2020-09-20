@@ -1,16 +1,16 @@
 import React from 'react';
 import {
-  Panel,
+  Card,
   ButtonGroup,
   ButtonToolbar,
   Button,
   Table,
-  Grid,
+  Container,
   Col,
   Row,
-  Label,
-  Glyphicon
+  Badge,
 } from 'react-bootstrap';
+import { FaArrowDown, FaArrowUp, FaArrowRight } from 'react-icons/fa';
 import { sort } from './sort-array';
 import TableHeader from './table-header';
 
@@ -18,10 +18,10 @@ export default class LeagueRankings extends React.Component {
   state = {
     sortColumn: 'total_points.last_week',
     sortDirection: 'up',
-    data_to_display: 'total_points'
+    data_to_display: 'total_points',
   };
 
-  setDataToDisplay = e => {
+  setDataToDisplay = (e) => {
     this.setState({ data_to_display: e.target.value });
   };
 
@@ -30,18 +30,18 @@ export default class LeagueRankings extends React.Component {
     {
       text: 'Two Weeks Ago',
       sortColumn: 'last_last_week',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: 'Last Week',
       sortColumn: 'last_week',
-      sortDirection: 'up'
+      sortDirection: 'up',
     },
     {
       text: 'This Week',
       sortColumn: 'this_week',
-      sortDirection: 'up'
-    }
+      sortDirection: 'up',
+    },
   ];
 
   updateColumnHeaders() {
@@ -71,13 +71,13 @@ export default class LeagueRankings extends React.Component {
     const snapshot_table = {};
     // should be three iterations, starting with this week
     for (let i = 0; i < calcStats.weapons_stats.length; i++) {
-      Object.keys(calcStats.weapons_stats[i]).forEach(weapon => {
+      Object.keys(calcStats.weapons_stats[i]).forEach((weapon) => {
         if (weapon in snapshot_table) {
           snapshot_table[weapon].display_stats.push({
             uses_by_week: calcStats.weapons_stats[i][weapon].uses,
             total_points_by_week:
               calcStats.weapons_stats[i][weapon].total_points,
-            avg_points_by_week: calcStats.weapons_stats[i][weapon].avg_points
+            avg_points_by_week: calcStats.weapons_stats[i][weapon].avg_points,
           });
         } else {
           snapshot_table[weapon] = {
@@ -88,16 +88,16 @@ export default class LeagueRankings extends React.Component {
                 total_points_by_week:
                   calcStats.weapons_stats[i][weapon].total_points,
                 avg_points_by_week:
-                  calcStats.weapons_stats[i][weapon].avg_points
-              }
-            ]
+                  calcStats.weapons_stats[i][weapon].avg_points,
+              },
+            ],
           };
         }
       });
     }
 
     const weapons_out = [];
-    Object.keys(snapshot_table).forEach(weapon =>
+    Object.keys(snapshot_table).forEach((weapon) =>
       weapons_out.push({
         name: snapshot_table[weapon].name,
         uses: {
@@ -109,7 +109,7 @@ export default class LeagueRankings extends React.Component {
           last_last_week:
             snapshot_table[weapon].display_stats.length > 2
               ? snapshot_table[weapon].display_stats[2]['uses_by_week']
-              : 0
+              : 0,
         },
         total_points: {
           this_week:
@@ -121,7 +121,7 @@ export default class LeagueRankings extends React.Component {
           last_last_week:
             snapshot_table[weapon].display_stats.length > 2
               ? snapshot_table[weapon].display_stats[2]['total_points_by_week']
-              : 0
+              : 0,
         },
         avg_points: {
           this_week:
@@ -133,8 +133,8 @@ export default class LeagueRankings extends React.Component {
           last_last_week:
             snapshot_table[weapon].display_stats.length > 2
               ? snapshot_table[weapon].display_stats[2]['avg_points_by_week']
-              : 0
-        }
+              : 0,
+        },
       })
     );
 
@@ -189,15 +189,16 @@ export default class LeagueRankings extends React.Component {
     sort(weapons_out, this.state.sortColumn, this.state.sortDirection);
 
     return (
-      <Panel>
-        <Panel.Heading>{this.props.title}</Panel.Heading>
-        <Panel.Body>
-          <Grid fluid>
+      <Card>
+        <Card.Header>{this.props.title}</Card.Header>
+        <Card.Body>
+          <Container fluid>
             <Row>
               <Col sm={12} md={12}>
                 <ButtonToolbar style={{ marginBottom: '10px' }}>
                   <ButtonGroup>
                     <Button
+                      variant="outline-secondary"
                       onClick={this.setDataToDisplay}
                       value="uses"
                       active={this.state.data_to_display === 'uses'}
@@ -205,6 +206,7 @@ export default class LeagueRankings extends React.Component {
                       Uses
                     </Button>
                     <Button
+                      variant="outline-secondary"
                       onClick={this.setDataToDisplay}
                       value="total_points"
                       active={this.state.data_to_display === 'total_points'}
@@ -212,6 +214,7 @@ export default class LeagueRankings extends React.Component {
                       Total Rating
                     </Button>
                     <Button
+                      variant="outline-secondary"
                       onClick={this.setDataToDisplay}
                       value="avg_points"
                       active={this.state.data_to_display === 'avg_points'}
@@ -224,10 +227,10 @@ export default class LeagueRankings extends React.Component {
             </Row>
             <Row>
               <Col sm={12} md={12}>
-                <Table striped bordered condensed hover>
+                <Table striped bordered hover>
                   <thead>
                     <tr>
-                      {this.columnHeaders.map(header => (
+                      {this.columnHeaders.map((header) => (
                         <TableHeader
                           key={header.text}
                           setState={this.setState.bind(this)}
@@ -238,7 +241,7 @@ export default class LeagueRankings extends React.Component {
                                 : this.state.data_to_display +
                                   '.' +
                                   header.sortColumn,
-                            sortDirection: header.sortDirection
+                            sortDirection: header.sortDirection,
                           }}
                           text={header.text}
                           sortColumn={this.state.sortColumn}
@@ -247,7 +250,7 @@ export default class LeagueRankings extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {weapons_out.map(weapon => (
+                    {weapons_out.map((weapon) => (
                       <tr key={weapon.name}>
                         <td>{weapon.name}</td>
                         <td>
@@ -269,8 +272,8 @@ export default class LeagueRankings extends React.Component {
                             : ` (${weapon[
                                 this.state.data_to_display
                               ].last_week_percent.toFixed(1)}%) `}
-                          <Label
-                            bsStyle={
+                          <Badge
+                            variant={
                               weapon[this.state.data_to_display]
                                 .diff_last_to_last_last > 0
                                 ? 'success'
@@ -280,22 +283,21 @@ export default class LeagueRankings extends React.Component {
                                 : 'default'
                             }
                           >
-                            <Glyphicon
-                              glyph={
-                                weapon[this.state.data_to_display]
-                                  .diff_last_to_last_last > 0
-                                  ? 'arrow-up'
-                                  : weapon[this.state.data_to_display]
-                                      .diff_last_to_last_last < 0
-                                  ? 'arrow-down'
-                                  : 'arrow-right'
-                              }
-                            />
+                            {weapon[this.state.data_to_display]
+                              .diff_last_to_last_last > 0 ? (
+                              <FaArrowUp />
+                            ) : weapon[this.state.data_to_display]
+                                .diff_last_to_last_last < 0 ? (
+                              <FaArrowDown />
+                            ) : (
+                              <FaArrowRight />
+                            )}
+
                             {
                               weapon[this.state.data_to_display]
                                 .diff_last_to_last_last
                             }
-                          </Label>
+                          </Badge>
                         </td>
                         <td>
                           {weapon[this.state.data_to_display].this_week.toFixed(
@@ -306,8 +308,8 @@ export default class LeagueRankings extends React.Component {
                             : ` (${weapon[
                                 this.state.data_to_display
                               ].this_week_percent.toFixed(1)}%) `}
-                          <Label
-                            bsStyle={
+                          <Badge
+                            variant={
                               weapon[this.state.data_to_display]
                                 .diff_this_to_last > 0
                                 ? 'success'
@@ -317,22 +319,20 @@ export default class LeagueRankings extends React.Component {
                                 : 'default'
                             }
                           >
-                            <Glyphicon
-                              glyph={
-                                weapon[this.state.data_to_display]
-                                  .diff_this_to_last > 0
-                                  ? 'arrow-up'
-                                  : weapon[this.state.data_to_display]
-                                      .diff_this_to_last < 0
-                                  ? 'arrow-down'
-                                  : 'arrow-right'
-                              }
-                            />
+                            {weapon[this.state.data_to_display]
+                              .diff_this_to_last > 0 ? (
+                              <FaArrowUp />
+                            ) : weapon[this.state.data_to_display]
+                                .diff_this_to_last < 0 ? (
+                              <FaArrowDown />
+                            ) : (
+                              <FaArrowRight />
+                            )}
                             {
                               weapon[this.state.data_to_display]
                                 .diff_this_to_last
                             }
-                          </Label>
+                          </Badge>
                         </td>
                       </tr>
                     ))}
@@ -340,9 +340,9 @@ export default class LeagueRankings extends React.Component {
                 </Table>
               </Col>
             </Row>
-          </Grid>
-        </Panel.Body>
-      </Panel>
+          </Container>
+        </Card.Body>
+      </Card>
     );
   }
 }

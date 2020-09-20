@@ -1,71 +1,72 @@
 import React from 'react';
-import { Row, Col, ProgressBar, Label } from 'react-bootstrap';
+import { Row, Col, ProgressBar, Badge } from 'react-bootstrap';
 import { FormattedMessage, FormattedDate, FormattedTime } from 'react-intl';
 import LobbyColors from './lobby-colors';
 
-const labelStyle = {
+const BadgeStyle = {
   fontSize: 16,
   fontWeight: 'normal',
+  color: 'white',
   marginRight: 5,
   float: 'left',
   marginBottom: 5,
-  padding: '.35em .6em .35em'
+  padding: '.35em .6em .35em',
 };
 
-const LeagueLabels = ({ result, colorMap }) => {
+const LeagueBadges = ({ result, colorMap }) => {
   return (
     <React.Fragment>
       {result.league_point != null ? (
-        <Label style={{ background: colorMap.normal, ...labelStyle }}>
+        <Badge style={{ background: colorMap.normal, ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.currentPower"
             defaultMessage="Current Power {power}"
             values={{ power: result.league_point }}
           />
-        </Label>
+        </Badge>
       ) : null}
       {result.max_league_point != null && result.max_league_point > 0 ? (
-        <Label style={{ background: colorMap.dark, ...labelStyle }}>
+        <Badge style={{ background: colorMap.dark, ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.maxPower"
             defaultMessage="Max Power {power}"
             values={{ power: result.max_league_point }}
           />
-        </Label>
+        </Badge>
       ) : null}
     </React.Fragment>
   );
 };
 
-const XRankLabels = ({ result, colorMap }) => {
+const XRankBadges = ({ result, colorMap }) => {
   return (
     <React.Fragment>
       {result.x_power != null ? (
-        <Label bsStyle="default" style={{ ...labelStyle }}>
+        <Badge variant="secondary" style={{ ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.xPower"
             defaultMessage="X Power {power}"
             values={{ power: result.x_power }}
           />
-        </Label>
+        </Badge>
       ) : null}
       {result.rank != null ? (
-        <Label bsStyle="default" style={{ ...labelStyle }}>
+        <Badge variant="secondary" style={{ ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.globalRank"
             defaultMessage="Global Rank {rank}"
             values={{ rank: result.rank }}
           />
-        </Label>
+        </Badge>
       ) : null}
       {result.estimate_x_power != null ? (
-        <Label bsStyle="default" style={{ ...labelStyle }}>
+        <Badge variant="secondary" style={{ ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.estimatePower.v2"
             defaultMessage="8-Squid Power {power}"
             values={{ power: result.estimate_x_power }}
           />
-        </Label>
+        </Badge>
       ) : null}
     </React.Fragment>
   );
@@ -76,107 +77,107 @@ const splatfestExp = [
   35, // Fiend
   50,
   85, // Defender
-  184 // Champion
+  184, // Champion
   // 184, // King/Queen
 ];
 
-const FestivalLabels = ({ result, colorMap }) => {
+const FestivalBadges = ({ result, colorMap }) => {
   const expRequired =
     result.fes_grade != null ? splatfestExp[result.fes_grade.rank] : null;
   return (
     <React.Fragment>
       {result.fes_power ? (
-        <Label style={{ background: colorMap.normal, ...labelStyle }}>
+        <Badge style={{ background: colorMap.normal, ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.currentPower"
             defaultMessage="Current Power {power}"
             values={{ power: result.fes_power }}
           />
-        </Label>
+        </Badge>
       ) : null}
       {result.max_fes_poser != null ? (
-        <Label style={{ background: colorMap.normal, ...labelStyle }}>
+        <Badge style={{ background: colorMap.normal, ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.maxPower"
             defaultMessage="Max Power {power}"
             values={{ power: result.max_fes_poser }}
           />
-        </Label>
+        </Badge>
       ) : null}
       {result.fes_grade != null ? (
-        <Label style={{ background: colorMap.normal, ...labelStyle }}>
+        <Badge style={{ background: colorMap.normal, ...BadgeStyle }}>
           {result.fes_grade.name}
-        </Label>
+        </Badge>
       ) : null}
       {result.fes_point != null && expRequired != null ? (
-        <Label style={{ background: colorMap.normal, ...labelStyle }}>
+        <Badge style={{ background: colorMap.normal, ...BadgeStyle }}>
           {`${result.fes_point}/${expRequired}`}
-        </Label>
+        </Badge>
       ) : null}
     </React.Fragment>
   );
 };
 
-const RankedLabels = ({ result, colorMap }) => {
+const RankedBadges = ({ result, colorMap }) => {
   return (
     <React.Fragment>
       {result.estimate_gachi_power != null ? (
-        <Label bsStyle="default" style={{ ...labelStyle }}>
+        <Badge variant="secondary" style={{ ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.estimatePower.v2"
             defaultMessage="8-Squid Power {power}"
             values={{ power: result.estimate_gachi_power }}
           />
-        </Label>
+        </Badge>
       ) : null}
     </React.Fragment>
   );
 };
 
-const TurfLabels = ({ result, colorMap }) => {
+const TurfBadges = ({ result, colorMap }) => {
   return (
     <React.Fragment>
       {result.win_meter != null ? (
-        <Label bsStyle="default" style={{ ...labelStyle }}>
+        <Badge variant="secondary" style={{ ...BadgeStyle }}>
           <FormattedMessage
             id="resultDetails.summary.winMeter"
             defaultMessage="Win Meter {meter}"
             values={{ meter: result.win_meter }}
           />
-        </Label>
+        </Badge>
       ) : null}
     </React.Fragment>
   );
 };
 
-const BattleLabels = ({ result }) => {
+const BattleBadges = ({ result }) => {
   const lobby = result.game_mode.key;
   const colorMap = LobbyColors[lobby];
 
   return (
     <React.Fragment>
-      <Label
-        bsStyle={result.my_team_result.key === 'victory' ? 'info' : 'warning'}
-        style={labelStyle}
+      <Badge
+        variant={result.my_team_result.key === 'victory' ? 'info' : 'warning'}
+        style={BadgeStyle}
       >
         <FormattedMessage
           id="resultDetails.summary.resultInElapsedTime"
           defaultMessage="{result} in {time} sec"
           values={{
             result: result.my_team_result.name,
-            time: result.elapsed_time
+            time: result.elapsed_time,
           }}
         />
-      </Label>
-      <Label style={{ background: colorMap.normal, ...labelStyle }}>
+      </Badge>
+      <Badge style={{ background: colorMap.normal, ...BadgeStyle }}>
         {`${result.game_mode.name}`}
-      </Label>
+      </Badge>
 
-      <LeagueLabels result={result} colorMap={colorMap} />
-      <XRankLabels result={result} colorMap={colorMap} />
-      <FestivalLabels result={result} colorMap={colorMap} />
-      <RankedLabels result={result} colorMap={colorMap} />
-      <TurfLabels result={result} colorMap={colorMap} />
+      <LeagueBadges result={result} colorMap={colorMap} />
+      <XRankBadges result={result} colorMap={colorMap} />
+      <FestivalBadges result={result} colorMap={colorMap} />
+      <RankedBadges result={result} colorMap={colorMap} />
+      <TurfBadges result={result} colorMap={colorMap} />
     </React.Fragment>
   );
 };
@@ -194,7 +195,7 @@ const BattleSummary = ({ result }) => {
   const myNow = (myScore * 100) / totalScore;
   const otherNow = (otherScore * 100) / totalScore;
   return (
-    <div>
+    <>
       <Row>
         <Col md={12}>
           <h2 style={{ marginTop: 0 }}>
@@ -203,7 +204,7 @@ const BattleSummary = ({ result }) => {
               defaultMessage="{rule} on {map}"
               values={{
                 rule: result.rule.name,
-                map: result.stage.name
+                map: result.stage.name,
               }}
             />
           </h2>
@@ -222,16 +223,16 @@ const BattleSummary = ({ result }) => {
       </Row>
       <Row>
         <Col md={12}>
-          <BattleLabels result={result} />
+          <BattleBadges result={result} />
         </Col>
       </Row>
-      <Row>
+      <Row className="mb-3">
         <Col md={12}>
           <ProgressBar style={{ height: 30 }}>
             <ProgressBar
               striped
               now={myNow}
-              bsStyle="info"
+              variant="info"
               label={myScore}
               key={1}
               style={{ fontSize: 16, padding: '.35em 0' }}
@@ -239,7 +240,7 @@ const BattleSummary = ({ result }) => {
             <ProgressBar
               striped
               now={otherNow}
-              bsStyle="warning"
+              variant="warning"
               label={otherScore}
               key={2}
               style={{ fontSize: 16, padding: '.35em 0' }}
@@ -247,7 +248,7 @@ const BattleSummary = ({ result }) => {
           </ProgressBar>
         </Col>
       </Row>
-    </div>
+    </>
   );
 };
 

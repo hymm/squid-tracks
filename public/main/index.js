@@ -14,14 +14,14 @@ const Store = require('./store');
 require('./battles-store');
 const mitm = require('./mitm-read-cookie');
 
-process.on('uncaughtException', err => {
+process.on('uncaughtException', (err) => {
   const message = `Unhandled Error in Main: ${err}`;
   log.error(message);
   log.error(err.stack);
   uaException(message);
 });
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   const message = `Unhandled Promise Rejection in Main: ${err}`;
   log.error(message);
   log.error(err.stack);
@@ -49,11 +49,11 @@ let mainWindow;
 const statInkStore = new Store({
   configName: 'stat-ink',
   defaults: {
-    info: {}
-  }
+    info: {},
+  },
 });
 
-ipcMain.on('checkIksmValid', async event => {
+ipcMain.on('checkIksmValid', async (event) => {
   event.returnValue = await splatnet.checkIksmValid();
 });
 
@@ -107,7 +107,7 @@ ipcMain.on('writeToStatInk', async (event, result, type) => {
       case 'manual':
         event.sender.send('writeBattleManualError', {
           username: '',
-          battle: -1
+          battle: -1,
         });
         break;
       case 'auto':
@@ -151,7 +151,7 @@ ipcMain.on('getSplatnetImage', async (event, result) => {
   }
 });
 
-ipcMain.on('checkStoredSessionToken', async event => {
+ipcMain.on('checkStoredSessionToken', async (event) => {
   event.returnValue = await checkStoredSessionToken();
 });
 
@@ -186,7 +186,7 @@ function createMenusMacOS() {
       submenu: [
         {
           label: 'About SquidTracks',
-          selector: 'orderFrontStandardAboutPanel:'
+          selector: 'orderFrontStandardAboutPanel:',
         },
         { type: 'separator' },
         { label: 'Hide SquidTracks', role: 'hide' },
@@ -196,11 +196,11 @@ function createMenusMacOS() {
         {
           label: 'Quit',
           accelerator: 'Command+Q',
-          click: function() {
+          click: function () {
             app.quit();
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
     {
       label: 'Edit',
@@ -214,9 +214,9 @@ function createMenusMacOS() {
         {
           label: 'Select All',
           accelerator: 'CmdOrCtrl+A',
-          selector: 'selectAll:'
-        }
-      ]
+          selector: 'selectAll:',
+        },
+      ],
     },
     {
       label: 'View',
@@ -225,22 +225,25 @@ function createMenusMacOS() {
         { label: 'Zoom In', role: 'zoomin' },
         { label: 'Zoom Out', role: 'zoomout' },
         { type: 'separator' },
-        { label: 'Toggle Full Screen', role: 'togglefullscreen' }
-      ]
+        { label: 'Toggle Full Screen', role: 'togglefullscreen' },
+        ...(isDev
+          ? [{ label: 'Toggle Developer Tools', role: 'toggledevtools' }]
+          : []),
+      ],
     },
     {
       label: 'Window',
       role: 'window',
       submenu: [
         { label: 'Minimize', role: 'close' },
-        { label: 'Close', role: 'close' }
-      ]
+        { label: 'Close', role: 'close' },
+      ],
     },
     {
       label: 'Help',
       role: 'help',
-      submenu: [{ label: '' }]
-    }
+      submenu: [{ label: '' }],
+    },
   ];
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
@@ -257,14 +260,17 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
-    icon: path.join(__dirname, '../icon.png')
+    icon: path.join(__dirname, '../icon.png'),
+    webPreferences: {
+      nodeIntegration: true,
+    },
   });
 
   mitm.setMainWindow(mainWindow);
   eSplatnet.setMainWindow(mainWindow, startUrl);
 
   // comment this in on first run to get dev tools
-  if (isDev) {
+  /*if (isDev) {
     const {
       default: installExtension,
       REACT_DEVELOPER_TOOLS
@@ -272,13 +278,11 @@ function createWindow() {
     installExtension(REACT_DEVELOPER_TOOLS)
       .then(name => console.log(`Added Extension:  ${name}`))
       .catch(err => console.log('An error occurred: ', err));
-  }
+  }*/
 
   mainWindow.loadURL(startUrl);
 
-  // mainWindow.webContents.openDevTools();
-
-  mainWindow.on('closed', function() {
+  mainWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
@@ -288,7 +292,7 @@ function createWindow() {
 
 app.on('ready', createWindow);
 
-app.on('window-all-closed', function() {
+app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
@@ -296,7 +300,7 @@ app.on('window-all-closed', function() {
   }
 });
 
-app.on('activate', function() {
+app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {

@@ -6,7 +6,7 @@ const log = require('electron-log');
 const { app } = require('electron');
 const Memo = require('promise-memoize');
 
-const userAgentVersion = `1.8.0`;
+const userAgentVersion = `1.9.0`;
 const userAgentString = `com.nintendo.znca/${userAgentVersion} (Android/7.1.2)`;
 const appVersion = app.getVersion();
 const squidTracksUserAgentString = `SquidTracks/${appVersion}`;
@@ -19,7 +19,7 @@ if (process.env.PROXY) {
   request = request2.defaults({
     proxy: proxy,
     rejectUnauthorized: false,
-    jar: jar
+    jar: jar,
   });
   log.info(`Splatnet proxy on ${proxy}`);
 } else {
@@ -48,7 +48,7 @@ function generateAuthenticationParams() {
   return {
     state,
     codeVerifier,
-    codeChallenge
+    codeChallenge,
   };
 }
 
@@ -68,14 +68,14 @@ async function getSessionToken(session_token_code, codeVerifier) {
       'Content-Type': 'application/x-www-form-urlencoded',
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
-      'User-Agent': `OnlineLounge/${userAgentVersion} NASDKAPI Android`
+      'User-Agent': `OnlineLounge/${userAgentVersion} NASDKAPI Android`,
     },
     form: {
       client_id: '71b963c1b7b6d119',
       session_token_code: session_token_code,
-      session_token_code_verifier: codeVerifier
+      session_token_code_verifier: codeVerifier,
     },
-    json: true
+    json: true,
   });
 
   // should check the challege here and error if incorrect.
@@ -91,18 +91,18 @@ async function getApiToken(session_token) {
       'Content-Type': 'application/json; charset=utf-8',
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
-      'User-Agent': `OnlineLounge/${userAgentVersion} NASDKAPI Android`
+      'User-Agent': `OnlineLounge/${userAgentVersion} NASDKAPI Android`,
     },
     json: {
       client_id: '71b963c1b7b6d119',
       grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer-session-token',
-      session_token: session_token
-    }
+      session_token: session_token,
+    },
   });
 
   return {
     id: resp.id_token,
-    access: resp.access_token
+    access: resp.access_token,
   };
 }
 
@@ -111,12 +111,12 @@ async function getHash(idToken, timestamp) {
     method: 'POST',
     uri: 'https://elifessler.com/s2s/api/gen2',
     headers: {
-      'User-Agent': squidTracksUserAgentString
+      'User-Agent': squidTracksUserAgentString,
     },
     form: {
       naIdToken: idToken,
-      timestamp: timestamp
-    }
+      timestamp: timestamp,
+    },
   });
 
   const responseObject = JSON.parse(response);
@@ -140,8 +140,8 @@ async function callFlapg(idToken, guid, timestamp, login) {
       'x-guid': guid,
       'x-hash': hash,
       'x-ver': '3',
-      'x-iid': login
-    }
+      'x-iid': login,
+    },
   });
 
   const responseObject = JSON.parse(response);
@@ -158,16 +158,16 @@ async function getUserInfo(token) {
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
       'User-Agent': `OnlineLounge/${userAgentVersion} NASDKAPI Android`,
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    json: true
+    json: true,
   });
 
   return {
     nickname: response.nickname,
     language: response.language,
     birthday: response.birthday,
-    country: response.country
+    country: response.country,
   };
 }
 
@@ -180,7 +180,7 @@ async function getApiLogin(userinfo, flapg_nso) {
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
       'User-Agent': userAgentString,
-      Authorization: 'Bearer'
+      Authorization: 'Bearer',
     },
     body: {
       parameter: {
@@ -190,11 +190,11 @@ async function getApiLogin(userinfo, flapg_nso) {
         f: flapg_nso.f,
         naIdToken: flapg_nso.p1,
         timestamp: flapg_nso.p2,
-        requestId: flapg_nso.p3
-      }
+        requestId: flapg_nso.p3,
+      },
     },
     json: true,
-    gzip: true
+    gzip: true,
   });
   return resp.result.webApiServerCredential.accessToken;
 }
@@ -208,7 +208,7 @@ async function getWebServiceToken(token, flapg_app) {
       'X-Platform': 'Android',
       'X-ProductVersion': userAgentVersion,
       'User-Agent': userAgentString,
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
       // 'Access-Control-Allow-Origin': '*',
     },
     json: {
@@ -217,14 +217,14 @@ async function getWebServiceToken(token, flapg_app) {
         f: flapg_app.f,
         registrationToken: flapg_app.p1,
         timestamp: flapg_app.p2,
-        requestId: flapg_app.p3
-      }
-    }
+        requestId: flapg_app.p3,
+      },
+    },
   });
 
   return {
     accessToken: resp.result.accessToken,
-    expiresAt: Math.round(new Date().getTime()) + resp.result.expiresIn
+    expiresAt: Math.round(new Date().getTime()) + resp.result.expiresIn,
   };
 }
 
@@ -237,10 +237,10 @@ async function getSplatnetApi(url) {
       'Accept-Encoding': 'gzip, deflate',
       'Accept-Language': userLanguage,
       'User-Agent': userAgentString,
-      Connection: 'keep-alive'
+      Connection: 'keep-alive',
     },
     json: true,
-    gzip: true
+    gzip: true,
   });
 
   return resp;
@@ -264,10 +264,10 @@ async function postSplatnetApi(url, body) {
       'User-Agent': userAgentString,
       Connection: 'keep-alive',
       'X-Unique-Id': uniqueId,
-      'X-Requested-With': 'XMLHttpRequest'
+      'X-Requested-With': 'XMLHttpRequest',
     },
     formData: body,
-    gzip: true
+    gzip: true,
   };
   if (body) {
     requestOptions.formData = body;
@@ -292,8 +292,8 @@ async function getSessionCookie(token) {
       'x-gamewebtoken': token,
       'x-isappanalyticsoptedin': false,
       'X-Requested-With': 'com.nintendo.znca',
-      Connection: 'keep-alive'
-    }
+      Connection: 'keep-alive',
+    },
   });
 
   const iksmToken = getIksmToken();
@@ -320,7 +320,7 @@ async function getSplatnetSession(sessionTokenCode, sessionVerifier) {
 
   return {
     sessionToken: sessionToken,
-    accessToken: splatnetToken.accessToken
+    accessToken: splatnetToken.accessToken,
   };
 }
 
@@ -330,9 +330,9 @@ async function getSplatnetImage(battle) {
     method: 'GET',
     uri: url,
     headers: {
-      'Content-Type': 'image/png'
+      'Content-Type': 'image/png',
     },
-    encoding: null
+    encoding: null,
   });
 
   // const imgEncoded = imgBuf.toString('binary');
@@ -356,7 +356,7 @@ async function setIksmToken(cookieValue) {
 function getIksmToken() {
   const cookies = jar.getCookies(splatnetUrl);
   let value;
-  cookies.find(cookie => {
+  cookies.find((cookie) => {
     if (cookie.key === 'iksm_session') {
       value = cookie.value;
     }

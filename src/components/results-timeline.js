@@ -1,6 +1,6 @@
 import React from 'react';
 import LobbyColors from './lobby-colors';
-import { Subscriber } from 'react-broadcast';
+import { useSplatnet } from '../splatnet-provider';
 import {
   ResponsiveContainer,
   ComposedChart,
@@ -11,7 +11,7 @@ import {
   CartesianGrid,
   ReferenceLine,
   Dot,
-  Area
+  Area,
 } from 'recharts';
 import { getValue } from './sort-array';
 
@@ -35,7 +35,7 @@ const stageColors = [
   '#ddd6cf',
   '#e8e4d4',
   '#f4f2da',
-  '#ffffe0'
+  '#ffffe0',
 ];
 
 class ResultDot extends React.Component {
@@ -62,18 +62,21 @@ class BarLabel extends React.Component {
         return (
           <g>
             <polygon
-              points={`${x},${y} ${x + width * 0.25},${y} ${x},${y -
-                width * 0.5}`}
+              points={`${x},${y} ${x + width * 0.25},${y} ${x},${
+                y - width * 0.5
+              }`}
               fill={color}
             />
             <polygon
-              points={`${x + width * 0.25},${y} ${x + width * 0.5},${y -
-                width * 0.5} ${x + width * 0.75},${y}`}
+              points={`${x + width * 0.25},${y} ${x + width * 0.5},${
+                y - width * 0.5
+              } ${x + width * 0.75},${y}`}
               fill={color}
             />
             <polygon
-              points={`${x + width * 0.75},${y} ${x + width},${y} ${x +
-                width},${y - width * 0.5}`}
+              points={`${x + width * 0.75},${y} ${x + width},${y} ${
+                x + width
+              },${y - width * 0.5}`}
               fill={color}
             />
           </g>
@@ -142,7 +145,7 @@ class ResultsTimeline extends React.Component {
 
     return {
       mine,
-      other
+      other,
     };
   }
 
@@ -183,7 +186,7 @@ class ResultsTimeline extends React.Component {
       stageId: result.stage.id,
       myScore: counts.mine,
       otherScore: counts.other,
-      battle_number: result.battle_number
+      battle_number: result.battle_number,
     };
   }
 
@@ -210,7 +213,7 @@ class ResultsTimeline extends React.Component {
         y={average}
         stroke="white"
         strokeOpacity={0.5}
-      />
+      />,
     ];
   }
 
@@ -222,7 +225,7 @@ class ResultsTimeline extends React.Component {
         scale="auto"
         type="number"
         domain={[0, `dataMax + 50`]}
-        tickFormatter={valueRaw => valueRaw.toFixed(0)}
+        tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
       />,
       <Line
         key="inkedTrend"
@@ -237,7 +240,7 @@ class ResultsTimeline extends React.Component {
         y={average}
         stroke="white"
         strokeOpacity={0.5}
-      />
+      />,
     ];
   }
 
@@ -249,7 +252,7 @@ class ResultsTimeline extends React.Component {
         scale="auto"
         type="number"
         domain={[0, `dataMax + 1`]}
-        tickFormatter={valueRaw => valueRaw.toFixed(0)}
+        tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
       />,
       <ReferenceLine
         key="kaAverage"
@@ -276,7 +279,7 @@ class ResultsTimeline extends React.Component {
         fillOpacity={1}
         isAnimationActive={true}
         dot={null}
-      />
+      />,
     ];
   }
 
@@ -288,7 +291,7 @@ class ResultsTimeline extends React.Component {
         scale="auto"
         type="number"
         domain={[0, `dataMax + 1`]}
-        tickFormatter={valueRaw => valueRaw.toFixed(0)}
+        tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
       />,
       <ReferenceLine key="kAverage" y={averageK} stroke="white" />,
       <Line
@@ -307,7 +310,7 @@ class ResultsTimeline extends React.Component {
         stroke="#000"
         isAnimationActive={true}
         dot={null}
-      />
+      />,
     ];
   }
 
@@ -319,7 +322,7 @@ class ResultsTimeline extends React.Component {
         scale="auto"
         type="number"
         domain={[0, `dataMax + 1`]}
-        tickFormatter={valueRaw => valueRaw.toFixed(0)}
+        tickFormatter={(valueRaw) => valueRaw.toFixed(0)}
       />,
       <Line
         key="sTrend"
@@ -334,19 +337,19 @@ class ResultsTimeline extends React.Component {
         y={average}
         stroke="white"
         strokeOpacity={0.5}
-      />
+      />,
     ];
   }
 
   render() {
     const { activeValue, averages, results, changeResult } = this.props;
     // const results = this.props.splatnet.current.results.results;
-    const data = results.map(result => this.getValues(result));
+    const data = results.map((result) => this.getValues(result));
 
     data.reverse();
     const powerAvg = data
-      .map(d => d.power)
-      .filter(a => a != null)
+      .map((d) => d.power)
+      .filter((a) => a != null)
       .reduce((avg, v, i, a) => avg + v / a.length, 0);
     return (
       <ResponsiveContainer minHeight={200}>
@@ -406,11 +409,8 @@ class ResultsTimeline extends React.Component {
 }
 
 const TimelineSubscribed = ({ ...props }) => {
-  return (
-    <Subscriber channel="splatnet">
-      {splatnet => <ResultsTimeline splatnet={splatnet} {...props} />}
-    </Subscriber>
-  );
+  const splatnet = useSplatnet();
+  return <ResultsTimeline splatnet={splatnet} {...props} />;
 };
 
 export default TimelineSubscribed;

@@ -1,12 +1,10 @@
 import React from 'react';
-import { Glyphicon } from 'react-bootstrap';
+import { FaCaretDown } from 'react-icons/fa';
 
 const TableHeader = ({ sort, text, sortColumn, setState }) => {
   return (
     <th onClick={() => setState(sort)} style={{ cursor: 'pointer' }}>
-      {sort.sortColumn === sortColumn ? (
-        <Glyphicon glyph="triangle-bottom" />
-      ) : null}
+      {sort.sortColumn === sortColumn ? <FaCaretDown /> : null}
       {text}
     </th>
   );

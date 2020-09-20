@@ -62,7 +62,7 @@ const PlayerRow = ({ player, crown }) => {
       </td>
 
       {player.player.udemae ? (
-        <td>{`${player.player.udemae.name}${crown ? '👑' : ''}`}</td>
+        <td>{`${player.player.udemae.name || 'C-'}${crown ? '👑' : ''}`}</td>
       ) : null}
       <td style={{ textAlign: 'center', background: 'darkgrey' }}>
         <Image
@@ -88,10 +88,10 @@ const TeamStatTable = ({ result, team }) => {
   const total_s = team.reduce((sum, player) => sum + player.special_count, 0);
 
   return (
-    <Table striped bordered condensed hover>
+    <Table size="sm" className="mb-0" striped bordered hover>
       <TeamHeader player={team[0]} />
       <tbody>
-        {team.map(player => (
+        {team.map((player) => (
           <PlayerRow
             key={player.player.principal_id}
             player={player}

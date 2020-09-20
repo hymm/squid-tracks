@@ -9,12 +9,12 @@ const languages = [
   { name: 'Español', code: 'es', statInk: 'es_ES' },
   { name: 'Francais', code: 'fr', statInk: 'fr_FR' },
   { name: 'Italiano', code: 'it', statInk: 'it_IT' },
-  { name: '日本語', code: 'ja', statInk: 'ja_JP' }
+  { name: '日本語', code: 'ja', statInk: 'ja_JP' },
 ];
 export { languages };
 
 export default class LanguageSelect extends React.Component {
-  handleChange = e => {
+  handleChange = (e) => {
     this.props.setLocale(e.target.value);
     event('settings', 'set-locale', e.target.value);
   };
@@ -23,12 +23,12 @@ export default class LanguageSelect extends React.Component {
     const { locale } = this.props;
     return (
       <FormControl
+        as="select"
         value={locale}
         id="languageSelect"
-        componentClass="select"
         onChange={this.handleChange}
       >
-        {languages.map(language => (
+        {languages.map((language) => (
           <option key={language.code} value={language.code}>
             {language.name}
           </option>

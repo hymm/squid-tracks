@@ -1,10 +1,10 @@
 import React from 'react';
-import { Panel, Table, Grid, Row, Col } from 'react-bootstrap';
+import { Card, Table, Container, Row, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 const LeagueTable = ({ medals, max_rank }) => {
   return (
-    <Table striped bordered condensed hover>
+    <Table size="sm" striped bordered hover>
       <thead>
         <tr />
       </thead>
@@ -59,15 +59,15 @@ const LeagueTable = ({ medals, max_rank }) => {
   );
 };
 
-const LeagueCard = ({ records }) => {
+const LeagueCard = ({ records, className }) => {
   const { player, league_stats } = records;
   return (
-    <Panel>
-      <Panel.Heading>
+    <Card className={className}>
+      <Card.Header>
         <FormattedMessage id="LeagueCard.title" defaultMessage="League Stats" />
-      </Panel.Heading>
-      <Panel.Body>
-        <Grid fluid>
+      </Card.Header>
+      <Card.Body>
+        <Container fluid>
           <Row>
             <Col md={6}>
               <h4>
@@ -94,9 +94,9 @@ const LeagueCard = ({ records }) => {
               />
             </Col>
           </Row>
-        </Grid>
-      </Panel.Body>
-    </Panel>
+        </Container>
+      </Card.Body>
+    </Card>
   );
 };
 

@@ -1,5 +1,5 @@
 const request2 = require('request-promise-native');
-const msgpack = require('msgpack-lite');
+const { encode } = require('@msgpack/msgpack');
 const LobbyModeMap = require('./lobby-mode-map');
 const RuleMap = require('./rule-map');
 const StatInkMap = require('./stat-ink-map');
@@ -21,7 +21,7 @@ if (process.env.PROXY) {
   request = request2.defaults({
     proxy: 'http://localhost:8888',
     rejectUnauthorized: false,
-    jar: true
+    jar: true,
   });
 } else {
   request = request2;
@@ -218,14 +218,14 @@ async function setPlayers(statInk, result) {
   statInk.players.push(
     await getPlayer(result.player_result, 'me', addBonusMyTeam)
   );
-  result.my_team_members.forEach(async player => {
+  result.my_team_members.forEach(async (player) => {
     statInk.players.push(await getPlayer(player, 'my', addBonusMyTeam));
   });
 
   const addBonusTheirTeam =
     result.other_team_result.key === 'victory' &&
     result.rule.key === 'turf_war';
-  result.other_team_members.forEach(async player => {
+  result.other_team_members.forEach(async (player) => {
     statInk.players.push(await getPlayer(player, 'his', addBonusTheirTeam));
   });
 }
@@ -317,11 +317,11 @@ async function writeToStatInk(apiKey, result) {
     uri: 'https://stat.ink/api/v2/battle',
     headers: {
       'Content-Type': 'application/x-msgpack',
-      Authorization: `Bearer ${apiKey}`
+      Authorization: `Bearer ${apiKey}`,
     },
-    body: msgpack.encode(await convertResultToStatInk(result)),
+    body: encode(await convertResultToStatInk(result)),
     resolveWithFullResponse: true,
-    simple: false
+    simple: false,
   });
 
   if (response.statusCode !== 201 && response.statusCode !== 302) {
@@ -332,7 +332,7 @@ async function writeToStatInk(apiKey, result) {
     username: response.headers['x-user-screen-name'],
     battle: response.headers['x-battle-id'],
     location: response.headers['location'],
-    apiLocation: response.headers['x-api-location']
+    apiLocation: response.headers['x-api-location'],
   };
 }
 module.exports.writeToStatInk = writeToStatInk;

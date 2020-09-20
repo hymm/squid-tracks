@@ -10,7 +10,7 @@ const userDataStore = new Store({
     uuid: '',
     gaEnabled: true,
     locale: '',
-    combineReplicaLeagueStats: false
-  }
+    combineReplicaLeagueStats: false,
+  },
 });
 module.exports.userDataStore = userDataStore;

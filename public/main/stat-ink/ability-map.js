@@ -24,5 +24,5 @@ module.exports = {
   108: 'ability_doubler',
   109: 'stealth_jump',
   110: 'object_shredder',
-  111: 'drop_roller'
+  111: 'drop_roller',
 };

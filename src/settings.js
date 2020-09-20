@@ -1,44 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Grid,
+  Container,
   Col,
   Row,
   Button,
   FormGroup,
   FormControl,
-  HelpBlock,
-  Checkbox,
-  Panel,
-  Glyphicon
+  Form,
+  Card,
 } from 'react-bootstrap';
+import { FaCopy } from 'react-icons/fa';
 import jws from 'jws';
 import { event } from './analytics';
 import LanguageSelect from './components/language-select';
-import {
-  defineMessages,
-  FormattedMessage,
-  injectIntl,
-  FormattedHTMLMessage
-} from 'react-intl';
+import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 const { remote, ipcRenderer, clipboard } = require('electron');
 const { openExternal } = remote.shell;
 
 class StatInkSettings extends React.Component {
   state = {
     apiToken: '',
-    saved: false
+    saved: false,
   };
 
   messages = defineMessages({
     saveToken: {
       id: 'Settings.StatInk.ButtonText.saveToken',
-      defaultMessage: 'Save Token'
+      defaultMessage: 'Save Token',
     },
     tokenSaved: {
       id: 'Settings.StatInk.ButtonText.tokenSaved',
-      defaultMessage: 'Token Saved'
-    }
+      defaultMessage: 'Token Saved',
+    },
   });
 
   componentDidMount() {
@@ -49,11 +43,11 @@ class StatInkSettings extends React.Component {
     this.setState({ apiToken: ipcRenderer.sendSync('getStatInkApiToken') });
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ apiToken: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     event('stat.ink', 'saved-token');
     ipcRenderer.sendSync('setStatInkApiToken', this.state.apiToken);
     this.setState({ saved: true });
@@ -67,17 +61,17 @@ class StatInkSettings extends React.Component {
     const { saved } = this.state;
     const { intl } = this.props;
     return (
-      <Panel>
-        <Panel.Heading>
+      <Card>
+        <Card.Header>
           <FormattedMessage
             id="Settings.StatInk.title"
             defaultMessage="stat.ink API Token"
           />
-        </Panel.Heading>
-        <Panel.Body>
+        </Card.Header>
+        <Card.Body>
           <form onSubmit={this.handleSubmit}>
             <FormGroup>
-              <HelpBlock>
+              <Form.Text>
                 <FormattedMessage
                   id="Settings.StatInk.HelpMessage"
                   defaultMessage="Copy API Token from {link}, paste below, and click Save"
@@ -90,10 +84,10 @@ class StatInkSettings extends React.Component {
                       >
                         https://stat.ink/profile
                       </button>
-                    )
+                    ),
                   }}
                 />
-              </HelpBlock>
+              </Form.Text>
               <FormControl
                 type="text"
                 value={this.state.apiToken}
@@ -106,8 +100,8 @@ class StatInkSettings extends React.Component {
               )}
             </Button>
           </form>
-        </Panel.Body>
-      </Panel>
+        </Card.Body>
+      </Card>
     );
   }
 }
@@ -117,7 +111,7 @@ class GoogleAnalyticsCheckbox extends React.Component {
 
   componentDidMount() {
     this.setState({
-      enabled: ipcRenderer.sendSync('getFromStore', 'gaEnabled')
+      enabled: ipcRenderer.sendSync('getFromStore', 'gaEnabled'),
     });
   }
 
@@ -129,19 +123,24 @@ class GoogleAnalyticsCheckbox extends React.Component {
 
   render() {
     return (
-      <Checkbox checked={this.state.enabled} onClick={this.handleClick}>
-        <FormattedMessage
-          id="Settings.GoogleAnalytics.EnabledCheckboxLabel"
-          defaultMessage="Enabled"
-        />
-      </Checkbox>
+      <Form.Check
+        type="checkbox"
+        checked={this.state.enabled}
+        onChange={this.handleClick}
+        label={
+          <FormattedMessage
+            id="Settings.GoogleAnalytics.EnabledCheckboxLabel"
+            defaultMessage="Enabled"
+          />
+        }
+      />
     );
   }
 }
 
 class IksmToken extends React.Component {
   state = {
-    cookie: ''
+    cookie: '',
   };
 
   componentDidMount() {
@@ -167,8 +166,7 @@ class IksmToken extends React.Component {
             defaultMessage="iksm Token"
           />{' '}
           {cookie.length > 0 ? (
-            <Glyphicon
-              glyph="copy"
+            <FaCopy
               style={{ fontSize: 20, cursor: 'pointer' }}
               onClick={() => {
                 clipboard.writeText(cookie);
@@ -184,25 +182,21 @@ class IksmToken extends React.Component {
 
 const LanguageSettings = ({ setLocale, locale }) => {
   return (
-    <Row>
-      <Col md={12}>
-        <Panel>
-          <Panel.Heading>
-            <FormattedMessage
-              id="Settings.Language.title"
-              defaultMessage="Language"
-            />
-          </Panel.Heading>
-          <Panel.Body>
-            <FormattedMessage
-              id="Settings.Language.warning"
-              defaultMessage="Languages in the Splatnet API are limited by Nintendo regions, so some languages may not work correctly."
-            />
-            <LanguageSelect setLocale={setLocale} locale={locale} />
-          </Panel.Body>
-        </Panel>
-      </Col>
-    </Row>
+    <Card>
+      <Card.Header>
+        <FormattedMessage
+          id="Settings.Language.title"
+          defaultMessage="Language"
+        />
+      </Card.Header>
+      <Card.Body>
+        <FormattedMessage
+          id="Settings.Language.warning"
+          defaultMessage="Languages in the Splatnet API are limited by Nintendo regions, so some languages may not work correctly."
+        />
+        <LanguageSelect setLocale={setLocale} locale={locale} />
+      </Card.Body>
+    </Card>
   );
 };
 
@@ -211,7 +205,7 @@ class SessionToken extends React.Component {
 
   componentDidMount() {
     this.setState({
-      token: ipcRenderer.sendSync('getFromStore', 'sessionToken')
+      token: ipcRenderer.sendSync('getFromStore', 'sessionToken'),
     });
   }
 
@@ -231,8 +225,7 @@ class SessionToken extends React.Component {
             description="long term session token that can be used to obtain a new cookie"
           />{' '}
           {token.length > 0 ? (
-            <Glyphicon
-              glyph="copy"
+            <FaCopy
               onClick={() => {
                 clipboard.writeText(token);
                 event('settings', 'copy-session-token');
@@ -253,14 +246,14 @@ class SessionToken extends React.Component {
 
 const GoogleAnalyticsSettings = () => {
   return (
-    <Panel>
-      <Panel.Heading>
+    <Card>
+      <Card.Header>
         <FormattedMessage
           id="Settings.GoogleAnalytics.title"
           defaultMessage="Google Analytics"
         />
-      </Panel.Heading>
-      <Panel.Body>
+      </Card.Header>
+      <Card.Body>
         <FormattedMessage
           id="Settings.GoogleAnalytics.description"
           defaultMessage={`
@@ -270,21 +263,21 @@ const GoogleAnalyticsSettings = () => {
           `}
         />
         <GoogleAnalyticsCheckbox />
-      </Panel.Body>
-    </Panel>
+      </Card.Body>
+    </Card>
   );
 };
 
 const Debugging = () => {
   return (
-    <Panel>
-      <Panel.Heading>
+    <Card>
+      <Card.Header>
         <FormattedMessage
           id="Settings.Debugging.title"
           defaultMessage="Debugging"
         />
-      </Panel.Heading>
-      <Panel.Body>
+      </Card.Header>
+      <Card.Body>
         <Link to="/testApi">
           <Button>
             <FormattedMessage
@@ -293,52 +286,59 @@ const Debugging = () => {
             />
           </Button>
         </Link>
-      </Panel.Body>
-    </Panel>
+      </Card.Body>
+    </Card>
   );
 };
 
 const SecurityTokens = () => {
   return (
-    <Panel>
-      <Panel.Heading>
+    <Card>
+      <Card.Header>
         <FormattedMessage
           id="Settings.Tokens.title"
           defaultMessage="Splatnet 2 Access Tokens"
         />
-      </Panel.Heading>
-      <Panel.Body>
-        <FormattedHTMLMessage
+      </Card.Header>
+      <Card.Body>
+        <FormattedMessage
           id="Settings.Tokens.warning"
           defaultMessage={`
-            <strong>DO NOT SHARE Session Token or iksm Token.</strong> These
+            <b>DO NOT SHARE Session Token or iksm Token.</b> These
             are available here for debugging purposes. Sharing these could
             lead to someone stealing your personal information.
           `}
+          values={{
+            b: (chunks) => <strong>{chunks}</strong>,
+          }}
         />
 
         <SessionToken />
         <IksmToken />
-      </Panel.Body>
-    </Panel>
+      </Card.Body>
+    </Card>
   );
 };
 
 const SettingsScreen = ({ token, logoutCallback, setLocale, locale, intl }) => {
   return (
-    <Grid fluid style={{ marginTop: 65, marginBotton: 30 }}>
-      <LanguageSettings setLocale={setLocale} locale={locale} />
-      <Row>
+    <Container fluid style={{ marginTop: '1rem', marginBotton: 30 }}>
+      <Row className="mb-3">
+        <Col md={12}>
+          <LanguageSettings setLocale={setLocale} locale={locale} />
+        </Col>
+      </Row>
+      <Row className="mb-3">
         <Col md={12}>
           <StatInkSettings intl={intl} />
         </Col>
       </Row>
-      <Row>
+      <Row className="mb-3">
         <Col md={12}>
           <GoogleAnalyticsSettings />
         </Col>
       </Row>
-      <Row>
+      <Row className="mb-3">
         <Col md={12}>
           <Debugging />
         </Col>
@@ -348,7 +348,7 @@ const SettingsScreen = ({ token, logoutCallback, setLocale, locale, intl }) => {
           <SecurityTokens />
         </Col>
       </Row>
-    </Grid>
+    </Container>
   );
 };
 
