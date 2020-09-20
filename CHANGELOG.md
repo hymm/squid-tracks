@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Version 1.3.3
+
+* Bump NSO version to fix login
+* Change fonts to improve appearance
+* Add ability to toggle dev tools in development mode on mac
+* Fix sorting of stage card
+* Update dependencies
+
 ## Version 1.3.2
 
 * Bump Version to fix broken linux and mac build
