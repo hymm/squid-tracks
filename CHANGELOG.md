@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Version 1.3.5
+
+* Update NSO version to fix login
+
 ## Version 1.3.4
 
 * Fix content security policy to load images 
