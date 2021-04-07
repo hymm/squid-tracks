@@ -32,7 +32,7 @@
     "history": "^5.0.0",
     "http-mitm-proxy": "^0.8.2",
     "husky": "^4.2.5",
-    "immer": "^7.0.7",
+    "immer": "^8.0.1",
     "immutability-helper": "^3.1.1",
     "json2csv": "^5.0.1",
     "jws": "^4.0.0",
