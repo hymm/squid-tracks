@@ -6,7 +6,7 @@ const log = require('electron-log');
 const { app } = require('electron');
 const Memo = require('promise-memoize');
 
-const userAgentVersion = `1.11.0`;
+const userAgentVersion = `1.12.2`;
 const userAgentString = `com.nintendo.znca/${userAgentVersion} (Android/7.1.2)`;
 const appVersion = app.getVersion();
 const squidTracksUserAgentString = `SquidTracks/${appVersion}`;
