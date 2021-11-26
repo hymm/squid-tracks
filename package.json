@@ -2,7 +2,7 @@
   "name": "squid-tracks",
   "description": "alternative splatnet2 client with ability to upload to stat.ink",
   "productName": "SquidTracks",
-  "version": "1.3.7-beta",
+  "version": "1.3.7",
   "private": true,
   "author": "@Wrong_Shoe",
   "engines": {
