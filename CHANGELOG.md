@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## Version 1.3.7
+
+* Update NSO version to fix login
 ## Version 1.3.6
 
 * Update NSO version to fix login
