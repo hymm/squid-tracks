@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "babel-plugin-react-intl": "^7.9.2",
-    "electron": "^9.1.2",
+    "electron": "^18.3.7",
     "electron-builder": "^22.8.1",
     "react-intl-translations-manager": "^5.0.3",
     "react-scripts": "3.4.3"
